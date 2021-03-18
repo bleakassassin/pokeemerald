@@ -4909,7 +4909,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         gPartyMenuUseExitCallback = FALSE;
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = task;
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
     }
     else
     {
@@ -5039,7 +5039,10 @@ static void PartyMenuTryEvolution(u8 taskId)
     }
     else
     {
-        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
+			gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+		else
+			gTasks[taskId].func = Task_ClosePartyMenuAfterText;
     }
 }
 
