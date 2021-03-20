@@ -1028,24 +1028,22 @@ int SetCableClubWarp(void)
     return 0;
 }
 
-extern const u8 EventScript_DisableAutoRun[];
-extern const u8 EventScript_EnableAutoRun[];
+extern const u8 EventScript_ChangeAutoRun[];
 static bool8 EnableAutoRun(void)
 {
     if (!FlagGet(FLAG_SYS_B_DASH) || !(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT))
         return FALSE;   //auto run unusable until you get running shoes
 
-    PlaySE(SE_SELECT);
+    PlaySE(SE_RG_CARD_FLIPPING);
     if (gSaveBlock2Ptr->autoRun)
     {
         gSaveBlock2Ptr->autoRun = FALSE;
-        ScriptContext1_SetupScript(EventScript_DisableAutoRun);
     }
     else
     {
         gSaveBlock2Ptr->autoRun = TRUE;
-        ScriptContext1_SetupScript(EventScript_EnableAutoRun);
     }
+    ScriptContext1_SetupScript(EventScript_ChangeAutoRun);
     
     return TRUE;
 }
