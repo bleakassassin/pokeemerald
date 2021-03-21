@@ -79,6 +79,9 @@ static const u8 sText_AttackerFainted[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\
 static const u8 sText_TargetFainted[] = _("{B_DEF_NAME_WITH_PREFIX}\nfainted!\p");
 static const u8 sText_PlayerGotMoney[] = _("{B_PLAYER_NAME} got ¥{B_BUFF1}\nfor winning!\p");
 static const u8 sText_PlayerWhiteout[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\p");
+static const u8 sText_PlayerPanicked[] = _("{B_PLAYER_NAME} panicked and lost ¥{B_BUFF1}…\p… … … …\p{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PlayerLostToTrainer[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\pPlayer lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PlayerPaidAsPrizeMoney[] = _("{B_PLAYER_NAME} paid ¥{B_BUFF1} as the prize\nmoney…\p… … … …\p{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PlayerWhiteout2[] = _("{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
 static const u8 sText_PreventsEscape[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} prevents\nescape with {B_SCR_ACTIVE_ABILITY}!\p");
 static const u8 sText_CantEscape2[] = _("Can't escape!\p");
@@ -540,7 +543,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_TARGETFAINTED - 12] = sText_TargetFainted,
     [STRINGID_PLAYERGOTMONEY - 12] = sText_PlayerGotMoney,
     [STRINGID_PLAYERWHITEOUT - 12] = sText_PlayerWhiteout,
-    [STRINGID_PLAYERWHITEOUT2 - 12] = sText_PlayerWhiteout2,
+    [STRINGID_PLAYERWHITEOUT2 - 12] = sText_PlayerPanicked,
     [STRINGID_PREVENTSESCAPE - 12] = sText_PreventsEscape,
     [STRINGID_HITXTIMES - 12] = sText_HitXTimes,
     [STRINGID_PKMNFELLASLEEP - 12] = sText_PkmnFellAsleep,
@@ -889,6 +892,8 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_PKMNBOXLANETTESPCFULL - 12] = gText_PkmnTransferredLanettesPCBoxFull,
     [STRINGID_TRAINER1WINTEXT - 12] = sText_Trainer1WinText,
     [STRINGID_TRAINER2WINTEXT - 12] = sText_Trainer2WinText,
+    [STRINGID_PLAYERLOSTTOTRAINER - 12] = sText_PlayerLostToTrainer,
+    [STRINGID_PLAYERPAIDPRIZEMONEY - 12] = sText_PlayerPaidAsPrizeMoney,
 };
 
 const u16 gMissStringIds[] =
