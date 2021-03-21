@@ -5595,6 +5595,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
 static void Cmd_getmoneyreward(void)
 {
 	u32 moneyReward;
+	u32 money = GetMoney(&gSaveBlock1Ptr->money);
 	
     if (gBattleOutcome == B_OUTCOME_WON)
     {
@@ -5621,6 +5622,8 @@ static void Cmd_getmoneyreward(void)
                 ++count;
         }
         moneyReward = sWhiteOutBadgeMoney[count] * gMaxPartyLevel;
+		if (moneyReward > money)
+			moneyReward = money;
         RemoveMoney(&gSaveBlock1Ptr->money, moneyReward);
     }
     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 5, moneyReward);
