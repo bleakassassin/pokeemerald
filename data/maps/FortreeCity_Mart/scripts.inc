@@ -21,6 +21,7 @@ FortreeCity_Mart_EventScript_2ndClerk::
 	.align 2
 FortreeCity_Mart_2ndClerk:
 	.2byte ITEM_WOOD_MAIL
+	.2byte ITEM_TROPIC_MAIL
 	.2byte ITEM_NONE
 	release
 	end

@@ -21,6 +21,7 @@ SlateportCity_Mart_EventScript_2ndClerk::
 	.align 2
 SlateportCity_Mart_2ndClerk:
 	.2byte ITEM_HARBOR_MAIL
+	.2byte ITEM_FAB_MAIL
 	.2byte ITEM_NONE
 	release
 	end

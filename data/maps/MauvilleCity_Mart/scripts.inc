@@ -26,6 +26,7 @@ MauvilleCity_Mart_2ndClerk:
 	.2byte ITEM_GUARD_SPEC
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_X_ACCURACY
+	.2byte ITEM_GLITTER_MAIL
 	.2byte ITEM_NONE
 	release
 	end

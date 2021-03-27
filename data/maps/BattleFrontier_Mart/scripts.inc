@@ -28,6 +28,8 @@ BattleFrontier_Mart_2ndClerk:
 	.2byte ITEM_ZINC
 	.2byte ITEM_CARBOS
 	.2byte ITEM_HP_UP
+	.2byte ITEM_POKE_DOLL
+	.2byte ITEM_RETRO_MAIL
 	.2byte ITEM_NONE
 	release
 	end

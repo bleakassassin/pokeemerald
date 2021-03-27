@@ -21,6 +21,7 @@ VerdanturfTown_Mart_EventScript_2ndClerk::
 	.align 2
 VerdanturfTown_Mart_2ndClerk:
 	.2byte ITEM_NEST_BALL
+	.2byte ITEM_LUXURY_BALL
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_FLUFFY_TAIL
 	.2byte ITEM_NONE
