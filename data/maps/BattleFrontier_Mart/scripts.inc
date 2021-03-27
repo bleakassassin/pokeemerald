@@ -8,20 +8,20 @@ BattleFrontier_Mart_EventScript_Clerk:: @ 8267ACC
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart BattleFrontier_Mart_Pokemart
+	goto EventScript_PokeMart
+
+BattleFrontier_Mart_EventScript_2ndClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Mart_2ndClerk
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-BattleFrontier_Mart_Pokemart: @ 8267AE4
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
+BattleFrontier_Mart_2ndClerk:
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_IRON
