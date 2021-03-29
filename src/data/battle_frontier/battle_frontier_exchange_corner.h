@@ -23,6 +23,19 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
     0xFFFF 
 };
 
+static const u16 sFrontierExchangeCorner_Decor2_Regi[] =
+{ 
+    DECOR_LAPRAS_DOLL, 
+    DECOR_SNORLAX_DOLL, 
+    DECOR_VENUSAUR_DOLL, 
+    DECOR_CHARIZARD_DOLL, 
+    DECOR_BLASTOISE_DOLL, 
+    DECOR_REGIROCK_DOLL, 
+    DECOR_REGICE_DOLL, 
+    DECOR_REGISTEEL_DOLL, 
+    0xFFFF 
+};
+
 static const u16 sFrontierExchangeCorner_Vitamins[] =
 { 
     ITEM_PROTEIN, 
@@ -31,6 +44,11 @@ static const u16 sFrontierExchangeCorner_Vitamins[] =
     ITEM_ZINC, 
     ITEM_CARBOS, 
     ITEM_HP_UP, 
+    ITEM_LIECHI_BERRY, 
+    ITEM_GANLON_BERRY, 
+    ITEM_SALAC_BERRY, 
+    ITEM_PETAYA_BERRY, 
+    ITEM_APICOT_BERRY, 
     0xFFFF 
 };
 
@@ -73,6 +91,19 @@ static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
     gText_Exit
 };
 
+static const u8 *const sFrontierExchangeCorner_Decor2Descriptions_Regi[] = 
+{
+    BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
+    gText_Exit
+};
+
 static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] = 
 {
     BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc,
@@ -81,6 +112,11 @@ static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
     BattleFrontier_ExchangeServiceCorner_Text_ZincDesc,
     BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc,
     BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LiechiBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_GanlonBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_SalacBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc,
     gText_Exit
 };
 

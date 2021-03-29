@@ -2352,9 +2352,19 @@ void ShowScrollableMultichoice(void)
             task->tKeepOpenAfterSelect = FALSE;
             task->tTaskId = taskId;
             break;
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 9;
+            task->tLeft = 14;
+            task->tTop = 1;
+            task->tWidth = 15;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 7;
+            task->tNumItems = 12;
             task->tLeft = 14;
             task->tTop = 1;
             task->tWidth = 15;
@@ -2485,6 +2495,18 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_BlastoiseDoll256BP,
         gText_Exit
     },
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R] =
+    {
+        gText_LaprasDoll128BP,
+        gText_SnorlaxDoll128BP,
+        gText_VenusaurDoll256BP,
+        gText_CharizardDoll256BP,
+        gText_BlastoiseDoll256BP,
+        gText_RegirockDoll256BP,
+        gText_RegiceDoll256BP,
+        gText_RegisteelDoll256BP,
+        gText_Exit
+    },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR] =
     {
         gText_Protein1BP,
@@ -2493,6 +2515,11 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Zinc1BP,
         gText_Carbos1BP,
         gText_HpUp1BP,
+        gText_LiechiBerry128BP,
+        gText_GanlonBerry128BP,
+        gText_SalacBerry128BP,
+        gText_PetayaBerry128BP,
+        gText_ApicotBerry128BP,
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
@@ -3097,6 +3124,19 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
                     sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, 5500, 5500);
                 }
                 break;
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R:
+                AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_Decor2Descriptions_Regi[selection], 0, NULL, 2, 1, 3);
+                if (sFrontierExchangeCorner_Decor2_Regi[selection] == 0xFFFF)
+                {
+                    ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2_Regi[selection]);
+                }
+                else
+                {
+                    FreeSpriteTilesByTag(5500);
+                    FreeSpritePaletteByTag(5500);
+                    sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2_Regi[selection], 33, 88, 0, 5500, 5500);
+                }
+                break;
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
                 AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, 2, 1, 3);
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
@@ -3131,6 +3171,7 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
         {
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
+            case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
             case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
                 DestroySpriteAndFreeResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
