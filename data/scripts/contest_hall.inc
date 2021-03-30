@@ -38,20 +38,17 @@ LilycoveCity_ContestLobby_EventScript_GivePokeblockCase:: @ 8279CF3
 
 LilycoveCity_ContestLobby_EventScript_PickUpPrize:: @ 8279D13
 	msgbox LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize, MSGBOX_DEFAULT
-	switch VAR_CONTEST_PRIZE_PICKUP
-	case 4, LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter
-	end
-
-LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter:: @ 8279D2C
-	giveitem ITEM_LUXURY_BALL
+	copyvar VAR_RESULT, VAR_CONTEST_PRIZE_PICKUP
+	addvar VAR_RESULT, ITEM_NOMEL_BERRY
+	giveitem VAR_RESULT
 	compare VAR_RESULT, FALSE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter
+	goto_if_eq LilycoveCity_ContestLobby_EventScript_NoRoomForBerryAtCounter
 	setvar VAR_CONTEST_PRIZE_PICKUP, 0
 	closemessage
 	release
 	end
 
-LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter:: @ 8279D4B
+LilycoveCity_ContestLobby_EventScript_NoRoomForBerryAtCounter:: @ 8279D4B
 	call Common_EventScript_BagIsFull
 	msgbox LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater, MSGBOX_DEFAULT
 	release
@@ -1237,24 +1234,27 @@ ContestHall_EventScript_GiveContestPrizes:: @ 827AC77
 	compare VAR_RESULT, FALSE
 	goto_if_eq ContestHall_EventScript_ReceiveContestRibbon
 	compare VAR_CONTEST_RANK, CONTEST_RANK_MASTER
-	goto_if_eq ContestHall_EventScript_GiveLuxuryBall
+	goto_if_eq ContestHall_EventScript_GiveBerry
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
 	return
 
-ContestHall_EventScript_NoRoomForLuxuryBall:: @ 827ACA8
+ContestHall_EventScript_NoRoomForBerry:: @ 827ACA8
 	lockall
 	call Common_EventScript_BagIsFull
 	msgbox ContestHall_Text_PickUpPrizeAtCounterLater, MSGBOX_DEFAULT
 	releaseall
-	setvar VAR_CONTEST_PRIZE_PICKUP, 4
+	copyvar VAR_CONTEST_PRIZE_PICKUP, VAR_CONTEST_CATEGORY
+	addvar VAR_CONTEST_PRIZE_PICKUP, 1
 	return
 
-ContestHall_EventScript_GiveLuxuryBall:: @ 827ACBD
-	giveitem ITEM_LUXURY_BALL
+ContestHall_EventScript_GiveBerry:: @ 827ACBD
+	copyvar VAR_RESULT, VAR_CONTEST_CATEGORY
+	addvar VAR_RESULT, ITEM_SPELON_BERRY
+	giveitem VAR_RESULT
 	compare VAR_RESULT, FALSE
-	goto_if_eq ContestHall_EventScript_NoRoomForLuxuryBall
+	goto_if_eq ContestHall_EventScript_NoRoomForBerry
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall
