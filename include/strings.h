@@ -693,6 +693,8 @@ extern const u8 gText_GanlonBerry128BP[];
 extern const u8 gText_SalacBerry128BP[];
 extern const u8 gText_PetayaBerry128BP[];
 extern const u8 gText_ApicotBerry128BP[];
+extern const u8 gText_LansatBerry256BP[];
+extern const u8 gText_StarfBerry256BP[];
 
 extern const u8 gText_Leftovers48BP[];
 extern const u8 gText_WhiteHerb48BP[];
@@ -865,6 +867,8 @@ extern const u8 BattleFrontier_ExchangeServiceCorner_Text_GanlonBerryDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_SalacBerryDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LansatBerryDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_StarfBerryDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc[];

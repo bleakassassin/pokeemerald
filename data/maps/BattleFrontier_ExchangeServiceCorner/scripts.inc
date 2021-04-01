@@ -22,7 +22,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize:: @ 825F08A
 	compare VAR_TEMP_2, EXCHANGE_CORNER_DECOR2_CLERK
 	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2Branch
 	compare VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK
-	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin
+	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminBranch
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem
 	end
 
@@ -66,7 +66,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryGiveItem:: @ 825F12A
 	playse SE_SHOP
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize, MSGBOX_DEFAULT
 	compare VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK
-	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin
+	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminBranch
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem
 	end
 
@@ -184,9 +184,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2::
 	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_VenusaurDoll
 	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_CharizardDoll
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_BlastoiseDoll
-	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	end
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2_Regi::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R
@@ -203,9 +201,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2_Regi::
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_RegirockDoll
 	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_RegiceDoll
 	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_RegisteelDoll
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	end
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
 BattleFrontier_ExchangeServiceCorner_EventScript_LaprasDoll::
 	setvar VAR_0x8008, 128
@@ -259,8 +255,12 @@ BattleFrontier_ExchangeServiceCorner_EventScript_VitaminClerk:: @ 825F49F
 	faceplayer
 	setvar VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK
 	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminBranch
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminBranch::
+	goto_if_set FLAG_COLLECTED_ALL_GOLD_SYMBOLS, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminGold
+	goto_if_set FLAG_COLLECTED_ALL_SILVER_SYMBOLS, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminSilver
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin
-	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin:: @ 825F4B1
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR
@@ -280,8 +280,50 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin:: @ 825F4B1
 	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
 	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
 	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
-	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	end
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminSilver::
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S
+	special ShowFrontierExchangeCornerItemIconWindow
+	special ShowScrollableMultichoice
+	waitstate
+	special CloseFrontierExchangeCornerItemIconWindow
+	switch VAR_RESULT
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Protein
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_Calcium
+	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_Iron
+	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_Zinc
+	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
+	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
+	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
+	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
+	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_LansatBerry
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminGold::
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G
+	special ShowFrontierExchangeCornerItemIconWindow
+	special ShowScrollableMultichoice
+	waitstate
+	special CloseFrontierExchangeCornerItemIconWindow
+	switch VAR_RESULT
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Protein
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_Calcium
+	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_Iron
+	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_Zinc
+	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
+	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
+	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
+	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
+	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_LansatBerry
+	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_StarfBerry
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Protein:: @ 825F51E
 	setvar VAR_0x8008, 1
@@ -338,11 +380,21 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry::
 	setvar VAR_0x8009, ITEM_APICOT_BERRY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
+BattleFrontier_ExchangeServiceCorner_EventScript_LansatBerry::
+	setvar VAR_0x8008, 256
+	setvar VAR_0x8009, ITEM_LANSAT_BERRY
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
+
+BattleFrontier_ExchangeServiceCorner_EventScript_StarfBerry::
+	setvar VAR_0x8008, 256
+	setvar VAR_0x8009, ITEM_STARF_BERRY
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
+
 BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin::
 	bufferitemname 0, VAR_0x8009
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmPrize, MSGBOX_YESNO
 	compare VAR_RESULT, NO
-	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin
+	goto_if_eq BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminBranch
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize
 
 BattleFrontier_ExchangeServiceCorner_EventScript_HoldItemClerk:: @ 825F5F0
@@ -604,6 +656,14 @@ BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc::
 BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc::
 	.string "A hold item that raises SP.DEF in a\n"
 	.string "pinch.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_LansatBerryDesc::
+	.string "A hold item that ups the critical-hit\n"
+	.string "rate in a pinch.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_StarfBerryDesc::
+	.string "A hold item that sharply boosts a\n"
+	.string "stat in a pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc:: @ 826047A
 	.string "A hold item that gradually restores\n"

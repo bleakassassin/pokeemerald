@@ -23,7 +23,7 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
     0xFFFF 
 };
 
-static const u16 sFrontierExchangeCorner_Decor2_Regi[] =
+static const u16 sFrontierExchangeCorner_Decor2Regi[] =
 { 
     DECOR_LAPRAS_DOLL, 
     DECOR_SNORLAX_DOLL, 
@@ -49,6 +49,41 @@ static const u16 sFrontierExchangeCorner_Vitamins[] =
     ITEM_SALAC_BERRY, 
     ITEM_PETAYA_BERRY, 
     ITEM_APICOT_BERRY, 
+    0xFFFF 
+};
+
+static const u16 sFrontierExchangeCorner_VitaminsSilver[] =
+{ 
+    ITEM_PROTEIN, 
+    ITEM_CALCIUM, 
+    ITEM_IRON, 
+    ITEM_ZINC, 
+    ITEM_CARBOS, 
+    ITEM_HP_UP, 
+    ITEM_LIECHI_BERRY, 
+    ITEM_GANLON_BERRY, 
+    ITEM_SALAC_BERRY, 
+    ITEM_PETAYA_BERRY, 
+    ITEM_APICOT_BERRY, 
+    ITEM_LANSAT_BERRY, 
+    0xFFFF 
+};
+
+static const u16 sFrontierExchangeCorner_VitaminsGold[] =
+{ 
+    ITEM_PROTEIN, 
+    ITEM_CALCIUM, 
+    ITEM_IRON, 
+    ITEM_ZINC, 
+    ITEM_CARBOS, 
+    ITEM_HP_UP, 
+    ITEM_LIECHI_BERRY, 
+    ITEM_GANLON_BERRY, 
+    ITEM_SALAC_BERRY, 
+    ITEM_PETAYA_BERRY, 
+    ITEM_APICOT_BERRY, 
+    ITEM_LANSAT_BERRY, 
+    ITEM_STARF_BERRY, 
     0xFFFF 
 };
 
@@ -91,7 +126,7 @@ static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_Decor2Descriptions_Regi[] = 
+static const u8 *const sFrontierExchangeCorner_Decor2DescriptionsRegi[] = 
 {
     BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
     BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
@@ -117,6 +152,41 @@ static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
     BattleFrontier_ExchangeServiceCorner_Text_SalacBerryDesc,
     BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc,
     BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc,
+    gText_Exit
+};
+
+static const u8 *const sFrontierExchangeCorner_VitaminsDescriptionsSilver[] = 
+{
+    BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_IronDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ZincDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LiechiBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_GanlonBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_SalacBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LansatBerryDesc,
+    gText_Exit
+};
+
+static const u8 *const sFrontierExchangeCorner_VitaminsDescriptionsGold[] = 
+{
+    BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_IronDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ZincDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LiechiBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_GanlonBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_SalacBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_LansatBerryDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_StarfBerryDesc,
     gText_Exit
 };
 
