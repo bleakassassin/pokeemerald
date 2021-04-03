@@ -4,6 +4,7 @@ ShoalCave_LowTideLowerRoom_MapScripts:: @ 8237156
 
 ShoalCave_LowTideLowerRoom_OnLoad: @ 823715C
 	call ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles
+	call_if_set FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM_07, ShoalCave_LowTideLowerRoom_EventScript_SetBoulders_TM07
 	end
 
 ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles:: @ 8237162
@@ -13,6 +14,10 @@ ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles:: @ 8237162
 
 ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd:: @ 8237175
 	return
+
+ShoalCave_LowTideLowerRoom_EventScript_SetBoulders_TM07:
+	setobjectxyperm 1, 28, 3
+	return	
 
 ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4:: @ 8237176
 	lockall

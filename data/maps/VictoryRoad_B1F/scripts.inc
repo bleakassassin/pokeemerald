@@ -1,5 +1,28 @@
 VictoryRoad_B1F_MapScripts:: @ 82364E4
+	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_B1F_OnLoad
 	.byte 0
+
+VictoryRoad_B1F_OnLoad:
+	call_if_set FLAG_LANDMARK_POKEMON_LEAGUE, VictoryRoad_B1F_EventScript_SetBoulders_Main
+	call_if_set FLAG_ITEM_VICTORY_ROAD_1F_PP_UP, VictoryRoad_B1F_EventScript_SetBoulders_PPUp
+	call_if_set FLAG_ITEM_VICTORY_ROAD_B1F_FULL_RESTORE, VictoryRoad_B1F_EventScript_SetBoulders_FullRestore
+	end
+
+VictoryRoad_B1F_EventScript_SetBoulders_Main:
+	setobjectxyperm 3, 3, 7
+	setobjectxyperm 4, 10, 10
+	setobjectxyperm 5, 20, 27
+	return
+	
+VictoryRoad_B1F_EventScript_SetBoulders_PPUp:
+	setobjectxyperm 1, 20, 6
+	setobjectxyperm 2, 21, 3
+	return	
+	
+VictoryRoad_B1F_EventScript_SetBoulders_FullRestore:
+	setobjectxyperm 7, 34, 5
+	setobjectxyperm 13, 33, 4
+	return
 
 VictoryRoad_B1F_EventScript_Samuel:: @ 82364E5
 	trainerbattle_single TRAINER_SAMUEL, VictoryRoad_B1F_Text_SamuelIntro, VictoryRoad_B1F_Text_SamuelDefeat

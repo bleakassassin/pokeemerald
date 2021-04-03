@@ -4,7 +4,14 @@ MagmaHideout_1F_MapScripts:: @ 8239880
 
 MagmaHideout_1F_OnTransition: @ 8239886
 	setvar VAR_JAGGED_PASS_ASH_WEATHER, 0
+	call_if_set FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS, MagmaHideout_1F_EventScript_SetBoulders
 	end
+
+MagmaHideout_1F_EventScript_SetBoulders:
+	setobjectxyperm 4, 4, 22
+	setobjectxyperm 5, 10, 22
+	setobjectxyperm 6, 4, 23
+	return
 
 MagmaHideout_1F_EventScript_Grunt1:: @ 823988C
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_1, MagmaHideout_1F_Text_Grunt1Intro, MagmaHideout_1F_Text_Grunt1Defeat
