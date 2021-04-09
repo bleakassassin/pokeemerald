@@ -1,8 +1,8 @@
 SeafloorCavern_Room8_MapScripts:: @ 8234DC7
-	map_script MAP_SCRIPT_ON_LOAD, SeafloorCavern_Room8_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, SeafloorCavern_Room8_OnTransition
 	.byte 0
 
-SeafloorCavern_Room8_OnLoad:
+SeafloorCavern_Room8_OnTransition:
 	call_if_set FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS, SeafloorCavern_Room8_EventScript_SetBoulders
 	end
 	

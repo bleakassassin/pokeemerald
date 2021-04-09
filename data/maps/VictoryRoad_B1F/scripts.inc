@@ -1,8 +1,8 @@
 VictoryRoad_B1F_MapScripts:: @ 82364E4
-	map_script MAP_SCRIPT_ON_LOAD, VictoryRoad_B1F_OnLoad
+	map_script MAP_SCRIPT_ON_TRANSITION, VictoryRoad_B1F_OnTransition
 	.byte 0
 
-VictoryRoad_B1F_OnLoad:
+VictoryRoad_B1F_OnTransition:
 	call_if_set FLAG_LANDMARK_POKEMON_LEAGUE, VictoryRoad_B1F_EventScript_SetBoulders_Main
 	call_if_set FLAG_ITEM_VICTORY_ROAD_1F_PP_UP, VictoryRoad_B1F_EventScript_SetBoulders_PPUp
 	call_if_set FLAG_ITEM_VICTORY_ROAD_B1F_FULL_RESTORE, VictoryRoad_B1F_EventScript_SetBoulders_FullRestore
