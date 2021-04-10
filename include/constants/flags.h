@@ -63,12 +63,12 @@
 #define FLAG_HIDE_ROUTE_123_TREE_1           0x33 // Remove right tree blocking grass-free detour on Route 123 after cutting it
 #define FLAG_HIDE_ROUTE_123_TREE_2           0x34 // Remove tree blocking two hidden items and three Trainers on Route 123 after cutting it
 #define FLAG_HIDE_ROUTE_123_TREE_3           0x35 // Remove left tree blocking grass-free detour on Route 123 after cutting it
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
-#define FLAG_UNUSED_0x037    0x37 // Unused Flag
-#define FLAG_UNUSED_0x038    0x38 // Unused Flag
-#define FLAG_UNUSED_0x039    0x39 // Unused Flag
-#define FLAG_UNUSED_0x03A    0x3A // Unused Flag
-#define FLAG_UNUSED_0x03B    0x3B // Unused Flag
+#define FLAG_HIDE_ROUTE_111_ROCK_1           0x36 // Remove left rock on Route 111 after smashing it
+#define FLAG_HIDE_ROUTE_111_ROCK_2           0x37 // Remove right rock on Route 111 after smashing it
+#define FLAG_HIDE_ROUTE_114_ROCK_1           0x38 // Remove right-side rock blocking upper right Secret Base on Route 114 after smashing it
+#define FLAG_HIDE_ROUTE_114_ROCK_2           0x39 // Remove rock blocking bottom Secret Base on Route 114 after smashing it
+#define FLAG_HIDE_ROUTE_114_ROCK_3           0x3A // Remove rock blocking Secret Base next to Granite Cave entrance on Route 114 after smashing it
+#define FLAG_HIDE_ROUTE_115_ROCK             0x3B // Remove rock on Route 115 after smashing it
 #define FLAG_UNUSED_0x03C    0x3C // Unused Flag
 #define FLAG_UNUSED_0x03D    0x3D // Unused Flag
 #define FLAG_UNUSED_0x03E    0x3E // Unused Flag
