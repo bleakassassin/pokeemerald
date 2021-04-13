@@ -434,24 +434,24 @@ const u8 gTypeEffectiveness[336] =
 
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
-    _("NORMAL"),
-    _("FIGHT"),
-    _("FLYING"),
-    _("POISON"),
-    _("GROUND"),
-    _("ROCK"),
-    _("BUG"),
-    _("GHOST"),
-    _("STEEL"),
-    _("???"),
-    _("FIRE"),
-    _("WATER"),
-    _("GRASS"),
-    _("ELECTR"),
-    _("PSYCHC"),
-    _("ICE"),
-    _("DRAGON"),
-    _("DARK"),
+    [TYPE_NORMAL] = _("NORMAL"),
+    [TYPE_FIGHTING] = _("FIGHT"),
+    [TYPE_FLYING] = _("FLYING"),
+    [TYPE_POISON] = _("POISON"),
+    [TYPE_GROUND] = _("GROUND"),
+    [TYPE_ROCK] = _("ROCK"),
+    [TYPE_BUG] = _("BUG"),
+    [TYPE_GHOST] = _("GHOST"),
+    [TYPE_STEEL] = _("STEEL"),
+    [TYPE_MYSTERY] = _("???"),
+    [TYPE_FIRE] = _("FIRE"),
+    [TYPE_WATER] = _("WATER"),
+    [TYPE_GRASS] = _("GRASS"),
+    [TYPE_ELECTRIC] = _("ELECTR"),
+    [TYPE_PSYCHIC] = _("PSYCHC"),
+    [TYPE_ICE] = _("ICE"),
+    [TYPE_DRAGON] = _("DRAGON"),
+    [TYPE_DARK] = _("DARK"),
 };
 
 // This is a factor in how much money you get for beating a trainer.
@@ -3959,7 +3959,7 @@ u8 IsRunningFromBattleImpossible(void)
         {
             gBattleScripting.battler = i;
             gLastUsedAbility = gBattleMons[i].ability;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
             return 2;
         }
         if (side != GetBattlerSide(i)
@@ -3969,7 +3969,7 @@ u8 IsRunningFromBattleImpossible(void)
         {
             gBattleScripting.battler = i;
             gLastUsedAbility = gBattleMons[i].ability;
-            gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
             return 2;
         }
     }
@@ -3978,18 +3978,18 @@ u8 IsRunningFromBattleImpossible(void)
     {
         gBattleScripting.battler = i - 1;
         gLastUsedAbility = gBattleMons[i - 1].ability;
-        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PREVENTS_ESCAPE;
         return 2;
     }
     if ((gBattleMons[gActiveBattler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
         || (gStatuses3[gActiveBattler] & STATUS3_ROOTED))
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
         return 1;
     }
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
-        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DONT_LEAVE_BIRCH;
         return 1;
     }
     return 0;
