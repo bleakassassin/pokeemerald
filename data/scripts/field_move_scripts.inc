@@ -60,7 +60,35 @@ Text_CantCut: @ 829077D
 	.string "CUT down!$"
 
 @ Interact with smashable rock
-EventScript_RockSmash:: @ 82907A6
+EventScript_RockSmash::
+	call EventScript_RockSmash_Main
+	call EventScript_RockItemTable
+	call EventScript_RockItemTable_Main
+	goto EventScript_ItemUnderRubble
+
+EventScript_RockSmash_SeafloorCavern::
+	call EventScript_RockSmash_Main
+	call EventScript_RockItemTable
+	call EventScript_RockItemTable_SeafloorCavern
+	goto EventScript_ItemUnderRubble
+
+EventScript_RockSmash_GraniteCave::
+	call EventScript_RockSmash_Main
+	call EventScript_RockItemTable
+	call EventScript_RockItemTable_GraniteCave
+	goto EventScript_ItemUnderRubble
+
+EventScript_RockSmash_SafariZone::
+	call EventScript_RockSmash_Main
+	call EventScript_RockItemTable
+	call EventScript_RockItemTable_SafariZone
+	goto EventScript_ItemUnderRubble
+	
+EventScript_RockSmash_NoItem::
+	call EventScript_RockSmash_Main
+	goto EventScript_EndSmash
+	
+EventScript_RockSmash_Main::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	checkpartymove MOVE_ROCK_SMASH
@@ -84,10 +112,8 @@ EventScript_UseRockSmash:: @ 82907F0
 	lockall
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
-	goto EventScript_SmashRock
-	end
 
-EventScript_SmashRock:: @ 82907FB
+EventScript_SmashRock::
 	applymovement VAR_LAST_TALKED, Movement_SmashRock
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
@@ -95,15 +121,173 @@ EventScript_SmashRock:: @ 82907FB
 	compare VAR_RESULT, TRUE
 	goto_if_eq EventScript_EndSmash
 	special RockSmashWildEncounter
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_EndSmash
+	compare VAR_RESULT, TRUE
+	goto_if_eq EventScript_EndSmash_WildEncounter
+	return
+	
+EventScript_EndSmash_WildEncounter::
 	waitstate
 	releaseall
 	end
+	
+EventScript_RockItemTable::
+	random 24
+	compare VAR_RESULT, 0
+	call_if_eq EventScript_RockItem1
+	compare VAR_RESULT, 1
+	call_if_eq EventScript_RockItem2
+	compare VAR_RESULT, 2
+	call_if_eq EventScript_RockItem3
+	compare VAR_RESULT, 3
+	call_if_eq EventScript_RockItem4
+	compare VAR_RESULT, 4
+	call_if_eq EventScript_RockItem5
+	compare VAR_RESULT, 5
+	call_if_eq EventScript_RockItem6
+	return
 
-EventScript_EndSmash:: @ 8290829
+EventScript_RockItemTable_Main::
+	compare VAR_RESULT, 6
+	call_if_eq EventScript_RockItem7
+	compare VAR_RESULT, 7
+	call_if_eq EventScript_RockItem8
+	compare VAR_RESULT, 8
+	call_if_eq EventScript_RockItem9
+	compare VAR_RESULT, 9
+	call_if_eq EventScript_RockItem10
+	return
+
+EventScript_RockItemTable_SeafloorCavern::
+	compare VAR_RESULT, 6
+	call_if_eq EventScript_RockItem7_SeafloorCavern
+	compare VAR_RESULT, 7
+	call_if_eq EventScript_RockItem8_SeafloorCavern
+	compare VAR_RESULT, 8
+	call_if_eq EventScript_RockItem9_SeafloorCavern
+	compare VAR_RESULT, 9
+	call_if_eq EventScript_RockItem10_SeafloorCavern
+	return
+
+EventScript_RockItemTable_GraniteCave::
+	compare VAR_RESULT, 6
+	call_if_eq EventScript_RockItem7
+	compare VAR_RESULT, 7
+	call_if_eq EventScript_RockItem8
+	compare VAR_RESULT, 8
+	call_if_eq EventScript_RockItem9_GraniteCave
+	compare VAR_RESULT, 9
+	call_if_eq EventScript_RockItem10_GraniteCave
+	return
+
+EventScript_RockItemTable_SafariZone::
+	compare VAR_RESULT, 6
+	call_if_eq EventScript_RockItem7
+	compare VAR_RESULT, 7
+	call_if_eq EventScript_RockItem8_SafariZone
+	compare VAR_RESULT, 8
+	call_if_eq EventScript_RockItem9_SafariZone
+	compare VAR_RESULT, 9
+	call_if_eq EventScript_RockItem10_SafariZone
+	return
+	
+EventScript_ItemUnderRubble::	
+	compare VAR_RESULT, 10
+	goto_if_ge EventScript_EndSmash
+	giveitem VAR_TEMP_0
+	compare VAR_RESULT, FALSE
+	goto_if_eq Common_EventScript_ShowBagIsFull
+
+EventScript_EndSmash::
 	releaseall
 	end
+
+EventScript_RockItem1::
+	setvar VAR_TEMP_0, ITEM_REVIVE
+	return
+
+EventScript_RockItem2::
+	setvar VAR_TEMP_0, ITEM_MAX_REVIVE
+	return
+
+EventScript_RockItem3::
+	setvar VAR_TEMP_0, ITEM_ETHER
+	return
+
+EventScript_RockItem4::
+	setvar VAR_TEMP_0, ITEM_MAX_ETHER
+	return
+
+EventScript_RockItem5::
+	setvar VAR_TEMP_0, ITEM_SOFT_SAND
+	return
+
+EventScript_RockItem6::
+	setvar VAR_TEMP_0, ITEM_HARD_STONE
+	return
+
+EventScript_RockItem7::
+	setvar VAR_TEMP_0, ITEM_HEART_SCALE
+	return
+
+EventScript_RockItem8::
+	setvar VAR_TEMP_0, ITEM_STAR_PIECE
+	return
+
+EventScript_RockItem9::
+	setvar VAR_TEMP_0, ITEM_PEARL
+	return
+
+EventScript_RockItem10::
+	setvar VAR_TEMP_0, ITEM_BIG_PEARL
+	return
+
+EventScript_RockItem7_SeafloorCavern::
+	setvar VAR_TEMP_0, ITEM_RED_SHARD
+	return
+
+EventScript_RockItem8_SeafloorCavern::
+	setvar VAR_TEMP_0, ITEM_BLUE_SHARD
+	return
+
+EventScript_RockItem9_SeafloorCavern::
+	setvar VAR_TEMP_0, ITEM_YELLOW_SHARD
+	return
+
+EventScript_RockItem10_SeafloorCavern::
+	setvar VAR_TEMP_0, ITEM_GREEN_SHARD
+	return
+
+EventScript_RockItem9_GraniteCave::
+	goto_if_unset FLAG_HIDE_DESERT_UNDERPASS_FOSSIL, EventScript_EndSmash
+	checkitem ITEM_ROOT_FOSSIL, 1
+	goto_if_ge EventScript_EndSmash
+	setvar VAR_TEMP_0, ITEM_ROOT_FOSSIL
+	return
+
+EventScript_RockItem10_GraniteCave::
+	goto_if_unset FLAG_HIDE_DESERT_UNDERPASS_FOSSIL, EventScript_EndSmash
+	checkitem ITEM_CLAW_FOSSIL, 1
+	goto_if_ge EventScript_EndSmash
+	setvar VAR_TEMP_0, ITEM_CLAW_FOSSIL
+	return
+
+EventScript_RockItem8_SafariZone::
+	checkitem ITEM_HELIX_FOSSIL, 1
+	goto_if_ge EventScript_EndSmash
+	setvar VAR_TEMP_0, ITEM_HELIX_FOSSIL
+	return
+
+EventScript_RockItem9_SafariZone::
+	checkitem ITEM_DOME_FOSSIL, 1
+	goto_if_ge EventScript_EndSmash
+	setvar VAR_TEMP_0, ITEM_DOME_FOSSIL
+	return
+
+EventScript_RockItem10_SafariZone::
+	checkitem ITEM_OLD_AMBER, 1
+	goto_if_ge EventScript_EndSmash
+	setvar VAR_TEMP_0, ITEM_OLD_AMBER
+	return
 
 Movement_SmashRock: @ 829082B
 	rock_smash_break
