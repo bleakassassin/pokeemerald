@@ -177,7 +177,7 @@ static const u16 *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
 	sPrizeListRoar,
 	sPrizeListSludgeBomb,
 	sPrizeListToxic,
-	sPrizeListSunnyDay,
+	sPrizeListRareCandy1,
 	sPrizeListEarthQuake
 };
 
@@ -188,10 +188,10 @@ static const u16 *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
 	sPrizeListMaxRevive2,
 	sPrizeListMaxEther2,
 	sPrizeListElixir2,
-	sPrizeListBrickBreak,
+	sPrizeListMaxEther2,
 	sPrizeListTorment,
 	sPrizeListSkillSwap,
-	sPrizeListGigaDrain,
+	sPrizeListMaxRevive1,
 	sPrizeListAttract
 };
 
