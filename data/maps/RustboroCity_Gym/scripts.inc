@@ -37,6 +37,7 @@ RustboroCity_Gym_EventScript_GiveRockTomb:: @ 8212FA4
 	end
 
 RustboroCity_Gym_EventScript_RoxanneRematch:: @ 8212FC8
+	setvar VAR_ALTERING_CAVE_WILD_SET, 1
 	trainerbattle_rematch_double TRAINER_ROXANNE_1, RustboroCity_Gym_Text_RoxannePreRematch, RustboroCity_Gym_Text_RoxanneRematchDefeat, RustboroCity_Gym_Text_RoxanneRematchNeedTwoMons
 	msgbox RustboroCity_Gym_Text_RoxannePostRematch, MSGBOX_AUTOCLOSE
 	end

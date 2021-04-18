@@ -103,6 +103,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat:: @ 81FE841
 	return
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryRematch:: @ 81FE864
+	setvar VAR_ALTERING_CAVE_WILD_SET, 4
 	trainerbattle_rematch_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryPreRematch, LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat, LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostRematch, MSGBOX_AUTOCLOSE
 	end

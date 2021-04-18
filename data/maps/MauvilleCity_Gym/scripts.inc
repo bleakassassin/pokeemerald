@@ -137,6 +137,7 @@ MauvilleCity_Gym_EventScript_CompletedNewMauville:: @ 820DFD4
 	end
 
 MauvilleCity_Gym_EventScript_WattsonRematch:: @ 820DFDE
+	setvar VAR_ALTERING_CAVE_WILD_SET, 3
 	trainerbattle_rematch_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonPreRematch, MauvilleCity_Gym_Text_WattsonRematchDefeat, MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons
 	msgbox MauvilleCity_Gym_Text_WattsonPostRematch, MSGBOX_AUTOCLOSE
 	end

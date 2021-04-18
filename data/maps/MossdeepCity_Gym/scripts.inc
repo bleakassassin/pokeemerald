@@ -108,6 +108,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind:: @ 822095B
 	return
 
 MossdeepCity_Gym_EventScript_TateAndLizaRematch:: @ 822097E
+	setvar VAR_ALTERING_CAVE_WILD_SET, 7
 	trainerbattle_rematch_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaPreRematch, MossdeepCity_Gym_Text_TateAndLizaRematchDefeat, MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostRematch, MSGBOX_AUTOCLOSE
 	end

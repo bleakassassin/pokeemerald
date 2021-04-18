@@ -198,6 +198,7 @@ DewfordTown_Gym_EventScript_GiveBulkUp2: @ 81FC878
 	end
 
 DewfordTown_Gym_EventScript_BrawlyRematch:: @ 81FC89C
+	setvar VAR_ALTERING_CAVE_WILD_SET, 2
 	trainerbattle_rematch_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyPreRematch, DewfordTown_Gym_Text_BrawlyRematchDefeat, DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons
 	msgbox DewfordTown_Gym_Text_BrawlyPostRematch, MSGBOX_AUTOCLOSE
 	end
