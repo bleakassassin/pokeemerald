@@ -2393,9 +2393,18 @@ void ShowScrollableMultichoice(void)
             task->tTaskId = taskId;
             break;
         case SCROLL_MULTI_BF_MOVE_TUTOR_1:
-        case SCROLL_MULTI_BF_MOVE_TUTOR_2:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
             task->tNumItems = 11;
+            task->tLeft = 15;
+            task->tTop = 1;
+            task->tWidth = 14;
+            task->tHeight = 12;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
+        case SCROLL_MULTI_BF_MOVE_TUTOR_2:
+            task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+            task->tNumItems = 14;
             task->tLeft = 15;
             task->tTop = 1;
             task->tWidth = 14;
@@ -2554,11 +2563,14 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     {
         gText_DefenseCurl16BP,
         gText_Snore24BP,
+        gText_Nightmare24BP,
         gText_MudSlap24BP,
         gText_Swift24BP,
         gText_IcyWind24BP,
+        gText_SelfDestruct24BP,
         gText_Endure48BP,
         gText_PsychUp48BP,
+        gText_SkyAttack48BP,
         gText_IcePunch48BP,
         gText_ThunderPunch48BP,
         gText_FirePunch48BP,
@@ -3158,11 +3170,14 @@ static const u16 sBattleFrontier_TutorMoves2[] =
 { 
     MOVE_DEFENSE_CURL, 
     MOVE_SNORE, 
+    MOVE_NIGHTMARE, 
     MOVE_MUD_SLAP, 
     MOVE_SWIFT, 
     MOVE_ICY_WIND, 
+    MOVE_SELF_DESTRUCT, 
     MOVE_ENDURE, 
     MOVE_PSYCH_UP, 
+    MOVE_SKY_ATTACK, 
     MOVE_ICE_PUNCH, 
     MOVE_THUNDER_PUNCH, 
     MOVE_FIRE_PUNCH 
@@ -3225,11 +3240,14 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
     {
         BattleFrontier_Lounge7_Text_DefenseCurlDesc,
         BattleFrontier_Lounge7_Text_SnoreDesc,
+        BattleFrontier_Lounge7_Text_NightmareDesc,
         BattleFrontier_Lounge7_Text_MudSlapDesc,
         BattleFrontier_Lounge7_Text_SwiftDesc,
         BattleFrontier_Lounge7_Text_IcyWindDesc,
+        BattleFrontier_Lounge7_Text_SelfDestructDesc,
         BattleFrontier_Lounge7_Text_EndureDesc,
         BattleFrontier_Lounge7_Text_PsychUpDesc,
+        BattleFrontier_Lounge7_Text_SkyAttackDesc,
         BattleFrontier_Lounge7_Text_IcePunchDesc,
         BattleFrontier_Lounge7_Text_ThunderPunchDesc,
         BattleFrontier_Lounge7_Text_FirePunchDesc,
