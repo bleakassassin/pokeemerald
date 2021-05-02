@@ -5,9 +5,14 @@ Route119_WeatherInstitute_1F_MapScripts:: @ 826FA86
 	.byte 0
 
 Route119_WeatherInstitute_1F_OnTransition: @ 826FA8C
+	call_if_set FLAG_HIDE_ROUTE_119_TEAM_AQUA, Route119_WeatherInstitute_1F_EventScript_SetHealLocation
 	compare VAR_WEATHER_INSTITUTE_STATE, 0
 	call_if_eq Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos
 	end
+	
+Route119_WeatherInstitute_1F_EventScript_SetHealLocation::
+	setrespawn HEAL_LOCATION_ROUTE119_WEATHER_INSTITUTE
+	return
 
 Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos:: @ 826FA98
 	setobjectxyperm LOCALID_LITTLE_BOY, 0, 5
