@@ -2069,6 +2069,7 @@ static void CB_ExitFlyMap(void)
 					break;
 				case MAPSEC_ROUTE_112:
 					SetWarpDestinationToMapWarp(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], 6);
+					break;
 				case MAPSEC_ROUTE_120:
 					SetWarpDestinationToMapWarp(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], sFlyMap->regionMap.posWithinMapSec >= 2 ? 3 : 2);
 					break;
