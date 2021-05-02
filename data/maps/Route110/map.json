@@ -541,6 +541,20 @@
       "elevation": 0,
       "dest_map": "MAP_ROUTE110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE",
       "dest_warp_id": 2
+    },
+    {
+      "x": 11,
+      "y": 67,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE110",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 35,
+      "y": 25,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE110",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [

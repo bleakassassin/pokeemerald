@@ -136,6 +136,10 @@ Route115_EventScript_Marlene:: @ 81F2B3E
 	trainerbattle_single TRAINER_MARLENE, Route115_Text_MarleneIntro, Route115_Text_MarleneDefeat
 	msgbox Route115_Text_MarlenePostBattle, MSGBOX_AUTOCLOSE
 	end
+	
+Route115_EventScript_ExitMeteorFalls::
+	setflag FLAG_EXITED_METEOR_FALLS_AT_ROUTE_115
+	end
 
 Route115_Text_NeverKnowWhenCavePokemonWillAppear: @ 81F2B55
 	.string "Exploring a cave isn't like walking\n"

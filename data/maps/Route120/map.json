@@ -612,6 +612,20 @@
       "elevation": 1,
       "dest_map": "MAP_SCORCHED_SLAB",
       "dest_warp_id": 0
+    },
+    {
+      "x": 27,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE120",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 38,
+      "y": 89,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE120",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [

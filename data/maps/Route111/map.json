@@ -664,6 +664,13 @@
       "elevation": 0,
       "dest_map": "MAP_TRAINER_HILL_ENTRANCE",
       "dest_warp_id": 0
+    },
+    {
+      "x": 7,
+      "y": 67,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE111",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [

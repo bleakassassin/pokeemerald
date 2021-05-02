@@ -415,6 +415,13 @@
       "elevation": 0,
       "dest_map": "MAP_ROUTE121_SAFARI_ZONE_ENTRANCE",
       "dest_warp_id": 2
+    },
+    {
+      "x": 37,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE121",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [

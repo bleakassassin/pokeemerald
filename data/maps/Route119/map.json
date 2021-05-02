@@ -599,6 +599,13 @@
       "elevation": 0,
       "dest_map": "MAP_ROUTE119_HOUSE",
       "dest_warp_id": 0
+    },
+    {
+      "x": 33,
+      "y": 110,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE119",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [
