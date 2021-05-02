@@ -80,7 +80,9 @@ PetalburgCity_Mart_Text_RepelIsUseful: @ 8207E60
 PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou: @ 8207EB0
 	.string "Do you have any ANTIDOTES with\n"
 	.string "you?\p"
-	.string "If you walk around with a poisoned\n"
-	.string "POKéMON, it will lose HP until it faints.\l"
+	.string "If a POKéMON is poisoned, it will\n"
+	.string "steadily lose HP when battling.\p"
+	.string "The poison won't disappear after\n"
+	.string "the battle, either.\p"
 	.string "Take some ANTIDOTES with you.$"
 

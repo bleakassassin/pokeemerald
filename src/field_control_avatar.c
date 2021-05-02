@@ -31,6 +31,7 @@
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/field_poison.h"
+#include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
@@ -663,7 +664,7 @@ static bool8 UpdatePoisonStepCounter(void)
 {
     u16 *ptr;
 
-    if (gMapHeader.mapType != MAP_TYPE_SECRET_BASE)
+    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
     {
         ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
         (*ptr)++;
