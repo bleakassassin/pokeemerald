@@ -282,6 +282,14 @@ static u16 GetCurrentMapWildMonHeaderId(void)
 
                 i += alteringCaveId;
             }
+			else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SKY_PILLAR_1F) &&
+                    ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_1F)) ||
+                     (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_3F)) ||
+                     (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_5F))) &&
+					 VarGet(VAR_SOOTOPOLIS_CITY_STATE) == 6)
+			{
+				i += 1;
+			}
 
             return i;
         }
