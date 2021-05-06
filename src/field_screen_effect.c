@@ -980,7 +980,7 @@ void AnimateFlash(u8 flashLevel)
     bool8 fullBrightness = FALSE;
     if (!flashLevel)
         fullBrightness = TRUE;
-    StartUpdateFlashLevelEffect(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sFlashLevelPixelRadii[curFlashLevel], sFlashLevelPixelRadii[flashLevel], fullBrightness, 1);
+    StartUpdateFlashLevelEffect(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sFlashLevelPixelRadii[curFlashLevel], sFlashLevelPixelRadii[flashLevel], fullBrightness, 2);
     StartWaitForFlashUpdate();
     ScriptContext2_Enable();
 }
