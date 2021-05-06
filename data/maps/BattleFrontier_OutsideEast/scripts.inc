@@ -19,10 +19,11 @@ BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo:: @ 8242C19
 BattleFrontier_OutsideEast_OnTransition: @ 8242C2D
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
-	call_if_unset FLAG_DEFEATED_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_ShowSudowoodo
+	call_if_unset FLAG_CAUGHT_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_ShowSudowoodo
 	end
 
 BattleFrontier_OutsideEast_EventScript_ShowSudowoodo:: @ 8242C3F
+	goto_if_set FLAG_DEFEATED_SUDOWOODO, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_BATTLE_FRONTIER_SUDOWOODO
 	return
 
@@ -141,7 +142,7 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo:: @ 8242CFC
 	goto_if_eq BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo
-	setflag FLAG_DEFEATED_SUDOWOODO
+	setflag FLAG_CAUGHT_SUDOWOODO
 	release
 	end
 
@@ -224,6 +225,7 @@ BattleFrontier_OutsideEast_EventScript_OldWoman:: @ 8242DE9
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone
+	goto_if_set FLAG_CAUGHT_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone
 	msgbox BattleFrontier_OutsideEast_Text_OddTreeHereSeemsToWiggle, MSGBOX_DEFAULT
 	release
 	end
