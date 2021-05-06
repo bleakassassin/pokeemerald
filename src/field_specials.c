@@ -3541,11 +3541,11 @@ void CreateAbnormalWeatherEvent(void)
     u16 randomValue = Random();
     VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, 0);
 
-    if (FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE)
+    if ((FlagGet(FLAG_DEFEATED_KYOGRE) == TRUE) || FlagGet(FLAG_CAUGHT_KYOGRE) == TRUE)
     {
         VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % TERRA_CAVE_LOCATIONS) + TERRA_CAVE_LOCATIONS_START);
     }
-    else if (FlagGet(FLAG_DEFEATED_GROUDON) == TRUE)
+    else if ((FlagGet(FLAG_DEFEATED_GROUDON) == TRUE) || FlagGet(FLAG_CAUGHT_GROUDON) == TRUE)
     {
         VarSet(VAR_ABNORMAL_WEATHER_LOCATION, (randomValue % MARINE_CAVE_LOCATIONS) + MARINE_CAVE_LOCATIONS_START);
     }

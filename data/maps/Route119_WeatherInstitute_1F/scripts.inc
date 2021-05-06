@@ -36,6 +36,8 @@ Route119_WeatherInstitute_1F_EventScript_InstituteWorker1:: @ 826FAC8
 	setvar VAR_0x8004, 0
 	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
 	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
+	call_if_set FLAG_CAUGHT_KYOGRE, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
+	call_if_set FLAG_CAUGHT_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
 	compare VAR_0x8004, 2  @ Both defeated
 	goto_if_eq Route119_WeatherInstitute_1F_EventScript_StudyingRain
 	msgbox Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather, MSGBOX_DEFAULT

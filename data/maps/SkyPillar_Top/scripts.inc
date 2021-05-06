@@ -30,10 +30,11 @@ SkyPillar_Top_EventScript_SetCleanLayout:: @ 82396FD
 	return
 
 SkyPillar_Top_EventScript_TryShowRayquaza:: @ 8239705
-	call_if_unset FLAG_DEFEATED_RAYQUAZA, SkyPillar_Top_EventScript_ShowRayquaza
+	call_if_unset FLAG_CAUGHT_RAYQUAZA, SkyPillar_Top_EventScript_ShowRayquaza
 	return
 
 SkyPillar_Top_EventScript_ShowRayquaza:: @ 823970F
+	goto_if_set FLAG_DEFEATED_RAYQUAZA, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL
 	return
 
@@ -63,28 +64,14 @@ SkyPillar_Top_EventScript_Rayquaza:: @ 8239722
 	goto_if_eq SkyPillar_Top_EventScript_RanFromRayquaza
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq SkyPillar_Top_EventScript_RanFromRayquaza
-	setflag FLAG_DEFEATED_RAYQUAZA
+	setflag FLAG_CAUGHT_RAYQUAZA
 	releaseall
 	end
 
 SkyPillar_Top_EventScript_DefeatedRayquaza:: @ 8239768
 	setflag FLAG_DEFEATED_RAYQUAZA
-	goto SkyPillar_Top_EventScript_DefeatedRayquaza2
-	end
-
 SkyPillar_Top_EventScript_RanFromRayquaza:: @ 8239771
 	setvar VAR_0x8004, SPECIES_RAYQUAZA
-	goto SkyPillar_Top_EventScript_RanFromRayquaza2
-	end
-
-SkyPillar_Top_EventScript_DefeatedRayquaza2:: @ 823977C
-	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
-	fadescreenswapbuffers FADE_FROM_BLACK
-	releaseall
-	end
-
-SkyPillar_Top_EventScript_RanFromRayquaza2:: @ 8239785
 	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK

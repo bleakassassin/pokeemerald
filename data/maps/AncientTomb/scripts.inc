@@ -17,10 +17,11 @@ AncientTomb_EventScript_TryRemoveRegisteel:: @ 8238FCD
 
 AncientTomb_OnTransition: @ 8238FE1
 	setflag FLAG_LANDMARK_ANCIENT_TOMB
-	call_if_unset FLAG_DEFEATED_REGISTEEL, AncientTomb_EventScript_ShowRegisteel
+	call_if_unset FLAG_CAUGHT_REGISTEEL, AncientTomb_EventScript_ShowRegisteel
 	end
 
 AncientTomb_EventScript_ShowRegisteel:: @ 8238FEE
+	goto_if_set FLAG_DEFEATED_REGISTEEL, Common_EventScript_NopReturn
 	clearflag FLAG_HIDE_REGISTEEL
 	return
 
@@ -78,15 +79,12 @@ AncientTomb_EventScript_Registeel:: @ 823905A
 	goto_if_eq AncientTomb_EventScript_RanFromRegisteel
 	compare VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED
 	goto_if_eq AncientTomb_EventScript_RanFromRegisteel
-	setflag FLAG_DEFEATED_REGISTEEL
+	setflag FLAG_CAUGHT_REGISTEEL
 	release
 	end
 
 AncientTomb_EventScript_DefeatedRegisteel:: @ 82390A1
 	setflag FLAG_DEFEATED_REGISTEEL
-	goto Common_EventScript_RemoveStaticPokemon
-	end
-
 AncientTomb_EventScript_RanFromRegisteel:: @ 82390AA
 	setvar VAR_0x8004, SPECIES_REGISTEEL
 	goto Common_EventScript_LegendaryFlewAway
