@@ -109,13 +109,7 @@ BerryTree_EventScript_CheckBerryFullyGrown:: @ 8274421
 	lock
 	faceplayer
 	special ObjectEventInteractionGetBerryCountString
-	msgbox BerryTree_Text_WantToPick, MSGBOX_YESNO
-	compare VAR_RESULT, YES
-	goto_if_eq BerryTree_EventScript_PickBerry
-	compare VAR_RESULT, NO
-	goto_if_eq BerryTree_EventScript_CancelPickingBerry
-
-BerryTree_EventScript_PickBerry:: @ 8274448
+	msgbox BerryTree_Text_WantToPick, MSGBOX_DEFAULT
 	special ObjectEventInteractionPickBerryTree
 	compare VAR_0x8004, 0
 	goto_if_eq BerryTree_EventScript_BerryPocketFull
@@ -134,13 +128,6 @@ BerryTree_EventScript_PickBerry:: @ 8274448
 
 BerryTree_EventScript_BerryPocketFull:: @ 8274470
 	message BerryTree_Text_BerryPocketFull
-	waitmessage
-	waitbuttonpress
-	release
-	end
-
-BerryTree_EventScript_CancelPickingBerry:: @ 8274479
-	message BerryTree_Text_BerryLeftUnpicked
 	waitmessage
 	waitbuttonpress
 	release
@@ -228,9 +215,7 @@ BerryTree_Text_CareAdverbGood: @ 82745E5
 	.string "prettily$"
 
 BerryTree_Text_WantToPick: @ 82745EE
-	.string "You found {STR_VAR_2} {STR_VAR_1}!\p"
-	.string "Do you want to pick the\n"
-	.string "{STR_VAR_1}?$"
+	.string "You found {STR_VAR_2} {STR_VAR_1}!$"
 
 BerryTree_Text_PickedTheBerry: @ 827461B
 	.string "{PLAYER} picked the {STR_VAR_2} {STR_VAR_1}.$"
@@ -244,10 +229,6 @@ BerryTree_Text_PutAwayBerry: @ 8274630
 BerryTree_Text_BerryPocketFull: @ 827468F
 	.string "The BAG's BERRIES POCKET is full.\p"
 	.string "The {STR_VAR_1} couldn't be taken.$"
-
-BerryTree_Text_BerryLeftUnpicked: @ 82746CB
-	.string "{PLAYER} left the {STR_VAR_1}\n"
-	.string "unpicked.$"
 
 BerryTree_Text_WantToWater: @ 82746E4
 	.string "Want to water the {STR_VAR_1} with the\n"
