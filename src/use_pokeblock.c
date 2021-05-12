@@ -665,15 +665,7 @@ static void UsePokeblockMenu(void)
             sInfo->mainState = STATE_HANDLE_INPUT;
             break;
         case 0: // YES
-            if (IsSheenMaxed())
-            {
-                PrintWontEatAnymore();
-                sInfo->mainState = STATE_WAIT_MSG;
-            }
-            else
-            {
-                SetUsePokeblockCallback(FeedPokeblockToMon);
-            }
+            SetUsePokeblockCallback(FeedPokeblockToMon);
             break;
         }
         break;
