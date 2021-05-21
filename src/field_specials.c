@@ -2363,7 +2363,7 @@ void ShowScrollableMultichoice(void)
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 12;
+            task->tNumItems = 14;
             task->tLeft = 14;
             task->tTop = 1;
             task->tWidth = 15;
@@ -2373,7 +2373,7 @@ void ShowScrollableMultichoice(void)
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 13;
+            task->tNumItems = 15;
             task->tLeft = 14;
             task->tTop = 1;
             task->tWidth = 15;
@@ -2383,7 +2383,7 @@ void ShowScrollableMultichoice(void)
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 14;
+            task->tNumItems = 16;
             task->tLeft = 14;
             task->tTop = 1;
             task->tWidth = 15;
@@ -2393,7 +2393,7 @@ void ShowScrollableMultichoice(void)
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
             task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-            task->tNumItems = 10;
+            task->tNumItems = 16;
             task->tLeft = 14;
             task->tTop = 1;
             task->tWidth = 15;
@@ -2534,6 +2534,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Zinc1BP,
         gText_Carbos1BP,
         gText_HpUp1BP,
+        gText_MachoBrace16BP,
+        gText_RareCandy64BP,
         gText_LiechiBerry128BP,
         gText_GanlonBerry128BP,
         gText_SalacBerry128BP,
@@ -2549,6 +2551,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Zinc1BP,
         gText_Carbos1BP,
         gText_HpUp1BP,
+        gText_MachoBrace16BP,
+        gText_RareCandy64BP,
         gText_LiechiBerry128BP,
         gText_GanlonBerry128BP,
         gText_SalacBerry128BP,
@@ -2565,6 +2569,8 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Zinc1BP,
         gText_Carbos1BP,
         gText_HpUp1BP,
+        gText_MachoBrace16BP,
+        gText_RareCandy64BP,
         gText_LiechiBerry128BP,
         gText_GanlonBerry128BP,
         gText_SalacBerry128BP,
@@ -2576,13 +2582,19 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
     {
-        gText_Leftovers48BP,
         gText_WhiteHerb48BP,
-        gText_QuickClaw48BP,
         gText_MentalHerb48BP,
-        gText_BrightPowder64BP,
-        gText_ChoiceBand64BP,
+        gText_Everstone32BP,
         gText_KingsRock64BP,
+        gText_UpGrade32BP,
+        gText_DeepSeaTooth32BP,
+        gText_DeepSeaScale32BP,
+        gText_DragonScale32BP,
+        gText_Leftovers48BP,
+        gText_QuickClaw48BP,
+        gText_BrightPowder64BP,
+        gText_SootheBell64BP,
+        gText_ChoiceBand64BP,
         gText_FocusBand64BP,
         gText_ScopeLens64BP,
         gText_Exit
