@@ -29,16 +29,16 @@ BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMoveWindow::
 	waitstate
 	copyvar VAR_TEMP_D, VAR_RESULT
 	switch VAR_RESULT
-	case 0, BattleFrontier_Lounge7_EventScript_16BP
-	case 1, BattleFrontier_Lounge7_EventScript_24BP
-	case 2, BattleFrontier_Lounge7_EventScript_24BP
-	case 3, BattleFrontier_Lounge7_EventScript_24BP
-	case 4, BattleFrontier_Lounge7_EventScript_48BP
-	case 5, BattleFrontier_Lounge7_EventScript_48BP
-	case 6, BattleFrontier_Lounge7_EventScript_48BP
-	case 7, BattleFrontier_Lounge7_EventScript_48BP
-	case 8, BattleFrontier_Lounge7_EventScript_48BP
-	case 9, BattleFrontier_Lounge7_EventScript_48BP
+	case 0, BattleFrontier_Lounge7_EventScript_4BP
+	case 1, BattleFrontier_Lounge7_EventScript_4BP
+	case 2, BattleFrontier_Lounge7_EventScript_4BP
+	case 3, BattleFrontier_Lounge7_EventScript_4BP
+	case 4, BattleFrontier_Lounge7_EventScript_4BP
+	case 5, BattleFrontier_Lounge7_EventScript_4BP
+	case 6, BattleFrontier_Lounge7_EventScript_4BP
+	case 7, BattleFrontier_Lounge7_EventScript_6BP
+	case 8, BattleFrontier_Lounge7_EventScript_6BP
+	case 9, BattleFrontier_Lounge7_EventScript_8BP
 	goto BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect
 
 BattleFrontier_Lounge7_EventScript_ChooseNewLeftTutorMove:: @ 826532F
@@ -49,18 +49,23 @@ BattleFrontier_Lounge7_EventScript_ChooseNewLeftTutorMove:: @ 826532F
 	setvar VAR_0x8006, 1
 	goto BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMoveWindow
 
-BattleFrontier_Lounge7_EventScript_16BP:: @ 82653D7
-	setvar VAR_0x8008, 16
+BattleFrontier_Lounge7_EventScript_2BP:: @ 82653D7
+	setvar VAR_0x8008, 2
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
-BattleFrontier_Lounge7_EventScript_24BP:: @ 82653E2
-	setvar VAR_0x8008, 24
+BattleFrontier_Lounge7_EventScript_4BP:: @ 82653E2
+	setvar VAR_0x8008, 4
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
-BattleFrontier_Lounge7_EventScript_48BP:: @ 8265403
-	setvar VAR_0x8008, 48
+BattleFrontier_Lounge7_EventScript_6BP:: @ 8265403
+	setvar VAR_0x8008, 6
+	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
+	end
+
+BattleFrontier_Lounge7_EventScript_8BP:: @ 8265403
+	setvar VAR_0x8008, 8
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
@@ -92,19 +97,19 @@ BattleFrontier_Lounge7_EventScript_ChooseRightTutorMoveWindow::
 	waitstate
 	copyvar VAR_TEMP_D, VAR_RESULT
 	switch VAR_RESULT
-	case 0, BattleFrontier_Lounge7_EventScript_16BP
-	case 1, BattleFrontier_Lounge7_EventScript_24BP
-	case 2, BattleFrontier_Lounge7_EventScript_24BP
-	case 3, BattleFrontier_Lounge7_EventScript_24BP
-	case 4, BattleFrontier_Lounge7_EventScript_24BP
-	case 5, BattleFrontier_Lounge7_EventScript_24BP
-	case 6, BattleFrontier_Lounge7_EventScript_24BP
-	case 7, BattleFrontier_Lounge7_EventScript_48BP
-	case 8, BattleFrontier_Lounge7_EventScript_48BP
-	case 9, BattleFrontier_Lounge7_EventScript_48BP
-	case 10, BattleFrontier_Lounge7_EventScript_48BP
-	case 11, BattleFrontier_Lounge7_EventScript_48BP
-	case 12, BattleFrontier_Lounge7_EventScript_48BP
+	case 0, BattleFrontier_Lounge7_EventScript_2BP
+	case 1, BattleFrontier_Lounge7_EventScript_2BP
+	case 2, BattleFrontier_Lounge7_EventScript_2BP
+	case 3, BattleFrontier_Lounge7_EventScript_4BP
+	case 4, BattleFrontier_Lounge7_EventScript_4BP
+	case 5, BattleFrontier_Lounge7_EventScript_4BP
+	case 6, BattleFrontier_Lounge7_EventScript_4BP
+	case 7, BattleFrontier_Lounge7_EventScript_4BP
+	case 8, BattleFrontier_Lounge7_EventScript_4BP
+	case 9, BattleFrontier_Lounge7_EventScript_4BP
+	case 10, BattleFrontier_Lounge7_EventScript_6BP
+	case 11, BattleFrontier_Lounge7_EventScript_8BP
+	case 12, BattleFrontier_Lounge7_EventScript_8BP
 	goto BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect
 
 BattleFrontier_Lounge7_EventScript_ChooseNewRightTutorMove:: @ 826551F
@@ -365,8 +370,8 @@ BattleFrontier_Lounge7_Text_PsychUpDesc:: @ 826612D
 
 BattleFrontier_Lounge7_Text_SkyAttackDesc::
 	.string "Searches out weak\n"
-	.string "spots, then str-\n"
-	.string "ikes the next turn.$"
+	.string "spots, then stri-\n"
+	.string "kes the next turn.$"
 
 BattleFrontier_Lounge7_Text_IcePunchDesc:: @ 826615F
 	.string "An icy punch\n"

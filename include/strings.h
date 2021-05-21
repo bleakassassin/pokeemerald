@@ -730,7 +730,7 @@ extern const u8 gText_Counter48BP[];
 extern const u8 gText_ThunderWave48BP[];
 extern const u8 gText_SwordsDance48BP[];
 extern const u8 gText_DefenseCurl16BP[];
-extern const u8 gText_Snore24BP[];
+extern const u8 gText_Snore16BP[];
 extern const u8 gText_Nightmare24BP[];
 extern const u8 gText_MudSlap24BP[];
 extern const u8 gText_Swift24BP[];

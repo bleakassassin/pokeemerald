@@ -2549,30 +2549,30 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Softboiled16BP,
         gText_SeismicToss24BP,
         gText_DreamEater24BP,
+        gText_RockSlide48BP,
+        gText_ThunderWave48BP,
+        gText_SwordsDance48BP,
         gText_MegaPunch24BP,
         gText_MegaKick48BP,
         gText_BodySlam48BP,
-        gText_RockSlide48BP,
         gText_Counter48BP,
-        gText_ThunderWave48BP,
-        gText_SwordsDance48BP,
         gText_Exit
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_2] = 
     {
         gText_DefenseCurl16BP,
-        gText_Snore24BP,
+        gText_Snore16BP,
+        gText_Swift24BP,
         gText_Nightmare24BP,
         gText_MudSlap24BP,
-        gText_Swift24BP,
-        gText_IcyWind24BP,
-        gText_SelfDestruct24BP,
         gText_Endure48BP,
         gText_PsychUp48BP,
-        gText_SkyAttack48BP,
         gText_IcePunch48BP,
         gText_ThunderPunch48BP,
         gText_FirePunch48BP,
+        gText_IcyWind24BP,
+        gText_SelfDestruct24BP,
+        gText_SkyAttack48BP,
         gText_Exit
     },
     [SCROLL_MULTI_SS_TIDAL_DESTINATION] =
@@ -3156,30 +3156,30 @@ static const u16 sBattleFrontier_TutorMoves1[] =
     MOVE_SOFT_BOILED, 
     MOVE_SEISMIC_TOSS, 
     MOVE_DREAM_EATER, 
+    MOVE_ROCK_SLIDE, 
+    MOVE_THUNDER_WAVE, 
+    MOVE_SWORDS_DANCE, 
     MOVE_MEGA_PUNCH, 
     MOVE_MEGA_KICK, 
     MOVE_BODY_SLAM, 
-    MOVE_ROCK_SLIDE, 
-    MOVE_COUNTER, 
-    MOVE_THUNDER_WAVE, 
-    MOVE_SWORDS_DANCE 
+    MOVE_COUNTER 
 };
 
 static const u16 sBattleFrontier_TutorMoves2[] =
 { 
     MOVE_DEFENSE_CURL, 
     MOVE_SNORE, 
+    MOVE_SWIFT, 
     MOVE_NIGHTMARE, 
     MOVE_MUD_SLAP, 
-    MOVE_SWIFT, 
-    MOVE_ICY_WIND, 
-    MOVE_SELF_DESTRUCT, 
     MOVE_ENDURE, 
     MOVE_PSYCH_UP, 
-    MOVE_SKY_ATTACK, 
     MOVE_ICE_PUNCH, 
     MOVE_THUNDER_PUNCH, 
-    MOVE_FIRE_PUNCH 
+    MOVE_FIRE_PUNCH, 
+    MOVE_ICY_WIND, 
+    MOVE_SELF_DESTRUCT, 
+    MOVE_SKY_ATTACK 
 };
 
 void BufferBattleFrontierTutorMoveName(void)
@@ -3225,13 +3225,13 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         BattleFrontier_Lounge7_Text_SoftboiledDesc,
         BattleFrontier_Lounge7_Text_SeismicTossDesc,
         BattleFrontier_Lounge7_Text_DreamEaterDesc,
+        BattleFrontier_Lounge7_Text_RockSlideDesc,
+        BattleFrontier_Lounge7_Text_ThunderWaveDesc,
+        BattleFrontier_Lounge7_Text_SwordsDanceDesc,
         BattleFrontier_Lounge7_Text_MegaPunchDesc,
         BattleFrontier_Lounge7_Text_MegaKickDesc,
         BattleFrontier_Lounge7_Text_BodySlamDesc,
-        BattleFrontier_Lounge7_Text_RockSlideDesc,
         BattleFrontier_Lounge7_Text_CounterDesc,
-        BattleFrontier_Lounge7_Text_ThunderWaveDesc,
-        BattleFrontier_Lounge7_Text_SwordsDanceDesc,
         gText_Exit,
     };
 
@@ -3239,17 +3239,17 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
     {
         BattleFrontier_Lounge7_Text_DefenseCurlDesc,
         BattleFrontier_Lounge7_Text_SnoreDesc,
+        BattleFrontier_Lounge7_Text_SwiftDesc,
         BattleFrontier_Lounge7_Text_NightmareDesc,
         BattleFrontier_Lounge7_Text_MudSlapDesc,
-        BattleFrontier_Lounge7_Text_SwiftDesc,
-        BattleFrontier_Lounge7_Text_IcyWindDesc,
-        BattleFrontier_Lounge7_Text_SelfDestructDesc,
         BattleFrontier_Lounge7_Text_EndureDesc,
         BattleFrontier_Lounge7_Text_PsychUpDesc,
-        BattleFrontier_Lounge7_Text_SkyAttackDesc,
         BattleFrontier_Lounge7_Text_IcePunchDesc,
         BattleFrontier_Lounge7_Text_ThunderPunchDesc,
         BattleFrontier_Lounge7_Text_FirePunchDesc,
+        BattleFrontier_Lounge7_Text_IcyWindDesc,
+        BattleFrontier_Lounge7_Text_SelfDestructDesc,
+        BattleFrontier_Lounge7_Text_SkyAttackDesc,
         gText_Exit,
     };
 
