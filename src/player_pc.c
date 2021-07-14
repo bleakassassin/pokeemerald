@@ -119,7 +119,7 @@ static void sub_816C060(u16 itemId);
 static void sub_816BEF0(s32 id);
 static void sub_816B4DC(u8 taskId);
 static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu * thisMenu);
-static void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset);
+static void fish4_goto_x5_or_x6(u8 windowId, u32 id, u8 yOffset);
 
 // EWRAM
 static EWRAM_DATA const u8 *gPcItemMenuOptionOrder = NULL;
@@ -943,7 +943,7 @@ static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu *thisMenu)
     if (gUnknown_0203BCC4->unk666 == 0xFF)
     {
         sub_816C0C8();
-        if (id != -2)
+        if (id != LIST_CANCEL)
             sub_816C060(gSaveBlock1Ptr->pcItems[id].itemId);
         else
             sub_816C060(ITEMPC_GO_BACK_TO_PREV);
@@ -951,9 +951,9 @@ static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu *thisMenu)
     }
 }
 
-static void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset)
+static void fish4_goto_x5_or_x6(u8 windowId, u32 id, u8 yOffset)
 {
-    if (id != -2)
+    if (id != LIST_CANCEL)
     {
         if (gUnknown_0203BCC4->unk666 != 0xFF)
         {
@@ -1245,7 +1245,6 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
 {
     s16 *data;
     u16 b;
-    u8 c;
 
     data = gTasks[taskId].data;
     b = (playerPCItemPageInfo.itemsAbove + playerPCItemPageInfo.cursorPos);
@@ -1253,21 +1252,17 @@ static void ItemStorage_DoItemSwap(u8 taskId, bool8 a)
     DestroyListMenuTask(data[5], &(playerPCItemPageInfo.itemsAbove), &(playerPCItemPageInfo.cursorPos));
     if (!a)
     {
-        c = gUnknown_0203BCC4->unk666;
-        if (c != b)
+        if (gUnknown_0203BCC4->unk666 != b)
         {
-            if (c != b - 1)
+            if (gUnknown_0203BCC4->unk666 != b - 1)
             {
-                MoveItemSlotInList(gSaveBlock1Ptr->pcItems, c, b);
+                MoveItemSlotInList(gSaveBlock1Ptr->pcItems, gUnknown_0203BCC4->unk666, b);
                 ItemStorage_RefreshListMenu();
             }
         }
-        else
-            goto LABEL_SKIP_CURSOR_DECREMENT;
     }
     if (gUnknown_0203BCC4->unk666 < b)
         playerPCItemPageInfo.cursorPos--;
-    LABEL_SKIP_CURSOR_DECREMENT:
     SetSwapLineSpritesInvisibility(gUnknown_0203BCC4->spriteIds, 7, TRUE);
     gUnknown_0203BCC4->unk666 = 0xFF;
     data[5] = ListMenuInit(&gMultiuseListMenuTemplate, playerPCItemPageInfo.itemsAbove, playerPCItemPageInfo.cursorPos);
