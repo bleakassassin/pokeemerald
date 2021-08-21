@@ -1,4 +1,4 @@
-EventScript_RepelWoreOff:: @ 82A4B2A
+EventScript_RepelWoreOff::
 	lock
 	checkitem VAR_REPEL_LAST_USED, 1
 	compare VAR_RESULT, FALSE
@@ -22,7 +22,7 @@ EventScript_RepelWoreOff_NoMoreRepels:
 EventScript_RepelWoreOff_End:	
 	end
 
-Text_RepelWoreOff: @ 82A4B33
+Text_RepelWoreOff:
 	.string "REPEL's effect wore off!$"
 
 Text_RepelWoreOff_UseAnother:

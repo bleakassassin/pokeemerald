@@ -1135,9 +1135,9 @@ static void LoadAndCreateUpDownSprites(void)
 static void SpriteCB_UpDown(struct Sprite *sprite)
 {
     if (sprite->data[0] < 6)
-        sprite->pos2.y -= 2;
+        sprite->y2 -= 2;
     else if (sprite->data[0] < 12)
-        sprite->pos2.y += 2;
+        sprite->y2 += 2;
 
     if (++sprite->data[0] > 60)
     {
@@ -1226,7 +1226,7 @@ static void UpdateMonPic(u8 loadId)
         {
             sMenu->curMonSpriteId = spriteId;
             gSprites[sMenu->curMonSpriteId].callback = SpriteCB_MonPic;
-            gSprites[sMenu->curMonSpriteId].pos2.y -= 34;
+            gSprites[sMenu->curMonSpriteId].y2 -= 34;
             sMenu->curMonTileStart = (void*)(OBJ_VRAM0 + (sMenu->curMonSheet * 32));
             sMenu->curMonPalette = (sMenu->curMonPalette * 16) + 0x100;
         }
@@ -1566,7 +1566,7 @@ static bool8 LoadNewSelection_MonToMon(void)
 
 static void SpriteCB_MonPic(struct Sprite *sprite)
 {
-    sprite->pos1.x = sMenu->curMonXOffset + 38;
+    sprite->x = sMenu->curMonXOffset + 38;
 }
 
 static void SpriteCB_SelectionIconPokeball(struct Sprite *sprite)
@@ -1653,13 +1653,13 @@ static bool8 LoadConditionTitle(void)
 // Literally the word "Condition", the title block that appears over the mon icon
 static void SpriteCB_Condition(struct Sprite *sprite)
 {
-    s16 prevX = sprite->pos1.x;
+    s16 prevX = sprite->x;
 
-    sprite->pos1.x += sprite->data[0];
-    if ((prevX <= sprite->data[1] && sprite->pos1.x >= sprite->data[1])
-     || (prevX >= sprite->data[1] && sprite->pos1.x <= sprite->data[1]))
+    sprite->x += sprite->data[0];
+    if ((prevX <= sprite->data[1] && sprite->x >= sprite->data[1])
+     || (prevX >= sprite->data[1] && sprite->x <= sprite->data[1]))
     {
-        sprite->pos1.x = sprite->data[1];
+        sprite->x = sprite->data[1];
         sprite->callback = SpriteCallbackDummy;
     }
 }

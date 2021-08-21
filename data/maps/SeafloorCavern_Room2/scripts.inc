@@ -1,4 +1,4 @@
-SeafloorCavern_Room2_MapScripts:: @ 8234936
+SeafloorCavern_Room2_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SeafloorCavern_Room2_OnTransition
 	.byte 0
 
