@@ -1,7 +1,7 @@
-PacifidlogTown_House2_MapScripts:: @ 8203791
+PacifidlogTown_House2_MapScripts::
 	.byte 0
 
-PacifidlogTown_House2_EventScript_FanClubYoungerBrother:: @ 8203792
+PacifidlogTown_House2_EventScript_FanClubYoungerBrother::
 	lock
 	faceplayer
 	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_MonAssessment
@@ -16,16 +16,16 @@ PacifidlogTown_House2_EventScript_FanClubYoungerBrother:: @ 8203792
 	goto PacifidlogTown_House2_EventScript_GiveFrustration
 	end
 
-PacifidlogTown_House2_EventScript_MonAssessment:: @ 82037F8
+PacifidlogTown_House2_EventScript_MonAssessment::
 	msgbox PacifidlogTown_House2_Text_AhYourPokemon, MSGBOX_DEFAULT
 	return
 
-PacifidlogTown_House2_EventScript_FirstMonAssessment:: @ 8203801
+PacifidlogTown_House2_EventScript_FirstMonAssessment::
 	msgbox PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation, MSGBOX_DEFAULT
 	msgbox PacifidlogTown_House2_Text_AhYourPokemon, MSGBOX_DEFAULT
 	return
 
-PacifidlogTown_House2_EventScript_GiveReturn:: @ 8203816
+PacifidlogTown_House2_EventScript_GiveReturn::
 	checkitem ITEM_TM27 , 1
 	compare VAR_RESULT, TRUE
 	goto_if_eq PacifidlogTown_House2_EventScript_HaveReturn
@@ -40,12 +40,12 @@ PacifidlogTown_House2_EventScript_HaveReturn::
 	release
 	end
 
-PacifidlogTown_House2_EventScript_PutInEffort:: @ 8203845
+PacifidlogTown_House2_EventScript_PutInEffort::
 	msgbox PacifidlogTown_House2_Text_PutInSomeMoreEffort, MSGBOX_DEFAULT
 	release
 	end
 
-PacifidlogTown_House2_EventScript_GiveFrustration:: @ 820384F
+PacifidlogTown_House2_EventScript_GiveFrustration::
 	checkitem ITEM_TM21 , 1
 	compare VAR_RESULT, TRUE
 	goto_if_eq PacifidlogTown_House2_EventScript_HaveFrustration
@@ -60,7 +60,7 @@ PacifidlogTown_House2_EventScript_HaveFrustration::
 	release
 	end
 
-PacifidlogTown_House2_EventScript_HappyAzurill:: @ 8203891
+PacifidlogTown_House2_EventScript_HappyAzurill::
 	lock
 	faceplayer
 	waitse
@@ -71,7 +71,7 @@ PacifidlogTown_House2_EventScript_HappyAzurill:: @ 8203891
 	release
 	end
 
-PacifidlogTown_House2_EventScript_UnhappyAzurill:: @ 82038AC
+PacifidlogTown_House2_EventScript_UnhappyAzurill::
 	lock
 	faceplayer
 	waitse
@@ -82,7 +82,7 @@ PacifidlogTown_House2_EventScript_UnhappyAzurill:: @ 82038AC
 	release
 	end
 
-PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation: @ 82038C7
+PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation:
 	.string "Er-hem!\p"
 	.string "I am the POKéMON FAN CLUB's most\n"
 	.string "important person, the CHAIRMAN's\l"
@@ -90,11 +90,11 @@ PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation: @ 82038C7
 	.string "I'm here enjoying my vacation with\n"
 	.string "POKéMON, yes, indeed.$"
 
-PacifidlogTown_House2_Text_AhYourPokemon: @ 820395B
+PacifidlogTown_House2_Text_AhYourPokemon:
 	.string "Ah!\n"
 	.string "Your POKéMON…$"
 
-PacifidlogTown_House2_Text_AdoringPokemonTakeThis: @ 820396D
+PacifidlogTown_House2_Text_AdoringPokemonTakeThis:
 	.string "It clearly likes you very much.\p"
 	.string "A POKéMON that adoring and adorable\n"
 	.string "deserves a TM like this, no?$"
@@ -102,13 +102,13 @@ PacifidlogTown_House2_Text_AdoringPokemonTakeThis: @ 820396D
 PacifidlogTown_House2_Text_AdoringPokemonHaveTM27:
 	.string "It clearly likes you very much.$"
 
-PacifidlogTown_House2_Text_PutInSomeMoreEffort: @ 82039CE
+PacifidlogTown_House2_Text_PutInSomeMoreEffort:
 	.string "Hmm…\n"
 	.string "It's not bad, but it's also not good.\p"
 	.string "You, as the TRAINER, need to put in\n"
 	.string "some more effort.$"
 
-PacifidlogTown_House2_Text_ViciousPokemonTakeThis: @ 8203A2F
+PacifidlogTown_House2_Text_ViciousPokemonTakeThis:
 	.string "It has a vicious look to it.\p"
 	.string "A frightening POKéMON like that\n"
 	.string "deserves a TM like this.$"
@@ -116,23 +116,23 @@ PacifidlogTown_House2_Text_ViciousPokemonTakeThis: @ 8203A2F
 PacifidlogTown_House2_Text_ViciousPokemonHaveTM21:
 	.string "It has a vicious look to it.$"
 
-PacifidlogTown_House2_Text_ExplainReturnFrustration: @ 8203A85
+PacifidlogTown_House2_Text_ExplainReturnFrustration:
 	.string "If a POKéMON likes you a lot, RETURN's\n"
 	.string "power is enhanced.\p"
 	.string "If it doesn't like you, FRUSTRATION's\n"
 	.string "power goes up.$"
 
-PacifidlogTown_House2_Text_Rurii: @ 8203B8D
+PacifidlogTown_House2_Text_Rurii:
 	.string "AZURILL: Rurii.$"
 
-PacifidlogTown_House2_Text_VeryFriendlyWithTrainer: @ 8203B9D
+PacifidlogTown_House2_Text_VeryFriendlyWithTrainer:
 	.string "It appears to be very friendly with the\n"
 	.string "TRAINER.$"
 
-PacifidlogTown_House2_Text_Rururi: @ 8203BCE
+PacifidlogTown_House2_Text_Rururi:
 	.string "AZURILL: Rururi!$"
 
-PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch: @ 8203BDF
+PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
 	.string "It doesn't appear to like the TRAINER\n"
 	.string "very much.$"
 
