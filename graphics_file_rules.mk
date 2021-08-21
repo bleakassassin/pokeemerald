@@ -20,6 +20,7 @@ MISCGFXDIR := graphics/misc
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
+categories := physical special status
 
 
 
@@ -446,7 +447,7 @@ $(BATTRANSGFXDIR)/vs_frame.4bpp: %.4bpp: %.png
 $(INTERFACEGFXDIR)/party_menu_bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 62
 
-$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp) $(categories:%=$(TYPESGFXDIR)/category_%.4bpp)
 	@cat $^ >$@
 
 $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
