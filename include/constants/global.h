@@ -119,8 +119,8 @@
 #define DIR_NORTHWEST   7
 #define DIR_NORTHEAST   8
 
-#define DEFAULT_COSTUME 0
-#define COSTUME_1       1
-#define COSTUME_COUNT   2
+#define OUTFIT_EMERALD  0
+#define OUTFIT_RS       1
+#define OUTFIT_TOTAL    2
 
 #endif // GUARD_CONSTANTS_GLOBAL_H

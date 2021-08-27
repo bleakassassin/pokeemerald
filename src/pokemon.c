@@ -6766,10 +6766,10 @@ u16 GetTrainerFrontSpriteBasedOnPlayerCostumeAndGender(u8 costumeId, u8 playerGe
     {
         switch (costumeId)
         {
-            case DEFAULT_COSTUME:
+            case OUTFIT_EMERALD:
                 trainerPic = TRAINER_PIC_MAY;
                 break;
-            case COSTUME_1:
+            case OUTFIT_RS:
                 trainerPic = TRAINER_PIC_RS_MAY;
                 break;
         }
@@ -6778,10 +6778,10 @@ u16 GetTrainerFrontSpriteBasedOnPlayerCostumeAndGender(u8 costumeId, u8 playerGe
     {
         switch (costumeId)
         {
-            case DEFAULT_COSTUME:
+            case OUTFIT_EMERALD:
                 trainerPic = TRAINER_PIC_BRENDAN;
                 break;
-            case COSTUME_1:
+            case OUTFIT_RS:
                 trainerPic = TRAINER_PIC_RS_BRENDAN;
                 break;
         }
