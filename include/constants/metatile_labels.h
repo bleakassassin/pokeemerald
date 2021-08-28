@@ -48,7 +48,8 @@
 #define METATILE_Building_PC_On  0x005
 
 // gTileset_PokemonCenter
-#define METATILE_PokemonCenter_Door_CableClub  0x264
+#define METATILE_PokemonCenter_Door_CableClub   0x264
+#define METATILE_PokemonCenter_Door_FittingRoom 0x2AE
 
 // gTileset_Shop
 #define METATILE_Shop_Door_Elevator 0x285

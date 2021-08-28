@@ -988,6 +988,10 @@ Common_EventScript_WirelessClubAttendant::
 Common_EventScript_DirectCornerAttendant::
 	call CableClub_EventScript_DirectCornerAttendant
 	end
+	
+Common_EventScript_FittingRoom::
+	call CableClub_EventScript_FittingRoom
+	end
 
 Common_EventScript_RemoveStaticPokemon::
 	fadescreenswapbuffers FADE_TO_BLACK
