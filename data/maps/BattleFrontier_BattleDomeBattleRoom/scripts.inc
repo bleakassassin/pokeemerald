@@ -2,8 +2,7 @@
 .set LOCALID_AUDIENCE_TWIN, 2
 .set LOCALID_AUDIENCE_WALKING, 6
 .set LOCALID_REFEREE, 9
-.set LOCALID_PLAYER, 13
-.set LOCALID_OPPONENT, 15
+.set LOCALID_OPPONENT, 14
 
 BattleFrontier_BattleDomeBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleDomeBattleRoom_OnTransition
@@ -22,24 +21,7 @@ BattleFrontier_BattleDomeBattleRoom_OnTransition:
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, DOME_ROUND1
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_SetWalkingAudienceMemberPos
-	call BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx
 	end
-
-BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx::
-	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale
-	return
-
-BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	return
-
-BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
-	return
 
 BattleFrontier_BattleDomeBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleDomeBattleRoom_EventScript_EnterRoom
@@ -47,6 +29,8 @@ BattleFrontier_BattleDomeBattleRoom_OnFrame:
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_EnterRoom::
 	lockall
+	special SpawnCameraObject
+	setobjectxyperm OBJ_EVENT_ID_CAMERA, 9, 5
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum
 	compare VAR_RESULT, DOME_ROUND1
 	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat
@@ -55,17 +39,17 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_EnterRoom::
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayer
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerHasEnteredDome, MSGBOX_DEFAULT
 	closemessage
-	showobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
+	showobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	compare VAR_TEMP_F, DOME_FINAL
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter
 	compare VAR_TEMP_E, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker
 BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter::
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnter
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnter
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceReactToPlayer
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker::
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnterForTucker
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnterForTucker
 BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceReactToPlayer::
 	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
@@ -78,14 +62,17 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent::
 	dome_getopponentname
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTrainer, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_OpponentStepForward
 	waitmovement 0
+	special RemoveCameraObject
 	tower_getopponentintro 0
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
 	dome_initopponentparty
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle
+	special SpawnCameraObject
+	setobjectxyperm OBJ_EVENT_ID_CAMERA, 9, 5
 	setvar VAR_TEMP_2, NO_DRAW
 	switch VAR_RESULT
 	case B_OUTCOME_WON, BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent
@@ -100,7 +87,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_Draw::
 	delay 60
 	applymovement LOCALID_REFEREE, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter
 	waitmovement 0
-	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerFaceLeft
+	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	delay 180
 	applymovement LOCALID_REFEREE, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit
@@ -168,7 +155,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent::
 	waitstate
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney::
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerApproachAudience
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerApproachAudience
 	waitmovement 0
 	frontier_get FRONTIER_DATA_LVL_MODE
 	switch VAR_RESULT
@@ -448,7 +435,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold::
 BattleFrontier_BattleDomeBattleRoom_EventScript_DoTuckerBattle::
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTucker, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward2
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward2
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerStepForward
 	waitmovement 0
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle
@@ -484,11 +471,11 @@ BattleFrontier_BattleDomeBattleRoom_OnWarp:
 	.2byte 0
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetUpObjects::
-	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AddAudience
-	call BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx
 	setvar VAR_TEMP_1, 1
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisible
+	setobjectxy OBJ_EVENT_ID_PLAYER, 4, 9
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	compare VAR_RESULT, DOME_FINAL
 	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects
@@ -600,10 +587,6 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience::
 	createvobject OBJ_EVENT_GFX_MART_EMPLOYEE, 30, 6, 2, 3, DIR_SOUTH
 	createvobject OBJ_EVENT_GFX_WOMAN_5, 31, 8, 2, 3, DIR_SOUTH
 	return
-
-BattleFrontier_BattleDomeBattleRoom_Movement_SetInvisible:
-	set_invisible
-	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnter:
 	set_visible
@@ -946,10 +929,6 @@ BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter:
 	walk_right
 	step_end
 
-BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerFaceLeft:
-	walk_in_place_fastest_left
-	step_end
-
 BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit:
 	walk_left
 	walk_left
@@ -1183,18 +1162,6 @@ BattleFrontier_BattleDomeBattleRoom_Text_LookForwardToNextEncounter:
 	.string "a superstar like me.\p"
 	.string "I will very much look forward to\n"
 	.string "our next encounter!$"
-
-@ Unused
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLv50Champ2:
-	.string "{PLAYER} is the Level 50\n"
-	.string "Battle Tournament Champion!\p"
-	.string "Congratulations!$"
-
-@ Unused
-BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp2:
-	.string "{PLAYER} is the Open Level\n"
-	.string "Battle Tournament Champion!\p"
-	.string "Congratulations!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTucker:
 	.string "The final match!\p"

@@ -5,7 +5,6 @@
 .set LOCALID_SCIENTIST_4, 5
 .set LOCALID_SCIENTIST_5, 6
 .set LOCALID_SCIENTIST_6, 7
-.set LOCALID_PLAYER, 8
 
 BattleFrontier_BattleFactoryBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleFactoryBattleRoom_OnTransition
@@ -13,16 +12,8 @@ BattleFrontier_BattleFactoryBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleFactoryBattleRoom_OnFrame
 	.byte 0
 
-	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
-	@ The player is represented instead by LOCALID_PLAYER, which has the gfx id VAR_OBJ_GFX_ID_F
-
 BattleFrontier_BattleFactoryBattleRoom_OnTransition:
 	frontier_settrainers
-	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxFemale
 	frontier_getbrainstatus
 	copyvar VAR_TEMP_F, VAR_RESULT
 	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
@@ -40,20 +31,13 @@ BattleFrontier_BattleFactoryBattleRoom_OnWarp:
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_HideObjects::
 	setvar VAR_TEMP_1, 1
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
+	setobjectxy OBJ_EVENT_ID_PLAYER, 5, 11
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	compare VAR_TEMP_F, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_EndHideObjects
 	hideobjectat LOCALID_OPPONENT, MAP_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM
 BattleFrontier_BattleFactoryBattleRoom_EventScript_EndHideObjects::
 	end
-
-BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxMale::
-	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	return
-
-BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxFemale::
-	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
-	return
 
 BattleFrontier_BattleFactoryBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoom
@@ -63,7 +47,6 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle::
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_GetAMoveOn, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleFactoryBattleRoom_Movement_NolandMoveToBattle
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle
@@ -73,7 +56,6 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle::
 BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoom::
 	compare VAR_TEMP_F, FRONTIER_BRAIN_NOT_READY
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_EnterRoomFactoryHeadBattle
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerEnterRoom
 	waitmovement 0
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle
@@ -148,7 +130,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver::
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
 	waitmovement 0
 	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleFactoryBattleRoom_Text_ReceivedKnowledgeSymbol
@@ -177,7 +159,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold::
 	goto_if_eq BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass, MSGBOX_DEFAULT
 	waitmessage
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
+	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
 	waitmovement 0
 	playfanfare MUS_OBTAIN_SYMBOL
 	message BattleFrontier_BattleFactoryBattleRoom_Text_KnowledgeSymbolTookGoldenShine
