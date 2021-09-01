@@ -1371,10 +1371,24 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     u8 spriteId;
 
     // Load sprite sheets
-    if (sIntroCharacterGender == MALE)
-        LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
-    else
-        LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
+	if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->playerGender == MALE)
+	{
+		if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+			LoadCompressedSpriteSheet(gSpriteSheet_IntroRSBrendan);
+		else
+			LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
+	}
+	else if (gSaveBlock2Ptr->playerGender == FEMALE)
+	{
+		if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+			LoadCompressedSpriteSheet(gSpriteSheet_IntroRSMay);
+		else
+			LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
+	}
+	else if (sIntroCharacterGender == MALE)
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
+        else
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);   
 
     LoadCompressedSpriteSheet(gSpriteSheet_IntroBicycle);
     LoadCompressedSpriteSheet(gSpriteSheet_IntroFlygon);
@@ -1383,17 +1397,22 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     for (spriteId = 0; spriteId < ARRAY_COUNT(sSpriteSheet_RunningPokemon) - 1; spriteId++)
         LoadCompressedSpriteSheet(&sSpriteSheet_RunningPokemon[spriteId]);
 
-    LoadSpritePalettes(gSpritePalettes_IntroPlayerFlygon);
+	if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+		LoadSpritePalettes(gSpritePalettes_IntroRSPlayerFlygon);
+	else
+		LoadSpritePalettes(gSpritePalettes_IntroPlayerFlygon);
     LoadSpritePalettes(sSpritePalettes_RunningPokemon);
 
     // Create Pokémon and player sprites
     CreateSprite(&sSpriteTemplate_Manectric, DISPLAY_WIDTH + 32, 128, 0);
     CreateSprite(&sSpriteTemplate_Torchic, DISPLAY_WIDTH + 48, 110, 1);
 
-    if (sIntroCharacterGender == MALE)
+    if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->playerGender == MALE)
         spriteId = CreateIntroBrendanSprite(DISPLAY_WIDTH + 32, 100);
-    else
+    else if (gSaveBlock2Ptr->playerGender == FEMALE || sIntroCharacterGender == FEMALE)
         spriteId = CreateIntroMaySprite(DISPLAY_WIDTH + 32, 100);
+	else
+        spriteId = CreateIntroBrendanSprite(DISPLAY_WIDTH + 32, 100);
 
     gSprites[spriteId].callback = SpriteCB_PlayerOnBicycle;
     gSprites[spriteId].anims = sAnims_PlayerBicycle;
