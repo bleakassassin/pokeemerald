@@ -1220,16 +1220,16 @@ u8 CreateIntroBrendanSprite(s16 x, s16 y)
     u8 playerSpriteId;
     u8 bicycleSpriteId;
 	
-	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_EMERALD)
 		|| (x == DISPLAY_WIDTH + 32 && y == 46))
-	{
-	    playerSpriteId = CreateSprite(&sSpriteTemplate_RSBrendan, x, y, 2);
-	    bicycleSpriteId = CreateSprite(&sSpriteTemplate_RSBrendanBicycle, x, y + 8, 3);
-	}
-	else
 	{
 	    playerSpriteId = CreateSprite(&sSpriteTemplate_Brendan, x, y, 2);
 	    bicycleSpriteId = CreateSprite(&sSpriteTemplate_BrendanBicycle, x, y + 8, 3);
+	}
+	else
+	{
+	    playerSpriteId = CreateSprite(&sSpriteTemplate_RSBrendan, x, y, 2);
+	    bicycleSpriteId = CreateSprite(&sSpriteTemplate_RSBrendanBicycle, x, y + 8, 3);
 	}
     gSprites[bicycleSpriteId].sPlayerSpriteId = playerSpriteId;
     return playerSpriteId;
@@ -1240,16 +1240,16 @@ u8 CreateIntroMaySprite(s16 x, s16 y)
     u8 playerSpriteId;
     u8 bicycleSpriteId;
 	
-	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_EMERALD)
 		|| (x == DISPLAY_WIDTH + 32 && y == 46))
-	{
-	    playerSpriteId = CreateSprite(&sSpriteTemplate_RSMay, x, y, 2);
-        bicycleSpriteId = CreateSprite(&sSpriteTemplate_RSMayBicycle, x, y + 8, 3);
-	}
-	else
 	{
 	    playerSpriteId = CreateSprite(&sSpriteTemplate_May, x, y, 2);
         bicycleSpriteId = CreateSprite(&sSpriteTemplate_MayBicycle, x, y + 8, 3);
+	}
+	else
+	{
+	    playerSpriteId = CreateSprite(&sSpriteTemplate_RSMay, x, y, 2);
+        bicycleSpriteId = CreateSprite(&sSpriteTemplate_RSMayBicycle, x, y + 8, 3);
 	}
     gSprites[bicycleSpriteId].sPlayerSpriteId = playerSpriteId;
     return playerSpriteId;
