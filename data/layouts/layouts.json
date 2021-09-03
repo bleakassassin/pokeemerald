@@ -3794,7 +3794,7 @@
     {
       "id": "LAYOUT_MAGMA_HIDEOUT_2F_3R",
       "name": "MagmaHideout_2F_3R_Layout",
-      "width": 60,
+      "width": 33,
       "height": 19,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Lavaridge",
