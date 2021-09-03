@@ -534,43 +534,10 @@ static const union AnimCmd *const sAnims_Bicycle[] =
     sAnim_Bicycle
 };
 
-static const struct SpriteTemplate sSpriteTemplate_BrendanBicycle =
+static const struct SpriteTemplate sSpriteTemplate_Bicycle =
 {
     .tileTag = TAG_BICYCLE,
     .paletteTag = TAG_BRENDAN,
-    .oam = &sOamData_Bicycle,
-    .anims = sAnims_Bicycle,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Bicycle
-};
-
-static const struct SpriteTemplate sSpriteTemplate_RSBrendanBicycle =
-{
-    .tileTag = TAG_BICYCLE,
-    .paletteTag = TAG_RS_BRENDAN,
-    .oam = &sOamData_Bicycle,
-    .anims = sAnims_Bicycle,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Bicycle
-};
-
-static const struct SpriteTemplate sSpriteTemplate_MayBicycle =
-{
-    .tileTag = TAG_BICYCLE,
-    .paletteTag = TAG_MAY,
-    .oam = &sOamData_Bicycle,
-    .anims = sAnims_Bicycle,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Bicycle
-};
-
-static const struct SpriteTemplate sSpriteTemplate_RSMayBicycle =
-{
-    .tileTag = TAG_BICYCLE,
-    .paletteTag = TAG_RS_MAY,
     .oam = &sOamData_Bicycle,
     .anims = sAnims_Bicycle,
     .images = NULL,
@@ -701,13 +668,6 @@ const struct SpritePalette gSpritePalettes_IntroPlayerFlygon[] =
 {
     { .data = sBrendan_Pal,     .tag = TAG_BRENDAN },
     { .data = sMay_Pal,         .tag = TAG_MAY },
-    { .data = gIntroFlygon_Pal, .tag = TAG_FLYGON_LATIOS },
-    { .data = gIntroFlygon_Pal, .tag = TAG_FLYGON_LATIAS },
-    {}
-};
-
-const struct SpritePalette gSpritePalettes_IntroRSPlayerFlygon[] =
-{
     { .data = sRSBrendan_Pal,   .tag = TAG_RS_BRENDAN },
     { .data = sRSMay_Pal,       .tag = TAG_RS_MAY },
     { .data = gIntroFlygon_Pal, .tag = TAG_FLYGON_LATIOS },
@@ -755,16 +715,6 @@ const struct CompressedSpriteSheet gSpriteSheet_CreditsRSMay[] =
     {}
 };
 
-const struct CompressedSpriteSheet gSpriteSheet_CreditsBicycle[] =
-{
-    {
-        .data = sBicycle_Gfx,
-        .size = 0x1000,
-        .tag = TAG_BICYCLE
-    },
-    {}
-};
-
 // Unused
 static const struct CompressedSpriteSheet sSpriteSheet_Latios[] =
 {
@@ -793,26 +743,6 @@ const struct SpritePalette gSpritePalettes_Credits[] =
     { .data = sMay_Pal,            .tag = TAG_MAY },
     { .data = sRSBrendan_Pal,      .tag = TAG_RS_BRENDAN },
     { .data = sRSMay_Pal,          .tag = TAG_RS_MAY },
-    {}
-};
-
-const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalBrendan[] =
-{
-    {
-        .data = sBrendan_Gfx,
-        .size = 0x2000,
-        .tag = TAG_BRENDAN
-    },
-    {}
-};
-
-const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalMay[] =
-{
-    {
-        .data = sMay_Gfx,
-        .size = 0x2000,
-        .tag = TAG_MAY
-    },
     {}
 };
 
@@ -853,7 +783,7 @@ void LoadIntroPart2Graphics(u8 scenery)
         break;
     }
     gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_NORMAL;
-    gReservedSpritePaletteCount = 8;
+    gReservedSpritePaletteCount = 7;
 }
 
 // Note: This is only called with a=1.
@@ -1220,17 +1150,11 @@ u8 CreateIntroBrendanSprite(s16 x, s16 y)
     u8 playerSpriteId;
     u8 bicycleSpriteId;
 	
-	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_EMERALD)
-		|| (x == DISPLAY_WIDTH + 32 && y == 46))
-	{
-	    playerSpriteId = CreateSprite(&sSpriteTemplate_Brendan, x, y, 2);
-	    bicycleSpriteId = CreateSprite(&sSpriteTemplate_BrendanBicycle, x, y + 8, 3);
-	}
+	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_EMERALD) || (x == DISPLAY_WIDTH + 32 && y == 46))
+        playerSpriteId = CreateSprite(&sSpriteTemplate_Brendan, x, y, 2);
 	else
-	{
 	    playerSpriteId = CreateSprite(&sSpriteTemplate_RSBrendan, x, y, 2);
-	    bicycleSpriteId = CreateSprite(&sSpriteTemplate_RSBrendanBicycle, x, y + 8, 3);
-	}
+    bicycleSpriteId = CreateSprite(&sSpriteTemplate_Bicycle, x, y + 8, 3);
     gSprites[bicycleSpriteId].sPlayerSpriteId = playerSpriteId;
     return playerSpriteId;
 }
@@ -1240,17 +1164,11 @@ u8 CreateIntroMaySprite(s16 x, s16 y)
     u8 playerSpriteId;
     u8 bicycleSpriteId;
 	
-	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_EMERALD)
-		|| (x == DISPLAY_WIDTH + 32 && y == 46))
-	{
-	    playerSpriteId = CreateSprite(&sSpriteTemplate_May, x, y, 2);
-        bicycleSpriteId = CreateSprite(&sSpriteTemplate_MayBicycle, x, y + 8, 3);
-	}
+	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_EMERALD) || (x == DISPLAY_WIDTH + 32 && y == 46))
+        playerSpriteId = CreateSprite(&sSpriteTemplate_May, x, y, 2);
 	else
-	{
 	    playerSpriteId = CreateSprite(&sSpriteTemplate_RSMay, x, y, 2);
-        bicycleSpriteId = CreateSprite(&sSpriteTemplate_RSMayBicycle, x, y + 8, 3);
-	}
+    bicycleSpriteId = CreateSprite(&sSpriteTemplate_Bicycle, x, y + 8, 3);
     gSprites[bicycleSpriteId].sPlayerSpriteId = playerSpriteId;
     return playerSpriteId;
 }

@@ -1397,10 +1397,7 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     for (spriteId = 0; spriteId < ARRAY_COUNT(sSpriteSheet_RunningPokemon) - 1; spriteId++)
         LoadCompressedSpriteSheet(&sSpriteSheet_RunningPokemon[spriteId]);
 
-	if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_RS)
-		LoadSpritePalettes(gSpritePalettes_IntroRSPlayerFlygon);
-	else
-		LoadSpritePalettes(gSpritePalettes_IntroPlayerFlygon);
+    LoadSpritePalettes(gSpritePalettes_IntroPlayerFlygon);
     LoadSpritePalettes(sSpritePalettes_RunningPokemon);
 
     // Create Pokémon and player sprites

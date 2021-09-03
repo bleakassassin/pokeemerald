@@ -28,14 +28,10 @@ extern const struct CompressedSpriteSheet gSpriteSheet_IntroRSMay[];
 extern const struct CompressedSpriteSheet gSpriteSheet_IntroBicycle[];
 extern const struct CompressedSpriteSheet gSpriteSheet_IntroFlygon[];
 extern const struct SpritePalette gSpritePalettes_IntroPlayerFlygon[];
-extern const struct SpritePalette gSpritePalettes_IntroRSPlayerFlygon[];
 extern const struct CompressedSpriteSheet gSpriteSheet_CreditsBrendan[];
 extern const struct CompressedSpriteSheet gSpriteSheet_CreditsRSBrendan[];
 extern const struct CompressedSpriteSheet gSpriteSheet_CreditsMay[];
 extern const struct CompressedSpriteSheet gSpriteSheet_CreditsRSMay[];
-extern const struct CompressedSpriteSheet gSpriteSheet_CreditsBicycle[];
-extern const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalBrendan[];
-extern const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalMay[];
 extern const struct SpritePalette gSpritePalettes_Credits[];
 
 void LoadIntroPart2Graphics(u8 scene);

@@ -1214,8 +1214,8 @@ static bool8 LoadBikeScene(u8 scene, u8 taskId)
 			else
 				LoadCompressedSpriteSheet(gSpriteSheet_CreditsBrendan);
 			LoadSpritePalettes(gSpritePalettes_Credits);
-            LoadCompressedSpriteSheet(gSpriteSheet_CreditsRivalMay);
-            LoadCompressedSpriteSheet(gSpriteSheet_CreditsBicycle);
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroBicycle);
 
             spriteId = CreateIntroBrendanSprite(120, 46);
             gTasks[taskId].tPlayerSpriteId = spriteId;
@@ -1234,8 +1234,8 @@ static bool8 LoadBikeScene(u8 scene, u8 taskId)
 			else
 				LoadCompressedSpriteSheet(gSpriteSheet_CreditsMay);
 			LoadSpritePalettes(gSpritePalettes_Credits);
-            LoadCompressedSpriteSheet(gSpriteSheet_CreditsRivalBrendan);
-            LoadCompressedSpriteSheet(gSpriteSheet_CreditsBicycle);
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroBicycle);
 
             spriteId = CreateIntroMaySprite(120, 46);
             gTasks[taskId].tPlayerSpriteId = spriteId;
