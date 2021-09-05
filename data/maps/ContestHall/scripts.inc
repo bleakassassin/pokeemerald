@@ -74,6 +74,8 @@ ContestHall_EventScript_Contest::
 	end
 
 ContestHall_EventScript_SetContestObjects::
+	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
+	goto_if_ne ContestHall_EventScript_LoadPlayerObject
 	special LoadLinkContestPlayerPalettes
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	call ContestHall_EventScript_CreateAudience
@@ -441,20 +443,11 @@ ContestHall_EventScript_SetExitWarpLinkContest::
 	warp MAP_LILYCOVE_CITY_CONTEST_LOBBY, 255, 15, 4
 	waitstate
 	end
-
-LilycoveCity_ContestLobby_EventScript_SetPlayerGfx::
-	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan
-	compare VAR_RESULT, FEMALE
-	goto_if_eq LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay
-	return
-
-LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan::
-	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	return
-
-LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay::
-	setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	
+ContestHall_EventScript_LoadPlayerObject::
+	removeobject 14
+	setobjectxy OBJ_EVENT_ID_PLAYER, 10, 7
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	call ContestHall_EventScript_CreateAudience
 	return
 

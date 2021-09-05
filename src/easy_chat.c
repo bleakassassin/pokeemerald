@@ -4991,6 +4991,10 @@ static void TryAddInterviewObjectEvents(void)
 {
     int graphicsId;
     u8 spriteId;
+	u16 playerGraphicsIds[OUTFIT_TOTAL][2] = {
+        [OUTFIT_EMERALD]   = {OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL},
+        [OUTFIT_RS] = {OBJ_EVENT_GFX_LINK_RS_BRENDAN, OBJ_EVENT_GFX_LINK_RS_MAY},
+    };
 
     switch (GetDisplayedPersonType())
     {
@@ -5019,8 +5023,7 @@ static void TryAddInterviewObjectEvents(void)
     }
 
     // Add object for player (facing right)
-    spriteId = AddPseudoObjectEvent(
-        gSaveBlock2Ptr->playerGender == MALE ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
+    spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender],
         SpriteCallbackDummy,
         52,
         40,
