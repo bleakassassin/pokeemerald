@@ -41,6 +41,7 @@ void GetXYCoordsOneStepInFrontOfPlayer(s16 *xPtr, s16 *yPtr);
 u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8, u8);
 void SetPlayerAvatarFieldMove(void);
 u16 GetPlayerAvatarGraphicsIdByCurrentState(void);
+u16 GetPlayerSceneGraphicsIdByGender(void);
 void SetPlayerAvatarStateMask(u8 a);
 u16 GetPlayerAvatarGraphicsIdByStateId(u8 a);
 u8 GetJumpSpecialMovementAction(u32);

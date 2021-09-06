@@ -10,6 +10,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_message_box.h"
+#include "field_player_avatar.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -4991,10 +4992,6 @@ static void TryAddInterviewObjectEvents(void)
 {
     int graphicsId;
     u8 spriteId;
-	u16 playerGraphicsIds[OUTFIT_TOTAL][2] = {
-        [OUTFIT_EMERALD]   = {OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL},
-        [OUTFIT_RS] = {OBJ_EVENT_GFX_LINK_RS_BRENDAN, OBJ_EVENT_GFX_LINK_RS_MAY},
-    };
 
     switch (GetDisplayedPersonType())
     {
@@ -5023,11 +5020,7 @@ static void TryAddInterviewObjectEvents(void)
     }
 
     // Add object for player (facing right)
-    spriteId = AddPseudoObjectEvent(playerGraphicsIds[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender],
-        SpriteCallbackDummy,
-        52,
-        40,
-        0);
+    spriteId = AddPseudoObjectEvent(GetPlayerSceneGraphicsIdByGender(), SpriteCallbackDummy, 52, 40, 0);
 
     if (spriteId != MAX_SPRITES)
     {
