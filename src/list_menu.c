@@ -1133,7 +1133,7 @@ u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 fi
     gTempScrollArrowTemplate.fullyDownThreshold = fullyDownThreshold;
     gTempScrollArrowTemplate.tileTag = tileTag;
     gTempScrollArrowTemplate.palTag = palTag;
-    gTempScrollArrowTemplate.palNum = 0;
+    gTempScrollArrowTemplate.palNum = 11;
 
     return AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, scrollOffset);
 }

@@ -20,6 +20,7 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "pokemon.h"
+#include "registered_items_menu.h"
 #include "safari_zone.h"
 #include "script.h"
 #include "secret_base.h"
@@ -31,6 +32,7 @@
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/field_poison.h"
+#include "constants/items.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
 #include "constants/songs.h"
@@ -186,7 +188,13 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
-    if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
+    if (input->pressedSelectButton && gSaveBlock1Ptr->registeredItems[1].itemId != ITEM_NONE)
+    {
+        PlaySE(SE_WIN_OPEN);
+        TxRegItemsMenu_OpenMenu();
+        return TRUE;
+    }
+    else if (input->pressedSelectButton && UseRegisteredKeyItemOnField(1) == TRUE)
         return TRUE;
 
     return FALSE;
