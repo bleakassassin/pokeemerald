@@ -745,7 +745,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
                 STR_CONV_MODE_LEFT_ALIGN,
                 5);
         }
-        if (ItemId_GetPocket(item) == POCKET_TM_HM && (CheckBagHasItem(item, 1) || CheckPCHasItem(item, 1)))
+        if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
             StringCopy(gStringVar4, gText_SoldOutLabel);
         else
 			StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
