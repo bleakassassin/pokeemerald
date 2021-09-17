@@ -520,6 +520,7 @@
 // Secondary IDs for bikes
 #define MACH_BIKE 0
 #define ACRO_BIKE 1
+#define BICYCLE   2
 
 // Item type IDs (used to determine the exit callback)
 #define ITEM_USE_MAIL        0

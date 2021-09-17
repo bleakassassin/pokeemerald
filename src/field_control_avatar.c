@@ -111,8 +111,6 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedAButton = TRUE;
             if (newKeys & B_BUTTON)
                 input->pressedBButton = TRUE;
-            if (newKeys & R_BUTTON)
-                input->pressedRButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -120,6 +118,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             input->heldDirection = TRUE;
             input->heldDirection2 = TRUE;
         }
+        if (newKeys & R_BUTTON)
+            input->pressedRButton = TRUE;
     }
 
     if (forcedMove == FALSE)
@@ -198,17 +198,19 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         {
-            gPlayerAvatar.flags -= PLAYER_AVATAR_FLAG_MACH_BIKE;
-            gPlayerAvatar.flags += PLAYER_AVATAR_FLAG_ACRO_BIKE;
             SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
+            FlagClear(FLAG_MACH_GEAR);
+            PlaySE(SE_BIKE_BELL);
         }
-        else
+        else if (gPlayerAvatar.acroBikeState == ACRO_STATE_NORMAL)
         {
-            gPlayerAvatar.flags -= PLAYER_AVATAR_FLAG_ACRO_BIKE;
-            gPlayerAvatar.flags += PLAYER_AVATAR_FLAG_MACH_BIKE;
             SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_MACH_BIKE);
+            FlagSet(FLAG_MACH_GEAR);
+            ObjectEventClearHeldMovementIfActive(&gObjectEvents[gPlayerAvatar.objectEventId]);
+            PlaySE(SE_BIKE_BELL);
+            if (gPlayerAvatar.runningState == MOVING)
+                gPlayerAvatar.bikeFrameCounter = 20;
         }
-        PlaySE(SE_BIKE_BELL);
     }
 
     return FALSE;
