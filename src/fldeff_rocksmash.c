@@ -72,8 +72,11 @@ static void Task_DoFieldMove_Init(u8 taskId)
         else
         {
             // Do field move pose
-            SetPlayerAvatarFieldMove();
-            ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+			if (gFieldEffectArguments[3] != 1)
+            {
+                SetPlayerAvatarFieldMove();
+                ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+            }
             gTasks[taskId].func = Task_DoFieldMove_ShowMonAfterPose;
         }
     }
@@ -81,7 +84,7 @@ static void Task_DoFieldMove_Init(u8 taskId)
 
 static void Task_DoFieldMove_ShowMonAfterPose(u8 taskId)
 {
-    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]) == TRUE)
+    if (ObjectEventCheckHeldMovementStatus(&gObjectEvents[gPlayerAvatar.objectEventId]) == TRUE || gFieldEffectArguments[3] == 1)
     {
         FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
         gTasks[taskId].func = Task_DoFieldMove_WaitForMon;

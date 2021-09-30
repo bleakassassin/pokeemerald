@@ -2569,10 +2569,15 @@ bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
     u32 flag = gFieldEffectArguments[0] & 0x80000000;
-    pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
-    gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
-    gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_OT_ID);
-    gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
+	if (gFieldEffectArguments[3] != 1)
+	{
+        pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
+        gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
+        gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_OT_ID);
+        gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
+	}
+	else
+		gFieldEffectArguments[1] = 0xFFFF;
     gFieldEffectArguments[0] |= flag;
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -3009,8 +3014,11 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        SetPlayerAvatarFieldMove();
-        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        if (gFieldEffectArguments[3] != 1)
+        {
+            SetPlayerAvatarFieldMove();
+            ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        }
         task->tState++;
     }
 }
