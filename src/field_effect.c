@@ -3236,13 +3236,13 @@ static void FlyOutFieldEffect_BirdSwoopDown(struct Task *task)
 
 static void FlyOutFieldEffect_JumpOnBird(struct Task *task)
 {
-    if ((++task->tTimer) >= 8)
+    if ((++task->tTimer) >= 7)
     {
         struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_SURFING));
         StartSpriteAnim(&gSprites[objectEvent->spriteId], 0x16);
         objectEvent->inanimate = TRUE;
-        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
+        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT_RIGHT);
         if (task->tAvatarFlags & PLAYER_AVATAR_FLAG_SURFING)
         {
             DestroySprite(&gSprites[objectEvent->fieldEffectSpriteId]);
