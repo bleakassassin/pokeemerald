@@ -403,7 +403,7 @@ const struct Item gItems[] =
 
     [ITEM_ENERGY_POWDER] =
     {
-        .name = _("Energypowder"),
+        .name = _("EnergyPowder"),
         .itemId = ITEM_ENERGY_POWDER,
         .price = 500,
         .description = sEnergyPowderDesc,
@@ -1194,7 +1194,7 @@ const struct Item gItems[] =
 
     [ITEM_THUNDER_STONE] =
     {
-        .name = _("ThunderStone"),
+        .name = _("Thunderstone"),
         .itemId = ITEM_THUNDER_STONE,
         .price = 2100,
         .description = sThunderStoneDesc,
@@ -1273,7 +1273,7 @@ const struct Item gItems[] =
 
     [ITEM_TINY_MUSHROOM] =
     {
-        .name = _("Tinymushroom"),
+        .name = _("TinyMushroom"),
         .itemId = ITEM_TINY_MUSHROOM,
         .price = 500,
         .description = sTinyMushroomDesc,
@@ -2185,7 +2185,7 @@ const struct Item gItems[] =
 
     [ITEM_BRIGHT_POWDER] =
     {
-        .name = _("Brightpowder"),
+        .name = _("BrightPowder"),
         .itemId = ITEM_BRIGHT_POWDER,
         .price = 10,
         .holdEffect = HOLD_EFFECT_EVASION_UP,
@@ -2625,7 +2625,7 @@ const struct Item gItems[] =
 
     [ITEM_TWISTED_SPOON] =
     {
-        .name = _("Twistedspoon"),
+        .name = _("TwistedSpoon"),
         .itemId = ITEM_TWISTED_SPOON,
         .price = 100,
         .holdEffect = HOLD_EFFECT_PSYCHIC_POWER,

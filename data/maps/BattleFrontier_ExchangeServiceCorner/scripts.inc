@@ -570,7 +570,7 @@ BattleFrontier_ExchangeServiceCorner_Text_ConfirmHPUp:
 	.string "Is that correct?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmBrightpowder:
-	.string "You've chosen the Brightpowder.\n"
+	.string "You've chosen the BrightPowder.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmWhiteHerb:
