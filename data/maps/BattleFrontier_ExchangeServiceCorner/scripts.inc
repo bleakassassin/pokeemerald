@@ -706,11 +706,11 @@ BattleFrontier_ExchangeServiceCorner_Text_SalacBerryDesc::
 	.string "pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc::
-	.string "A hold item that raises SP.ATK in a\n"
+	.string "A hold item that raises SP. ATK in a\n"
 	.string "pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc::
-	.string "A hold item that raises SP.DEF in a\n"
+	.string "A hold item that raises SP. DEF in a\n"
 	.string "pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LansatBerryDesc::
@@ -741,11 +741,11 @@ BattleFrontier_ExchangeServiceCorner_Text_UpGradeDesc::
 	.string "A peculiar box made by SILPH CO.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DeepSeaToothDesc::
-	.string "A hold item that raises the SP.ATK\n"
+	.string "A hold item that raises the SP. ATK\n"
 	.string "of CLAMPERL.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DeepSeaScaleDesc::
-	.string "A hold item that raises the SP.DEF\n"
+	.string "A hold item that raises the SP. DEF\n"
 	.string "of CLAMPERL.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DragonScaleDesc::
@@ -765,7 +765,7 @@ BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc::
 	.string "reduce accuracy.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_SootheBellDesc::
-	.string "A held item that cals spirits and\n"
+	.string "A hold item that cals spirits and\n"
 	.string "fosters friendship.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc::
