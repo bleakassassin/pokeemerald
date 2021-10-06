@@ -633,8 +633,8 @@ BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls:
 	.string "Oh, they're so nice!\n"
 	.string "I wish I had them!\l"
 	.string "Cute cushions!\l"
-	.string "Big plush Dolls!\l"
-	.string "Little plush Dolls!\l"
+	.string "Big plush dolls!\l"
+	.string "Little plush dolls!\l"
 	.string "I wish I had them all!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant:
@@ -670,39 +670,39 @@ BattleFrontier_ExchangeServiceCorner_Text_KissCushionDesc::
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_SmoochumDollDesc::
-	.string "A Smoochum Doll.\n"
+	.string "A Smoochum doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_TogepiDollDesc::
-	.string "A Togepi Doll.\n"
+	.string "A Togepi doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MeowthDollDesc::
-	.string "A Meowth Doll.\n"
+	.string "A Meowth doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ClefairyDollDesc::
-	.string "A Clefairy Doll.\n"
+	.string "A Clefairy doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DittoDollDesc::
-	.string "A Ditto Doll.\n"
+	.string "A Ditto doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CyndaquilDollDesc::
-	.string "A Cyndaquil Doll.\n"
+	.string "A Cyndaquil doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ChikoritaDollDesc::
-	.string "A Chikorita Doll.\n"
+	.string "A Chikorita doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_TotodileDollDesc::
-	.string "A Totodile Doll.\n"
+	.string "A Totodile doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc::
-	.string "A large Doll.\n"
+	.string "A large doll.\n"
 	.string "Place it on a mat or a desk.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc::
