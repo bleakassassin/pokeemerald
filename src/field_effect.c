@@ -1,5 +1,6 @@
 #include "global.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
@@ -2569,7 +2570,7 @@ bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
     u32 flag = gFieldEffectArguments[0] & 0x80000000;
-	if (gFieldEffectArguments[3] != 1)
+	if (FlagGet(FLAG_TEMP_5) == FALSE)
 	{
         pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
         gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
@@ -3014,7 +3015,7 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        if (gFieldEffectArguments[3] != 1)
+        if (FlagGet(FLAG_TEMP_5) == FALSE)
         {
             SetPlayerAvatarFieldMove();
             ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);

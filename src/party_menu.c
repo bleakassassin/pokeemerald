@@ -3646,6 +3646,7 @@ static void CursorCb_FieldMove(u8 taskId)
     }
     else
     {
+		FlagClear(FLAG_TEMP_5);
         // All field moves before WATERFALL are HMs.
         if (fieldMove <= FIELD_MOVE_WATERFALL && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE)
         {
