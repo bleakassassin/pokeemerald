@@ -426,7 +426,7 @@ LilycoveCity_EventScript_DontKnowAboutBerryBlender::
 LilycoveCity_Text_MayShoppingLetsBattle:
 	.string "May: Oh, hey?\n"
 	.string "{PLAYER}{KUN}, are you shopping, too?\p"
-	.string "I bought a whole bunch of Dolls and\n"
+	.string "I bought a whole bunch of dolls and\n"
 	.string "Posters.\p"
 	.string "Of course, I've also caught a lot of\n"
 	.string "Pokémon, and I'm raising them\l"
@@ -496,7 +496,7 @@ LilycoveCity_Text_MayYouGoingToBattleFrontier:
 LilycoveCity_Text_BrendanShoppingLetsBattle:
 	.string "Brendan: Oh, hey, it's {PLAYER}.\p"
 	.string "I'm running an errand for my dad.\n"
-	.string "No, I'm not buying any Dolls.\p"
+	.string "No, I'm not buying any dolls.\p"
 	.string "Anyways, it's been a while.\p"
 	.string "Want to have a battle to see who's been\n"
 	.string "raising Pokémon better?$"

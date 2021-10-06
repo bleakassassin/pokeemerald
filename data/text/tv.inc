@@ -2150,11 +2150,11 @@ TVSecretBaseSecrets_Text_UsedBalloon::
 	.string "the sudden noise!$"
 
 TVSecretBaseSecrets_Text_UsedTent::
-	.string "The visitor entered a Tent!\p"
+	.string "The visitor entered a tent!\p"
 	.string "The visitor is running around!\p"
 	.string "Oh, my, the visitor is frolicking!\p"
 	.string "The visitor appears surprised by\n"
-	.string "the Tent's size!$"
+	.string "the tent's size!$"
 
 TVSecretBaseSecrets_Text_UsedPlant::
 	.string "The visitor is examining\n"
@@ -2252,7 +2252,7 @@ TVSecretBaseSecrets_Text_UsedPoster::
 	.string "about the visitor's stares.$"
 
 TVSecretBaseSecrets_Text_UsedNoteMat::
-	.string "The visitor stepped on a NOTE Mat!\p"
+	.string "The visitor stepped on a Note Mat!\p"
 	.string "…Hmm…\n"
 	.string "The visitor composed a funny tune!$"
 
@@ -2292,9 +2292,9 @@ TVSecretBaseSecrets_Text_UsedDesk::
 	.string "about neatness!$"
 
 TVSecretBaseSecrets_Text_UsedBrick::
-	.string "The visitor is staring at a Brick!\p"
+	.string "The visitor is staring at a brick!\p"
 	.string "Perhaps the visitor is thinking about\n"
-	.string "the object on the Brick.$"
+	.string "the object on the brick.$"
 
 TVSecretBaseSecrets_Text_UsedSolidBoard::
 	.string "The visitor is walking across\n"
@@ -2305,7 +2305,7 @@ TVSecretBaseSecrets_Text_UsedSolidBoard::
 
 TVSecretBaseSecrets_Text_UsedFence::
 	.string "The visitor is looking intently\n"
-	.string "at a Fence!\p"
+	.string "at a fence!\p"
 	.string "Has a new idea for a trap popped\n"
 	.string "into the visitor's head?$"
 
@@ -2319,12 +2319,12 @@ TVSecretBaseSecrets_Text_UsedGlitterMat::
 
 TVSecretBaseSecrets_Text_UsedTire::
 	.string "The visitor is staring intently\n"
-	.string "at a Tire!\p"
+	.string "at a tire!\p"
 	.string "Could the visitor be thinking about\n"
 	.string "the kind of car that would use it?$"
 
 TVSecretBaseSecrets_Text_UsedStand::
-	.string "The visitor climbed a Stand!\p"
+	.string "The visitor climbed a stand!\p"
 	.string "The visitor is looking out across\n"
 	.string "{STR_VAR_1}'s Base from high up!\p"
 	.string "And…\p"
@@ -2337,12 +2337,12 @@ TVSecretBaseSecrets_Text_BrokeDoor::
 	.string "The visitor is laughing uproariously!$"
 
 TVSecretBaseSecrets_Text_UsedDoll::
-	.string "The visitor is talking to a Doll!\p"
+	.string "The visitor is talking to a doll!\p"
 	.string "…It's a little creepy…$"
 
 TVSecretBaseSecrets_Text_UsedSlide::
 	.string "The visitor is climbing the ladder\n"
-	.string "on a Slide!\p"
+	.string "on a slide!\p"
 	.string "And…\p"
 	.string "The visitor slid down!\p"
 	.string "Looks like the visitor is having\n"
@@ -2350,7 +2350,7 @@ TVSecretBaseSecrets_Text_UsedSlide::
 
 TVSecretBaseSecrets_Text_UsedSlideButDidntGoDown::
 	.string "The visitor is climbing the ladder\n"
-	.string "on a Slide!\p"
+	.string "on a slide!\p"
 	.string "And…\p"
 	.string "The visitor went back down\n"
 	.string "the ladder!\p"

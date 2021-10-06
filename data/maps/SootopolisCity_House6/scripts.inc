@@ -48,8 +48,8 @@ SootopolisCity_House6_Text_IllHoldItForYou:
 
 SootopolisCity_House6_Text_DontWantThisDoll:
 	.string "Are you sure?\n"
-	.string "You don't want this Doll?$"
+	.string "You don't want this doll?$"
 
 SootopolisCity_House6_Text_LovePlushDolls:
-	.string "I love plush Dolls!$"
+	.string "I love plush dolls!$"
 

@@ -1020,10 +1020,10 @@ SlateportCity_Text_SlateportWonderfulPlace:
 	.string "Slateport is such a wonderful place!$"
 
 SlateportCity_Text_BuyBricksSoDecorWontGetDirty:
-	.string "If you put Dolls or Cushions on\n"
+	.string "If you put dolls or cushions on\n"
 	.string "the floor, they'll get dirty.\p"
-	.string "I'm going to buy some Bricks so my\n"
-	.string "Dolls and Cushions won't get dirty\l"
+	.string "I'm going to buy some bricks so my\n"
+	.string "dolls and cushions won't get dirty\l"
 	.string "when I leave them out.$"
 
 SlateportCity_Text_GoingToCompeteInBattleTent:
