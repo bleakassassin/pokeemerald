@@ -338,28 +338,28 @@ SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis:
 
 SlateportCity_PokemonFanClub_Text_ExplainRedScarf:
 	.string "Let a POKéMON hold that RED SCARF.\p"
-	.string "Everyone will recognize the coolness\n"
+	.string "Everyone will recognize the Coolness\n"
 	.string "of that POKéMON!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainBlueScarf:
 	.string "Let a POKéMON hold that BLUE SCARF.\p"
-	.string "Its beauty will be accentuated much\n"
+	.string "Its Beauty will be accentuated much\n"
 	.string "more than now!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainPinkScarf:
 	.string "Let a POKéMON hold that PINK SCARF.\p"
-	.string "It will draw out the cuteness of\n"
+	.string "It will draw out the Cuteness of\n"
 	.string "the POKéMON some more!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainGreenScarf:
 	.string "Let a POKéMON hold that GREEN SCARF.\p"
 	.string "That will enhance the\n"
-	.string "smartness of POKéMON!$"
+	.string "Smartness of POKéMON!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainYellowScarf:
 	.string "Let a POKéMON hold that YELLOW SCARF.\p"
 	.string "It will bolster your POKéMON's\n"
-	.string "toughness so much more!$"
+	.string "Toughness so much more!$"
 
 SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou:
 	.string "I'm sorry, but I've nothing else to\n"

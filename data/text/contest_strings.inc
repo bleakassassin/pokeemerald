@@ -688,19 +688,19 @@ gText_Contest_Fear::
 	.string "fear$"
 
 gText_Contest_Coolness::
-	.string "coolness$"
+	.string "Coolness$"
 
 gText_Contest_Beauty::
-	.string "beauty$"
+	.string "Beauty$"
 
 gText_Contest_Cuteness::
-	.string "cuteness$"
+	.string "Cuteness$"
 
 gText_Contest_Smartness::
-	.string "smartness$"
+	.string "Smartness$"
 
 gText_Contest_Toughness::
-	.string "toughness$"
+	.string "Toughness$"
 
 @ Unused
 gText_Tension::
