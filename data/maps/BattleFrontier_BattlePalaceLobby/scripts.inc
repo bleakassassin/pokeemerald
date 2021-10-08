@@ -414,7 +414,7 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge:
 	.string "TRAINERS are otherwise forbidden to\n"
 	.string "command their POKéMON.\p"
 	.string "The POKéMON are to behave according\n"
-	.string "to their nature and battle on their own.\p"
+	.string "to their Nature and battle on their own.\p"
 	.string "You must put your trust in your\n"
 	.string "POKéMON and watch over them.\p"
 	.string "If you achieve the honor of beating\n"
@@ -535,16 +535,16 @@ BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink:
 
 BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere:
 	.string "Hmm…\p"
-	.string "It appears that the nature of POKéMON\n"
+	.string "It appears that the Nature of POKéMON\n"
 	.string "and the moves that they have been\l"
 	.string "taught are the keys to battle here.\p"
 	.string "To be more precise, it's how well\n"
-	.string "the moves match the nature of\l"
+	.string "the moves match the Mature of\l"
 	.string "the POKéMON.\p"
 	.string "If your POKéMON is in trouble and\n"
 	.string "unable to live up to its potential,\l"
 	.string "you may need to examine how well\l"
-	.string "its moves match its nature.$"
+	.string "its moves match its Nature.$"
 
 BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
 	.string "My POKéMON is usually very docile.\p"
@@ -555,10 +555,10 @@ BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
 	.string "It's shocking, even.$"
 
 BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway:
-	.string "I wonder what sort of nature a POKéMON\n"
+	.string "I wonder what sort of Nature a POKéMON\n"
 	.string "would have if it favored enfeebling its\l"
 	.string "opponents and chipping away slowly.\p"
-	.string "I'd be surprised if it was a LAX nature.\p"
+	.string "I'd be surprised if it was a LAX Nature.\p"
 	.string "But, nah, that can't be right.$"
 
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle:
@@ -584,7 +584,7 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainDoubleBattleChallenge:
 	.string "TRAINERS are otherwise forbidden to\n"
 	.string "command their POKéMON.\p"
 	.string "The POKéMON are to behave according\n"
-	.string "to their nature and battle on their own.\p"
+	.string "to their Nature and battle on their own.\p"
 	.string "You must put your trust in your\n"
 	.string "POKéMON and watch over them.\p"
 	.string "If you achieve the honor of beating\n"
@@ -620,16 +620,16 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics:
 	.string "and battle by themselves.\p"
 	.string "Unlike in the wild, POKéMON that live\n"
 	.string "with people behave differently\l"
-	.string "depending on their nature.$"
+	.string "depending on their Nature.$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature:
-	.string "Depending on its nature, a POKéMON\n"
+	.string "Depending on its Nature, a POKéMON\n"
 	.string "may prefer to attack no matter what.\p"
 	.string "Another POKéMON may prefer to protect\n"
 	.string "itself from any harm.\p"
 	.string "Yet another may enjoy vexing or\n"
 	.string "confounding its foes.\p"
-	.string "Due to its nature, a POKéMON\n"
+	.string "Due to its Nature, a POKéMON\n"
 	.string "will have favorite moves that it is good\l"
 	.string "at using.\p"
 	.string "It may also dislike certain moves that\n"
@@ -655,13 +655,13 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered:
 	.string "A POKéMON is not good at using any\n"
 	.string "move that it dislikes.\p"
 	.string "If a POKéMON only knows moves that\n"
-	.string "do not match its nature, it will often\l"
+	.string "do not match its Nature, it will often\l"
 	.string "be unable to live up to its potential.$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger:
-	.string "Depending on its nature, a POKéMON may\n"
+	.string "Depending on its Nature, a POKéMON may\n"
 	.string "start using moves that don't match its\l"
-	.string "nature when it is in trouble.\p"
+	.string "Nature when it is in trouble.\p"
 	.string "If a POKéMON begins behaving oddly\n"
 	.string "in a pinch, watch it carefully.$"
 
