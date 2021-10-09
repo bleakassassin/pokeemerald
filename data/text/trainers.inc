@@ -3039,16 +3039,16 @@ Route120_Text_JeffreyPostRematch:
 	.string "For my precious BUG POKéMON…$"
 
 Route120_Text_JenniferIntro:
-	.string "POKéMON have many special abilities.\n"
-	.string "If you want to become a first-class\l"
-	.string "TRAINER, learn about them.$"
+	.string "POKéMON have many Abilities. If you\n"
+	.string "want to become a first-class TRAINER,\l"
+	.string "learn about them.$"
 
 Route120_Text_JenniferDefeat:
 	.string "You're obviously thinking.$"
 
 Route120_Text_JenniferPostBattle:
-	.string "The special abilities of POKéMON\n"
-	.string "will make battle styles change.$"
+	.string "The Abilities of POKéMON will\n"
+	.string "make battle styles change.$"
 
 Route120_Text_ChipIntro:
 	.string "Who might you be?\p"
