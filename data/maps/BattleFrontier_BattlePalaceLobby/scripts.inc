@@ -539,7 +539,7 @@ BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere:
 	.string "and the moves that they have been\l"
 	.string "taught are the keys to battle here.\p"
 	.string "To be more precise, it's how well\n"
-	.string "the moves match the Mature of\l"
+	.string "the moves match the Nature of\l"
 	.string "the POKéMON.\p"
 	.string "If your POKéMON is in trouble and\n"
 	.string "unable to live up to its potential,\l"
