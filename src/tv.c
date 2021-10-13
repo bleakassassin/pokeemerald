@@ -195,36 +195,42 @@ static const struct {
     u16 moves[MAX_MON_MOVES];
     u8 level;
     u8 location;
+    u8 group;
 } sPokeOutbreakSpeciesList[] = {
     {
         .species = SPECIES_SEEDOT,
         .moves = {MOVE_BIDE, MOVE_HARDEN, MOVE_LEECH_SEED},
         .level = 3,
-        .location = MAP_NUM(ROUTE102)
+        .location = MAP_NUM(ROUTE102),
+        .group = MAP_GROUP(ROUTE102),
     },
     {
         .species = SPECIES_NUZLEAF,
         .moves = {MOVE_HARDEN, MOVE_GROWTH, MOVE_NATURE_POWER, MOVE_LEECH_SEED},
         .level = 15,
         .location = MAP_NUM(ROUTE114),
+        .group = MAP_GROUP(ROUTE114),
     },
     {
         .species = SPECIES_SEEDOT,
         .moves = {MOVE_HARDEN, MOVE_GROWTH, MOVE_NATURE_POWER, MOVE_LEECH_SEED},
         .level = 13,
         .location = MAP_NUM(ROUTE117),
+        .group = MAP_GROUP(ROUTE117),
     },
     {
         .species = SPECIES_SEEDOT,
         .moves = {MOVE_GIGA_DRAIN, MOVE_FRUSTRATION, MOVE_SOLAR_BEAM, MOVE_LEECH_SEED},
         .level = 25,
         .location = MAP_NUM(ROUTE120),
+        .group = MAP_GROUP(ROUTE120),
     },
     {
         .species = SPECIES_SKITTY,
         .moves = {MOVE_GROWL, MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_ATTRACT},
         .level = 8,
         .location = MAP_NUM(ROUTE116),
+        .group = MAP_GROUP(ROUTE116),
     }
 };
 
@@ -1114,7 +1120,6 @@ void TryPutPokemonTodayOnAir(void)
 
     ballsUsed = 0;
     TryPutRandomPokeNewsOnAir();
-    TryStartRandomMassOutbreak();
 
     // Try either the Failed or Caught version of the show
     if (gBattleResults.caughtMonSpecies == SPECIES_NONE)
@@ -1577,7 +1582,9 @@ void StartMassOutbreak(void)
     gSaveBlock1Ptr->outbreakPokemonMoves[3] = show->massOutbreak.moves[3];
     gSaveBlock1Ptr->outbreakUnk4 = show->massOutbreak.var03;
     gSaveBlock1Ptr->outbreakPokemonProbability = show->massOutbreak.probability;
-    gSaveBlock1Ptr->outbreakDaysLeft = 2;
+    gSaveBlock1Ptr->outbreakDaysLeft = 1;
+    show->massOutbreak.kind = TVSHOW_OFF_AIR;
+    show->massOutbreak.active = FALSE;
 }
 
 void PutLilycoveContestLadyShowOnTheAir(void)
@@ -1658,33 +1665,30 @@ static void TryStartRandomMassOutbreak(void)
             if (gSaveBlock1Ptr->tvShows[i].common.kind == TVSHOW_MASS_OUTBREAK)
                 return;
         }
-        if (!rbernoulli(1, 200))
+        sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
+        if (sCurTVShowSlot != -1)
         {
-            sCurTVShowSlot = FindFirstEmptyNormalTVShowSlot(gSaveBlock1Ptr->tvShows);
-            if (sCurTVShowSlot != -1)
-            {
-                outbreakIdx = Random() % ARRAY_COUNT(sPokeOutbreakSpeciesList);
-                show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-                show->massOutbreak.kind = TVSHOW_MASS_OUTBREAK;
-                show->massOutbreak.active = TRUE;
-                show->massOutbreak.level = sPokeOutbreakSpeciesList[outbreakIdx].level;
-                show->massOutbreak.var02 = 0;
-                show->massOutbreak.var03 = 0;
-                show->massOutbreak.species = sPokeOutbreakSpeciesList[outbreakIdx].species;
-                show->massOutbreak.var0E = 0;
-                show->massOutbreak.moves[0] = sPokeOutbreakSpeciesList[outbreakIdx].moves[0];
-                show->massOutbreak.moves[1] = sPokeOutbreakSpeciesList[outbreakIdx].moves[1];
-                show->massOutbreak.moves[2] = sPokeOutbreakSpeciesList[outbreakIdx].moves[2];
-                show->massOutbreak.moves[3] = sPokeOutbreakSpeciesList[outbreakIdx].moves[3];
-                show->massOutbreak.locationMapNum = sPokeOutbreakSpeciesList[outbreakIdx].location;
-                show->massOutbreak.locationMapGroup = 0;
-                show->massOutbreak.var12 = 0;
-                show->massOutbreak.probability = 50;
-                show->massOutbreak.var15 = 0;
-                show->massOutbreak.daysLeft = 1;
-                StorePlayerIdInNormalShow(show);
-                show->massOutbreak.language = gGameLanguage;
-            }
+            outbreakIdx = Random() % ARRAY_COUNT(sPokeOutbreakSpeciesList);
+            show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
+            show->massOutbreak.kind = TVSHOW_MASS_OUTBREAK;
+            show->massOutbreak.active = TRUE;
+            show->massOutbreak.level = sPokeOutbreakSpeciesList[outbreakIdx].level;
+            show->massOutbreak.var02 = 0;
+            show->massOutbreak.var03 = 0;
+            show->massOutbreak.species = sPokeOutbreakSpeciesList[outbreakIdx].species;
+            show->massOutbreak.var0E = 0;
+            show->massOutbreak.moves[0] = sPokeOutbreakSpeciesList[outbreakIdx].moves[0];
+            show->massOutbreak.moves[1] = sPokeOutbreakSpeciesList[outbreakIdx].moves[1];
+            show->massOutbreak.moves[2] = sPokeOutbreakSpeciesList[outbreakIdx].moves[2];
+            show->massOutbreak.moves[3] = sPokeOutbreakSpeciesList[outbreakIdx].moves[3];
+            show->massOutbreak.locationMapNum = sPokeOutbreakSpeciesList[outbreakIdx].location;
+            show->massOutbreak.locationMapGroup = sPokeOutbreakSpeciesList[outbreakIdx].group;
+            show->massOutbreak.var12 = 0;
+            show->massOutbreak.probability = 50;
+            show->massOutbreak.var15 = 0;
+            show->massOutbreak.daysLeft = 0;
+            StorePlayerIdInNormalShow(show);
+            show->massOutbreak.language = gGameLanguage;
         }
     }
 }
@@ -1713,6 +1717,7 @@ void UpdateTVShowsPerDay(u16 days)
     UpdatePokeNewsTimeLeft(days);
     ResolveWorldOfMastersShow(days);
     ResolveNumberOneShow(days);
+    TryStartRandomMassOutbreak();
 }
 
 static void UpdateMassOutbreakTimeLeft(u16 days)
@@ -4880,7 +4885,7 @@ static void DoTVShowPokemonNewsMassOutbreak(void)
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
-    GetMapName(gStringVar1, show->massOutbreak.locationMapNum, 0);
+    GetMapName(gStringVar1, Overworld_GetMapHeaderByGroupAndId(show->massOutbreak.locationMapGroup, show->massOutbreak.locationMapNum)->regionMapSectionId, 0);
     StringCopy(gStringVar2, gSpeciesNames[show->massOutbreak.species]);
     TVShowDone();
     StartMassOutbreak();
