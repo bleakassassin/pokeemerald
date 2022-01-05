@@ -379,9 +379,9 @@ static void TxRegItemsMenu_PrintFunc(u8 windowId, u32 id, u8 yOffset)
         if (gTxRegItemsMenu->toSwapPos != NOT_SWAPPING)
         {
             if (gTxRegItemsMenu->toSwapPos == (u8)id)
-                TxRegItemsMenu_PrintSwappingCursor(yOffset, 0, TEXT_SPEED_FF);
+                TxRegItemsMenu_PrintSwappingCursor(yOffset, 0, TEXT_SKIP_DRAW);
             else
-                TxRegItemsMenu_PrintSwappingCursor(yOffset, 0xFF, TEXT_SPEED_FF);
+                TxRegItemsMenu_PrintSwappingCursor(yOffset, 0xFF, TEXT_SKIP_DRAW);
         }
     }
 }
