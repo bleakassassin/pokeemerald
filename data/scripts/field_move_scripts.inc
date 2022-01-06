@@ -3,14 +3,11 @@ EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
     checkitem ITEM_HM01, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_CheckTreeCantCut
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CheckTreeCantCut
 	msgbox Text_WantToCut, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_CancelCut
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
 	checkpartymove MOVE_CUT
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CutWildMon
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CutWildMon
 	clearflag FLAG_TEMP_5
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
@@ -67,14 +64,11 @@ EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
     checkitem ITEM_HM06, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_CantSmashRock
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CantSmashRock
 	msgbox Text_WantToSmash, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_CancelSmash
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
 	checkpartymove MOVE_ROCK_SMASH
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_RockSmashWildMon
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_RockSmashWildMon
 	clearflag FLAG_TEMP_5
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
@@ -103,11 +97,9 @@ EventScript_SmashRock::
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_EndSmash
+	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
 	special RockSmashWildEncounter
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_EndSmash
+	goto_if_eq VAR_RESULT, FALSE, EventScript_EndSmash
 	waitstate
 	releaseall
 	end
@@ -142,16 +134,13 @@ EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
     checkitem ITEM_HM04, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_CantStrength
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	msgbox Text_WantToStrength, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_CancelStrength
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
 	closemessage
 	checkpartymove MOVE_STRENGTH
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_StrengthWildMon
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_StrengthWildMon
 	clearflag FLAG_TEMP_5
 	setfieldeffectargument 0, VAR_RESULT
 EventScript_ActivateStrength::
@@ -209,11 +198,9 @@ Text_StrengthActivated:
 EventScript_UseWaterfall::
 	lockall
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_EndWaterfall
+	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
 	checkpartymove MOVE_WATERFALL
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_WaterfallWildMon
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_WaterfallWildMon
 	clearflag FLAG_TEMP_5
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
@@ -250,14 +237,11 @@ Text_MonUsedWaterfall:
 EventScript_UseDive::
 	lockall
     checkitem ITEM_HM08, 1
-	compare VAR_RESULT, FALSE
-	goto_if_eq EventScript_CantDive
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CantDive
 	msgbox Text_WantToDive, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_EndDive
+	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
 	checkpartymove MOVE_DIVE
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_DiveWildMon
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_DiveWildMon
 	clearflag FLAG_TEMP_5
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
@@ -284,11 +268,9 @@ EventScript_DiveWildMon::
 EventScript_UseDiveUnderwater::
 	lockall
 	msgbox Text_WantToSurface, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_EndSurface
+	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
 	checkpartymove MOVE_DIVE
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_SurfaceWildMon
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_SurfaceWildMon
 	clearflag FLAG_TEMP_5
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT

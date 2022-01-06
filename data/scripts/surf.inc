@@ -1,11 +1,9 @@
 EventScript_UseSurf::
 	lockall
 	msgbox gText_WantToUseSurf, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_ReleaseUseSurf
+	goto_if_eq VAR_RESULT, NO, EventScript_ReleaseUseSurf
 	checkpartymove MOVE_SURF
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_SurfWildMon
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_SurfWildMon
 	clearflag FLAG_TEMP_5
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
