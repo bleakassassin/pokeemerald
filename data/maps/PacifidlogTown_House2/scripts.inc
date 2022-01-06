@@ -8,11 +8,9 @@ PacifidlogTown_House2_EventScript_FanClubYoungerBrother::
 	call_if_unset FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_FirstMonAssessment
 	setflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
-	compare VAR_RESULT, 4
-	goto_if_ge PacifidlogTown_House2_EventScript_GiveReturn
+	goto_if_ge VAR_RESULT, 4, PacifidlogTown_House2_EventScript_GiveReturn
 	specialvar VAR_RESULT, GetLeadMonFriendshipScore
-	compare VAR_RESULT, 2
-	goto_if_ge PacifidlogTown_House2_EventScript_PutInEffort
+	goto_if_ge VAR_RESULT, 2, PacifidlogTown_House2_EventScript_PutInEffort
 	goto PacifidlogTown_House2_EventScript_GiveFrustration
 	end
 
@@ -64,7 +62,7 @@ PacifidlogTown_House2_EventScript_HappyAzurill::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZURILL, 0
+	playmoncry SPECIES_AZURILL, CRY_MODE_NORMAL
 	msgbox PacifidlogTown_House2_Text_Rurii, MSGBOX_DEFAULT
 	waitmoncry
 	msgbox PacifidlogTown_House2_Text_VeryFriendlyWithTrainer, MSGBOX_DEFAULT
@@ -75,7 +73,7 @@ PacifidlogTown_House2_EventScript_UnhappyAzurill::
 	lock
 	faceplayer
 	waitse
-	playmoncry SPECIES_AZURILL, 2
+	playmoncry SPECIES_AZURILL, CRY_MODE_ENCOUNTER
 	msgbox PacifidlogTown_House2_Text_Rururi, MSGBOX_DEFAULT
 	waitmoncry
 	msgbox PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch, MSGBOX_DEFAULT

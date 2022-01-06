@@ -3,14 +3,12 @@ EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
 	checkpartymove MOVE_CUT
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CheckTreeCantCut
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
 	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick 0, VAR_RESULT
-	buffermovename 1, MOVE_CUT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	buffermovename STR_VAR_2, MOVE_CUT
 	msgbox Text_WantToCut, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_CancelCut
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
@@ -92,14 +90,12 @@ EventScript_RockSmash_Main::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	checkpartymove MOVE_ROCK_SMASH
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantSmashRock
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
 	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick 0, VAR_RESULT
-	buffermovename 1, MOVE_ROCK_SMASH
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
 	msgbox Text_WantToSmash, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_CancelSmash
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
@@ -118,11 +114,9 @@ EventScript_SmashRock::
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_EndSmash
+	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
 	special RockSmashWildEncounter
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_EndSmash_WildEncounter
+	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash_WildEncounter
 	return
 	
 EventScript_EndSmash_WildEncounter::
@@ -132,70 +126,46 @@ EventScript_EndSmash_WildEncounter::
 	
 EventScript_RockItemTable::
 	random 24
-	compare VAR_RESULT, 0
-	call_if_eq EventScript_RockItem1
-	compare VAR_RESULT, 1
-	call_if_eq EventScript_RockItem2
-	compare VAR_RESULT, 2
-	call_if_eq EventScript_RockItem3
-	compare VAR_RESULT, 3
-	call_if_eq EventScript_RockItem4
-	compare VAR_RESULT, 4
-	call_if_eq EventScript_RockItem5
-	compare VAR_RESULT, 5
-	call_if_eq EventScript_RockItem6
+	call_if_eq VAR_RESULT, 0, EventScript_RockItem1
+	call_if_eq VAR_RESULT, 1, EventScript_RockItem2
+	call_if_eq VAR_RESULT, 2, EventScript_RockItem3
+	call_if_eq VAR_RESULT, 3, EventScript_RockItem4
+	call_if_eq VAR_RESULT, 4, EventScript_RockItem5
+	call_if_eq VAR_RESULT, 5, EventScript_RockItem6
 	return
 
 EventScript_RockItemTable_Main::
-	compare VAR_RESULT, 6
-	call_if_eq EventScript_RockItem7
-	compare VAR_RESULT, 7
-	call_if_eq EventScript_RockItem8
-	compare VAR_RESULT, 8
-	call_if_eq EventScript_RockItem9
-	compare VAR_RESULT, 9
-	call_if_eq EventScript_RockItem10
+	call_if_eq VAR_RESULT, 6, EventScript_RockItem7
+	call_if_eq VAR_RESULT, 7, EventScript_RockItem8
+	call_if_eq VAR_RESULT, 8, EventScript_RockItem9
+	call_if_eq VAR_RESULT, 9, EventScript_RockItem10
 	return
 
 EventScript_RockItemTable_SeafloorCavern::
-	compare VAR_RESULT, 6
-	call_if_eq EventScript_RockItem7_SeafloorCavern
-	compare VAR_RESULT, 7
-	call_if_eq EventScript_RockItem8_SeafloorCavern
-	compare VAR_RESULT, 8
-	call_if_eq EventScript_RockItem9_SeafloorCavern
-	compare VAR_RESULT, 9
-	call_if_eq EventScript_RockItem10_SeafloorCavern
+	call_if_eq VAR_RESULT, 6, EventScript_RockItem7_SeafloorCavern
+	call_if_eq VAR_RESULT, 7, EventScript_RockItem8_SeafloorCavern
+	call_if_eq VAR_RESULT, 8, EventScript_RockItem9_SeafloorCavern
+	call_if_eq VAR_RESULT, 9, EventScript_RockItem10_SeafloorCavern
 	return
 
 EventScript_RockItemTable_GraniteCave::
-	compare VAR_RESULT, 6
-	call_if_eq EventScript_RockItem7
-	compare VAR_RESULT, 7
-	call_if_eq EventScript_RockItem8
-	compare VAR_RESULT, 8
-	call_if_eq EventScript_RockItem9_GraniteCave
-	compare VAR_RESULT, 9
-	call_if_eq EventScript_RockItem10_GraniteCave
+	call_if_eq VAR_RESULT, 6, EventScript_RockItem7
+	call_if_eq VAR_RESULT, 7, EventScript_RockItem8
+	call_if_eq VAR_RESULT, 8, EventScript_RockItem9_GraniteCave
+	call_if_eq VAR_RESULT, 9, EventScript_RockItem10_GraniteCave
 	return
 
 EventScript_RockItemTable_SafariZone::
-	compare VAR_RESULT, 6
-	call_if_eq EventScript_RockItem7
-	compare VAR_RESULT, 7
-	call_if_eq EventScript_RockItem8_SafariZone
-	compare VAR_RESULT, 8
-	call_if_eq EventScript_RockItem9_SafariZone
-	compare VAR_RESULT, 9
-	call_if_eq EventScript_RockItem10_SafariZone
+	call_if_eq VAR_RESULT, 6, EventScript_RockItem7
+	call_if_eq VAR_RESULT, 7, EventScript_RockItem8_SafariZone
+	call_if_eq VAR_RESULT, 8, EventScript_RockItem9_SafariZone
+	call_if_eq VAR_RESULT, 9, EventScript_RockItem10_SafariZone
 	return
 	
-EventScript_ItemUnderRubble::	
-	compare VAR_RESULT, 10
-	goto_if_ge EventScript_EndSmash
+EventScript_ItemUnderRubble::
+	goto_if_ge VAR_RESULT, 10, EventScript_EndSmash
 	giveitem VAR_TEMP_0
-	compare VAR_RESULT, FALSE
-	goto_if_eq Common_EventScript_ShowBagIsFull
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 
 EventScript_EndSmash::
 	releaseall
@@ -316,12 +286,10 @@ EventScript_StrengthBoulder::
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	checkpartymove MOVE_STRENGTH
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantStrength
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_CancelStrength
+	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
 	closemessage
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
@@ -377,13 +345,11 @@ Text_StrengthActivated:
 EventScript_UseWaterfall::
 	lockall
 	checkpartymove MOVE_WATERFALL
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantWaterfall
-	bufferpartymonnick 0, VAR_RESULT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_EndWaterfall
+	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
 	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_EndWaterfall
@@ -412,14 +378,12 @@ Text_MonUsedWaterfall:
 EventScript_UseDive::
 	lockall
 	checkpartymove MOVE_DIVE
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantDive
-	bufferpartymonnick 0, VAR_RESULT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_WantToDive, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_EndDive
+	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndDive
@@ -437,14 +401,12 @@ EventScript_EndDive::
 EventScript_UseDiveUnderwater::
 	lockall
 	checkpartymove MOVE_DIVE
-	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EventScript_CantSurface
-	bufferpartymonnick 0, VAR_RESULT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
 	msgbox Text_WantToSurface, MSGBOX_YESNO
-	compare VAR_RESULT, NO
-	goto_if_eq EventScript_EndSurface
+	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndSurface
