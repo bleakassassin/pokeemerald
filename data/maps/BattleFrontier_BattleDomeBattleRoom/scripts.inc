@@ -19,8 +19,7 @@ BattleFrontier_BattleDomeBattleRoom_OnTransition:
 	dome_setopponentgfx
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	copyvar VAR_TEMP_F, VAR_RESULT
-	compare VAR_RESULT, DOME_ROUND1
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_SetWalkingAudienceMemberPos
+	call_if_eq VAR_RESULT, DOME_ROUND1, BattleFrontier_BattleDomeBattleRoom_EventScript_SetWalkingAudienceMemberPos
 	end
 
 BattleFrontier_BattleDomeBattleRoom_OnFrame:
@@ -32,18 +31,15 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_EnterRoom::
 	special SpawnCameraObject
 	setobjectxyperm OBJ_EVENT_ID_CAMERA, 9, 5
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_GetRoundNum
-	compare VAR_RESULT, DOME_ROUND1
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat
+	call_if_eq VAR_RESULT, DOME_ROUND1, BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat
 	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayer
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerHasEnteredDome, MSGBOX_DEFAULT
 	closemessage
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM
-	compare VAR_TEMP_F, DOME_FINAL
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter
-	compare VAR_TEMP_E, FRONTIER_BRAIN_NOT_READY
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker
+	goto_if_ne VAR_TEMP_F, DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter
+	goto_if_ne VAR_TEMP_E, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker
 BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter::
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnter
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceReactToPlayer
@@ -54,10 +50,8 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceReactToPlayer::
 	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitmovement 0
-	compare VAR_TEMP_F, DOME_FINAL
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent
-	compare VAR_TEMP_E, FRONTIER_BRAIN_NOT_READY
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTucker
+	goto_if_ne VAR_TEMP_F, DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent
+	goto_if_ne VAR_TEMP_E, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnounceTucker
 BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent::
 	dome_getopponentname
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTrainer, MSGBOX_DEFAULT
@@ -87,13 +81,12 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_Draw::
 	delay 60
 	applymovement LOCALID_REFEREE, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter
 	waitmovement 0
-	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceFastestLeft
+	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 180
 	applymovement LOCALID_REFEREE, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeExit
 	waitmovement 0
-	compare VAR_TEMP_2, DRAW_TUCKER  @ Tucker always wins on a draw
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent
+	goto_if_eq VAR_TEMP_2, DRAW_TUCKER, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent @ Tucker always wins on a draw
 	dome_compareseeds
 	switch VAR_RESULT
 	case 1, BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent
@@ -101,12 +94,9 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent::
 	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
 	dome_getopponentname
-	compare VAR_TEMP_2, NO_DRAW
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWon
-	compare VAR_TEMP_2, DRAW_TRAINER
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWonDraw
-	compare VAR_TEMP_2, DRAW_TUCKER
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw
+	call_if_eq VAR_TEMP_2, NO_DRAW, BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWon
+	call_if_eq VAR_TEMP_2, DRAW_TRAINER, BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWonDraw
+	call_if_eq VAR_TEMP_2, DRAW_TUCKER, BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw
 	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
@@ -117,13 +107,13 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobbyLost::
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobby
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWon::
-	frontier_gettrainername 1
+	frontier_gettrainername STR_VAR_2
 	message BattleFrontier_BattleDomeBattleRoom_Text_TrainerIsWinner
 	waitmessage
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWonDraw::
-	frontier_gettrainername 0
+	frontier_gettrainername STR_VAR_1
 	message BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTrainer
 	waitmessage
 	return
@@ -136,10 +126,8 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw::
 BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent::
 	applymovement LOCALID_ANNOUNCER, Common_Movement_WalkInPlaceDown
 	waitmovement 0
-	compare VAR_TEMP_2, NO_DRAW
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWon
-	compare VAR_TEMP_2, DRAW_TRAINER
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWonDraw
+	call_if_eq VAR_TEMP_2, NO_DRAW, BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWon
+	call_if_eq VAR_TEMP_2, DRAW_TRAINER, BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWonDraw
 	playse SE_M_ENCORE2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
@@ -151,7 +139,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent::
 	switch VAR_RESULT
 	case DOME_ROUNDS_COUNT, BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney
 	setvar VAR_0x8006, 1
-	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 255, 5, 3
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM, 5, 3
 	waitstate
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney::
@@ -183,14 +171,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWonDraw::
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayer::
 	dome_get DOME_DATA_ATTEMPTED_CHALLENGE
-	compare VAR_RESULT, FALSE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttempt
+	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerFirstAttempt
 	dome_get DOME_DATA_HAS_WON_CHALLENGE
-	compare VAR_RESULT, FALSE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWon
+	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWon
 	dome_get DOME_DATA_WIN_STREAK_ACTIVE
-	compare VAR_RESULT, FALSE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreak
+	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerBrokenStreak
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampion
 	return
 
@@ -253,8 +238,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerNeverWonFinal::
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampion::
-	compare VAR_TEMP_F, DOME_FINAL
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionNoTucker
+	goto_if_ne VAR_TEMP_F, DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerChampionNoTucker
 	switch VAR_TEMP_E
 	case FRONTIER_BRAIN_SILVER, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerSilver
 	case FRONTIER_BRAIN_GOLD, BattleFrontier_BattleDomeBattleRoom_EventScript_AnnouncePlayerPreTuckerGold
@@ -374,8 +358,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerEnter::
 	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver
 	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
-	compare VAR_RESULT, FALSE
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver
+	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_TuckerSilverIntro, MSGBOX_DEFAULT
 	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver::
@@ -388,8 +371,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver::
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_IncredibleVictorIsPlayer, MSGBOX_DEFAULT
 	dome_resolvewinners DOME_PLAYER_WON_MATCH
 	frontier_getsymbols
-	compare VAR_RESULT, 0
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney
+	goto_if_ne VAR_RESULT, 0, BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney
 	closemessage
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerApproachPlayer
 	waitmovement 0
@@ -404,8 +386,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver::
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerGoldIntro::
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
-	compare VAR_RESULT, FALSE
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold
+	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_TuckerGoldIntro, MSGBOX_DEFAULT
 	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold::
@@ -418,8 +399,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold::
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_IncredibleVictorIsPlayer, MSGBOX_DEFAULT
 	dome_resolvewinners DOME_PLAYER_WON_MATCH
 	frontier_getsymbols
-	compare VAR_RESULT, 2
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney
+	goto_if_eq VAR_RESULT, 2, BattleFrontier_BattleDomeBattleRoom_EventScript_WonTourney
 	closemessage
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerApproachPlayer
 	waitmovement 0
@@ -477,12 +457,10 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_SetUpObjects::
 	setobjectxy OBJ_EVENT_ID_PLAYER, 4, 9
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	compare VAR_RESULT, DOME_FINAL
-	goto_if_ne BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects
+	goto_if_ne VAR_RESULT, DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects
 	frontier_getbrainstatus
 	copyvar VAR_TEMP_E, VAR_RESULT
-	compare VAR_RESULT, FRONTIER_BRAIN_NOT_READY
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects
+	goto_if_eq VAR_RESULT, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects
 	call BattleFrontier_EventScript_SetBrainObjectGfx
 	setobjectxyperm LOCALID_OPPONENT, 13, 9
 	removeobject LOCALID_OPPONENT
@@ -492,8 +470,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_EndSetUpObjects::
 	end
 
 BattleFrontier_BattleDomeBattleRoom_OnResume:
-	compare VAR_TEMP_9, 1
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_CallAddAudience
+	call_if_eq VAR_TEMP_9, 1, BattleFrontier_BattleDomeBattleRoom_EventScript_CallAddAudience
 	end
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_CallAddAudience::
@@ -502,90 +479,86 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_CallAddAudience::
 
 @ Add audience members to supplement the permanent object event audience
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddAudience::
-	compare VAR_TEMP_F, DOME_ROUND1
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound1Audience
-	compare VAR_TEMP_F, DOME_ROUND2
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound2Audience
-	compare VAR_TEMP_F, DOME_SEMIFINAL
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience
-	compare VAR_TEMP_F, DOME_FINAL
-	call_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience
+	call_if_eq VAR_TEMP_F, DOME_ROUND1, BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound1Audience
+	call_if_eq VAR_TEMP_F, DOME_ROUND2, BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound2Audience
+	call_if_eq VAR_TEMP_F, DOME_SEMIFINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience
+	call_if_eq VAR_TEMP_F, DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound1Audience::
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddRound2Audience::
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_BEAUTY, 19, 7, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_LITTLE_BOY, 25, 15, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_YOUNGSTER, 26, 2, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCHOOL_KID_M, 29, 5, 1, 3, DIR_SOUTH
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0
+	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0
+	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0
+	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0
+	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 0
+	createvobject OBJ_EVENT_GFX_BEAUTY, 19, 7, 1
+	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1
+	createvobject OBJ_EVENT_GFX_LITTLE_BOY, 25, 15, 1
+	createvobject OBJ_EVENT_GFX_YOUNGSTER, 26, 2, 2
+	createvobject OBJ_EVENT_GFX_SCHOOL_KID_M, 29, 5, 1
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddSemifinalAudience::
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_2, 7, 9, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_LASS, 10, 12, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_GENTLEMAN, 15, 2, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_NINJA_BOY, 16, 3, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_2, 17, 4, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_BEAUTY, 19, 7, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_EXPERT_F, 20, 9, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 23, 13, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_LITTLE_BOY, 25, 15, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_YOUNGSTER, 26, 2, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_HEX_MANIAC, 28, 5, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCHOOL_KID_M, 29, 5, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_MART_EMPLOYEE, 30, 6, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_5, 31, 8, 2, 3, DIR_SOUTH
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0
+	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0
+	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0
+	createvobject OBJ_EVENT_GFX_WOMAN_2, 7, 9, 0
+	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0
+	createvobject OBJ_EVENT_GFX_LASS, 10, 12, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0
+	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 0
+	createvobject OBJ_EVENT_GFX_GENTLEMAN, 15, 2, 1
+	createvobject OBJ_EVENT_GFX_NINJA_BOY, 16, 3, 1
+	createvobject OBJ_EVENT_GFX_WOMAN_2, 17, 4, 1
+	createvobject OBJ_EVENT_GFX_BEAUTY, 19, 7, 1
+	createvobject OBJ_EVENT_GFX_EXPERT_F, 20, 9, 1
+	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 23, 13, 1
+	createvobject OBJ_EVENT_GFX_LITTLE_BOY, 25, 15, 1
+	createvobject OBJ_EVENT_GFX_YOUNGSTER, 26, 2, 2
+	createvobject OBJ_EVENT_GFX_HEX_MANIAC, 28, 5, 2
+	createvobject OBJ_EVENT_GFX_SCHOOL_KID_M, 29, 5, 1
+	createvobject OBJ_EVENT_GFX_MART_EMPLOYEE, 30, 6, 2
+	createvobject OBJ_EVENT_GFX_WOMAN_5, 31, 8, 2
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_AddFinalAudience::
-	createvobject OBJ_EVENT_GFX_NINJA_BOY, 0, 2, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_BEAUTY, 2, 15, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_MAN_5, 3, 5, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 5, 7, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_2, 7, 9, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_3, 8, 10, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_LASS, 10, 12, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_BEAUTY, 12, 14, 0, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_HIKER, 14, 12, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_GENTLEMAN, 15, 2, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_NINJA_BOY, 16, 3, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_2, 17, 4, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_3, 18, 6, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_BEAUTY, 19, 7, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_EXPERT_F, 20, 9, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_MAN_2, 21, 10, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 23, 13, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_GENTLEMAN, 24, 14, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_LITTLE_BOY, 25, 15, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_YOUNGSTER, 26, 2, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_FAT_MAN, 27, 3, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_HEX_MANIAC, 28, 5, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_SCHOOL_KID_M, 29, 5, 1, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_MART_EMPLOYEE, 30, 6, 2, 3, DIR_SOUTH
-	createvobject OBJ_EVENT_GFX_WOMAN_5, 31, 8, 2, 3, DIR_SOUTH
+	createvobject OBJ_EVENT_GFX_NINJA_BOY, 0, 2, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 1, 3, 0
+	createvobject OBJ_EVENT_GFX_BEAUTY, 2, 15, 0
+	createvobject OBJ_EVENT_GFX_MAN_5, 3, 5, 0
+	createvobject OBJ_EVENT_GFX_EXPERT_F, 4, 6, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 5, 7, 0
+	createvobject OBJ_EVENT_GFX_NINJA_BOY, 6, 8, 0
+	createvobject OBJ_EVENT_GFX_WOMAN_2, 7, 9, 0
+	createvobject OBJ_EVENT_GFX_WOMAN_3, 8, 10, 0
+	createvobject OBJ_EVENT_GFX_LITTLE_GIRL, 9, 11, 0
+	createvobject OBJ_EVENT_GFX_LASS, 10, 12, 0
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 11, 13, 0
+	createvobject OBJ_EVENT_GFX_BEAUTY, 12, 14, 0
+	createvobject OBJ_EVENT_GFX_MAN_5, 13, 15, 2
+	createvobject OBJ_EVENT_GFX_HIKER, 14, 12, 2
+	createvobject OBJ_EVENT_GFX_GENTLEMAN, 15, 2, 1
+	createvobject OBJ_EVENT_GFX_NINJA_BOY, 16, 3, 1
+	createvobject OBJ_EVENT_GFX_WOMAN_2, 17, 4, 1
+	createvobject OBJ_EVENT_GFX_WOMAN_3, 18, 6, 1
+	createvobject OBJ_EVENT_GFX_BEAUTY, 19, 7, 1
+	createvobject OBJ_EVENT_GFX_EXPERT_F, 20, 9, 1
+	createvobject OBJ_EVENT_GFX_MAN_2, 21, 10, 1
+	createvobject OBJ_EVENT_GFX_WOMAN_5, 22, 11, 1
+	createvobject OBJ_EVENT_GFX_SCIENTIST_1, 23, 13, 1
+	createvobject OBJ_EVENT_GFX_GENTLEMAN, 24, 14, 1
+	createvobject OBJ_EVENT_GFX_LITTLE_BOY, 25, 15, 1
+	createvobject OBJ_EVENT_GFX_YOUNGSTER, 26, 2, 2
+	createvobject OBJ_EVENT_GFX_FAT_MAN, 27, 3, 2
+	createvobject OBJ_EVENT_GFX_HEX_MANIAC, 28, 5, 2
+	createvobject OBJ_EVENT_GFX_SCHOOL_KID_M, 29, 5, 1
+	createvobject OBJ_EVENT_GFX_MART_EMPLOYEE, 30, 6, 2
+	createvobject OBJ_EVENT_GFX_WOMAN_5, 31, 8, 2
 	return
 
 BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnter:
@@ -741,7 +714,7 @@ BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerMoveForTuckerEntrance:
 	delay_16
 	walk_left
 	walk_left
-	walk_in_place_fastest_right
+	walk_in_place_faster_right
 	delay_16
 	delay_16
 	delay_16
@@ -783,7 +756,7 @@ BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerMoveForTuckerEntrance:
 	delay_16
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_TuckerStepForward:
@@ -866,14 +839,13 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround::
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobby::
 	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
-	compare VAR_RESULT, FRONTIER_MODE_DOUBLES
-	goto_if_eq BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles
-	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 5, 11
+	goto_if_eq VAR_RESULT, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 5, 11
 	waitstate
 	end
 
 BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles::
-	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 255, 17, 11
+	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY, 17, 11
 	waitstate
 	end
 
@@ -881,15 +853,13 @@ BattleFrontier_BattleDomePreBattleRoom_EventScript_WarpToLobbyDoubles::
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetWalkingAudienceMemberPos::
 	random 2
 	copyvar VAR_TEMP_D, VAR_RESULT
-	compare VAR_TEMP_D, 0
-	goto_if_eq Common_EventScript_NopReturn
+	goto_if_eq VAR_TEMP_D, 0, Common_EventScript_NopReturn
 	setobjectxyperm LOCALID_AUDIENCE_WALKING, 2, 0
 	setobjectmovementtype LOCALID_AUDIENCE_WALKING, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_TryDoAudienceMemberWalkToSeat::
-	compare VAR_TEMP_D, 0
-	goto_if_eq Common_EventScript_NopReturn
+	goto_if_eq VAR_TEMP_D, 0, Common_EventScript_NopReturn
 	applymovement LOCALID_AUDIENCE_WALKING, BattleFrontier_BattleDomeBattleRoom_Movement_AudienceMemberWalkToSeat
 	return
 
@@ -919,7 +889,7 @@ BattleFrontier_BattleDomeBattleRoom_Movement_AudienceMemberWalkToSeat:
 	walk_down
 	walk_right
 	walk_right
-	walk_in_place_fastest_down
+	walk_in_place_faster_down
 	step_end
 
 BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter:
