@@ -2572,7 +2572,7 @@ bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
     bool32 noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
-	if (FlagGet(FLAG_TEMP_5) == FALSE)
+	if (FlagGet(FLAG_TEMP_WILD_HM) == FALSE)
 	{
         pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
         gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
@@ -3013,7 +3013,7 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        if (FlagGet(FLAG_TEMP_5) == FALSE)
+        if (FlagGet(FLAG_TEMP_WILD_HM) == FALSE)
         {
             SetPlayerAvatarFieldMove();
             ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
