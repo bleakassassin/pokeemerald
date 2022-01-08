@@ -9,7 +9,7 @@ EventScript_CutTree::
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
 	checkpartymove MOVE_CUT
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CutWildMon
-	clearflag FLAG_TEMP_WILD_HM
+	clearflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_CUT
@@ -33,7 +33,7 @@ EventScript_UseCut::
 	goto EventScript_InitCut
 
 EventScript_CutWildMon::
-	setflag FLAG_TEMP_WILD_HM
+	setflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, SPECIES_ZIGZAGOON
 	goto EventScript_InitCut
 
@@ -79,7 +79,7 @@ EventScript_RockSmash::
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
 	checkpartymove MOVE_ROCK_SMASH
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_RockSmashWildMon
-	clearflag FLAG_TEMP_WILD_HM
+	clearflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, VAR_RESULT
 	bufferpartymonnick 0, VAR_RESULT
 	buffermovename 1, MOVE_ROCK_SMASH
@@ -109,7 +109,7 @@ EventScript_UseRockSmash::
 
 EventScript_RockSmashWildMon::
 	closemessage
-	setflag FLAG_TEMP_WILD_HM
+	setflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, SPECIES_MAKUHITA
 	goto EventScript_InitRockSmash
 
@@ -155,7 +155,7 @@ EventScript_StrengthBoulder::
 	closemessage
 	checkpartymove MOVE_STRENGTH
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_StrengthWildMon
-	clearflag FLAG_TEMP_WILD_HM
+	clearflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, VAR_RESULT
 EventScript_ActivateStrength::
 	dofieldeffect FLDEFF_USE_STRENGTH
@@ -171,7 +171,7 @@ EventScript_UseStrength::
 	end
 
 EventScript_StrengthWildMon::
-	setflag FLAG_TEMP_WILD_HM
+	setflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, SPECIES_MAKUHITA
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
@@ -215,7 +215,7 @@ EventScript_UseWaterfall::
 	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
 	checkpartymove MOVE_WATERFALL
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_WaterfallWildMon
-	clearflag FLAG_TEMP_WILD_HM
+	clearflag FLAG_SYS_WILD_HM
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
@@ -233,7 +233,7 @@ EventScript_CannotUseWaterfall::
 	end
 
 EventScript_WaterfallWildMon::
-	setflag FLAG_TEMP_WILD_HM
+	setflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, SPECIES_WAILMER
 	goto EventScript_InitWaterfall
 
@@ -256,7 +256,7 @@ EventScript_UseDive::
 	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
 	checkpartymove MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_DiveWildMon
-	clearflag FLAG_TEMP_WILD_HM
+	clearflag FLAG_SYS_WILD_HM
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
@@ -275,7 +275,7 @@ EventScript_CantDive::
 	end
 
 EventScript_DiveWildMon::
-	setflag FLAG_TEMP_WILD_HM
+	setflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, SPECIES_WAILMER
 	goto EventScript_InitDive
 
@@ -285,7 +285,7 @@ EventScript_UseDiveUnderwater::
 	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
 	checkpartymove MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_SurfaceWildMon
-	clearflag FLAG_TEMP_WILD_HM
+	clearflag FLAG_SYS_WILD_HM
 	bufferpartymonnick 0, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
@@ -305,7 +305,7 @@ EventScript_CantSurface::
 	end
 
 EventScript_SurfaceWildMon::
-	setflag FLAG_TEMP_WILD_HM
+	setflag FLAG_SYS_WILD_HM
 	setfieldeffectargument 0, SPECIES_WAILMER
 	goto EventScript_InitSurface
 

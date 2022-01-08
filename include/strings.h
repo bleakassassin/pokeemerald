@@ -1039,6 +1039,8 @@ extern const u8 gText_PokenavMatchCall_SelfIntroduction[];
 extern const u8 gText_Pokenav_ClearButtonList[];
 extern const u8 gText_PokenavMap_ZoomedOutButtons[];
 extern const u8 gText_PokenavMap_ZoomedInButtons[];
+extern const u8 gText_PokenavMap_ZoomedOutButtonsFly[];
+extern const u8 gText_PokenavMap_ZoomedInButtonsFly[];
 extern const u8 gText_PokenavCondition_MonListButtons[];
 extern const u8 gText_PokenavCondition_MonStatusButtons[];
 extern const u8 gText_PokenavCondition_MarkingButtons[];
