@@ -16,6 +16,7 @@
 #include "script.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "rtc.h"
 #include "constants/abilities.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
@@ -293,9 +294,19 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     return min + rand;
 }
 
+static const u16 sNightWildMaps[] =
+{
+    MAP_ROUTE101, MAP_ROUTE102, MAP_ROUTE103, MAP_ROUTE104, MAP_ROUTE110, MAP_ROUTE111, MAP_ROUTE112,
+    MAP_ROUTE113, MAP_ROUTE116, MAP_ROUTE117, MAP_ROUTE120, MAP_ROUTE121, MAP_ROUTE123, MAP_METEOR_FALLS_1F_1R,
+	MAP_METEOR_FALLS_1F_2R, MAP_METEOR_FALLS_B1F_1R, MAP_METEOR_FALLS_B1F_2R, MAP_GRANITE_CAVE_B1F,
+	MAP_GRANITE_CAVE_B2F, MAP_PETALBURG_WOODS, MAP_CAVE_OF_ORIGIN_1F,	MAP_VICTORY_ROAD_B2F, MAP_SKY_PILLAR_1F,
+	MAP_SKY_PILLAR_3F, MAP_SKY_PILLAR_5F, MAP_METEOR_FALLS_STEVENS_CAVE, 0xFFFF
+};
+
 static u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
+    u8 j;
 
     for (i = 0; ; i++)
     {
@@ -315,13 +326,20 @@ static u16 GetCurrentMapWildMonHeaderId(void)
 
                 i += alteringCaveId;
             }
-			else if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SKY_PILLAR_1F) &&
-                    ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_1F)) ||
-                     (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_3F)) ||
-                     (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_5F))) &&
-					 VarGet(VAR_SOOTOPOLIS_CITY_STATE) == 6)
-				i += 1;
-
+            if (gSaveBlock1Ptr->location.mapGroup == 0 || gSaveBlock1Ptr->location.mapGroup == 24)
+            {
+                for (j = 0; sNightWildMaps[j] != 0xFFFF ; j++)
+                {
+                    if ((sNightWildMaps[j] == (gSaveBlock1Ptr->location.mapGroup << 8 | gSaveBlock1Ptr->location.mapNum)) &&
+					   (gLocalTime.hours >= 20 || gLocalTime.hours < 6))
+                        i += 1;
+                }
+                if (((gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_1F)) ||
+                   (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_3F)) ||
+                   (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_5F))) &&
+                    VarGet(VAR_SOOTOPOLIS_CITY_STATE) == 6)
+                    i += 2;
+            }
             return i;
         }
     }
