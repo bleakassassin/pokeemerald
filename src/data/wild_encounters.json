@@ -9247,6 +9247,75 @@
           }
         },
         {
+          "map": "MAP_SKY_PILLAR_1F",
+          "base_label": "gSkyPillar_1F_2",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 48,
+                "max_level": 48,
+                "species": "SPECIES_BANETTE"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_BANETTE"
+              },
+              {
+                "min_level": 49,
+                "max_level": 49,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 47,
+                "max_level": 47,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_CLAYDOL"
+              }
+            ]
+          }
+        },
+        {
           "map": "MAP_SOOTOPOLIS_CITY",
           "base_label": "gSootopolisCity",
           "water_mons": {
@@ -9405,6 +9474,75 @@
           }
         },
         {
+          "map": "MAP_SKY_PILLAR_3F",
+          "base_label": "gSkyPillar_3F_2",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 51,
+                "max_level": 51,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 51,
+                "max_level": 51,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 53,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 53,
+                "max_level": 53,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 51,
+                "max_level": 51,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 51,
+                "max_level": 51,
+                "species": "SPECIES_BANETTE"
+              },
+              {
+                "min_level": 53,
+                "max_level": 53,
+                "species": "SPECIES_BANETTE"
+              },
+              {
+                "min_level": 52,
+                "max_level": 52,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 53,
+                "max_level": 53,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 50,
+                "max_level": 50,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 53,
+                "max_level": 53,
+                "species": "SPECIES_CLAYDOL"
+              }
+            ]
+          }
+        },		
+        {
           "map": "MAP_SKY_PILLAR_5F",
           "base_label": "gSkyPillar_5F",
           "land_mons": {
@@ -9468,6 +9606,75 @@
               {
                 "min_level": 39,
                 "max_level": 39,
+                "species": "SPECIES_ALTARIA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SKY_PILLAR_5F",
+          "base_label": "gSkyPillar_5F_2",
+          "land_mons": {
+            "encounter_rate": 10,
+            "mons": [
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 56,
+                "max_level": 56,
+                "species": "SPECIES_GOLBAT"
+              },
+              {
+                "min_level": 56,
+                "max_level": 56,
+                "species": "SPECIES_SABLEYE"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_BANETTE"
+              },
+              {
+                "min_level": 56,
+                "max_level": 56,
+                "species": "SPECIES_BANETTE"
+              },
+              {
+                "min_level": 55,
+                "max_level": 55,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 56,
+                "max_level": 56,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 57,
+                "max_level": 57,
+                "species": "SPECIES_ALTARIA"
+              },
+              {
+                "min_level": 54,
+                "max_level": 54,
+                "species": "SPECIES_ALTARIA"
+              },
+              {
+                "min_level": 60,
+                "max_level": 60,
                 "species": "SPECIES_ALTARIA"
               }
             ]
