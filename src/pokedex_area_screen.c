@@ -11,6 +11,7 @@
 #include "pokedex_area_screen.h"
 #include "region_map.h"
 #include "roamer.h"
+#include "rtc.h"
 #include "sound.h"
 #include "string_util.h"
 #include "trig.h"
@@ -460,10 +461,24 @@ static bool8 MapHasMon(const struct WildPokemonHeader *info, u16 species)
             return FALSE;
     }
 
-    if (MonListHasMon(info->landMonsInfo, species, 12))
-        return TRUE;
+    else if (MonListHasMon(info->landMonsInfo, species, 12))
+    {
+        if ((info->mapNum != (info + 1)->mapNum) && (info->mapNum != (info - 1)->mapNum))
+            return TRUE;
+        else if ((info->mapNum == (info + 1)->mapNum) && (gLocalTime.hours >= 6 && gLocalTime.hours < 20))
+            return TRUE;
+        else if ((info->mapNum == (info - 1)->mapNum) && (gLocalTime.hours >= 20 || gLocalTime.hours < 6))
+            return TRUE;
+    }
     if (MonListHasMon(info->waterMonsInfo, species, 5))
-        return TRUE;
+    {
+        if ((species == SPECIES_LUNATONE) && (gLocalTime.hours >= 20 || gLocalTime.hours < 6))
+            return TRUE;
+        else if ((species == SPECIES_SOLROCK) && (gLocalTime.hours >= 6 && gLocalTime.hours < 20))
+            return TRUE;
+        else if ((species != SPECIES_LUNATONE) && (species != SPECIES_SOLROCK))
+            return TRUE;
+    }
     if (MonListHasMon(info->fishingMonsInfo, species, 12))
         return TRUE;
     if (MonListHasMon(info->rockSmashMonsInfo, species, 5))
