@@ -12,6 +12,7 @@
 #include "battle_setup.h"
 #include "roamer.h"
 #include "tv.h"
+#include "rtc.h"
 #include "link.h"
 #include "script.h"
 #include "battle_pike.h"
@@ -21,6 +22,7 @@
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
+#include "constants/region_map_sections.h"
 #include "constants/weather.h"
 
 extern const u8 EventScript_RepelWoreOff[];
@@ -294,19 +296,9 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     return min + rand;
 }
 
-static const u16 sNightWildMaps[] =
-{
-    MAP_ROUTE101, MAP_ROUTE102, MAP_ROUTE103, MAP_ROUTE104, MAP_ROUTE110, MAP_ROUTE111, MAP_ROUTE112,
-    MAP_ROUTE113, MAP_ROUTE116, MAP_ROUTE117, MAP_ROUTE120, MAP_ROUTE121, MAP_ROUTE123, MAP_METEOR_FALLS_1F_1R,
-	MAP_METEOR_FALLS_1F_2R, MAP_METEOR_FALLS_B1F_1R, MAP_METEOR_FALLS_B1F_2R, MAP_GRANITE_CAVE_B1F,
-	MAP_GRANITE_CAVE_B2F, MAP_PETALBURG_WOODS, MAP_CAVE_OF_ORIGIN_1F, MAP_VICTORY_ROAD_B2F, MAP_SKY_PILLAR_1F,
-	MAP_SKY_PILLAR_3F, MAP_SKY_PILLAR_5F, MAP_METEOR_FALLS_STEVENS_CAVE, 0xFFFF
-};
-
 static u16 GetCurrentMapWildMonHeaderId(void)
 {
     u16 i;
-    u8 j;
 
     for (i = 0; ; i++)
     {
@@ -326,20 +318,9 @@ static u16 GetCurrentMapWildMonHeaderId(void)
 
                 i += alteringCaveId;
             }
-            if (gSaveBlock1Ptr->location.mapGroup == 0 || gSaveBlock1Ptr->location.mapGroup == 24)
-            {
-                for (j = 0; sNightWildMaps[j] != 0xFFFF ; j++)
-                {
-                    if ((sNightWildMaps[j] == (gSaveBlock1Ptr->location.mapGroup << 8 | gSaveBlock1Ptr->location.mapNum)) &&
-					   (gLocalTime.hours >= 20 || gLocalTime.hours < 6))
-                        i += 1;
-                }
-                if (((gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_1F)) ||
-                   (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_3F)) ||
-                   (gSaveBlock1Ptr->location.mapNum == MAP_NUM(SKY_PILLAR_5F))) &&
-                    VarGet(VAR_SOOTOPOLIS_CITY_STATE) == 6)
-                    i += 2;
-            }
+            else if (gMapHeader.regionMapSectionId == MAPSEC_SKY_PILLAR &&
+                     VarGet(VAR_SOOTOPOLIS_CITY_STATE) == 6)
+                i += 1;
             return i;
         }
     }
@@ -626,7 +607,15 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                 }
 
                 // try a regular wild land encounter
-                if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                if ((gWildMonHeaders[headerId].nightMonsInfo) && IsNight() == TRUE)
+                {
+                    if (TryGenerateWildMon(gWildMonHeaders[headerId].nightMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+                    {
+                        BattleSetup_StartWildBattle();
+                        return TRUE;
+                    }
+                }
+                else if (TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
                 {
                     BattleSetup_StartWildBattle();
                     return TRUE;
@@ -746,6 +735,8 @@ bool8 SweetScentWildEncounter(void)
 
             if (DoMassOutbreakEncounterTest() == TRUE)
                 SetUpMassOutbreakEncounter(0);
+            if ((gWildMonHeaders[headerId].nightMonsInfo) && IsNight() == TRUE)
+                TryGenerateWildMon(gWildMonHeaders[headerId].nightMonsInfo, WILD_AREA_LAND, 0);                
             else
                 TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
 
@@ -808,6 +799,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
 {
     u16 headerId;
     const struct WildPokemonInfo *landMonsInfo;
+    const struct WildPokemonInfo *nightMonsInfo;
     const struct WildPokemonInfo *waterMonsInfo;
 
     *isWaterMon = FALSE;
@@ -815,10 +807,14 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     if (headerId == 0xFFFF)
         return SPECIES_NONE;
     landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
+    nightMonsInfo = gWildMonHeaders[headerId].nightMonsInfo;
     waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
     // Neither
     if (landMonsInfo == NULL && waterMonsInfo == NULL)
         return SPECIES_NONE;
+    // Night Pokemon
+    else if (nightMonsInfo != NULL && IsNight() == TRUE && waterMonsInfo == NULL)
+        return nightMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
     // Land Pokemon
     else if (landMonsInfo != NULL && waterMonsInfo == NULL)
         return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
@@ -831,7 +827,10 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     // Either land or water Pokemon
     if ((Random() % 100) < 80)
     {
-        return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+        if (nightMonsInfo != NULL && IsNight())
+            return nightMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+        else
+            return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
     }
     else
     {

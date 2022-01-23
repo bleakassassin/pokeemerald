@@ -1754,7 +1754,10 @@ static void PopulateSpeciesFromTrainerLocation(int matchCallId, u8 *destStr)
             if (gWildMonHeaders[i].landMonsInfo)
             {
                 slot = GetLandEncounterSlot();
-                species[numSpecies] = gWildMonHeaders[i].landMonsInfo->wildPokemon[slot].species;
+                if ((gWildMonHeaders[i].nightMonsInfo) && IsNight() == TRUE)
+                    species[numSpecies] = gWildMonHeaders[i].nightMonsInfo->wildPokemon[slot].species;
+                else
+                    species[numSpecies] = gWildMonHeaders[i].landMonsInfo->wildPokemon[slot].species;                    
                 numSpecies++;
             }
 

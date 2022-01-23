@@ -344,3 +344,11 @@ u32 RtcGetLocalDayCount(void)
 {
     return RtcGetDayCount(&sRtc);
 }
+
+bool8 IsNight(void)
+{
+    if ((gLocalTime.hours >= 20 || gLocalTime.hours < 6))
+        return TRUE;
+
+    return FALSE;
+}
