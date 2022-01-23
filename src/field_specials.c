@@ -377,9 +377,7 @@ bool32 ShouldDoScottFortreeCall(void)
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
             if (++(*GetVarPointer(VAR_SCOTT_FORTREE_CALL_STEP_COUNTER)) < 10)
-            {
                 return FALSE;
-            }
             break;
         default:
             return FALSE;
@@ -404,9 +402,7 @@ bool32 ShouldDoScottBattleFrontierCall(void)
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
             if (++(*GetVarPointer(VAR_SCOTT_BF_CALL_STEP_COUNTER)) < 10)
-            {
                 return FALSE;
-            }
             break;
         default:
             return FALSE;
@@ -431,9 +427,7 @@ bool32 ShouldDoRoxanneCall(void)
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
             if (++(*GetVarPointer(VAR_ROXANNE_CALL_STEP_COUNTER)) < 250)
-            {
                 return FALSE;
-            }
             break;
         default:
             return FALSE;
@@ -458,9 +452,7 @@ bool32 ShouldDoRivalRayquazaCall(void)
         case MAP_TYPE_ROUTE:
         case MAP_TYPE_OCEAN_ROUTE:
             if (++(*GetVarPointer(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER)) < 250)
-            {
                 return FALSE;
-            }
             break;
         default:
             return FALSE;
@@ -940,9 +932,8 @@ u16 GetWeekCount(void)
 {
     u16 weekCount = gLocalTime.days / 7;
     if (weekCount > 9999)
-    {
         weekCount = 9999;
-    }
+
     return weekCount;
 }
 
@@ -3203,17 +3194,17 @@ void DoDeoxysRockInteraction(void)
 }
 
 static const u16 sDeoxysRockPalettes[][16] = {
-    INCBIN_U16("graphics/misc/deoxys1.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys2.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys3.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys4.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys5.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys6.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys7.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys8.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys9.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys10.gbapal"),
-    INCBIN_U16("graphics/misc/deoxys11.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_1.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_2.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_3.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_4.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_5.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_6.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_7.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_8.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_9.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_10.gbapal"),
+    INCBIN_U16("graphics/field_effects/palettes/deoxys_rock_11.gbapal"),
 };
 
 static const u8 sDeoxysRockCoords[][2] = {
