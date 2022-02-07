@@ -1003,7 +1003,7 @@ static const union AffineAnimCmd *const sAffineAnims_CrossingMonPics[] =
 
 static const struct InGameTrade sIngameTrades[] =
 {
-    [INGAME_TRADE_SEEDOT] =
+    [INGAME_TRADE_MAKUHITA] =
     {
         .nickname = _("MAKIT"),
         .species = SPECIES_MAKUHITA,
@@ -1019,7 +1019,7 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_SLAKOTH
     },
-    [INGAME_TRADE_PLUSLE] =
+    [INGAME_TRADE_SKITTY] =
     {
         .nickname = _("SKITIT"),
         .species = SPECIES_SKITTY,
@@ -1035,7 +1035,7 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_SPINDA
     },
-    [INGAME_TRADE_HORSEA] =
+    [INGAME_TRADE_CORSOLA] =
     {
         .nickname = _("COROSO"),
         .species = SPECIES_CORSOLA,
@@ -1060,12 +1060,60 @@ static const struct InGameTrade sIngameTrades[] =
         .otId = 91481,
         .conditions = {5, 5, 5, 30, 5},
         .personality = 0x8B,
-        .heldItem = ITEM_RETRO_MAIL,
+        .heldItem = ITEM_GLITTER_MAIL,
         .mailNum = 2,
         .otName = _("ISIS"),
         .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_PIKACHU
+    },
+    [INGAME_TRADE_BELLSPROUT] =
+    {
+        .nickname = _("BELLAMY"),
+        .species = SPECIES_BELLSPROUT,
+        .ivs = {5, 4, 5, 4, 4, 4},
+        .abilityNum = 0,
+        .otId = 38726,
+        .conditions = {30, 5, 5, 5, 5},
+        .personality = 0x84,
+        .heldItem = ITEM_CHESTO_BERRY,
+        .mailNum = -1,
+        .otName = _("KOBE"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_RALTS
+    },
+    [INGAME_TRADE_NIDORAN_M] =
+    {
+        .nickname = _("NIDOL"),
+        .species = SPECIES_NIDORAN_M,
+        .ivs = {4, 4, 4, 5, 5, 4},
+        .abilityNum = 0,
+        .otId = 73996,
+        .conditions = {5, 5, 30, 5, 5},
+        .personality = 0x6F,
+        .heldItem = ITEM_RETRO_MAIL,
+        .mailNum = 3,
+        .otName = _("ROMAN"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_VOLBEAT
+    },
+    [INGAME_TRADE_DRATINI] =
+    {
+        .nickname = _("DRAGOON"),
+        .species = SPECIES_DRATINI,
+        .ivs = {5, 4, 4, 4, 5, 4},
+        .abilityNum = 0,
+        .otId = 46285,
+        .conditions = {5, 5, 5, 5, 30},
+        .personality = 0x7F,
+        .heldItem = ITEM_WAVE_MAIL,
+        .mailNum = 4,
+        .otName = _("SKYLAR"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_BAGON
     }
 };
 
@@ -1101,6 +1149,26 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_A,
         EC_WORD_CUTE,
         EC_WORD_WAY
+    }, {
+        EC_WORD_BE,
+        EC_WORD_NICE,
+        EC_WORD_TO,
+        EC_POKEMON_NATIONAL(NIDORAN_F),
+        EC_WORD_EXCL,
+        EC_POKEMON(VOLBEAT),
+        EC_WORD_WILL,
+        EC_WORD_BE,
+        EC_WORD_FANTASTIC
+    }, {
+        EC_WORD_I,
+        EC_WORD_WILL,
+        EC_WORD_MAKE,
+        EC_POKEMON(BAGON),
+        EC_WORD_TOUGH,
+        EC_WORD_PLEASE,
+        EC_WORD_TRAIN,
+        EC_POKEMON_NATIONAL(DRATINI),
+        EC_WORD_WELL
     }
 };
 

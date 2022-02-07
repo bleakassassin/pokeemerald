@@ -5,7 +5,7 @@ PacifidlogTown_House3_EventScript_Trader::
 	lock
 	faceplayer
 	goto_if_set FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED, PacifidlogTown_House3_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_HORSEA
+	setvar VAR_0x8008, INGAME_TRADE_CORSOLA
 	copyvar VAR_0x8004, VAR_0x8008
 	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
 	copyvar VAR_0x8009, VAR_RESULT
@@ -61,7 +61,7 @@ PacifidlogTown_House3_Text_WillingToTradeIt:
 PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou:
 	.string "Wow!\n"
 	.string "This {STR_VAR_1} is so fluffy!$"
-	
+
 PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon:
 	.string "That's no {STR_VAR_1}.$"
 

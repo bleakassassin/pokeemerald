@@ -11820,10 +11820,20 @@
               {
                 "min_level": 25,
                 "max_level": 30,
-                "species": "SPECIES_SHELLDER"
+                "species": "SPECIES_KRABBY"
               },
               {
                 "min_level": 30,
+                "max_level": 35,
+                "species": "SPECIES_REMORAID"
+              },
+              {
+                "min_level": 25,
+                "max_level": 30,
+                "species": "SPECIES_SHELLDER"
+              },
+              {
+                "min_level": 25,
                 "max_level": 35,
                 "species": "SPECIES_REMORAID"
               },
@@ -11833,19 +11843,9 @@
                 "species": "SPECIES_QWILFISH"
               },
               {
-                "min_level": 25,
-                "max_level": 35,
-                "species": "SPECIES_REMORAID"
-              },
-              {
-                "min_level": 25,
-                "max_level": 30,
-                "species": "SPECIES_DRATINI"
-              },
-              {
                 "min_level": 30,
                 "max_level": 35,
-                "species": "SPECIES_DRAGONAIR"
+                "species": "SPECIES_KINGLER"
               },
               {
                 "min_level": 35,
