@@ -50,28 +50,26 @@ RustboroCity_House1_EventScript_Hiker::
 	end
 
 RustboroCity_House1_Text_IllTradeIfYouWant:
-	.string "Huh? My POKéMON is cute?\n"
-	.string "Sure, I knew that.\p"
-	.string "But if you really want, I'm willing\n"
-	.string "to trade it to you.\p"
-	.string "I'll trade you my {STR_VAR_2} for\n"
-	.string "a {STR_VAR_1} if you want.$"
+	.string "Do you nickname your POKéMON?\n"
+	.string "I gave a cool name to mine.\p"
+	.string "But when I call my POKéMON by that\n"
+	.string "name, people laugh at me...\p"
+	.string "If it's okay with you, want to trade\n"
+	.string "your {STR_VAR_1} for my {STR_VAR_2}?$"
 
 RustboroCity_House1_Text_PleaseBeGoodToMyPokemon:
-	.string "Eheheh…\n"
-	.string "Please be good to my POKéMON.$"
+	.string "Eheheheh, ooh, this is so exciting!$"
 
 RustboroCity_House1_Text_DoesntLookLikeMonToMe:
-	.string "Huh? That doesn't look anything like\n"
-	.string "a {STR_VAR_1} to me.$"
+	.string "But that's no {STR_VAR_1}.\n"
+	.string "Tch, that's so disappointing...$"
 
 RustboroCity_House1_Text_YouDontWantToThatsOkay:
-	.string "Oh, if you don't want to, that's okay.\n"
-	.string "But my POKéMON is cute, you know…$"
+	.string "Aww, it's a good POKéMON...$"
 
 RustboroCity_House1_Text_AnyPokemonCanBeCute:
-	.string "Any POKéMON can be cute if you raise\n"
-	.string "it with care and kindness.$"
+	.string "Don't you get curious about what other\n"
+	.string "people named their POKéMON?$"
 
 RustboroCity_House1_Text_AllSortsOfPlaces:
 	.string "In all sorts of places, there are all\n"

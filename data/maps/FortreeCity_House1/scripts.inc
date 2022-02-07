@@ -61,32 +61,32 @@ FortreeCity_House1_EventScript_Zigzagoon::
 	end
 
 FortreeCity_House1_Text_YouWillTradeWontYou:
-	.string "Wrooooaaar! I need it!\n"
-	.string "I have to get me a {STR_VAR_1}!\l"
-	.string "I'll do anything for it!\p"
-	.string "…Uh… Did you hear that?\n"
-	.string "My shout from the bottom of my heart?\p"
-	.string "Having heard that, you will trade\n"
-	.string "your {STR_VAR_1} for my {STR_VAR_2},\l"
-	.string "won't you?$"
+	.string "Hi, there's this POKéMON that I'm\n"
+	.string "looking for.\p"
+	.string "I want a {STR_VAR_1}.\n"
+	.string "Do you have one?\p"
+	.string "Would you trade it for my {STR_VAR_2}?$"
 
 FortreeCity_House1_Text_MonYouTakeCare:
-	.string "Oh, yeah, right on!\p"
-	.string "{STR_VAR_1}, welcome!\n"
-	.string "{STR_VAR_2}, you take care!$"
+	.string "Thank you!\p"
+	.string "I'll be good to your {STR_VAR_1},\n"
+	.string "so please be nice to my {STR_VAR_2}!$"
 
 FortreeCity_House1_Text_ThisIsntAMon:
-	.string "Uh, no, I don't think so.\n"
-	.string "That isn't a {STR_VAR_1}.$"
+	.string "Wait!\n"
+	.string "That POKéMON isn't a {STR_VAR_1}.\p"
+	.string "I guess you don't want to trade\n"
+	.string "with me.$"
 
 FortreeCity_House1_Text_YouWontTradeMe:
-	.string "No? You won't trade me?\n"
-	.string "Even after I bared my heart to you?$"
+	.string "Oh, okay. If you change your mind,\n"
+	.string "please come see me.\p"
+	.string "I'll be waiting!$"
 
 FortreeCity_House1_Text_GoingToMakeVolbeatStrong:
-	.string "I'm going to make VOLBEAT super\n"
-	.string "strong from this moment on!\p"
-	.string "I hope you do the same with PLUSLE!$"
+	.string "Thank you for trading with me!\p"
+	.string "I really wanted this POKéMON, so\n"
+	.string "I promise to take good care of it!$"
 
 FortreeCity_House1_Text_TradingMemoriesWithOthers:
 	.string "Trading POKéMON with others…\p"
