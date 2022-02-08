@@ -781,7 +781,7 @@ static void CB_FlyFromRegionMap(void)
         SetWarpDestinationToHealLocation(gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE : HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE);
         break;
     case MAPSEC_EVER_GRANDE_CITY:
-        SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && sFlyMap->regionMap.posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
+        SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && regionMap->posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
         break;
     case MAPSEC_ROUTE_101:
     case MAPSEC_ROUTE_102:
@@ -793,7 +793,7 @@ static void CB_FlyFromRegionMap(void)
     case MAPSEC_ROUTE_132:
     case MAPSEC_ROUTE_133:
     case MAPSEC_ROUTE_134:
-        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 0);
+        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 0);
         break;
     case MAPSEC_ROUTE_103:
     case MAPSEC_ROUTE_105:
@@ -808,47 +808,47 @@ static void CB_FlyFromRegionMap(void)
     case MAPSEC_ROUTE_124:
     case MAPSEC_ROUTE_125:
     case MAPSEC_ROUTE_131:
-        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 1);
+        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 1);
         break;
     case MAPSEC_ROUTE_116:
-        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 5);
+        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 5);
         break;
     case MAPSEC_ROUTE_112:
-        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 6);
+        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 6);
         break;
     case MAPSEC_ROUTE_120:
-        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], sFlyMap->regionMap.posWithinMapSec >= 2 ? 3 : 2);
+        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], regionMap->posWithinMapSec >= 2 ? 3 : 2);
         break;
     case MAPSEC_ROUTE_104:
-        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], sFlyMap->regionMap.posWithinMapSec == 0 ? 9 : 8);
+        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], regionMap->posWithinMapSec == 0 ? 9 : 8);
         break;
     case MAPSEC_ROUTE_110:
-        if (sFlyMap->regionMap.posWithinMapSec == 0 && FlagGet(FLAG_LANDMARK_NEW_MAUVILLE))
-            SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 7);
+        if (regionMap->posWithinMapSec == 0 && FlagGet(FLAG_LANDMARK_NEW_MAUVILLE))
+            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 7);
         else
-            SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 6);
+            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 6);
         break;
     case MAPSEC_ROUTE_111:
-        if (sFlyMap->regionMap.posWithinMapSec <= 1)
+        if (regionMap->posWithinMapSec <= 1)
             SetWarpDestinationToHealLocation(HEAL_LOCATION_ROUTE111_REST_STOP);
-        else if (sFlyMap->regionMap.posWithinMapSec >= 4)
-            SetWarpDestinationToHealLocation(gMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
+        else if (regionMap->posWithinMapSec >= 4)
+            SetWarpDestinationToHealLocation(gMapHealLocations[regionMap->mapSecId][2]);
         else
-            SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 5);
+            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 5);
         break;
     case MAPSEC_ROUTE_114:
-        if (sFlyMap->regionMap.posWithinMapSec == 3)
-            SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 7);
-        else if  (sFlyMap->regionMap.posWithinMapSec == 1)
-            SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 5);
+        if (regionMap->posWithinMapSec == 3)
+            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 7);
+        else if  (regionMap->posWithinMapSec == 1)
+            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 5);
         else
-            SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 6);
+            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 6);
         break;
     case MAPSEC_ROUTE_119:
-        if (sFlyMap->regionMap.posWithinMapSec >= 4)
-            SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 2);
+        if (regionMap->posWithinMapSec >= 4)
+            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 2);
         else
-            SetWarpDestinationToHealLocation(gMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
+            SetWarpDestinationToHealLocation(gMapHealLocations[regionMap->mapSecId][2]);
         break;
     default:
         if (gMapHealLocations[regionMap->mapSecId][2] != 0)
