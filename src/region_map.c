@@ -683,6 +683,10 @@ static u8 ProcessRegionMapInput_Full(void)
     {
         input = MAP_INPUT_B_BUTTON;
     }
+    else if (JOY_NEW(R_BUTTON))
+    {
+        input = MAP_INPUT_R_BUTTON;
+    }
     if (input == MAP_INPUT_MOVE_START)
     {
         gRegionMap->cursorMovementFrameCounter = 4;
@@ -761,6 +765,10 @@ static u8 ProcessRegionMapInput_Zoomed(void)
     if (JOY_NEW(B_BUTTON))
     {
         input = MAP_INPUT_B_BUTTON;
+    }
+    if (JOY_NEW(R_BUTTON))
+    {
+        input = MAP_INPUT_R_BUTTON;
     }
     if (input == MAP_INPUT_MOVE_START)
     {
