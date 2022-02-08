@@ -116,5 +116,6 @@ void BlendRegionMap(u16 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
 
 extern const struct RegionMapLocation gRegionMapEntries[];
+extern const u8 gMapHealLocations[][3];
 
 #endif //GUARD_REGION_MAP_H
