@@ -6,36 +6,15 @@ LittlerootTown_MaysHouse_2F_MapScripts::
 	.byte 0
 
 LittlerootTown_MaysHouse_2F_OnTransition:
-	call_if_lt VAR_LITTLEROOT_RIVAL_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay
-	call_if_ge VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos
+	call_if_lt VAR_LITTLEROOT_RIVAL_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 4, PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet
 	call SecretBase_EventScript_SetDecorationFlags
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos::
-	goto_if_set FLAG_MET_RIVAL_LILYCOVE, LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos
-	goto_if_ge VAR_BIRCH_LAB_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_Ret
-	goto LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos
-
-LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos::
-	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_2F_EventScript_Ret
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_Ret
-	setobjectxyperm LOCALID_RIVAL, 8, 2
-	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_UP
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_Ret::
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay::
-	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
-	return
-
 LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay::
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 2
+	setobjectxyperm LOCALID_RIVAL, 7, 2
+	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_2F_OnWarp:
@@ -49,209 +28,179 @@ LittlerootTown_MaysHouse_2F_EventScript_CheckInitDecor::
 
 LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall::
 	lockall
-	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_MeetMay
-	msgbox RivalsHouse_2F_Text_ItsRivalsPokeBall, MSGBOX_DEFAULT
+	msgbox RivalsHouse_2F_Text_ItsRivalsPokeBall, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, RivalsHouse_2F_EventScript_LeaveRivalStarter
+RivalsHouse_2F_EventScript_TakeRivalStarter::
+	setvar VAR_TEMP_1, SPECIES_TREECKO
+	call_if_eq VAR_STARTER_MON, 0, RivalsHouse_2F_EventScript_GiveTorchic
+	call_if_eq VAR_STARTER_MON, 1, RivalsHouse_2F_EventScript_GiveMudkip
+	givemon VAR_TEMP_1, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, RivalsHouse_2F_EventScript_SendRivalStarterParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, RivalsHouse_2F_EventScript_SendRivalStarterPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+
+RivalsHouse_2F_EventScript_GiveTorchic::
+	setvar VAR_TEMP_1, SPECIES_TORCHIC
+	return
+
+RivalsHouse_2F_EventScript_GiveMudkip::
+	setvar VAR_TEMP_1, SPECIES_MUDKIP
+	return
+
+RivalsHouse_2F_EventScript_SendRivalStarterParty::
+	call RivalsHouse_2F_EventScript_ReceivedRivalStarter
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, RivalsHouse_2F_EventScript_AddedRivalStarter
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto RivalsHouse_2F_EventScript_AddedRivalStarter
+
+RivalsHouse_2F_EventScript_SendRivalStarterPC::
+	call RivalsHouse_2F_EventScript_ReceivedRivalStarter
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, RivalsHouse_2F_EventScript_RivalStarterTransferredToPC
+	call Common_EventScript_NameReceivedBoxMon
+RivalsHouse_2F_EventScript_RivalStarterTransferredToPC::
+	call Common_EventScript_TransferredToPC
+RivalsHouse_2F_EventScript_AddedRivalStarter::
+	setflag FLAG_RECEIVED_RIVAL_STARTER
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_MeetMay::
-	delay 10
-	addobject LOCALID_RIVAL
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayEnters
-	waitmovement 0
-	playse SE_PIN
-	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_Delay48
-	waitmovement 0
-	delay 10
-	playbgm MUS_ENCOUNTER_MAY, TRUE
-	call_if_eq VAR_FACING, DIR_NORTH, LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth
-	call_if_eq VAR_FACING, DIR_SOUTH, LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth
-	call_if_eq VAR_FACING, DIR_WEST, LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest
-	call_if_eq VAR_FACING, DIR_EAST, LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast
+RivalsHouse_2F_EventScript_ReceivedRivalStarter::
+	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	removeobject VAR_LAST_TALKED
+	playfanfare MUS_OBTAIN_ITEM
+	message RivalsHouse_2F_Text_ReceivedRivalStarter
+	waitmessage
+	waitfanfare
+	return
+
+RivalsHouse_2F_EventScript_LeaveRivalStarter::
+	msgbox RivalsHouse_2F_Text_LeaveRightWhereItIs, MSGBOX_DEFAULT
+	releaseall
+	end
+
+RivalsHouse_2F_EventScript_Rival::
+	lockall
+	goto_if_set FLAG_MET_RIVAL_LILYCOVE, RivalsHouse_2F_EventScript_RivalPostLilycove
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, RivalsHouse_2F_EventScript_May
+	call_if_eq VAR_RESULT, FEMALE, RivalsHouse_2F_EventScript_Brendan
+	playse SE_EXIT
+	removeobject VAR_LAST_TALKED
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 3
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	setvar VAR_LITTLEROOT_TOWN_STATE, 1
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	releaseall
 	end
 
-LittlerootTown_MaysHouse_2F_EventScript_MeetMayNorth::
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerNorth
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayNorth
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCNorth
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_MeetMaySouth::
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMaySouth
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCSouth
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_MeetMayWest::
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
-	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_2F_EventScript_MeetMayEast::
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
-	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast
-	applymovement LOCALID_RIVAL, LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast
-	waitmovement 0
-	return
-
-LittlerootTown_MaysHouse_2F_Movement_MayEnters:
-	walk_down
-	walk_down
-	walk_in_place_faster_right
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerNorth:
-	walk_right
-	walk_right
-	walk_down
-	walk_down
-	walk_right
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCNorth:
-	walk_up
-	walk_up
-	walk_up
-	walk_in_place_faster_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_faster_up
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayNorth:
-	delay_16
-	walk_in_place_faster_up
-	delay_16
-	delay_16
-	delay_16
-	delay_16
-	walk_in_place_faster_right
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth:
-	walk_right
-	walk_right
-	walk_right
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCSouth:
-	walk_up
-	walk_in_place_faster_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_faster_up
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMaySouth:
-	delay_16
-	walk_in_place_faster_up
-	delay_16
-	delay_16
-	walk_in_place_faster_right
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerWest:
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_faster_down
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCWest:
-	walk_up
-	walk_right
-	walk_right
-	walk_in_place_faster_up
-	step_end
-
-@ Unused, the player is already facing this direction so its unneeded
-LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayWest:
-	delay_16
-	delay_16
-	walk_in_place_faster_right
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerEast:
-	walk_right
-	walk_right
-	walk_down
-	walk_in_place_faster_right
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_MayWalkToPCEast:
-	walk_up
-	walk_up
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_faster_up
-	step_end
-
-LittlerootTown_MaysHouse_2F_Movement_PlayerWatchMayEast:
-	delay_16
-	walk_in_place_faster_up
-	delay_16
-	delay_16
-	walk_in_place_faster_right
-	step_end
-
-RivalsHouse_2F_EventScript_Rival::
-	lockall
-	goto_if_set FLAG_MET_RIVAL_LILYCOVE, RivalsHouse_2F_EventScript_RivalPostLilycove
-	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, RivalsHouse_2F_EventScript_May
-	goto_if_eq VAR_RESULT, FEMALE, RivalsHouse_2F_EventScript_Brendan
-	end
-
 RivalsHouse_2F_EventScript_May::
 	msgbox RivalsHouse_2F_Text_MayGettingReady, MSGBOX_DEFAULT
-	releaseall
-	end
+	playbgm MUS_ENCOUNTER_MAY, TRUE
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
+	waitmovement 0
+	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
+	closemessage
+	goto_if_eq VAR_FACING, DIR_EAST, RivalsHouse_2F_EventScript_MeetMayEast
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	applymovement VAR_LAST_TALKED, RivalsHouse_2F_Movement_MayGoDownstairs
+	waitmovement 0
+	return
+
+RivalsHouse_2F_EventScript_MeetMayEast::
+	applymovement OBJ_EVENT_ID_PLAYER, RivalsHouse_2F_Movement_PlayerWatchMayEast
+	applymovement VAR_LAST_TALKED, RivalsHouse_2F_Movement_MayGoDownstairsEast
+	waitmovement 0
+	return
+
+RivalsHouse_2F_Movement_MayGoDownstairsEast:
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	delay_8
+	step_end
+
+RivalsHouse_2F_Movement_MayGoDownstairs:
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	delay_8
+	step_end
+
+RivalsHouse_2F_Movement_PlayerWatchMayEast:
+	delay_16
+	delay_16
+	face_left
+	step_end
 
 RivalsHouse_2F_EventScript_Brendan::
 	msgbox RivalsHouse_2F_Text_BrendanGettingReady, MSGBOX_DEFAULT
-	releaseall
-	end
+	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
+	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
+	waitmovement 0
+	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
+	closemessage
+	goto_if_eq VAR_FACING, DIR_WEST, RivalsHouse_2F_EventScript_MeetBrendanWest
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	applymovement VAR_LAST_TALKED, RivalsHouse_2F_Movement_BrendanGoDownstairs
+	waitmovement 0
+	return
+
+RivalsHouse_2F_EventScript_MeetBrendanWest::
+	applymovement OBJ_EVENT_ID_PLAYER, RivalsHouse_2F_Movement_PlayerWatchBrendanWest
+	applymovement VAR_LAST_TALKED, RivalsHouse_2F_Movement_BrendanGoDownstairsWest
+	waitmovement 0
+	return
+
+RivalsHouse_2F_Movement_BrendanGoDownstairsWest:
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	delay_8
+	step_end
+
+RivalsHouse_2F_Movement_BrendanGoDownstairs:
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	delay_8
+	step_end
+
+RivalsHouse_2F_Movement_PlayerWatchBrendanWest:
+	delay_16
+	delay_16
+	face_right
+	step_end
 
 RivalsHouse_2F_EventScript_RivalPostLilycove::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
@@ -364,7 +313,13 @@ RivalsHouse_2F_Text_BrendanGettingReady:
 
 RivalsHouse_2F_Text_ItsRivalsPokeBall:
 	.string "It's {RIVAL}'s POKé BALL!\p"
+	.string "Do you want to take it?$"
+	
+RivalsHouse_2F_Text_LeaveRightWhereItIs:
 	.string "Better leave it right where it is.$"
+	
+RivalsHouse_2F_Text_ReceivedRivalStarter:
+	.string "{PLAYER} received a {STR_VAR_1}!$"
 
 RivalsHouse_2F_Text_MayJustCheckingMyPokedex:
 	.string "MAY: {PLAYER}{KUN}!\p"

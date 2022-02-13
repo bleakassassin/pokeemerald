@@ -31,6 +31,7 @@ LittlerootTown_MapScripts::
 	@ 3: Entered Hall of Fame
 	@ 4: Completed Lati TV / SS Ticket event
 	@ 5: Exited house after above event
+	@ 6: Entered rival's house after above
 
 	@ State descriptions for VAR_LITTLEROOT_RIVAL_STATE
 	@ 1: Never occurs
@@ -50,11 +51,16 @@ LittlerootTown_OnTransition:
 	call_if_eq VAR_OLDALE_RIVAL_STATE, 1, LittlerootTown_EventScript_MoveRivalFromOldale
 	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_EventScript_SetRivalLeftForRoute103
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_HideMapNamePopup
-	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
+	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
+	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_EventScript_LeftLabAfterSecondJohtoStarter
 	end
 
 LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4
+	return
+
+LittlerootTown_EventScript_LeftLabAfterSecondJohtoStarter::
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7
 	return
 
 LittlerootTown_EventScript_HideMapNamePopup::
