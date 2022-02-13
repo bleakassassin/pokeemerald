@@ -41,7 +41,26 @@ FortreeCity_EventScript_Boy::
 	end
 
 FortreeCity_EventScript_GameboyKid::
-	msgbox FortreeCity_Text_PokemonThatEvolveWhenTraded, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox FortreeCity_Text_PokemonThatEvolveWhenTraded, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, FortreeCity_EventScript_ThatsFineThen
+	msgbox FortreeCity_Text_JustChooseThePokemon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FortreeCity_EventScript_ThatsFineThen
+	copyvar VAR_0x8005, VAR_0x8004
+	setvar VAR_0x8004, 7
+	special CreateInGameTradePokemon
+	special DoInGameTradeScene
+	waitstate
+	msgbox FortreeCity_Text_Text_TradeDidntGoThrough, MSGBOX_DEFAULT
+	release
+	end
+	
+FortreeCity_EventScript_ThatsFineThen::
+	msgbox FortreeCity_Text_ThatsFineThen, MSGBOX_DEFAULT
+	release
 	end
 
 FortreeCity_EventScript_CitySign::
@@ -128,7 +147,26 @@ FortreeCity_Text_BugPokemonComeThroughWindow:
 
 FortreeCity_Text_PokemonThatEvolveWhenTraded:
 	.string "There are POKéMON that evolve when\n"
-	.string "you trade them! That's what I heard.$"
+	.string "you trade them! That's what I heard.\p"
+	.string "I want to find out for myself. Would\n"
+	.string "you be willing to do a trade with me?$"
+
+FortreeCity_Text_ThatsFineThen:
+	.string "Oh.\n"
+	.string "Well, that's fine, then…$"
+
+FortreeCity_Text_JustChooseThePokemon:
+	.string "Great! Just choose the POKéMON in your\n"
+	.string "party that you'll trade. I will, too.\p"
+	.string "Let's see if either of them evolve,\n"
+	.string "and then we'll trade them back!$"
+
+FortreeCity_Text_Text_TradeDidntGoThrough:
+	.string "Uh-oh!\n"
+	.string "The trade didn't go through on my end.\p"
+	.string "I must not have my Wireless Adapter\n"
+	.string "connected properly.\p"
+	.string "Did the trade work for you?$"
 
 FortreeCity_Text_SomethingUnseeable:
 	.string "Something unseeable is in the way.$"
