@@ -124,11 +124,11 @@ LilycoveCity_Harbor_EventScript_GetAuroraTicketState::
 
 LilycoveCity_Harbor_EventScript_GetOldSeaMapState::
 	setvar VAR_TEMP_C, 0
-	goto_if_unset FLAG_ENABLE_SHIP_FARAWAY_ISLAND, Common_EventScript_NopReturn
+	goto_if_unset FLAG_RECEIVED_OLD_SEA_MAP, Common_EventScript_NopReturn
 	checkitem ITEM_OLD_SEA_MAP
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 1
-	goto_if_set FLAG_SHOWN_OLD_SEA_MAP, Common_EventScript_NopReturn
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 5, Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 2
 	return
 
@@ -225,7 +225,7 @@ LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime::
 	end
 
 LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime::
-	setflag FLAG_SHOWN_OLD_SEA_MAP
+	setvar VAR_OLD_SEA_MAP_STATE, 5
 	msgbox EventTicket_Text_ShowOldSeaMap, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor

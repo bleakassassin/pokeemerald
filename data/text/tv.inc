@@ -483,16 +483,13 @@ SlateportCity_OceanicMuseum_1F_Text_InterviewRequest:
 	.string "Oh?\n"
 	.string "Do you perhaps like POKéMON?\p"
 	.string "I'm on assignment with the TV network.\p"
-	.string "I'm gathering stories on POKéMON and\n"
-	.string "TRAINERS that occurred recently.\p"
-	.string "If you don't mind, could you tell me\n"
-	.string "something about yourself?$"
-
 SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort:
 	.string "I'm gathering stories on POKéMON and\n"
 	.string "TRAINERS that occurred recently.\p"
 	.string "If you don't mind, could you tell me\n"
-	.string "something about yourself?$"
+	.string "something about yourself?\p"
+	.string "I'll hook you up with a free souvenir\n"
+	.string "from the museum for your trouble.$"
 
 SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon:
 	.string "Oh, you will?\n"
@@ -511,7 +508,10 @@ SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview:
 	.string "I'll be sure to get your story told\n"
 	.string "on television.\p"
 	.string "It should be aired sometime, I think,\n"
-	.string "so please look forward to it.$"
+	.string "so please look forward to it.\p"
+	.string "Your souvenir should arrive at your\n"
+	.string "nearest POKéMON CENTER shortly after\l"
+	.string "the program airs.$"
 
 SlateportCity_OceanicMuseum_1F_Text_BetterWriteUpStory:
 	.string "Hmmm…\n"

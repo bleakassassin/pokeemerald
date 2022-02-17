@@ -476,7 +476,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         }
     }
 
-    if (CheckBagHasItem(ITEM_OLD_SEA_MAP, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND) == TRUE)
+    if (CheckBagHasItem(ITEM_OLD_SEA_MAP, 1) == TRUE && FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
     {
         if (gSpecialVar_0x8004 == 0)
         {
@@ -484,11 +484,11 @@ static void CreateLilycoveSSTidalMultichoice(void)
             selectionCount++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_OLD_SEA_MAP) == FALSE)
+        if (gSpecialVar_0x8004 == 1 && VarGet(VAR_OLD_SEA_MAP_STATE) != 5)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_FARAWAY_ISLAND;
             selectionCount++;
-            FlagSet(FLAG_SHOWN_OLD_SEA_MAP);
+            VarSet(VAR_OLD_SEA_MAP_STATE, 5);
         }
     }
 

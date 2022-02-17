@@ -3,13 +3,11 @@ CableClub_OnTransition:
 	end
 
 CableClub_EventScript_HideOrShowMysteryGiftMan::
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 3, CableClub_EventScript_ShowMysteryGiftMan
 	specialvar VAR_RESULT, ShouldDistributeEonTicket
 	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_ShowMysteryGiftMan
 	specialvar VAR_RESULT, ValidateSavedWonderCard
 	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_HideMysteryGiftMan
-	goto CableClub_EventScript_ShowMysteryGiftMan
-	end
-
 CableClub_EventScript_ShowMysteryGiftMan::
 	clearflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
 	return
@@ -19,11 +17,10 @@ CableClub_EventScript_HideMysteryGiftMan::
 	return
 
 CableClub_EventScript_MysteryGiftMan::
+	goto_if_eq VAR_TEMP_0, 1, CableClub_EventScript_TryUsingItAtLilycovePort
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 3, MysteryGiftScript_OldSeaMap
 	specialvar VAR_RESULT, ShouldDistributeEonTicket
 	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_DistributeEonTicket
-	goto CableClub_EventScript_TryWonderCardScript
-	end
-
 CableClub_EventScript_TryWonderCardScript::
 	trywondercardscript
 CableClub_EventScript_MysteryGiftThankYou::
@@ -38,6 +35,7 @@ CableClub_EventScript_DistributeEonTicket::
 	giveitem ITEM_EON_TICKET
 	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 	setvar VAR_DISTRIBUTE_EON_TICKET, 0
+CableClub_EventScript_TryUsingItAtLilycovePort::
 	msgbox MysteryGift_Text_TryUsingItAtLilycovePort, MSGBOX_DEFAULT
 	release
 	end

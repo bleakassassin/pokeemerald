@@ -4857,6 +4857,12 @@ static void DoTVShowRecentHappenings(void)
         return;
     }
     ShowFieldMessage(sTVRecentHappeninssTextGroup[state]);
+    if (VarGet(VAR_OLD_SEA_MAP_STATE) == 2)
+    {
+        FlagSet(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
+        if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == FALSE)
+            VarSet(VAR_OLD_SEA_MAP_STATE, 3);
+    }
 }
 
 static void DoTVShowPokemonFanClubOpinions(void)

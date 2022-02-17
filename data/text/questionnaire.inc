@@ -37,7 +37,7 @@ MysteryGift_Text_TheresATicketForYou::
 	.string "There is a ticket here for you.$"
 
 MysteryGift_Text_TryUsingItAtLilycovePort::
-	.string "It appears to be for use at\n"
-	.string "the LILYCOVE CITY port.\p"
+	.string "It appears to be for use at the\n"
+	.string "LILYCOVE CITY port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"

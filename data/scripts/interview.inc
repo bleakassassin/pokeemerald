@@ -50,8 +50,8 @@ SlateportCity_OceanicMuseum_1F_EventScript_Reporter::
 	special InterviewBefore
 	goto_if_eq VAR_RESULT, TRUE, SlateportCity_OceanicMuseum_1F_EventScript_AlreadyInterviewed
 	copyvar VAR_0x8009, VAR_0x8006
-	goto_if_set FLAG_OCEANIC_MUSEUM_MET_REPORTER, SlateportCity_OceanicMuseum_1F_EventScript_RequestInterviewShort
-	setflag FLAG_OCEANIC_MUSEUM_MET_REPORTER
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 1, SlateportCity_OceanicMuseum_1F_EventScript_RequestInterviewShort
+	setvar VAR_OLD_SEA_MAP_STATE, 1
 	msgbox SlateportCity_OceanicMuseum_1F_Text_InterviewRequest, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, SlateportCity_OceanicMuseum_1F_EventScript_AcceptInterview
 	goto_if_eq VAR_RESULT, NO, SlateportCity_OceanicMuseum_1F_EventScript_DeclineInterview
@@ -83,6 +83,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_DeclineInterview::
 SlateportCity_OceanicMuseum_1F_EventScript_SubmitResponse::
 	msgbox SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview, MSGBOX_DEFAULT
 	setvar VAR_0x8005, TVSHOW_RECENT_HAPPENINGS
+	setvar VAR_OLD_SEA_MAP_STATE, 2
 	goto Interview_EventScript_EndInterview
 	end
 
