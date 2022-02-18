@@ -509,11 +509,11 @@ SlateportCity_Harbor_Text_HandedScannerToStern:
 SlateportCity_Harbor_Text_TakeThisTicket:
 	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
 	.string "This will help our research a lot!\p"
-	.string "Take this TICKET as a token of my\n"
+	.string "Take this ticket as a token of my\n"
 	.string "appreciation for your generosity.$"
 
 SlateportCity_Harbor_Text_ThatTicket:
-	.string "CAPT. STERN: That TICKET is for use\n"
+	.string "CAPT. STERN: That ticket is for use\n"
 	.string "at the LILYCOVE CITY port.\p"
 	.string "It will grant you a first-class trip\n"
 	.string "on the S.S. TIDAL to a distant island.\p"
