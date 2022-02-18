@@ -3,56 +3,26 @@ MysteryGiftScript_MysticTicket::
 	lock
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_MYSTIC_TICKET, MysticTicket_Obtained
-	vgoto_if_set FLAG_CAUGHT_LUGIA, MysticTicket_Obtained
-	vgoto_if_set FLAG_CAUGHT_HO_OH, MysticTicket_Obtained
-	checkitem ITEM_MYSTIC_TICKET
-	vgoto_if_eq VAR_RESULT, TRUE, MysticTicket_Obtained
-	vmessage sText_MysticTicketForYou
+	removeitem ITEM_MYSTIC_TICKET
+	vmessage MysteryGift_Text_TheresATicketForYouShort
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_MYSTIC_TICKET
 	vgoto_if_eq VAR_RESULT, FALSE, MysticTicket_NoBagSpace
+	setvar VAR_TEMP_0, 1
+	clearflag FLAG_EXCHANGED_SCANNER
 	giveitem ITEM_MYSTIC_TICKET
-	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
 	setflag FLAG_RECEIVED_MYSTIC_TICKET
-	vmessage sText_MysticTicketUseAtPort
+MysticTicket_Obtained:
+	vmessage MysteryGift_Text_TryUsingItAtLilycovePort
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
 MysticTicket_NoBagSpace:
-	vmessage sText_MysticTicketBagFull
+	vmessage MysteryGift_Text_BagFull
 	waitmessage
 	waitbuttonpress
 	release
 	end
-
-MysticTicket_Obtained:
-	vmessage sText_MysticTicketThankYou
-	waitmessage
-	waitbuttonpress
-	release
-	end
-
-sText_MysticTicketForYou:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "You must be {PLAYER}.\n"
-	.string "There is a ticket here for you.$"
-
-sText_MysticTicketUseAtPort:
-	.string "It appears to be for use at the\n"
-	.string "LILYCOVE CITY port.\p"
-	.string "Why not give it a try and see what\n"
-	.string "it is about?$"
-
-sText_MysticTicketThankYou:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.$"
-
-sText_MysticTicketBagFull:
-	.string "Oh, I'm sorry, {PLAYER}.\n"
-	.string "Your BAG's KEY ITEMS POCKET is full.\p"
-	.string "Please store something on your PC,\n"
-	.string "then come back for this.$"

@@ -128,13 +128,13 @@ LilycoveCity_Harbor_EventScript_GetOldSeaMapState::
 	checkitem ITEM_OLD_SEA_MAP
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 1
-	goto_if_eq VAR_OLD_SEA_MAP_STATE, 5, Common_EventScript_NopReturn
+	goto_if_set FLAG_SHOWN_OLD_SEA_MAP, Common_EventScript_NopReturn
 	setvar VAR_TEMP_C, 2
 	return
 
 LilycoveCity_Harbor_EventScript_GetMysticTicketState::
 	setvar VAR_TEMP_9, 0
-	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, Common_EventScript_NopReturn
+	goto_if_unset FLAG_RECEIVED_MYSTIC_TICKET, Common_EventScript_NopReturn
 	checkitem ITEM_MYSTIC_TICKET
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_NopReturn
 	setvar VAR_TEMP_9, 1
@@ -225,7 +225,7 @@ LilycoveCity_Harbor_EventScript_GoToBirthIslandFirstTime::
 	end
 
 LilycoveCity_Harbor_EventScript_OldSeaMapFirstTime::
-	setvar VAR_OLD_SEA_MAP_STATE, 5
+	setflag FLAG_SHOWN_OLD_SEA_MAP
 	msgbox EventTicket_Text_ShowOldSeaMap, MSGBOX_DEFAULT
 	closemessage
 	call LilycoveCity_Harbor_EventScript_GetEventTicketSailor

@@ -335,55 +335,31 @@ SlateportCity_Harbor_EventScript_FerryFinished::
 	end
 
 SlateportCity_Harbor_EventScript_AskToTradeScanner::
-	message SlateportCity_Harbor_Text_WouldYouTradeScanner
-	waitmessage
-	goto SlateportCity_Harbor_EventScript_ChooseScannerTrade
-	end
-
-SlateportCity_Harbor_EventScript_ChooseScannerTrade::
-	multichoice 0, 0, MULTI_STERN_DEEPSEA, FALSE
-	switch VAR_RESULT
-	case 0, SlateportCity_Harbor_EventScript_DeepSeaTooth
-	case 1, SlateportCity_Harbor_EventScript_DeepSeaScale
-	case 2, SlateportCity_Harbor_EventScript_DeclineTrade
-	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_DeclineTrade
-	end
-
-SlateportCity_Harbor_EventScript_DeepSeaTooth::
-	msgbox SlateportCity_Harbor_Text_TradeForDeepSeaTooth, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseDifferentTrade
-	giveitem ITEM_DEEP_SEA_TOOTH
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	msgbox SlateportCity_Harbor_Text_WouldYouTradeScanner, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SlateportCity_Harbor_EventScript_DeclineTrade
+	setvar VAR_TEMP_1, 1
 	removeitem ITEM_SCANNER
 	msgbox SlateportCity_Harbor_Text_HandedScannerToStern, MSGBOX_DEFAULT
-	setflag FLAG_EXCHANGED_SCANNER
-	goto SlateportCity_Harbor_EventScript_TradedScanner
+	goto_if_unset FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_TicketPending
+	msgbox SlateportCity_Harbor_Text_TakeThisTicket, MSGBOX_DEFAULT
+	giveitem ITEM_MYSTIC_TICKET
+	setflag FLAG_RECEIVED_MYSTIC_TICKET
+	msgbox SlateportCity_Harbor_Text_ThatTicket, MSGBOX_DEFAULT
+	release
 	end
 
-SlateportCity_Harbor_EventScript_DeepSeaScale::
-	msgbox SlateportCity_Harbor_Text_TradeForDeepSeaScale, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseDifferentTrade
-	giveitem ITEM_DEEP_SEA_SCALE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	removeitem ITEM_SCANNER
-	msgbox SlateportCity_Harbor_Text_HandedScannerToStern, MSGBOX_DEFAULT
+SlateportCity_Harbor_EventScript_TicketPending::
 	setflag FLAG_EXCHANGED_SCANNER
-	goto SlateportCity_Harbor_EventScript_TradedScanner
-	end
+	msgbox SlateportCity_Harbor_Text_DontHaveAnythingICanGive, MSGBOX_DEFAULT
+	release
+	end	
 
 SlateportCity_Harbor_EventScript_DeclineTrade::
 	msgbox SlateportCity_Harbor_Text_IfYouWantToTradeLetMeKnow, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_Harbor_EventScript_ChooseDifferentTrade::
-	message SlateportCity_Harbor_Text_WhichOneDoYouWant
-	waitmessage
-	goto SlateportCity_Harbor_EventScript_ChooseScannerTrade
-	end
-
 SlateportCity_Harbor_EventScript_TradedScanner::
-	setvar VAR_TEMP_1, 1
 	msgbox SlateportCity_Harbor_Text_ThisWillHelpResearch, MSGBOX_DEFAULT
 	release
 	end
@@ -517,31 +493,48 @@ SlateportCity_Harbor_Text_WouldYouTradeScanner:
 	.string "{PLAYER}{KUN}, that item you have…\p"
 	.string "That's a SCANNER! That would sure\n"
 	.string "help us on our explorations.\p"
-	.string "{PLAYER}{KUN}, would you trade your\n"
-	.string "SCANNER for something?\p"
-	.string "Like, say, a DEEPSEATOOTH or\n"
-	.string "a DEEPSEASCALE that I have?$"
+	.string "{PLAYER}{KUN}, can you do me a favor and let\n"
+	.string "me take that SCANNER off your hands?$"
 
 SlateportCity_Harbor_Text_IfYouWantToTradeLetMeKnow:
 	.string "CAPT. STERN: Are you certain?\n"
 	.string "It's useless to you, {PLAYER}{KUN}…\p"
-	.string "Well, okay, then. If you want to trade\n"
-	.string "your SCANNER, let me know.$"
-
-SlateportCity_Harbor_Text_TradeForDeepSeaTooth:
-	.string "CAPT. STERN: So you'll trade it for\n"
-	.string "my DEEPSEATOOTH?$"
-
-SlateportCity_Harbor_Text_TradeForDeepSeaScale:
-	.string "CAPT. STERN: So you'll trade it for\n"
-	.string "my DEEPSEASCALE?$"
-
-SlateportCity_Harbor_Text_WhichOneDoYouWant:
-	.string "CAPT. STERN: Which one do you want?$"
+	.string "Well, okay, then. If you want to\n"
+	.string "reconsider, let me know.$"
 
 SlateportCity_Harbor_Text_HandedScannerToStern:
 	.string "{PLAYER} handed the SCANNER to\n"
 	.string "CAPT. STERN.$"
+
+SlateportCity_Harbor_Text_TakeThisTicket:
+	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
+	.string "This will help our research a lot!\p"
+	.string "Take this TICKET as a token of my\n"
+	.string "appreciation for your generosity.$"
+
+SlateportCity_Harbor_Text_ThatTicket:
+	.string "CAPT. STERN: That TICKET is for use\n"
+	.string "at the LILYCOVE CITY port.\p"
+	.string "It will grant you a first-class trip\n"
+	.string "on the S.S. TIDAL to a distant island.\p"
+	.string "It's a spectacle! I feel I owe you a\n"
+	.string "trip there for helping us out so much.\p"
+	.string "Do be careful, though.\p"
+	.string "Those who have wandered there spread\n"
+	.string "rumors of mystic POKéMON in the area…$"
+
+SlateportCity_Harbor_Text_DontHaveAnythingICanGive:
+	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
+	.string "This will help our research a lot!\p"
+	.string "You've done so much for us, I want to\n"
+	.string "reward you for your generosity.\p"
+	.string "I don't have anything that I can give\n"
+	.string "to you at the moment, though…\p"
+	.string "When I do, I'll send it to a nearby\n"
+	.string "POKéMON CENTER for you to pick up.\p"
+	.string "It should get here by the time the\n"
+	.string "S.S. TIDAL takes its maiden voyage.\p"
+	.string "I promise it will be worth the wait!$"
 
 SlateportCity_Harbor_Text_ThisWillHelpResearch:
 	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"

@@ -33,6 +33,7 @@ Questionnaire_Text_YouCanAccessMysteryEvent::
 MysteryGift_Text_TheresATicketForYou::
 	.string "Thank you for using the MYSTERY\n"
 	.string "EVENT System.\p"
+MysteryGift_Text_TheresATicketForYouShort::
 	.string "You must be {PLAYER}.\n"
 	.string "There is a ticket here for you.$"
 
@@ -41,3 +42,9 @@ MysteryGift_Text_TryUsingItAtLilycovePort::
 	.string "LILYCOVE CITY port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"
+
+MysteryGift_Text_BagFull::
+	.string "Oh, I'm sorry, {PLAYER}.\n"
+	.string "Your BAG's KEY ITEMS POCKET is full.\p"
+	.string "Please store something on your PC,\n"
+	.string "then come back for this.$"

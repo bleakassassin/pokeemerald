@@ -24,7 +24,7 @@ OldSeaMap_Obtained:
 	end
 
 OldSeaMap_NoBagSpace:
-	vmessage sText_MysteryGiftOldSeaMapBagFull
+	vmessage MysteryGift_Text_BagFull
 	waitmessage
 	waitbuttonpress
 	release
@@ -34,9 +34,3 @@ sText_MysteryGiftOldSeaMapForYou:
 	.string "Let me confirm--you are {PLAYER}?\p"
 	.string "We received this OLD SEA MAP\n"
 	.string "addressed to you.$"
-
-sText_MysteryGiftOldSeaMapBagFull:
-	.string "Oh, I'm sorry, {PLAYER}.\n"
-	.string "Your BAG's KEY ITEMS POCKET is full.\p"
-	.string "Please store something on your PC,\n"
-	.string "then come back for this.$"
