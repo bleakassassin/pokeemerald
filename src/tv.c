@@ -1718,6 +1718,8 @@ void UpdateTVShowsPerDay(u16 days)
     ResolveWorldOfMastersShow(days);
     ResolveNumberOneShow(days);
     TryStartRandomMassOutbreak();
+    if (VarGet(VAR_OLD_SEA_MAP_STATE) == 3)
+        VarSet(VAR_OLD_SEA_MAP_STATE, 4);
 }
 
 static void UpdateMassOutbreakTimeLeft(u16 days)

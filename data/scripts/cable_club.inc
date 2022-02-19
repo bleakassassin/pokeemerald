@@ -15,7 +15,7 @@ CableClub_EventScript_ShowMysteryGiftMan::
 	
 CableClub_EventScript_TicketMysteryGiftMan::
 	goto_if_set FLAG_EXCHANGED_SCANNER, CableClub_EventScript_ShowMysteryGiftMan
-	goto_if_eq VAR_OLD_SEA_MAP_STATE, 3, CableClub_EventScript_ShowMysteryGiftMan
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 4, CableClub_EventScript_ShowMysteryGiftMan
 	goto CableClub_EventScript_HideOrShowMysteryGiftManMain
 
 CableClub_EventScript_HideMysteryGiftMan::
@@ -25,7 +25,7 @@ CableClub_EventScript_HideMysteryGiftMan::
 CableClub_EventScript_MysteryGiftMan::
 	goto_if_eq VAR_TEMP_0, 1, CableClub_EventScript_TryUsingItAtLilycovePort
 	goto_if_set FLAG_EXCHANGED_SCANNER, MysteryGiftScript_MysticTicket
-	goto_if_eq VAR_OLD_SEA_MAP_STATE, 3, MysteryGiftScript_OldSeaMap
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 4, MysteryGiftScript_OldSeaMap
 	specialvar VAR_RESULT, ShouldDistributeEonTicket
 	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_DistributeEonTicket
 CableClub_EventScript_TryWonderCardScript::
