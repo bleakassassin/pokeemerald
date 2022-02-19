@@ -49,15 +49,13 @@ PetalburgCity_Gym_EventScript_MoveWallyToEntrance::
 	setobjectxyperm LOCALID_WALLY, 5, 108
 	return
 
-PetalburgCity_Gym_EventScript_MoveNormanToEntrance::
-	setobjectxyperm LOCALID_NORMAN, 4, 107
-	return
-
 PetalburgCity_Gym_EventScript_CheckNormanForRematch::
+	goto_if_unset FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, PetalburgCity_Gym_EventScript_MoveNormanToEntrance
 	setorcopyvar VAR_TRAINER_BATTLE_OPPONENT_A, TRAINER_NORMAN_1
 	specialvar VAR_RESULT, IsTrainerReadyForRematch
 	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_DontMoveNormanToFront
 	goto_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_Gym_EventScript_DontMoveNormanToFront
+PetalburgCity_Gym_EventScript_MoveNormanToEntrance::
 	setobjectxyperm LOCALID_NORMAN, 4, 107
 	return
 
@@ -333,7 +331,8 @@ PetalburgCity_Gym_EventScript_NormanPostBattle::
 	call PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry
 	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_GiveEnigmaBerry
 	goto_if_unset FLAG_RECEIVED_TM42, PetalburgCity_Gym_EventScript_GiveFacade2
-	goto_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough
+	goto_if_set FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough
+	goto_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_SawStoryOnTV
 	msgbox PetalburgCity_Gym_Text_DadGoingToKeepTraining, MSGBOX_DEFAULT
 	release
 	end
@@ -732,6 +731,15 @@ PetalburgCity_Gym_Movement_PlayerExitWithWallyEast:
 
 PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough::
 	msgbox PetalburgCity_Gym_Text_DadNoAmountOfTrainingIsEnough, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgCity_Gym_EventScript_SawStoryOnTV::
+	removeitem ITEM_EON_TICKET
+	msgbox PetalburgCity_Gym_Text_DadSawStoryOnTV, MSGBOX_DEFAULT
+	giveitem ITEM_EON_TICKET
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	msgbox PetalburgCity_Gym_Text_DadAnotherShipPass, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1514,11 +1522,6 @@ PetalburgCity_Gym_Text_EnterSpeedRoom:
 	.string "“SPEED ROOM,” the sign says.\p"
 	.string "Do you want to go through?$"
 
-@ Unused
-PetalburgCity_Gym_Text_DoorAppearsLocked2:
-	.string "This door appears to be locked\n"
-	.string "right now…$"
-
 PetalburgCity_Gym_Text_EnterAccuracyRoom:
 	.string "“ACCURACY ROOM,” the sign says.\p"
 	.string "Do you want to go through?$"
@@ -1594,3 +1597,29 @@ PetalburgCity_Gym_Text_NormanRematchNeedTwoMons:
 	.string "Sorry, but you'll have to come back\n"
 	.string "with at least two POKéMON.$"
 
+PetalburgCity_Gym_Text_DadSawStoryOnTV:
+	.string "DAD: {PLAYER}! Good to see you!\p"
+	.string "Your mother told me you two saw a story\n"
+	.string "on TV about a mysterious POKéMON.\p"
+	.string "She said that it was red? No, wait…\n"
+	.string "Was it blue? Hmm. I forgot which.\p"
+	.string "No matter. It reminded me of something\n"
+	.string "I've had for a good two years now.\p"
+	.string "I'm too busy to be able to use it now.\n"
+	.string "Why don't you have it?$"
+	
+PetalburgCity_Gym_Text_DadAnotherShipPass:
+	.string "DAD: It's another PASS for a ship.\p"
+	.string "Hm… That new ferry at the LILYCOVE\n"
+	.string "CITY port should accept it.\p"
+	.string "This one leads to an island off the\n"
+	.string "southern coast of HOENN.\p"
+	.string "It's shrouded by a hazy veil and home\n"
+	.string "to a wondrous flying POKéMON.\p"
+	.string "The POKéMON's color and size seem to\n"
+	.string "change each time someone mentions it.\p"
+	.string "It sounds a lot like what you saw on TV.\p"
+	.string "Mm-hmm! I think you've earned the right\n"
+	.string "to tread upon the soil of that island.\p"
+	.string "Take care out there, {PLAYER}.\n"
+	.string "I have faith that you're up to the task!$"
