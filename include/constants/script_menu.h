@@ -101,7 +101,7 @@
 #define MULTI_UNUSED_SSTIDAL_2             90 //
 #define MULTI_UNUSED_SSTIDAL_3             91 //
 #define MULTI_UNUSED_SSTIDAL_4             92 //
-#define MULTI_FOSSIL                       93
+#define MULTI_FOSSIL                       93 // Edited multichoice; exit only, populated by CreateDevonCorpFossilMultichoice
 #define MULTI_YESNO                        94
 #define MULTI_FRONTIER_RULES               95
 #define MULTI_BATTLE_ARENA_RULES           96
@@ -132,6 +132,15 @@
 #define SSTIDAL_SELECTION_FARAWAY_ISLAND   5
 #define SSTIDAL_SELECTION_EXIT             6
 #define SSTIDAL_SELECTION_COUNT            7
+
+// Devon Corporation Fossil Multichoice Selections
+#define FOSSIL_SELECTION_HELIX_FOSSIL     0
+#define FOSSIL_SELECTION_DOME_FOSSIL      1
+#define FOSSIL_SELECTION_OLD_AMBER        2
+#define FOSSIL_SELECTION_ROOT_FOSSIL      3
+#define FOSSIL_SELECTION_CLAW_FOSSIL      4
+#define FOSSIL_SELECTION_EXIT             5
+#define FOSSIL_SELECTION_COUNT            6
 
 // Std String Ids
 #define STDSTRING_COOL             0
