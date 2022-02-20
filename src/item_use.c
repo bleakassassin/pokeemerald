@@ -61,6 +61,8 @@ static void ItemUseOnFieldCB_Berry(u8 taskId);
 static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId);
 static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId);
 static bool8 TryToWaterSudowoodo(void);
+static void ItemUseOnFieldCB_BlueFluteSnorlax(u8 taskId);
+static bool8 TryToWakeSnorlax(void);
 static void BootUpSoundTMHM(u8 taskId);
 static void Task_ShowTMHMContainedMessage(u8 taskId);
 static void UseTMHMYesNo(u8 taskId);
@@ -895,6 +897,42 @@ void ItemUseOutOfBattle_BlackWhiteFlute(u8 taskId)
     }
     gTasks[taskId].data[8] = 0;
     gTasks[taskId].func = Task_UsedBlackWhiteFlute;
+}
+
+void ItemUseOutOfBattle_BlueFlute(u8 taskId)
+{
+    if (TryToWakeSnorlax() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_BlueFluteSnorlax;
+        gFieldCallback = FieldCB_UseItemOnField;
+        gBagMenu->newScreenCallback = CB2_ReturnToField;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        ItemUseOutOfBattle_Medicine(taskId);
+    }
+}
+
+static bool8 TryToWakeSnorlax(void)
+{
+    u16 x, y;
+    u8 elevation;
+    u8 objId;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    elevation = PlayerGetElevation();
+    objId = GetObjectEventIdByPosition(x, y, elevation);
+    if (gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_BIG_SNORLAX_DOLL)
+        return FALSE;
+    else
+        return TRUE;
+}
+
+static void ItemUseOnFieldCB_BlueFluteSnorlax(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Route103_EventScript_WakeSnorlax);
+    DestroyTask(taskId);
 }
 
 void Task_UseDigEscapeRopeOnField(u8 taskId)

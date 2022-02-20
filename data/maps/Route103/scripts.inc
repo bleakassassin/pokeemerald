@@ -1,9 +1,21 @@
 .set LOCALID_RIVAL, 2
+.set LOCALID_SNORLAX, 21
 
 Route103_MapScripts::
+	map_script MAP_SCRIPT_ON_RESUME, Route103_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, Route103_OnTransition
 	map_script MAP_SCRIPT_ON_LOAD, Route103_OnLoad
 	.byte 0
+
+Route103_OnResume:
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, Route103_EventScript_TryRemoveSnorlax
+	end
+
+Route103_EventScript_TryRemoveSnorlax::
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject VAR_LAST_TALKED
+	return
 
 Route103_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
@@ -287,6 +299,41 @@ Route103_EventScript_Isabelle::
 	trainerbattle_single TRAINER_ISABELLE, Route103_Text_IsabelleIntro, Route103_Text_IsabelleDefeated
 	msgbox Route103_Text_IsabellePostBattle, MSGBOX_AUTOCLOSE
 	end
+	
+Route103_EventScript_Snorlax::
+	lock
+	msgbox Route103_Text_SleepingPokemonBlocking, MSGBOX_DEFAULT
+	release
+	end
+	
+Route103_EventScript_WakeSnorlax::
+	lock
+	faceplayer
+	msgbox Route103_Text_PlayedPeculiarTune, MSGBOX_DEFAULT
+	playfanfare MUS_RG_POKE_FLUTE
+	waitfanfare
+	msgbox Route103_Text_SleepingPokemonAttacked, MSGBOX_DEFAULT
+	closemessage
+	playmoncry SPECIES_SNORLAX, CRY_MODE_ENCOUNTER
+	delay 40
+	waitmoncry
+	setvar VAR_LAST_TALKED, LOCALID_SNORLAX
+	setwildbattle SPECIES_SNORLAX, 50
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	dowildbattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route103_EventScript_DefeatedSnorlax
+	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route103_EventScript_DefeatedSnorlax
+	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route103_EventScript_DefeatedSnorlax
+	setflag FLAG_CAUGHT_SNORLAX
+	release
+	end
+	
+Route103_EventScript_DefeatedSnorlax::
+	setflag FLAG_DEFEATED_SNORLAX
+	goto Common_EventScript_RemoveStaticPokemon
+	end
 
 Route103_Text_MayRoute103Pokemon:
 	.string "MAY: Let's see… The POKéMON found\n"
@@ -353,3 +400,16 @@ Route103_Text_RouteSign:
 	.string "ROUTE 103\n"
 	.string "{DOWN_ARROW} OLDALE TOWN$"
 
+Route103_Text_SleepingPokemonBlocking:
+	.string "It looks like a large DOLL…\n"
+	.string "No, wait!\p"
+	.string "A sleeping POKéMON is blocking the\n"
+	.string "cave entrance!$"
+	
+Route103_Text_PlayedPeculiarTune:
+	.string "You suddenly felt compelled to play\n"
+	.string "a peculiar tune.$"
+
+Route103_Text_SleepingPokemonAttacked:
+    .string "The sleeping POKéMON woke up!\p"
+    .string "It attacked in a grumpy rage!$"

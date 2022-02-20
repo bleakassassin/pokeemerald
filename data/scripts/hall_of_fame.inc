@@ -39,6 +39,7 @@ EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries::
 	clearflag FLAG_DEFEATED_KYOGRE
 	clearflag FLAG_DEFEATED_GROUDON
 	clearflag FLAG_DEFEATED_RAYQUAZA
+	clearflag FLAG_DEFEATED_SNORLAX
 	return
 
 EverGrandeCity_HallOfFame_EventScript_SetDesertUnderpassCommentReady::
@@ -65,6 +66,7 @@ EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent::
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 3
 	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
 	clearflag FLAG_HIDE_OCEANIC_MUSEUM_REPORTER
+	clearflag FLAG_HIDE_ROUTE_103_SNORLAX
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ReadyDexUpgradeEvent::
