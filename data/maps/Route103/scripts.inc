@@ -302,13 +302,20 @@ Route103_EventScript_Isabelle::
 	
 Route103_EventScript_Snorlax::
 	lock
+	checkitem ITEM_BLUE_FLUTE
+	goto_if_eq VAR_RESULT, TRUE, Route103_EventScript_AskUseBlueFlute
 	msgbox Route103_Text_SleepingPokemonBlocking, MSGBOX_DEFAULT
 	release
 	end
-	
+
+Route103_EventScript_AskUseBlueFlute::
+	msgbox Route103_Text_WantToUseBlueFlute, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route103_EventScript_WakeSnorlax
+	release
+	end
+
 Route103_EventScript_WakeSnorlax::
 	lock
-	faceplayer
 	msgbox Route103_Text_PlayedPeculiarTune, MSGBOX_DEFAULT
 	playfanfare MUS_RG_POKE_FLUTE
 	waitfanfare
@@ -329,7 +336,7 @@ Route103_EventScript_WakeSnorlax::
 	setflag FLAG_CAUGHT_SNORLAX
 	release
 	end
-	
+
 Route103_EventScript_DefeatedSnorlax::
 	setflag FLAG_DEFEATED_SNORLAX
 	goto Common_EventScript_RemoveStaticPokemon
@@ -405,7 +412,13 @@ Route103_Text_SleepingPokemonBlocking:
 	.string "No, wait!\p"
 	.string "A sleeping POKéMON is blocking the\n"
 	.string "cave entrance!$"
-	
+
+Route103_Text_WantToUseBlueFlute:
+	.string "A sleeping POKéMON is blocking the\n"
+	.string "cave entrance!\p"
+	.string "Want to use your BLUE FLUTE to try\n"
+	.string "and wake it up?$"
+
 Route103_Text_PlayedPeculiarTune:
 	.string "You suddenly felt compelled to play\n"
 	.string "a peculiar tune.$"
