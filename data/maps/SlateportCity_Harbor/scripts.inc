@@ -267,11 +267,7 @@ SlateportCity_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather
-	setvar VAR_0x8004, 0
-	call_if_set FLAG_DEFEATED_KYOGRE, SlateportCity_Harbor_EventScript_CountDefeatedLegendary
-	call_if_set FLAG_DEFEATED_GROUDON, SlateportCity_Harbor_EventScript_CountDefeatedLegendary
-	call_if_set FLAG_CAUGHT_KYOGRE, SlateportCity_Harbor_EventScript_CountDefeatedLegendary
-	call_if_set FLAG_CAUGHT_GROUDON, SlateportCity_Harbor_EventScript_CountDefeatedLegendary
+	call AbnormalWeather_EventScript_CheckKyogreGroudonStatus
 	goto_if_eq VAR_0x8004, 2, SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather  @ Defeated both
 	msgbox SlateportCity_Harbor_Text_AbnormalWeather, MSGBOX_DEFAULT
 	release
@@ -281,10 +277,6 @@ SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather::
 	msgbox SlateportCity_Harbor_Text_LoveToGoDeepUnderwaterSomeday, MSGBOX_DEFAULT
 	release
 	end
-
-SlateportCity_Harbor_EventScript_CountDefeatedLegendary::
-	addvar VAR_0x8004, 1
-	return
 
 SlateportCity_Harbor_EventScript_FatMan::
 	msgbox SlateportCity_Harbor_Text_SubTooSmallForMe, MSGBOX_NPC

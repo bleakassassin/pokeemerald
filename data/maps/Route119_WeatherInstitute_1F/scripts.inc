@@ -31,19 +31,11 @@ Route119_WeatherInstitute_1F_EventScript_InstituteWorker1::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, Route119_WeatherInstitute_1F_EventScript_StudyingRain
-	setvar VAR_0x8004, 0
-	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
-	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
-	call_if_set FLAG_CAUGHT_KYOGRE, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
-	call_if_set FLAG_CAUGHT_GROUDON, Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated
+	call AbnormalWeather_EventScript_CheckKyogreGroudonStatus
 	goto_if_eq VAR_0x8004, 2, Route119_WeatherInstitute_1F_EventScript_StudyingRain  @ Both defeated
 	msgbox Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather, MSGBOX_DEFAULT
 	release
 	end
-
-Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated::
-	addvar VAR_0x8004, 1
-	return
 
 Route119_WeatherInstitute_1F_EventScript_StudyingRain::
 	msgbox Route119_WeatherInstitute_1F_Text_ProfStudyingRain, MSGBOX_DEFAULT

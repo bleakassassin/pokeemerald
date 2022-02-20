@@ -4,8 +4,8 @@ PacifidlogTown_House5_MapScripts::
 PacifidlogTown_House5_EventScript_MirageIslandWatcher::
 	lock
 	faceplayer
-	specialvar VAR_RESULT, IsMirageIslandPresent
-	goto_if_eq VAR_RESULT, TRUE, PacifidlogTown_House5_EventScript_MirageIslandPresent
+	call AbnormalWeather_EventScript_CheckKyogreGroudonStatus
+	goto_if_eq VAR_0x8004, 2, PacifidlogTown_House5_EventScript_MirageIslandPresent @ Both defeated
 	msgbox PacifidlogTown_House5_Text_CantSeeMirageIslandToday, MSGBOX_DEFAULT
 	release
 	end

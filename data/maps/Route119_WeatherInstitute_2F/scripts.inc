@@ -138,11 +138,7 @@ Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather::
 	end
 
 Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather::
-	setvar VAR_0x8004, 0
-	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
-	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
-	call_if_set FLAG_CAUGHT_KYOGRE, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
-	call_if_set FLAG_CAUGHT_GROUDON, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
+	call AbnormalWeather_EventScript_CheckKyogreGroudonStatus
 	goto_if_eq VAR_0x8004, 2, Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather  @ Both defeated
 	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather
 	specialvar VAR_RESULT, GetAbnormalWeatherMapNameAndType
@@ -159,10 +155,6 @@ Route119_WeatherInstitute_2F_EventScript_KyogreWeather::
 Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather::
 	special CreateAbnormalWeatherEvent
 	setflag FLAG_TEMP_2
-	return
-
-Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated::
-	addvar VAR_0x8004, 1
 	return
 
 Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather::

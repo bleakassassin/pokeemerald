@@ -423,3 +423,15 @@ AbnormalWeather_Underwater_SetupEscapeWarpRoute129West::
 AbnormalWeather_Underwater_SetupEscapeWarpRoute129East::
 	setescapewarp MAP_ROUTE129, 43, 20
 	return
+	
+AbnormalWeather_EventScript_CheckKyogreGroudonStatus::
+	setvar VAR_0x8004, 0
+	call_if_set FLAG_DEFEATED_KYOGRE, AbnormalWeather_EventScript_LegendaryDefeated
+	call_if_set FLAG_DEFEATED_GROUDON, AbnormalWeather_EventScript_LegendaryDefeated
+	call_if_set FLAG_CAUGHT_KYOGRE, AbnormalWeather_EventScript_LegendaryDefeated
+	call_if_set FLAG_CAUGHT_GROUDON, AbnormalWeather_EventScript_LegendaryDefeated
+	return
+
+AbnormalWeather_EventScript_LegendaryDefeated::
+	addvar VAR_0x8004, 1
+	return
