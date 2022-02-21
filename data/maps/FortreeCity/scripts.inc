@@ -57,17 +57,19 @@ FortreeCity_EventScript_Kecleon::
 	faceplayer
 	checkitem ITEM_DEVON_SCOPE
 	goto_if_eq VAR_RESULT, TRUE, FortreeCity_EventScript_AskUseDevonScope
-	msgbox FortreeCity_Text_SomethingUnseeable, MSGBOX_DEFAULT
+	msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_EventScript_AskUseDevonScope::
-	msgbox FortreeCity_Text_UnseeableUseDevonScope, MSGBOX_YESNO
+	msgbox Kecleon_Text_WantToUseDevonScope, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, FortreeCity_EventScript_UseDevonScope
 	release
 	end
 
 FortreeCity_EventScript_UseDevonScope::
+	lock
+	faceplayer
 	msgbox FortreeCity_Text_UsedDevonScopePokemonFled, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Movement_KecleonAppears
@@ -129,13 +131,6 @@ FortreeCity_Text_BugPokemonComeThroughWindow:
 FortreeCity_Text_PokemonThatEvolveWhenTraded:
 	.string "There are POKéMON that evolve when\n"
 	.string "you trade them! That's what I heard.$"
-
-FortreeCity_Text_SomethingUnseeable:
-	.string "Something unseeable is in the way.$"
-
-FortreeCity_Text_UnseeableUseDevonScope:
-	.string "Something unseeable is in the way.\p"
-	.string "Want to use the DEVON SCOPE?$"
 
 FortreeCity_Text_UsedDevonScopePokemonFled:
 	.string "{PLAYER} used the DEVON SCOPE.\p"
