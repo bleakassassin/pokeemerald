@@ -922,7 +922,7 @@ static bool8 TryToWakeSnorlax(void)
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     elevation = PlayerGetElevation();
     objId = GetObjectEventIdByPosition(x, y, elevation);
-    if (gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_BIG_SNORLAX_DOLL)
+    if (Overworld_IsBikingAllowed() == FALSE || gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_BIG_SNORLAX_DOLL)
         return FALSE;
     else
         return TRUE;
