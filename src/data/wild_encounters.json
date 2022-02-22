@@ -12054,7 +12054,7 @@
             ]
           },
           "rock_smash_mons": {
-            "encounter_rate": 30,
+            "encounter_rate": 25,
             "mons": [
               {
                 "min_level": 20,
@@ -12064,7 +12064,7 @@
               {
                 "min_level": 20,
                 "max_level": 25,
-                "species": "SPECIES_DUNSPARCE"
+                "species": "SPECIES_SHUCKLE"
               },
               {
                 "min_level": 30,
@@ -12977,6 +12977,36 @@
                 "min_level": 45,
                 "max_level": 45,
                 "species": "SPECIES_DITTO"
+              }
+            ]
+          },
+          "rock_smash_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_GRAVELER"
+              },
+              {
+                "min_level": 30,
+                "max_level": 40,
+                "species": "SPECIES_DUNSPARCE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_GRAVELER"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_GRAVELER"
+              },
+              {
+                "min_level": 35,
+                "max_level": 40,
+                "species": "SPECIES_GRAVELER"
               }
             ]
           }

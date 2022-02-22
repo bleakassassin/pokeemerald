@@ -96,6 +96,8 @@ EventScript_SmashRock::
 	end
 
 EventScript_EndSmash::
+	specialvar VAR_RESULT RockSmashItem
+	goto_if_gt VAR_RESULT, ITEM_NONE, EventScript_RockSmashItem
 	releaseall
 	end
 
@@ -110,6 +112,12 @@ EventScript_CantSmashRock::
 
 EventScript_CancelSmash::
 	closemessage
+	releaseall
+	end
+
+EventScript_RockSmashItem::
+	giveitem VAR_RESULT
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	releaseall
 	end
 
