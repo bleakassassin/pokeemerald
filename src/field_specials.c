@@ -56,6 +56,7 @@
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/mystery_gift.h"
+#include "constants/region_map_sections.h"
 #include "constants/script_menu.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
@@ -1371,6 +1372,64 @@ u8 TryUpdateRusturfTunnelState(void)
         }
     }
     return FALSE;
+}
+
+static const u16 sRockSmashItems[] =
+{
+    ITEM_REVIVE,
+    ITEM_MAX_REVIVE,
+    ITEM_ETHER,
+    ITEM_MAX_ETHER,
+    ITEM_SOFT_SAND,
+    ITEM_HARD_STONE,
+    ITEM_HEART_SCALE,
+    ITEM_STAR_PIECE,
+    ITEM_PEARL,
+    ITEM_BIG_PEARL,
+    ITEM_RED_SHARD,
+    ITEM_BLUE_SHARD,
+    ITEM_YELLOW_SHARD,
+    ITEM_GREEN_SHARD,
+};
+
+static const u16 sRockSmashFossils[] =
+{
+    ITEM_HELIX_FOSSIL,
+    ITEM_DOME_FOSSIL,
+    ITEM_OLD_AMBER,
+    ITEM_ROOT_FOSSIL,
+    ITEM_CLAW_FOSSIL,
+};
+
+u16 RockSmashItem(void)
+{
+    u8 i;
+    u8 rand = Random() % 32;
+
+    if (Overworld_IsBikingAllowed() == FALSE)
+        return ITEM_NONE;
+    else if (gMapHeader.regionMapSectionId == MAPSEC_DESERT_UNDERPASS)
+    {
+        rand /= 2;
+        for (i = 0; i < ARRAY_COUNT(sRockSmashFossils); i++)
+        {
+            if (i > 2 && (!FlagGet(FLAG_HIDE_DESERT_UNDERPASS_FOSSIL) || VarGet(VAR_MIRAGE_TOWER_STATE) <= 1))
+                return ITEM_NONE;
+            else if (i >= rand)
+                return sRockSmashFossils[i];
+        }
+    }
+    else
+    {
+        for (i = 0; i < ARRAY_COUNT(sRockSmashItems); i++)
+        {
+            if (i > 9 && gMapHeader.regionMapSectionId != MAPSEC_SEAFLOOR_CAVERN)
+                return ITEM_NONE;
+            else if (i >= rand)
+                return sRockSmashItems[i];
+        }
+    }
+    return ITEM_NONE;
 }
 
 void SetShoalItemFlag(u16 unused)

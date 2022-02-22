@@ -5760,14 +5760,14 @@
             "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 30,
+                "min_level": 25,
                 "max_level": 35,
                 "species": "SPECIES_GRAVELER"
               },
               {
-                "min_level": 30,
+                "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GEODUDE"
               },
               {
                 "min_level": 30,
@@ -5859,14 +5859,14 @@
             "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 30,
+                "min_level": 25,
                 "max_level": 35,
                 "species": "SPECIES_GRAVELER"
               },
               {
-                "min_level": 30,
+                "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GEODUDE"
               },
               {
                 "min_level": 30,
@@ -6096,14 +6096,14 @@
             "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 30,
+                "min_level": 25,
                 "max_level": 35,
                 "species": "SPECIES_GRAVELER"
               },
               {
-                "min_level": 30,
+                "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GEODUDE"
               },
               {
                 "min_level": 30,
@@ -8197,14 +8197,14 @@
             "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 30,
+                "min_level": 25,
                 "max_level": 35,
                 "species": "SPECIES_GRAVELER"
               },
               {
-                "min_level": 30,
+                "min_level": 25,
                 "max_level": 35,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GEODUDE"
               },
               {
                 "min_level": 30,
@@ -8613,9 +8613,9 @@
                 "species": "SPECIES_GRAVELER"
               },
               {
-                "min_level": 25,
+                "min_level": 20,
                 "max_level": 30,
-                "species": "SPECIES_GRAVELER"
+                "species": "SPECIES_GEODUDE"
               },
               {
                 "min_level": 25,

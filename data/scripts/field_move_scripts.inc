@@ -59,34 +59,6 @@ Text_CantCut:
 
 @ Interact with smashable rock
 EventScript_RockSmash::
-	call EventScript_RockSmash_Main
-	call EventScript_RockItemTable
-	call EventScript_RockItemTable_Main
-	goto EventScript_ItemUnderRubble
-
-EventScript_RockSmash_SeafloorCavern::
-	call EventScript_RockSmash_Main
-	call EventScript_RockItemTable
-	call EventScript_RockItemTable_SeafloorCavern
-	goto EventScript_ItemUnderRubble
-
-EventScript_RockSmash_GraniteCave::
-	call EventScript_RockSmash_Main
-	call EventScript_RockItemTable
-	call EventScript_RockItemTable_GraniteCave
-	goto EventScript_ItemUnderRubble
-
-EventScript_RockSmash_SafariZone::
-	call EventScript_RockSmash_Main
-	call EventScript_RockItemTable
-	call EventScript_RockItemTable_SafariZone
-	goto EventScript_ItemUnderRubble
-	
-EventScript_RockSmash_NoItem::
-	call EventScript_RockSmash_Main
-	goto EventScript_EndSmash
-	
-EventScript_RockSmash_Main::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
 	checkpartymove MOVE_ROCK_SMASH
@@ -116,148 +88,16 @@ EventScript_SmashRock::
 	specialvar VAR_RESULT, TryUpdateRusturfTunnelState
 	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
 	special RockSmashWildEncounter
-	goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash_WildEncounter
-	return
-	
-EventScript_EndSmash_WildEncounter::
+	goto_if_eq VAR_RESULT, FALSE, EventScript_EndSmash
 	waitstate
 	releaseall
 	end
-	
-EventScript_RockItemTable::
-	random 24
-	call_if_eq VAR_RESULT, 0, EventScript_RockItem1
-	call_if_eq VAR_RESULT, 1, EventScript_RockItem2
-	call_if_eq VAR_RESULT, 2, EventScript_RockItem3
-	call_if_eq VAR_RESULT, 3, EventScript_RockItem4
-	call_if_eq VAR_RESULT, 4, EventScript_RockItem5
-	call_if_eq VAR_RESULT, 5, EventScript_RockItem6
-	return
-
-EventScript_RockItemTable_Main::
-	call_if_eq VAR_RESULT, 6, EventScript_RockItem7
-	call_if_eq VAR_RESULT, 7, EventScript_RockItem8
-	call_if_eq VAR_RESULT, 8, EventScript_RockItem9
-	call_if_eq VAR_RESULT, 9, EventScript_RockItem10
-	return
-
-EventScript_RockItemTable_SeafloorCavern::
-	call_if_eq VAR_RESULT, 6, EventScript_RockItem7_SeafloorCavern
-	call_if_eq VAR_RESULT, 7, EventScript_RockItem8_SeafloorCavern
-	call_if_eq VAR_RESULT, 8, EventScript_RockItem9_SeafloorCavern
-	call_if_eq VAR_RESULT, 9, EventScript_RockItem10_SeafloorCavern
-	return
-
-EventScript_RockItemTable_GraniteCave::
-	call_if_eq VAR_RESULT, 6, EventScript_RockItem7
-	call_if_eq VAR_RESULT, 7, EventScript_RockItem8
-	call_if_eq VAR_RESULT, 8, EventScript_RockItem9_GraniteCave
-	call_if_eq VAR_RESULT, 9, EventScript_RockItem10_GraniteCave
-	return
-
-EventScript_RockItemTable_SafariZone::
-	call_if_eq VAR_RESULT, 6, EventScript_RockItem7
-	call_if_eq VAR_RESULT, 7, EventScript_RockItem8_SafariZone
-	call_if_eq VAR_RESULT, 8, EventScript_RockItem9_SafariZone
-	call_if_eq VAR_RESULT, 9, EventScript_RockItem10_SafariZone
-	return
-	
-EventScript_ItemUnderRubble::
-	goto_if_ge VAR_RESULT, 10, EventScript_EndSmash
-	giveitem VAR_TEMP_0
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 
 EventScript_EndSmash::
+	specialvar VAR_RESULT RockSmashItem
+	goto_if_gt VAR_RESULT, ITEM_NONE, EventScript_RockSmashItem
 	releaseall
 	end
-
-EventScript_RockItem1::
-	setvar VAR_TEMP_0, ITEM_REVIVE
-	return
-
-EventScript_RockItem2::
-	setvar VAR_TEMP_0, ITEM_MAX_REVIVE
-	return
-
-EventScript_RockItem3::
-	setvar VAR_TEMP_0, ITEM_ETHER
-	return
-
-EventScript_RockItem4::
-	setvar VAR_TEMP_0, ITEM_MAX_ETHER
-	return
-
-EventScript_RockItem5::
-	setvar VAR_TEMP_0, ITEM_SOFT_SAND
-	return
-
-EventScript_RockItem6::
-	setvar VAR_TEMP_0, ITEM_HARD_STONE
-	return
-
-EventScript_RockItem7::
-	setvar VAR_TEMP_0, ITEM_HEART_SCALE
-	return
-
-EventScript_RockItem8::
-	setvar VAR_TEMP_0, ITEM_STAR_PIECE
-	return
-
-EventScript_RockItem9::
-	setvar VAR_TEMP_0, ITEM_PEARL
-	return
-
-EventScript_RockItem10::
-	setvar VAR_TEMP_0, ITEM_BIG_PEARL
-	return
-
-EventScript_RockItem7_SeafloorCavern::
-	setvar VAR_TEMP_0, ITEM_RED_SHARD
-	return
-
-EventScript_RockItem8_SeafloorCavern::
-	setvar VAR_TEMP_0, ITEM_BLUE_SHARD
-	return
-
-EventScript_RockItem9_SeafloorCavern::
-	setvar VAR_TEMP_0, ITEM_YELLOW_SHARD
-	return
-
-EventScript_RockItem10_SeafloorCavern::
-	setvar VAR_TEMP_0, ITEM_GREEN_SHARD
-	return
-
-EventScript_RockItem9_GraniteCave::
-	goto_if_unset FLAG_HIDE_DESERT_UNDERPASS_FOSSIL, EventScript_EndSmash
-	checkitem ITEM_ROOT_FOSSIL, 1
-	goto_if_ge EventScript_EndSmash
-	setvar VAR_TEMP_0, ITEM_ROOT_FOSSIL
-	return
-
-EventScript_RockItem10_GraniteCave::
-	goto_if_unset FLAG_HIDE_DESERT_UNDERPASS_FOSSIL, EventScript_EndSmash
-	checkitem ITEM_CLAW_FOSSIL, 1
-	goto_if_ge EventScript_EndSmash
-	setvar VAR_TEMP_0, ITEM_CLAW_FOSSIL
-	return
-
-EventScript_RockItem8_SafariZone::
-	checkitem ITEM_HELIX_FOSSIL, 1
-	goto_if_ge EventScript_EndSmash
-	setvar VAR_TEMP_0, ITEM_HELIX_FOSSIL
-	return
-
-EventScript_RockItem9_SafariZone::
-	checkitem ITEM_DOME_FOSSIL, 1
-	goto_if_ge EventScript_EndSmash
-	setvar VAR_TEMP_0, ITEM_DOME_FOSSIL
-	return
-
-EventScript_RockItem10_SafariZone::
-	checkitem ITEM_OLD_AMBER, 1
-	goto_if_ge EventScript_EndSmash
-	setvar VAR_TEMP_0, ITEM_OLD_AMBER
-	return
 
 Movement_SmashRock:
 	rock_smash_break
@@ -270,6 +110,12 @@ EventScript_CantSmashRock::
 
 EventScript_CancelSmash::
 	closemessage
+	releaseall
+	end
+
+EventScript_RockSmashItem::
+	giveitem VAR_RESULT
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	releaseall
 	end
 
