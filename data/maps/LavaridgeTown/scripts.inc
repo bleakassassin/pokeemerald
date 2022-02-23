@@ -235,17 +235,31 @@ LavaridgeTown_EventScript_ExpertF::
 LavaridgeTown_EventScript_EggWoman::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_LAVARIDGE_EGG, LavaridgeTown_EventScript_ReceivedEgg
+	goto_if_set FLAG_RECEIVED_LAVARIDGE_EGG, LavaridgeTown_EventScript_Prep2ndEgg
 	msgbox LavaridgeTown_Text_HaveEggWillYouTakeIt, MSGBOX_YESNO
+LavaridgeTown_EventScript_AnswerEgg:
 	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_DeclineEgg
 	getpartysize
 	goto_if_eq VAR_RESULT, PARTY_SIZE, LavaridgeTown_EventScript_NoRoomForEgg
 	msgbox LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_LAVARIDGE_EGG
 	playfanfare MUS_OBTAIN_ITEM
 	message LavaridgeTown_Text_ReceivedTheEgg
 	waitfanfare
+	goto_if_set FLAG_RECEIVED_LAVARIDGE_EGG, LavaridgeTown_EventScript_GiveTogepiEgg
 	giveegg SPECIES_WYNAUT
+	setflag FLAG_RECEIVED_LAVARIDGE_EGG
+	release
+	end
+
+LavaridgeTown_EventScript_Prep2ndEgg::
+	goto_if_set FLAG_RECEIVED_2ND_LAVARIDGE_EGG, LavaridgeTown_EventScript_ReceivedEgg
+	goto_if_unset FLAG_SYS_GAME_CLEAR, LavaridgeTown_EventScript_ReceivedEgg
+	msgbox LavaridgeTown_Text_WillYouTakeAnotherEgg, MSGBOX_YESNO
+	goto LavaridgeTown_EventScript_AnswerEgg
+	
+LavaridgeTown_EventScript_GiveTogepiEgg::
+	giveegg SPECIES_TOGEPI
+	setflag FLAG_RECEIVED_2ND_LAVARIDGE_EGG
 	release
 	end
 
@@ -353,6 +367,11 @@ LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare:
 	.string "Every so often, an EGG will be found at\n"
 	.string "the POKéMON DAY CARE.\p"
 	.string "Or at least that's how the rumor goes.$"
+	
+LavaridgeTown_Text_WillYouTakeAnotherEgg:
+	.string "Your POKéMON radiate vitality as usual.\p"
+	.string "What say you?\n"
+	.string "Will you take another EGG to hatch?$"
 
 LavaridgeTown_Text_HotSpringsNeverRunDry:
 	.string "We draw as much hot water as we need,\n"
