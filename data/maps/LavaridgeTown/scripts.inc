@@ -367,7 +367,7 @@ LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare:
 	.string "Every so often, an EGG will be found at\n"
 	.string "the POKéMON DAY CARE.\p"
 	.string "Or at least that's how the rumor goes.$"
-	
+
 LavaridgeTown_Text_WillYouTakeAnotherEgg:
 	.string "Your POKéMON radiate vitality as usual.\p"
 	.string "What say you?\n"
