@@ -6,22 +6,22 @@ VerdanturfTown_Mart_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart VerdanturfTown_Mart_Pokemart
+	goto EventScript_PokeMart
+	
+VerdanturfTown_Mart_EventScript_2ndClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart VerdanturfTown_Mart_2ndClerk
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-VerdanturfTown_Mart_Pokemart:
-	.2byte ITEM_GREAT_BALL
+VerdanturfTown_Mart_2ndClerk:
 	.2byte ITEM_NEST_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_BURN_HEAL
-	.2byte ITEM_ICE_HEAL
-	.2byte ITEM_REPEL
+	.2byte ITEM_LUXURY_BALL
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_FLUFFY_TAIL
 	.2byte ITEM_NONE

@@ -725,33 +725,21 @@ SootopolisCity_EventScript_KiriRayquaza::
 	release
 	end
 
-@ Gives 2 berries daily. First ranges from FIRST_KIRI_BERRY to LAST_KIRI_BERRY, second is always Figy or Iapapa
+@ Gives 2 berries daily. First ranges from FIRST_KIRI_BERRY to LAST_KIRI_BERRY, second is from Figy to Iapapa (inclusive)
 SootopolisCity_EventScript_KiriGiveBerry::
 	dotimebasedevents
 	special GetPlayerBigGuyGirlString
 	goto_if_set FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY, SootopolisCity_EventScript_KiriReceivedBerry
 	msgbox SootopolisCity_Text_NameIsKiriHaveOneOfThese, MSGBOX_DEFAULT
 	random NUM_KIRI_BERRIES
-	addvar VAR_RESULT, NUM_KIRI_BERRIES_SKIPPED
-	addvar VAR_RESULT, FIRST_BERRY_INDEX
+	addvar VAR_RESULT, FIRST_KIRI_BERRY
 	giveitem VAR_RESULT
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY
 	msgbox SootopolisCity_Text_GiveYouThisBerryToo, MSGBOX_DEFAULT
-	random 2
-	goto_if_eq VAR_RESULT, 0, SootopolisCity_EventScript_GiveFigyBerry
-	goto_if_eq VAR_RESULT, 1, SootopolisCity_EventScript_GiveIapapaBerry
-	end
-
-SootopolisCity_EventScript_GiveFigyBerry::
-	giveitem ITEM_FIGY_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
-	release
-	end
-
-SootopolisCity_EventScript_GiveIapapaBerry::
-	giveitem ITEM_IAPAPA_BERRY
+	random NUM_KIRI_BERRIES_2ND
+	addvar VAR_RESULT, FIRST_KIRI_BERRY_2ND
+	giveitem VAR_RESULT
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
 	release

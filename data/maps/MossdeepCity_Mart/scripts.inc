@@ -6,22 +6,25 @@ MossdeepCity_Mart_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart MossdeepCity_Mart_Pokemart
+	goto EventScript_PokeMart
+
+MossdeepCity_Mart_EventScript_2ndClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart MossdeepCity_Mart_2ndClerk
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 	.align 2
-MossdeepCity_Mart_Pokemart:
-	.2byte ITEM_ULTRA_BALL
+MossdeepCity_Mart_2ndClerk:
 	.2byte ITEM_NET_BALL
 	.2byte ITEM_DIVE_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
 	.2byte ITEM_X_ATTACK
 	.2byte ITEM_X_DEFEND
+	.2byte ITEM_DREAM_MAIL
 	.2byte ITEM_NONE
 	release
 	end

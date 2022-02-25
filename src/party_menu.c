@@ -4692,14 +4692,6 @@ static void Task_LearnedMove(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     s16 *move = &gPartyMenu.data1;
-    u16 item = gSpecialVar_ItemId;
-
-    if (move[1] == 0)
-    {
-        AdjustFriendship(mon, FRIENDSHIP_EVENT_LEARN_TMHM);
-        if (item < ITEM_HM01_CUT)
-            RemoveBagItem(item, 1);
-    }
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, gMoveNames[move[0]]);
     StringExpandPlaceholders(gStringVar4, gText_PkmnLearnedMove3);
@@ -4803,13 +4795,21 @@ static void Task_PartyMenuReplaceMove(u8 taskId)
 {
     struct Pokemon *mon;
     u16 move;
+	u16 item;
+	u8 pp;
 
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
         mon = &gPlayerParty[gPartyMenu.slotId];
+		item = gSpecialVar_ItemId;
+		pp = GetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace());
         RemoveMonPPBonus(mon, GetMoveSlotToReplace());
         move = gPartyMenu.data1;
         SetMonMoveSlot(mon, move, GetMoveSlotToReplace());
+		if (item >= ITEM_TM01_FOCUS_PUNCH && (GetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace()) > pp))
+		{
+			SetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace(), &pp);
+		}
         Task_LearnedMove(taskId);
     }
 }

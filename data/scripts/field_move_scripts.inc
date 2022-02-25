@@ -80,8 +80,6 @@ EventScript_UseRockSmash::
 	lockall
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
-	goto EventScript_SmashRock
-	end
 
 EventScript_SmashRock::
 	applymovement VAR_LAST_TALKED, Movement_SmashRock

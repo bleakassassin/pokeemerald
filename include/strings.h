@@ -683,6 +683,9 @@ extern const u8 gText_SnorlaxDoll128BP[];
 extern const u8 gText_VenusaurDoll256BP[];
 extern const u8 gText_CharizardDoll256BP[];
 extern const u8 gText_BlastoiseDoll256BP[];
+extern const u8 gText_RegirockDoll256BP[];
+extern const u8 gText_RegiceDoll256BP[];
+extern const u8 gText_RegisteelDoll256BP[];
 
 extern const u8 gText_Protein1BP[];
 extern const u8 gText_Calcium1BP[];
@@ -690,6 +693,15 @@ extern const u8 gText_Iron1BP[];
 extern const u8 gText_Zinc1BP[];
 extern const u8 gText_Carbos1BP[];
 extern const u8 gText_HpUp1BP[];
+extern const u8 gText_MachoBrace16BP[];
+extern const u8 gText_RareCandy64BP[];
+extern const u8 gText_LiechiBerry128BP[];
+extern const u8 gText_GanlonBerry128BP[];
+extern const u8 gText_SalacBerry128BP[];
+extern const u8 gText_PetayaBerry128BP[];
+extern const u8 gText_ApicotBerry128BP[];
+extern const u8 gText_LansatBerry256BP[];
+extern const u8 gText_StarfBerry256BP[];
 
 extern const u8 gText_Leftovers48BP[];
 extern const u8 gText_WhiteHerb48BP[];
@@ -698,6 +710,12 @@ extern const u8 gText_MentalHerb48BP[];
 extern const u8 gText_BrightPowder64BP[];
 extern const u8 gText_ChoiceBand64BP[];
 extern const u8 gText_KingsRock64BP[];
+extern const u8 gText_Everstone32BP[];
+extern const u8 gText_UpGrade32BP[];
+extern const u8 gText_DeepSeaTooth32BP[];
+extern const u8 gText_DeepSeaScale32BP[];
+extern const u8 gText_DragonScale32BP[];
+extern const u8 gText_SootheBell64BP[];
 extern const u8 gText_FocusBand64BP[];
 extern const u8 gText_ScopeLens64BP[];
 
@@ -857,6 +875,15 @@ extern const u8 BattleFrontier_ExchangeServiceCorner_Text_IronDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ZincDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_MachoBraceDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_RareCandyDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LiechiBerryDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_GanlonBerryDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_SalacBerryDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LansatBerryDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_StarfBerryDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc[];
@@ -864,6 +891,12 @@ extern const u8 BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_EverstoneDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_UpGradeDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_DeepSeaToothDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_DeepSeaScaleDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_DragonScaleDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_SootheBellDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc[];
 extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc[];
 
@@ -1020,6 +1053,8 @@ extern const u8 gText_ThrowInPremierBall[];
 extern const u8 gText_ShopBuy[];
 extern const u8 gText_ShopSell[];
 extern const u8 gText_ShopQuit[];
+extern const u8 gText_SoldOut[]; // Sold out dialogue
+extern const u8 gText_SoldOutLabel[]; // Sold out price label
 
 extern const u8 gText_OhABite[];
 extern const u8 gText_PokemonOnHook[];

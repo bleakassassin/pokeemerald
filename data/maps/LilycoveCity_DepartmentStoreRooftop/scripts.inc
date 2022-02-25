@@ -37,6 +37,8 @@ LilycoveCity_DepartmentStoreRooftop_PokemartDecor_ClearOutSale:
 	.2byte DECOR_SAND_ORNAMENT
 	.2byte DECOR_STAND
 	.2byte DECOR_SLIDE
+	.2byte DECOR_RED_TENT
+	.2byte DECOR_BLUE_TENT
 	.2byte DECOR_TV
 	.2byte DECOR_ROUND_TV
 	.2byte DECOR_CUTE_TV
