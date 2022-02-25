@@ -110,7 +110,7 @@ static const u16 sShopInventory_OneBadge[] = {
     ITEM_ANTIDOTE,
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
-	ITEM_ESCAPE_ROPE,
+    ITEM_ESCAPE_ROPE,
     ITEM_REPEL,
     ITEM_NONE
 };
@@ -125,7 +125,7 @@ static const u16 sShopInventory_TwoBadges[] = {
     ITEM_ICE_HEAL,
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
-	ITEM_ESCAPE_ROPE,
+    ITEM_ESCAPE_ROPE,
     ITEM_REPEL,
     ITEM_NONE
 };
@@ -141,7 +141,7 @@ static const u16 sShopInventory_ThreeBadges[] = {
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
     ITEM_REVIVE,
-	ITEM_ESCAPE_ROPE,
+    ITEM_ESCAPE_ROPE,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_NONE
@@ -160,7 +160,7 @@ static const u16 sShopInventory_FiveBadges[] = {
     ITEM_AWAKENING,
     ITEM_PARALYZE_HEAL,
     ITEM_REVIVE,
-	ITEM_ESCAPE_ROPE,
+    ITEM_ESCAPE_ROPE,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_NONE
@@ -180,7 +180,7 @@ static const u16 sShopInventory_SixBadges[] = {
     ITEM_PARALYZE_HEAL,
     ITEM_FULL_HEAL,
     ITEM_REVIVE,
-	ITEM_ESCAPE_ROPE,
+    ITEM_ESCAPE_ROPE,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_MAX_REPEL,
@@ -202,7 +202,7 @@ static const u16 sShopInventory_SevenBadges[] = {
     ITEM_PARALYZE_HEAL,
     ITEM_FULL_HEAL,
     ITEM_REVIVE,
-	ITEM_ESCAPE_ROPE,
+    ITEM_ESCAPE_ROPE,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_MAX_REPEL,
@@ -225,7 +225,7 @@ static const u16 sShopInventory_EightBadges[] = {
     ITEM_PARALYZE_HEAL,
     ITEM_FULL_HEAL,
     ITEM_REVIVE,
-	ITEM_ESCAPE_ROPE,
+    ITEM_ESCAPE_ROPE,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_MAX_REPEL,
@@ -483,11 +483,11 @@ static void SetShopItemsForSale(const u16 *items)
 {
     u16 i = 0;
     u8 badgeCount = GetNumberOfBadges();
-	
-	if (items == NULL)
-		sMartInfo.itemList = sShopInventories[badgeCount];
-	else
-		sMartInfo.itemList = items;		
+    
+    if (items == NULL)
+        sMartInfo.itemList = sShopInventories[badgeCount];
+    else
+        sMartInfo.itemList = items;        
 
     sMartInfo.itemCount = 0;
 
@@ -748,7 +748,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
         if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
             StringCopy(gStringVar4, gText_SoldOutLabel);
         else
-			StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
+            StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
         x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 0x78);
         AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, 0, sShopBuyMenuTextColors[1], TEXT_SKIP_DRAW, gStringVar4);
     }

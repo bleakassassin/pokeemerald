@@ -7,7 +7,7 @@ VerdanturfTown_Mart_EventScript_Clerk::
 	message gText_HowMayIServeYou
 	waitmessage
 	goto EventScript_PokeMart
-	
+
 VerdanturfTown_Mart_EventScript_2ndClerk::
 	lock
 	faceplayer
