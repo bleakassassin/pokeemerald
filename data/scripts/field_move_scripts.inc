@@ -2,7 +2,7 @@
 EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
-    checkitem ITEM_HM01, 1
+	checkitem ITEM_HM01, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_CheckTreeCantCut
 	goto_if_set FLAG_TEMP_CUT, EventScript_SkipTree
 	msgbox Text_WantToCut, MSGBOX_YESNO
@@ -72,7 +72,7 @@ Text_CantCut:
 EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
-    checkitem ITEM_HM06, 1
+	checkitem ITEM_HM06, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_CantSmashRock
 	goto_if_set FLAG_TEMP_ROCK_SMASH, EventScript_SkipRock
 	msgbox Text_WantToSmash, MSGBOX_YESNO
@@ -155,7 +155,7 @@ Text_CantSmash:
 EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
-    checkitem ITEM_HM04, 1
+	checkitem ITEM_HM04, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
 	msgbox Text_WantToStrength, MSGBOX_YESNO
@@ -258,7 +258,7 @@ Text_MonUsedWaterfall:
 
 EventScript_UseDive::
 	lockall
-    checkitem ITEM_HM08, 1
+	checkitem ITEM_HM08, 1
 	goto_if_eq VAR_RESULT, FALSE, EventScript_CantDive
 	msgbox Text_WantToDive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
@@ -342,7 +342,7 @@ EventScript_FailSweetScent::
 
 Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"
-    
+
 EventScript_ChangeAutoRun::
 	release
 	end

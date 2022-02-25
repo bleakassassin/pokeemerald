@@ -70,7 +70,7 @@ static void Task_DoFieldMove_Init(u8 taskId)
         else
         {
             // Do field move pose
-			if (!FlagGet(FLAG_SYS_WILD_HM))
+            if (!FlagGet(FLAG_SYS_WILD_HM))
             {
                 SetPlayerAvatarFieldMove();
                 ObjectEventSetHeldMovement(&gObjectEvents[objEventId], MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);

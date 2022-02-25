@@ -1987,13 +1987,13 @@ static u16 GetTutorMove(u8 tutor)
 
 static bool8 CanLearnTutorMove(u16 species, u8 tutor)
 {
-	if (tutor < 32)
-	{
-		if (sTutorLearnsets[species][0] & (1 << (tutor)))
-			return TRUE;
-		else
-			return FALSE;
-	}
+    if (tutor < 32)
+    {
+        if (sTutorLearnsets[species][0] & (1 << (tutor)))
+            return TRUE;
+        else
+            return FALSE;
+    }
     else if (sTutorLearnsets[species][1] & (1 << (tutor - 32)))
         return TRUE;
     else
@@ -3650,7 +3650,7 @@ static void CursorCb_FieldMove(u8 taskId)
     }
     else
     {
-		FlagClear(FLAG_SYS_WILD_HM);
+        FlagClear(FLAG_SYS_WILD_HM);
         // All field moves before WATERFALL are HMs.
         if (fieldMove <= FIELD_MOVE_WATERFALL && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE)
         {
@@ -5045,9 +5045,9 @@ static void PartyMenuTryEvolution(u8 taskId)
     else
     {
         if (CheckBagHasItem(gSpecialVar_ItemId, 1))
-			gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-		else
-			gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
     }
 }
 

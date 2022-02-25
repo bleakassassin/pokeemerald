@@ -2596,7 +2596,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     [SCROLL_MULTI_BF_MOVE_TUTOR_2] =
     {
         gText_DefenseCurl16BP,
-        gText_Snore16BP,
+        gText_Snore24BP,
         gText_Swift24BP,
         gText_Nightmare24BP,
         gText_MudSlap24BP,

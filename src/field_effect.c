@@ -2576,15 +2576,15 @@ bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
     bool32 noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
-	if (!FlagGet(FLAG_SYS_WILD_HM))
-	{
+    if (!FlagGet(FLAG_SYS_WILD_HM))
+    {
         pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
         gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
         gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_OT_ID);
         gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
-	}
-	else
-		gFieldEffectArguments[1] = 0xFFFF;
+    }
+    else
+        gFieldEffectArguments[1] = 0xFFFF;
     gFieldEffectArguments[0] |= noDucking;
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -3246,7 +3246,7 @@ static void FlyOutFieldEffect_BirdSwoopDown(struct Task *task)
     {
         task->tState++;
         PlaySE(SE_M_FLY);
-		if (FlagGet(FLAG_SYS_WILD_HM))
+        if (FlagGet(FLAG_SYS_WILD_HM))
             task->tBirdSpriteId = CreateFlyBirdSprite();
         StartFlyBirdSwoopDown(task->tBirdSpriteId);
     }

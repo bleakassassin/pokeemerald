@@ -1013,7 +1013,7 @@ static u8 SaveFileExistsCallback(void)
     }
     else
     {
-		sSaveDialogCallback = SaveSavingMessageCallback;
+        sSaveDialogCallback = SaveSavingMessageCallback;
     }
 
     return SAVE_IN_PROGRESS;

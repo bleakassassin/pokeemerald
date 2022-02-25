@@ -215,10 +215,10 @@ bool8 SetUpFieldMove_Cut(void)
             if (ret == TRUE)
             {
                 gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-				if (!FlagGet(FLAG_TEMP_CUT))
-					gPostMenuFieldCallback = FieldCallback_CutGrass;
-				else
-					gPostMenuFieldCallback = StartCutGrassFieldEffect;
+                if (!FlagGet(FLAG_TEMP_CUT))
+                    gPostMenuFieldCallback = FieldCallback_CutGrass;
+                else
+                    gPostMenuFieldCallback = StartCutGrassFieldEffect;
             }
         }
         else
@@ -250,10 +250,10 @@ bool8 SetUpFieldMove_Cut(void)
                         || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                         {
                             gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-							if (!FlagGet(FLAG_TEMP_CUT))
-								gPostMenuFieldCallback = FieldCallback_CutGrass;
-							else
-								gPostMenuFieldCallback = StartCutGrassFieldEffect;
+                            if (!FlagGet(FLAG_TEMP_CUT))
+                                gPostMenuFieldCallback = FieldCallback_CutGrass;
+                            else
+                                gPostMenuFieldCallback = StartCutGrassFieldEffect;
                             sHyperCutTiles[tileArrayId] = TRUE;
                             ret = TRUE;
                         }
@@ -269,10 +269,10 @@ bool8 SetUpFieldMove_Cut(void)
             if (ret == TRUE)
             {
                 gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-				if (!FlagGet(FLAG_TEMP_CUT))
-					gPostMenuFieldCallback = FieldCallback_CutGrass;
-				else
-					gPostMenuFieldCallback = StartCutGrassFieldEffect;
+                if (!FlagGet(FLAG_TEMP_CUT))
+                    gPostMenuFieldCallback = FieldCallback_CutGrass;
+                else
+                    gPostMenuFieldCallback = StartCutGrassFieldEffect;
             }
         }
 
@@ -284,7 +284,7 @@ static void FieldCallback_CutGrass(void)
 {
     FieldEffectStart(FLDEFF_USE_CUT_ON_GRASS);
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-	FlagSet(FLAG_TEMP_CUT);
+    FlagSet(FLAG_TEMP_CUT);
 }
 
 bool8 FldEff_UseCutOnGrass(void)

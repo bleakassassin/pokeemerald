@@ -7488,8 +7488,8 @@ static void GetGroundEffectFlags_ShallowFlowingWater(struct ObjectEvent *objEven
             objEvent->inShallowFlowingWater = TRUE;
             *flags |= GROUND_EFFECT_FLAG_SHALLOW_FLOWING_WATER;
         }
-		if (gObjectEvents[gPlayerAvatar.objectEventId].invisible)
-			gObjectEvents[gPlayerAvatar.objectEventId].inShallowFlowingWater = 0;
+        if (gObjectEvents[gPlayerAvatar.objectEventId].invisible)
+            gObjectEvents[gPlayerAvatar.objectEventId].inShallowFlowingWater = 0;
     }
     else
     {
