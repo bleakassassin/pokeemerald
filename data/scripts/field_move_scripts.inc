@@ -2,34 +2,40 @@
 EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
-	checkpartymove MOVE_CUT
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CheckTreeCantCut
-	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	buffermovename STR_VAR_2, MOVE_CUT
+    checkitem ITEM_HM01, 1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CheckTreeCantCut
+	goto_if_set FLAG_TEMP_CUT, EventScript_SkipTree
 	msgbox Text_WantToCut, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
+	checkpartymove MOVE_CUT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CutWildMon
+	clearflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick 0, VAR_RESULT
+	buffermovename 1, MOVE_CUT
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
+EventScript_InitCut::
 	closemessage
 	dofieldeffect FLDEFF_USE_CUT_ON_TREE
 	waitstate
-	goto EventScript_CutTreeDown
-	end
-
-@ Use cut from party menu
-EventScript_UseCut::
-	lockall
-	dofieldeffect FLDEFF_USE_CUT_ON_TREE
-	waitstate
-	goto EventScript_CutTreeDown
-	end
-
+	setflag FLAG_TEMP_CUT
 EventScript_CutTreeDown::
 	applymovement VAR_LAST_TALKED, Movement_CutTreeDown
 	waitmovement 0
 	removeobject VAR_LAST_TALKED
 	releaseall
 	end
+
+@ Use cut from party menu
+EventScript_UseCut::
+	lockall
+	goto_if_set FLAG_TEMP_CUT, EventScript_SkipTree
+	goto EventScript_InitCut
+
+EventScript_CutWildMon::
+	setflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, SPECIES_ZIGZAGOON
+	goto EventScript_InitCut
 
 Movement_CutTreeDown:
 	cut_tree
@@ -44,6 +50,11 @@ EventScript_CancelCut::
 	closemessage
 	releaseall
 	end
+	
+EventScript_SkipTree::
+	playse SE_M_CUT
+	incrementgamestat GAME_STAT_USED_CUT
+	goto EventScript_CutTreeDown
 
 Text_WantToCut:
 	.string "This tree looks like it can be\n"
@@ -61,26 +72,23 @@ Text_CantCut:
 EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
-	checkpartymove MOVE_ROCK_SMASH
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSmashRock
-	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
+    checkitem ITEM_HM06, 1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CantSmashRock
+	goto_if_set FLAG_TEMP_ROCK_SMASH, EventScript_SkipRock
 	msgbox Text_WantToSmash, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
+	checkpartymove MOVE_ROCK_SMASH
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_RockSmashWildMon
+	clearflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick 0, VAR_RESULT
+	buffermovename 1, MOVE_ROCK_SMASH
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
+EventScript_InitRockSmash::
 	dofieldeffect FLDEFF_USE_ROCK_SMASH
 	waitstate
-	goto EventScript_SmashRock
-	end
-
-@ Use rock smash from party menu
-EventScript_UseRockSmash::
-	lockall
-	dofieldeffect FLDEFF_USE_ROCK_SMASH
-	waitstate
-
+	setflag FLAG_TEMP_ROCK_SMASH
 EventScript_SmashRock::
 	applymovement VAR_LAST_TALKED, Movement_SmashRock
 	waitmovement 0
@@ -92,6 +100,18 @@ EventScript_SmashRock::
 	waitstate
 	releaseall
 	end
+
+@ Use rock smash from party menu
+EventScript_UseRockSmash::
+	lockall
+	goto_if_set FLAG_TEMP_ROCK_SMASH, EventScript_SkipRock
+	goto EventScript_InitRockSmash
+
+EventScript_RockSmashWildMon::
+	closemessage
+	setflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, SPECIES_MAKUHITA
+	goto EventScript_InitRockSmash
 
 EventScript_EndSmash::
 	specialvar VAR_RESULT RockSmashItem
@@ -113,6 +133,11 @@ EventScript_CancelSmash::
 	releaseall
 	end
 
+EventScript_SkipRock::
+	playse SE_M_ROCK_THROW
+	incrementgamestat GAME_STAT_USED_ROCK_SMASH
+	goto EventScript_SmashRock
+
 EventScript_RockSmashItem::
 	giveitem VAR_RESULT
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
@@ -130,38 +155,42 @@ Text_CantSmash:
 EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
+    checkitem ITEM_HM04, 1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
-	checkpartymove MOVE_STRENGTH
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantStrength
-	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToStrength, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelStrength
 	closemessage
-	dofieldeffect FLDEFF_USE_STRENGTH
-	waitstate
-	goto EventScript_ActivateStrength
-	end
-
-EventScript_UseStrength::
-	lockall
-	dofieldeffect FLDEFF_USE_STRENGTH
-	waitstate
-	goto EventScript_ActivateStrength
-	end
-
+	checkpartymove MOVE_STRENGTH
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_StrengthWildMon
+	clearflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, VAR_RESULT
 EventScript_ActivateStrength::
+	dofieldeffect FLDEFF_USE_STRENGTH
+	waitstate
 	setflag FLAG_SYS_USE_STRENGTH
 	msgbox Text_MonUsedStrength, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CantStrength::
-	msgbox Text_CantStrength, MSGBOX_DEFAULT
+EventScript_UseStrength::
+	lockall
+	goto EventScript_ActivateStrength
+	end
+
+EventScript_StrengthWildMon::
+	setflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, SPECIES_MAKUHITA
+	dofieldeffect FLDEFF_USE_STRENGTH
+	waitstate
+	setflag FLAG_SYS_USE_STRENGTH
+EventScript_CheckActivatedBoulder::
+	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CheckActivatedBoulder::
-	msgbox Text_StrengthActivated, MSGBOX_DEFAULT
+EventScript_CantStrength::
+	msgbox Text_CantStrength, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -190,25 +219,31 @@ Text_StrengthActivated:
 
 EventScript_UseWaterfall::
 	lockall
-	checkpartymove MOVE_WATERFALL
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantWaterfall
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_WantToWaterfall, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
+	checkpartymove MOVE_WATERFALL
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_WaterfallWildMon
+	clearflag FLAG_SYS_WILD_HM
+	bufferpartymonnick 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
+EventScript_InitWaterfall::
+	closemessage
 	dofieldeffect FLDEFF_USE_WATERFALL
-	goto EventScript_EndWaterfall
-
-EventScript_CannotUseWaterfall::
-	lockall
-
-EventScript_CantWaterfall::
-	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
-
 EventScript_EndWaterfall::
 	releaseall
 	end
+
+EventScript_CannotUseWaterfall::
+	lockall
+	msgbox Text_CantWaterfall, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EventScript_WaterfallWildMon::
+	setflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, SPECIES_WAILMER
+	goto EventScript_InitWaterfall
 
 Text_CantWaterfall:
 	.string "A wall of water is crashing down with\n"
@@ -223,16 +258,23 @@ Text_MonUsedWaterfall:
 
 EventScript_UseDive::
 	lockall
-	checkpartymove MOVE_DIVE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantDive
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
-	setfieldeffectargument 1, 1
+    checkitem ITEM_HM08, 1
+	goto_if_eq VAR_RESULT, FALSE, EventScript_CantDive
 	msgbox Text_WantToDive, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
+	checkpartymove MOVE_DIVE
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_DiveWildMon
+	clearflag FLAG_SYS_WILD_HM
+	bufferpartymonnick 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+EventScript_InitDive::	
+	closemessage
+	setfieldeffectargument 1, 1
 	dofieldeffect FLDEFF_USE_DIVE
-	goto EventScript_EndDive
+	waitstate
+EventScript_EndDive::
+	releaseall
 	end
 
 EventScript_CantDive::
@@ -240,22 +282,28 @@ EventScript_CantDive::
 	releaseall
 	end
 
-EventScript_EndDive::
-	releaseall
-	end
+EventScript_DiveWildMon::
+	setflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, SPECIES_WAILMER
+	goto EventScript_InitDive
 
 EventScript_UseDiveUnderwater::
 	lockall
-	checkpartymove MOVE_DIVE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
-	setfieldeffectargument 0, VAR_RESULT
-	setfieldeffectargument 1, 1
 	msgbox Text_WantToSurface, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
+	checkpartymove MOVE_DIVE
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_SurfaceWildMon
+	clearflag FLAG_SYS_WILD_HM
+	bufferpartymonnick 0, VAR_RESULT
+	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
+EventScript_InitSurface::	
+	closemessage
+	setfieldeffectargument 1, 1
 	dofieldeffect FLDEFF_USE_DIVE
-	goto EventScript_EndSurface
+	waitstate
+EventScript_EndSurface::
+	releaseall
 	end
 
 EventScript_CantSurface::
@@ -264,9 +312,10 @@ EventScript_CantSurface::
 	goto EventScript_EndSurface
 	end
 
-EventScript_EndSurface::
-	releaseall
-	end
+EventScript_SurfaceWildMon::
+	setflag FLAG_SYS_WILD_HM
+	setfieldeffectargument 0, SPECIES_WAILMER
+	goto EventScript_InitSurface
 
 Text_CantDive:
 	.string "The sea is deep here. A POKéMON\n"
@@ -293,3 +342,7 @@ EventScript_FailSweetScent::
 
 Text_FailSweetScent:
 	.string "Looks like there's nothing here…$"
+    
+EventScript_ChangeAutoRun::
+	release
+	end

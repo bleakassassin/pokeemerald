@@ -361,7 +361,6 @@ static void (*const gMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
 void DoWhiteOut(void)
 {
     ScriptContext2_RunNewScript(EventScript_WhiteOut);
-    SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
     SetWarpDestinationToLastHealLocation();
@@ -976,7 +975,7 @@ void SetDefaultFlashLevel(void)
     if (!gMapHeader.cave)
         gSaveBlock1Ptr->flashLevel = 0;
     else if (FlagGet(FLAG_SYS_USE_FLASH))
-        gSaveBlock1Ptr->flashLevel = 1;
+        gSaveBlock1Ptr->flashLevel = 0;
     else
         gSaveBlock1Ptr->flashLevel = gMaxFlashLevel - 1;
 }

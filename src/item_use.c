@@ -72,6 +72,8 @@ static void Task_UseRepel(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8 taskId);
 static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 x, s16 y);
 static void CB2_OpenPokeblockFromBag(void);
+static void ItemUseOnFieldCB_DevonScopeKecleon(u8 taskId);
+static bool8 TryToScopeKecleon(void);
 
 // EWRAM variables
 EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
@@ -219,7 +221,7 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
 
 static void ItemUseOnFieldCB_Bike(u8 taskId)
 {
-    if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == MACH_BIKE)
+    if (ItemId_GetSecondaryId(gSpecialVar_ItemId) == MACH_BIKE || FlagGet(FLAG_MACH_GEAR) == TRUE)
         GetOnOffBike(PLAYER_AVATAR_FLAG_MACH_BIKE);
     else // ACRO_BIKE
         GetOnOffBike(PLAYER_AVATAR_FLAG_ACRO_BIKE);
@@ -860,6 +862,7 @@ static void Task_UseRepel(u8 taskId)
     if (!IsSEPlaying())
     {
         VarSet(VAR_REPEL_STEP_COUNT, ItemId_GetHoldEffectParam(gSpecialVar_ItemId));
+		VarSet(VAR_REPEL_LAST_USED, gSpecialVar_ItemId);
         RemoveUsedItem();
         if (!InBattlePyramid())
             DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, CloseItemMessage);
@@ -1158,6 +1161,46 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
         ItemUseOutOfBattle_CannotUse(taskId);
         break;
     }
+}
+
+void ItemUseOutOfBattle_DevonScope(u8 taskId)
+{
+    if (TryToScopeKecleon() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_DevonScopeKecleon;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+}
+
+static bool8 TryToScopeKecleon(void)
+{
+    u16 x, y;
+    u8 elevation;
+    u8 objId;
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    elevation = PlayerGetElevation();
+    objId = GetObjectEventIdByPosition(x, y, elevation);
+    if (gObjectEvents[objId].movementType != MOVEMENT_TYPE_INVISIBLE || gObjectEvents[objId].graphicsId != OBJ_EVENT_GFX_KECLEON)
+        return FALSE;
+    else
+    {
+        VarSet(VAR_LAST_TALKED, gObjectEvents[objId].localId);
+        return TRUE;
+    }
+}
+
+static void ItemUseOnFieldCB_DevonScopeKecleon(u8 taskId)
+{
+    ScriptContext2_Enable();
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FORTREE_CITY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(FORTREE_CITY))
+        ScriptContext1_SetupScript(FortreeCity_EventScript_UseDevonScope);
+    else
+        ScriptContext1_SetupScript(EventScript_BattleKecleon);
+    DestroyTask(taskId);
 }
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)

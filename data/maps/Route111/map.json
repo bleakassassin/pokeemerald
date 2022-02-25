@@ -223,7 +223,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "FLAG_TEMP_11"
+      "flag": "FLAG_HIDE_ROUTE_111_ROCK_1"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
@@ -236,7 +236,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "FLAG_TEMP_12"
+      "flag": "FLAG_HIDE_ROUTE_111_ROCK_2"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
@@ -379,7 +379,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
-      "flag": "FLAG_TEMP_13"
+      "flag": "FLAG_HIDE_ROUTE_111_TREE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
@@ -663,6 +663,13 @@
       "y": 113,
       "elevation": 0,
       "dest_map": "MAP_TRAINER_HILL_ENTRANCE",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 7,
+      "y": 67,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE111",
       "dest_warp_id": 0
     }
   ],

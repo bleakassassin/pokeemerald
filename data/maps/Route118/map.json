@@ -184,7 +184,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
-      "flag": "FLAG_TEMP_11"
+      "flag": "FLAG_HIDE_ROUTE_118_TREE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
@@ -305,6 +305,20 @@
     }
   ],
   "warp_events": [
+    {
+      "x": 58,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE118",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 13,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE118",
+      "dest_warp_id": 0
+    },
     {
       "x": 42,
       "y": 6,

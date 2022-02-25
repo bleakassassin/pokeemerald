@@ -1,5 +1,6 @@
 #include "global.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
@@ -19,6 +20,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_storage_system.h"
 #include "script.h"
 #include "sound.h"
 #include "sprite.h"
@@ -1002,7 +1004,7 @@ bool8 FldEff_PokecenterHeal(void)
     u8 nPokemon;
     struct Task *task;
 
-    nPokemon = CalculatePlayerPartyCount();
+    nPokemon = CountPartyNonEggMons();
     task = &gTasks[CreateTask(Task_PokecenterHeal, 0xff)];
     task->tNumMons = nPokemon;
     task->tFirstBallX = 93;
@@ -1352,7 +1354,9 @@ static void Task_UseFly(u8 taskId)
             return;
 
         gFieldEffectArguments[0] = GetCursorSelectionMonId();
-        if ((int)gFieldEffectArguments[0] > PARTY_SIZE - 1)
+        if (FlagGet(FLAG_SYS_WILD_HM))
+            gFieldEffectArguments[0] = SPECIES_FLYGON;
+        else if ((int)gFieldEffectArguments[0] > PARTY_SIZE - 1)
             gFieldEffectArguments[0] = 0;
 
         FieldEffectStart(FLDEFF_USE_FLY);
@@ -2572,10 +2576,15 @@ bool8 FldEff_FieldMoveShowMonInit(void)
 {
     struct Pokemon *pokemon;
     bool32 noDucking = gFieldEffectArguments[0] & SHOW_MON_CRY_NO_DUCKING;
-    pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
-    gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
-    gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_OT_ID);
-    gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
+	if (!FlagGet(FLAG_SYS_WILD_HM))
+	{
+        pokemon = &gPlayerParty[(u8)gFieldEffectArguments[0]];
+        gFieldEffectArguments[0] = GetMonData(pokemon, MON_DATA_SPECIES);
+        gFieldEffectArguments[1] = GetMonData(pokemon, MON_DATA_OT_ID);
+        gFieldEffectArguments[2] = GetMonData(pokemon, MON_DATA_PERSONALITY);
+	}
+	else
+		gFieldEffectArguments[1] = 0xFFFF;
     gFieldEffectArguments[0] |= noDucking;
     FieldEffectStart(FLDEFF_FIELD_MOVE_SHOW_MON);
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON_INIT);
@@ -3008,8 +3017,11 @@ static void SurfFieldEffect_FieldMovePose(struct Task *task)
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        SetPlayerAvatarFieldMove();
-        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        if (!FlagGet(FLAG_SYS_WILD_HM))
+        {
+            SetPlayerAvatarFieldMove();
+            ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        }
         task->tState++;
     }
 }
@@ -3179,8 +3191,11 @@ static void FlyOutFieldEffect_FieldMovePose(struct Task *task)
         task->tAvatarFlags = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
-        SetPlayerAvatarFieldMove();
-        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        if (!FlagGet(FLAG_SYS_WILD_HM))
+        {
+            SetPlayerAvatarFieldMove();
+            ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        }
         task->tState++;
     }
 }
@@ -3206,17 +3221,19 @@ static void FlyOutFieldEffect_BirdLeaveBall(struct Task *task)
             SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, BOB_JUST_MON);
             SetSurfBlob_DontSyncAnim(objectEvent->fieldEffectSpriteId, FALSE);
         }
-        task->tBirdSpriteId = CreateFlyBirdSprite(); // Does "leave ball" animation by default
+        if (!FlagGet(FLAG_SYS_WILD_HM))
+            task->tBirdSpriteId = CreateFlyBirdSprite(); // Does "leave ball" animation by default
         task->tState++;
     }
 }
 
 static void FlyOutFieldEffect_WaitBirdLeave(struct Task *task)
 {
-    if (GetFlyBirdAnimCompleted(task->tBirdSpriteId))
+    if (GetFlyBirdAnimCompleted(task->tBirdSpriteId) || FlagGet(FLAG_SYS_WILD_HM))
     {
         task->tState++;
-        task->tTimer = 16;
+        if (!FlagGet(FLAG_SYS_WILD_HM))
+            task->tTimer = 16;
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
         ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], MOVEMENT_ACTION_FACE_LEFT);
     }
@@ -3229,6 +3246,8 @@ static void FlyOutFieldEffect_BirdSwoopDown(struct Task *task)
     {
         task->tState++;
         PlaySE(SE_M_FLY);
+		if (FlagGet(FLAG_SYS_WILD_HM))
+            task->tBirdSpriteId = CreateFlyBirdSprite();
         StartFlyBirdSwoopDown(task->tBirdSpriteId);
     }
 }
@@ -3545,8 +3564,17 @@ static void FlyInFieldEffect_FieldMovePose(struct Task *task)
         sprite->x2 = 0;
         sprite->y2 = 0;
         sprite->coordOffsetEnabled = TRUE;
-        SetPlayerAvatarFieldMove();
-        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        if (!FlagGet(FLAG_SYS_WILD_HM))
+        {
+            SetPlayerAvatarFieldMove();
+            ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        }
+        else
+        {
+            ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_STATE_NORMAL));
+            ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_FACE_DOWN);
+            task->tState++;
+        }
         task->tState++;
     }
 }
@@ -3574,7 +3602,7 @@ static void FlyInFieldEffect_End(struct Task *task)
 {
     u8 state;
     struct ObjectEvent *objectEvent;
-    if ((--task->data[1]) == 0)
+    if ((--task->data[1]) == 0 || FlagGet(FLAG_SYS_WILD_HM))
     {
         objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
         state = PLAYER_AVATAR_STATE_NORMAL;
@@ -3585,6 +3613,7 @@ static void FlyInFieldEffect_End(struct Task *task)
         }
         ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(state));
         ObjectEventTurn(objectEvent, DIR_SOUTH);
+        FlagClear(FLAG_SYS_WILD_HM);
         gPlayerAvatar.flags = task->tAvatarFlags;
         gPlayerAvatar.preventStep = FALSE;
         FieldEffectActiveListRemove(FLDEFF_FLY_IN);

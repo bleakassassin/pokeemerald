@@ -418,7 +418,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
-      "flag": "FLAG_TEMP_11"
+      "flag": "FLAG_HIDE_ROUTE_104_TREE"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -529,6 +529,20 @@
       "elevation": 3,
       "dest_map": "MAP_PETALBURG_WOODS",
       "dest_warp_id": 5
+    },
+    {
+      "x": 10,
+      "y": 39,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE104",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 5,
+      "y": 19,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE104",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [

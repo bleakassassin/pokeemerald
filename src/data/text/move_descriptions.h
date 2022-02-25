@@ -215,7 +215,7 @@ static const u8 sFlamethrowerDescription[] = _(
 
 static const u8 sMistDescription[] = _(
     "Creates a mist that stops\n"
-    "reduction of abilities.");
+    "reduction of stats.");
 
 static const u8 sWaterGunDescription[] = _(
     "Squirts water to attack\n"
@@ -1047,7 +1047,7 @@ static const u8 sWillOWispDescription[] = _(
 
 static const u8 sMementoDescription[] = _(
     "The user faints and lowers\n"
-    "the foe's abilities.");
+    "the foe's stats.");
 
 static const u8 sFacadeDescription[] = _(
     "Boosts ATTACK when burned,\n"
@@ -1087,7 +1087,7 @@ static const u8 sTrickDescription[] = _(
 
 static const u8 sRolePlayDescription[] = _(
     "Mimics the target and\n"
-    "copies its special ability.");
+    "copies its Ability.");
 
 static const u8 sWishDescription[] = _(
     "A wish that restores HP.\n"
@@ -1103,7 +1103,7 @@ static const u8 sIngrainDescription[] = _(
 
 static const u8 sSuperpowerDescription[] = _(
     "Boosts strength sharply,\n"
-    "but lowers abilities.");
+    "but lowers stats.");
 
 static const u8 sMagicCoatDescription[] = _(
     "Reflects special effects\n"
@@ -1138,8 +1138,8 @@ static const u8 sEruptionDescription[] = _(
     "the more damage caused.");
 
 static const u8 sSkillSwapDescription[] = _(
-    "The user swaps special\n"
-    "abilities with the target.");
+    "The user swaps Abilities\n"
+    "with the target.");
 
 static const u8 sImprisonDescription[] = _(
     "Prevents foes from using\n"
@@ -1271,7 +1271,7 @@ static const u8 sRockTombDescription[] = _(
 
 static const u8 sSilverWindDescription[] = _(
     "A powdery attack that may\n"
-    "raise abilities.");
+    "raise stats.");
 
 static const u8 sMetalSoundDescription[] = _(
     "Emits a horrible screech\n"

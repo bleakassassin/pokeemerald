@@ -1,5 +1,15 @@
 SeafloorCavern_Room1_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, SeafloorCavern_Room1_OnTransition
 	.byte 0
+
+SeafloorCavern_Room1_OnTransition:
+	call_if_set FLAG_HIDE_SEAFLOOR_CAVERN_AQUA_GRUNTS, SeafloorCavern_Room1_EventScript_SetBoulders
+	end	
+
+SeafloorCavern_Room1_EventScript_SetBoulders:
+	setobjectxyperm 1, 5, 13
+	setobjectxyperm 2, 13, 11
+	return	
 
 SeafloorCavern_Room1_EventScript_Grunt1::
 	trainerbattle_single TRAINER_GRUNT_SEAFLOOR_CAVERN_1, SeafloorCavern_Room1_Text_Grunt1Intro, SeafloorCavern_Room1_Text_Grunt1Defeat

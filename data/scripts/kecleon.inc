@@ -1,53 +1,7 @@
-Route120_EventScript_Kecleon1::
+EventScript_Kecleon::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 1
-	goto EventScript_Kecleon
-	end
-
-Route120_EventScript_Kecleon2::
-	lock
-	faceplayer
-	setvar VAR_0x8009, 2
-	goto EventScript_Kecleon
-	end
-
-Route120_EventScript_Kecleon3::
-	lock
-	faceplayer
-	setvar VAR_0x8009, 3
-	goto EventScript_Kecleon
-	end
-
-Route120_EventScript_Kecleon4::
-	lock
-	faceplayer
-	setvar VAR_0x8009, 4
-	goto EventScript_Kecleon
-	end
-
-Route120_EventScript_Kecleon5::
-	lock
-	faceplayer
-	setvar VAR_0x8009, 5
-	goto EventScript_Kecleon
-	end
-
-Route119_EventScript_Kecleon1::
-	lock
-	faceplayer
-	setvar VAR_0x8009, 6
-	goto EventScript_Kecleon
-	end
-
-Route119_EventScript_Kecleon2::
-	lock
-	faceplayer
-	setvar VAR_0x8009, 7
-	goto EventScript_Kecleon
-	end
-
-EventScript_Kecleon::
 	checkitem ITEM_DEVON_SCOPE
 	goto_if_eq VAR_RESULT, TRUE, EventScript_AskUseDevonScope
 	msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_DEFAULT
@@ -61,6 +15,8 @@ EventScript_AskUseDevonScope::
 	end
 
 EventScript_BattleKecleon::
+	lock
+	faceplayer
 	msgbox Kecleon_Text_UseDevonScopeMonAttacked, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer

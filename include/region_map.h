@@ -14,11 +14,13 @@ enum
     MAP_INPUT_MOVE_END,
     MAP_INPUT_A_BUTTON,
     MAP_INPUT_B_BUTTON,
+    MAP_INPUT_R_BUTTON,
 };
 
 enum {
     MAPSECTYPE_NONE,
     MAPSECTYPE_ROUTE,
+    MAPSECTYPE_ROUTE_CANTFLY,
     MAPSECTYPE_CITY_CANFLY,
     MAPSECTYPE_CITY_CANTFLY,
     MAPSECTYPE_BATTLE_FRONTIER
@@ -115,5 +117,6 @@ void BlendRegionMap(u16 color, u32 coeff);
 void SetRegionMapDataForZoom(void);
 
 extern const struct RegionMapLocation gRegionMapEntries[];
+extern const u8 gMapHealLocations[][3];
 
 #endif //GUARD_REGION_MAP_H

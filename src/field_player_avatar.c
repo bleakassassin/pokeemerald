@@ -634,11 +634,18 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
         return;
     }
 
-    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON) && FlagGet(FLAG_SYS_B_DASH)
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER) && (heldKeys & B_BUTTON || gSaveBlock2Ptr->autoRun) && FlagGet(FLAG_SYS_B_DASH)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
-        PlayerRun(direction);
-        gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
+        if (heldKeys & B_BUTTON && gSaveBlock2Ptr->autoRun == TRUE)
+        {
+            PlayerWalkNormal(direction);
+        }
+        else
+        {
+            PlayerRun(direction);
+            gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
+        }
         return;
     }
     else
@@ -1726,19 +1733,19 @@ static bool8 Fishing_Init(struct Task *task)
 static bool8 Fishing_GetRodOut(struct Task *task)
 {
     struct ObjectEvent *playerObjEvent;
-    const s16 minRounds1[] = {
-        [OLD_ROD]   = 1,
-        [GOOD_ROD]  = 1,
-        [SUPER_ROD] = 1
-    };
-    const s16 minRounds2[] = {
-        [OLD_ROD]   = 1,
-        [GOOD_ROD]  = 3,
-        [SUPER_ROD] = 6
-    };
+//    const s16 minRounds1[] = {
+//        [OLD_ROD]   = 1,
+//        [GOOD_ROD]  = 1,
+//        [SUPER_ROD] = 1
+//    };
+//    const s16 minRounds2[] = {
+//        [OLD_ROD]   = 1,
+//        [GOOD_ROD]  = 3,
+//        [SUPER_ROD] = 6
+//    };
 
-    task->tRoundsPlayed = 0;
-    task->tMinRoundsRequired = minRounds1[task->tFishingRod] + (Random() % minRounds2[task->tFishingRod]);
+//    task->tRoundsPlayed = 0;
+//    task->tMinRoundsRequired = minRounds1[task->tFishingRod] + (Random() % minRounds2[task->tFishingRod]);
     task->tPlayerGfxId = gObjectEvents[gPlayerAvatar.objectEventId].graphicsId;
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     ObjectEventClearHeldMovementIfActive(playerObjEvent);
@@ -1769,8 +1776,8 @@ static bool8 Fishing_InitDots(struct Task *task)
     task->tNumDots = 0;
     randVal = Random();
     randVal %= 10;
-    task->tDotsRequired = randVal + 1;
-    if (task->tRoundsPlayed == 0)
+//    task->tDotsRequired = randVal + 1;
+//    if (task->tRoundsPlayed == 0)
         task->tDotsRequired = randVal + 4;
     if (task->tDotsRequired >= 10)
         task->tDotsRequired = 10;
@@ -1786,8 +1793,8 @@ static bool8 Fishing_ShowDots(struct Task *task)
     if (JOY_NEW(A_BUTTON))
     {
         task->tStep = FISHING_NO_BITE;
-        if (task->tRoundsPlayed != 0)
-            task->tStep = FISHING_GOT_AWAY;
+//        if (task->tRoundsPlayed != 0)
+//            task->tStep = FISHING_GOT_AWAY;
         return TRUE;
     }
     else
@@ -1798,9 +1805,9 @@ static bool8 Fishing_ShowDots(struct Task *task)
             if (task->tNumDots >= task->tDotsRequired)
             {
                 task->tStep++;
-                if (task->tRoundsPlayed != 0)
-                    task->tStep++;
-                task->tRoundsPlayed++;
+//                if (task->tRoundsPlayed != 0)
+//                    task->tStep++;
+//                task->tRoundsPlayed++;
             }
             else
             {
@@ -1880,27 +1887,27 @@ static bool8 Fishing_WaitForA(struct Task *task)
 // Determine if we're going to play the dot game again
 static bool8 Fishing_CheckMoreDots(struct Task *task)
 {
-    const s16 moreDotsChance[][2] =
-    {
-        [OLD_ROD]   = {0, 0},
-        [GOOD_ROD]  = {40, 10},
-        [SUPER_ROD] = {70, 30}
-    };
+//    const s16 moreDotsChance[][2] =
+//    {
+//        [OLD_ROD]   = {0, 0},
+//        [GOOD_ROD]  = {40, 10},
+//        [SUPER_ROD] = {70, 30}
+//    };
 
     AlignFishingAnimationFrames();
     task->tStep++;
-    if (task->tRoundsPlayed < task->tMinRoundsRequired)
-    {
-        task->tStep = FISHING_START_ROUND;
-    }
-    else if (task->tRoundsPlayed < 2)
-    {
-        // probability of having to play another round
-        s16 probability = Random() % 100;
-
-        if (moreDotsChance[task->tFishingRod][task->tRoundsPlayed] > probability)
-            task->tStep = FISHING_START_ROUND;
-    }
+//    if (task->tRoundsPlayed < task->tMinRoundsRequired)
+//    {
+//        task->tStep = FISHING_START_ROUND;
+//    }
+//    else if (task->tRoundsPlayed < 2)
+//    {
+//        // probability of having to play another round
+//        s16 probability = Random() % 100;
+//
+//        if (moreDotsChance[task->tFishingRod][task->tRoundsPlayed] > probability)
+//            task->tStep = FISHING_START_ROUND;
+//    }
     return FALSE;
 }
 

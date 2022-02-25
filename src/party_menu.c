@@ -1987,7 +1987,14 @@ static u16 GetTutorMove(u8 tutor)
 
 static bool8 CanLearnTutorMove(u16 species, u8 tutor)
 {
-    if (sTutorLearnsets[species] & (1 << tutor))
+	if (tutor < 32)
+	{
+		if (sTutorLearnsets[species][0] & (1 << (tutor)))
+			return TRUE;
+		else
+			return FALSE;
+	}
+    else if (sTutorLearnsets[species][1] & (1 << (tutor - 32)))
         return TRUE;
     else
         return FALSE;
@@ -3643,6 +3650,7 @@ static void CursorCb_FieldMove(u8 taskId)
     }
     else
     {
+		FlagClear(FLAG_SYS_WILD_HM);
         // All field moves before WATERFALL are HMs.
         if (fieldMove <= FIELD_MOVE_WATERFALL && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE)
         {
@@ -4344,7 +4352,11 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         PlaySE(SE_SELECT);
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = task;
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD)
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        else
+            gTasks[taskId].func = task;
+        return;
     }
     else
     {
@@ -4376,7 +4388,10 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             GetMedicineItemEffectMessage(item);
             DisplayPartyMenuMessage(gStringVar4, TRUE);
             ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = task;
+            if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(item, 1))
+                gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            else
+                gTasks[taskId].func = task;
         }
     }
 }
@@ -4388,7 +4403,10 @@ static void Task_DisplayHPRestoredMessage(u8 taskId)
     DisplayPartyMenuMessage(gStringVar4, FALSE);
     ScheduleBgCopyTilemapToVram(2);
     HandleBattleLowHpMusicChange();
-    gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD && CheckBagHasItem(gSpecialVar_ItemId, 1))
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+    else
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
 }
 
 static void Task_ClosePartyMenuAfterText(u8 taskId)
@@ -4896,7 +4914,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         gPartyMenuUseExitCallback = FALSE;
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
         ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = task;
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
     }
     else
     {
@@ -5026,7 +5044,10 @@ static void PartyMenuTryEvolution(u8 taskId)
     }
     else
     {
-        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
+			gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+		else
+			gTasks[taskId].func = Task_ClosePartyMenuAfterText;
     }
 }
 

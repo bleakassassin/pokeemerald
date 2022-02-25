@@ -346,8 +346,8 @@ LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
 	.string "I've entered a bunch of CONTESTS,\n"
 	.string "so I'm seeing how things work.\p"
 	.string "If you're in a COOLNESS CONTEST,\n"
-	.string "cool moves go over as appeals.\p"
-	.string "But smart moves and cute moves\n"
+	.string "Cool moves go over as appeals.\p"
+	.string "But Smart moves and Cute moves\n"
 	.string "don't go over well, for instance.$"
 
 LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks:
@@ -390,7 +390,7 @@ LilycoveCity_ContestHall_Text_RaisedMonToBeSmart:
 
 LilycoveCity_ContestHall_Text_IfMonPullsSmartMoveNext:
 	.string "There it is!\p"
-	.string "If my POKéMON pulls a smart move next,\n"
+	.string "If my POKéMON pulls a Smart move next,\n"
 	.string "the audience's excitement will peak!$"
 
 LilycoveCity_ContestHall_Text_DontAppreciateCuteLeechLife:
@@ -502,7 +502,7 @@ LilycoveCity_ContestHall_Text_PetalDanceIsMarvel:
 LilycoveCity_ContestHall_Text_MyMonAppealSoMuchCuter:
 	.string "Everyone's POKéMON are very cute.\p"
 	.string "However, if my POKéMON were to make\n"
-	.string "a cute appeal…\p"
+	.string "a Cute appeal…\p"
 	.string "I'm sure that it would be so much \n"
 	.string "cuter than the others.$"
 

@@ -287,7 +287,7 @@ static const u32 sRegionMapFrameTilemapLZ[] = INCBIN_U32("graphics/pokenav/regio
 static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("graphics/pokenav/region_map/fly_target_icons.gbapal");
 static const u32 sFlyTargetIcons_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/fly_target_icons.4bpp.lz");
 
-static const u8 sMapHealLocations[][3] =
+const u8 gMapHealLocations[][3] =
 {
     [MAPSEC_LITTLEROOT_TOWN] = {MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F},
     [MAPSEC_OLDALE_TOWN] = {MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), HEAL_LOCATION_OLDALE_TOWN},
@@ -315,7 +315,7 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_ROUTE_108] = {MAP_GROUP(ROUTE108), MAP_NUM(ROUTE108), 0},
     [MAPSEC_ROUTE_109] = {MAP_GROUP(ROUTE109), MAP_NUM(ROUTE109), 0},
     [MAPSEC_ROUTE_110] = {MAP_GROUP(ROUTE110), MAP_NUM(ROUTE110), 0},
-    [MAPSEC_ROUTE_111] = {MAP_GROUP(ROUTE111), MAP_NUM(ROUTE111), 0},
+    [MAPSEC_ROUTE_111] = {MAP_GROUP(ROUTE111), MAP_NUM(ROUTE111), HEAL_LOCATION_ROUTE111_TRAINER_HILL},
     [MAPSEC_ROUTE_112] = {MAP_GROUP(ROUTE112), MAP_NUM(ROUTE112), 0},
     [MAPSEC_ROUTE_113] = {MAP_GROUP(ROUTE113), MAP_NUM(ROUTE113), 0},
     [MAPSEC_ROUTE_114] = {MAP_GROUP(ROUTE114), MAP_NUM(ROUTE114), 0},
@@ -323,7 +323,7 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_ROUTE_116] = {MAP_GROUP(ROUTE116), MAP_NUM(ROUTE116), 0},
     [MAPSEC_ROUTE_117] = {MAP_GROUP(ROUTE117), MAP_NUM(ROUTE117), 0},
     [MAPSEC_ROUTE_118] = {MAP_GROUP(ROUTE118), MAP_NUM(ROUTE118), 0},
-    [MAPSEC_ROUTE_119] = {MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119), 0},
+    [MAPSEC_ROUTE_119] = {MAP_GROUP(ROUTE119), MAP_NUM(ROUTE119), HEAL_LOCATION_ROUTE119_WEATHER_INSTITUTE},
     [MAPSEC_ROUTE_120] = {MAP_GROUP(ROUTE120), MAP_NUM(ROUTE120), 0},
     [MAPSEC_ROUTE_121] = {MAP_GROUP(ROUTE121), MAP_NUM(ROUTE121), 0},
     [MAPSEC_ROUTE_122] = {MAP_GROUP(ROUTE122), MAP_NUM(ROUTE122), 0},
@@ -683,6 +683,10 @@ static u8 ProcessRegionMapInput_Full(void)
     {
         input = MAP_INPUT_B_BUTTON;
     }
+    else if (JOY_NEW(R_BUTTON))
+    {
+        input = MAP_INPUT_R_BUTTON;
+    }
     if (input == MAP_INPUT_MOVE_START)
     {
         gRegionMap->cursorMovementFrameCounter = 4;
@@ -761,6 +765,10 @@ static u8 ProcessRegionMapInput_Zoomed(void)
     if (JOY_NEW(B_BUTTON))
     {
         input = MAP_INPUT_B_BUTTON;
+    }
+    if (JOY_NEW(R_BUTTON))
+    {
+        input = MAP_INPUT_R_BUTTON;
     }
     if (input == MAP_INPUT_MOVE_START)
     {
@@ -1217,6 +1225,37 @@ static u8 GetMapsecType(u16 mapSecId)
         return FlagGet(FLAG_LANDMARK_BATTLE_FRONTIER) ? MAPSECTYPE_BATTLE_FRONTIER : MAPSECTYPE_NONE;
     case MAPSEC_SOUTHERN_ISLAND:
         return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? MAPSECTYPE_ROUTE : MAPSECTYPE_NONE;
+    case MAPSEC_ROUTE_103:
+        return FlagGet(FLAG_LANDMARK_ALTERING_CAVE) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_108:
+        return FlagGet(FLAG_LANDMARK_ABANDONED_SHIP) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_115:
+        return FlagGet(FLAG_EXITED_METEOR_FALLS_AT_ROUTE_115) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_120:
+    case MAPSEC_ROUTE_121:
+        return FlagGet(FLAG_VISITED_LILYCOVE_CITY) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_122:
+        return FlagGet(FLAG_LANDMARK_MT_PYRE) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_124:
+        return FlagGet(FLAG_VISITED_MOSSDEEP_CITY) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_125:
+        return FlagGet(FLAG_LANDMARK_SHOAL_CAVE) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_127:
+    case MAPSEC_ROUTE_128:
+        return FlagGet(FLAG_VISITED_EVER_GRANDE_CITY) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_130:
+        return FlagGet(FLAG_VISITED_PACIFIDLOG_TOWN) ? MAPSECTYPE_ROUTE_CANTFLY : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_131: 
+        return FlagGet(FLAG_LANDMARK_SKY_PILLAR) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_132:
+    case MAPSEC_ROUTE_133:
+    case MAPSEC_ROUTE_134:
+        return FlagGet(FLAG_LANDMARK_SEALED_CHAMBER) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+    case MAPSEC_ROUTE_126:
+    case MAPSEC_ROUTE_129:
+    case MAPSEC_MT_CHIMNEY:
+    case MAPSEC_SAFARI_ZONE:
+        return MAPSECTYPE_ROUTE_CANTFLY;
     default:
         return MAPSECTYPE_ROUTE;
     }
@@ -1967,7 +2006,7 @@ static void CB_HandleFlyMapInput(void)
             DrawFlyDestTextWindow();
             break;
         case MAP_INPUT_A_BUTTON:
-            if (sFlyMap->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY || sFlyMap->regionMap.mapSecType == MAPSECTYPE_BATTLE_FRONTIER)
+            if (sFlyMap->regionMap.mapSecType == MAPSECTYPE_CITY_CANFLY || sFlyMap->regionMap.mapSecType == MAPSECTYPE_ROUTE || sFlyMap->regionMap.mapSecType == MAPSECTYPE_BATTLE_FRONTIER)
             {
                 m4aSongNumStart(SE_SELECT);
                 sFlyMap->choseFlyLocation = TRUE;
@@ -2011,11 +2050,78 @@ static void CB_ExitFlyMap(void)
                 case MAPSEC_EVER_GRANDE_CITY:
                     SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && sFlyMap->regionMap.posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
                     break;
-                default:
-                    if (sMapHealLocations[sFlyMap->regionMap.mapSecId][2] != 0)
-                        SetWarpDestinationToHealLocation(sMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
+                case MAPSEC_ROUTE_101:
+                case MAPSEC_ROUTE_102:
+                case MAPSEC_ROUTE_107:
+                case MAPSEC_ROUTE_108:
+                case MAPSEC_ROUTE_118:
+                case MAPSEC_ROUTE_127:
+                case MAPSEC_ROUTE_128:
+                case MAPSEC_ROUTE_132:
+                case MAPSEC_ROUTE_133:
+                case MAPSEC_ROUTE_134:
+                    SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 0);
+                    break;
+                case MAPSEC_ROUTE_103:
+                case MAPSEC_ROUTE_105:
+                case MAPSEC_ROUTE_106:
+                case MAPSEC_ROUTE_109:
+                case MAPSEC_ROUTE_113:
+                case MAPSEC_ROUTE_115:
+                case MAPSEC_ROUTE_117:
+                case MAPSEC_ROUTE_121:
+                case MAPSEC_ROUTE_122:
+                case MAPSEC_ROUTE_123:
+                case MAPSEC_ROUTE_124:
+                case MAPSEC_ROUTE_125:
+                case MAPSEC_ROUTE_131:
+                    SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 1);
+                    break;
+                case MAPSEC_ROUTE_116:
+                    SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 5);
+                    break;
+                case MAPSEC_ROUTE_112:
+                    SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 6);
+                    break;
+                case MAPSEC_ROUTE_120:
+                    SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], sFlyMap->regionMap.posWithinMapSec >= 2 ? 3 : 2);
+                    break;
+                case MAPSEC_ROUTE_104:
+                    SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], sFlyMap->regionMap.posWithinMapSec == 0 ? 9 : 8);
+                    break;
+                case MAPSEC_ROUTE_110:
+                    if (sFlyMap->regionMap.posWithinMapSec == 0 && FlagGet(FLAG_LANDMARK_NEW_MAUVILLE))
+                        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 7);
                     else
-                        SetWarpDestinationToMapWarp(sMapHealLocations[sFlyMap->regionMap.mapSecId][0], sMapHealLocations[sFlyMap->regionMap.mapSecId][1], WARP_ID_NONE);
+                        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 6);
+                    break;
+                case MAPSEC_ROUTE_111:
+                    if (sFlyMap->regionMap.posWithinMapSec <= 1)
+                        SetWarpDestinationToHealLocation(HEAL_LOCATION_ROUTE111_REST_STOP);
+                    else if (sFlyMap->regionMap.posWithinMapSec >= 4)
+                        SetWarpDestinationToHealLocation(gMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
+                    else
+                        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 5);
+                    break;
+                case MAPSEC_ROUTE_114:
+                    if (sFlyMap->regionMap.posWithinMapSec == 3)
+                        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 7);
+                    else if  (sFlyMap->regionMap.posWithinMapSec == 1)
+                        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 5);
+                    else
+                        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 6);
+                    break;
+                case MAPSEC_ROUTE_119:
+                    if (sFlyMap->regionMap.posWithinMapSec >= 4)
+                        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], 2);
+                    else
+                        SetWarpDestinationToHealLocation(gMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
+                    break;
+                default:
+                    if (gMapHealLocations[sFlyMap->regionMap.mapSecId][2] != 0)
+                        SetWarpDestinationToHealLocation(gMapHealLocations[sFlyMap->regionMap.mapSecId][2]);
+                    else
+                        SetWarpDestinationToMapWarp(gMapHealLocations[sFlyMap->regionMap.mapSecId][0], gMapHealLocations[sFlyMap->regionMap.mapSecId][1], WARP_ID_NONE);
                     break;
                 }
                 ReturnToFieldFromFlyMapSelect();

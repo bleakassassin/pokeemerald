@@ -4,6 +4,7 @@ ShoalCave_LowTideLowerRoom_MapScripts::
 
 ShoalCave_LowTideLowerRoom_OnLoad:
 	call ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles
+	call_if_set FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM_07, ShoalCave_LowTideLowerRoom_EventScript_SetBoulders_TM07
 	end
 
 ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles::
@@ -13,6 +14,10 @@ ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles::
 
 ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd::
 	return
+
+ShoalCave_LowTideLowerRoom_EventScript_SetBoulders_TM07:
+	setobjectxyperm 1, 28, 3
+	return	
 
 ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4::
 	lockall

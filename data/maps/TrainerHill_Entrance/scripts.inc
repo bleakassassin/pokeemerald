@@ -12,6 +12,7 @@ TrainerHill_Entrance_MapScripts::
 	.byte 0
 
 TrainerHill_Entrance_OnTransition:
+	setrespawn HEAL_LOCATION_ROUTE111_TRAINER_HILL
 	setflag FLAG_LANDMARK_TRAINER_HILL
 	getplayerxy VAR_TEMP_D, VAR_RESULT
 	end

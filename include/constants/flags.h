@@ -12,8 +12,8 @@
 #define FLAG_TEMP_2      (TEMP_FLAGS_START + 0x2)
 #define FLAG_TEMP_3      (TEMP_FLAGS_START + 0x3)
 #define FLAG_TEMP_4      (TEMP_FLAGS_START + 0x4)
-#define FLAG_TEMP_5      (TEMP_FLAGS_START + 0x5)  // Unused Flag
-#define FLAG_TEMP_6      (TEMP_FLAGS_START + 0x6)  // Unused Flag
+#define FLAG_TEMP_CUT    (TEMP_FLAGS_START + 0x5)
+#define FLAG_TEMP_ROCK_SMASH (TEMP_FLAGS_START + 0x6)
 #define FLAG_TEMP_7      (TEMP_FLAGS_START + 0x7)  // Unused Flag
 #define FLAG_TEMP_8      (TEMP_FLAGS_START + 0x8)  // Unused Flag
 #define FLAG_TEMP_9      (TEMP_FLAGS_START + 0x9)  // Unused Flag
@@ -41,34 +41,34 @@
 #define FLAG_TEMP_1F     (TEMP_FLAGS_START + 0x1F)
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 
-#define FLAG_UNUSED_0x020    0x20 // Unused Flag
-#define FLAG_UNUSED_0x021    0x21 // Unused Flag
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
-#define FLAG_UNUSED_0x026    0x26 // Unused Flag
-#define FLAG_UNUSED_0x027    0x27 // Unused Flag
-#define FLAG_UNUSED_0x028    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
-#define FLAG_UNUSED_0x02A    0x2A // Unused Flag
-#define FLAG_UNUSED_0x02B    0x2B // Unused Flag
-#define FLAG_UNUSED_0x02C    0x2C // Unused Flag
-#define FLAG_UNUSED_0x02D    0x2D // Unused Flag
-#define FLAG_UNUSED_0x02E    0x2E // Unused Flag
-#define FLAG_UNUSED_0x02F    0x2F // Unused Flag
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
-#define FLAG_UNUSED_0x031    0x31 // Unused Flag
-#define FLAG_UNUSED_0x032    0x32 // Unused Flag
-#define FLAG_UNUSED_0x033    0x33 // Unused Flag
-#define FLAG_UNUSED_0x034    0x34 // Unused Flag
-#define FLAG_UNUSED_0x035    0x35 // Unused Flag
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
-#define FLAG_UNUSED_0x037    0x37 // Unused Flag
-#define FLAG_UNUSED_0x038    0x38 // Unused Flag
-#define FLAG_UNUSED_0x039    0x39 // Unused Flag
-#define FLAG_UNUSED_0x03A    0x3A // Unused Flag
-#define FLAG_UNUSED_0x03B    0x3B // Unused Flag
+#define FLAG_HIDE_PETALBURG_WOODS_TREE_1     0x20 // Remove upper tree in Petalburg Woods after cutting it
+#define FLAG_HIDE_PETALBURG_WOODS_TREE_2     0x21 // Remove lower tree in Petalburg Woods after cutting it
+#define FLAG_HIDE_ROUTE_103_TREE_1           0x22 // Remove tree blocking PP Up item on Route 103 after cutting it
+#define FLAG_HIDE_ROUTE_103_TREE_2           0x23 // Remove tree blocking Berry farm and two Trainers on Route 103 after cutting it
+#define FLAG_HIDE_ROUTE_104_TREE             0x24 // Remove tree on Route 104 after cutting it
+#define FLAG_HIDE_ROUTE_111_TREE             0x25 // Remove tree on Route 111 after cutting it
+#define FLAG_HIDE_ROUTE_116_TREE_1           0x26 // Remove left-most tree on Route 116 after cutting it
+#define FLAG_HIDE_ROUTE_116_TREE_2           0x27 // Remove right-most tree on Route 116 after cutting it
+#define FLAG_HIDE_ROUTE_116_TREE_3           0x28 // Remove middle tree on Route 116 after cutting it
+#define FLAG_HIDE_ROUTE_116_TREE_4           0x29 // Remove second-from-the-left tree on Route 116 after cutting it
+#define FLAG_HIDE_ROUTE_116_TREE_5           0x2A // Remove second-from-the-right tree on Route 116 after cutting it
+#define FLAG_HIDE_ROUTE_117_TREE             0x2B // Remove tree on Route 117 after cutting it
+#define FLAG_HIDE_ROUTE_118_TREE             0x2C // Remove tree on Route 118 after cutting it
+#define FLAG_HIDE_ROUTE_120_TREE_1           0x2D // Remove tree blocking Aspear Berry farm and bush Secret Base on Route 120 after cutting it
+#define FLAG_HIDE_ROUTE_120_TREE_2           0x2E // Remove upper-left tree on Route 120 after cutting it
+#define FLAG_HIDE_ROUTE_120_TREE_3           0x2F // Remove upper-right tree on Route 120 after cutting it
+#define FLAG_HIDE_ROUTE_121_TREE_1           0x30 // Remove tree blocking Safari Zone on Route 121 after cutting it
+#define FLAG_HIDE_ROUTE_121_TREE_2           0x31 // Remove tree blocking cave Secret Base on Route 121 after cutting it
+#define FLAG_HIDE_ROUTE_121_TREE_3           0x32 // Remove tree blocking hidden Nugget on Route 121 after cutting it
+#define FLAG_HIDE_ROUTE_123_TREE_1           0x33 // Remove right tree blocking grass-free detour on Route 123 after cutting it
+#define FLAG_HIDE_ROUTE_123_TREE_2           0x34 // Remove tree blocking two hidden items and three Trainers on Route 123 after cutting it
+#define FLAG_HIDE_ROUTE_123_TREE_3           0x35 // Remove left tree blocking grass-free detour on Route 123 after cutting it
+#define FLAG_HIDE_ROUTE_111_ROCK_1           0x36 // Remove left rock on Route 111 after smashing it
+#define FLAG_HIDE_ROUTE_111_ROCK_2           0x37 // Remove right rock on Route 111 after smashing it
+#define FLAG_HIDE_ROUTE_114_ROCK_1           0x38 // Remove right-side rock blocking upper right Secret Base on Route 114 after smashing it
+#define FLAG_HIDE_ROUTE_114_ROCK_2           0x39 // Remove rock blocking bottom Secret Base on Route 114 after smashing it
+#define FLAG_HIDE_ROUTE_114_ROCK_3           0x3A // Remove rock blocking Secret Base next to Granite Cave entrance on Route 114 after smashing it
+#define FLAG_HIDE_ROUTE_115_ROCK             0x3B // Remove rock on Route 115 after smashing it
 #define FLAG_UNUSED_0x03C    0x3C // Unused Flag
 #define FLAG_UNUSED_0x03D    0x3D // Unused Flag
 #define FLAG_UNUSED_0x03E    0x3E // Unused Flag
@@ -118,7 +118,7 @@
 #define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 //
 #define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 //
 
-#define FLAG_UNUSED_0x068                    0x68  // Unused Flag
+#define FLAG_MACH_GEAR                       0x68  // Unused Flag
 
 #define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69  // Removed Flag; functionality now handled by Old Sea Map var
 #define FLAG_RECEIVED_HM04                   0x6A
@@ -1386,7 +1386,7 @@
 #define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
 #define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag
 #define FLAG_UNUSED_0x886                           (SYSTEM_FLAGS + 0x26) // Unused Flag
-#define FLAG_UNUSED_0x887                           (SYSTEM_FLAGS + 0x27) // Unused Flag
+#define FLAG_SYS_WILD_HM                            (SYSTEM_FLAGS + 0x27)
 
 #define FLAG_SYS_USE_FLASH                          (SYSTEM_FLAGS + 0x28)
 #define FLAG_SYS_USE_STRENGTH                       (SYSTEM_FLAGS + 0x29)
@@ -1495,12 +1495,12 @@
 #define FLAG_ARRIVED_AT_NAVEL_ROCK                  (SYSTEM_FLAGS + 0x81)
 #define FLAG_LANDMARK_TRAINER_HILL                  (SYSTEM_FLAGS + 0x82)
 
-#define FLAG_UNUSED_0x8E3                           (SYSTEM_FLAGS + 0x83) // Unused Flag
+#define FLAG_LANDMARK_MT_PYRE                       (SYSTEM_FLAGS + 0x83)
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 
-#define FLAG_UNUSED_0x8E5                           (SYSTEM_FLAGS + 0x85) // Unused Flag
-#define FLAG_UNUSED_0x8E6                           (SYSTEM_FLAGS + 0x86) // Unused Flag
+#define FLAG_LANDMARK_SHOAL_CAVE                    (SYSTEM_FLAGS + 0x85)
+#define FLAG_EXITED_METEOR_FALLS_AT_ROUTE_115       (SYSTEM_FLAGS + 0x86)
 #define FLAG_UNUSED_0x8E7                           (SYSTEM_FLAGS + 0x87) // Unused Flag
 #define FLAG_UNUSED_0x8E8                           (SYSTEM_FLAGS + 0x88) // Unused Flag
 #define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag

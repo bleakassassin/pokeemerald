@@ -911,6 +911,13 @@ static const u8 sBattlePalaceNatureToFlavorTextId[NUM_NATURES] =
     [NATURE_QUIRKY]  = B_MSG_EAGER_FOR_MORE,
 };
 
+static const u16 sBadgeFlags[8] = {
+    FLAG_BADGE01_GET, FLAG_BADGE02_GET, FLAG_BADGE03_GET, FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET, FLAG_BADGE06_GET, FLAG_BADGE07_GET, FLAG_BADGE08_GET,
+};
+
+static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 64, 80, 100, 120 };
+
 static void Cmd_attackcanceler(void)
 {
     s32 i;
@@ -5424,32 +5431,24 @@ static void Cmd_yesnoboxlearnmove(void)
             else
             {
                 u16 moveId = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MOVE1 + movePosition);
-                if (IsHMMove2(moveId))
+                gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+
+                PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
+
+                RemoveMonPPBonus(&gPlayerParty[gBattleStruct->expGetterMonId], movePosition);
+                SetMonMoveSlot(&gPlayerParty[gBattleStruct->expGetterMonId], gMoveToLearn, movePosition);
+
+                if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && MOVE_IS_PERMANENT(0, movePosition))
                 {
-                    PrepareStringBattle(STRINGID_HMMOVESCANTBEFORGOTTEN, gActiveBattler);
-                    gBattleScripting.learnMoveState = 6;
+                    RemoveBattleMonPPBonus(&gBattleMons[0], movePosition);
+                    SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, movePosition);
                 }
-                else
+                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
+                    && gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId
+                    && MOVE_IS_PERMANENT(2, movePosition))
                 {
-                    gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
-
-                    PREPARE_MOVE_BUFFER(gBattleTextBuff2, moveId)
-
-                    RemoveMonPPBonus(&gPlayerParty[gBattleStruct->expGetterMonId], movePosition);
-                    SetMonMoveSlot(&gPlayerParty[gBattleStruct->expGetterMonId], gMoveToLearn, movePosition);
-
-                    if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId && MOVE_IS_PERMANENT(0, movePosition))
-                    {
-                        RemoveBattleMonPPBonus(&gBattleMons[0], movePosition);
-                        SetBattleMonMoveSlot(&gBattleMons[0], gMoveToLearn, movePosition);
-                    }
-                    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
-                        && gBattlerPartyIndexes[2] == gBattleStruct->expGetterMonId
-                        && MOVE_IS_PERMANENT(2, movePosition))
-                    {
-                        RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
-                        SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
-                    }
+                    RemoveBattleMonPPBonus(&gBattleMons[2], movePosition);
+                    SetBattleMonMoveSlot(&gBattleMons[2], gMoveToLearn, movePosition);
                 }
             }
         }
@@ -5593,11 +5592,39 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
 
 static void Cmd_getmoneyreward(void)
 {
-    u32 moneyReward = GetTrainerMoneyToGive(gTrainerBattleOpponent_A);
-    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        moneyReward += GetTrainerMoneyToGive(gTrainerBattleOpponent_B);
+    u32 moneyReward;
+    u32 money = GetMoney(&gSaveBlock1Ptr->money);
+    u8 sPartyLevel = 1;
 
-    AddMoney(&gSaveBlock1Ptr->money, moneyReward);
+    if (gBattleOutcome == B_OUTCOME_WON)
+    {
+        moneyReward = GetTrainerMoneyToGive(gTrainerBattleOpponent_A);
+        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+            moneyReward += GetTrainerMoneyToGive(gTrainerBattleOpponent_B);
+        AddMoney(&gSaveBlock1Ptr->money, moneyReward);
+    }
+    else
+    {
+        s32 i, count;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_NONE
+             && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+            {
+                if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > sPartyLevel)
+                    sPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            }
+        }
+        for (count = 0, i = 0; i < ARRAY_COUNT(sBadgeFlags); i++)
+        {
+            if (FlagGet(sBadgeFlags[i]) == TRUE)
+                ++count;
+        }
+        moneyReward = sWhiteOutBadgeMoney[count] * sPartyLevel;
+        if (moneyReward > money)
+            moneyReward = money;
+        RemoveMoney(&gSaveBlock1Ptr->money, moneyReward);
+    }
     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff1, 5, moneyReward);
 
     gBattlescriptCurrInstr++;
@@ -9856,7 +9883,7 @@ static void Cmd_handleballthrow(void)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
         if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
-            odds *= 2;
+            odds = (odds * 25) / 10;
         if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
             odds = (odds * 15) / 10;
 

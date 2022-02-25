@@ -1194,8 +1194,8 @@
     {
       "id": "LAYOUT_ROUTE114_FOSSIL_MANIACS_TUNNEL",
       "name": "Route114_FossilManiacsTunnel_Layout",
-      "width": 13,
-      "height": 26,
+      "width": 18,
+      "height": 28,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Fallarbor",
       "border_filepath": "data/layouts/Route114_FossilManiacsTunnel/border.bin",

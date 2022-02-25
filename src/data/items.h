@@ -3507,8 +3507,8 @@ const struct Item gItems[] =
         .description = sDevonScopeDesc,
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_DevonScope,
     },
 
 // TMs/HMs
@@ -4375,7 +4375,8 @@ const struct Item gItems[] =
         .registrability = TRUE,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_Bike,
+        .secondaryId = BICYCLE,
     },
 
     [ITEM_TOWN_MAP] =

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_data.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -214,7 +215,10 @@ bool8 SetUpFieldMove_Cut(void)
             if (ret == TRUE)
             {
                 gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-                gPostMenuFieldCallback = FieldCallback_CutGrass;
+				if (!FlagGet(FLAG_TEMP_CUT))
+					gPostMenuFieldCallback = FieldCallback_CutGrass;
+				else
+					gPostMenuFieldCallback = StartCutGrassFieldEffect;
             }
         }
         else
@@ -246,7 +250,10 @@ bool8 SetUpFieldMove_Cut(void)
                         || MetatileBehavior_IsAshGrass(tileBehavior) == TRUE)
                         {
                             gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-                            gPostMenuFieldCallback = FieldCallback_CutGrass;
+							if (!FlagGet(FLAG_TEMP_CUT))
+								gPostMenuFieldCallback = FieldCallback_CutGrass;
+							else
+								gPostMenuFieldCallback = StartCutGrassFieldEffect;
                             sHyperCutTiles[tileArrayId] = TRUE;
                             ret = TRUE;
                         }
@@ -262,7 +269,10 @@ bool8 SetUpFieldMove_Cut(void)
             if (ret == TRUE)
             {
                 gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
-                gPostMenuFieldCallback = FieldCallback_CutGrass;
+				if (!FlagGet(FLAG_TEMP_CUT))
+					gPostMenuFieldCallback = FieldCallback_CutGrass;
+				else
+					gPostMenuFieldCallback = StartCutGrassFieldEffect;
             }
         }
 
@@ -274,6 +284,7 @@ static void FieldCallback_CutGrass(void)
 {
     FieldEffectStart(FLDEFF_USE_CUT_ON_GRASS);
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
+	FlagSet(FLAG_TEMP_CUT);
 }
 
 bool8 FldEff_UseCutOnGrass(void)
@@ -282,7 +293,6 @@ bool8 FldEff_UseCutOnGrass(void)
 
     gTasks[taskId].data[8] = (u32)StartCutGrassFieldEffect >> 16;
     gTasks[taskId].data[9] = (u32)StartCutGrassFieldEffect;
-    IncrementGameStat(GAME_STAT_USED_CUT);
     return FALSE;
 }
 
@@ -306,6 +316,7 @@ static void StartCutGrassFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_CUT_ON_GRASS);
     FieldEffectStart(FLDEFF_CUT_GRASS);
+    IncrementGameStat(GAME_STAT_USED_CUT);
 }
 
 bool8 FldEff_CutGrass(void)

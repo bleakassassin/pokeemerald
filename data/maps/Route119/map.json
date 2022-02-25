@@ -477,7 +477,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_Kecleon1",
+      "script": "EventScript_Kecleon",
       "flag": "FLAG_HIDE_ROUTE_119_KECLEON_1"
     },
     {
@@ -490,7 +490,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_Kecleon2",
+      "script": "EventScript_Kecleon",
       "flag": "FLAG_HIDE_ROUTE_119_KECLEON_2"
     },
     {
@@ -598,6 +598,13 @@
       "y": 109,
       "elevation": 0,
       "dest_map": "MAP_ROUTE119_HOUSE",
+      "dest_warp_id": 0
+    },
+    {
+      "x": 33,
+      "y": 110,
+      "elevation": 0,
+      "dest_map": "MAP_ROUTE119",
       "dest_warp_id": 0
     }
   ],

@@ -42,7 +42,10 @@
 #define TUTOR_MOVE_THUNDER_PUNCH   27
 #define TUTOR_MOVE_FIRE_PUNCH      28
 #define TUTOR_MOVE_FURY_CUTTER     29
-#define TUTOR_MOVE_COUNT           30
+#define TUTOR_MOVE_NIGHTMARE       30
+#define TUTOR_MOVE_SELF_DESTRUCT   31
+#define TUTOR_MOVE_SKY_ATTACK      32
+#define TUTOR_MOVE_COUNT           33
 
 #define PARTY_LAYOUT_SINGLE          0
 #define PARTY_LAYOUT_DOUBLE          1
