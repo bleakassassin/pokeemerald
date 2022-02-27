@@ -4202,6 +4202,66 @@
       "blockdata_filepath": "data/layouts/AlteringCave/map.bin"
     },
     {
+      "id": "LAYOUT_ALTERING_CAVE_FIRE",
+      "name": "AlteringCave_Fire_Layout",
+      "width": 32,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Lavaridge",
+      "border_filepath": "data/layouts/AlteringCave_Fire/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Fire/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_SAND",
+      "name": "AlteringCave_Sand_Layout",
+      "width": 32,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_MirageTower",
+      "border_filepath": "data/layouts/AlteringCave_Sand/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Sand/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_LIGHT",
+      "name": "AlteringCave_Light_Layout",
+      "width": 32,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_NavelRock",
+      "border_filepath": "data/layouts/AlteringCave_Light/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Light/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_TUNNEL",
+      "name": "AlteringCave_Tunnel_Layout",
+      "width": 32,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_RusturfTunnel",
+      "border_filepath": "data/layouts/AlteringCave_Tunnel/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Tunnel/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_ICE",
+      "name": "AlteringCave_Ice_Layout",
+      "width": 32,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Ice/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Ice/map.bin"
+    },
+    {
+      "id": "LAYOUT_ALTERING_CAVE_ANCIENT",
+      "name": "AlteringCave_Ancient_Layout",
+      "width": 32,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/AlteringCave_Ancient/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Ancient/map.bin"
+    },
+    {
       "id": "LAYOUT_NAVEL_ROCK_EXTERIOR",
       "name": "NavelRock_Exterior_Layout",
       "width": 21,

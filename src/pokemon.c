@@ -2101,13 +2101,13 @@ static const u16 sHMMoves[] =
 
 static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
 {
-    {SPECIES_NONE,      ITEM_NONE},
-    {SPECIES_MAREEP,    ITEM_GANLON_BERRY},
-    {SPECIES_PINECO,    ITEM_APICOT_BERRY},
-    {SPECIES_HOUNDOUR,  ITEM_BIG_MUSHROOM},
-    {SPECIES_TEDDIURSA, ITEM_PETAYA_BERRY},
-    {SPECIES_AIPOM,     ITEM_BERRY_JUICE},
-    {SPECIES_SHUCKLE,   ITEM_BERRY_JUICE},
+    {SPECIES_KANGASKHAN, ITEM_GANLON_BERRY},
+    {SPECIES_MAGMAR,     ITEM_PETAYA_BERRY},
+    {SPECIES_MAROWAK,    ITEM_NONE},
+    {SPECIES_ELECTABUZZ, ITEM_SALAC_BERRY},
+    {SPECIES_PRIMEAPE,   ITEM_LIECHI_BERRY},
+    {SPECIES_JYNX,       ITEM_NONE},
+    {SPECIES_MR_MIME,    ITEM_APICOT_BERRY},
     {SPECIES_STANTLER,  ITEM_PETAYA_BERRY},
     {SPECIES_SMEARGLE,  ITEM_SALAC_BERRY},
 };
@@ -6597,16 +6597,16 @@ void SetWildMonHeldItem(void)
         if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
         {
             s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
-            if (alteringCaveId != 0)
+            if (sAlteringCaveWildMonHeldItems[alteringCaveId].item != ITEM_NONE)
             {
-                // In active Altering Cave, use special item list
+                // In Altering Cave with Pokemon that doesn't have wild hold items, use special item list
                 if (rnd < chanceCommon)
                     return;
                 SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &sAlteringCaveWildMonHeldItems[alteringCaveId].item);
             }
             else
             {
-                // In inactive Altering Cave, use normal items
+                // In Altering Cave with Pokemon that does have wild hold items, use normal items
                 if (rnd < chanceNoItem)
                     return;
                 if (rnd < chanceCommon)
