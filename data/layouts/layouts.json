@@ -1762,74 +1762,74 @@
       "blockdata_filepath": "data/layouts/UnusedCave7/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE8",
-      "name": "UnusedCave8_Layout",
-      "width": 1,
-      "height": 1,
+      "id": "LAYOUT_ALTERING_CAVE",
+      "name": "AlteringCave_Layout",
+      "width": 32,
+      "height": 24,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave8/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave8/map.bin"
+      "border_filepath": "data/layouts/AlteringCave/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE9",
-      "name": "UnusedCave9_Layout",
-      "width": 1,
-      "height": 1,
+      "id": "LAYOUT_ALTERING_CAVE_FIRE",
+      "name": "AlteringCave_Fire_Layout",
+      "width": 32,
+      "height": 24,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave9/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave9/map.bin"
+      "secondary_tileset": "gTileset_Lavaridge",
+      "border_filepath": "data/layouts/AlteringCave_Fire/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Fire/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE10",
-      "name": "UnusedCave10_Layout",
-      "width": 1,
-      "height": 1,
+      "id": "LAYOUT_ALTERING_CAVE_SAND",
+      "name": "AlteringCave_Sand_Layout",
+      "width": 32,
+      "height": 24,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave10/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave10/map.bin"
+      "secondary_tileset": "gTileset_MirageTower",
+      "border_filepath": "data/layouts/AlteringCave_Sand/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Sand/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE11",
-      "name": "UnusedCave11_Layout",
-      "width": 1,
-      "height": 1,
+      "id": "LAYOUT_ALTERING_CAVE_LIGHT",
+      "name": "AlteringCave_Light_Layout",
+      "width": 32,
+      "height": 24,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave11/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave11/map.bin"
+      "secondary_tileset": "gTileset_NavelRock",
+      "border_filepath": "data/layouts/AlteringCave_Light/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Light/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE12",
-      "name": "UnusedCave12_Layout",
-      "width": 1,
-      "height": 1,
+      "id": "LAYOUT_ALTERING_CAVE_TUNNEL",
+      "name": "AlteringCave_Tunnel_Layout",
+      "width": 32,
+      "height": 24,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave12/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave12/map.bin"
+      "secondary_tileset": "gTileset_RusturfTunnel",
+      "border_filepath": "data/layouts/AlteringCave_Tunnel/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Tunnel/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE13",
-      "name": "UnusedCave13_Layout",
-      "width": 1,
-      "height": 1,
+      "id": "LAYOUT_ALTERING_CAVE_ICE",
+      "name": "AlteringCave_Ice_Layout",
+      "width": 32,
+      "height": 24,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave13/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave13/map.bin"
+      "border_filepath": "data/layouts/AlteringCave_Ice/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Ice/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE14",
-      "name": "UnusedCave14_Layout",
-      "width": 1,
-      "height": 1,
+      "id": "LAYOUT_ALTERING_CAVE_ANCIENT",
+      "name": "AlteringCave_Ancient_Layout",
+      "width": 32,
+      "height": 24,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave14/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave14/map.bin"
+      "border_filepath": "data/layouts/AlteringCave_Ancient/border.bin",
+      "blockdata_filepath": "data/layouts/AlteringCave_Ancient/map.bin"
     },
     {
       "id": "LAYOUT_NEW_MAUVILLE_ENTRANCE",
@@ -4192,74 +4192,14 @@
       "blockdata_filepath": "data/layouts/TrainerHill_Roof/map.bin"
     },
     {
-      "id": "LAYOUT_ALTERING_CAVE",
-      "name": "AlteringCave_Layout",
-      "width": 32,
-      "height": 24,
+      "id": "LAYOUT_UNUSED_CAVE8",
+      "name": "UnusedCave8_Layout",
+      "width": 1,
+      "height": 1,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/AlteringCave/border.bin",
-      "blockdata_filepath": "data/layouts/AlteringCave/map.bin"
-    },
-    {
-      "id": "LAYOUT_ALTERING_CAVE_FIRE",
-      "name": "AlteringCave_Fire_Layout",
-      "width": 32,
-      "height": 24,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Lavaridge",
-      "border_filepath": "data/layouts/AlteringCave_Fire/border.bin",
-      "blockdata_filepath": "data/layouts/AlteringCave_Fire/map.bin"
-    },
-    {
-      "id": "LAYOUT_ALTERING_CAVE_SAND",
-      "name": "AlteringCave_Sand_Layout",
-      "width": 32,
-      "height": 24,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_MirageTower",
-      "border_filepath": "data/layouts/AlteringCave_Sand/border.bin",
-      "blockdata_filepath": "data/layouts/AlteringCave_Sand/map.bin"
-    },
-    {
-      "id": "LAYOUT_ALTERING_CAVE_LIGHT",
-      "name": "AlteringCave_Light_Layout",
-      "width": 32,
-      "height": 24,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_NavelRock",
-      "border_filepath": "data/layouts/AlteringCave_Light/border.bin",
-      "blockdata_filepath": "data/layouts/AlteringCave_Light/map.bin"
-    },
-    {
-      "id": "LAYOUT_ALTERING_CAVE_TUNNEL",
-      "name": "AlteringCave_Tunnel_Layout",
-      "width": 32,
-      "height": 24,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_RusturfTunnel",
-      "border_filepath": "data/layouts/AlteringCave_Tunnel/border.bin",
-      "blockdata_filepath": "data/layouts/AlteringCave_Tunnel/map.bin"
-    },
-    {
-      "id": "LAYOUT_ALTERING_CAVE_ICE",
-      "name": "AlteringCave_Ice_Layout",
-      "width": 32,
-      "height": 24,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/AlteringCave_Ice/border.bin",
-      "blockdata_filepath": "data/layouts/AlteringCave_Ice/map.bin"
-    },
-    {
-      "id": "LAYOUT_ALTERING_CAVE_ANCIENT",
-      "name": "AlteringCave_Ancient_Layout",
-      "width": 32,
-      "height": 24,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/AlteringCave_Ancient/border.bin",
-      "blockdata_filepath": "data/layouts/AlteringCave_Ancient/map.bin"
+      "border_filepath": "data/layouts/UnusedCave8/border.bin",
+      "blockdata_filepath": "data/layouts/UnusedCave8/map.bin"
     },
     {
       "id": "LAYOUT_NAVEL_ROCK_EXTERIOR",
