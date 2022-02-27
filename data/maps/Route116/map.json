@@ -113,7 +113,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_ItemEther",
+      "script": "ItemBall_EventScript_ItemEther",
       "flag": "FLAG_ITEM_ROUTE_116_ETHER"
     },
     {
@@ -126,7 +126,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_ItemRepel",
+      "script": "ItemBall_EventScript_ItemRepel",
       "flag": "FLAG_ITEM_ROUTE_116_REPEL"
     },
     {
@@ -217,7 +217,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_ItemHPUp",
+      "script": "ItemBall_EventScript_ItemHPUp",
       "flag": "FLAG_ITEM_ROUTE_116_HP_UP"
     },
     {
@@ -282,7 +282,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_ItemXSpecial",
+      "script": "ItemBall_EventScript_ItemXSpecial",
       "flag": "FLAG_ITEM_ROUTE_116_X_SPECIAL"
     },
     {
@@ -347,7 +347,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route116_EventScript_ItemPotion",
+      "script": "ItemBall_EventScript_ItemPotion",
       "flag": "FLAG_ITEM_ROUTE_116_POTION"
     },
     {

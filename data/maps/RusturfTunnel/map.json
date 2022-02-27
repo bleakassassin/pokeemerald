@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RusturfTunnel_EventScript_ItemPokeBall",
+      "script": "ItemBall_EventScript_ItemPokeBall",
       "flag": "FLAG_ITEM_RUSTURF_TUNNEL_POKE_BALL"
     },
     {
@@ -63,7 +63,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "RusturfTunnel_EventScript_ItemMaxEther",
+      "script": "ItemBall_EventScript_ItemMaxEther",
       "flag": "FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER"
     },
     {

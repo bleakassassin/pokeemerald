@@ -243,7 +243,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemSuperRepel",
+      "script": "ItemBall_EventScript_ItemSuperRepel",
       "flag": "FLAG_ITEM_ROUTE_119_SUPER_REPEL"
     },
     {
@@ -256,7 +256,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemZinc",
+      "script": "ItemBall_EventScript_ItemZinc",
       "flag": "FLAG_ITEM_ROUTE_119_ZINC"
     },
     {
@@ -269,7 +269,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemElixir",
+      "script": "ItemBall_EventScript_ItemElixir",
       "flag": "FLAG_ITEM_ROUTE_119_ELIXIR_1"
     },
     {
@@ -282,7 +282,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemLeafStone",
+      "script": "ItemBall_EventScript_ItemLeafStone",
       "flag": "FLAG_ITEM_ROUTE_119_LEAF_STONE"
     },
     {
@@ -295,7 +295,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemRareCandy",
+      "script": "ItemBall_EventScript_ItemRareCandy",
       "flag": "FLAG_ITEM_ROUTE_119_RARE_CANDY"
     },
     {
@@ -308,7 +308,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemHyperPotion",
+      "script": "ItemBall_EventScript_ItemHyperPotion",
       "flag": "FLAG_ITEM_ROUTE_119_HYPER_POTION_1"
     },
     {
@@ -438,7 +438,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemHyperPotion2",
+      "script": "ItemBall_EventScript_ItemHyperPotion",
       "flag": "FLAG_ITEM_ROUTE_119_HYPER_POTION_2"
     },
     {
@@ -555,7 +555,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemNugget",
+      "script": "ItemBall_EventScript_ItemNugget",
       "flag": "FLAG_ITEM_ROUTE_119_NUGGET"
     },
     {
@@ -568,7 +568,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route119_EventScript_ItemElixir2",
+      "script": "ItemBall_EventScript_ItemElixir",
       "flag": "FLAG_ITEM_ROUTE_119_ELIXIR_2"
     },
     {

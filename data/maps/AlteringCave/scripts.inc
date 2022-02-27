@@ -18,10 +18,10 @@ AlteringCave_EventScript_ResetItemBall::
 AlteringCave_EventScript_DailyVitamin::
 	setflag FLAG_DAILY_ITEM_ALTERING_CAVE
 	switch VAR_ALTERING_CAVE_WILD_SET
-	case 0, Route111_EventScript_ItemHPUp
-	case 1, Route123_EventScript_ItemCalcium
-	case 2, Route105_EventScript_ItemIron
-	case 3, Route121_EventScript_ItemCarbos
-	case 4, Route106_EventScript_ItemProtein
-	case 5, Route103_EventScript_ItemPPUp
-	case 6, Route119_EventScript_ItemZinc
+	case 0, ItemBall_EventScript_ItemHPUp
+	case 1, ItemBall_EventScript_ItemCalcium
+	case 2, ItemBall_EventScript_ItemIron
+	case 3, ItemBall_EventScript_ItemCarbos
+	case 4, ItemBall_EventScript_ItemProtein
+	case 5, ItemBall_EventScript_ItemPPUp
+	case 6, ItemBall_EventScript_ItemZinc

@@ -295,7 +295,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_ItemCalcium",
+      "script": "ItemBall_EventScript_ItemCalcium",
       "flag": "FLAG_ITEM_ROUTE_123_CALCIUM"
     },
     {
@@ -438,7 +438,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_ItemUltraBall",
+      "script": "ItemBall_EventScript_ItemUltraBall",
       "flag": "FLAG_ITEM_ROUTE_123_ULTRA_BALL"
     },
     {
@@ -451,7 +451,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_ItemElixir",
+      "script": "ItemBall_EventScript_ItemElixir",
       "flag": "FLAG_ITEM_ROUTE_123_ELIXIR"
     },
     {
@@ -542,7 +542,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_ItemPPUp",
+      "script": "ItemBall_EventScript_ItemPPUp",
       "flag": "FLAG_ITEM_ROUTE_123_PP_UP"
     },
     {
@@ -581,7 +581,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "Route123_EventScript_ItemRevivalHerb",
+      "script": "ItemBall_EventScript_ItemRevivalHerb",
       "flag": "FLAG_ITEM_ROUTE_123_REVIVAL_HERB"
     }
   ],
