@@ -1797,7 +1797,7 @@
       "width": 32,
       "height": 24,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_NavelRock",
+      "secondary_tileset": "gTileset_MeteorFalls",
       "border_filepath": "data/layouts/AlteringCave_Light/border.bin",
       "blockdata_filepath": "data/layouts/AlteringCave_Light/map.bin"
     },
