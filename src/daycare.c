@@ -473,22 +473,9 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
     FlagSet(FLAG_PENDING_DAYCARE_EGG);
 }
 
-// Functionally unused
-static void _TriggerPendingDaycareMaleEgg(struct DayCare *daycare)
-{
-    daycare->offspringPersonality = (Random()) | (EGG_GENDER_MALE);
-    FlagSet(FLAG_PENDING_DAYCARE_EGG);
-}
-
 void TriggerPendingDaycareEgg(void)
 {
     _TriggerPendingDaycareEgg(&gSaveBlock1Ptr->daycare);
-}
-
-// Unused
-static void TriggerPendingDaycareMaleEgg(void)
-{
-    _TriggerPendingDaycareMaleEgg(&gSaveBlock1Ptr->daycare);
 }
 
 // Removes the selected index from the given IV list and shifts the remaining
@@ -645,6 +632,45 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
 
     numEggMoves = GetEggMoves(egg, sHatchedEggEggMoves);
 
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (sHatchedEggFatherMoves[i] == MOVE_NONE)
+            break;
+        for (j = 0; j < MAX_MON_MOVES; j++)
+        {
+            if (sHatchedEggFatherMoves[i] == sHatchedEggMotherMoves[j])
+                sHatchedEggFinalMoves[numSharedParentMoves++] = sHatchedEggFatherMoves[i];
+        }
+    }
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (sHatchedEggFinalMoves[i] == MOVE_NONE)
+            break;
+        for (j = 0; j < numLevelUpMoves; j++)
+        {
+            if (sHatchedEggLevelUpMoves[j] != MOVE_NONE && sHatchedEggFinalMoves[i] == sHatchedEggLevelUpMoves[j])
+            {
+                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == MON_HAS_MAX_MOVES)
+                    DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFinalMoves[i]);
+                break;
+            }
+        }
+    }
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (sHatchedEggFatherMoves[i] != MOVE_NONE)
+        {
+            for (j = 0; j < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; j++)
+            {
+                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
+                {
+                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == MON_HAS_MAX_MOVES)
+                        DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
+                }
+            }
+        }
+    }
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (sHatchedEggFatherMoves[i] != MOVE_NONE)
@@ -666,42 +692,20 @@ static void BuildEggMoveset(struct Pokemon *egg, struct BoxPokemon *father, stru
     }
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (sHatchedEggFatherMoves[i] != MOVE_NONE)
+        if (sHatchedEggMotherMoves[i] != MOVE_NONE)
         {
-            for (j = 0; j < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; j++)
+            for (j = 0; j < numEggMoves; j++)
             {
-                if (sHatchedEggFatherMoves[i] == ItemIdToBattleMoveId(ITEM_TM01_FOCUS_PUNCH + j) && CanMonLearnTMHM(egg, j))
+                if (sHatchedEggMotherMoves[i] == sHatchedEggEggMoves[j])
                 {
-                    if (GiveMoveToMon(egg, sHatchedEggFatherMoves[i]) == MON_HAS_MAX_MOVES)
-                        DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFatherMoves[i]);
+                    if (GiveMoveToMon(egg, sHatchedEggMotherMoves[i]) == MON_HAS_MAX_MOVES)
+                        DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggMotherMoves[i]);
+                    break;
                 }
             }
         }
-    }
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (sHatchedEggFatherMoves[i] == MOVE_NONE)
+        else
             break;
-        for (j = 0; j < MAX_MON_MOVES; j++)
-        {
-            if (sHatchedEggFatherMoves[i] == sHatchedEggMotherMoves[j] && sHatchedEggFatherMoves[i] != MOVE_NONE)
-                sHatchedEggFinalMoves[numSharedParentMoves++] = sHatchedEggFatherMoves[i];
-        }
-    }
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        if (sHatchedEggFinalMoves[i] == MOVE_NONE)
-            break;
-        for (j = 0; j < numLevelUpMoves; j++)
-        {
-            if (sHatchedEggLevelUpMoves[j] != MOVE_NONE && sHatchedEggFinalMoves[i] == sHatchedEggLevelUpMoves[j])
-            {
-                if (GiveMoveToMon(egg, sHatchedEggFinalMoves[i]) == MON_HAS_MAX_MOVES)
-                    DeleteFirstMoveAndGiveMoveToMon(egg, sHatchedEggFinalMoves[i]);
-                break;
-            }
-        }
     }
 }
 
