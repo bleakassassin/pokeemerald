@@ -417,38 +417,23 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
 {
     u32 species[DAYCARE_MON_COUNT];
     s32 i;
-    s32 dittoCount;
+    s32 holdCount;
     s32 parent = -1;
 
-    // search for female gender
-    for (i = 0; i < DAYCARE_MON_COUNT; i++)
+    // search for parent holding Everstone
+    for (i = 0, holdCount = 0; i < DAYCARE_MON_COUNT; i++)
     {
-        if (GetBoxMonGender(&daycare->mons[i].mon) == MON_FEMALE)
-            parent = i;
+        if (GetBoxMonData(&daycare->mons[i].mon, MON_DATA_HELD_ITEM) == ITEM_EVERSTONE)
+            parent = i, holdCount++;
     }
 
-    // search for ditto
-    for (dittoCount = 0, i = 0; i < DAYCARE_MON_COUNT; i++)
-    {
-        species[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SPECIES);
-        if (species[i] == SPECIES_DITTO)
-            dittoCount++, parent = i;
-    }
-
-    // coin flip on ...two Dittos
-    if (dittoCount == DAYCARE_MON_COUNT)
+    // coin flip on two parents holding Everstone
+    if (holdCount == DAYCARE_MON_COUNT)
     {
         if (Random() >= USHRT_MAX / 2)
             parent = 0;
         else
             parent = 1;
-    }
-
-    // Don't inherit nature if not holding Everstone
-    if (GetBoxMonData(&daycare->mons[parent].mon, MON_DATA_HELD_ITEM) != ITEM_EVERSTONE
-        || Random() >= USHRT_MAX / 2)
-    {
-        return -1;
     }
 
     return parent;
@@ -795,6 +780,10 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     if (eggSpecies == SPECIES_ILLUMISE && daycare->offspringPersonality & EGG_GENDER_MALE)
     {
         eggSpecies = SPECIES_VOLBEAT;
+    }
+    if (eggSpecies == SPECIES_VOLBEAT && !(daycare->offspringPersonality & EGG_GENDER_MALE))
+    {
+        eggSpecies = SPECIES_ILLUMISE;
     }
 
     // Make Ditto the "mother" slot if the other daycare mon is male.
