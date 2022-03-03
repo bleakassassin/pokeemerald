@@ -2391,7 +2391,7 @@ Route117_Text_LydiaRematchDefeat:
 
 Route117_Text_LydiaPostRematch:
 	.string "POKéMON seem to like different kinds\n"
-	.string "of {POKEBLOCK}S, depending on their Nature.$"
+	.string "of {POKEBLOCK}S, depending on their NATURE.$"
 
 Route117_Text_DylanIntro:
 	.string "I'm in the middle of a triathlon, but,\n"
@@ -3039,7 +3039,7 @@ Route120_Text_JeffreyPostRematch:
 	.string "For my precious BUG POKéMON…$"
 
 Route120_Text_JenniferIntro:
-	.string "POKéMON have many Abilities. If you\n"
+	.string "POKéMON have many ABILITIES. If you\n"
 	.string "want to become a first-class TRAINER,\l"
 	.string "learn about them.$"
 
@@ -3047,7 +3047,7 @@ Route120_Text_JenniferDefeat:
 	.string "You're obviously thinking.$"
 
 Route120_Text_JenniferPostBattle:
-	.string "The Abilities of POKéMON will\n"
+	.string "The ABILITIES of POKéMON will\n"
 	.string "make battle styles change.$"
 
 Route120_Text_ChipIntro:

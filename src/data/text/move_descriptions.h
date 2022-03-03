@@ -1087,7 +1087,7 @@ static const u8 sTrickDescription[] = _(
 
 static const u8 sRolePlayDescription[] = _(
     "Mimics the target and\n"
-    "copies its Ability.");
+    "copies its ABILITY.");
 
 static const u8 sWishDescription[] = _(
     "A wish that restores HP.\n"
@@ -1138,7 +1138,7 @@ static const u8 sEruptionDescription[] = _(
     "the more damage caused.");
 
 static const u8 sSkillSwapDescription[] = _(
-    "The user swaps Abilities\n"
+    "The user swaps ABILITIES\n"
     "with the target.");
 
 static const u8 sImprisonDescription[] = _(

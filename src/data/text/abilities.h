@@ -1,4 +1,4 @@
-static const u8 sNoneDescription[] = _("No Ability.");
+static const u8 sNoneDescription[] = _("No ABILITY.");
 static const u8 sStenchDescription[] = _("Helps repel wild POKéMON.");
 static const u8 sDrizzleDescription[] = _("Summons rain in battle.");
 static const u8 sSpeedBoostDescription[] = _("Gradually boosts SPEED.");
@@ -34,7 +34,7 @@ static const u8 sSereneGraceDescription[] = _("Promotes added effects.");
 static const u8 sSwiftSwimDescription[] = _("Raises SPEED in rain.");
 static const u8 sChlorophyllDescription[] = _("Raises SPEED in sunshine.");
 static const u8 sIlluminateDescription[] = _("Encounter rate increases.");
-static const u8 sTraceDescription[] = _("Copies Ability.");
+static const u8 sTraceDescription[] = _("Copies ABILITY.");
 static const u8 sHugePowerDescription[] = _("Raises ATTACK.");
 static const u8 sPoisonPointDescription[] = _("Poisons foe on contact.");
 static const u8 sInnerFocusDescription[] = _("Prevents flinching.");

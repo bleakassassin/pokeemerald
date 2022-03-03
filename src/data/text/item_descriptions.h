@@ -1353,7 +1353,7 @@ static const u8 sTM47Desc[] = _(
     "slams into the foe.");
 
 static const u8 sTM48Desc[] = _(
-    "Switches Abilities\n"
+    "Switches ABILITIES\n"
     "with the foe on the\n"
     "turn this is used.");
 

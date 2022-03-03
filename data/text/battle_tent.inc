@@ -136,7 +136,7 @@ VerdanturfTown_BattleTentLobby_Text_ExplainVerdanturfTent:
 	.string "TRAINERS are otherwise forbidden to\n"
 	.string "command their POKéMON.\p"
 	.string "The POKéMON are to behave according\n"
-	.string "to their Nature and battle on their own.\p"
+	.string "to their NATURE and battle on their own.\p"
 	.string "You must put your trust in your\n"
 	.string "POKéMON and watch over them.\p"
 	.string "If you achieve the honor of beating\n"
@@ -372,17 +372,17 @@ VerdanturfTown_BattleTentLobby_Text_ExplainBasicRules:
 	.string "battle by themselves.\p"
 	.string "Unlike in the wild, POKéMON that live\n"
 	.string "with people behave differently\l"
-	.string "depending on their Nature.$"
+	.string "depending on their NATURE.$"
 
 @ Unused
 VerdanturfTown_BattleTentLobby_Text_ExplainNatureRules:
-	.string "Depending on its Nature, a POKéMON\n"
+	.string "Depending on its NATURE, a POKéMON\n"
 	.string "may prefer to attack no matter what.\p"
 	.string "Another POKéMON may prefer to protect\n"
 	.string "itself from any harm.\p"
 	.string "Yet another may enjoy vexing or\n"
 	.string "confounding its foes.\p"
-	.string "Depending on its Nature, a POKéMON\n"
+	.string "Depending on its NATURE, a POKéMON\n"
 	.string "will have favorite moves that it is good\l"
 	.string "at using.\p"
 	.string "It may also dislike certain moves that\n"
@@ -410,14 +410,14 @@ VerdanturfTown_BattleTentLobby_Text_ExplainUnderpoweredRules:
 	.string "A POKéMON is not good at using any\n"
 	.string "move that it dislikes.\p"
 	.string "If a POKéMON only knows moves that\n"
-	.string "do not match its Nature, it will often\l"
+	.string "do not match its NATURE, it will often\l"
 	.string "be unable to live up to its potential.$"
 
 @ Unused
 VerdanturfTown_BattleTentLobby_Text_ExplainWhenInDangerRules:
-	.string "Depending on its Nature, a POKéMON may\n"
+	.string "Depending on its NATURE, a POKéMON may\n"
 	.string "start using moves that don't match its\l"
-	.string "Nature when it is in trouble.\p"
+	.string "NATURE when it is in trouble.\p"
 	.string "If a POKéMON begins behaving oddly\n"
 	.string "in a pinch, watch it carefully.$"
 

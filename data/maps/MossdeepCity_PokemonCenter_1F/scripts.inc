@@ -32,7 +32,7 @@ MossdeepCity_PokemonCenter_1F_Text_GymLeaderDuoFormidable:
 	.string "excellent and wow!$"
 
 MossdeepCity_PokemonCenter_1F_Text_AbilitiesMightChangeMoves:
-	.string "Depending on the Abilities of POKéMON,\n"
+	.string "Depending on the ABILITIES of POKéMON,\n"
 	.string "some moves might change or not work\l"
 	.string "at all.$"
 

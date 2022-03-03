@@ -731,11 +731,11 @@ BattleFrontier_BattlePikeRoomNormal_Text_ThatsEnough:
 
 BattleFrontier_BattlePikeRoomNormal_Text_ApologizeForKirlia:
 	.string "I must apologize to you…\p"
-	.string "My KIRLIA has a TIMID Nature…$"
+	.string "My KIRLIA has a TIMID NATURE…$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ApologizeForDusclops:
 	.string "I must apologize to you…\p"
-	.string "My DUSCLOPS has a TIMID Nature…$"
+	.string "My DUSCLOPS has a TIMID NATURE…$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_AttacksWhenStartled:
 	.string "It attacks without warning if it is\n"
