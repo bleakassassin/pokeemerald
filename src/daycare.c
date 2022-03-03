@@ -19,6 +19,7 @@
 #include "party_menu.h"
 #include "list_menu.h"
 #include "overworld.h"
+#include "item.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
@@ -443,6 +444,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 {
     s32 parent;
     s32 natureTries = 0;
+    u32 personality;
 
     SeedRng2(gMain.vblankCounter2);
     parent = GetParentToInheritNature(daycare);
@@ -450,13 +452,36 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
     // don't inherit nature
     if (parent < 0)
     {
-        daycare->offspringPersonality = (Random2() << 16) | ((Random() % 0xfffe) + 1);
+        u16 j = 0;
+        u32 shinyValue;
+        u16 shinyRolls = 2;
+
+        u32 value = gSaveBlock2Ptr->playerTrainerId[0]
+              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+        // Masuda method
+        if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_LANGUAGE) != GetBoxMonData(&daycare->mons[1].mon, MON_DATA_LANGUAGE))
+			shinyRolls += 10;
+
+        // Shiny Charm
+        if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+            shinyRolls += 4;
+
+        do
+        {
+            personality = Random32();
+            shinyValue = GET_SHINY_VALUE(value, personality);
+            j++;
+        } while (shinyValue >= SHINY_ODDS && j < shinyRolls);
+        
+		daycare->offspringPersonality = personality;
     }
     // inherit nature
     else
     {
         u8 wantedNature = GetNatureFromPersonality(GetBoxMonData(&daycare->mons[parent].mon, MON_DATA_PERSONALITY, NULL));
-        u32 personality;
 
         do
         {

@@ -1408,6 +1408,12 @@ static const u8 sHM08Desc[] = _(
     "the 1st turn, then\n"
     "attacks next turn.");
 
+// Charms
+static const u8 sShinyCharmDesc[] = _(
+    "Increases chance\n"
+    "of finding a SHINY\n"
+    "POKéMON.");
+
 // FireRed/LeafGreen key items
 static const u8 sOaksParcelDesc[] = _(
     "A parcel for PROF.\n"

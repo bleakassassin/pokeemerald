@@ -113,3 +113,21 @@ gBirchDexRatingText_OnANationwideBasis::
 	.string "On a nationwide basis…\p"
 	.string "You've seen {STR_VAR_1} POKéMON,\n"
 	.string "and you've caught {STR_VAR_2} POKéMON…$"
+
+gBirchDexRatingText_NationalDexCompleted::
+	.string "Amazing!\n"
+	.string "You completed the NATIONAL POKéDEX!\p"
+	.string "Sniffle…\n"
+	.string "I am overwhelmed.\p"
+	.string "My decision to give you that POKéDEX\n"
+	.string "I'd ordered was wholly justified.\p"
+	.string "This is a testament to your hard work,\n"
+	.string "the support of those who helped you…\p"
+	.string "And the bonds you have built with\n"
+	.string "your POKéMON!\p"
+	.string "It's a unique treasure deserving of\n"
+	.string "something special. Here, take this!$"
+	
+gBirchDexRatingText_ImproveShinyChances::
+	.string "PROF. BIRCH: That will improve your\n"
+	.string "chances of finding a SHINY POKéMON!$"

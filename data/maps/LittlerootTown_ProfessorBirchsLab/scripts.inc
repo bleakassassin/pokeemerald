@@ -22,6 +22,7 @@ LittlerootTown_ProfessorBirchsLab_MapScripts::
 	@ 8: Entered lab after catching all Hoenn mons
 	@ 9: Birch told player to take final Johto starter
 	@ 10: Took final Johto starter
+	@ 11: Left lab after taking final Johto starter
 
 	@ State descriptions for VAR_BIRCH_LAB_STATE
 	@ 1: Never occurs
@@ -44,6 +45,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_End::
 LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForFinalJohtoStarter::
 	specialvar VAR_RESULT, HasAllHoennMons
 	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForFinalJohtoStarter
+LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout::
 	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
 	setobjectxyperm LOCALID_RIVAL, 5, 10
 	end
@@ -55,11 +57,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForFinalJohtoStarter::
 LittlerootTown_ProfessorBirchsLab_EventScript_SetJohtoStarterLayout::
 	setmaplayoutindex LAYOUT_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB_WITH_TABLE
 	return
-
-LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout::
-	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
-	setobjectxyperm LOCALID_RIVAL, 5, 10
-	end
 
 LittlerootTown_ProfessorBirchsLab_OnWarp:
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter
@@ -393,10 +390,11 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	lock
 	faceplayer
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
+	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting2
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRemainingPokemon
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting2
+	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting3
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 9, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveFinalPokemon
+	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 10, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_CheckIfMeteorFallsStevenDefeated
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
@@ -407,7 +405,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon::
 	release
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting::
+LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting2::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting2, MSGBOX_DEFAULT
 	release
 	end
@@ -417,13 +415,18 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRemainingPokemon::
 	release
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting2::
+LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting3::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting3, MSGBOX_DEFAULT
 	release
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveFinalPokemon::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CanHaveFinalPokemon, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	release
 	end
 
@@ -439,9 +442,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_DefeatedStevenChoosePokemon::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister::
 	goto_if_unset FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_UNKNOWN_0x380, ProfBirch_EventScript_RatePokedexOrRegister
-	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, ProfBirch_EventScript_RatePokedexOrRegister
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, ProfBirch_EventScript_RatePokedexOrRegister
-	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 10, ProfBirch_EventScript_RatePokedexOrRegister
+	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, ProfBirch_EventScript_RatePokedexOrRegister
 	goto_if_eq VAR_BIRCH_LAB_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome, MSGBOX_DEFAULT
 	release
@@ -622,11 +623,6 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork:
 	.string "It is to study things in the natural\n"
 	.string "environment, like fields and mountains,\l"
 	.string "instead of a laboratory.\p"
-	.string "The PROF isn't one for doing desk work.\n"
-	.string "He's the type of person who would\l"
-	.string "rather go outside and experience\l"
-	.string "things than read about them here.$"
-
 LittlerootTown_ProfessorBirchsLab_Text_BirchIsntOneForDeskWork:
 	.string "The PROF isn't one for doing desk work.\n"
 	.string "He's the type of person who would\l"

@@ -370,7 +370,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_HM08] = {gItemIcon_HM, gItemIconPalette_WaterTMHM},
     // ????????
     [ITEM_15B] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-    [ITEM_15C] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+    [ITEM_SHINY_CHARM] = {gItemIcon_ShinyCharm, gItemIconPalette_ShinyCharm},
     // FireRed/LeafGreen key items
     [ITEM_OAKS_PARCEL] = {gItemIcon_OaksParcel, gItemIconPalette_OaksParcel},
     [ITEM_POKE_FLUTE] = {gItemIcon_PokeFlute, gItemIconPalette_PokeFlute},
