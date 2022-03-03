@@ -463,7 +463,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 
         // Masuda method
         if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_LANGUAGE) != GetBoxMonData(&daycare->mons[1].mon, MON_DATA_LANGUAGE))
-			shinyRolls += 10;
+            shinyRolls += 10;
 
         // Shiny Charm
         if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
@@ -476,7 +476,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
             j++;
         } while (shinyValue >= SHINY_ODDS && j < shinyRolls);
         
-		daycare->offspringPersonality = personality;
+        daycare->offspringPersonality = personality;
     }
     // inherit nature
     else

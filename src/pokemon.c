@@ -2224,7 +2224,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     {
         u16 j = 0;
         u16 shinyRolls = 2;
-		
+        
         if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
             shinyRolls += 4;
 
@@ -2240,7 +2240,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             j++;
         } while (shinyValue >= SHINY_ODDS && j < shinyRolls);
     }
-	
+    
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
 
