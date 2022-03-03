@@ -64,18 +64,15 @@ static void Task_OptionMenuSave(u8 taskId);
 static void Task_OptionMenuFadeOut(u8 taskId);
 static void HighlightOptionMenuItem(u8 selection);
 static u8   TextSpeed_ProcessInput(u8 selection);
+static u8   TwoOptions_ProcessInput(u8 selection);
 static void TextSpeed_DrawChoices(u8 selection);
-static u8   BattleScene_ProcessInput(u8 selection);
 static void BattleScene_DrawChoices(u8 selection);
-static u8   BattleStyle_ProcessInput(u8 selection);
 static void BattleStyle_DrawChoices(u8 selection);
-static u8   AttackStyle_ProcessInput(u8 selection);
 static void AttackStyle_DrawChoices(u8 selection);
 static u8   Sound_ProcessInput(u8 selection);
 static void Sound_DrawChoices(u8 selection);
 static u8   FrameType_ProcessInput(u8 selection);
 static void FrameType_DrawChoices(u8 selection);
-static u8   ButtonMode_ProcessInput(u8 selection);
 static void ButtonMode_DrawChoices(u8 selection);
 static void DrawTextOption(void);
 static void DrawOptionMenuTexts(void);
@@ -312,21 +309,21 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             break;
         case MENUITEM_BATTLESCENE:
             previousOption = gTasks[taskId].data[TD_BATTLESCENE];
-            gTasks[taskId].data[TD_BATTLESCENE] = BattleScene_ProcessInput(gTasks[taskId].data[TD_BATTLESCENE]);
+            gTasks[taskId].data[TD_BATTLESCENE] = TwoOptions_ProcessInput(gTasks[taskId].data[TD_BATTLESCENE]);
 
             if (previousOption != gTasks[taskId].data[TD_BATTLESCENE])
                 BattleScene_DrawChoices(gTasks[taskId].data[TD_BATTLESCENE]);
             break;
         case MENUITEM_BATTLESTYLE:
             previousOption = gTasks[taskId].data[TD_BATTLESTYLE];
-            gTasks[taskId].data[TD_BATTLESTYLE] = BattleStyle_ProcessInput(gTasks[taskId].data[TD_BATTLESTYLE]);
+            gTasks[taskId].data[TD_BATTLESTYLE] = TwoOptions_ProcessInput(gTasks[taskId].data[TD_BATTLESTYLE]);
 
             if (previousOption != gTasks[taskId].data[TD_BATTLESTYLE])
                 BattleStyle_DrawChoices(gTasks[taskId].data[TD_BATTLESTYLE]);
             break;
         case MENUITEM_ATTACKSTYLE:
             previousOption = gTasks[taskId].data[TD_ATTACKSTYLE];
-            gTasks[taskId].data[TD_ATTACKSTYLE] = AttackStyle_ProcessInput(gTasks[taskId].data[TD_ATTACKSTYLE]);
+            gTasks[taskId].data[TD_ATTACKSTYLE] = TwoOptions_ProcessInput(gTasks[taskId].data[TD_ATTACKSTYLE]);
 
             if (previousOption != gTasks[taskId].data[TD_ATTACKSTYLE])
                 AttackStyle_DrawChoices(gTasks[taskId].data[TD_ATTACKSTYLE]);
@@ -340,7 +337,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             break;
         case MENUITEM_BUTTONMODE:
             previousOption = gTasks[taskId].data[TD_BUTTONMODE];
-            gTasks[taskId].data[TD_BUTTONMODE] = ButtonMode_ProcessInput(gTasks[taskId].data[TD_BUTTONMODE]);
+            gTasks[taskId].data[TD_BUTTONMODE] = TwoOptions_ProcessInput(gTasks[taskId].data[TD_BUTTONMODE]);
 
             if (previousOption != gTasks[taskId].data[TD_BUTTONMODE])
                 ButtonMode_DrawChoices(gTasks[taskId].data[TD_BUTTONMODE]);
@@ -458,7 +455,7 @@ static void TextSpeed_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_TextSpeedFast, GetStringRightAlignXOffset(FONT_NORMAL, gText_TextSpeedFast, 198), YPOS_TEXTSPEED, styles[2]);
 }
 
-static u8 BattleScene_ProcessInput(u8 selection)
+static u8 TwoOptions_ProcessInput(u8 selection)
 {
     if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
@@ -481,17 +478,6 @@ static void BattleScene_DrawChoices(u8 selection)
     DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), YPOS_BATTLESCENE, styles[1]);
 }
 
-static u8 BattleStyle_ProcessInput(u8 selection)
-{
-    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
-    {
-        selection ^= 1;
-        sArrowPressed = TRUE;
-    }
-
-    return selection;
-}
-
 static void BattleStyle_DrawChoices(u8 selection)
 {
     u8 styles[2];
@@ -502,17 +488,6 @@ static void BattleStyle_DrawChoices(u8 selection)
 
     DrawOptionMenuChoice(gText_BattleStyleShift, 104, YPOS_BATTLESTYLE, styles[0]);
     DrawOptionMenuChoice(gText_BattleStyleSet, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleStyleSet, 198), YPOS_BATTLESTYLE, styles[1]);
-}
-
-static u8 AttackStyle_ProcessInput(u8 selection)
-{
-    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
-    {
-        selection ^= 1;
-        sArrowPressed = TRUE;
-    }
-
-    return selection;
 }
 
 static void AttackStyle_DrawChoices(u8 selection)
@@ -609,50 +584,16 @@ static void FrameType_DrawChoices(u8 selection)
     DrawOptionMenuChoice(text, 131, YPOS_FRAMETYPE, 1);
 }
 
-static u8 ButtonMode_ProcessInput(u8 selection)
-{
-    if (JOY_NEW(DPAD_RIGHT))
-    {
-        if (selection <= 1)
-            selection++;
-        else
-            selection = 0;
-
-        sArrowPressed = TRUE;
-    }
-    if (JOY_NEW(DPAD_LEFT))
-    {
-        if (selection != 0)
-            selection--;
-        else
-            selection = 2;
-
-        sArrowPressed = TRUE;
-    }
-    return selection;
-}
-
 static void ButtonMode_DrawChoices(u8 selection)
 {
-    s32 widthNormal, widthLR, widthLA, xLR;
-    u8 styles[3];
+    u8 styles[2];
 
     styles[0] = 0;
     styles[1] = 0;
-    styles[2] = 0;
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(gText_ButtonTypeNormal, 104, YPOS_BUTTONMODE, styles[0]);
-
-    widthNormal = GetStringWidth(FONT_NORMAL, gText_ButtonTypeNormal, 0);
-    widthLR = GetStringWidth(FONT_NORMAL, gText_ButtonTypeLR, 0);
-    widthLA = GetStringWidth(FONT_NORMAL, gText_ButtonTypeLEqualsA, 0);
-
-    widthLR -= 94;
-    xLR = (widthNormal - widthLR - widthLA) / 2 + 104;
-    DrawOptionMenuChoice(gText_ButtonTypeLR, xLR, YPOS_BUTTONMODE, styles[1]);
-
-    DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeLEqualsA, 198), YPOS_BUTTONMODE, styles[2]);
+    DrawOptionMenuChoice(gText_ButtonTypeDefault, 104, YPOS_BUTTONMODE, styles[0]);
+    DrawOptionMenuChoice(gText_ButtonTypeLEqualsA, GetStringRightAlignXOffset(FONT_NORMAL, gText_ButtonTypeLEqualsA, 198), YPOS_BUTTONMODE, styles[1]);
 }
 
 static void DrawTextOption(void)
