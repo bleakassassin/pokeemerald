@@ -1120,7 +1120,7 @@ static void Cmd_accuracycheck(void)
         u8 type, moveAcc, holdEffect, param;
         s8 buff;
         u16 calc;
-	    u8 physical;
+        u8 physical;
 
         if (move == ACC_CURR_MOVE)
             move = gCurrentMove;
@@ -1848,8 +1848,8 @@ static void Cmd_healthbarupdate(void)
 static void Cmd_datahpupdate(void)
 {
     u32 moveType;
-	u8 physical;
-	u8 special;
+    u8 physical;
+    u8 special;
 
     if (gBattleControllerExecFlags)
         return;

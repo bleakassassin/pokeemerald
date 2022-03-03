@@ -923,9 +923,9 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIE
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = 14,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_SMART] = 15,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_TOUGH] = 13,
-	[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_PHYSICAL] = 13,
-	[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_SPECIAL] = 14,
-	[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_STATUS] = 13,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_PHYSICAL] = 13,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_SPECIAL] = 14,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_STATUS] = 13,
 };
 static const struct OamData sOamData_MoveSelector =
 {
@@ -1569,17 +1569,17 @@ static void Task_HandleInput(u8 taskId)
             PlaySE(SE_SELECT);
             BeginCloseSummaryScreen(taskId);
         }
-		else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
-		{
-			if (JOY_HELD(SELECT_BUTTON))
-			{
-				SetMoveCategoryIcons();
-			}
-			else
-			{
-				SetMoveTypeIcons();
-			}
-		}
+        else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+        {
+            if (JOY_HELD(SELECT_BUTTON))
+            {
+                SetMoveCategoryIcons();
+            }
+            else
+            {
+                SetMoveTypeIcons();
+            }
+        }
     }
 }
 
@@ -1949,17 +1949,17 @@ static void Task_HandleInput_MoveSelect(u8 taskId)
             PlaySE(SE_SELECT);
             CloseMoveSelectMode(taskId);
         }
-		else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
-		{
-			if (JOY_HELD(SELECT_BUTTON))
-			{
-				SetMoveCategoryIcons();
-			}
-			else
-			{
-				SetMoveTypeIcons();
-			}
-		}
+        else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+        {
+            if (JOY_HELD(SELECT_BUTTON))
+            {
+                SetMoveCategoryIcons();
+            }
+            else
+            {
+                SetMoveTypeIcons();
+            }
+        }
     }
 }
 
@@ -2088,17 +2088,17 @@ static void Task_HandleInput_MovePositionSwitch(u8 taskId)
         {
             ExitMovePositionSwitchMode(taskId, FALSE);
         }
-		else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
-		{
-			if (JOY_HELD(SELECT_BUTTON))
-			{
-				SetMoveCategoryIcons();
-			}
-			else
-			{
-				SetMoveTypeIcons();
-			}
-		}
+        else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+        {
+            if (JOY_HELD(SELECT_BUTTON))
+            {
+                SetMoveCategoryIcons();
+            }
+            else
+            {
+                SetMoveTypeIcons();
+            }
+        }
     }
 }
 
@@ -2255,19 +2255,19 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
                 gSpecialVar_0x8005 = MAX_MON_MOVES;
                 BeginCloseSummaryScreen(taskId);
             }
-			else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
-			{
-				if (JOY_HELD(SELECT_BUTTON))
-				{
-					SetMoveCategoryIcons();
-					SetNewMoveCategoryIcon();
-				}
-				else
-				{
-					SetMoveTypeIcons();
-					SetNewMoveTypeIcon();
-				}
-			}
+            else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+            {
+                if (JOY_HELD(SELECT_BUTTON))
+                {
+                    SetMoveCategoryIcons();
+                    SetNewMoveCategoryIcon();
+                }
+                else
+                {
+                    SetMoveTypeIcons();
+                    SetNewMoveTypeIcon();
+                }
+            }
         }
     }
 }
@@ -2346,19 +2346,19 @@ static void Task_HandleInputCantForgetHMsMoves(u8 taskId)
             HandleAppealJamTilemap(9, -3, move);
             gTasks[taskId].func = Task_HandleReplaceMoveInput;
         }
-		else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
-		{
-			if (JOY_HELD(SELECT_BUTTON))
-			{
-				SetMoveCategoryIcons();
-				SetNewMoveCategoryIcon();
-			}
-			else
-			{
-				SetMoveTypeIcons();
-				SetNewMoveTypeIcon();
-			}
-		}
+        else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+        {
+            if (JOY_HELD(SELECT_BUTTON))
+            {
+                SetMoveCategoryIcons();
+                SetNewMoveCategoryIcon();
+            }
+            else
+            {
+                SetMoveTypeIcons();
+                SetNewMoveTypeIcon();
+            }
+        }
     }
 }
 
@@ -3930,7 +3930,7 @@ static void SetNewMoveCategoryIcon(void)
     }
     else
     {
-        SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + gBattleMoves[sMonSummaryScreen->newMove].category, 85, 96, SPRITE_ARR_ID_TYPE + 4);		
+        SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + gBattleMoves[sMonSummaryScreen->newMove].category, 85, 96, SPRITE_ARR_ID_TYPE + 4);        
     }
 }
 
