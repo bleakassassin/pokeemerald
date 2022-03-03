@@ -1120,7 +1120,6 @@ static void Cmd_accuracycheck(void)
         u8 type, moveAcc, holdEffect, param;
         s8 buff;
         u16 calc;
-        u8 physical;
 
         if (move == ACC_CURR_MOVE)
             move = gCurrentMove;
@@ -1153,11 +1152,6 @@ static void Cmd_accuracycheck(void)
         if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN && gBattleMoves[move].effect == EFFECT_THUNDER)
             moveAcc = 50;
 
-        if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
-            physical = IS_TYPE_PHYSICAL(type);
-        else
-            physical = IS_CATEGORY_PHYSICAL(gBattleMoves[move]);
-
         calc = sAccuracyStageRatios[buff].dividend * moveAcc;
         calc /= sAccuracyStageRatios[buff].divisor;
 
@@ -1165,7 +1159,7 @@ static void Cmd_accuracycheck(void)
             calc = (calc * 130) / 100; // 1.3 compound eyes boost
         if (WEATHER_HAS_EFFECT && gBattleMons[gBattlerTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
             calc = (calc * 80) / 100; // 1.2 sand veil loss
-        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && physical)
+        if (gBattleMons[gBattlerAttacker].ability == ABILITY_HUSTLE && CheckSplitPhysical(type))
             calc = (calc * 80) / 100; // 1.2 hustle loss
 
         if (gBattleMons[gBattlerTarget].item == ITEM_ENIGMA_BERRY)
@@ -1848,8 +1842,6 @@ static void Cmd_healthbarupdate(void)
 static void Cmd_datahpupdate(void)
 {
     u32 moveType;
-    u8 physical;
-    u8 special;
 
     if (gBattleControllerExecFlags)
         return;
@@ -1860,16 +1852,6 @@ static void Cmd_datahpupdate(void)
         moveType = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK;
     else
         moveType = gBattleMoves[gCurrentMove].type;
-
-    if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
-        physical = IS_TYPE_PHYSICAL(moveType);
-    else
-        physical = IS_CATEGORY_PHYSICAL(gBattleMoves[gCurrentMove]);
-
-    if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
-        special = IS_TYPE_SPECIAL(moveType);
-    else
-        special = IS_CATEGORY_SPECIAL(gBattleMoves[gCurrentMove]);
 
     if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
     {
@@ -1938,7 +1920,7 @@ static void Cmd_datahpupdate(void)
                 if (!gSpecialStatuses[gActiveBattler].dmg && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                     gSpecialStatuses[gActiveBattler].dmg = gHpDealt;
 
-                if (physical && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
+                if (CheckSplitPhysical(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE) && gCurrentMove != MOVE_PAIN_SPLIT)
                 {
                     gProtectStructs[gActiveBattler].physicalDmg = gHpDealt;
                     gSpecialStatuses[gActiveBattler].physicalDmg = gHpDealt;
@@ -1953,7 +1935,7 @@ static void Cmd_datahpupdate(void)
                         gSpecialStatuses[gActiveBattler].physicalBattlerId = gBattlerTarget;
                     }
                 }
-                else if (special && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
+                else if (CheckSplitSpecial(moveType) && !(gHitMarker & HITMARKER_PASSIVE_DAMAGE))
                 {
                     gProtectStructs[gActiveBattler].specialDmg = gHpDealt;
                     gSpecialStatuses[gActiveBattler].specialDmg = gHpDealt;

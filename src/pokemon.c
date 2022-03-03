@@ -3110,8 +3110,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 defenderHoldEffectParam;
     u8 attackerHoldEffect;
     u8 attackerHoldEffectParam;
-    u8 physical;
-    u8 special;
 
     if (!powerOverride)
         gBattleMovePower = gBattleMoves[move].power;
@@ -3122,16 +3120,6 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         type = gBattleMoves[move].type;
     else
         type = typeOverride & DYNAMIC_TYPE_MASK;
-
-    if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
-        physical = IS_TYPE_PHYSICAL(type);
-    else
-        physical = IS_CATEGORY_PHYSICAL(gBattleMoves[move]);
-
-    if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
-        special = IS_TYPE_SPECIAL(type);
-    else
-        special = IS_CATEGORY_SPECIAL(gBattleMoves[move]);
 
     attack = attacker->attack;
     defense = defender->defense;
@@ -3206,7 +3194,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     // Apply abilities / field sports
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
-        spAttack /= 2;
+        gBattleMovePower /= 2;
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
     if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
@@ -3234,7 +3222,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
-    if (physical)
+    if (CheckSplitPhysical(type))
     {
         if (gCritMultiplier == 2)
         {
@@ -3325,7 +3313,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
         damage = (15 * damage) / 10;
         
-    if (special)
+    if (CheckSplitSpecial(type))
     {
         if (gCritMultiplier == 2)
         {
@@ -7111,4 +7099,20 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum)
 
         return gfx->spritePointers[spriteNum];
     }
+}
+
+bool8 CheckSplitPhysical(u8 moveType)
+{
+    if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+        return IS_TYPE_PHYSICAL(moveType);
+    else
+        return IS_CATEGORY_PHYSICAL(gCurrentMove);
+}
+
+bool8 CheckSplitSpecial(u8 moveType)
+{
+    if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+        return IS_TYPE_SPECIAL(moveType);
+    else
+        return IS_CATEGORY_SPECIAL(gCurrentMove);
 }
