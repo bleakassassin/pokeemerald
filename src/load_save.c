@@ -203,6 +203,7 @@ void CopyPartyAndObjectsFromSave(void)
 {
     LoadPlayerParty();
     LoadObjectEvents();
+    FixImportedSave();
 }
 
 void LoadPlayerBag(void)
@@ -269,6 +270,12 @@ void SavePlayerBag(void)
     gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;
     ApplyNewEncryptionKeyToBagItems(encryptionKeyBackup);
     gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
+}
+
+void FixImportedSave(void)
+{
+    if (gSaveBlock2Ptr->optionsButtonMode > OPTIONS_BUTTON_MODE_L_EQUALS_A)
+        gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_L_EQUALS_A;
 }
 
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)

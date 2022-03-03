@@ -293,7 +293,9 @@ static void CreateMoveTypeIcons(void);
 static void SetMonTypeIcons(void);
 static void SetMoveTypeIcons(void);
 static void SetContestMoveTypeIcons(void);
+static void SetMoveCategoryIcons(void);
 static void SetNewMoveTypeIcon(void);
+static void SetNewMoveCategoryIcon(void);
 static void SwapMovesTypeSprites(u8 moveIndex1, u8 moveIndex2);
 static u8 LoadMonGfxAndSprite(struct Pokemon *a, s16 *b);
 static u8 CreateMonSprite(struct Pokemon *unused);
@@ -729,6 +731,7 @@ static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
 #define TAG_MON_STATUS 30001
 #define TAG_MOVE_TYPES 30002
 #define TAG_MON_MARKINGS 30003
+#define TAG_MOVE_CATEGORIES 30004
 
 static const struct OamData sOamData_MoveTypes =
 {
@@ -838,7 +841,19 @@ static const union AnimCmd sSpriteAnim_CategoryTough[] = {
     ANIMCMD_FRAME((CONTEST_CATEGORY_TOUGH + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
-static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT] = {
+static const union AnimCmd sSpriteAnim_CategoryPhysical[] = {
+    ANIMCMD_FRAME((CATEGORY_PHYSICAL + NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_CategorySpecial[] = {
+    ANIMCMD_FRAME((CATEGORY_SPECIAL + NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_CategoryStatus[] = {
+    ANIMCMD_FRAME((CATEGORY_STATUS + NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + NUMBER_OF_CATEGORIES] = {
     sSpriteAnim_TypeNormal,
     sSpriteAnim_TypeFighting,
     sSpriteAnim_TypeFlying,
@@ -862,12 +877,15 @@ static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_CategoryCute,
     sSpriteAnim_CategorySmart,
     sSpriteAnim_CategoryTough,
+    sSpriteAnim_CategoryPhysical,
+    sSpriteAnim_CategorySpecial,
+    sSpriteAnim_CategoryStatus,
 };
 
 static const struct CompressedSpriteSheet sSpriteSheet_MoveTypes =
 {
     .data = gMoveTypes_Gfx,
-    .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 0x100,
+    .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + NUMBER_OF_CATEGORIES) * 0x100,
     .tag = TAG_MOVE_TYPES
 };
 static const struct SpriteTemplate sSpriteTemplate_MoveTypes =
@@ -880,7 +898,7 @@ static const struct SpriteTemplate sSpriteTemplate_MoveTypes =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
-static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT] =
+static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + NUMBER_OF_CATEGORIES] =
 {
     [TYPE_NORMAL] = 13,
     [TYPE_FIGHTING] = 13,
@@ -905,6 +923,9 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIE
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = 14,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_SMART] = 15,
     [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_TOUGH] = 13,
+	[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_PHYSICAL] = 13,
+	[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_SPECIAL] = 14,
+	[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + CATEGORY_STATUS] = 13,
 };
 static const struct OamData sOamData_MoveSelector =
 {
@@ -1548,6 +1569,17 @@ static void Task_HandleInput(u8 taskId)
             PlaySE(SE_SELECT);
             BeginCloseSummaryScreen(taskId);
         }
+		else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+		{
+			if (JOY_HELD(SELECT_BUTTON))
+			{
+				SetMoveCategoryIcons();
+			}
+			else
+			{
+				SetMoveTypeIcons();
+			}
+		}
     }
 }
 
@@ -1917,6 +1949,17 @@ static void Task_HandleInput_MoveSelect(u8 taskId)
             PlaySE(SE_SELECT);
             CloseMoveSelectMode(taskId);
         }
+		else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+		{
+			if (JOY_HELD(SELECT_BUTTON))
+			{
+				SetMoveCategoryIcons();
+			}
+			else
+			{
+				SetMoveTypeIcons();
+			}
+		}
     }
 }
 
@@ -2045,6 +2088,17 @@ static void Task_HandleInput_MovePositionSwitch(u8 taskId)
         {
             ExitMovePositionSwitchMode(taskId, FALSE);
         }
+		else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+		{
+			if (JOY_HELD(SELECT_BUTTON))
+			{
+				SetMoveCategoryIcons();
+			}
+			else
+			{
+				SetMoveTypeIcons();
+			}
+		}
     }
 }
 
@@ -2201,6 +2255,19 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
                 gSpecialVar_0x8005 = MAX_MON_MOVES;
                 BeginCloseSummaryScreen(taskId);
             }
+			else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+			{
+				if (JOY_HELD(SELECT_BUTTON))
+				{
+					SetMoveCategoryIcons();
+					SetNewMoveCategoryIcon();
+				}
+				else
+				{
+					SetMoveTypeIcons();
+					SetNewMoveTypeIcon();
+				}
+			}
         }
     }
 }
@@ -2279,6 +2346,19 @@ static void Task_HandleInputCantForgetHMsMoves(u8 taskId)
             HandleAppealJamTilemap(9, -3, move);
             gTasks[taskId].func = Task_HandleReplaceMoveInput;
         }
+		else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
+		{
+			if (JOY_HELD(SELECT_BUTTON))
+			{
+				SetMoveCategoryIcons();
+				SetNewMoveCategoryIcon();
+			}
+			else
+			{
+				SetMoveTypeIcons();
+				SetNewMoveTypeIcon();
+			}
+		}
     }
 }
 
@@ -3814,6 +3894,19 @@ static void SetContestMoveTypeIcons(void)
     }
 }
 
+static void SetMoveCategoryIcons(void)
+{
+    u8 i;
+    struct PokeSummary *summary = &sMonSummaryScreen->summary;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (summary->moves[i] != MOVE_NONE)
+            SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + gBattleMoves[summary->moves[i]].category, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+        else
+            SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
+    }
+}
+
 static void SetNewMoveTypeIcon(void)
 {
     if (sMonSummaryScreen->newMove == MOVE_NONE)
@@ -3826,6 +3919,18 @@ static void SetNewMoveTypeIcon(void)
             SetTypeSpritePosAndPal(gBattleMoves[sMonSummaryScreen->newMove].type, 85, 96, SPRITE_ARR_ID_TYPE + 4);
         else
             SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + gContestMoves[sMonSummaryScreen->newMove].contestCategory, 85, 96, SPRITE_ARR_ID_TYPE + 4);
+    }
+}
+
+static void SetNewMoveCategoryIcon(void)
+{
+    if (sMonSummaryScreen->newMove == MOVE_NONE)
+    {
+        SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 4, TRUE);
+    }
+    else
+    {
+        SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT + gBattleMoves[sMonSummaryScreen->newMove].category, 85, 96, SPRITE_ARR_ID_TYPE + 4);		
     }
 }
 

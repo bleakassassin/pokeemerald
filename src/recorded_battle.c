@@ -56,6 +56,7 @@ struct RecordedBattleSave
     u8 frontierBrainSymbol;
     u8 battleScene:1;
     u8 textSpeed:3;
+    u8 attackStyle:1;
     u32 AI_scripts;
     u8 recordMixFriendName[PLAYER_NAME_LENGTH + 1];
     u8 recordMixFriendClass;
@@ -82,6 +83,7 @@ EWRAM_DATA u8 gRecordedBattleMultiplayerId = 0;
 EWRAM_DATA static u8 sFrontierPassFlag = 0;
 EWRAM_DATA static u8 sBattleScene = 0;
 EWRAM_DATA static u8 sTextSpeed = 0;
+EWRAM_DATA static u8 sAttackStyle = 0;
 EWRAM_DATA static u32 sBattleFlags = 0;
 EWRAM_DATA static u32 sAI_Scripts = 0;
 EWRAM_DATA static struct Pokemon sSavedPlayerParty[PARTY_SIZE] = {0};
@@ -390,6 +392,7 @@ bool32 MoveRecordedBattleToSaveData(void)
     battleSave->frontierBrainSymbol = sFrontierBrainSymbol;
     battleSave->battleScene = gSaveBlock2Ptr->optionsBattleSceneOff;
     battleSave->textSpeed = gSaveBlock2Ptr->optionsTextSpeed;
+    battleSave->attackStyle = gSaveBlock2Ptr->optionsAttackStyle;
     battleSave->AI_scripts = sAI_Scripts;
 
     if (gTrainerBattleOpponent_A >= TRAINER_RECORD_MIXING_FRIEND && gTrainerBattleOpponent_A < TRAINER_RECORD_MIXING_APPRENTICE)
@@ -566,6 +569,7 @@ static void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
     sFrontierBrainSymbol = src->frontierBrainSymbol;
     sBattleScene = src->battleScene;
     sTextSpeed = src->textSpeed;
+    sAttackStyle = src->attackStyle;
     sAI_Scripts = src->AI_scripts;
 
     for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
@@ -687,6 +691,11 @@ u8 GetBattleSceneInRecordedBattle(void)
 u8 GetTextSpeedInRecordedBattle(void)
 {
     return sTextSpeed;
+}
+
+u8 GetAttackStyleInRecordedBattle(void)
+{
+    return sAttackStyle;
 }
 
 void RecordedBattle_CopyBattlerMoves(void)
