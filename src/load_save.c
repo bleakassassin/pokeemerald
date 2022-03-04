@@ -15,8 +15,6 @@
 #include "decoration_inventory.h"
 #include "agb_flash.h"
 #include "constants/heal_locations.h"
-#include "constants/items.h"
-#include "constants/layouts.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
@@ -306,6 +304,7 @@ void FixImportedSave(void)
         }
         else
         {
+            FlagClear(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
             FlagClear(FLAG_HIDE_ROUTE_103_SNORLAX);
             FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
             
