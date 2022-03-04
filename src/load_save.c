@@ -280,8 +280,6 @@ void FixImportedSave(void)
 {
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
     {
-        AddBagItem(ITEM_ESCAPE_ROPE, 1);
-
         if (gSaveBlock1Ptr->mapLayoutId == 420)
         {
             SetContinueGameWarpStatus();
