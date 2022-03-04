@@ -316,7 +316,7 @@ void FixImportedSave(void)
             else
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
         }
-        VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
+        //VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
     }
 }
 
