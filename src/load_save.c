@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "berry_powder.h"
+#include "event_data.h"
 #include "item.h"
 #include "load_save.h"
 #include "main.h"
@@ -13,6 +14,9 @@
 #include "gba/flash_internal.h"
 #include "decoration_inventory.h"
 #include "agb_flash.h"
+#include "constants/heal_locations.h"
+#include "constants/items.h"
+#include "constants/layouts.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
@@ -274,8 +278,46 @@ void SavePlayerBag(void)
 
 void FixImportedSave(void)
 {
-    if (gSaveBlock2Ptr->optionsButtonMode > OPTIONS_BUTTON_MODE_L_EQUALS_A)
-        gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_L_EQUALS_A;
+    if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
+    {
+        AddBagItem(ITEM_ESCAPE_ROPE, 1);
+
+        if (gSaveBlock1Ptr->mapLayoutId == 420)
+        {
+            SetContinueGameWarpStatus();
+            SetContinueGameWarpToHealLocation(HEAL_LOCATION_SLATEPORT_CITY);
+        }
+        
+        if (gSaveBlock2Ptr->optionsButtonMode >= OPTIONS_BUTTON_MODE_L_EQUALS_A)
+            gSaveBlock2Ptr->optionsButtonMode--;
+        
+        if (VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 3)
+        {
+            VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);
+            FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL);
+            FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE);
+            FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
+        }
+        
+        if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
+        {
+            FlagSet(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
+            FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
+            FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
+            FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
+        }
+        else
+        {
+            FlagClear(FLAG_HIDE_ROUTE_103_SNORLAX);
+            FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
+            
+            if (gSaveBlock2Ptr->playerGender == MALE)
+                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
+            else
+                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
+        }
+        VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
+    }
 }
 
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)

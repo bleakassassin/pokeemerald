@@ -63,7 +63,6 @@ RivalsHouse_2F_EventScript_SendRivalStarterPC::
 RivalsHouse_2F_EventScript_RivalStarterTransferredToPC::
 	call Common_EventScript_TransferredToPC
 RivalsHouse_2F_EventScript_AddedRivalStarter::
-	setflag FLAG_RECEIVED_RIVAL_STARTER
 	releaseall
 	end
 

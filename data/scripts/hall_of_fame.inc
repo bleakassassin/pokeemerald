@@ -19,7 +19,6 @@ EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags::
 	special UpdateTrainerFanClubGameClear
 	call_if_unset FLAG_RECEIVED_SS_TICKET, EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent
 	call_if_unset FLAG_RECEIVED_BELDUM, EverGrandeCity_HallOfFame_EventScript_ShowStevensHouseBeldum
-	call_if_unset FLAG_RECEIVED_RIVAL_STARTER, EverGrandeCity_HallOfFame_EventScript_ShowRivalBedroomStarter
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
@@ -50,7 +49,12 @@ EverGrandeCity_HallOfFame_EventScript_ShowStevensHouseBeldum::
 	clearflag FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL
 	return
 
-EverGrandeCity_HallOfFame_EventScript_ShowRivalBedroomStarter::
+EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent::
+	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 3
+	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 3
+	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
+	clearflag FLAG_HIDE_OCEANIC_MUSEUM_REPORTER
+	clearflag FLAG_HIDE_ROUTE_103_SNORLAX
 	checkplayergender
 	goto_if_eq VAR_RESULT, MALE, EverGrandeCity_HallOfFame_EventScript_ShowMayBedroomStarter
 EverGrandeCity_HallOfFame_EventScript_ShowBrendanBedroomStarter::
@@ -59,14 +63,6 @@ EverGrandeCity_HallOfFame_EventScript_ShowBrendanBedroomStarter::
 	
 EverGrandeCity_HallOfFame_EventScript_ShowMayBedroomStarter::
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
-	return
-
-EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent::
-	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 3
-	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 3
-	clearflag FLAG_HIDE_PLAYERS_HOUSE_DAD
-	clearflag FLAG_HIDE_OCEANIC_MUSEUM_REPORTER
-	clearflag FLAG_HIDE_ROUTE_103_SNORLAX
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ReadyDexUpgradeEvent::

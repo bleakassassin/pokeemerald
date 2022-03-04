@@ -770,7 +770,7 @@
 #define FLAG_HIDE_PETALBURG_CITY_WALLY                              0x2D6
 #define FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_INVISIBLE_NINJA_BOY   0x2D7
 #define FLAG_HIDE_PETALBURG_CITY_WALLYS_MOM                         0x2D8
-#define FLAG_HIDE_OCEANIC_MUSEUM_REPORTER                           0x2D9 // Set at start of game; cleared after becoming champion and set again after Recent Happenings airs 
+#define FLAG_HIDE_OCEANIC_MUSEUM_REPORTER                           0x2D9 // Edited Flag; set at start of game, cleared after becoming champion and set again after Recent Happenings airs 
 #define FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER                     0x2DA
 #define FLAG_HIDE_RUSTBORO_CITY_AQUA_GRUNT                          0x2DB
 #define FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1                    0x2DC
@@ -786,7 +786,7 @@
 #define FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT                          0x2E6
 #define FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN                       0x2E7
 #define FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT                          0x2E8
-#define FLAG_RECEIVED_RIVAL_STARTER                                 0x2E9 // Edited Flag; set after receiving rival's Starter
+#define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN            0x2E9 // Removed Flag; object removed
 #define FLAG_HIDE_ROUTE_103_SNORLAX                                 0x2EA // Edited Flag; used for Snorlax on Route 103
 #define FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION                  0x2EB
 #define FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER                0x2EC
