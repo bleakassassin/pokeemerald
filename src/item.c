@@ -197,11 +197,7 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
             ownedCount = GetBagItemQuantity(&gBagPockets[pocket].itemSlots[i].quantity);
             if (ownedCount + count <= slotCapacity)
                 return TRUE;
-            if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
-                return FALSE;
-            count -= (slotCapacity - ownedCount);
-            if (count == 0)
-                break; //should be return TRUE, but that doesn't match
+            return FALSE;
         }
     }
 
@@ -213,16 +209,8 @@ bool8 CheckBagHasSpace(u16 itemId, u16 count)
             if (gBagPockets[pocket].itemSlots[i].itemId == 0)
             {
                 if (count > slotCapacity)
-                {
-                    if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
-                        return FALSE;
-                    count -= slotCapacity;
-                }
-                else
-                {
-                    count = 0; //should be return TRUE, but that doesn't match
-                    break;
-                }
+                    return FALSE;
+                return TRUE;
             }
         }
         if (count > 0)
@@ -272,22 +260,8 @@ bool8 AddBagItem(u16 itemId, u16 count)
                 }
                 else
                 {
-                    // try creating another instance of the item if possible
-                    if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
-                    {
-                        Free(newItems);
-                        return FALSE;
-                    }
-                    else
-                    {
-                        count -= slotCapacity - ownedCount;
-                        SetBagItemQuantity(&newItems[i].quantity, slotCapacity);
-                        // don't create another instance of the item if it's at max slot capacity and count is equal to 0
-                        if (count == 0)
-                        {
-                            break;
-                        }
-                    }
+                    Free(newItems);
+                    return FALSE;
                 }
             }
         }
@@ -295,30 +269,16 @@ bool8 AddBagItem(u16 itemId, u16 count)
         // we're done if quantity is equal to 0
         if (count > 0)
         {
-            // either no existing item was found or we have to create another instance, because the capacity was exceeded
+            // no existing item was found
             for (i = 0; i < itemPocket->capacity; i++)
             {
                 if (newItems[i].itemId == ITEM_NONE)
                 {
                     newItems[i].itemId = itemId;
-                    if (count > slotCapacity)
-                    {
-                        // try creating a new slot with max capacity if duplicates are possible
-                        if (pocket == TMHM_POCKET || pocket == BERRIES_POCKET)
-                        {
-                            Free(newItems);
-                            return FALSE;
-                        }
-                        count -= slotCapacity;
-                        SetBagItemQuantity(&newItems[i].quantity, slotCapacity);
-                    }
-                    else
-                    {
-                        // created a new slot and added quantity
-                        SetBagItemQuantity(&newItems[i].quantity, count);
-                        count = 0;
-                        break;
-                    }
+                    // created a new slot and added quantity
+                    SetBagItemQuantity(&newItems[i].quantity, count);
+                    count = 0;
+                    break;
                 }
             }
 
