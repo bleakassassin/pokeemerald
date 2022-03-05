@@ -1116,6 +1116,13 @@ static void Task_BuyMenu(u8 taskId)
 
             if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
                 BuyMenuDisplayMessage(taskId, gText_SoldOut, BuyMenuReturnToItemList);
+            else if (!CheckBagHasSpace(itemId, 1))
+                BuyMenuDisplayMessage(taskId, gText_NoMoreRoomForThis, BuyMenuReturnToItemList);
+            else if (sMartInfo.martType != MART_TYPE_NORMAL && DecorationCheckSpace(itemId) == FALSE)
+            {
+                StringCopy(gStringVar1, gDecorations[itemId].name);
+                BuyMenuDisplayMessage(taskId, gText_SpaceForVar1Full, BuyMenuReturnToItemList);
+            }
             else if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData->totalCost))
             {
                 BuyMenuDisplayMessage(taskId, gText_YouDontHaveMoney, BuyMenuReturnToItemList);
@@ -1162,6 +1169,7 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
 
     u16 quantityInBag = CountTotalItemQuantityInBag(tItemId);
     u16 maxQuantity;
+    u16 remainingQuantity = MAX_BAG_ITEM_CAPACITY - quantityInBag;
 
     DrawStdFrameWithCustomTileAndPalette(3, FALSE, 1, 13);
     ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, BAG_ITEM_CAPACITY_DIGITS + 1);
@@ -1176,7 +1184,10 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
 
     if (maxQuantity > MAX_PURCHASE_QUANTITY)
     {
-        sShopData->maxQuantity = MAX_PURCHASE_QUANTITY;
+        if (remainingQuantity < MAX_PURCHASE_QUANTITY)
+            sShopData->maxQuantity = remainingQuantity;
+        else
+            sShopData->maxQuantity = MAX_PURCHASE_QUANTITY;
     }
     else
     {
@@ -1237,13 +1248,8 @@ static void BuyMenuTryMakePurchase(u8 taskId)
     {
         if (AddBagItem(tItemId, tItemCount) == TRUE)
         {
-            RedrawListMenu(tListTaskId);
             RecordItemPurchase(taskId);
             BuyMenuDisplayMessage(taskId, gText_HereYouGoThankYou, BuyMenuSubtractMoney);
-        }
-        else
-        {
-            BuyMenuDisplayMessage(taskId, gText_NoMoreRoomForThis, BuyMenuReturnToItemList);
         }
     }
     else
@@ -1254,10 +1260,6 @@ static void BuyMenuTryMakePurchase(u8 taskId)
                 BuyMenuDisplayMessage(taskId, gText_ThankYouIllSendItHome, BuyMenuSubtractMoney);
             else // MART_TYPE_DECOR2
                 BuyMenuDisplayMessage(taskId, gText_ThanksIllSendItHome, BuyMenuSubtractMoney);
-        }
-        else
-        {
-            BuyMenuDisplayMessage(taskId, gText_SpaceForVar1Full, BuyMenuReturnToItemList);
         }
     }
 }
@@ -1317,6 +1319,7 @@ static void BuyMenuReturnToItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
+    RedrawListMenu(tListTaskId);
     ClearDialogWindowAndFrameToTransparent(5, 0);
     BuyMenuPrintCursor(tListTaskId, 1);
     PutWindowTilemap(1);
