@@ -1802,7 +1802,7 @@ void UpdateTVShowsPerDay(u16 days)
     ResolveWorldOfMastersShow(days);
     ResolveNumberOneShow(days);
     TryStartRandomMassOutbreak();
-    if (VarGet(VAR_OLD_SEA_MAP_STATE) == 3)
+    if (VarGet(VAR_OLD_SEA_MAP_STATE) == 3 && FlagGet(FLAG_LANDMARK_ALTERING_CAVE))
         VarSet(VAR_OLD_SEA_MAP_STATE, 4);
 }
 

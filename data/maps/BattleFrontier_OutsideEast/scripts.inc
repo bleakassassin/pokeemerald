@@ -145,7 +145,6 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo::
 BattleFrontier_OutsideEast_EventScript_DefeatedSudowoodo::
 	setflag FLAG_DEFEATED_SUDOWOODO
 	goto Common_EventScript_RemoveStaticPokemon
-	end
 
 BattleFrontier_OutsideEast_Movement_SudowoodoShake:
 	face_right

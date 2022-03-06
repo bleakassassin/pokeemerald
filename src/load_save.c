@@ -287,6 +287,9 @@ void FixImportedSave(void)
         if (gSaveBlock2Ptr->optionsButtonMode >= OPTIONS_BUTTON_MODE_L_EQUALS_A)
             gSaveBlock2Ptr->optionsButtonMode--;
         
+        if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
+            VarSet(VAR_OLD_SEA_MAP_STATE, 4);
+
         if (VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 3)
         {
             VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);

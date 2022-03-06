@@ -145,14 +145,9 @@ FarawayIsland_Interior_EventScript_Mew::
 
 FarawayIsland_Interior_EventScript_MewDefeated::
 	setflag FLAG_DEFEATED_MEW
-	setvar VAR_0x8004, SPECIES_MEW
-	goto Common_EventScript_LegendaryFlewAway
-	end
-
 FarawayIsland_Interior_EventScript_PlayerOrMewRan::
 	setvar VAR_0x8004, SPECIES_MEW
 	goto Common_EventScript_LegendaryFlewAway
-	end
 
 FarawayIsland_Interior_EventScript_FoundMewNorth::
 	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpNorth

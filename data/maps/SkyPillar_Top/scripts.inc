@@ -66,13 +66,7 @@ SkyPillar_Top_EventScript_DefeatedRayquaza::
 	setflag FLAG_DEFEATED_RAYQUAZA
 SkyPillar_Top_EventScript_RanFromRayquaza::
 	setvar VAR_0x8004, SPECIES_RAYQUAZA
-	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
-	fadescreenswapbuffers FADE_FROM_BLACK
-	bufferspeciesname STR_VAR_1, VAR_0x8004
-	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
-	releaseall
-	end
+	goto Common_EventScript_LegendaryFlewAway
 
 SkyPillar_Top_EventScript_AwakenRayquaza::
 	lockall

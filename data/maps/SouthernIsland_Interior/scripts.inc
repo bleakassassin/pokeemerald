@@ -90,14 +90,9 @@ SouthernIsland_Interior_EventScript_Lati::
 
 SouthernIsland_Interior_EventScript_LatiDefeated::
 	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
-	copyvar VAR_0x8004, VAR_TEMP_4
-	goto Common_EventScript_LegendaryFlewAway
-	end
-
 SouthernIsland_Interior_EventScript_RanFromLati::
 	copyvar VAR_0x8004, VAR_TEMP_4
 	goto Common_EventScript_LegendaryFlewAway
-	end
 
 SouthernIsland_Interior_EventScript_Sign::
 	msgbox SouthernIsland_Interior_Text_Sign, MSGBOX_DEFAULT

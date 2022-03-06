@@ -68,11 +68,6 @@ NavelRock_Bottom_EventScript_Lugia::
 
 NavelRock_Bottom_EventScript_DefeatedLugia::
 	setflag FLAG_DEFEATED_LUGIA
-	setvar VAR_0x8004, SPECIES_LUGIA
-	goto Common_EventScript_LegendaryFlewAway
-	end
-
 NavelRock_Bottom_EventScript_RanFromLugia::
 	setvar VAR_0x8004, SPECIES_LUGIA
 	goto Common_EventScript_LegendaryFlewAway
-	end

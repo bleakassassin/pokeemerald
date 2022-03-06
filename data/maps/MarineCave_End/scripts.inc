@@ -56,7 +56,6 @@ MarineCave_End_EventScript_DefeatedKyogre::
 MarineCave_End_EventScript_RanFromKyogre::
 	setvar VAR_0x8004, SPECIES_KYOGRE
 	goto Common_EventScript_LegendaryFlewAway
-	end
 
 MarineCave_End_Movement_KyogreApproach:
 	init_affine_anim

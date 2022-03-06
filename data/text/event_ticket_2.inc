@@ -69,3 +69,8 @@ FarawayIsland_Entrance_Text_Sign:
 
 FarawayIsland_Interior_Text_Mew:
     .string "Myuu…$"
+	
+FarawayIsland_Entrance_Text_PokemonFlyingAbove:
+    .string "Several POKéMON are flying up above!\p"
+    .string "It looks like they're headed towards\n"
+    .string "a cave in HOENN!$"

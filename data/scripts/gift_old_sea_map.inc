@@ -9,10 +9,11 @@ MysteryGiftScript_OldSeaMap::
 	waitbuttonpress
 	checkitemspace ITEM_OLD_SEA_MAP
 	vgoto_if_eq VAR_RESULT, FALSE, OldSeaMap_NoBagSpace
-	goto_if_ne VAR_OLD_SEA_MAP_STATE, 4, OldSeaMap_Give
-	setvar VAR_TEMP_0, 1
-	setvar VAR_OLD_SEA_MAP_STATE, 0
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 4, OldSeaMap_Give
+	setvar VAR_OLD_SEA_MAP_STATE, 4
+	setvar VAR_TEMP_1, 1
 OldSeaMap_Give:
+	setvar VAR_TEMP_0, 1
 	giveitem ITEM_OLD_SEA_MAP
 	setflag FLAG_HIDE_OCEANIC_MUSEUM_REPORTER
 	setflag FLAG_RECEIVED_OLD_SEA_MAP

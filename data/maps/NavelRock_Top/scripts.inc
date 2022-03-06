@@ -73,14 +73,9 @@ NavelRock_Top_EventScript_HoOh::
 
 NavelRock_Top_EventScript_DefeatedHoOh::
 	setflag FLAG_DEFEATED_HO_OH
-	setvar VAR_0x8004, SPECIES_HO_OH
-	goto Common_EventScript_LegendaryFlewAway
-	end
-
 NavelRock_Top_EventScript_RanFromHoOh::
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto Common_EventScript_LegendaryFlewAway
-	end
 
 NavelRock_Top_Movement_CameraPanUp:
 	walk_up

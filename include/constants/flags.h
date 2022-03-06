@@ -736,9 +736,9 @@
 #define FLAG_UNUSED_0x2B6  0x2B6 // Unused Flag
 #define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
 #define FLAG_UNUSED_0x2B8  0x2B8 // Unused Flag
-#define FLAG_UNUSED_0x2B9  0x2B9 // Unused Flag
-#define FLAG_UNUSED_0x2BA  0x2BA // Unused Flag
-#define FLAG_UNUSED_0x2BB  0x2BB // Unused Flag
+#define FLAG_HIDE_ARTICUNO                                          0x2B9 // Edited Flag; used for Articuno in Altering Cave
+#define FLAG_HIDE_ZAPDOS                                            0x2BA // Edited Flag; used for Zapdos in Altering Cave
+#define FLAG_HIDE_MOLTRES                                           0x2BB // Edited Flag; used for Moltres in Altering Cave
 
 // Event Flags
 #define FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG                      0x2BC
@@ -1299,12 +1299,12 @@
 #define FLAG_UNUSED_0x4E4                                           0x4E4 // Unused Flag
 #define FLAG_UNUSED_0x4E5                                           0x4E5 // Unused Flag
 #define FLAG_UNUSED_0x4E6                                           0x4E6 // Unused Flag
-#define FLAG_UNUSED_0x4E7                                           0x4E7 // Unused Flag
-#define FLAG_UNUSED_0x4E8                                           0x4E8 // Unused Flag
-#define FLAG_UNUSED_0x4E9                                           0x4E9 // Unused Flag
-#define FLAG_UNUSED_0x4EA                                           0x4EA // Unused Flag
-#define FLAG_UNUSED_0x4EB                                           0x4EB // Unused Flag
-#define FLAG_UNUSED_0x4EC                                           0x4EC // Unused Flag
+#define FLAG_DEFEATED_ARTICUNO                                      0x4E7 // Edited Flag; used for Articuno in Altering Cave
+#define FLAG_DEFEATED_ZAPDOS                                        0x4E8 // Edited Flag; used for Zapdos in Altering Cave
+#define FLAG_DEFEATED_MOLTRES                                       0x4E9 // Edited Flag; used for Moltres in Altering Cave
+#define FLAG_CAUGHT_ARTICUNO                                        0x4EA // Edited Flag; used for Articuno in Altering Cave
+#define FLAG_CAUGHT_ZAPDOS                                          0x4EB // Edited Flag; used for Zapdos in Altering Cave
+#define FLAG_CAUGHT_MOLTRES                                         0x4EC // Edited Flag; used for Moltres in Altering Cave
 #define FLAG_KOBE_TRADE_DONE                                        0x4ED
 #define FLAG_ROMAN_TRADE_DONE                                       0x4EE
 #define FLAG_SKYLAR_TRADE_DONE                                      0x4EF

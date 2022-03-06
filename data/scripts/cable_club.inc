@@ -23,6 +23,7 @@ CableClub_EventScript_HideMysteryGiftMan::
 	return
 
 CableClub_EventScript_MysteryGiftMan::
+	goto_if_eq VAR_TEMP_1, 1, CableClub_EventScript_MysteryGiftThankYou
 	goto_if_eq VAR_TEMP_0, 1, CableClub_EventScript_TryUsingItAtLilycovePort
 	goto_if_set FLAG_EXCHANGED_SCANNER, MysteryGiftScript_MysticTicket
 	goto_if_eq VAR_OLD_SEA_MAP_STATE, 4, MysteryGiftScript_OldSeaMap

@@ -44,5 +44,25 @@ FarawayIsland_Entrance_EventScript_AsYouLike::
 
 FarawayIsland_Entrance_EventScript_Sign::
 	msgbox FarawayIsland_Entrance_Text_Sign, MSGBOX_SIGN
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 5, FarawayIsland_Entrance_EventScript_End
+	lockall
+	setvar VAR_OLD_SEA_MAP_STATE, 5
+	fadeoutbgm 1
+	delay 60
+	setvar VAR_0x8004, 8  @ num loops
+	setvar VAR_0x8005, 35 @ delay
+	special LoopWingFlapSE
+	delay 60
+	playmoncry SPECIES_ARTICUNO, CRY_MODE_ENCOUNTER
+	waitmoncry
+	playmoncry SPECIES_ZAPDOS, CRY_MODE_ENCOUNTER
+	waitmoncry
+	playmoncry SPECIES_MOLTRES, CRY_MODE_ENCOUNTER
+	waitmoncry
+	delay 30
+	msgbox FarawayIsland_Entrance_Text_PokemonFlyingAbove, MSGBOX_DEFAULT
+	fadeinbgm 1
+	releaseall
+FarawayIsland_Entrance_EventScript_End::
 	end
 
