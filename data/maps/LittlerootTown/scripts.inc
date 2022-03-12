@@ -52,8 +52,8 @@ LittlerootTown_OnTransition:
 	call_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, LittlerootTown_EventScript_SetRivalLeftForRoute103
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_EventScript_HideMapNamePopup
 	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 3, LittlerootTown_EventScript_LeftLabAfterDexUpgrade
-	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6, LittlerootTown_EventScript_LeftLabAfterSecondJohtoStarter
-	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 10, LittlerootTown_EventScript_LeftLabAfterFinalJohtoStarter
+	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7, LittlerootTown_EventScript_LeftLabAfterSecondJohtoStarter
+	call_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 11, LittlerootTown_EventScript_LeftLabAfterFinalJohtoStarter
 	end
 
 LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
@@ -61,11 +61,11 @@ LittlerootTown_EventScript_LeftLabAfterDexUpgrade::
 	return
 
 LittlerootTown_EventScript_LeftLabAfterSecondJohtoStarter::
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 7
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 8
 	return
 
 LittlerootTown_EventScript_LeftLabAfterFinalJohtoStarter::
-	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 11
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 12
 	return
 
 LittlerootTown_EventScript_HideMapNamePopup::

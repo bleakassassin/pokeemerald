@@ -39,22 +39,29 @@ EverGrandeCity_PhoebesRoom_EventScript_CloseDoor::
 EverGrandeCity_PhoebesRoom_EventScript_Phoebe::
 	lock
 	faceplayer
-	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech
+	goto_if_set FLAG_DEFEATED_ELITE_4_PHOEBE, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSetup
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
+	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_PhoebesRoom_EventScript_Rematch
 	msgbox EverGrandeCity_PhoebesRoom_Text_IntroSpeech, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_PHOEBE, EverGrandeCity_PhoebesRoom_Text_Defeat
-	goto EverGrandeCity_PhoebesRoom_EventScript_Defeated
-	end
-
+	setflag FLAG_DEFEATED_ELITE_4_PHOEBE
+	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
 EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech::
 	msgbox EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	release
 	end
+	
+EverGrandeCity_PhoebesRoom_EventScript_PostBattleSetup::
+	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeechRematch
+	goto EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeech
 
-EverGrandeCity_PhoebesRoom_EventScript_Defeated::
+EverGrandeCity_PhoebesRoom_EventScript_Rematch::
+	msgbox EverGrandeCity_PhoebesRoom_Text_IntroSpeechRematch, MSGBOX_DEFAULT
+	trainerbattle_no_intro TRAINER_PHOEBE_2, EverGrandeCity_PhoebesRoom_Text_DefeatRematch
 	setflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
-	msgbox EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
+EverGrandeCity_PhoebesRoom_EventScript_PostBattleSpeechRematch::
+	msgbox EverGrandeCity_PhoebesRoom_Text_PostBattleSpeechRematch, MSGBOX_DEFAULT
 	release
 	end
 
@@ -82,3 +89,20 @@ EverGrandeCity_PhoebesRoom_Text_PostBattleSpeech:
 	.string "will carry you.\p"
 	.string "Go ahead, move on to the next room.$"
 
+EverGrandeCity_PhoebesRoom_Text_IntroSpeechRematch:
+	.string "Ahahaha!\n"
+	.string "I've been waiting for you!\p"
+	.string "I brought more to the table this time!\p"
+	.string "Prepare yourself and bring it on!$"
+
+EverGrandeCity_PhoebesRoom_Text_DefeatRematch:
+	.string "I expected no less of you!$"
+
+EverGrandeCity_PhoebesRoom_Text_PostBattleSpeechRematch:
+	.string "Hmmmp, what a shame.\n"
+	.string "I lost again, huh?\p"
+	.string "But on the bright side…\n"
+	.string "The bonds between me and my POKéMON\l"
+	.string "got even deeper!\p"
+	.string "I look forward to being able to battle\n"
+	.string "you again sometime!$"

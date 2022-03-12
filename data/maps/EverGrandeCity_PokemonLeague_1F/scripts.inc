@@ -11,11 +11,23 @@ EverGrandeCity_PokemonLeague_1F_OnTransition:
 	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE
 	setflag FLAG_LANDMARK_POKEMON_LEAGUE
 	call_if_unset FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
+	call_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_PokemonLeague_1F_EventScript_CheckPostGame
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor::
 	setobjectxyperm LOCALID_GUARD_1, 9, 2
 	setobjectxyperm LOCALID_GUARD_2, 10, 2
+	return
+
+EverGrandeCity_PokemonLeague_1F_EventScript_CheckPostGame::
+	goto_if_set FLAG_WON_LEAGUE_REMATCHES, Common_EventScript_NopReturn
+	call AbnormalWeather_EventScript_CheckKyogreGroudonStatus
+	call_if_set FLAG_RECEIVED_BELDUM, EverGrandeCity_PokemonLeague_1F_EventScript_AddVar
+	call_if_lt VAR_0x8004, 3, EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
+	return
+
+EverGrandeCity_PokemonLeague_1F_EventScript_AddVar::
+	addvar VAR_0x8004, 1
 	return
 
 EverGrandeCity_PokemonLeague_1F_EventScript_Nurse::
@@ -37,6 +49,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_Clerk::
 @ Its assumed the player has the remaining badges
 EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard::
 	lockall
+	goto_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_PokemonLeague_1F_EventScript_CheckRematch
 	goto_if_set FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GoForth
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	call_if_ge VAR_TEMP_0, 11, EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight
@@ -77,6 +90,9 @@ EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges::
 	releaseall
 	end
 
+EverGrandeCity_PokemonLeague_1F_EventScript_CheckRematch::
+	goto_if_set FLAG_WON_LEAGUE_REMATCHES, EverGrandeCity_PokemonLeague_1F_EventScript_GoForth
+	goto_if_lt VAR_0x8004, 3, EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable
 EverGrandeCity_PokemonLeague_1F_EventScript_GoForth::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
@@ -86,6 +102,11 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GoForth::
 	waitmovement 0
 	releaseall
 	end
+	
+EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable::
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_ChampionNotAvailable, MSGBOX_DEFAULT
+	releaseall
+	end	
 
 EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromRight:
 	walk_down
@@ -125,3 +146,8 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth:
 	.string "TRAINER! Believe in yourself and your\n"
 	.string "POKéMON, and go forth!$"
 
+EverGrandeCity_PokemonLeague_1F_Text_ChampionNotAvailable:
+	.string "Due to WALLACE's absence, the doors\n"
+	.string "to the POKEéMON LEAGUE are closed.\p"
+	.string "We apologize for the inconvenience\n"
+	.string "and thank you for your patience.$"

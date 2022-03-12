@@ -1,6 +1,6 @@
 EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags::
 	special SetChampionSaveWarp
-	setflag FLAG_IS_CHAMPION
+	call_if_set FLAG_SYS_GAME_CLEAR, EverGrandeCity_HallOfFame_EventScript_SetRematchChampionCheck
 	call EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries
 	call_if_eq VAR_FOSSIL_MANIAC_STATE, 0, EverGrandeCity_HallOfFame_EventScript_SetDesertUnderpassCommentReady
 	clearflag FLAG_HIDE_LILYCOVE_MOTEL_GAME_DESIGNERS
@@ -42,6 +42,10 @@ EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries::
 	clearflag FLAG_DEFEATED_ARTICUNO
 	clearflag FLAG_DEFEATED_ZAPDOS
 	clearflag FLAG_DEFEATED_MOLTRES
+	return
+
+EverGrandeCity_HallOfFame_EventScript_SetRematchChampionCheck::
+	setflag FLAG_WON_LEAGUE_REMATCHES
 	return
 
 EverGrandeCity_HallOfFame_EventScript_SetDesertUnderpassCommentReady::
