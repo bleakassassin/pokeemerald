@@ -13,7 +13,7 @@ AlteringCave_OnTransition:
 	copyvar VAR_0x8000, VAR_ALTERING_CAVE_WILD_SET
 	addvar VAR_0x8000, LAYOUT_ALTERING_CAVE
 	setmaplayoutindex VAR_0x8000
-	goto_if_eq VAR_OLD_SEA_MAP_STATE, 5, AlteringCave_EventScript_SetupLegendaryBirds
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 6, AlteringCave_EventScript_SetupLegendaryBirds
 	end
 
 AlteringCave_EventScript_ResetItemBall::

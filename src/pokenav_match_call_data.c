@@ -497,6 +497,25 @@ static const struct MatchCallStructTrainer sJuanMatchCallHeader =
     .textData = sJuanTextScripts
 };
 
+static const match_call_text_data_t sLeaderWallaceTextScripts[] = {
+    { MatchCall_Text_LeaderWallace1, 0xFFFE,              0xFFFF },
+    { MatchCall_Text_LeaderWallace2, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_LeaderWallace2, 0xFFFF,              0xFFFF },
+    { MatchCall_Text_LeaderWallace2, FLAG_SYS_GAME_CLEAR, 0xFFFF },
+    { NULL,                          0xFFFF,              0xFFFF }
+};
+
+static const struct MatchCallStructTrainer sLeaderWallaceMatchCallHeader =
+{
+    .type = MC_TYPE_LEADER,
+    .mapSec = MAPSEC_SOOTOPOLIS_CITY,
+    .flag = FLAG_ENABLE_WALLACE_MATCH_CALL,
+    .rematchTableIdx = REMATCH_GL_WALLACE,
+    .desc = gText_WallaceMatchCallDesc,
+    .name = NULL,
+    .textData = sLeaderWallaceTextScripts
+};
+
 static const match_call_text_data_t sSidneyTextScripts[] = {
     { MatchCall_Text_Sidney, 0xFFFF, 0xFFFF },
     { NULL,                  0xFFFF, 0xFFFF }
@@ -594,6 +613,7 @@ static const match_call_t sMatchCallHeaders[] = {
     [MC_HEADER_WINONA]     = {.leader = &sWinonaMatchCallHeader},
     [MC_HEADER_TATE_LIZA]  = {.leader = &sTateLizaMatchCallHeader},
     [MC_HEADER_JUAN]       = {.leader = &sJuanMatchCallHeader},
+    [MC_HEADER_GL_WALLACE] = {.leader = &sLeaderWallaceMatchCallHeader},
     [MC_HEADER_SIDNEY]     = {.leader = &sSidneyMatchCallHeader},
     [MC_HEADER_PHOEBE]     = {.leader = &sPhoebeMatchCallHeader},
     [MC_HEADER_GLACIA]     = {.leader = &sGlaciaMatchCallHeader},

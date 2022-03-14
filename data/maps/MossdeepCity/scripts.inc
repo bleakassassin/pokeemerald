@@ -252,6 +252,11 @@ MossdeepCity_EventScript_DeclineKingsRock::
 	end
 
 MossdeepCity_EventScript_BlackBelt::
+	goto_if_set FLAG_READ_STEVENS_LETTER, MossdeepCity_EventScript_SootopolisNewGymLeader
+	msgbox MossdeepCity_Text_WavesWashOver, MSGBOX_NPC
+	end
+
+MossdeepCity_EventScript_SootopolisNewGymLeader::
 	msgbox MossdeepCity_Text_SootopolisNewGymLeader, MSGBOX_NPC
 	end
 
@@ -422,6 +427,10 @@ MossdeepCity_Text_ScottSomethingWrongWithTown:
 	.string "letter and the SPACE CENTER…\p"
 	.string "I don't think it concerns me in any\n"
 	.string "way, though.$"
+
+MossdeepCity_Text_WavesWashOver:
+	.string "Ahh… It feels great letting the waves\n"
+	.string "wash over my feet…$"
 
 MossdeepCity_Text_SootopolisNewGymLeader:
 	.string "Ahh… It feels great letting the waves\n"

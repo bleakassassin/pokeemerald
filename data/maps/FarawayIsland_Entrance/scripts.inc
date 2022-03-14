@@ -44,9 +44,9 @@ FarawayIsland_Entrance_EventScript_AsYouLike::
 
 FarawayIsland_Entrance_EventScript_Sign::
 	msgbox FarawayIsland_Entrance_Text_Sign, MSGBOX_SIGN
-	goto_if_eq VAR_OLD_SEA_MAP_STATE, 5, FarawayIsland_Entrance_EventScript_End
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 6, FarawayIsland_Entrance_EventScript_End
 	lockall
-	setvar VAR_OLD_SEA_MAP_STATE, 5
+	setvar VAR_OLD_SEA_MAP_STATE, 6
 	fadeoutbgm 1
 	delay 60
 	setvar VAR_0x8004, 8  @ num loops

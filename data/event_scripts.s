@@ -378,10 +378,10 @@ gStdScripts_End::
 	.include "data/maps/SeafloorCavern_Room9/scripts.inc"
 	.include "data/maps/CaveOfOrigin_Entrance/scripts.inc"
 	.include "data/maps/CaveOfOrigin_1F/scripts.inc"
-	.include "data/maps/CaveOfOrigin_UnusedRubySapphireMap1/scripts.inc"
-	.include "data/maps/CaveOfOrigin_UnusedRubySapphireMap2/scripts.inc"
-	.include "data/maps/CaveOfOrigin_UnusedRubySapphireMap3/scripts.inc"
 	.include "data/maps/CaveOfOrigin_B1F/scripts.inc"
+	.include "data/maps/CaveOfOrigin_B2F/scripts.inc"
+	.include "data/maps/CaveOfOrigin_B3F/scripts.inc"
+	.include "data/maps/CaveOfOrigin_B4F/scripts.inc"
 	.include "data/maps/VictoryRoad_1F/scripts.inc"
 	.include "data/maps/VictoryRoad_B1F/scripts.inc"
 	.include "data/maps/VictoryRoad_B2F/scripts.inc"
@@ -936,8 +936,8 @@ gText_PlayerHandedOverTheItem::
 	.string "{STR_VAR_1}.$"
 
 gText_ThankYouForAccessingMysteryGift::
-	.string "Thank you for accessing the\n"
-	.string "MYSTERY GIFT System.$"
+	.string "Thank you for using the MYSTERY\n"
+	.string "GIFT System.$"
 
 gText_PlayerFoundOneTMHM::
 	.string "{PLAYER} found one {STR_VAR_1}\n"

@@ -2233,10 +2233,11 @@ MatchCall_Text_Juan1::
 	.string "yet surpass WALLACE!$"
 
 MatchCall_Text_Juan2::
-	.string "JUAN: Fufu… {PLAYER}{KUN}…\n"
-	.string "You've finally achieved your goal.\p"
-	.string "My eye for appraising talent wasn't\n"
-	.string "mistaken…\p"
+	.string "JUAN: Fufu… {PLAYER}{KUN}…\p"
+	.string "My eye for appraising talent was\n"
+	.string "affirmed during our battle…\p"
+	.string "You truly are worthy of holding the\n"
+	.string "title of CHAMPION.\p"
 	.string "I wish for another chance to meet\n"
 	.string "you, for you have scaled the peak\l"
 	.string "of power and prestige.$"
@@ -2255,6 +2256,24 @@ MatchCall_Text_Juan4::
 	.string "of inspiration in my heart…\p"
 	.string "When I close my eyes, I see visions\n"
 	.string "of you soaring with the melody…$"
+
+MatchCall_Text_LeaderWallace1::
+	.string "WALLACE: Ah, {PLAYER}{KUN}.\p"
+	.string "Our battle together--it brought\n"
+	.string "to me memories of myself when I\l"
+	.string "began my mentorship under JUAN.\p"
+	.string "Perhaps you are a genius who may\n"
+	.string "yet surpass both of us!$"
+
+MatchCall_Text_LeaderWallace2::
+	.string "WALLACE: {PLAYER}{KUN}…\n"
+	.string "You have even surpassed STEVEN…\p"
+	.string "I am disappointed at my inability\n"
+	.string "to find any fitting words for you.\p"
+	.string "You now stand at the summit of all\n"
+	.string "HOENN TRAINERS.\p"
+	.string "I look forward to the day when we\n"
+	.string "battle once again.$"
 
 MatchCall_Text_Sidney::
 	.string "SIDNEY: Yo, {PLAYER}!\p"
@@ -2294,11 +2313,11 @@ MatchCall_Text_Drake::
 
 MatchCall_Text_Wallace::
 	.string "WALLACE: Hello, {PLAYER}{KUN}.\n"
-	.string "Have you met STEVEN?\p"
+	.string "How well do you know STEVEN?\p"
 	.string "He is…\n"
 	.string "Actually incredibly skilled.\p"
 	.string "However, he's an odd soul who\n"
-	.string "rarely battles.\p"
+	.string "rarely battles anymore.\p"
 	.string "Instead, he would rather look for\n"
 	.string "rare stones.\p"
 	.string "I'm sure he's digging in a cave or\n"

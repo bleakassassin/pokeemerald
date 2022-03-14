@@ -468,4 +468,5 @@ const u8 *const gMatchCallFlavorTexts[REMATCH_TABLE_ENTRIES][CHECK_PAGE_ENTRY_CO
     [REMATCH_GLACIA] = MCFLAVOR(EliteFour_Glacia),
     [REMATCH_DRAKE] = MCFLAVOR(EliteFour_Drake),
     [REMATCH_WALLACE] = MCFLAVOR(Champion_Wallace),
+    [REMATCH_GL_WALLACE] = MCFLAVOR(Champion_Wallace),
 };

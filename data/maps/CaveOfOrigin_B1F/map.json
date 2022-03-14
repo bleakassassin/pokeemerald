@@ -2,39 +2,32 @@
   "id": "MAP_CAVE_OF_ORIGIN_B1F",
   "name": "CaveOfOrigin_B1F",
   "layout": "LAYOUT_CAVE_OF_ORIGIN_B1F",
-  "music": "MUS_NONE",
+  "music": "MUS_CAVE_OF_ORIGIN",
   "region_map_section": "MAPSEC_CAVE_OF_ORIGIN",
-  "requires_flash": false,
-  "weather": "WEATHER_FOG_HORIZONTAL",
+  "requires_flash": true,
+  "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
-  "allow_cycling": false,
+  "allow_cycling": true,
   "allow_escaping": true,
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [
-    {
-      "graphics_id": "OBJ_EVENT_GFX_WALLACE",
-      "x": 9,
-      "y": 13,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "CaveOfOrigin_B1F_EventScript_Wallace",
-      "flag": "FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE"
-    }
-  ],
+  "object_events": [],
   "warp_events": [
     {
-      "x": 9,
-      "y": 3,
+      "x": 13,
+      "y": 5,
       "elevation": 3,
       "dest_map": "MAP_CAVE_OF_ORIGIN_1F",
       "dest_warp_id": 1
+    },
+    {
+      "x": 5,
+      "y": 11,
+      "elevation": 3,
+      "dest_map": "MAP_CAVE_OF_ORIGIN_B2F",
+      "dest_warp_id": 0
     }
   ],
   "coord_events": [],

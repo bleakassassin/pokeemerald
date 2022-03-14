@@ -118,9 +118,9 @@
 #define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 //
 #define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 //
 
-#define FLAG_MACH_GEAR                       0x68  // Unused Flag
+#define FLAG_MACH_GEAR                       0x68 // Edited Flag; used for switching bike modes
 
-#define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69  // Removed Flag; functionality now handled by Old Sea Map var
+#define FLAG_READ_STEVENS_LETTER             0x69 // Edited Flag; used to progress post-game state
 #define FLAG_RECEIVED_HM04                   0x6A
 #define FLAG_RECEIVED_HM06                   0x6B
 #define FLAG_WHITEOUT_TO_LAVARIDGE           0x6C // Set after defeating Flannery, so the player cant white out from poison before receiving Go Goggles
@@ -455,7 +455,7 @@
 #define FLAG_REMATCH_DRAKE                   0x1A8
 #define FLAG_REMATCH_WALLACE                 0x1A9
 
-#define FLAG_UNUSED_0x1AA                    0x1AA // Unused Flag
+#define FLAG_ENABLE_WALLACE_MATCH_CALL       0x1AA // Edited Flag; enables Gym Leader Wallace Match Call after beating him in Sootopolis, cleared after beating him as Champion.
 #define FLAG_UNUSED_0x1AB                    0x1AB // Unused Flag
 
 #define FLAG_DEFEATED_DEOXYS                 0x1AC
@@ -861,7 +861,7 @@
 #define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL       0x331
 #define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL           0x332
 #define FLAG_HIDE_ROUTE_112_TEAM_MAGMA                              0x333
-#define FLAG_HIDE_CAVE_OF_ORIGIN_B1F_WALLACE                        0x334
+#define FLAG_HIDE_CAVE_OF_ORIGIN_B4F_WALLACE                        0x334
 #define FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE         0x335
 #define FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_2_BLOCKING_ENTRANCE         0x336
 #define FLAG_HIDE_MOSSDEEP_CITY_TEAM_MAGMA                          0x337
@@ -1476,7 +1476,7 @@
 
 #define FLAG_MAP_SCRIPT_CHECKED_DEOXYS              (SYSTEM_FLAGS + 0x73)
 #define FLAG_DEOXYS_ROCK_COMPLETE                   (SYSTEM_FLAGS + 0x74)
-#define FLAG_ENABLE_SHIP_BIRTH_ISLAND               (SYSTEM_FLAGS + 0x75)
+#define FLAG_ENABLE_SHIP_BIRTH_ISLAND               (SYSTEM_FLAGS + 0x75) // Removed Flag; functionally redundant with FLAG_RECEIVED_AURORA_TICKET
 #define FLAG_ENABLE_SHIP_FARAWAY_ISLAND             (SYSTEM_FLAGS + 0x76) // Removed Flag; functionally redundant with FLAG_RECEIVED_OLD_SEA_MAP
 
 #define FLAG_SHOWN_BOX_WAS_FULL_MESSAGE             (SYSTEM_FLAGS + 0x77)

@@ -2916,6 +2916,7 @@ extern const u32 gTrainerFrontPic_LeaderFlannery[];
 extern const u32 gTrainerFrontPic_LeaderNorman[];
 extern const u32 gTrainerFrontPic_LeaderWinona[];
 extern const u32 gTrainerFrontPic_LeaderTateAndLiza[];
+extern const u32 gTrainerFrontPic_LeaderWallace[];
 extern const u32 gTrainerFrontPic_LeaderJuan[];
 extern const u32 gTrainerFrontPic_SchoolKidM[];
 extern const u32 gTrainerFrontPic_SchoolKidF[];
@@ -3281,6 +3282,7 @@ extern const u32 gBattleTerrainPalette_StadiumPhoebe[];
 extern const u32 gBattleTerrainPalette_StadiumGlacia[];
 extern const u32 gBattleTerrainPalette_StadiumDrake[];
 extern const u32 gBattleTerrainPalette_StadiumWallace[];
+extern const u32 gBattleTerrainPalette_StadiumSteven[];
 
 // pokedex
 extern const u32 gPokedexInterface_Gfx[];

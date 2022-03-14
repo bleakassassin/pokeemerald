@@ -4,11 +4,17 @@ SootopolisCity_House3_MapScripts::
 SootopolisCity_House3_EventScript_Woman::
 	lock
 	faceplayer
-	msgbox SootopolisCity_House3_Text_JuanHasManyFansDoYou, MSGBOX_YESNO
+	goto_if_set FLAG_READ_STEVENS_LETTER, SootopolisCity_House3_EventScript_JuanHaveFans
+	msgbox SootopolisCity_House3_Text_WallaceHasManyFansDoYou, MSGBOX_YESNO
+SootopolisCity_House3_EventScript_DoYouHaveFans::
 	goto_if_eq VAR_RESULT, YES, SootopolisCity_House3_EventScript_HaveFans
 	msgbox SootopolisCity_House3_Text_LonesomeTryWorkingHarder, MSGBOX_DEFAULT
 	release
 	end
+
+SootopolisCity_House3_EventScript_JuanHaveFans::
+	msgbox SootopolisCity_House3_Text_JuanHasManyFansDoYou, MSGBOX_YESNO
+	goto SootopolisCity_House3_EventScript_DoYouHaveFans
 
 SootopolisCity_House3_EventScript_HaveFans::
 	msgbox SootopolisCity_House3_Text_YouMustBePrettyStrong, MSGBOX_DEFAULT
@@ -18,6 +24,12 @@ SootopolisCity_House3_EventScript_HaveFans::
 SootopolisCity_House3_EventScript_Girl::
 	msgbox SootopolisCity_House3_Text_TrainerFanClubWasWild, MSGBOX_NPC
 	end
+
+SootopolisCity_House3_Text_WallaceHasManyFansDoYou:
+	.string "You're a POKéMON TRAINER, aren't you?\p"
+	.string "SOOTOPOLIS's GYM LEADER WALLACE has\n"
+	.string "many fans.\l"
+	.string "Do you have any?$"
 
 SootopolisCity_House3_Text_JuanHasManyFansDoYou:
 	.string "You're a POKéMON TRAINER, aren't you?\p"

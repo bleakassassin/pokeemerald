@@ -1822,6 +1822,7 @@ const u8 gText_FlanneryMatchCallDesc[] = _("PASSION BURN");
 const u8 gText_WinonaMatchCallDesc[] = _("SKY TAMER");
 const u8 gText_TateLizaMatchCallDesc[] = _("MYSTIC DUO");
 const u8 gText_JuanMatchCallDesc[] = _("DANDY CHARM");
+const u8 gText_WallaceMatchCallDesc[] = _("WITFUL GRACE");
 const u8 gText_EliteFourMatchCallDesc[] = _("ELITE FOUR");
 const u8 gText_ChampionMatchCallDesc[] = _("CHAMPION");
 const u8 gText_ProfBirchMatchCallDesc[] = _("{PKMN} PROF.");

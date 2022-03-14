@@ -1,7 +1,7 @@
 {
-  "id": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3",
-  "name": "CaveOfOrigin_UnusedRubySapphireMap3",
-  "layout": "LAYOUT_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3",
+  "id": "MAP_CAVE_OF_ORIGIN_B2F",
+  "name": "CaveOfOrigin_B2F",
+  "layout": "LAYOUT_CAVE_OF_ORIGIN_B2F",
   "music": "MUS_CAVE_OF_ORIGIN",
   "region_map_section": "MAPSEC_CAVE_OF_ORIGIN",
   "requires_flash": true,
@@ -16,17 +16,17 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 7,
-      "y": 14,
+      "x": 5,
+      "y": 10,
       "elevation": 3,
-      "dest_map": "MAP_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2",
+      "dest_map": "MAP_CAVE_OF_ORIGIN_B1F",
       "dest_warp_id": 1
     },
     {
-      "x": 12,
-      "y": 6,
+      "x": 8,
+      "y": 14,
       "elevation": 3,
-      "dest_map": "MAP_CAVE_OF_ORIGIN_B1F",
+      "dest_map": "MAP_CAVE_OF_ORIGIN_B3F",
       "dest_warp_id": 0
     }
   ],

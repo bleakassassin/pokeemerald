@@ -45,6 +45,7 @@ EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries::
 	return
 
 EverGrandeCity_HallOfFame_EventScript_SetRematchChampionCheck::
+	clearflag FLAG_ENABLE_WALLACE_MATCH_CALL
 	setflag FLAG_WON_LEAGUE_REMATCHES
 	return
 

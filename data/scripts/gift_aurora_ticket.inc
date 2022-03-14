@@ -3,55 +3,28 @@ MysteryGiftScript_AuroraTicket::
 	lock
 	faceplayer
 	vgoto_if_set FLAG_RECEIVED_AURORA_TICKET, AuroraTicket_Obtained
-	vgoto_if_set FLAG_BATTLED_DEOXYS, AuroraTicket_Obtained
-	checkitem ITEM_AURORA_TICKET
-	vgoto_if_eq VAR_RESULT, TRUE, AuroraTicket_Obtained
-	vmessage sText_AuroraTicketForYou
+	removeitem ITEM_AURORA_TICKET
+	vmessage MysteryGift_Text_TheresATicketForYouShort
 	waitmessage
 	waitbuttonpress
 	checkitemspace ITEM_AURORA_TICKET
 	vgoto_if_eq VAR_RESULT, FALSE, AuroraTicket_NoBagSpace
+	goto_if_set FLAG_ENABLE_JUAN_MATCH_CALL, AuroraTicket_Give
+	setvar VAR_TEMP_1, 1
+AuroraTicket_Give:
+	setvar VAR_TEMP_0, 1
 	giveitem ITEM_AURORA_TICKET
-	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
 	setflag FLAG_RECEIVED_AURORA_TICKET
-	vmessage sText_AuroraTicketUseAtPort
+AuroraTicket_Obtained:
+	vmessage MysteryGift_Text_TryUsingItAtLilycovePort
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
 AuroraTicket_NoBagSpace:
-	vmessage sText_AuroraTicketBagFull
+	vmessage MysteryGift_Text_BagFull
 	waitmessage
 	waitbuttonpress
 	release
 	end
-
-AuroraTicket_Obtained:
-	vmessage sText_AuroraTicketThankYou
-	waitmessage
-	waitbuttonpress
-	release
-	end
-
-sText_AuroraTicketForYou:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "You must be {PLAYER}.\n"
-	.string "There is a ticket here for you.$"
-
-sText_AuroraTicketUseAtPort:
-	.string "It appears to be for use at the\n"
-	.string "LILYCOVE CITY port.\p"
-	.string "Why not give it a try and see what\n"
-	.string "it is about?$"
-
-sText_AuroraTicketThankYou:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.$"
-
-sText_AuroraTicketBagFull:
-	.string "Oh, I'm sorry, {PLAYER}.\n"
-	.string "Your BAG's KEY ITEMS POCKET is full.\p"
-	.string "Please store something on your PC,\n"
-	.string "then come back for this.$"

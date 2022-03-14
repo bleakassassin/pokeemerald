@@ -1,0 +1,8 @@
+CaveOfOrigin_B3F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, CaveOfOrigin_B3F_OnTransition
+	.byte 0
+
+CaveOfOrigin_B3F_OnTransition:
+	call_if_set FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE, CaveOfOrigin_EventScript_DisableTriggers
+	end
+

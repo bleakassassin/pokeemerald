@@ -141,6 +141,7 @@ MossdeepCity_StevensHouse_EventScript_Steven::
 MossdeepCity_StevensHouse_EventScript_Letter::
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_LetterFromSteven, MSGBOX_DEFAULT
+	setflag FLAG_READ_STEVENS_LETTER
 	releaseall
 	end
 
@@ -200,8 +201,14 @@ MossdeepCity_StevensHouse_Text_LetterFromSteven:
 	.string "To {PLAYER}{KUN}…\p"
 	.string "I've decided to do a little soul-\n"
 	.string "searching and train on the road.\p"
-	.string "I don't plan to return home for some\n"
-	.string "time.\p"
+	.string "I don't plan to return for some time.\p"
+	.string "The POKéMON LEAGUE will be under new\n"
+	.string "leadership in my absence.\p"
+	.string "I asked a good friend to step in and\n"
+	.string "take on this great responsibility.\p"
+	.string "Should you take on the LEAGUE again,\n"
+	.string "you'll be pleased to know who it is.\p"
+	.string "… … … … … …\p"
 	.string "I have a favor to ask of you.\p"
 	.string "I want you to take the POKé BALL on\n"
 	.string "the desk.\p"

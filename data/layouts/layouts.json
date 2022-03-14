@@ -1582,44 +1582,44 @@
       "blockdata_filepath": "data/layouts/CaveOfOrigin_1F/map.bin"
     },
     {
-      "id": "LAYOUT_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP1",
-      "name": "CaveOfOrigin_UnusedRubySapphireMap1_Layout",
+      "id": "LAYOUT_CAVE_OF_ORIGIN_B1F",
+      "name": "CaveOfOrigin_B1F_Layout",
       "width": 23,
       "height": 23,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/CaveOfOrigin_UnusedRubySapphireMap1/border.bin",
-      "blockdata_filepath": "data/layouts/CaveOfOrigin_UnusedRubySapphireMap1/map.bin"
+      "border_filepath": "data/layouts/CaveOfOrigin_B1F/border.bin",
+      "blockdata_filepath": "data/layouts/CaveOfOrigin_B1F/map.bin"
     },
     {
-      "id": "LAYOUT_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP2",
-      "name": "CaveOfOrigin_UnusedRubySapphireMap2_Layout",
+      "id": "LAYOUT_CAVE_OF_ORIGIN_B2F",
+      "name": "CaveOfOrigin_B2F_Layout",
       "width": 21,
       "height": 21,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/CaveOfOrigin_UnusedRubySapphireMap2/border.bin",
-      "blockdata_filepath": "data/layouts/CaveOfOrigin_UnusedRubySapphireMap2/map.bin"
+      "border_filepath": "data/layouts/CaveOfOrigin_B2F/border.bin",
+      "blockdata_filepath": "data/layouts/CaveOfOrigin_B2F/map.bin"
     },
     {
-      "id": "LAYOUT_CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP3",
-      "name": "CaveOfOrigin_UnusedRubySapphireMap3_Layout",
+      "id": "LAYOUT_CAVE_OF_ORIGIN_B3F",
+      "name": "CaveOfOrigin_B3F_Layout",
       "width": 19,
       "height": 21,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/CaveOfOrigin_UnusedRubySapphireMap3/border.bin",
-      "blockdata_filepath": "data/layouts/CaveOfOrigin_UnusedRubySapphireMap3/map.bin"
+      "border_filepath": "data/layouts/CaveOfOrigin_B3F/border.bin",
+      "blockdata_filepath": "data/layouts/CaveOfOrigin_B3F/map.bin"
     },
     {
-      "id": "LAYOUT_CAVE_OF_ORIGIN_B1F",
-      "name": "CaveOfOrigin_B1F_Layout",
+      "id": "LAYOUT_CAVE_OF_ORIGIN_B4F",
+      "name": "CaveOfOrigin_B4F_Layout",
       "width": 19,
       "height": 19,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/CaveOfOrigin_B1F/border.bin",
-      "blockdata_filepath": "data/layouts/CaveOfOrigin_B1F/map.bin"
+      "border_filepath": "data/layouts/CaveOfOrigin_B4F/border.bin",
+      "blockdata_filepath": "data/layouts/CaveOfOrigin_B4F/map.bin"
     },
     {
       "id": "LAYOUT_VICTORY_ROAD_1F",
@@ -1752,14 +1752,14 @@
       "blockdata_filepath": "data/layouts/UnusedCave6/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE7",
-      "name": "UnusedCave7_Layout",
-      "width": 1,
-      "height": 1,
-      "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave7/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave7/map.bin"
+      "id": "LAYOUT_EVER_GRANDE_CITY_STEVENS_ROOM",
+      "name": "EverGrandeCity_StevensRoom_Layout",
+      "width": 13,
+      "height": 13,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_EliteFour",
+      "border_filepath": "data/layouts/EverGrandeCity_StevensRoom/border.bin",
+      "blockdata_filepath": "data/layouts/EverGrandeCity_StevensRoom/map.bin"
     },
     {
       "id": "LAYOUT_ALTERING_CAVE",
@@ -4192,14 +4192,14 @@
       "blockdata_filepath": "data/layouts/TrainerHill_Roof/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE8",
-      "name": "UnusedCave8_Layout",
+      "id": "LAYOUT_UNUSED_CAVE7",
+      "name": "UnusedCave7_Layout",
       "width": 1,
       "height": 1,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave8/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave8/map.bin"
+      "border_filepath": "data/layouts/UnusedCave7/border.bin",
+      "blockdata_filepath": "data/layouts/UnusedCave7/map.bin"
     },
     {
       "id": "LAYOUT_NAVEL_ROCK_EXTERIOR",

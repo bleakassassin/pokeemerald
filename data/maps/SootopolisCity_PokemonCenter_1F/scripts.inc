@@ -20,14 +20,20 @@ SootopolisCity_PokemonCenter_1F_EventScript_Nurse::
 SootopolisCity_PokemonCenter_1F_EventScript_Gentleman::
 	lock
 	faceplayer
+	goto_if_set FLAG_READ_STEVENS_LETTER, SootopolisCity_PokemonCenter_1F_EventScript_GentlemanWallaceMentor
 	goto_if_ge VAR_SKY_PILLAR_STATE, 2, SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries
 	goto_if_unset FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries
 	msgbox SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries::
+SootopolisCity_PokemonCenter_1F_EventScript_GentlemanWallaceMentor::
 	msgbox SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries::
+	msgbox SootopolisCity_PokemonCenter_1F_Text_WallacePowerfulTrainer, MSGBOX_DEFAULT
 	release
 	end
 
@@ -53,6 +59,15 @@ SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn:
 	.string "But the ELITE FOUR… They're said to be\n"
 	.string "even stronger than WALLACE's mentor.\p"
 	.string "How strong could they be?$"
+
+SootopolisCity_PokemonCenter_1F_Text_WallacePowerfulTrainer:
+	.string "WALLACE, this town's GYM LEADER, is a\n"
+	.string "powerful TRAINER.\p"
+	.string "He's rumored to be the best in the\n"
+	.string "whole HOENN region.\p"
+	.string "But the ELITE FOUR...\p"
+	.string "They're said to be even stronger than\n"
+	.string "WALLACE. How strong could they be?$"
 
 SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge:
 	.string "Everyone in town has taken refuge\n"

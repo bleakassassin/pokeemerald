@@ -22,8 +22,9 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor::
 EverGrandeCity_PokemonLeague_1F_EventScript_CheckPostGame::
 	goto_if_set FLAG_WON_LEAGUE_REMATCHES, Common_EventScript_NopReturn
 	call AbnormalWeather_EventScript_CheckKyogreGroudonStatus
-	call_if_set FLAG_RECEIVED_BELDUM, EverGrandeCity_PokemonLeague_1F_EventScript_AddVar
-	call_if_lt VAR_0x8004, 3, EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
+	call_if_set FLAG_DEOXYS_ROCK_COMPLETE, EverGrandeCity_PokemonLeague_1F_EventScript_AddVar
+	call_if_ge VAR_MT_PYRE_STATE, 3, EverGrandeCity_PokemonLeague_1F_EventScript_AddVar
+	call_if_lt VAR_0x8004, 4, EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
 	return
 
 EverGrandeCity_PokemonLeague_1F_EventScript_AddVar::
@@ -92,7 +93,8 @@ EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges::
 
 EverGrandeCity_PokemonLeague_1F_EventScript_CheckRematch::
 	goto_if_set FLAG_WON_LEAGUE_REMATCHES, EverGrandeCity_PokemonLeague_1F_EventScript_GoForth
-	goto_if_lt VAR_0x8004, 3, EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable
+	goto_if_unset FLAG_RECEIVED_AURORA_TICKET, EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable
+	goto_if_lt VAR_0x8004, 4, EverGrandeCity_PokemonLeague_1F_EventScript_UndergoingOverhaul
 EverGrandeCity_PokemonLeague_1F_EventScript_GoForth::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
@@ -106,7 +108,12 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GoForth::
 EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable::
 	msgbox EverGrandeCity_PokemonLeague_1F_Text_ChampionNotAvailable, MSGBOX_DEFAULT
 	releaseall
-	end	
+	end
+
+EverGrandeCity_PokemonLeague_1F_EventScript_UndergoingOverhaul::
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_ShouldOpenSoon, MSGBOX_DEFAULT
+	releaseall
+	end
 
 EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromRight:
 	walk_down
@@ -147,7 +154,13 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth:
 	.string "POKéMON, and go forth!$"
 
 EverGrandeCity_PokemonLeague_1F_Text_ChampionNotAvailable:
-	.string "Due to WALLACE's absence, the doors\n"
+	.string "Due to STEVEN's absence, the doors\n"
 	.string "to the POKEéMON LEAGUE are closed.\p"
 	.string "We apologize for the inconvenience\n"
 	.string "and thank you for your patience.$"
+
+EverGrandeCity_PokemonLeague_1F_Text_ShouldOpenSoon:
+	.string "The POKéMON LEAGUE is currently\n"
+	.string "undergoing an overhaul.\p"
+	.string "The doors should open again soon.\n"
+	.string "Thank you for your patience.$"

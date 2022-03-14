@@ -9,6 +9,9 @@ MysteryGiftScript_MysticTicket::
 	waitbuttonpress
 	checkitemspace ITEM_MYSTIC_TICKET
 	vgoto_if_eq VAR_RESULT, FALSE, MysticTicket_NoBagSpace
+	goto_if_set FLAG_EXCHANGED_SCANNER, MysticTicket_Give
+	setvar VAR_TEMP_1, 1
+MysticTicket_Give:
 	setvar VAR_TEMP_0, 1
 	clearflag FLAG_EXCHANGED_SCANNER
 	giveitem ITEM_MYSTIC_TICKET
