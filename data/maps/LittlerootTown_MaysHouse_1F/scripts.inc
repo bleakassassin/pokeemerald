@@ -192,26 +192,26 @@ RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
 	.string "Like child, like father.\p"
-	.string "My husband is as wild about POKéMON\n"
+	.string "My husband is as wild about Pokémon\n"
 	.string "as our child.\p"
-	.string "If he's not at his LAB, he's likely\n"
+	.string "If he's not at his Lab, he's likely\n"
 	.string "scrabbling about in grassy places.$"
 
 RivalsHouse_1F_Text_TooBusyToNoticeVisit:
 	.string "That {RIVAL}!\p"
 	.string "I guess our child is too busy with\n"
-	.string "POKéMON to notice that you came\l"
+	.string "Pokémon to notice that you came\l"
 	.string "to visit, {PLAYER}{KUN}.$"
 
 RivalsHouse_1F_Text_WentOutToRoute103:
-	.string "Oh, {RIVAL} went out to ROUTE 103\n"
+	.string "Oh, {RIVAL} went out to Route 103\n"
 	.string "just a little while ago.\p"
 	.string "Like father, like child.\n"
 	.string "{RIVAL} can't stay quietly at home.$"
 
 RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 	.string "I think it's wonderful for people to\n"
-	.string "travel with POKéMON.\p"
+	.string "travel with Pokémon.\p"
 	.string "But you should go home every so often\n"
 	.string "to let your mother know you're okay.\p"
 	.string "She might not say it, but I'm sure she\n"
@@ -220,7 +220,7 @@ RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 RivalsHouse_1F_Text_WelcomeBack:
 	.string "{PLAYER}{KUN}! Welcome back!\p"
 	.string "My husband told me that you defeated\n"
-	.string "the POKéMON CHAMPION!\p"
+	.string "the Pokémon Champion!\p"
 	.string "Incredible! You must be having one\n"
 	.string "amazing adventure for yourself.\p"
 	.string "It's good to see you stop by home.\n"
@@ -234,4 +234,4 @@ RivalsHouse_1F_Text_WelcomeBack:
 RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "Hi, neighbor!\p"
 	.string "Do you already have your\n"
-	.string "own POKéMON?$"
+	.string "own Pokémon?$"

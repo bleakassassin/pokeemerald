@@ -165,7 +165,7 @@ BattleFrontier_Lounge6_EventScript_SkylarTradeCompleted::
 	end
 
 BattleFrontier_Lounge6_Text_WouldYouLikeToTrade:
-	.string "My POKéMON is a {STR_VAR_2}.\n"
+	.string "My Pokémon is a {STR_VAR_2}.\n"
 	.string "Do you know it?\l"
 	.string "It's quite cute and rather nice.\p"
 	.string "This little one, I could trade with\n"
@@ -192,11 +192,11 @@ BattleFrontier_Lounge6_Text_WellThatsFineToo:
 
 BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined:
 	.string "Giggle!\n"
-	.string "A PIKACHU is so much cuter than I had\l"
+	.string "A Pikachu is so much cuter than I had\l"
 	.string "imagined. I'm delighted!$"
 
 BattleFrontier_Lounge6_Text_IllTradeIfYouWant:
-	.string "Huh? My POKéMON is cute?\n"
+	.string "Huh? My Pokémon is cute?\n"
 	.string "Sure, I knew that.\p"
 	.string "But if you really want, I'm willing\n"
 	.string "to trade it to you.\p"
@@ -205,7 +205,7 @@ BattleFrontier_Lounge6_Text_IllTradeIfYouWant:
 
 BattleFrontier_Lounge6_Text_PleaseBeGoodToMyPokemon:
 	.string "Eheheh…\n"
-	.string "Please be good to my POKéMON.$"
+	.string "Please be good to my Pokémon.$"
 
 BattleFrontier_Lounge6_Text_DoesntLookLikeMonToMe:
 	.string "Huh? That doesn't look anything like\n"
@@ -213,10 +213,10 @@ BattleFrontier_Lounge6_Text_DoesntLookLikeMonToMe:
 
 BattleFrontier_Lounge6_Text_YouDontWantToThatsOkay:
 	.string "Oh, if you don't want to, that's okay.\n"
-	.string "But my POKéMON is cute, you know…$"
+	.string "But my Pokémon is cute, you know…$"
 
 BattleFrontier_Lounge6_Text_AnyPokemonCanBeCute:
-	.string "Any POKéMON can be cute if you raise\n"
+	.string "Any Pokémon can be cute if you raise\n"
 	.string "it with care and kindness.$"
 
 BattleFrontier_Lounge6_Text_YouWillTradeWontYou:
@@ -243,9 +243,9 @@ BattleFrontier_Lounge6_Text_YouWontTradeMe:
 	.string "Even after I bared my heart to you?$"
 
 BattleFrontier_Lounge6_Text_GoingToMakeVolbeatStrong:
-	.string "I'm going to make VOLBEAT super\n"
+	.string "I'm going to make Volbeat super\n"
 	.string "strong from this moment on!\p"
-	.string "I hope you do the same with NIDORAN♂!$"
+	.string "I hope you do the same with Nidoran♂!$"
 
 BattleFrontier_Lounge6_Text_WillingToTradeIt:
 	.string "Check out this {STR_VAR_2}!\p"
@@ -275,5 +275,5 @@ BattleFrontier_Lounge6_Text_NotDesperateOrAnything:
 BattleFrontier_Lounge6_Text_ReallyWantedToGetBagon:
 	.string "I know I could go looking for one\n"
 	.string "on my own, but…\p"
-	.string "But I really wanted to get a BAGON\n"
-	.string "that another TRAINER caught…$"
+	.string "But I really wanted to get a Bagon\n"
+	.string "that another Trainer caught…$"

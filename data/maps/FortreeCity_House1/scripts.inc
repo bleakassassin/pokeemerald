@@ -61,7 +61,7 @@ FortreeCity_House1_EventScript_Zigzagoon::
 	end
 
 FortreeCity_House1_Text_YouWillTradeWontYou:
-	.string "Hi, there's this POKéMON that I'm\n"
+	.string "Hi, there's this Pokémon that I'm\n"
 	.string "looking for.\p"
 	.string "I want a {STR_VAR_1}.\n"
 	.string "Do you have one?\p"
@@ -74,7 +74,7 @@ FortreeCity_House1_Text_MonYouTakeCare:
 
 FortreeCity_House1_Text_ThisIsntAMon:
 	.string "Wait!\n"
-	.string "That POKéMON isn't a {STR_VAR_1}.\p"
+	.string "That Pokémon isn't a {STR_VAR_1}.\p"
 	.string "I guess you don't want to trade\n"
 	.string "with me.$"
 
@@ -85,14 +85,14 @@ FortreeCity_House1_Text_YouWontTradeMe:
 
 FortreeCity_House1_Text_GoingToMakeVolbeatStrong:
 	.string "Thank you for trading with me!\p"
-	.string "I really wanted this POKéMON, so\n"
+	.string "I really wanted this Pokémon, so\n"
 	.string "I promise to take good care of it!$"
 
 FortreeCity_House1_Text_TradingMemoriesWithOthers:
-	.string "Trading POKéMON with others…\p"
+	.string "Trading Pokémon with others…\p"
 	.string "It's as if you're trading your own\n"
 	.string "memories with other people.$"
 
 FortreeCity_House1_Text_Zigzagoon:
-	.string "ZIGZAGOON: Gumomoh?$"
+	.string "Zigzagoon: Gumomoh?$"
 

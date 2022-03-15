@@ -66,18 +66,18 @@ EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeechRematch::
 	end
 
 EverGrandeCity_GlaciasRoom_Text_IntroSpeech:
-	.string "Welcome, my name is GLACIA\n"
-	.string "of the ELITE FOUR.\p"
-	.string "I've traveled from afar to HOENN\n"
+	.string "Welcome, my name is Glacia\n"
+	.string "of the Elite Four.\p"
+	.string "I've traveled from afar to Hoenn\n"
 	.string "so that I may hone my ice skills.\p"
 	.string "But all I have seen are challenges by\n"
-	.string "weak TRAINERS and their POKéMON.\p"
+	.string "weak Trainers and their Pokémon.\p"
 	.string "What about you?\p"
 	.string "It would please me to no end if I could\n"
 	.string "go all out against you!$"
 
 EverGrandeCity_GlaciasRoom_Text_Defeat:
-	.string "You and your POKéMON…\n"
+	.string "You and your Pokémon…\n"
 	.string "How hot your spirits burn!\p"
 	.string "The all-consuming heat overwhelms.\p"
 	.string "It's no surprise that my icy skills\n"
@@ -86,10 +86,10 @@ EverGrandeCity_GlaciasRoom_Text_Defeat:
 EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech:
 	.string "Advance to the next room.\p"
 	.string "And there, confirm the truly fearsome\n"
-	.string "side of the POKéMON LEAGUE.$"
+	.string "side of the Pokémon League.$"
 	
 EverGrandeCity_GlaciasRoom_Text_IntroSpeechRematch:
-	.string "I've been waiting for a TRAINER with\n"
+	.string "I've been waiting for a Trainer with\n"
 	.string "a burning-hot soul.\p"
 	.string "How can you oppose chilling moves\n"
 	.string "that can freeze everything?$"
@@ -102,4 +102,4 @@ EverGrandeCity_GlaciasRoom_Text_PostBattleSpeechRematch:
 	.string "Do you intend to thaw my very heart?\p"
 	.string "That actually wouldn't bother me.\p"
 	.string "Anyway, continue onward!\n"
-	.string "DRAKE is waiting for you as well.$"
+	.string "Drake is waiting for you as well.$"

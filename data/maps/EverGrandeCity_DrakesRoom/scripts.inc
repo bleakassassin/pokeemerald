@@ -72,13 +72,13 @@ EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeechRematch::
 	end
 
 EverGrandeCity_DrakesRoom_Text_IntroSpeech:
-	.string "I am the last of the POKéMON LEAGUE\n"
-	.string "ELITE FOUR, DRAKE the DRAGON master!\p"
-	.string "In their natural state, POKéMON are\n"
+	.string "I am the last of the Pokémon League\n"
+	.string "Elite Four, Drake the Dragon master!\p"
+	.string "In their natural state, Pokémon are\n"
 	.string "wild living things. They are free.\p"
 	.string "At times, they hinder us.\n"
 	.string "At times, they help us.\p"
-	.string "For us to battle with POKéMON as\n"
+	.string "For us to battle with Pokémon as\n"
 	.string "partners, do you know what it takes?\p"
 	.string "Do you know what is needed?\p"
 	.string "If you don't, then you will never\n"
@@ -89,20 +89,20 @@ EverGrandeCity_DrakesRoom_Text_Defeat:
 
 EverGrandeCity_DrakesRoom_Text_PostBattleSpeech:
 	.string "You deserve every credit for coming\n"
-	.string "this far as a TRAINER of POKéMON.\p"
+	.string "this far as a Trainer of Pokémon.\p"
 	.string "You do seem to know what is needed.\p"
-	.string "Yes, what a TRAINER needs is a\n"
+	.string "Yes, what a Trainer needs is a\n"
 	.string "virtuous heart.\p"
-	.string "POKéMON touch the good hearts of\n"
-	.string "TRAINERS and learn good from wrong.\p"
+	.string "Pokémon touch the good hearts of\n"
+	.string "Trainers and learn good from wrong.\p"
 	.string "They touch the good hearts of\n"
-	.string "TRAINERS and grow strong.\p"
+	.string "Trainers and grow strong.\p"
 	.string "Go! Go onwards!\n"
-	.string "The CHAMPION is waiting!$"
+	.string "The Champion is waiting!$"
 
 EverGrandeCity_DrakesRoom_Text_IntroSpeechRematch:
 	.string "Oh, I've been waitin' for you!\p"
-	.string "My POKéMON and I are going to show\n"
+	.string "My Pokémon and I are going to show\n"
 	.string "you everything we've got!\p"
 	.string "Well then, you had better get ready\n"
 	.string "to try and stop me!$"
@@ -113,6 +113,6 @@ EverGrandeCity_DrakesRoom_Text_DefeatRematch:
 EverGrandeCity_DrakesRoom_Text_PostBattleSpeechRematch:
 	.string "I got a glimpse inside your heart!\n"
 	.string "There's nothing for me to say to you!\p"
-	.string "Go forth, TRAINER!\n"
+	.string "Go forth, Trainer!\n"
 	.string "Go on to your next challenge with\l"
 	.string "your head held high!$"

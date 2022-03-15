@@ -364,16 +364,16 @@ SlateportCity_Harbor_Text_FerryServiceUnavailable:
 
 SlateportCity_Harbor_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
-	.string "May I see your TICKET?$"
+	.string "May I see your Ticket?$"
 
 SlateportCity_Harbor_Text_YouMustHaveTicket:
-	.string "{PLAYER} doesn't have the TICKET…\p"
+	.string "{PLAYER} doesn't have the Ticket…\p"
 	.string "I'm terribly sorry.\p"
-	.string "You must have a TICKET to board\n"
+	.string "You must have a Ticket to board\n"
 	.string "the ferry.$"
 
 SlateportCity_Harbor_Text_FlashedTicketWhereTo:
-	.string "{PLAYER} flashed the TICKET.\p"
+	.string "{PLAYER} flashed the Ticket.\p"
 	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 
@@ -381,10 +381,10 @@ SlateportCity_Harbor_Text_SailAnotherTime:
 	.string "Please sail with us another time!$"
 
 SlateportCity_Harbor_Text_LilycoveItIs:
-	.string "LILYCOVE CITY it is, then!$"
+	.string "Lilycove City it is, then!$"
 
 SlateportCity_Harbor_Text_BattleFrontierItIs:
-	.string "BATTLE FRONTIER it is, then!$"
+	.string "Battle Frontier it is, then!$"
 
 SlateportCity_Harbor_Text_PleaseBoardFerry:
 	.string "Please board the ferry and wait for\n"
@@ -403,131 +403,131 @@ SlateportCity_Harbor_Text_AbnormalWeather:
 	.string "For a ship to sail safely, we need to\n"
 	.string "know about the weather!\p"
 	.string "Speaking of weather, I heard something\n"
-	.string "from a guy at the WEATHER INSTITUTE.\p"
+	.string "from a guy at the Weather Institute.\p"
 	.string "He was saying abnormal weather has\n"
 	.string "been reported all over the place!\p"
-	.string "You should visit the WEATHER INSTITUTE\n"
+	.string "You should visit the Weather Institute\n"
 	.string "and ask around!$"
 
 SlateportCity_Harbor_Text_SubTooSmallForMe:
-	.string "I wanted to go with CAPT. STERN on\n"
+	.string "I wanted to go with Capt. Stern on\n"
 	.string "the ocean floor exploration.\p"
 	.string "But the sub's too small for me.\p"
 	.string "If I squeezed in, there wouldn't be\n"
-	.string "any room for the CAPTAIN…$"
+	.string "any room for the Captain…$"
 
 SlateportCity_Harbor_Text_SameThugsTriedToRobAtMuseum:
-	.string "CAPT. STERN: Those thugs…\p"
+	.string "Capt. Stern: Those thugs…\p"
 	.string "They're the same lot who tried to rob\n"
-	.string "the DEVON GOODS at the MUSEUM.$"
+	.string "the Devon Goods at the Museum.$"
 
 SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove:
-	.string "ARCHIE: Oh?\n"
+	.string "Archie: Oh?\n"
 	.string "Not you again…\p"
 	.string "You are tenacious to track us here,\n"
 	.string "that much I will give you.\p"
 	.string "But now…\n"
 	.string "No one can stop us! No one!\p"
 	.string "Or, will you follow us back to our\n"
-	.string "HIDEOUT in LILYCOVE CITY?\p"
+	.string "Hideout in Lilycove City?\p"
 	.string "Fwahahahaha…$"
 
 SlateportCity_Harbor_Text_CaptSternWhyStealMySubmarine:
-	.string "CAPT. STERN: Why…\p"
-	.string "Why would TEAM AQUA steal my\n"
-	.string "SUBMARINE EXPLORER 1?\p"
+	.string "Capt. Stern: Why…\p"
+	.string "Why would Team Aqua steal my\n"
+	.string "Submarine Explorer 1?\p"
 	.string "They can't be after the slumbering\n"
-	.string "POKéMON at the bottom of the sea…\p"
+	.string "Pokémon at the bottom of the sea…\p"
 	.string "But even if I were to chase them,\n"
 	.string "I don't stand a chance against them…$"
 
 SlateportCity_Harbor_Text_TeamAquaLeftNeedDive:
-	.string "CAPT. STERN: Oh, {PLAYER}{KUN}…\p"
-	.string "Okay… So TEAM AQUA left before you\n"
+	.string "Capt. Stern: Oh, {PLAYER}{KUN}…\p"
+	.string "Okay… So Team Aqua left before you\n"
 	.string "could stop them…\p"
 	.string "Oh, no, don't blame yourself.\n"
 	.string "You're not responsible for this.\p"
 	.string "Trying to catch a submarine…\n"
 	.string "It's impossible for most people.\p"
-	.string "You would need a POKéMON that knows\n"
-	.string "how to DIVE…\p"
+	.string "You would need a Pokémon that knows\n"
+	.string "how to Dive…\p"
 	.string "Perhaps if you went out to\n"
-	.string "MOSSDEEP CITY…\p"
+	.string "Mossdeep City…\p"
 	.string "A lot of divers live out there, so\n"
 	.string "someone might teach you…$"
 
 SlateportCity_Harbor_Text_NeedDiveToCatchSub:
-	.string "CAPT. STERN: Trying to catch a\n"
+	.string "Capt. Stern: Trying to catch a\n"
 	.string "submarine… It's impossible.\p"
-	.string "You would need a POKéMON that knows\n"
-	.string "how to DIVE…\p"
+	.string "You would need a Pokémon that knows\n"
+	.string "how to Dive…\p"
 	.string "Perhaps if you went out to\n"
-	.string "MOSSDEEP CITY…\p"
+	.string "Mossdeep City…\p"
 	.string "A lot of divers live out there, so\n"
 	.string "someone might teach you…$"
 
 SlateportCity_Harbor_Text_WontBeLongBeforeWeFinishFerry:
-	.string "CAPT. STERN: Oh, yes.\n"
-	.string "MR. BRINEY came to our SHIPYARD.\p"
+	.string "Capt. Stern: Oh, yes.\n"
+	.string "Mr. Briney came to our Shipyard.\p"
 	.string "It won't be long now before we finish\n"
 	.string "making the ferry!$"
 
 SlateportCity_Harbor_Text_FinishedMakingFerry:
-	.string "CAPT. STERN: {PLAYER}{KUN}!\p"
+	.string "Capt. Stern: {PLAYER}{KUN}!\p"
 	.string "We finally finished making the ferry\n"
-	.string "S.S. TIDAL!\p"
+	.string "S.S. Tidal!\p"
 	.string "We couldn't have done it without\n"
-	.string "your friend MR. BRINEY.\p"
+	.string "your friend Mr. Briney.\p"
 	.string "Please go for a short cruise on it!$"
 
 SlateportCity_Harbor_Text_WouldYouTradeScanner:
-	.string "CAPT. STERN: Oh?\n"
+	.string "Capt. Stern: Oh?\n"
 	.string "{PLAYER}{KUN}, that item you have…\p"
-	.string "That's a SCANNER! That would sure\n"
+	.string "That's a Scanner! That would sure\n"
 	.string "help us on our explorations.\p"
 	.string "{PLAYER}{KUN}, can you do me a favor and let\n"
-	.string "me take that SCANNER off your hands?$"
+	.string "me take that Scanner off your hands?$"
 
 SlateportCity_Harbor_Text_IfYouWantToTradeLetMeKnow:
-	.string "CAPT. STERN: Are you certain?\n"
+	.string "Capt. Stern: Are you certain?\n"
 	.string "It's useless to you, {PLAYER}{KUN}…\p"
 	.string "Well, okay, then. If you want to\n"
 	.string "reconsider, let me know.$"
 
 SlateportCity_Harbor_Text_HandedScannerToStern:
-	.string "{PLAYER} handed the SCANNER to\n"
-	.string "CAPT. STERN.$"
+	.string "{PLAYER} handed the Scanner to\n"
+	.string "Capt. Stern.$"
 
 SlateportCity_Harbor_Text_TakeThisTicket:
-	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
+	.string "Capt. Stern: Thanks, {PLAYER}{KUN}!\n"
 	.string "This will help our research a lot!\p"
 	.string "Take this ticket as a token of my\n"
 	.string "appreciation for your generosity.$"
 
 SlateportCity_Harbor_Text_ThatTicket:
-	.string "CAPT. STERN: That ticket is for use\n"
-	.string "at the LILYCOVE CITY port.\p"
+	.string "Capt. Stern: That ticket is for use\n"
+	.string "at the Lilycove City port.\p"
 	.string "It will grant you a first-class trip\n"
-	.string "on the S.S. TIDAL to a distant island.\p"
+	.string "on the S.S. Tidal to a distant island.\p"
 	.string "It's a spectacle! I feel I owe you a\n"
 	.string "trip there for helping us out so much.\p"
 	.string "Do be careful, though.\p"
 	.string "Those who have wandered there spread\n"
-	.string "rumors of mystic POKéMON in the area…$"
+	.string "rumors of mystic Pokémon in the area…$"
 
 SlateportCity_Harbor_Text_DontHaveAnythingICanGive:
-	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
+	.string "Capt. Stern: Thanks, {PLAYER}{KUN}!\n"
 	.string "This will help our research a lot!\p"
 	.string "You've done so much for us, I want to\n"
 	.string "reward you for your generosity.\p"
 	.string "I don't have anything that I can give\n"
 	.string "to you at the moment, though…\p"
 	.string "When I do, I'll send it to a nearby\n"
-	.string "POKéMON CENTER for you to pick up.\p"
+	.string "Pokémon Center for you to pick up.\p"
 	.string "It should get here by the time the\n"
-	.string "S.S. TIDAL takes its maiden voyage.\p"
+	.string "S.S. Tidal takes its maiden voyage.\p"
 	.string "I promise it will be worth the wait!$"
 
 SlateportCity_Harbor_Text_ThisWillHelpResearch:
-	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
+	.string "Capt. Stern: Thanks, {PLAYER}{KUN}!\n"
 	.string "This will help our research a lot!$"

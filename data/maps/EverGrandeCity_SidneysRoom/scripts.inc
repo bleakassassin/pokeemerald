@@ -73,13 +73,13 @@ EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeechRematch::
 
 EverGrandeCity_SidneysRoom_Text_IntroSpeech:
 	.string "Welcome, challenger!\n"
-	.string "I'm SIDNEY of the ELITE FOUR.\p"
+	.string "I'm Sidney of the Elite Four.\p"
 	.string "I like that look you're giving me.\n"
 	.string "I guess you'll give me a good match.\l"
 	.string "That's good! Looking real good!\p"
 	.string "All right! You and me, let's enjoy\n"
 	.string "a battle that can only be staged\l"
-	.string "here in the POKéMON LEAGUE!$"
+	.string "here in the Pokémon League!$"
 
 EverGrandeCity_SidneysRoom_Text_Defeat:
 	.string "Well, how do you like that? I lost!\n"
@@ -93,7 +93,7 @@ EverGrandeCity_SidneysRoom_Text_PostBattleSpeech:
 	.string "your next battle!$"
 	
 EverGrandeCity_SidneysRoom_Text_IntroSpeechRematch:
-	.string "I was waiting for you, CHAMPION.\p"
+	.string "I was waiting for you, Champion.\p"
 	.string "With the strength you've gained, we\n"
 	.string "can battle with no holds barred!\p"
 	.string "No matter who wins, no hard feelings!\p"

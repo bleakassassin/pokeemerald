@@ -50,9 +50,9 @@ RustboroCity_House1_EventScript_Hiker::
 	end
 
 RustboroCity_House1_Text_IllTradeIfYouWant:
-	.string "Do you nickname your POKéMON?\n"
+	.string "Do you nickname your Pokémon?\n"
 	.string "I gave a cool name to mine.\p"
-	.string "But when I call my POKéMON by that\n"
+	.string "But when I call my Pokémon by that\n"
 	.string "name, people laugh at me...\p"
 	.string "If it's okay with you, want to trade\n"
 	.string "your {STR_VAR_1} for my {STR_VAR_2}?$"
@@ -65,15 +65,15 @@ RustboroCity_House1_Text_DoesntLookLikeMonToMe:
 	.string "Tch, that's so disappointing...$"
 
 RustboroCity_House1_Text_YouDontWantToThatsOkay:
-	.string "Aww, it's a good POKéMON...$"
+	.string "Aww, it's a good Pokémon...$"
 
 RustboroCity_House1_Text_AnyPokemonCanBeCute:
 	.string "Don't you get curious about what other\n"
-	.string "people named their POKéMON?$"
+	.string "people named their Pokémon?$"
 
 RustboroCity_House1_Text_AllSortsOfPlaces:
 	.string "In all sorts of places, there are all\n"
-	.string "sorts of POKéMON and people.\p"
+	.string "sorts of Pokémon and people.\p"
 	.string "I find that fascinating, so I go to all\n"
 	.string "sorts of places.$"
 

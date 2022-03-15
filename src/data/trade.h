@@ -41,19 +41,19 @@ static const u8 sText_ThreeDashes[] = _("---");
 static const u8 sText_FourQuestionMarks[] = _("????");
 static const u8 sText_UnusedEmpty[] = _("");
 static const u8 sText_IsThisTradeOkay[] = _("Is this trade okay?");
-static const u8 sText_Cancel[] = _("CANCEL");
-static const u8 sText_ChooseAPkmn[] = _("Choose a POKéMON.");
-static const u8 sText_Summary[] = _("SUMMARY");
-static const u8 sText_Trade[] = _("TRADE");
+static const u8 sText_Cancel[] = _("Cancel");
+static const u8 sText_ChooseAPkmn[] = _("Choose a Pokémon.");
+static const u8 sText_Summary[] = _("Summary");
+static const u8 sText_Trade[] = _("Trade");
 static const u8 sText_CancelTrade[] = _("Cancel trade?");
 static const u8 sJPText_PressBButtonToQuit[] = _("Bボタン　で　もどります");
-static const u8 sText_Summary2[] = _("SUMMARY");
-static const u8 sText_Trade2[] = _("TRADE");
+static const u8 sText_Summary2[] = _("Summary");
+static const u8 sText_Trade2[] = _("Trade");
 static const u8 sText_CommunicationStandby[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}Communication standby…\nPlease wait.");
 static const u8 sText_TheTradeHasBeenCanceled[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}The trade has\nbeen canceled.");
-static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPOKéMON for battle.");
+static const u8 sText_OnlyPkmnForBattle[] = _("That's your only\nPokémon for battle.");
 static const u8 sText_WaitingForYourFriend[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}Waiting for your friend\nto finish…");
-static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade POKéMON.");
+static const u8 sText_YourFriendWantsToTrade[] = _("Your friend wants\nto trade Pokémon.");
 
 static const struct OamData sTradeOamData_32x16 =
 {
@@ -1005,7 +1005,7 @@ static const struct InGameTrade sIngameTrades[] =
 {
     [INGAME_TRADE_MAKUHITA] =
     {
-        .nickname = _("MAKIT"),
+        .nickname = _("Makit"),
         .species = SPECIES_MAKUHITA,
         .ivs = {5, 5, 4, 4, 4, 4},
         .abilityNum = 1,
@@ -1014,14 +1014,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x9C40,
         .heldItem = ITEM_X_ATTACK,
         .mailNum = -1,
-        .otName = _("DARRELL"),
+        .otName = _("Darrell"),
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_SLAKOTH
     },
     [INGAME_TRADE_SKITTY] =
     {
-        .nickname = _("SKITIT"),
+        .nickname = _("Skitit"),
         .species = SPECIES_SKITTY,
         .ivs = {5, 4, 4, 5, 4, 4},
         .abilityNum = 0,
@@ -1030,14 +1030,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x498A2E17,
         .heldItem = ITEM_WOOD_MAIL,
         .mailNum = 0,
-        .otName = _("ELYSSA"),
+        .otName = _("Elyssa"),
         .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_SPINDA
     },
     [INGAME_TRADE_CORSOLA] =
     {
-        .nickname = _("COROSO"),
+        .nickname = _("Coroso"),
         .species = SPECIES_CORSOLA,
         .ivs = {4, 4, 5, 4, 4, 5},
         .abilityNum = 1,
@@ -1046,14 +1046,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x4C970B7F,
         .heldItem = ITEM_TROPIC_MAIL,
         .mailNum = 1,
-        .otName = _("LAINE"),
+        .otName = _("Laine"),
         .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_BELLOSSOM
     },
     [INGAME_TRADE_MEOWTH] =
     {
-        .nickname = _("MEOWOW"),
+        .nickname = _("Meowow"),
         .species = SPECIES_MEOWTH,
         .ivs = {4, 5, 4, 5, 4, 4},
         .abilityNum = 0,
@@ -1062,14 +1062,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x8B,
         .heldItem = ITEM_GLITTER_MAIL,
         .mailNum = 2,
-        .otName = _("ISIS"),
+        .otName = _("Isis"),
         .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_PIKACHU
     },
     [INGAME_TRADE_BELLSPROUT] =
     {
-        .nickname = _("BELLAMY"),
+        .nickname = _("Bellamy"),
         .species = SPECIES_BELLSPROUT,
         .ivs = {5, 4, 5, 4, 4, 4},
         .abilityNum = 0,
@@ -1078,14 +1078,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x84,
         .heldItem = ITEM_CHESTO_BERRY,
         .mailNum = -1,
-        .otName = _("KOBE"),
+        .otName = _("Kobe"),
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_RALTS
     },
     [INGAME_TRADE_NIDORAN_M] =
     {
-        .nickname = _("NIDOL"),
+        .nickname = _("Nidol"),
         .species = SPECIES_NIDORAN_M,
         .ivs = {4, 4, 4, 5, 5, 4},
         .abilityNum = 0,
@@ -1094,14 +1094,14 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x6F,
         .heldItem = ITEM_RETRO_MAIL,
         .mailNum = 3,
-        .otName = _("ROMAN"),
+        .otName = _("Roman"),
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_VOLBEAT
     },
     [INGAME_TRADE_DRATINI] =
     {
-        .nickname = _("DRAGOON"),
+        .nickname = _("Dragoon"),
         .species = SPECIES_DRATINI,
         .ivs = {5, 4, 4, 4, 5, 4},
         .abilityNum = 0,
@@ -1110,7 +1110,7 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x7F,
         .heldItem = ITEM_WAVE_MAIL,
         .mailNum = 4,
-        .otName = _("SKYLAR"),
+        .otName = _("Skylar"),
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_BAGON

@@ -37,5 +37,5 @@ OldSeaMap_NoBagSpace:
 
 sText_MysteryGiftOldSeaMapForYou:
 	.string "Let me confirm--you are {PLAYER}?\p"
-	.string "We received this OLD SEA MAP\n"
+	.string "We received this Old Sea Map\n"
 	.string "addressed to you.$"
