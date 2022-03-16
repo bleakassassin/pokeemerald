@@ -519,7 +519,7 @@ SlateportCity_OceanicMuseum_1F_Text_BetterWriteUpStory:
 	.string "I'd better write it up in a hurry!$"
 
 gTVRecentHappeningsText00::
-	.string "Hello, it's time for RECENT HAPPENINGS.\p"
+	.string "Hello, it's time for Recent Happenings.\p"
 	.string "For Pokémon Trainers, every day\n"
 	.string "is a storybook tale.\p"
 	.string "What we want to do is to introduce you\n"
