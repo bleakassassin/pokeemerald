@@ -322,7 +322,8 @@ SootopolisCity_Gym_1F_EventScript_StrangeThing:
 	.string "here and wanted you to have it!\p"
 	.string "I'm merely speculating, of course.\p"
 	.string "Try using it at the ferry at LILYCOVE\n"
-	.string "CITY and see where it takes you.$"
+	.string "CITY and see where it takes you.\p"
+	.string "… … … … … …$"
 
 SootopolisCity_Gym_1F_Text_RegisteredWallace:
 	.string "Registered GYM LEADER WALLACE\n"

@@ -155,7 +155,7 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth:
 
 EverGrandeCity_PokemonLeague_1F_Text_ChampionNotAvailable:
 	.string "Due to STEVEN's absence, the doors\n"
-	.string "to the POKEéMON LEAGUE are closed.\p"
+	.string "to the POKéMON LEAGUE are closed.\p"
 	.string "We apologize for the inconvenience\n"
 	.string "and thank you for your patience.$"
 

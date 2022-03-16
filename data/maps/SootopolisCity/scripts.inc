@@ -1689,8 +1689,3 @@ SootopolisCity_Text_ExplainWaterfallGoToGym:
 	.string "that door.\p"
 	.string "I'm sure that you will be dazzled by my\n"
 	.string "breathtakingly elegant battle style.$"
-
-SootopolisCity_Text_DazzledByMentor:
-	.string "WALLACE: I'm sure that you will be\n"
-	.string "dazzled by my mentor's breathtakingly\l"
-	.string "elegant battle style.$"

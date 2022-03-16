@@ -145,8 +145,8 @@ MauvilleCity_BikeShop_Text_ExplainBike:
 	.string "feel the wind with their bodies!\p"
 	.string "And ACRO GEAR is for those who prefer\n"
 	.string "technical rides!\p"
-	.string "Be sure to read the handbooks in the"
-	.string "back to make the best use of each one!$"
+	.string "Be sure to read the handbooks in the\n"
+	.string "back to make the best use of each one!\p"
 	.string "May the wind always be at your back\n"
 	.string "on your adventure!$"
 
