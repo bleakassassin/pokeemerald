@@ -1203,7 +1203,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanReject::
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanMIntro::
 	.string "Hello, I'm {STR_VAR_1},\n"
-	.string "and I'm a Pokéfan.$"
+	.string "and I'm a Poké Fan.$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanMMon1::
 	.string "I have with me now one {STR_VAR_2}\n"
@@ -1540,7 +1540,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFReject::
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokemaniacIntro::
 	.string "Heyo!\n"
-	.string "I'm {STR_VAR_1}, the Pokémaniac!$"
+	.string "I'm {STR_VAR_1}, the Poké Maniac!$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokemaniacMon1::
 	.string "What does a guy like me have?\n"
@@ -1706,7 +1706,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederFReject::
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanFIntro::
 	.string "I'm {STR_VAR_1}, and I'm proud to say\n"
-	.string "that I am a Pokéfan.$"
+	.string "that I am a Poké Fan.$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanFMon1::
 	.string "The darling Pokémon I've raised are\n"

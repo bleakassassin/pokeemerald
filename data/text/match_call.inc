@@ -1085,7 +1085,7 @@ MatchCall_PersonalizedText37::
 MatchCall_PersonalizedText38::
 	.string "Oh, it's {STR_VAR_1}, hello.\p"
 	.string "I've been swimming a lot but I still\n"
-	.string "can't seem to reach Evergrande.\p"
+	.string "can't seem to reach Ever Grande.\p"
 	.string "Maybe I'm just going in circles.\p"
 	.string "No, no, that can't be possible.\n"
 	.string "Wahahaha.\l"
@@ -2798,8 +2798,8 @@ MatchCall_Text_Steven1::
 	.string "already?\p"
 	.string "You should visit the Bike Shop\n"
 	.string "and get a Bicycle.\p"
-	.string "Then, try exploring the Granite\n"
-	.string "Cave thoroughly.\p"
+	.string "Then, try exploring Granite Cave\n"
+	.string "thoroughly.\p"
 	.string "You may make a new discovery\n"
 	.string "there.$"
 
