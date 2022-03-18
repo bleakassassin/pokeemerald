@@ -362,7 +362,7 @@ EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside:
 	.string "From here on, only those Trainers who\n"
 	.string "have become Champions may enter.\p"
 	.string "You'll have to wait outside with the\n"
-	.string "Professor.$"
+	.string "professor.$"
 
 EverGrandeCity_ChampionsRoom_Text_MayCongratulations:
 	.string "May: Groan…\p"

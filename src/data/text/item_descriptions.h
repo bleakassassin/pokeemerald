@@ -1044,7 +1044,7 @@ static const u8 sPokeblockCaseDesc[] = _(
 
 static const u8 sLetterDesc[] = _(
     "A letter to Steven\n"
-    "from the President\n"
+    "from the president\n"
     "of the Devon Corp.");
 
 static const u8 sEonTicketDesc[] = _(
@@ -1411,8 +1411,8 @@ static const u8 sHM08Desc[] = _(
 // Charms
 static const u8 sShinyCharmDesc[] = _(
     "Increases chance\n"
-    "of finding a SHINY\n"
-    "POKéMON.");
+    "of finding a Shiny\n"
+    "Pokémon.");
 
 // FireRed/LeafGreen key items
 static const u8 sOaksParcelDesc[] = _(

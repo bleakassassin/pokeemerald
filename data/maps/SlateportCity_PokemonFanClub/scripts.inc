@@ -253,9 +253,9 @@ SlateportCity_PokemonFanClub_EventScript_Azumarill::
 	end
 
 SlateportCity_PokemonFanClub_Text_MeetChairman:
-	.string "Er-hem! I am the Chairman of the\n"
+	.string "Er-hem! I am the chairman of the\n"
 	.string "Pokémon Fan Club!\p"
-	.string "Being the Chairman, I am naturally\n"
+	.string "Being the chairman, I am naturally\n"
 	.string "the most important!\p"
 	.string "No one can best me when it comes\n"
 	.string "to raising Pokémon. No one!\p"

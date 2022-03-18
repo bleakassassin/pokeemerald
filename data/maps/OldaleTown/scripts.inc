@@ -392,7 +392,7 @@ OldaleTown_Text_MayLetsGoBack:
 
 OldaleTown_Text_BrendanLetsGoBack:
 	.string "Brendan: I'm heading back to my dad's\n"
-	.string "Lab now.\l"
+	.string "lab now.\l"
 	.string "{PLAYER}, you should hustle back, too.$"
 
 OldaleTown_Text_CitySign:

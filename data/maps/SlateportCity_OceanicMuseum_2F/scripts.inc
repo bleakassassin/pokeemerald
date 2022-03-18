@@ -290,7 +290,7 @@ SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou:
 
 SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua:
 	.string "We're Team Aqua!\p"
-	.string "Our Boss wants those parts!\n"
+	.string "Our boss wants those parts!\n"
 	.string "Shut your yap and fork them over!$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat:
@@ -299,7 +299,7 @@ SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat:
 
 SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious:
 	.string "Oh, man, what a disaster…\n"
-	.string "The Boss is going to be furious…$"
+	.string "The boss is going to be furious…$"
 
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis:
 	.string "Humph, sniveling wimp!\n"
@@ -372,7 +372,7 @@ SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip:
 
 SlateportCity_OceanicMuseum_2F_Text_DontRunInMuseum:
 	.string "Don't you dare run around inside\n"
-	.string "the Museum!$"
+	.string "the museum!$"
 
 SlateportCity_OceanicMuseum_2F_Text_WantToRideSubmarine:
 	.string "Wow, the submarine's awesome!\n"

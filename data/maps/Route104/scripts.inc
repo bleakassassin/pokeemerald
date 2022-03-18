@@ -1043,7 +1043,7 @@ Route104_Text_TMsAreOneTimeUse:
 	.string "So try it out as much as you want!$"
 
 Route104_Text_DontNeedThisTakeIt:
-	.string "This Flower Shop started selling\n"
+	.string "This flower shop started selling\n"
 	.string "saplings recently.\p"
 	.string "It made me so happy, I went overboard\n"
 	.string "shopping.\p"
@@ -1051,7 +1051,7 @@ Route104_Text_DontNeedThisTakeIt:
 	.string "Would you take it, please?$"
 
 Route104_Text_FlowerShopSellingSaplings:
-	.string "This Flower Shop started selling\n"
+	.string "This flower shop started selling\n"
 	.string "saplings recently.\p"
 	.string "It made me so happy, I went overboard\n"
 	.string "shopping. Where should I put them?$"
@@ -1083,14 +1083,14 @@ Route104_Text_TrainerTipsDoubleBattles:
 
 Route104_Text_MayWeShouldRegister:
 	.string "May: Oh, hi, {PLAYER}{KUN}!\p"
-	.string "Devon upgraded your Pokénav with\n"
+	.string "Devon upgraded your PokéNav with\n"
 	.string "the Match Call system, huh?\p"
 	.string "We should register each other so we\n"
 	.string "can get in contact anytime.$"
 
 Route104_Text_RegisteredMay:
 	.string "{PLAYER} registered May\n"
-	.string "in the Pokénav.$"
+	.string "in the PokéNav.$"
 
 Route104_Text_MayHowsYourPokedex:
 	.string "May: Oh, by the way, {PLAYER}{KUN},\n"
@@ -1130,13 +1130,13 @@ Route104_Text_MayPostBattle:
 Route104_Text_BrendanWeShouldRegister:
 	.string "Brendan: Oh, hey, {PLAYER}!\p"
 	.string "Cool, you had Devon install the Match\n"
-	.string "Call system on your Pokénav!\p"
+	.string "Call system on your PokéNav!\p"
 	.string "Let's register each other in our\n"
-	.string "Pokénavs so we can keep in touch.$"
+	.string "PokéNavs so we can keep in touch.$"
 
 Route104_Text_RegisteredBrendan:
 	.string "{PLAYER} registered Brendan\n"
-	.string "in the Pokénav.$"
+	.string "in the PokéNav.$"
 
 Route104_Text_BrendanHowsYourPokedex:
 	.string "Brendan: {PLAYER}, how's your Pokédex?\n"

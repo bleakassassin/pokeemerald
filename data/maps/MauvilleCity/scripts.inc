@@ -553,7 +553,7 @@ MauvilleCity_Text_WallyPokenavCall:
 	.string "… … … … … Beep!\p"
 	.string "Wally: Oh, hello, {PLAYER}!\p"
 	.string "I just wanted to tell you that\n"
-	.string "my uncle bought me a Pokénav!\p"
+	.string "my uncle bought me a PokéNav!\p"
 	.string "Now I can get in touch with you\n"
 	.string "anytime, {PLAYER}!\p"
 	.string "… … … … … …\n"
@@ -561,7 +561,7 @@ MauvilleCity_Text_WallyPokenavCall:
 
 MauvilleCity_Text_RegisteredWally:
 	.string "Registered Wally\n"
-	.string "in the Pokénav.$"
+	.string "in the PokéNav.$"
 
 MauvilleCity_Text_ScottYouDidntHoldBack:
 	.string "Scott: Hehe…\n"
@@ -585,10 +585,10 @@ MauvilleCity_Text_WattsonNeedFavorTakeKey:
 	.string "Mauville City has an underground\n"
 	.string "sector called New Mauville.\p"
 	.string "{PLAYER}{KUN}, I'd like you to go there and\n"
-	.string "switch off the Generator.\p"
-	.string "The Generator has been running a bit\n"
+	.string "switch off the generator.\p"
+	.string "The generator has been running a bit\n"
 	.string "haywire. It's getting unsafe.\p"
-	.string "Here, this is the Key to get into\n"
+	.string "Here, this is the key to get into\n"
 	.string "New Mauville.$"
 
 MauvilleCity_Text_WattsonWontBeChallenge:

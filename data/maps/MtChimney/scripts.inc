@@ -581,14 +581,14 @@ MtChimney_Text_MaxieYouHaventSeenLastOfMagma:
 	.string "you've seen of Team Magma.\p"
 	.string "Fufufu…\p"
 	.string "Even without the Meteorite, if we\n"
-	.string "obtain that Orb… Fufufu…$"
+	.string "obtain that orb… Fufufu…$"
 
 MtChimney_Text_TabithaIntro:
 	.string "Hehehe!\p"
 	.string "So you've come all the way here!\p"
 	.string "But you're too late!\n"
 	.string "I've already delivered the Meteorite\l"
-	.string "from Meteor Falls to the Boss!$"
+	.string "from Meteor Falls to the boss!$"
 
 MtChimney_Text_TabithaDefeat:
 	.string "Hehehe…\p"
@@ -612,7 +612,7 @@ MtChimney_Text_Grunt2Defeat:
 	.string "What do you mean I lost?$"
 
 MtChimney_Text_Grunt2PostBattle:
-	.string "Our Boss says, “It will make everyone\n"
+	.string "Our boss says, “It will make everyone\n"
 	.string "happy.”\p"
 	.string "But why does everyone keep getting\n"
 	.string "in our way?$"
@@ -801,7 +801,7 @@ MtChimney_Text_SheilaPostBattle:
 	.string "Mt. Chimney. It would be a shame if\l"
 	.string "I only do a little sightseeing…\p"
 	.string "I want to get in some battles and buy\n"
-	.string "Cookies as souvenirs.$"
+	.string "cookies as souvenirs.$"
 
 MtChimney_Text_ShirleyIntro:
 	.string "Since I bathed in the hot springs,\n"
@@ -830,7 +830,7 @@ MtChimney_Text_SawyerPostBattle:
 
 MtChimney_Text_SawyerRegister:
 	.string "I like little fireballs like you.\n"
-	.string "Let me register you in my Pokénav.$"
+	.string "Let me register you in my PokéNav.$"
 
 MtChimney_Text_SawyerRematchIntro:
 	.string "I'm happily surrounded by hot people\n"

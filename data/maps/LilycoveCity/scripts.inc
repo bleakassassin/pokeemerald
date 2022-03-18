@@ -416,7 +416,7 @@ LilycoveCity_Text_MayShoppingLetsBattle:
 	.string "May: Oh, hey?\n"
 	.string "{PLAYER}{KUN}, are you shopping, too?\p"
 	.string "I bought a whole bunch of dolls and\n"
-	.string "Posters.\p"
+	.string "posters.\p"
 	.string "Of course, I've also caught a lot of\n"
 	.string "Pokémon, and I'm raising them\l"
 	.string "properly, too.\p"
@@ -548,13 +548,13 @@ LilycoveCity_Text_BrendanYouGoingToBattleFrontier:
 LilycoveCity_Text_MovedLootIntoHideoutToday:
 	.string "Fufufu…\p"
 	.string "We moved more loot into our secret\n"
-	.string "Hideout today…\p"
+	.string "hideout today…\p"
 	.string "Wh-who are you?!\n"
 	.string "I was just talking to myself!$"
 
 LilycoveCity_Text_ChanceToDoBigThings:
 	.string "I'm just a Grunt, so I don't know what\n"
-	.string "the Boss is thinking…\p"
+	.string "the boss is thinking…\p"
 	.string "But being on Team Aqua, I know I'll get\n"
 	.string "the chance to do big things!\p"
 	.string "Wh-who are you?!\n"
@@ -593,7 +593,7 @@ LilycoveCity_Text_StrangeCaveInCove:
 
 LilycoveCity_Text_GoingToMoveDeleterForHMs:
 	.string "I'm going to teach my Pokémon some new\n"
-	.string "moves for entering a Contest.\p"
+	.string "moves for entering a contest.\p"
 	.string "So, I'm going to see the Move Deleter\n"
 	.string "and make it forget HM moves.$"
 
@@ -633,7 +633,7 @@ LilycoveCity_Text_ImArtDealer:
 	.string "I'm an Art Dealer.\p"
 	.string "I am a buyer and seller of fine art,\n"
 	.string "especially paintings.\p"
-	.string "I've heard that the Museum here has\n"
+	.string "I've heard that the museum here has\n"
 	.string "magnificent works on exhibit…$"
 
 LilycoveCity_Text_SeaRemainsForeverYoung:

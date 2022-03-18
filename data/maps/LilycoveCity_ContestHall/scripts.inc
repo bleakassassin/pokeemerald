@@ -343,7 +343,7 @@ LilycoveCity_ContestHall_Text_TodayWonSmartnessContest:
 	.string "My abilities scare even me…$"
 
 LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
-	.string "I've entered a bunch of Contests,\n"
+	.string "I've entered a bunch of contests,\n"
 	.string "so I'm seeing how things work.\p"
 	.string "If you're in a Coolness Contest,\n"
 	.string "Cool moves go over as appeals.\p"
@@ -359,7 +359,7 @@ LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks:
 LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous:
 	.string "Whoa, isn't this place humongous!\p"
 	.string "The tension in the air… It's not\n"
-	.string "like a Contest hall in the sticks.$"
+	.string "like a contest hall in the sticks.$"
 
 LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal:
 	.string "MC: Okay, Smart Pokémon and their\n"
@@ -368,13 +368,13 @@ LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal:
 	.string "Let's appeal!$"
 
 LilycoveCity_ContestHall_Text_AreYouEnjoyingThisContest:
-	.string "Judge: Are you enjoying this Contest?\p"
+	.string "Judge: Are you enjoying this contest?\p"
 	.string "Come back with three friends, and\n"
-	.string "all of you may enter a Contest!$"
+	.string "all of you may enter a contest!$"
 
 LilycoveCity_ContestHall_Text_EnteredWrongContest:
 	.string "Ayayayay…\n"
-	.string "I entered the wrong Contest.\p"
+	.string "I entered the wrong contest.\p"
 	.string "I entered this tough Pokémon in\n"
 	.string "the Smartness Contest…\p"
 	.string "Come on, wow them with a smart-looking\n"
@@ -438,7 +438,7 @@ LilycoveCity_ContestHall_Text_EyesWillBeGluedToMyBeauty:
 LilycoveCity_ContestHall_Text_OverdidGrooming:
 	.string "Waaaah!\p"
 	.string "I brushed and groomed my Pokémon\n"
-	.string "carefully for this Contest…\p"
+	.string "carefully for this contest…\p"
 	.string "But I overdid it…\n"
 	.string "My Pokémon's coat turned all scraggly…\p"
 	.string "What should I do?$"
@@ -475,7 +475,7 @@ LilycoveCity_ContestHall_Text_CantWinOnBeautyAlone:
 
 LilycoveCity_ContestHall_Text_InTheMiddleOfContest:
 	.string "MC: Uh-oh! Hello!\n"
-	.string "We're in the middle of a Contest!\p"
+	.string "We're in the middle of a contest!\p"
 	.string "Please enter at our registration\n"
 	.string "counter and come out, okay?$"
 
@@ -491,7 +491,7 @@ LilycoveCity_ContestHall_Text_MyAzurillWasDistracted:
 
 LilycoveCity_ContestHall_Text_NeverWonBattleButContest:
 	.string "My Pokémon has never won in a battle,\n"
-	.string "but put it in a Contest and look out!$"
+	.string "but put it in a contest and look out!$"
 
 LilycoveCity_ContestHall_Text_PetalDanceIsMarvel:
 	.string "My Pokémon's Petal Dance is a marvel\n"
@@ -507,7 +507,7 @@ LilycoveCity_ContestHall_Text_MyMonAppealSoMuchCuter:
 	.string "cuter than the others.$"
 
 LilycoveCity_ContestHall_Text_MyChildIsInContest:
-	.string "My child is in this Contest.$"
+	.string "My child is in this contest.$"
 
 LilycoveCity_ContestHall_Text_ComeOnDear:
 	.string "Come on, dear. Go for it!\n"

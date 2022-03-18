@@ -38,7 +38,7 @@ MossdeepCity_House3_Text_SuperRodIsSuper:
 
 MossdeepCity_House3_Text_TryDroppingRodInWater:
 	.string "If there's any water, try dropping in\n"
-	.string "your Rod and see what bites!$"
+	.string "your rod and see what bites!$"
 
 MossdeepCity_House3_Text_DontYouLikeToFish:
 	.string "Hunh?\n"

@@ -327,11 +327,11 @@ SootopolisCity_Gym_1F_EventScript_StrangeThing:
 
 SootopolisCity_Gym_1F_Text_RegisteredWallace:
 	.string "Registered Gym Leader Wallace\n"
-	.string "in the Pokénav.$"
+	.string "in the PokéNav.$"
 
 SootopolisCity_Gym_1F_Text_RegisteredJuan:
 	.string "Registered Gym Leader Juan\n"
-	.string "in the Pokénav.$"
+	.string "in the PokéNav.$"
 
 SootopolisCity_Gym_1F_Text_JuanPostBattle:
 	.string "The Trainers who have gathered all\n"

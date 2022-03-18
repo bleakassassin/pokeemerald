@@ -83,7 +83,7 @@ PacifidlogTown_House2_EventScript_UnhappyAzurill::
 PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation:
 	.string "Er-hem!\p"
 	.string "I am the Pokémon Fan Club's most\n"
-	.string "important person, the Chairman's\l"
+	.string "important person, the chairman's\l"
 	.string "younger brother.\p"
 	.string "I'm here enjoying my vacation with\n"
 	.string "Pokémon, yes, indeed.$"

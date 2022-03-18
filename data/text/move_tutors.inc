@@ -110,7 +110,7 @@ MoveTutor_Text_MetronomeWhichMon:
 
 MoveTutor_Text_MetronomeTaught:
 	.string "When a Pokémon waggles its finger\n"
-	.string "like a Metronome, all sorts of nice\l"
+	.string "like a metronome, all sorts of nice\l"
 	.string "things happen.\p"
 	.string "Wouldn't it be nice if we could\n"
 	.string "use it, too?$"
@@ -119,7 +119,7 @@ MoveTutor_Text_SleepTalkTeach:
 	.string "Humph! My wife relies on Hidden\n"
 	.string "Power to stay awake.\p"
 	.string "She should just take a nap like I do,\n"
-	.string "and Sleep Talk.\p"
+	.string "and sleep talk.\p"
 	.string "I can teach your Pokémon how to\n"
 	.string "Sleep Talk instead. Interested?$"
 
@@ -135,7 +135,7 @@ MoveTutor_Text_SleepTalkTaught:
 	.string "I've never once gotten my wife's\n"
 	.string "coin trick right.\p"
 	.string "I would be happy if I got it right\n"
-	.string "even as I Sleep Talk…$"
+	.string "even as I sleep talk…$"
 
 MoveTutor_Text_SubstituteTeach:
 	.string "When I see the wide world from up\n"
@@ -194,7 +194,7 @@ MoveTutor_Text_DoubleEdgeTeach:
 	.string "lovably admirable.\p"
 	.string "But that also means I have many\n"
 	.string "rivals for his attention.\p"
-	.string "He's got appeal with a Double-Edge.\n"
+	.string "He's got appeal with a double-edge.\n"
 	.string "I couldn't even catch his eye.\p"
 	.string "Please, let me teach your Pokémon\n"
 	.string "the move Double-Edge!$"
@@ -217,7 +217,7 @@ MoveTutor_Text_ExplosionTeach:
 	.string "You watch me, I'll get out to the city\n"
 	.string "and become a huge hit.\p"
 	.string "Seriously, I'm going to cause\n"
-	.string "a huge Explosion of popularity!\p"
+	.string "a huge explosion of popularity!\p"
 	.string "If you overheard that, I'll happily\n"
 	.string "teach Explosion to your Pokémon!$"
 
@@ -226,12 +226,12 @@ MoveTutor_Text_ExplosionDeclined:
 	.string "I live in the country?$"
 
 MoveTutor_Text_ExplosionWhichMon:
-	.string "Fine! An Explosion it is!\n"
+	.string "Fine! An explosion it is!\n"
 	.string "Which Pokémon wants to blow up?$"
 
 MoveTutor_Text_ExplosionTaught:
 	.string "For a long time, I've taught Pokémon\n"
 	.string "how to use Explosion, but I've yet\l"
-	.string "to ignite my own Explosion…\p"
+	.string "to ignite my own explosion…\p"
 	.string "Maybe it's because deep down,\n"
 	.string "I would rather stay here…$"

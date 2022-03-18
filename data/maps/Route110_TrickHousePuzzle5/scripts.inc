@@ -909,120 +909,120 @@ Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened:
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Intro:
-	.string "Clickety-clack…\n"
-	.string "Mechadoll 1 am I!\p"
-	.string "If you answer quizzes correctly,\n"
-	.string "then you will go to Mechadoll 5.\l"
-	.string "Then you can obtain the secret code.$"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 1 AM I!\p"
+	.string "IF YOU ANSWER QUIZZES CORRECTLY,\n"
+	.string "THEN YOU WILL GO TO MECHADOLL 5.\l"
+	.string "THEN YOU CAN OBTAIN THE SECRET CODE.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1:
-	.string "Mechadoll 1 quiz.\p"
+	.string "MECHADOLL 1 QUIZ.\p"
 	.string "One of these Pokémon is not found\n"
 	.string "on Route 110. Which one is it?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2:
-	.string "Mechadoll 1 quiz.\p"
+	.string "MECHADOLL 1 QUIZ.\p"
 	.string "One of these Pokémon is not of the\n"
 	.string "Water type. Which one is it?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3:
-	.string "Mechadoll 1 quiz.\p"
+	.string "MECHADOLL 1 QUIZ.\p"
 	.string "One of these Pokémon does not use\n"
 	.string "Leech Life. Which one is it?$"
 
 Route110_TrickHousePuzzle5_Text_CorrectGoThrough:
-	.string "Congratulations. Correct you are.\n"
-	.string "Go through. Please.$"
+	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
+	.string "GO THROUGH. PLEASE.$"
 
 Route110_TrickHousePuzzle5_Text_DisappointmentError:
-	.string "Bzzzt. Disappointment.\n"
-	.string "Error.$"
+	.string "BZZZT. DISAPPOINTMENT.\n"
+	.string "ERROR.$"
 
 Route110_TrickHousePuzzle5_Text_Wahahahaha:
-	.string "Wahahahaha! Wahahahaha!\n"
-	.string "Clickety-clack!$"
+	.string "WAHAHAHAHA! WAHAHAHAHA!\n"
+	.string "CLICKETY-CLACK!$"
 
 Route110_TrickHousePuzzle5_Text_WaitForNextChallenge:
-	.string "Your next challenge we wait for.$"
+	.string "YOUR NEXT CHALLENGE WE WAIT FOR.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Intro:
-	.string "Clickety-clack…\n"
-	.string "Mechadoll 2 am I!\p"
-	.string "Mechadoll 1's quiz difficulty level\n"
-	.string "is set too low.$"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 2 AM I!\p"
+	.string "MECHADOLL 1'S QUIZ DIFFICULTY LEVEL\n"
+	.string "IS SET TOO LOW.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1:
-	.string "Mechadoll 2 quiz.\p"
+	.string "MECHADOLL 2 QUIZ.\p"
 	.string "Which of these Pokémon did Wally\n"
 	.string "borrow from your father?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2:
-	.string "Mechadoll 2 quiz.\p"
+	.string "MECHADOLL 2 QUIZ.\p"
 	.string "Which of these Pokémon was chasing\n"
 	.string "Prof. Birch?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3:
-	.string "Mechadoll 2 quiz.\p"
+	.string "MECHADOLL 2 QUIZ.\p"
 	.string "Which of these Pokémon did Team Aqua\n"
 	.string "use in Petalburg Forest?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll3Intro:
-	.string "Clickety-clack…\n"
-	.string "Mechadoll 3 am I!\p"
-	.string "Matters of money are my sole focus.$"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 3 AM I!\p"
+	.string "MATTERS OF MONEY ARE MY SOLE FOCUS.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1:
-	.string "Mechadoll 3 quiz.\p"
+	.string "MECHADOLL 3 QUIZ.\p"
 	.string "Which costs more?\n"
 	.string "Three Harbor Mails or one Burn Heal?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2:
-	.string "Mechadoll 3 quiz.\p"
+	.string "MECHADOLL 3 QUIZ.\p"
 	.string "Sell one Great Ball and buy\n"
 	.string "one Potion. How much money remains?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3:
-	.string "Mechadoll 3 quiz.\p"
+	.string "MECHADOLL 3 QUIZ.\p"
 	.string "Do one Repel and Soda Pop cost\n"
 	.string "more than one Super Potion?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Intro:
-	.string "Clickety-clack…\n"
-	.string "Mechadoll 4 that is me!\p"
-	.string "My quiz is an object of beauty.$"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 4 THAT IS ME!\p"
+	.string "MY QUIZ IS AN OBJECT OF BEAUTY.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1:
-	.string "Mechadoll 4 quiz.\p"
+	.string "MECHADOLL 4 QUIZ.\p"
 	.string "In Seashore House, were there more men\n"
 	.string "or women?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2:
-	.string "Mechadoll 4 quiz.\p"
+	.string "MECHADOLL 4 QUIZ.\p"
 	.string "In Lavaridge Town, were there more\n"
 	.string "elderly men or elderly women?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3:
-	.string "Mechadoll 4 quiz.\p"
+	.string "MECHADOLL 4 QUIZ.\p"
 	.string "In the Trainer's School, how many\n"
 	.string "girl students were there?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Intro:
-	.string "Clickety-clack…\n"
-	.string "Mechadoll 5 am I!\p"
-	.string "The Master's best and proudest\n"
-	.string "achievement am I.$"
+	.string "CLICKETY-CLACK…\n"
+	.string "MECHADOLL 5 AM I!\p"
+	.string "THE MASTER'S BEST AND PROUDEST\n"
+	.string "ACHIEVEMENT AM I.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1:
-	.string "Mechadoll 5 quiz.\p"
+	.string "MECHADOLL 5 QUIZ.\p"
 	.string "In Slateport's Pokémon Fan Club,\n"
 	.string "how many Pokémon were there?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2:
-	.string "Mechadoll 5 quiz.\p"
+	.string "MECHADOLL 5 QUIZ.\p"
 	.string "In Fortree City, how many\n"
 	.string "tree houses were there?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3:
-	.string "Mechadoll 5 quiz.\p"
+	.string "MECHADOLL 5 QUIZ.\p"
 	.string "On the Cycling Road, how many\n"
 	.string "Triathletes were there?$"

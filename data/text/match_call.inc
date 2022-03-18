@@ -1100,9 +1100,9 @@ MatchCall_PersonalizedText39::
 	.string "Whiff-whiff! Whiff-whiff!\p"
 	.string "Hey! Sorry about that!\n"
 	.string "I just put on some suntan oil.\p"
-	.string "So my Pokénav went whoopsy\n"
+	.string "So my PokéNav went whoopsy\n"
 	.string "out of my hand into the water!\p"
-	.string "But, boy, Devon's Pokénav is built\n"
+	.string "But, boy, Devon's PokéNav is built\n"
 	.string "tough. It survived that dunking!\p"
 	.string "Anyways, I'm busy sunbathing,\n"
 	.string "so let's chat another time.$"
@@ -2648,7 +2648,7 @@ MatchCall_Text_Wally6::
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "Wally appears to be out of\n"
-	.string "the Pokénav's service area…$"
+	.string "the PokéNav's service area…$"
 
 MatchCall_Text_Wally7::
 	.string "Wally: Oh, {PLAYER}!\p"
@@ -2726,7 +2726,7 @@ MatchCall_Text_Scott7::
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "Scott appears to be out of\n"
-	.string "the Pokénav's service area…$"
+	.string "the PokéNav's service area…$"
 
 MatchCall_Text_Norman1::
 	.string "Dad: In Rustboro, there's a man\n"
@@ -2853,7 +2853,7 @@ MatchCall_Text_Steven7::
 MatchCall_Text_BirchRegisterCall:
 	.string "Prof. Birch: Oh, {PLAYER}{KUN}!\n"
 	.string "I've already heard about you!\p"
-	.string "It seems your Pokénav's been\n"
+	.string "It seems your PokéNav's been\n"
 	.string "upgraded with Match Call.\p"
 	.string "Well, I should register, too!\p"
 	.string "That way, I'd be able to examine\n"
@@ -2863,15 +2863,15 @@ MatchCall_Text_BirchRegisterCall:
 
 MatchCall_Text_RegisteredBirch:
 	.string "Registered Prof. Birch\n"
-	.string "in the Pokénav.$"	
+	.string "in the PokéNav.$"	
 MatchCall_Text_UnusedProfBirch:
 	.string "Prof. Birch: When one has both\n"
-	.string "the Pokédex and Pokénav, studying\l"
+	.string "the Pokédex and PokéNav, studying\l"
 	.string "Pokémon becomes more fun, eh?$"
 
 MatchCall_Text_MrStone1::
 	.string "Mr. Stone: Oh? {PLAYER}{KUN}!\p"
-	.string "Since you called me, the Pokénav\n"
+	.string "Since you called me, the PokéNav\n"
 	.string "must be working properly!\p"
 	.string "Other people will be registered,\n"
 	.string "so try calling them up, too!\p"
@@ -2893,7 +2893,7 @@ MatchCall_Text_MrStone2::
 	.string "After that, deliver our parcel to\n"
 	.string "Capt. Stern in Slateport.\p"
 	.string "You remember, don't you?\p"
-	.string "Now, since I am a busy President,\n"
+	.string "Now, since I am a busy president,\n"
 	.string "I have to go! Bye-bye!$"
 
 MatchCall_Text_MrStone3::
@@ -2934,9 +2934,9 @@ MatchCall_Text_MrStone7::
 	.string "Hello!\n"
 	.string "This is Devon Corporati…\l"
 	.string "Oh, hello, {PLAYER}!\p"
-	.string "Our President was here a little\n"
+	.string "Our president was here a little\n"
 	.string "while ago, but he's gone out.\p"
-	.string "Our President is busy, but you\n"
+	.string "Our president is busy, but you\n"
 	.string "seem to be just as busy, {PLAYER}.$"
 
 MatchCall_Text_MrStone8::

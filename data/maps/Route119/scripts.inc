@@ -579,7 +579,7 @@ Route119_Text_DontGoNearWeatherInstitute:
 
 Route119_Text_ThoughtFlyByCatchingBirdMons:
 	.string "I thought you Fly by catching a whole\n"
-	.string "flock of Bird Pokémon, and then\l"
+	.string "flock of bird Pokémon, and then\l"
 	.string "hanging on to them somehow.\p"
 	.string "But it turns out there's an HM move\n"
 	.string "called Fly!\p"

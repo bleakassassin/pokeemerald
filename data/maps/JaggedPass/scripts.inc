@@ -208,7 +208,7 @@ JaggedPass_Text_EthanPostBattle:
 JaggedPass_Text_EthanRegister:
 	.string "When I get more used to this bumpiness,\n"
 	.string "I'll be sure to win!\p"
-	.string "Can you register me in your Pokénav?$"
+	.string "Can you register me in your PokéNav?$"
 
 JaggedPass_Text_EthanRematchIntro:
 	.string "I got used to this bumpiness.\n"
@@ -230,7 +230,7 @@ JaggedPass_Text_GruntIntro:
 
 JaggedPass_Text_GruntDefeat:
 	.string "Urrrgh…\p"
-	.string "I should've ducked into our Hideout\n"
+	.string "I should've ducked into our hideout\n"
 	.string "right away…$"
 
 JaggedPass_Text_GoWhereverYouWant:

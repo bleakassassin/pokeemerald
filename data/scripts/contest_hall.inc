@@ -1400,7 +1400,7 @@ LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests:
 
 LilycoveCity_ContestLobby_Text_EnterContest1:
 	.string "Would you like to enter your Pokémon\n"
-	.string "in our Contests?$"
+	.string "in our contests?$"
 
 LilycoveCity_ContestLobby_Text_WhichTopic1:
 	.string "Which topic would you like?$"
@@ -1409,7 +1409,7 @@ LilycoveCity_ContestLobby_Text_ExplainContests:
 	.string "A Pokémon Contest involves four\n"
 	.string "Trainers entering one Pokémon each\l"
 	.string "in competitive judging.\p"
-	.string "A Contest has two stages of judging,\n"
+	.string "A contest has two stages of judging,\n"
 	.string "primary and secondary.\p"
 	.string "Primary judging is a popularity poll\n"
 	.string "involving the audience.\p"
@@ -1425,10 +1425,10 @@ LilycoveCity_ContestLobby_Text_ExplainContests:
 	.string "score is declared the winner.$"
 
 LilycoveCity_ContestLobby_Text_ExplainContestTypes:
-	.string "There are five kinds of Contests.\p"
+	.string "There are five kinds of contests.\p"
 	.string "Cool, Beauty, Cute, Smart, and\n"
 	.string "Tough are the five categories.\p"
-	.string "Choose the Contest that is right for\n"
+	.string "Choose the contest that is right for\n"
 	.string "the Pokémon you plan to enter.$"
 
 LilycoveCity_ContestLobby_Text_ExplainContestRanks:
@@ -1453,7 +1453,7 @@ LilycoveCity_ContestLobby_Text_EnterWhichRank:
 	.string "Which Rank would you like to enter?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichContest1:
-	.string "Which Contest would you like to enter?$"
+	.string "Which contest would you like to enter?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon1:
 	.string "Which Pokémon would you like to enter?$"
@@ -1469,23 +1469,23 @@ LilycoveCity_ContestLobby_Text_EggCannotTakePart:
 
 LilycoveCity_ContestLobby_Text_MonInNoConditionForContest:
 	.string "Your Pokémon appears to be in no\n"
-	.string "condition to take part in a Contest…$"
+	.string "condition to take part in a contest…$"
 
 LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway:
 	.string "Oh, but that Ribbon…\p"
-	.string "Your Pokémon has won this Contest\n"
+	.string "Your Pokémon has won this contest\n"
 	.string "before, hasn't it?\p"
 	.string "Would you like to enter it in this\n"
-	.string "Contest anyway?$"
+	.string "contest anyway?$"
 
 LilycoveCity_ContestLobby_Text_ConfirmContestMon:
-	.string "Is that your Contest Pokémon?$"
+	.string "Is that your contest Pokémon?$"
 
 LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4:
 	.string "Okay, your Pokémon will be entered\n"
-	.string "in this Contest.\p"
+	.string "in this contest.\p"
 	.string "Your Pokémon is Entry No. 4.\n"
-	.string "The Contest will begin shortly.$"
+	.string "The contest will begin shortly.$"
 
 LilycoveCity_ContestLobby_Text_ComeThroughHere:
 	.string "Please come in through here.\n"
@@ -1493,7 +1493,7 @@ LilycoveCity_ContestLobby_Text_ComeThroughHere:
 
 LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize:
 	.string "Congratulations! Your Pokémon is the\n"
-	.string "Contest winner!\p"
+	.string "contest winner!\p"
 	.string "We have your prize right here.\n"
 	.string "Please, right this way!$"
 
@@ -1594,11 +1594,11 @@ ContestHall_Text_OnlyRegister4Players:
 	.string "I only register four players for\n"
 	.string "Pokémon Contests.\p"
 	.string "If three other players link up, all\n"
-	.string "four may enter the same Contest.\p"
+	.string "four may enter the same contest.\p"
 	.string "Would you like to take part?$"
 
 LilycoveCity_ContestLobby_Text_ProgressWillBeSaved:
-	.string "Before entering a Contest, your\n"
+	.string "Before entering a contest, your\n"
 	.string "progress will be saved.$"
 
 LilycoveCity_ContestLobby_Text_ParticipateAnotherTime:
@@ -1607,23 +1607,23 @@ LilycoveCity_ContestLobby_Text_ParticipateAnotherTime:
 
 @ Unused
 LilycoveCity_ContestLobby_Text_EnterContest2:
-	.string "Would you like to enter a Contest?$"
+	.string "Would you like to enter a contest?$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_Explain4PlayerContest:
 	.string "When four players are ready, connect\n"
 	.string "over a Game Link cable, and register\l"
 	.string "with me, please.\p"
-	.string "Please choose the same Contest\n"
+	.string "Please choose the same contest\n"
 	.string "as your fellow contestants.\p"
-	.string "The Contest begins as soon as all\n"
+	.string "The contest begins as soon as all\n"
 	.string "players register their entry.\p"
-	.string "After that, the usual Contest rules\n"
+	.string "After that, the usual contest rules\n"
 	.string "apply.$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_EnterWhichContest2:
-	.string "Which Contest would you like to enter?$"
+	.string "Which contest would you like to enter?$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon2:
@@ -1637,7 +1637,7 @@ LilycoveCity_ContestLobby_Text_TransmissionError:
 
 LilycoveCity_ContestLobby_Text_PlayersChoseDifferentContest:
 	.string "You may have chosen a different\n"
-	.string "Contest than another player.$"
+	.string "contest than another player.$"
 
 LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice:
 	.string "You may have made a different\n"
@@ -1659,30 +1659,30 @@ LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain:
 
 LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX:
 	.string "Your Pokémon will be entered in\n"
-	.string "the Contest.\p"
+	.string "the contest.\p"
 	.string "Your Pokémon is Entry No. {STR_VAR_2}.$"
 
 LilycoveCity_ContestLobby_Text_ContestBeginShortly:
-	.string "The Contest will begin shortly.$"
+	.string "The contest will begin shortly.$"
 
 LilycoveCity_ContestLobby_Text_LinkContestReception:
 	.string "Welcome! This is the Pokémon Contest\n"
 	.string "link reception counter.\p"
-	.string "You may enter Contests together with\n"
+	.string "You may enter contests together with\n"
 	.string "one or more friends.$"
 
 LilycoveCity_ContestLobby_Text_WhichTopic2:
 	.string "Which topic would you like?$"
 
 LilycoveCity_ContestLobby_Text_EnterContest3:
-	.string "Would you like to enter a Contest?$"
+	.string "Would you like to enter a contest?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichContest3:
-	.string "Which Contest would you like to enter?$"
+	.string "Which contest would you like to enter?$"
 
 LilycoveCity_ContestLobby_Text_MonInNoCondition2:
 	.string "Your Pokémon appears to be in no\n"
-	.string "condition to take part in a Contest…$"
+	.string "condition to take part in a contest…$"
 
 LilycoveCity_ContestLobby_Text_EggCannotTakePart2:
 	.string "I'm sorry, but an Egg cannot take part\n"
@@ -1707,7 +1707,7 @@ LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode:
 	.string "then register to enter again, please.$"
 
 LilycoveCity_ContestLobby_Text_ExplainLinkContest:
-	.string "This is a Contest for two to four\n"
+	.string "This is a contest for two to four\n"
 	.string "players linked using a Wireless\l"
 	.string "Adapter or a GBA Game Link cable.\p"
 	.string "Participants are first asked to choose\n"
@@ -1722,9 +1722,9 @@ LilycoveCity_ContestLobby_Text_ExplainLinkContest:
 	.string "The players should discuss which mode\n"
 	.string "they want, then choose the same mode.\p"
 	.string "Once all the players have chosen\n"
-	.string "the same Contest in the same mode,\l"
+	.string "the same contest in the same mode,\l"
 	.string "the entry registration is complete.\p"
-	.string "After that, a Contest will start in\n"
+	.string "After that, a contest will start in\n"
 	.string "the usual manner.$"
 
 LilycoveCity_ContestLobby_Text_ExplainEMode:
@@ -1737,7 +1737,7 @@ LilycoveCity_ContestLobby_Text_ExplainEMode:
 	.string "GBA Game Link cables.\p"
 	.string "If there are fewer than four players,\n"
 	.string "Trainers in the hall will join to fill\l"
-	.string "the 4-player Contest lineup.\p"
+	.string "the 4-player contest lineup.\p"
 	.string "Please be aware that E-Mode is not\n"
 	.string "available in Pokémon Ruby or Sapphire.$"
 
@@ -1747,7 +1747,7 @@ LilycoveCity_ContestLobby_Text_ExplainGMode:
 	.string "GBA Game Link cables.\p"
 	.string "Each player must have a Pokémon\n"
 	.string "Emerald, Ruby, or Sapphire Game Pak.\p"
-	.string "The Contest starts after all players\n"
+	.string "The contest starts after all players\n"
 	.string "choose G-Mode (Pokémon Emerald) or\l"
 	.string "enter through the 4-player reception\l"
 	.string "counter (Pokémon Ruby or Sapphire).$"

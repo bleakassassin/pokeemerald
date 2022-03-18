@@ -133,7 +133,7 @@ gText_ScrambleOrderOfNextAppeals::
 	.string "Scrambles the order of\nappeals on the next turn.$"
 
 gText_AppealExcitesAudienceInAnyContest::
-	.string "An appeal that excites the\naudience in any Contest.$"
+	.string "An appeal that excites the\naudience in any contest.$"
 
 gText_BadlyStartlesMonsGoodAppeals::
 	.string "Badly startles all Pokémon\nthat made good appeals.$"

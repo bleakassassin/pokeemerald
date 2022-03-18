@@ -266,7 +266,7 @@ MeteorFalls_1F_1R_Text_BeSeeingYouTeamAqua:
 
 MeteorFalls_1F_1R_Text_ArchieSeenYouBefore:
 	.string "Archie: Didn't I see you before?\n"
-	.string "At Slateport's Museum?\p"
+	.string "At Slateport's museum?\p"
 	.string "Ah, so your name is {PLAYER}.\p"
 	.string "At the time, I thought you were one\n"
 	.string "of Team Magma's goons.\p"
@@ -296,7 +296,7 @@ MeteorFalls_1F_1R_Text_ArchieFarewell:
 
 MeteorFalls_1F_1R_Text_MeetProfCozmo:
 	.string "I… I'm Cozmo…\n"
-	.string "I'm a Professor…\p"
+	.string "I'm a professor…\p"
 	.string "Team Magma asked me to guide them\n"
 	.string "to Meteor Falls…\p"
 	.string "But they tricked me.\n"

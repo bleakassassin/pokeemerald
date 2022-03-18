@@ -86,12 +86,12 @@ LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis:
 
 LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer:
 	.string "Me? You're talking to me?\n"
-	.string "I'm the Programmer.\p"
-	.string "I wonder what the Slots are\n"
+	.string "I'm the programmer.\p"
+	.string "I wonder what the slots are\n"
 	.string "like here.$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist:
-	.string "I'm the Graphic Artist! Aren't the\n"
+	.string "I'm the graphic artist! Aren't the\n"
 	.string "Pokémon of Hoenn interesting?$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute:
@@ -125,12 +125,12 @@ LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles:
 	.string "battles and tough Trainers.\p"
 	.string "But that's just me.\p"
 	.string "{PLAYER}{KUN}, I hope you'll enjoy everything\n"
-	.string "like the Gyms, Contests, Battle Tent,\l"
+	.string "like the Gyms, contests, Battle Tent,\l"
 	.string "the whole works!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy:
 	.string "Scott: I think it does take strategy\n"
-	.string "to win a Contest.\p"
-	.string "Devising Contest strategies is one way\n"
+	.string "to win a contest.\p"
+	.string "Devising contest strategies is one way\n"
 	.string "of becoming a better Trainer, I'd say.$"
 

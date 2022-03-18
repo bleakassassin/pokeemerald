@@ -45,9 +45,9 @@ VerdanturfTown_BattleTentCorridor_Movement_AttendantEnterDoor:
 @ Leftover text from when this was a Contest Hall in R/S
 @ Unused
 VerdanturfTown_ContestHall_Text_WhichContestYouEntering:
-	.string "Which Contest are you entering?\n"
+	.string "Which contest are you entering?\n"
 	.string "Want a piece of advice?\p"
-	.string "In any Contest, for example, a Cute\n"
+	.string "In any contest, for example, a Cute\n"
 	.string "Contest, I don't think they judge you\l"
 	.string "only on cuteness in the first round.\p"
 	.string "You need to work out ways for raising\n"
@@ -57,7 +57,7 @@ VerdanturfTown_ContestHall_Text_WhichContestYouEntering:
 VerdanturfTown_ContestHall_Text_RaisedMonToBeCute:
 	.string "I raised my Pokémon to be cute.\p"
 	.string "I found out you can put Pokémon in\n"
-	.string "a Contest for cuteness!\p"
+	.string "a contest for cuteness!\p"
 	.string "I'm so glad I raised my Pokémon with\n"
 	.string "loving care…$"
 
@@ -67,7 +67,7 @@ VerdanturfTown_ContestHall_Text_MyMonRules:
 	.string "It's cool, tough yet beautiful, cute,\n"
 	.string "and smart. It's complete!\p"
 	.string "I may as well go for wins in every\n"
-	.string "single Contest.$"
+	.string "single contest.$"
 
 @ Unused
 VerdanturfTown_ContestHall_Text_NormalRankStage:

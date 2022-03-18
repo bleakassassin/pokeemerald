@@ -367,7 +367,7 @@ Route103_Text_MayTimeToHeadBack:
 	.string "You might be able to befriend any\n"
 	.string "kind of Pokémon easily.\p"
 	.string "Well, it's time to head back to\n"
-	.string "the Lab.$"
+	.string "the lab.$"
 
 Route103_Text_BrendanRoute103Pokemon:
 	.string "Brendan: Okay, so it's this one and\n"
@@ -392,7 +392,7 @@ Route103_Text_BrendanTimeToHeadBack:
 	.string "even though you just got it.\p"
 	.string "{PLAYER}, I get the feeling that you\n"
 	.string "could befriend any Pokémon with ease.\p"
-	.string "We should head back to the Lab.$"
+	.string "We should head back to the lab.$"
 
 Route103_Text_ShouldHaveBroughtPotion:
 	.string "My Pokémon is staggeringly tired…\n"
@@ -408,15 +408,15 @@ Route103_Text_RouteSign:
 	.string "{DOWN_ARROW} Oldale Town$"
 
 Route103_Text_SleepingPokemonBlocking:
-	.string "It looks like a large DOLL…\n"
+	.string "It looks like a large doll…\n"
 	.string "No, wait!\p"
-	.string "A sleeping POKéMON is blocking the\n"
+	.string "A sleeping Pokémon is blocking the\n"
 	.string "cave entrance!$"
 
 Route103_Text_WantToUseBlueFlute:
-	.string "A sleeping POKéMON is blocking the\n"
+	.string "A sleeping Pokémon is blocking the\n"
 	.string "cave entrance!\p"
-	.string "Want to use your BLUE FLUTE to try\n"
+	.string "Want to use your Blue Flute to try\n"
 	.string "and wake it up?$"
 
 Route103_Text_PlayedPeculiarTune:
@@ -424,5 +424,5 @@ Route103_Text_PlayedPeculiarTune:
 	.string "a peculiar tune.$"
 
 Route103_Text_SleepingPokemonAttacked:
-    .string "The sleeping POKéMON woke up!\p"
+    .string "The sleeping Pokémon woke up!\p"
     .string "It attacked in a grumpy rage!$"

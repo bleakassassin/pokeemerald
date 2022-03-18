@@ -68,7 +68,7 @@ SSTidalRooms_Text_TakeRestOnBed:
 
 SSTidalRooms_Text_ColtonIntro:
 	.string "I often sail to Lilycove City.\p"
-	.string "I enjoy attending Contests,\n"
+	.string "I enjoy attending contests,\n"
 	.string "you see.$"
 
 SSTidalRooms_Text_ColtonDefeat:
@@ -77,7 +77,7 @@ SSTidalRooms_Text_ColtonDefeat:
 SSTidalRooms_Text_ColtonPostBattle:
 	.string "I get so excited imagining what kinds\n"
 	.string "of Pokémon I'll get to see in the next\l"
-	.string "Contest. The anticipation of it thrills!$"
+	.string "contest. The anticipation of it thrills!$"
 
 SSTidalRooms_Text_MicahIntro:
 	.string "Are your friends strong?$"
