@@ -219,8 +219,8 @@ const u8 gText_MatchCallDragonTamer_Nicolas_Intro1[] = _("I'll become legendary 
 const u8 gText_MatchCallDragonTamer_Nicolas_Intro2[] = _("strongest one day!");
 
 const u8 gText_MatchCallBirdKeeper_Robert_Strategy[] = _("I'll show you my technique!");
-const u8 gText_MatchCallBirdKeeper_Robert_Pokemon[] = _("Elegantly wheeling Birds.");
-const u8 gText_MatchCallBirdKeeper_Robert_Intro1[] = _("My Bird Pokémon, deliver my");
+const u8 gText_MatchCallBirdKeeper_Robert_Pokemon[] = _("Elegantly wheeling birds.");
+const u8 gText_MatchCallBirdKeeper_Robert_Intro1[] = _("My bird Pokémon, deliver my");
 const u8 gText_MatchCallBirdKeeper_Robert_Intro2[] = _("love to that girl!");
 
 const u8 gText_MatchCallNinjaBoy_Lao_Strategy[] = _("You'll suffer from poison!");
@@ -276,7 +276,7 @@ const u8 gText_MatchCallPkmnBreeder_Lydia_Intro2[] = _("love to raise Pokémon."
 const u8 gText_MatchCallPkmnBreeder_Isaac_Strategy[] = _("Full-on attack!");
 const u8 gText_MatchCallPkmnBreeder_Isaac_Pokemon[] = _("Anything. I'll raise it.");
 const u8 gText_MatchCallPkmnBreeder_Isaac_Intro1[] = _("I give them {POKEBLOCK}S for");
-const u8 gText_MatchCallPkmnBreeder_Isaac_Intro2[] = _("going after Contest titles.");
+const u8 gText_MatchCallPkmnBreeder_Isaac_Intro2[] = _("going after contest titles.");
 
 const u8 gText_MatchCallPkmnBreeder_Gabrielle_Strategy[] = _("I raise Pokémon with care.");
 const u8 gText_MatchCallPkmnBreeder_Gabrielle_Pokemon[] = _("Fun-to-raise Pokémon.");

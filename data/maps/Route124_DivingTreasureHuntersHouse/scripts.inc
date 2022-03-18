@@ -290,18 +290,18 @@ Route124_DivingTreasureHuntersHouse_Text_Greeting:
 	.string "resting at the bottom.$"
 
 Route124_DivingTreasureHuntersHouse_Text_HaveYouSeenAnyShards:
-	.string "Tell me, have you seen any Shards of\n"
+	.string "Tell me, have you seen any shards of\n"
 	.string "tools made in ancient times?$"
 
 Route124_DivingTreasureHuntersHouse_Text_YouHaventGotAnyShards:
 	.string "You haven't got any treasures\n"
 	.string "for me…\p"
-	.string "If you see any Shards, like the Red\n"
+	.string "If you see any shards, like the Red\n"
 	.string "Shard, you've got to trade it with me!$"
 
 Route124_DivingTreasureHuntersHouse_Text_ThatsAShardIllTradeYou:
 	.string "Oh, hey! That…\n"
-	.string "That's a Shard! I'm looking for those!\p"
+	.string "That's a shard! I'm looking for those!\p"
 	.string "Oh, man, you've got to trade that\n"
 	.string "with me! I'll give you something good!$"
 

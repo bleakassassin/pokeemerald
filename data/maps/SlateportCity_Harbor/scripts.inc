@@ -394,16 +394,16 @@ SlateportCity_Harbor_Text_FerryServiceUnavailable:
 
 SlateportCity_Harbor_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
-	.string "May I see your Ticket?$"
+	.string "May I see your ticket?$"
 
 SlateportCity_Harbor_Text_YouMustHaveTicket:
-	.string "{PLAYER} doesn't have the Ticket…\p"
+	.string "{PLAYER} doesn't have the ticket…\p"
 	.string "I'm terribly sorry.\p"
-	.string "You must have a Ticket to board\n"
+	.string "You must have a ticket to board\n"
 	.string "the ferry.$"
 
 SlateportCity_Harbor_Text_FlashedTicketWhereTo:
-	.string "{PLAYER} flashed the Ticket.\p"
+	.string "{PLAYER} flashed the ticket.\p"
 	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 
@@ -444,12 +444,12 @@ SlateportCity_Harbor_Text_SubTooSmallForMe:
 	.string "the ocean floor exploration.\p"
 	.string "But the sub's too small for me.\p"
 	.string "If I squeezed in, there wouldn't be\n"
-	.string "any room for the Captain…$"
+	.string "any room for the captain…$"
 
 SlateportCity_Harbor_Text_SameThugsTriedToRobAtMuseum:
 	.string "Capt. Stern: Those thugs…\p"
 	.string "They're the same lot who tried to rob\n"
-	.string "the Devon Goods at the Museum.$"
+	.string "the Devon Goods at the museum.$"
 
 SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove:
 	.string "Archie: Oh?\n"
@@ -459,7 +459,7 @@ SlateportCity_Harbor_Text_ArchieYouAgainHideoutInLilycove:
 	.string "But now…\n"
 	.string "No one can stop us! No one!\p"
 	.string "Or, will you follow us back to our\n"
-	.string "Hideout in Lilycove City?\p"
+	.string "hideout in Lilycove City?\p"
 	.string "Fwahahahaha…$"
 
 SlateportCity_Harbor_Text_CaptSternWhyStealMySubmarine:
@@ -498,7 +498,7 @@ SlateportCity_Harbor_Text_NeedDiveToCatchSub:
 
 SlateportCity_Harbor_Text_WontBeLongBeforeWeFinishFerry:
 	.string "Capt. Stern: Oh, yes.\n"
-	.string "Mr. Briney came to our Shipyard.\p"
+	.string "Mr. Briney came to our shipyard.\p"
 	.string "It won't be long now before we finish\n"
 	.string "making the ferry!$"
 

@@ -31,7 +31,7 @@ BerryBlender_Text_BlendMasterKnowHowToMakePokeblocks:
 BerryBlender_Text_BlendMasterExplainBerryBlending:
 	.string "Hmmm!\p"
 	.string "Ah, but it is a simple process!\p"
-	.string "When the Blender's arrow comes to\n"
+	.string "When the blender's arrow comes to\n"
 	.string "your marker, just press the A Button.\p"
 	.string "That's all you have to do.\p"
 	.string "When you see how precisely I press\n"
@@ -67,7 +67,7 @@ BerryBlender_Text_WhatAnExpert:
 	.string "What an expert!$"
 
 BerryBlender_Text_MadeAmazingPokeblocksWithMaster:
-	.string "When I blended with the Master,\n"
+	.string "When I blended with the master,\n"
 	.string "we made amazing {POKEBLOCK}S!$"
 
 BerryBlender_Text_QualitiesOfBlendMaster:

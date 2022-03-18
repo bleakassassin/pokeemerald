@@ -732,7 +732,7 @@ MauvilleCity_GameCorner_Text_MauvilleSomethingForEveryone:
 	.string "For me, it's the Game Corner.$"
 
 MauvilleCity_GameCorner_Text_RouletteTablesDifferentRates:
-	.string "The Roulette tables have different\n"
+	.string "The roulette tables have different\n"
 	.string "rates.\p"
 	.string "Check your Coins if you're going to\n"
 	.string "pick a table.$"
@@ -746,13 +746,13 @@ MauvilleCity_GameCorner_Text_CoinsAreNeededToPlay:
 	.string "in the Game Corner.$"
 
 MauvilleCity_GameCorner_Text_RouletteOnlyLuck:
-	.string "This Roulette thing…\n"
+	.string "This roulette thing…\n"
 	.string "It's rather demanding.\p"
 	.string "Win or lose, it's only by luck.$"
 
 MauvilleCity_GameCorner_Text_UpTo3CoinsCanBeUsed:
 	.string "Up to three Coins can be used to play\n"
-	.string "the Slots.$"
+	.string "the slots.$"
 
 MauvilleCity_GameCorner_Text_DifficultToStopOn7:
 	.string "It's very difficult to make it stop\n"
@@ -762,7 +762,7 @@ MauvilleCity_GameCorner_Text_DifficultToStopOn7:
 
 MauvilleCity_GameCorner_Text_HeresSomeSlotsInfo:
 	.string "Here's some information for you\n"
-	.string "about the Slots.\p"
+	.string "about the slots.\p"
 	.string "The more lightning bolts you stock,\n"
 	.string "the more Reel Time chances you get.\p"
 	.string "In a game with the maximum five\n"

@@ -963,7 +963,7 @@ LittlerootTown_Text_CanUsePCToStoreItems:
 	.string "The power of science is staggering!$"
 
 LittlerootTown_Text_BirchSpendsDaysInLab:
-	.string "Prof. Birch spends days in his Lab\n"
+	.string "Prof. Birch spends days in his lab\n"
 	.string "studying, then he'll suddenly go out in\l"
 	.string "the wild to do more research…\p"
 	.string "When does Prof. Birch spend time\n"
@@ -1017,5 +1017,5 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "Oh, yes. Do you still have the Pokédex\n"
 	.string "I gave you?\p"
 	.string "I have something to show you.\n"
-	.string "Let's go to my Lab.$"
+	.string "Let's go to my lab.$"
 

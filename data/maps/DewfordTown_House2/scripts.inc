@@ -37,14 +37,14 @@ DewfordTown_House2_Text_WantYouToHaveSilkScarf:
 
 DewfordTown_House2_Text_NoRoom:
 	.string "Oh, you don't have room?\p"
-	.string "Now, listen tight, this Scarf is a must-\n"
+	.string "Now, listen tight, this scarf is a must-\n"
 	.string "have! Why, I would sell all my items\l"
 	.string "in order to get it!$"
 
 DewfordTown_House2_Text_ExplainSilkScarf:
 	.string "The Silk Scarf raises the power of\n"
 	.string "Normal-type moves.\p"
-	.string "It's a marvelous Scarf that will go\n"
+	.string "It's a marvelous scarf that will go\n"
 	.string "with almost all Pokémon!$"
 
 DewfordTown_House2_Text_BrawlySoCool:

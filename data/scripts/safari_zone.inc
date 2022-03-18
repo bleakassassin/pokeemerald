@@ -243,7 +243,7 @@ SafariZone_RestHouse_Text_PsychicM:
 	.string "Pokémon that don't flee easily.$"
 
 SafariZone_RestHouse_Text_FatMan:
-	.string "If you put a {POKEBLOCK} on the Feeder,\n"
+	.string "If you put a {POKEBLOCK} on the feeder,\n"
 	.string "Pokémon are attracted to it.\p"
 	.string "I think Pokémon with the same sort of\n"
 	.string "nature are drawn by a certain {POKEBLOCK}.$"

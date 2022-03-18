@@ -1411,7 +1411,7 @@ PetalburgCity_Gym_Text_GeorgePostBattle:
 	.string "earned only through effort.\p"
 	.string "I lost because my own efforts\n"
 	.string "weren't enough.\p"
-	.string "Go on! The One-hit KO Room is next.$"
+	.string "Go on! The One-Hit KO Room is next.$"
 
 PetalburgCity_Gym_Text_GeorgePostBadge:
 	.string "I'm going to keep training at Gyms.\n"
@@ -1476,7 +1476,7 @@ PetalburgCity_Gym_Text_AlexiaPostBattle:
 	.string "Now, go on! The left door goes to\n"
 	.string "the Strength Room.\p"
 	.string "The right door opens to\n"
-	.string "the One-hit KO Room.\p"
+	.string "the One-Hit KO Room.\p"
 	.string "Both of them have Trainers who are\n"
 	.string "skilled at offense.$"
 
@@ -1539,7 +1539,7 @@ PetalburgCity_Gym_Text_EnterStrengthRoom:
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterOHKORoom:
-	.string "“One-hit KO Room,” the sign says.\p"
+	.string "“One-Hit KO Room,” the sign says.\p"
 	.string "Do you want to go through?$"
 
 PetalburgCity_Gym_Text_EnterGymLeadersRoom:

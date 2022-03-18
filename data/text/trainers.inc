@@ -463,7 +463,7 @@ Route105_Text_DominikDefeated:
 
 Route105_Text_DominikPostBattle:
 	.string "Why is the sea blue?\p"
-	.string "I learned about that at the Museum in\n"
+	.string "I learned about that at the museum in\n"
 	.string "Slateport, but I forgot.$"
 
 Route105_Text_BeverlyIntro:
@@ -565,7 +565,7 @@ Route106_Text_ElliotRematchPostBattle:
 Route106_Text_NedIntro:
 	.string "What do people do if they need to go\n"
 	.string "to a washroom?\p"
-	.string "What if my Rod hooks a big one while\n"
+	.string "What if my rod hooks a big one while\n"
 	.string "I'm in the washroom? I just can't go…$"
 
 Route106_Text_NedDefeated:
@@ -2365,7 +2365,7 @@ Route117_Text_IsaacRematchDefeat:
 
 Route117_Text_IsaacPostRematch:
 	.string "Your Pokémon are growing good!\n"
-	.string "You should enter them in Contests.$"
+	.string "You should enter them in contests.$"
 
 Route117_Text_LydiaIntro:
 	.string "Please, allow me to evaluate if you\n"
@@ -2619,7 +2619,7 @@ Route118_Text_PerryPostBattle:
 
 Route118_Text_ChesterIntro:
 	.string "Take flight!\n"
-	.string "My Bird Pokémon!$"
+	.string "My bird Pokémon!$"
 
 Route118_Text_ChesterDefeat:
 	.string "They did take flight…$"
@@ -2835,19 +2835,19 @@ Route119_Text_HughDefeat:
 	.string "Down and out!$"
 
 Route119_Text_HughPostBattle:
-	.string "My Bird Pokémon made my dreams of\n"
+	.string "My bird Pokémon made my dreams of\n"
 	.string "flying come true!$"
 
 Route119_Text_PhilIntro:
 	.string "I'll show you the true potential of me\n"
-	.string "and my Bird Pokémon!$"
+	.string "and my bird Pokémon!$"
 
 Route119_Text_PhilDefeat:
 	.string "We lacked potential…$"
 
 Route119_Text_PhilPostBattle:
 	.string "Ever since I was a little kid, I always\n"
-	.string "admired Bird Pokémon…$"
+	.string "admired bird Pokémon…$"
 
 Route119_Text_YasuIntro:
 	.string "To lurk in shadows, and live in\n"
@@ -3146,7 +3146,7 @@ Route121_Text_VanessaDefeat:
 	.string "This isn't what I meant!$"
 
 Route121_Text_VanessaPostBattle:
-	.string "I'm going to a Contest in Lilycove.\p"
+	.string "I'm going to a contest in Lilycove.\p"
 	.string "My Pokémon should have no problem\n"
 	.string "sweeping the Master Class.$"
 
@@ -3328,14 +3328,14 @@ Route121_Text_PatPostBattle:
 Route121_Text_MarcelIntro:
 	.string "My Pokémon have never tasted defeat!\n"
 	.string "On their next win, I'm entering them\l"
-	.string "in Contests.$"
+	.string "in contests.$"
 
 Route121_Text_MarcelDefeat:
 	.string "Oh, now what happened here?$"
 
 Route121_Text_MarcelPostBattle:
 	.string "I may have to train my gang some more\n"
-	.string "before entering any Contest.$"
+	.string "before entering any contest.$"
 
 Route123_Text_WendyIntro:
 	.string "Want to determine how strong you are?\n"
@@ -3540,19 +3540,19 @@ Route123_Text_FrederickPostBattle:
 	.string "Wasn't the prize money enough?$"
 
 Route123_Text_AlbertoIntro:
-	.string "I have to tell you, Bird Pokémon\n"
+	.string "I have to tell you, bird Pokémon\n"
 	.string "are my obsession!\p"
 	.string "Birds are cool!\n"
 	.string "They're the best!$"
 
 Route123_Text_AlbertoDefeat:
-	.string "Even in defeat, Bird Pokémon are cool!$"
+	.string "Even in defeat, bird Pokémon are cool!$"
 
 Route123_Text_AlbertoPostBattle:
-	.string "I gather Bird Pokémon feathers that\n"
+	.string "I gather bird Pokémon feathers that\n"
 	.string "scatter during battles.\p"
 	.string "I'm going to make a hat with\n"
-	.string "Bird Pokémon feathers.$"
+	.string "bird Pokémon feathers.$"
 
 Route123_Text_EdIntro:
 	.string "When there are no Trainers around,\n"
@@ -4637,7 +4637,7 @@ Route133_Text_WarrenPostBattle:
 
 Route133_Text_BeckIntro:
 	.string "I came all the way out here with my\n"
-	.string "Bird Pokémon.$"
+	.string "bird Pokémon.$"
 
 Route133_Text_BeckDefeat:
 	.string "You…\n"
@@ -4690,7 +4690,7 @@ Route134_Text_LaurelDefeat:
 
 Route134_Text_LaurelPostBattle:
 	.string "There's a collector who's after\n"
-	.string "the Scales of Luvdisc.$"
+	.string "the scales of Luvdisc.$"
 
 Route134_Text_AlexIntro:
 	.string "Okeydokey! That's enough rest, gang!\n"
@@ -4700,7 +4700,7 @@ Route134_Text_AlexDefeat:
 	.string "Tuckered out again…$"
 
 Route134_Text_AlexPostBattle:
-	.string "My Bird Pokémon get tired quickly after\n"
+	.string "My bird Pokémon get tired quickly after\n"
 	.string "a long flight…$"
 
 Route134_Text_HitoshiIntro:

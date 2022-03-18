@@ -113,7 +113,7 @@ FortreeCity_Text_TreesGrowByDrinkingRainwater:
 	.string "there's both water and soil.$"
 
 FortreeCity_Text_EveryoneHealthyAndLively:
-	.string "The City consists of homes built on\n"
+	.string "The city consists of homes built on\n"
 	.string "trees.\p"
 	.string "Perhaps because of that lifestyle,\n"
 	.string "everyone is healthy and lively.\p"

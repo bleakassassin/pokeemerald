@@ -660,11 +660,11 @@ Route104_Text_LandedInDewfordDeliverLetter:
 	.string "Mr. Briney: Ahoy!\n"
 	.string "We've hit land in Dewford.\p"
 	.string "I suppose you're off to deliver that\n"
-	.string "Letter to, who was it now, Steven!$"
+	.string "letter to, who was it now, Steven!$"
 
 DewfordTown_Text_SetSailBackToPetalburg:
 	.string "Mr. Briney: Have you delivered your\n"
-	.string "Letter?\p"
+	.string "letter?\p"
 	.string "Or were you meaning to sail back to\n"
 	.string "Petalburg?$"
 
@@ -675,7 +675,7 @@ DewfordTown_Text_PetalburgWereSettingSail2:
 
 DewfordTown_Text_GoDeliverIllBeWaiting:
 	.string "Mr. Briney: Then you go on and deliver\n"
-	.string "the Letter. I'll be waiting.$"
+	.string "the letter. I'll be waiting.$"
 
 DewfordTown_Text_BrineyLandedInDewford:
 	.string "Mr. Briney: Ahoy!\n"
@@ -709,18 +709,18 @@ DewfordTown_Text_GettingItchToFish:
 DewfordTown_Text_GiveYouOneOfMyRods:
 	.string "I hear you, and I like what\n"
 	.string "you're saying!\p"
-	.string "I'll give you one of my fishing Rods.$"
+	.string "I'll give you one of my fishing rods.$"
 
 DewfordTown_Text_ThrowInFishingAdvice:
 	.string "And, as an added bonus, I'll even throw\n"
 	.string "in a little fishing advice!\p"
 	.string "First, you want to face the water,\n"
-	.string "then use the Rod.\p"
+	.string "then use the rod.\p"
 	.string "Focus your mind…\n"
-	.string "If you get a bite, pull on the Rod.\p"
+	.string "If you get a bite, pull on the rod.\p"
 	.string "Sometimes you can snag something\n"
 	.string "immediately, but with bigger catches,\l"
-	.string "you need to time the pulls on your Rod\l"
+	.string "you need to time the pulls on your rod\l"
 	.string "to haul them in.$"
 
 DewfordTown_Text_ThatsTooBadThen:
@@ -739,12 +739,12 @@ DewfordTown_Text_FishingAdvice:
 	.string "Oh, hey, don't get down on yourself!\n"
 	.string "I'll give you a little fishing advice.\p"
 	.string "First, you want to face the water,\n"
-	.string "then use the Rod.\p"
+	.string "then use the rod.\p"
 	.string "Focus your mind…\n"
-	.string "If you get a bite, pull the Rod.\p"
+	.string "If you get a bite, pull the rod.\p"
 	.string "Sometimes you can snag something\n"
 	.string "immediately, but with bigger catches,\l"
-	.string "you need to time the pulls on your Rod\l"
+	.string "you need to time the pulls on your rod\l"
 	.string "to haul them in.$"
 
 DewfordTown_Text_XIsTheBiggestHappeningThingRight:

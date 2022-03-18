@@ -1540,7 +1540,7 @@ SootopolisCity_Text_LeadSuperiorTrainerToCave:
 	.string "experience of many kinds of Pokémon…\p"
 	.string "If such a person were to appear, I was\n"
 	.string "instructed by Wallace to lead that\l"
-	.string "Trainer to this Cave.$"
+	.string "Trainer to this cave.$"
 
 SootopolisCity_Text_AwakenedPokemonClash:
 	.string "Oh, my…\p"
@@ -1681,7 +1681,7 @@ SootopolisCity_Text_MaxieArchieLeft:
 	.string "Steven: It looks like both Maxie and\n"
 	.string "Archie have gone away somewhere.\p"
 	.string "Perhaps they've gone to Mt. Pyre to\n"
-	.string "return those Orbs…$"
+	.string "return those orbs…$"
 
 SootopolisCity_Text_HaventYouScaledSkyPillar:
 	.string "Wallace: Oh?\n"

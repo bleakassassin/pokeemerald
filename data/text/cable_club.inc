@@ -371,7 +371,7 @@ CableClub_Text_ExplainBattleModes:
 
 CableClub_Text_ChooseGroupLeaderOfTwo:
 	.string "Please decide which of you two\n"
-	.string "will become the Leader.\p"
+	.string "will become the leader.\p"
 	.string "The other player must then choose\n"
 	.string "“Join Group.”$"
 
@@ -393,12 +393,12 @@ CableClub_Text_WelcomeUnionRoomEnter:
 	.string "You may interact directly with\n"
 	.string "other Trainers here, some of\l"
 	.string "whom you may not even know.\p"
-	.string "Would you like to enter the Room?$"
+	.string "Would you like to enter the room?$"
 
 CableClub_Text_UnionRoomInfo:
 	.string "The Trainers in the Union Room\n"
 	.string "will be those players around you\l"
-	.string "who have also entered the Room.\p"
+	.string "who have also entered the room.\p"
 	.string "You may do all sorts of things\n"
 	.string "here, such as exchanging greetings.\p"
 	.string "You may enter two Pokémon up to\n"
@@ -407,7 +407,7 @@ CableClub_Text_UnionRoomInfo:
 	.string "two to five people.\p"
 	.string "Or, you may register a Pokémon for\n"
 	.string "trade.\p"
-	.string "Would you like to enter the Room?$"
+	.string "Would you like to enter the room?$"
 
 CableClub_Text_EnjoyUnionRoom:
 	.string "I hope you enjoy your time in\n"

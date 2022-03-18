@@ -29,7 +29,7 @@ BerryBlender_Text_LetsBerryBlender:
 BerryBlender_Text_ExplainBerryBlending:
 	.string "Okay, a little explanation, then.\p"
 	.string "Oh, don't worry, it's quite simple.\p"
-	.string "When the Blender's arrow comes to\n"
+	.string "When the blender's arrow comes to\n"
 	.string "your marker, just press the A Button.\p"
 	.string "That's all you have to do.\n"
 	.string "You'll see how easy it is when you try.$"
@@ -93,7 +93,7 @@ BerryBlender_Text_LetsBerryBlender2:
 BerryBlender_Text_ExplainBerryBlending2:
 	.string "Okay!\n"
 	.string "Let me explain it to you!\p"
-	.string "When the spinning Blender's arrow\n"
+	.string "When the spinning blender's arrow\n"
 	.string "reaches your marker, just press\l"
 	.string "the A Button.\p"
 	.string "That's all it takes.\n"
@@ -143,7 +143,7 @@ BerryBlender_Text_LetsBerryBlender3:
 BerryBlender_Text_ExplainBerryBlending3:
 	.string "Oh, dear!\p"
 	.string "Then, I'll explain it to you nicely.\p"
-	.string "When the Blender's arrow spins to\n"
+	.string "When the blender's arrow spins to\n"
 	.string "your marker, press the A Button.\p"
 	.string "That's all it takes.\n"
 	.string "Isn't it simple?$"
@@ -171,7 +171,7 @@ BerryBlender_Text_DontHavePokeblockCase3:
 
 BerryBlender_Text_SetNewBlenderRecord:
 	.string "Okay! Today's going to be the day that\n"
-	.string "I set a new Blender speed record!$"
+	.string "I set a new blender speed record!$"
 
 BerryBlender_Text_LookGoodAtBlendingJoinUs:
 	.string "Oh, dear!\n"

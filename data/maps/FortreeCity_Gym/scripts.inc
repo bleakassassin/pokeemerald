@@ -149,7 +149,7 @@ FortreeCity_Gym_Text_GymGuidePostVictory:
 
 FortreeCity_Gym_Text_JaredIntro:
 	.string "Behold the elegant battle style of\n"
-	.string "Bird Pokémon!$"
+	.string "bird Pokémon!$"
 
 FortreeCity_Gym_Text_JaredDefeat:
 	.string "You…\n"
@@ -162,7 +162,7 @@ FortreeCity_Gym_Text_JaredPostBattle:
 	.string "our Leader?$"
 
 FortreeCity_Gym_Text_EdwardoIntro:
-	.string "The lovers of Bird Pokémon aspire\n"
+	.string "The lovers of bird Pokémon aspire\n"
 	.string "to join this Gym.\p"
 	.string "As a member of the Fortree Gym,\n"
 	.string "I'm not allowed to lose!$"
@@ -233,12 +233,12 @@ FortreeCity_Gym_Text_DariusPostBattle:
 FortreeCity_Gym_Text_WinonaIntro:
 	.string "I am Winona. I am the Leader of\n"
 	.string "the Fortree Pokémon Gym.\p"
-	.string "I have become one with Bird Pokémon\n"
+	.string "I have become one with bird Pokémon\n"
 	.string "and have soared the skies…\p"
 	.string "However grueling the battle, we have\n"
 	.string "triumphed with grace…\p"
 	.string "Witness the elegant choreography\n"
-	.string "of Bird Pokémon and I!$"
+	.string "of bird Pokémon and I!$"
 
 FortreeCity_Gym_Text_WinonaDefeat:
 	.string "Never before have I seen a Trainer\n"
@@ -272,7 +272,7 @@ FortreeCity_Gym_Text_RegisteredWinona:
 
 FortreeCity_Gym_Text_WinonaPostBattle:
 	.string "Though I fell to you, I will remain\n"
-	.string "devoted to Bird Pokémon.$"
+	.string "devoted to bird Pokémon.$"
 
 FortreeCity_Gym_Text_GymStatue:
 	.string "Fortree City Pokémon Gym$"

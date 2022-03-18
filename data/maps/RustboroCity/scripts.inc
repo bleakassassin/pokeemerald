@@ -1102,7 +1102,7 @@ RustboroCity_Text_OutOfTheWay:
 
 RustboroCity_Text_WaitDontTakeMyGoods:
 	.string "Wait! Pleeeaaase!\p"
-	.string "Don't take my Goods!$"
+	.string "Don't take my goods!$"
 
 RustboroCity_Text_HelpMeIWasRobbed:
 	.string "Oh, it's you!\p"
@@ -1267,7 +1267,7 @@ RustboroCity_Text_DevelopedNewPokenavFeature:
 	.string "for the PokéNav…\p"
 	.string "And it turned out great!\p"
 	.string "{PLAYER}, may I see that PokéNav?\n"
-	.string "The one our President gave you?$"
+	.string "The one our president gave you?$"
 
 RustboroCity_Text_AddedMatchCallPleaseCallMrStone:
 	.string "There you go, {PLAYER}!\p"
@@ -1279,7 +1279,7 @@ RustboroCity_Text_AddedMatchCallPleaseCallMrStone:
 	.string "{PLAYER}, our President Stone should\n"
 	.string "be registered in your PokéNav.\p"
 	.string "Test it out.\n"
-	.string "Please give our President a call.$"
+	.string "Please give our president a call.$"
 
 RustboroCity_Text_PleaseSelectPokenav:
 	.string "Please select the PokéNav.$"

@@ -1026,7 +1026,7 @@ SlateportCity_Text_BushedHikingFromMauville:
 
 SlateportCity_Text_EveryoneCallsHimCaptStern:
 	.string "Stern, the fellow who built the\n"
-	.string "Museum, also happens to be the leader\l"
+	.string "museum, also happens to be the leader\l"
 	.string "of an undersea exploration team.\p"
 	.string "So, everyone calls him Capt. Stern.$"
 
@@ -1036,7 +1036,7 @@ SlateportCity_Text_WhatsLongLineOverThere:
 
 SlateportCity_Text_VisitedMuseumOften:
 	.string "When I was a child, I visited\n"
-	.string "the Museum often.\p"
+	.string "the museum often.\p"
 	.string "I used to dream about the mysteries of\n"
 	.string "the sea after seeing the exhibits.$"
 
@@ -1050,18 +1050,18 @@ SlateportCity_Text_AquaHasPolicy:
 	.string "the operation site.$"
 
 SlateportCity_Text_BossIsBrilliant:
-	.string "Our Boss is brilliant.\p"
+	.string "Our boss is brilliant.\p"
 	.string "What would he want to do with\n"
-	.string "a Museum now?$"
+	.string "a museum now?$"
 
 SlateportCity_Text_WhatsNewSchemeIWonder:
 	.string "What's the new scheme, I wonder?\p"
-	.string "Our Boss is scary when he's mad, so\n"
+	.string "Our boss is scary when he's mad, so\n"
 	.string "I'd better not screw things up…$"
 
 SlateportCity_Text_ShouldTakeItAll:
 	.string "If there's something we need in\n"
-	.string "the Museum, we should take it all!$"
+	.string "the museum, we should take it all!$"
 
 SlateportCity_Text_DontButtIn:
 	.string "Hey, you there!\n"
@@ -1157,7 +1157,7 @@ SlateportCity_Text_SternSaysDiscoveredSomething:
 
 SlateportCity_Text_CaptainComeBackWithBigFish:
 	.string "What's going on here?\p"
-	.string "Did the good Captain come back with\n"
+	.string "Did the good captain come back with\n"
 	.string "a big fish from the ocean floor?$"
 
 SlateportCity_Text_AmIOnTV:
@@ -1166,7 +1166,7 @@ SlateportCity_Text_AmIOnTV:
 
 SlateportCity_Text_CaptainsACelebrity:
 	.string "A TV interview! Here!\n"
-	.string "The Captain's a celebrity!$"
+	.string "The captain's a celebrity!$"
 
 SlateportCity_Text_BigSmileForCamera:
 	.string "Ty: Okay, Capt. Stern, a big smile\n"
@@ -1270,7 +1270,7 @@ SlateportCity_Text_MarketSign:
 SlateportCity_Text_HarborFerryUnderConstruction:
 	.string "Slateport Harbor\p"
 	.string "“The ferry S.S. Tidal is under\n"
-	.string "construction in the Shipyard.\p"
+	.string "construction in the shipyard.\p"
 	.string "“Service is scheduled to begin\n"
 	.string "shortly.”$"
 

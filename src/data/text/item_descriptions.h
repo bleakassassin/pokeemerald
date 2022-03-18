@@ -1044,7 +1044,7 @@ static const u8 sPokeblockCaseDesc[] = _(
 
 static const u8 sLetterDesc[] = _(
     "A letter to Steven\n"
-    "from the President\n"
+    "from the president\n"
     "of the Devon Corp.");
 
 static const u8 sEonTicketDesc[] = _(

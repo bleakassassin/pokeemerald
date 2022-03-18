@@ -265,7 +265,7 @@ SSTidalCorridor_Text_ScottBattleFrontierInvite:
 	.string "Battle Frontier!\p"
 	.string "What's the place like?\n"
 	.string "You'll understand when you see it!\p"
-	.string "I've spoken with the ship's Captain\n"
+	.string "I've spoken with the ship's captain\n"
 	.string "about this.\p"
 	.string "The next time you take a ferry,\n"
 	.string "you should be able to sail to\l"

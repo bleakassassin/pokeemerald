@@ -72,7 +72,7 @@ FortreeCity_House4_Text_BringsWorldCloserTogether:
 
 FortreeCity_House4_Text_GoBirdPokemon:
 	.string "There!\n"
-	.string "Go, Bird Pokémon!$"
+	.string "Go, bird Pokémon!$"
 
 FortreeCity_House4_Text_AskedWingullToRunErrand:
 	.string "Heheh, I asked my Wingull to run\n"

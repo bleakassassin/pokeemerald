@@ -2874,7 +2874,7 @@ MatchCall_Text_MrStone2::
 	.string "After that, deliver our parcel to\n"
 	.string "Capt. Stern in Slateport.\p"
 	.string "You remember, don't you?\p"
-	.string "Now, since I am a busy President,\n"
+	.string "Now, since I am a busy president,\n"
 	.string "I have to go! Bye-bye!$"
 
 MatchCall_Text_MrStone3::
@@ -2915,9 +2915,9 @@ MatchCall_Text_MrStone7::
 	.string "Hello!\n"
 	.string "This is Devon Corporati…\l"
 	.string "Oh, hello, {PLAYER}!\p"
-	.string "Our President was here a little\n"
+	.string "Our president was here a little\n"
 	.string "while ago, but he's gone out.\p"
-	.string "Our President is busy, but you\n"
+	.string "Our president is busy, but you\n"
 	.string "seem to be just as busy, {PLAYER}.$"
 
 MatchCall_Text_MrStone8::

@@ -549,16 +549,16 @@ LilycoveCity_Harbor_Text_FerryUnavailable:
 
 LilycoveCity_Harbor_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
-	.string "May I see your Ticket?$"
+	.string "May I see your ticket?$"
 
 LilycoveCity_Harbor_Text_NoTicket:
-	.string "{PLAYER} doesn't have the Ticket…\p"
+	.string "{PLAYER} doesn't have the ticket…\p"
 	.string "I'm terribly sorry.\p"
-	.string "You must have a Ticket to board\n"
+	.string "You must have a ticket to board\n"
 	.string "the ferry.$"
 
 LilycoveCity_Harbor_Text_FlashTicketWhereTo:
-	.string "{PLAYER} flashed the Ticket.\p"
+	.string "{PLAYER} flashed the ticket.\p"
 	.string "Perfect! That's all you need!\p"
 	.string "And where would you like to go?$"
 
@@ -582,11 +582,11 @@ LilycoveCity_Harbor_Text_SailorFerryUnavailable:
 	.string "Until they finish making the ferry,\n"
 	.string "we sailors have nothing to do…\p"
 	.string "I wish they'd get a move on, the folks\n"
-	.string "at the Shipyard in Slateport.$"
+	.string "at the shipyard in Slateport.$"
 
 LilycoveCity_Harbor_Text_SailorFerryAvailable:
 	.string "The ferry S.S. Tidal is finally in\n"
 	.string "operation.\p"
-	.string "The folks at the Shipyard in Slateport\n"
+	.string "The folks at the shipyard in Slateport\n"
 	.string "must've worked extra hard.\p"
 	.string "Well, it's my turn to get busy now!$"
