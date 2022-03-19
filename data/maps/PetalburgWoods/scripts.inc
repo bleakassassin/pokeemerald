@@ -334,7 +334,7 @@ PetalburgWoods_Text_IWasGoingToAmbushYou:
 	.string "I got sick of waiting, so here I am!$"
 
 PetalburgWoods_Text_HandOverThosePapers:
-	.string "You! Devon Researcher!\p"
+	.string "You! Devon researcher!\p"
 	.string "Hand over those papers!$"
 
 PetalburgWoods_Text_YouHaveToHelpMe:

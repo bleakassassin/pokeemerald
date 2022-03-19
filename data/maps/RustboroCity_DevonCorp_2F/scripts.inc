@@ -343,7 +343,7 @@ RustboroCity_DevonCorp_2F_Text_HandedFossilToResearcher:
 	.string "Excellent!\n"
 	.string "Let's do this right away.\p"
 	.string "{PLAYER} handed the {STR_VAR_1} to\n"
-	.string "the Devon Researcher.$"
+	.string "the Devon researcher.$"
 
 RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime:
 	.string "The Fossil Regenerator, which I made,\n"
@@ -362,7 +362,7 @@ RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife:
 
 RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher:
 	.string "{PLAYER} received {STR_VAR_2} from\n"
-	.string "the Devon Researcher.$"
+	.string "the Devon researcher.$"
 
 @ Unused
 RustboroCity_DevonCorp_2F_Text_TooManyPokemon:
