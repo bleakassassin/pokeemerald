@@ -870,7 +870,7 @@ LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon:
 	.string "You can have the last remaining Pokémon\n"
 	.string "from my desk!\p"
 	.string "Consider it my show of appreciation\n"
-	.string "for the fantastic work you've done.$\p"
+	.string "for the fantastic work you've done.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CanHaveAnyOneOfRarePokemon:
 	.string "Prof. Birch: These are rare Pokémon\n"
@@ -888,7 +888,7 @@ LittlerootTown_ProfessorBirchsLab_Text_CanHaveFinalPokemon:
 	.string "Prof. Birch: This is a rare Pokémon\n"
 	.string "only found in another region!\p"
 	.string "Consider it my show of appreciation\n"
-	.string "for the fantastic work you've done.$\p"
+	.string "for the fantastic work you've done.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil:
 	.string "Prof. Birch: The Fire Pokémon\n"

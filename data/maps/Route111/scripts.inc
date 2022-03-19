@@ -720,7 +720,7 @@ Route111_Text_MauvilleUncleToldMeToTakeRockSmash:
 	.string "Rock Smash with me if I was going to\l"
 	.string "Route 111!\p"
 	.string "My uncle? He lives across from\n"
-	.string "the bike shop in Mauville.$"
+	.string "the Bike Shop in Mauville.$"
 
 Route111_Text_TrainerHillSign:
 	.string "{RIGHT_ARROW} Trainer Hill Entrance\p"

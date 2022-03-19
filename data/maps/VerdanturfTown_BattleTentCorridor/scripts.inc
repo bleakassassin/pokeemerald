@@ -57,15 +57,15 @@ VerdanturfTown_ContestHall_Text_WhichContestYouEntering:
 VerdanturfTown_ContestHall_Text_RaisedMonToBeCute:
 	.string "I raised my Pokémon to be cute.\p"
 	.string "I found out you can put Pokémon in\n"
-	.string "a contest for cuteness!\p"
+	.string "a contest for Cuteness!\p"
 	.string "I'm so glad I raised my Pokémon with\n"
 	.string "loving care…$"
 
 @ Unused
 VerdanturfTown_ContestHall_Text_MyMonRules:
 	.string "My Pokémon rules!\p"
-	.string "It's cool, tough yet beautiful, cute,\n"
-	.string "and smart. It's complete!\p"
+	.string "It's Cool, Tough yet Beautiful, Cute,\n"
+	.string "and Smart. It's complete!\p"
 	.string "I may as well go for wins in every\n"
 	.string "single contest.$"
 

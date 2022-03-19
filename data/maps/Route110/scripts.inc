@@ -816,7 +816,7 @@ Route110_Text_HairStreamsBehindMe:
 Route110_Text_YouGotBikeFromRydel:
 	.string "Oh, hey, you got that Bike from Rydel!\p"
 	.string "Oh, it's glaringly obvious.\n"
-	.string "It says right on your bike…\p"
+	.string "It says right on your Bike…\p"
 	.string "Rydel, Rydel, Rydel, Rydel, Rydel,\n"
 	.string "Rydel, Rydel, Rydel, Rydel, Rydel,\p"
 	.string "Rydel, Rydel, Rydel, Rydel, Rydel,\n"
