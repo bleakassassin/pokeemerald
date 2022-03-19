@@ -226,7 +226,7 @@ MoveTutor_Text_ExplosionDeclined:
 	.string "I live in the country?$"
 
 MoveTutor_Text_ExplosionWhichMon:
-	.string "Fine! An explosion it is!\n"
+	.string "Fine! An Explosion it is!\n"
 	.string "Which Pokémon wants to blow up?$"
 
 MoveTutor_Text_ExplosionTaught:
