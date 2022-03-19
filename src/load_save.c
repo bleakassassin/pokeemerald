@@ -15,6 +15,7 @@
 #include "decoration_inventory.h"
 #include "agb_flash.h"
 #include "constants/heal_locations.h"
+#include "constants/items.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
@@ -278,6 +279,20 @@ void FixImportedSave(void)
 {
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
     {
+        FlagClear(FLAG_REMATCH_SIDNEY);
+        FlagClear(FLAG_REMATCH_PHOEBE);
+        FlagClear(FLAG_REMATCH_GLACIA);
+        FlagClear(FLAG_REMATCH_DRAKE);
+        FlagClear(FLAG_REMATCH_WALLACE);
+        gSaveBlock1Ptr->registeredItem = 0;
+
+        if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE )
+        {
+            RemoveBagItem(ITEM_MACH_BIKE, 1);
+            RemoveBagItem(ITEM_ACRO_BIKE, 1);
+            AddBagItem(ITEM_BICYCLE, 1);
+        }
+
         if (gSaveBlock1Ptr->mapLayoutId == 420)
         {
             SetContinueGameWarpStatus();
@@ -307,14 +322,16 @@ void FixImportedSave(void)
             FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
 
             if (FlagGet(FLAG_BADGE08_GET) == TRUE)
-                FlagSet(FLAG_ENABLE_WALLACE_MATCH_CALL);                
+                FlagSet(FLAG_ENABLE_WALLACE_MATCH_CALL);
+                FlagClear(FLAG_ENABLE_JUAN_MATCH_CALL);
+                FlagClear(TRAINER_FLAGS_START + TRAINER_JUAN_1);
         }
         else
         {
             FlagClear(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
             FlagClear(FLAG_HIDE_ROUTE_103_SNORLAX);
             FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
-            
+
             if (gSaveBlock2Ptr->playerGender == MALE)
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
             else
