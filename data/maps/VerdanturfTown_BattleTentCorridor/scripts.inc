@@ -55,7 +55,7 @@ VerdanturfTown_ContestHall_Text_WhichContestYouEntering:
 
 @ Unused
 VerdanturfTown_ContestHall_Text_RaisedMonToBeCute:
-	.string "I raised my Pokémon to be cute.\p"
+	.string "I raised my Pokémon to be Cute.\p"
 	.string "I found out you can put Pokémon in\n"
 	.string "a contest for Cuteness!\p"
 	.string "I'm so glad I raised my Pokémon with\n"
