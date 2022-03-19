@@ -3893,7 +3893,7 @@ Route125_Text_IrisNotEnoughMons:
 	.string "anything like a 2-on-1 battle.$"
 
 Route125_Text_PresleyIntro:
-	.string "Why would a BIRDKEEPER like me\n"
+	.string "Why would a BIRD KEEPER like me\n"
 	.string "come out to the sea?$"
 
 Route125_Text_PresleyDefeat:
