@@ -14,14 +14,14 @@ CableClub_EventScript_ShowMysteryGiftMan::
 	return
 	
 CableClub_EventScript_TicketMysteryGiftMan::
-	call_if_set FLAG_ENABLE_JUAN_MATCH_CALL, CableClub_EventScript_CheckImportedSave
 	goto_if_set FLAG_EXCHANGED_SCANNER, CableClub_EventScript_ShowMysteryGiftMan
 	goto_if_eq VAR_OLD_SEA_MAP_STATE, 4, CableClub_EventScript_ShowMysteryGiftMan
+	goto_if_set FLAG_ENABLE_JUAN_MATCH_CALL, CableClub_EventScript_CheckImportedSave
 	goto CableClub_EventScript_HideOrShowMysteryGiftManMain
 
 CableClub_EventScript_CheckImportedSave::
 	goto_if_unset FLAG_RECEIVED_AURORA_TICKET, CableClub_EventScript_ShowMysteryGiftMan
-	return
+	goto CableClub_EventScript_HideOrShowMysteryGiftManMain
 
 CableClub_EventScript_HideMysteryGiftMan::
 	setflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
