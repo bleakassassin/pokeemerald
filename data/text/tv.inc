@@ -489,7 +489,7 @@ SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort:
 	.string "If you don't mind, could you tell me\n"
 	.string "something about yourself?\p"
 	.string "I'll hook you up with a free souvenir\n"
-	.string "from the MUSEUM for your trouble.$"
+	.string "from the museum for your trouble.$"
 
 SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon:
 	.string "Oh, you will?\n"
