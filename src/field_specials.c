@@ -541,17 +541,19 @@ void SpawnLinkPartnerObjectEvent(void)
                 else
                     linkSpriteId = OBJ_EVENT_GFX_LINK_RS_MAY;
                 break;
-            case VERSION_EMERALD:
-                if (gLinkPlayers[i].gender == 0)
-                    linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
-                else
-                    linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
-                break;
             default:
                 if (gLinkPlayers[i].gender == 0)
                     linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
                 else
                     linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
+                break;
+            }
+            if (gLinkPlayers[i].outfit == OUTFIT_RS)
+            {
+                if (gLinkPlayers[i].gender == 0)
+                    linkSpriteId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
+                else
+                    linkSpriteId = OBJ_EVENT_GFX_LINK_RS_MAY;
                 break;
             }
             SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + MAP_OFFSET, coordOffsets[j][1] + y + MAP_OFFSET, 0);

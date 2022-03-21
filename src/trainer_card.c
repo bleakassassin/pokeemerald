@@ -697,6 +697,7 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     u8 i;
 
     trainerCard->gender = gSaveBlock2Ptr->playerGender;
+    trainerCard->outfit = gSaveBlock2Ptr->costumeId;
     trainerCard->playTimeHours = gSaveBlock2Ptr->playTimeHours;
     trainerCard->playTimeMinutes = gSaveBlock2Ptr->playTimeMinutes;
 
@@ -1891,7 +1892,7 @@ static void CreateTrainerCardTrainerPic(void)
     }
     else
     {
-        CreateTrainerCardTrainerPicSprite(sCostumeFrontPics[gSaveBlock2Ptr->costumeId][sData->trainerCard.gender],
+        CreateTrainerCardTrainerPicSprite(sCostumeFrontPics[sData->trainerCard.outfit][sData->trainerCard.gender],
                     TRUE,
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],
