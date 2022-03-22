@@ -855,8 +855,8 @@ gText_SandstormIsVicious::
 	.string "It's impossible to keep going.$"
 
 gText_SelectWithoutRegisteredItem::
-	.string "An item in the Bag can be\n"
-	.string "registered to Select for easy use.$"
+	.string "Items in the Bag can be registered\n"
+	.string "to Select for easy use.$"
 
 gText_PokemonTrainerSchoolEmail::
 	.string "There's an e-mail from Pokémon Trainer\n"

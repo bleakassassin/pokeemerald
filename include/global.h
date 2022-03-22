@@ -134,6 +134,8 @@
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
 
+#define REGISTERED_ITEMS_MAX 16
+
 struct Coords8
 {
     s8 x;
@@ -551,6 +553,11 @@ struct ItemSlot
 {
     u16 itemId;
     u16 quantity;
+};
+
+struct RegisteredItemSlot
+{
+    u16 itemId;
 };
 
 struct Pokeblock
@@ -1016,6 +1023,9 @@ struct SaveBlock1
     /*0x3D64*/ struct SaveTrainerHill trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
+               u8 registeredItemLastSelected:4; //max 16 items
+               u8 registeredItemListCount:4;
+               struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
