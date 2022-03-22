@@ -38,8 +38,8 @@ static const u8 sText_EnsureGBAConnectionMatches[] = _("Please ensure the connec
                                                        "{COLOR RED}{SHADOW LIGHT_RED}Yes: Press the A Button.\n"
                                                        "No: Turn off the power and try again.");
 static const u8 sText_TurnOffPowerHoldingStartSelect[] = _("Please turn on the power of Pokémon\n"
-                                                           "Ruby/Sapphire while holding Start and\n"
-                                                           "Select simultaneously. Then, ensure\n"
+                                                           "Ruby/Sapphire while holding START and\n"
+                                                           "SELECT simultaneously. Then, ensure\n"
                                                            "the picture above appears.");
 static const u8 sText_TransmittingPleaseWait[] = _("Transmitting. Please wait.\n"
                                                    "{COLOR RED}{SHADOW LIGHT_RED}Please do not turn off the power or\n"
