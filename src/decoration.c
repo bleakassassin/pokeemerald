@@ -1397,12 +1397,12 @@ static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecoration
 
     if (gSaveBlock2Ptr->playerGender == MALE)
 	{
-		if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 			sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_RS_BRENDAN_DECORATING, SpriteCallbackDummy, x, 72, 0);
 		else			
             sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_BRENDAN_DECORATING, SpriteCallbackDummy, x, 72, 0);
 	}
-    else if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+    else if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
         sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_RS_MAY_DECORATING, SpriteCallbackDummy, x, 72, 0);
     else
         sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MAY_DECORATING, SpriteCallbackDummy, x, 72, 0);
@@ -2296,12 +2296,12 @@ static void SetUpPuttingAwayDecorationPlayerAvatar(void)
     gFieldCamera.spriteId = CreateSprite(&sPuttingAwayCursorSpriteTemplate, 120, 80, 0);
     if (gSaveBlock2Ptr->playerGender == MALE)
 	{
-		if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 			sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_RS_BRENDAN_DECORATING, SpriteCallbackDummy, 136, 72, 0);
 		else
 			sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_BRENDAN_DECORATING, SpriteCallbackDummy, 136, 72, 0);
 	}
-    else if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+    else if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
         sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_RS_MAY_DECORATING, SpriteCallbackDummy, 136, 72, 0);
     else
         sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MAY_DECORATING, SpriteCallbackDummy, 136, 72, 0);

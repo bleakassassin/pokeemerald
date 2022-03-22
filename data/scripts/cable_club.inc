@@ -980,7 +980,7 @@ CableClub_EventScript_SwitchWardrobe::
 	delay 30
 	fadescreen FADE_TO_BLACK
 	delay 60
-	special SwapPlayersCostume
+	special SwapPlayersOutfit
 	fadescreen FADE_FROM_BLACK
 	opendoor 13, 3
 	waitdooranim

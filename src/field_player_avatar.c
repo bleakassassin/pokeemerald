@@ -1268,12 +1268,12 @@ u16 GetRivalAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 
 u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 {
-    return sPlayerAvatarGfxIds[gSaveBlock2Ptr->costumeId][state][gSaveBlock2Ptr->playerGender];
+    return sPlayerAvatarGfxIds[gSaveBlock2Ptr->outfitId][state][gSaveBlock2Ptr->playerGender];
 }
 
 u16 GetPlayerSceneGraphicsIdByGender(void)
 {
-	return sPlayerSceneGfxIds[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender];
+	return sPlayerSceneGfxIds[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender];
 }
 
 u16 GetFRLGAvatarGraphicsIdByGender(u8 gender)
@@ -1389,10 +1389,10 @@ static u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->costumeId][0]); i++)
+    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][0]); i++)
     {
-        if (sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender][i][0] == graphicsId)
-            return sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender][i][1];
+        if (sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i][0] == graphicsId)
+            return sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i][1];
     }
     return PLAYER_AVATAR_FLAG_ON_FOOT;
 }
@@ -1402,10 +1402,10 @@ u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
     u8 i;
     u8 flags = gPlayerAvatar.flags;
 
-    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->costumeId][0]); i++)
+    for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][0]); i++)
     {
-        if (sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender][i][1] & flags)
-            return sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender][i][0];
+        if (sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i][1] & flags)
+            return sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i][0];
     }
     return 0;
 }

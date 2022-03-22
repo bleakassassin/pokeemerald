@@ -838,7 +838,7 @@ static bool8 LoadBagMenu_Graphics(void)
         gBagMenu->graphicsLoadState++;
         break;
     case 4:
-		if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 			LoadCompressedSpritePalette(&gBagRSPaletteTable);
 		else
 			LoadCompressedSpritePalette(&gBagPaletteTable);

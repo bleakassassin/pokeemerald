@@ -487,10 +487,8 @@ struct SaveBlock2
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
     /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u16 optionsAttackStyle:1; // OPTIONS_ATTACK_STYLE_[TYPE/CATEGORY]
-             bool8 autoRun;
-    /*0x91*/ u8 costumeId;
-    /*0x92*/ u8 filler_91[0x6];
+    /*0x90*/ u8 outfitId;
+    /*0x91*/ u8 filler_91[0x7];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
@@ -504,7 +502,9 @@ struct SaveBlock2
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
-}; // sizeof=0xF2C
+    /*0xF2C*/ u16 optionsAttackStyle:1; // OPTIONS_ATTACK_STYLE_[TYPE/CATEGORY]
+    /*0xF2C*/ bool8 autoRun;
+}; // sizeof=0xF2D
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 

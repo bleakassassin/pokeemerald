@@ -277,7 +277,7 @@ static const u8 sTrainerCardTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_D
 static const u8 sTrainerCardStatColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
 static const u8 sTimeColonInvisibleTextColors[6] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_TRANSPARENT};
 
-static const u8 sCostumeFrontPics[OUTFIT_TOTAL][GENDER_COUNT] = 
+static const u8 sOutfitFrontPics[OUTFIT_TOTAL][GENDER_COUNT] = 
 {
     [OUTFIT_EMERALD] = {TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY},
     [OUTFIT_RS]      = {TRAINER_PIC_RS_BRENDAN, TRAINER_PIC_RS_MAY},
@@ -697,7 +697,7 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     u8 i;
 
     trainerCard->gender = gSaveBlock2Ptr->playerGender;
-    trainerCard->outfit = gSaveBlock2Ptr->costumeId;
+    trainerCard->outfit = gSaveBlock2Ptr->outfitId;
     trainerCard->playTimeHours = gSaveBlock2Ptr->playTimeHours;
     trainerCard->playTimeMinutes = gSaveBlock2Ptr->playTimeMinutes;
 
@@ -1892,7 +1892,7 @@ static void CreateTrainerCardTrainerPic(void)
     }
     else
     {
-        CreateTrainerCardTrainerPicSprite(sCostumeFrontPics[sData->trainerCard.outfit][sData->trainerCard.gender],
+        CreateTrainerCardTrainerPicSprite(sOutfitFrontPics[sData->trainerCard.outfit][sData->trainerCard.gender],
                     TRUE,
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
                     sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],

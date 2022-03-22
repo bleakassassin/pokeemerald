@@ -208,7 +208,7 @@ void NewGameInitData(void)
     ResetTrainerHillResults();
     ResetContestLinkResults();
     gSaveBlock2Ptr->autoRun = FALSE;
-    gSaveBlock2Ptr->costumeId = 0;
+    gSaveBlock2Ptr->outfitId = 0;
 }
 
 static void ResetMiniGamesRecords(void)
