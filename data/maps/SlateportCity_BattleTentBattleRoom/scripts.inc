@@ -1,32 +1,9 @@
 .set LOCALID_OPPONENT, 2
-.set LOCALID_PLAYER, 3
 
 SlateportCity_BattleTentBattleRoom_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_BattleTentBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentBattleRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentBattleRoom_OnFrame
 	.byte 0
-
-	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
-	@ The player is represented instead by LOCALID_PLAYER, which has the gfx id VAR_OBJ_GFX_ID_1
-
-SlateportCity_BattleTentBattleRoom_OnTransition:
-	call SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfx
-	end
-
-SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfx::
-	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
-	return
-
-SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	return
-
-SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
-	return
 
 SlateportCity_BattleTentBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, SlateportCity_BattleTentBattleRoom_EventScript_SetUpObjects
@@ -34,7 +11,8 @@ SlateportCity_BattleTentBattleRoom_OnWarp:
 
 SlateportCity_BattleTentBattleRoom_EventScript_SetUpObjects::
 	setvar VAR_TEMP_1, 1
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM
+	setobjectxy OBJ_EVENT_ID_PLAYER, 4, 8
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	hideobjectat LOCALID_OPPONENT, MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
 	end
 
@@ -43,7 +21,9 @@ SlateportCity_BattleTentBattleRoom_OnFrame:
 	.2byte 0
 
 SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
-	applymovement LOCALID_PLAYER, SlateportCity_BattleTentBattleRoom_Movement_PlayerEnter
+	special SpawnCameraObject
+	setobjectxyperm OBJ_EVENT_ID_CAMERA, 4, 4
+	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_BattleTentBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	factory_setopponentgfx
 	setobjectxyperm LOCALID_OPPONENT, 5, 1

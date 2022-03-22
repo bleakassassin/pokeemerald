@@ -149,6 +149,10 @@
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
 
+#define OUTFIT_EMERALD  0
+#define OUTFIT_RS       1
+#define OUTFIT_TOTAL    2
+
 #define VANILLA_SAVE  0
 #define LATEST_VERSION 1
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "save.h"
 #include "intro_credits_graphics.h"
 #include "palette.h"
 #include "decompress.h"
@@ -22,6 +23,8 @@
 #define TAG_MAY     1003
 #define TAG_FLYGON_LATIOS  1004
 #define TAG_FLYGON_LATIAS  1005
+#define TAG_RS_BRENDAN 1006
+#define TAG_RS_MAY     1007
 
 // Used for the Clouds/Trees/Houses sprites that pass by in the background
 #define TAG_MOVING_SCENERY 2000
@@ -60,11 +63,14 @@ static const u32 sHouses_Gfx[]            = INCBIN_U32("graphics/intro/scene_2/h
 static const u16 sHouseSilhouette_Pal[]   = INCBIN_U16("graphics/intro/scene_2/house_silhouette.gbapal");
 static const u32 sHouses_Tilemap[]        = INCBIN_U32("graphics/intro/scene_2/houses_map.bin.lz");
 static const u32 sHouseSilhouette_Gfx[]   = INCBIN_U32("graphics/intro/scene_2/house_silhouette.4bpp.lz");
-static const u16 sBrendanCredits_Pal[]    = INCBIN_U16("graphics/intro/scene_2/brendan_credits.gbapal");
-static const u32 sBrendanCredits_Gfx[]    = INCBIN_U32("graphics/intro/scene_2/brendan_credits.4bpp.lz");
-static const u16 sMayCredits_Pal[]        = INCBIN_U16("graphics/intro/scene_2/may_credits.gbapal");
-static const u16 sUnused[0xF0]            = {0};
-static const u32 sMayCredits_Gfx[]        = INCBIN_U32("graphics/intro/scene_2/may_credits.4bpp.lz");
+static const u16 sBrendan_Pal[]           = INCBIN_U16("graphics/intro/scene_2/brendan.gbapal");
+static const u32 sBrendan_Gfx[]           = INCBIN_U32("graphics/intro/scene_2/brendan.4bpp.lz");
+static const u16 sRSBrendan_Pal[]         = INCBIN_U16("graphics/intro/scene_2/rs_brendan.gbapal");
+static const u32 sRSBrendan_Gfx[]         = INCBIN_U32("graphics/intro/scene_2/rs_brendan.4bpp.lz");
+static const u16 sMay_Pal[]               = INCBIN_U16("graphics/intro/scene_2/may.gbapal");
+static const u32 sMay_Gfx[]               = INCBIN_U32("graphics/intro/scene_2/may.4bpp.lz");
+static const u16 sRSMay_Pal[]             = INCBIN_U16("graphics/intro/scene_2/rs_may.gbapal");
+static const u32 sRSMay_Gfx[]             = INCBIN_U32("graphics/intro/scene_2/rs_may.4bpp.lz");
 static const u32 sBicycle_Gfx[]           = INCBIN_U32("graphics/intro/scene_2/bicycle.4bpp.lz");
 static const u16 sLatios_Pal[]            = INCBIN_U16("graphics/intro/scene_2/latios.gbapal");
 static const u32 sLatios_Gfx[]            = INCBIN_U32("graphics/intro/scene_2/latios.4bpp.lz");
@@ -473,10 +479,32 @@ static const struct SpriteTemplate sSpriteTemplate_Brendan =
     .callback = SpriteCB_Player
 };
 
+static const struct SpriteTemplate sSpriteTemplate_RSBrendan =
+{
+    .tileTag = TAG_RS_BRENDAN,
+    .paletteTag = TAG_RS_BRENDAN,
+    .oam = &sOamData_Player,
+    .anims = sAnims_Player,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Player
+};
+
 static const struct SpriteTemplate sSpriteTemplate_May =
 {
     .tileTag = TAG_MAY,
     .paletteTag = TAG_MAY,
+    .oam = &sOamData_Player,
+    .anims = sAnims_Player,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Player
+};
+
+static const struct SpriteTemplate sSpriteTemplate_RSMay =
+{
+    .tileTag = TAG_RS_MAY,
+    .paletteTag = TAG_RS_MAY,
     .oam = &sOamData_Player,
     .anims = sAnims_Player,
     .images = NULL,
@@ -506,21 +534,10 @@ static const union AnimCmd *const sAnims_Bicycle[] =
     sAnim_Bicycle
 };
 
-static const struct SpriteTemplate sSpriteTemplate_BrendanBicycle =
+static const struct SpriteTemplate sSpriteTemplate_Bicycle =
 {
     .tileTag = TAG_BICYCLE,
     .paletteTag = TAG_BRENDAN,
-    .oam = &sOamData_Bicycle,
-    .anims = sAnims_Bicycle,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Bicycle
-};
-
-static const struct SpriteTemplate sSpriteTemplate_MayBicycle =
-{
-    .tileTag = TAG_BICYCLE,
-    .paletteTag = TAG_MAY,
     .oam = &sOamData_Bicycle,
     .anims = sAnims_Bicycle,
     .images = NULL,
@@ -579,9 +596,19 @@ static const struct SpriteTemplate sSpriteTemplate_FlygonLatias =
 const struct CompressedSpriteSheet gSpriteSheet_IntroBrendan[] =
 {
     {
-        .data = gIntroBrendan_Gfx,
+        .data = sBrendan_Gfx,
         .size = 0x2000,
         .tag = TAG_BRENDAN
+    },
+    {}
+};
+
+const struct CompressedSpriteSheet gSpriteSheet_IntroRSBrendan[] =
+{
+    {
+        .data = sRSBrendan_Gfx,
+        .size = 0x2000,
+        .tag = TAG_RS_BRENDAN
     },
     {}
 };
@@ -589,9 +616,19 @@ const struct CompressedSpriteSheet gSpriteSheet_IntroBrendan[] =
 const struct CompressedSpriteSheet gSpriteSheet_IntroMay[] =
 {
     {
-        .data = gIntroMay_Gfx,
+        .data = sMay_Gfx,
         .size = 0x2000,
         .tag = TAG_MAY
+    },
+    {}
+};
+
+const struct CompressedSpriteSheet gSpriteSheet_IntroRSMay[] =
+{
+    {
+        .data = sRSMay_Gfx,
+        .size = 0x2000,
+        .tag = TAG_RS_MAY
     },
     {}
 };
@@ -629,8 +666,10 @@ const struct CompressedSpriteSheet gSpriteSheet_IntroFlygon[] =
 
 const struct SpritePalette gSpritePalettes_IntroPlayerFlygon[] =
 {
-    { .data = gIntroPlayer_Pal, .tag = TAG_BRENDAN },
-    { .data = gIntroPlayer_Pal, .tag = TAG_MAY },
+    { .data = sBrendan_Pal,     .tag = TAG_BRENDAN },
+    { .data = sMay_Pal,         .tag = TAG_MAY },
+    { .data = sRSBrendan_Pal,   .tag = TAG_RS_BRENDAN },
+    { .data = sRSMay_Pal,       .tag = TAG_RS_MAY },
     { .data = gIntroFlygon_Pal, .tag = TAG_FLYGON_LATIOS },
     { .data = gIntroFlygon_Pal, .tag = TAG_FLYGON_LATIAS },
     {}
@@ -639,9 +678,19 @@ const struct SpritePalette gSpritePalettes_IntroPlayerFlygon[] =
 const struct CompressedSpriteSheet gSpriteSheet_CreditsBrendan[] =
 {
     {
-        .data = sBrendanCredits_Gfx,
+        .data = sBrendan_Gfx,
         .size = 0x3800,
         .tag = TAG_BRENDAN
+    },
+    {}
+};
+
+const struct CompressedSpriteSheet gSpriteSheet_CreditsRSBrendan[] =
+{
+    {
+        .data = sRSBrendan_Gfx,
+        .size = 0x3800,
+        .tag = TAG_RS_BRENDAN
     },
     {}
 };
@@ -649,19 +698,19 @@ const struct CompressedSpriteSheet gSpriteSheet_CreditsBrendan[] =
 const struct CompressedSpriteSheet gSpriteSheet_CreditsMay[] =
 {
     {
-        .data = sMayCredits_Gfx,
+        .data = sMay_Gfx,
         .size = 0x3800,
         .tag = TAG_MAY
     },
     {}
 };
 
-const struct CompressedSpriteSheet gSpriteSheet_CreditsBicycle[] =
+const struct CompressedSpriteSheet gSpriteSheet_CreditsRSMay[] =
 {
     {
-        .data = sBicycle_Gfx,
-        .size = 0x1000,
-        .tag = TAG_BICYCLE
+        .data = sRSMay_Gfx,
+        .size = 0x3800,
+        .tag = TAG_RS_MAY
     },
     {}
 };
@@ -690,30 +739,10 @@ static const struct CompressedSpriteSheet sSpriteSheet_Latias[] =
 
 const struct SpritePalette gSpritePalettes_Credits[] =
 {
-    { .data = sBrendanCredits_Pal, .tag = TAG_BRENDAN },
-    { .data = sMayCredits_Pal,     .tag = TAG_MAY },
-    { .data = sLatios_Pal,         .tag = TAG_FLYGON_LATIOS },
-    { .data = sLatias_Pal,         .tag = TAG_FLYGON_LATIAS },
-    {}
-};
-
-const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalBrendan[] =
-{
-    {
-        .data = sBrendanCredits_Gfx,
-        .size = 0x2000,
-        .tag = TAG_BRENDAN
-    },
-    {}
-};
-
-const struct CompressedSpriteSheet gSpriteSheet_CreditsRivalMay[] =
-{
-    {
-        .data = sMayCredits_Gfx,
-        .size = 0x2000,
-        .tag = TAG_MAY
-    },
+    { .data = sBrendan_Pal,        .tag = TAG_BRENDAN },
+    { .data = sMay_Pal,            .tag = TAG_MAY },
+    { .data = sRSBrendan_Pal,      .tag = TAG_RS_BRENDAN },
+    { .data = sRSMay_Pal,          .tag = TAG_RS_MAY },
     {}
 };
 
@@ -754,7 +783,7 @@ void LoadIntroPart2Graphics(u8 scenery)
         break;
     }
     gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_NORMAL;
-    gReservedSpritePaletteCount = 8;
+    gReservedSpritePaletteCount = 7;
 }
 
 // Note: This is only called with a=1.
@@ -1118,16 +1147,28 @@ static void SpriteCB_Bicycle(struct Sprite* sprite)
 
 u8 CreateIntroBrendanSprite(s16 x, s16 y)
 {
-    u8 playerSpriteId = CreateSprite(&sSpriteTemplate_Brendan, x, y, 2);
-    u8 bicycleSpriteId = CreateSprite(&sSpriteTemplate_BrendanBicycle, x, y + 8, 3);
+    u8 playerSpriteId;
+    u8 bicycleSpriteId;
+	
+	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_EMERALD) || (x == DISPLAY_WIDTH + 32 && y == 46))
+        playerSpriteId = CreateSprite(&sSpriteTemplate_Brendan, x, y, 2);
+	else
+	    playerSpriteId = CreateSprite(&sSpriteTemplate_RSBrendan, x, y, 2);
+    bicycleSpriteId = CreateSprite(&sSpriteTemplate_Bicycle, x, y + 8, 3);
     gSprites[bicycleSpriteId].sPlayerSpriteId = playerSpriteId;
     return playerSpriteId;
 }
 
 u8 CreateIntroMaySprite(s16 x, s16 y)
 {
-    u8 playerSpriteId = CreateSprite(&sSpriteTemplate_May, x, y, 2);
-    u8 bicycleSpriteId = CreateSprite(&sSpriteTemplate_MayBicycle, x, y + 8, 3);
+    u8 playerSpriteId;
+    u8 bicycleSpriteId;
+	
+	if ((gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->costumeId == OUTFIT_EMERALD) || (x == DISPLAY_WIDTH + 32 && y == 46))
+        playerSpriteId = CreateSprite(&sSpriteTemplate_May, x, y, 2);
+	else
+	    playerSpriteId = CreateSprite(&sSpriteTemplate_RSMay, x, y, 2);
+    bicycleSpriteId = CreateSprite(&sSpriteTemplate_Bicycle, x, y + 8, 3);
     gSprites[bicycleSpriteId].sPlayerSpriteId = playerSpriteId;
     return playerSpriteId;
 }

@@ -2481,7 +2481,7 @@ void SetLinkContestPlayerGfx(void)
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
             int version = (u8)gLinkPlayers[i].version;
-            if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
+            if (version == VERSION_RUBY || version == VERSION_SAPPHIRE || gLinkPlayers[i].outfit == OUTFIT_RS)
             {
                 if (gLinkPlayers[i].gender == MALE)
                     gContestMons[i].trainerGfxId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
@@ -2514,7 +2514,7 @@ void LoadLinkContestPlayerPalettes(void)
             sprite = &gSprites[gObjectEvents[objectEventId].spriteId];
             sprite->oam.paletteNum = 6 + i;
             version = (u8)gLinkPlayers[i].version;
-            if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
+            if (version == VERSION_RUBY || version == VERSION_SAPPHIRE || gLinkPlayers[i].outfit == OUTFIT_RS)
             {
                 if (gLinkPlayers[i].gender == MALE)
                     LoadPalette(gObjectEventPal_RubySapphireBrendan, 0x160 + i * 0x10, 0x20);

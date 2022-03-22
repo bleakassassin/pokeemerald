@@ -959,6 +959,43 @@ CableClub_EventScript_WirelessClubAttendant::
 	release
 	return
 
+CableClub_EventScript_FittingRoom::
+	lock
+	msgbox CableClub_Text_SwitchOutfit, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq CableClub_EventScript_SwitchWardrobe
+	release
+	return
+	
+CableClub_EventScript_SwitchWardrobe::
+	closemessage
+	opendoor 13, 3
+	waitdooranim
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
+	waitmovement 0
+	hideobjectat OBJ_EVENT_ID_PLAYER, 0
+	closedoor 13, 3
+	waitdooranim
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerEnterLinkRoom
+	delay 30
+	fadescreen FADE_TO_BLACK
+	delay 60
+	special SwapPlayersCostume
+	fadescreen FADE_FROM_BLACK
+	opendoor 13, 3
+	waitdooranim
+	delay 30
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_PlayerExitLinkRoom
+	delay 14
+	showobjectat OBJ_EVENT_ID_PLAYER, 0
+	waitmovement 0
+	closedoor 13, 3
+	waitdooranim
+	delay 30
+	msgbox CableClub_Text_LookinStylish, MSGBOX_DEFAULT
+	release
+	return
+
 CableClub_EventScript_DontAskAboutLinking::
 	msgbox CableClub_Text_HopeYouEnjoyWirelessSystem, MSGBOX_DEFAULT
 	release

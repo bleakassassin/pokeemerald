@@ -130,7 +130,7 @@ static void UpdateHeldKeyCode(u16);
 static void UpdateAllLinkPlayers(u16*, s32);
 static u8 FlipVerticalAndClearForced(u8, u8);
 static u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
-static void CreateLinkPlayerSprite(u8, u8);
+static void CreateLinkPlayerSprite(u8, u8, u8);
 static void GetLinkPlayerCoords(u8, u16 *, u16 *);
 static u8 GetLinkPlayerFacingDirection(u8);
 static u8 GetLinkPlayerElevation(u8);
@@ -2208,7 +2208,7 @@ static void SpawnLinkPlayers(void)
     for (i = 0; i < gFieldLinkPlayerCount; i++)
     {
         SpawnLinkPlayerObjectEvent(i, i + x, y, gLinkPlayers[i].gender);
-        CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
+        CreateLinkPlayerSprite(i, gLinkPlayers[i].version, gLinkPlayers[i].outfit);
     }
 
     ClearAllPlayerKeys();
@@ -2218,7 +2218,7 @@ static void CreateLinkPlayerSprites(void)
 {
     u16 i;
     for (i = 0; i < gFieldLinkPlayerCount; i++)
-        CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
+        CreateLinkPlayerSprite(i, gLinkPlayers[i].version, gLinkPlayers[i].outfit);
 }
 
 
@@ -3160,7 +3160,7 @@ static bool8 LinkPlayerDetectCollision(u8 selfObjEventId, u8 direction, s16 x, s
     return MapGridIsImpassableAt(x, y);
 }
 
-static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
+static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion, u8 outfit)
 {
     struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
     u8 objEventId = linkPlayerObjEvent->objEventId;
@@ -3180,8 +3180,16 @@ static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
             objEvent->spriteId = CreateObjectGraphicsSprite(GetRSAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
             break;
         case VERSION_EMERALD:
-            objEvent->spriteId = CreateObjectGraphicsSprite(GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
-            break;
+            if (outfit == OUTFIT_RS)
+            {
+                objEvent->spriteId = CreateObjectGraphicsSprite(GetRSAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
+                break;
+            }
+            else
+            {
+                objEvent->spriteId = CreateObjectGraphicsSprite(GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
+                break;
+            }
         }
 
         sprite = &gSprites[objEvent->spriteId];

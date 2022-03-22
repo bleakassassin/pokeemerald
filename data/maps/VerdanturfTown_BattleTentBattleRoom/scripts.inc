@@ -1,44 +1,21 @@
-.set LOCALID_PLAYER, 1
-.set LOCALID_OPPONENT, 2
-.set LOCALID_ATTENDANT, 3
+.set LOCALID_OPPONENT, 1
+.set LOCALID_ATTENDANT, 2
 
 VerdanturfTown_BattleTentBattleRoom_MapScripts::
-	map_script MAP_SCRIPT_ON_TRANSITION, VerdanturfTown_BattleTentBattleRoom_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentBattleRoom_OnWarp
 	.byte 0
 
-	@ On this map the player (OBJ_EVENT_ID_PLAYER) is hidden
-	@ The player is represented instead by object event 1, which has the gfx id VAR_OBJ_GFX_ID_1
 	@ The opponent is represented by object event 2, which has the gfx id VAR_OBJ_GFX_ID_0
-
-VerdanturfTown_BattleTentBattleRoom_OnTransition:
-	call VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx
-	end
-
-VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx::
-	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
-	return
-
-VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	return
-
-VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
-	return
 
 VerdanturfTown_BattleTentBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom
 	.2byte 0
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom::
-	showobjectat LOCALID_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
-	applymovement LOCALID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter
+	special SpawnCameraObject
+	setobjectxyperm OBJ_EVENT_ID_CAMERA, 6, 5
+	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	goto_if_ne VAR_RESULT, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
@@ -69,7 +46,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_DefeatedOpponent::
 	waitmovement 0
 	removeobject LOCALID_OPPONENT
 	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterDown
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_LetMeRestoreYourMons, MSGBOX_DEFAULT
 	special LoadPlayerParty
@@ -107,7 +84,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_AskRetireChallenge::
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_ContinueChallenge::
 	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterRight
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	closemessage
 	goto VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter
@@ -133,10 +110,10 @@ VerdanturfTown_BattleTentBattleRoom_OnWarp:
 	.2byte 0
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects::
-	hideobjectat LOCALID_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
-	call VerdanturfTown_BattleTentBattleRoom_EventScript_SetPlayerGfx
+	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	setvar VAR_TEMP_1, 1
-	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_SetInvisible
+	setobjectxy OBJ_EVENT_ID_PLAYER, 2, 8
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	removeobject LOCALID_OPPONENT
 	end
 
@@ -149,10 +126,6 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent::
 	message BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor3rdOpponent
 	waitmessage
 	return
-
-VerdanturfTown_BattleTentBattleRoom_Movement_SetInvisible:
-	set_invisible
-	step_end
 
 VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter:
 	set_visible

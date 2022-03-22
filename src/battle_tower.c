@@ -21,6 +21,7 @@
 #include "data.h"
 #include "link.h"
 #include "field_message_box.h"
+#include "field_player_avatar.h"
 #include "tv.h"
 #include "battle_factory.h"
 #include "constants/apprentice.h"
@@ -2655,6 +2656,7 @@ static void SetMultiPartnerGfx(void)
 {
     // 0xF below means use VAR_OBJ_GFX_ID_E
     SetBattleFacilityTrainerGfxId(gSaveBlock2Ptr->frontier.trainerIds[17], 0xF);
+    VarSet(VAR_OBJ_GFX_ID_F, GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gSaveBlock2Ptr->playerGender));
 }
 
 static void SetTowerInterviewData(void)

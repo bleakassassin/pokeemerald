@@ -368,6 +368,14 @@
 // gTileset_MossdeepGym
 #define METATILE_MossdeepGym_YellowArrow_Right  0x250
 
+// gTileset_MossdeepGym from R/S
+#define METATILE_RS_MossdeepGym_RedArrow_Right        0x204
+#define METATILE_RS_MossdeepGym_RedArrow_Left         0x20C
+#define METATILE_RS_MossdeepGym_RedArrow_Up           0x20D
+#define METATILE_RS_MossdeepGym_RedArrow_Down         0x205
+#define METATILE_RS_MossdeepGym_Switch_Up             0x238
+#define METATILE_RS_MossdeepGym_Switch_Down           0x239
+
 // gTileset_Mossdeep
 #define METATILE_Mossdeep_Door              0x2A1
 #define METATILE_Mossdeep_Door_SpaceCenter  0x2ED
@@ -407,6 +415,7 @@
 // gTileset_PokemonCenter
 #define METATILE_PokemonCenter_CounterBarrier            0x25D
 #define METATILE_PokemonCenter_Door_CableClub            0x264
+#define METATILE_PokemonCenter_Door_FittingRoom          0x2AE
 #define METATILE_PokemonCenter_Escalator1F_Tile0_Frame0  0x280
 #define METATILE_PokemonCenter_Escalator1F_Tile0_Frame1  0x282
 #define METATILE_PokemonCenter_Escalator1F_Tile0_Frame2  0x284
