@@ -43,6 +43,7 @@ void SetPlayerAvatarFieldMove(void);
 u16 GetPlayerAvatarGraphicsIdByCurrentState(void);
 u16 GetPlayerSceneGraphicsIdByGender(void);
 void SetPlayerAvatarStateMask(u8 a);
+u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender);
 u16 GetPlayerAvatarGraphicsIdByStateId(u8 a);
 u8 GetJumpSpecialMovementAction(u32);
 bool8 PartyHasMonWithSurf(void);

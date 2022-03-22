@@ -68,8 +68,7 @@ ContestHall_EventScript_Contest::
 	end
 
 ContestHall_EventScript_SetContestObjects::
-	compare VAR_CONTEST_TYPE, CONTEST_TYPE_LINK
-	goto_if_ne ContestHall_EventScript_LoadPlayerObject
+	goto_if_ne VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_LoadPlayerObject
 	special LoadLinkContestPlayerPalettes
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
 	call ContestHall_EventScript_CreateAudience
