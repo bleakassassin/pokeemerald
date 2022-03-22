@@ -66,19 +66,6 @@ enum {
  // When showing the main list, the first window to this window are drawn
 #define ITEMPC_WIN_LIST_END ITEMPC_WIN_TITLE
 
-// Message IDs for Item Storage
-enum {
-    MSG_SWITCH_WHICH_ITEM = 0xFFF7,
-    MSG_OKAY_TO_THROW_AWAY,
-    MSG_TOO_IMPORTANT,
-    MSG_NO_MORE_ROOM,
-    MSG_THREW_AWAY_ITEM,
-    MSG_HOW_MANY_TO_TOSS,
-    MSG_WITHDREW_ITEM,
-    MSG_HOW_MANY_TO_WITHDRAW,
-    MSG_GO_BACK_TO_PREV
-};
-
 #define TAG_ITEM_ICON    5110
 #define TAG_SCROLL_ARROW 5112
 
@@ -379,7 +366,6 @@ void PlayerPC(void)
     DisplayItemMessageOnField(CreateTask(TaskDummy, 0), gText_WhatWouldYouLike, InitPlayerPCMenu);
 }
 
-#define tUsedSlots  data[1]
 #define tQuantity   data[2]
 #define tInTossMenu data[3]
 #define tWindowId   data[4]
