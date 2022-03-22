@@ -82,8 +82,14 @@ enum {
     TAG_MAP_INDICATOR,
     TAG_MEDAL_SILVER,
     TAG_MEDAL_GOLD,
-    TAG_HEAD_MALE,
-    TAG_HEAD_FEMALE,
+    TAG_HEADS,
+};
+
+enum {
+    HEAD_BRENDAN_EMERALD,
+    HEAD_BRENDAN_RS,
+    HEAD_MAY_EMERALD,
+    HEAD_MAY_RS,
 };
 
 // Error return codes. Never read
@@ -165,8 +171,7 @@ static void PrintAreaDescription(u8);
 static void ShowHideZoomingArea(bool8, bool8);
 static void SpriteCB_PlayerHead(struct Sprite *);
 
-static const u16 sMaleHead_Pal[]                 = INCBIN_U16("graphics/frontier_pass/map_heads.gbapal");
-static const u16 sFemaleHead_Pal[]               = INCBIN_U16("graphics/frontier_pass/map_heads_female.gbapal");
+static const u16 sHeads_Pal[]                    = INCBIN_U16("graphics/frontier_pass/map_heads.gbapal");
 static const u32 sMapScreen_Gfx[]                = INCBIN_U32("graphics/frontier_pass/map_screen.4bpp.lz");
 static const u32 sCursor_Gfx[]                   = INCBIN_U32("graphics/frontier_pass/cursor.4bpp.lz");
 static const u32 sHeads_Gfx[]                    = INCBIN_U32("graphics/frontier_pass/map_heads.4bpp.lz");
@@ -358,7 +363,7 @@ static const struct CompressedSpriteSheet sCursorSpriteSheets[] =
 
 static const struct CompressedSpriteSheet sHeadsSpriteSheet[] =
 {
-    {sHeads_Gfx, 0x100, TAG_HEAD_MALE},
+    {sHeads_Gfx, 0x200, TAG_HEADS},
     {}
 };
 
@@ -368,15 +373,8 @@ static const struct SpritePalette sSpritePalettes[] =
     {gFrontierPassMapCursor_Pal,    TAG_MAP_INDICATOR},
     {gFrontierPassMedalsSilver_Pal, TAG_MEDAL_SILVER},
     {gFrontierPassMedalsGold_Pal,   TAG_MEDAL_GOLD},
-    {sMaleHead_Pal,                 TAG_HEAD_MALE},
-    {sFemaleHead_Pal,               TAG_HEAD_FEMALE},
+    {sHeads_Pal,                    TAG_HEADS},
     {}
-};
-
-static const union AnimCmd sAnim_Frame1_Unused[] =
-{
-    ANIMCMD_FRAME(0, 0),
-    ANIMCMD_END
 };
 
 static const union AnimCmd sAnim_Frame1[] =
@@ -435,7 +433,6 @@ static const union AnimCmd sAnim_MapIndicatorCursor_Square[] =
     ANIMCMD_JUMP(0)
 };
 
-// Used both by the cursor and the map head icons
 static const union AnimCmd *const sAnims_TwoFrame[] =
 {
     sAnim_Frame1,
@@ -459,15 +456,12 @@ static const union AnimCmd *const sAnims_MapIndicatorCursor[] =
     [MAP_INDICATOR_SQUARE]    = sAnim_MapIndicatorCursor_Square
 };
 
-static const union AffineAnimCmd sAffineAnim_Unused[] =
+static const union AnimCmd *const sAnims_Heads[] =
 {
-    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd *const sAffineAnims_Unused[] =
-{
-    sAffineAnim_Unused
+    [HEAD_BRENDAN_EMERALD] = sAnim_Frame1,
+    [HEAD_BRENDAN_RS]      = sAnim_Frame2,
+    [HEAD_MAY_EMERALD]     = sAnim_Frame3,
+    [HEAD_MAY_RS]          = sAnim_Frame4
 };
 
 static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
@@ -507,10 +501,10 @@ static const struct SpriteTemplate sSpriteTemplate_Medal =
 
 static const struct SpriteTemplate sSpriteTemplate_PlayerHead =
 {
-    .tileTag = TAG_HEAD_MALE,
-    .paletteTag = TAG_HEAD_MALE,
+    .tileTag = TAG_HEADS,
+    .paletteTag = TAG_HEADS,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = sAnims_TwoFrame,
+    .anims = sAnims_Heads,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_PlayerHead,
@@ -1472,7 +1466,7 @@ static bool32 ExitFrontierMap(void)
         if (sMapData->playerHeadSprite != NULL)
         {
             DestroySprite(sMapData->playerHeadSprite);
-            FreeSpriteTilesByTag(TAG_HEAD_MALE);
+            FreeSpriteTilesByTag(TAG_HEADS);
         }
         FreeAllWindowBuffers();
         break;
@@ -1682,7 +1676,7 @@ static void InitFrontierMapSprites(void)
 
         LoadCompressedSpriteSheet(sHeadsSpriteSheet);
         sprite = sSpriteTemplate_PlayerHead;
-        sprite.paletteTag = gSaveBlock2Ptr->playerGender + TAG_HEAD_MALE; // TAG_HEAD_FEMALE if gender is FEMALE
+        sprite.paletteTag = TAG_HEADS;
         if (id != 0)
         {
             spriteId = CreateSprite(&sprite, x, y, 0);
@@ -1696,8 +1690,7 @@ static void InitFrontierMapSprites(void)
 
         sMapData->playerHeadSprite = &gSprites[spriteId];
         sMapData->playerHeadSprite->oam.priority = 0;
-        if (gSaveBlock2Ptr->playerGender != MALE)
-            StartSpriteAnim(sMapData->playerHeadSprite, 1);
+        StartSpriteAnim(sMapData->playerHeadSprite, 2 * gSaveBlock2Ptr->playerGender + gSaveBlock2Ptr->costumeId);
     }
 }
 

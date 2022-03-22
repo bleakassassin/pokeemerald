@@ -485,3 +485,10 @@ CableClub_Text_ExplainWirelessClub:
 CableClub_Text_HopeYouEnjoyWirelessSystem:
 	.string "I hope you enjoy the Wireless\n"
 	.string "Communication System.$"
+
+CableClub_Text_SwitchOutfit:
+	.string "It's a fitting room.\n"
+	.string "Want to switch your outfit?$"
+
+CableClub_Text_LookinStylish:
+	.string "Lookin' stylish!$"

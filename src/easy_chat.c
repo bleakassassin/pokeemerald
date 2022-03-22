@@ -10,6 +10,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_message_box.h"
+#include "field_player_avatar.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -5019,7 +5020,7 @@ static void TryAddInterviewObjectEvents(void)
 
     // Add object for player (facing right)
     spriteId = CreateObjectGraphicsSprite(
-        gSaveBlock2Ptr->playerGender == MALE ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
+        GetPlayerSceneGraphicsIdByGender(),
         SpriteCallbackDummy,
         52,
         40,

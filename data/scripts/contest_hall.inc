@@ -363,12 +363,23 @@ ContestHall_EventScript_Player3WalkToCenter::
 	return
 
 ContestHall_EventScript_Player4WalkToCenter::
+	goto_if_ne VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_PlayerWalkToCenter
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
 	applymovement LOCALID_CONTESTANT_4, ContestHall_Movement_Player4WalkToCenter
 	waitmovement 0
 	releaseall
 	setvar VAR_0x800B, LOCALID_CONTESTANT_4
+	return
+	
+ContestHall_EventScript_PlayerWalkToCenter::
+	lockall
+	special SpawnCameraObject
+	setobjectxyperm OBJ_EVENT_ID_CAMERA, 7, 5
+	applymovement OBJ_EVENT_ID_PLAYER, ContestHall_Movement_Player4WalkToCenter
+	waitmovement 0
+	releaseall
+	setvar VAR_0x800B, OBJ_EVENT_ID_PLAYER
 	return
 
 ContestHall_EventScript_ShowContestMonPic::
@@ -833,6 +844,7 @@ ContestHall_EventScript_ContestResults::
 
 ContestHall_EventScript_ThatsItForJudging::
 	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_ThatsItForJudgingLink
+	special RemoveCameraObject
 	msgbox ContestHall_Text_ThatsItForJudging, MSGBOX_DEFAULT
 	return
 
@@ -919,6 +931,10 @@ ContestHall_EventScript_CongratulateWinner::
 
 ContestHall_EventScript_CongratsWinner::
 	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_CongratsWinnerLink
+	removeobject LOCALID_CONTESTANT_4
+	special SpawnCameraObject
+	setobjectxyperm OBJ_EVENT_ID_CAMERA, 9, 5
+	setvar VAR_TEMP_3, OBJ_EVENT_ID_PLAYER
 	msgbox ContestHall_Text_CongratsTrainerXandMon, MSGBOX_DEFAULT
 	return
 

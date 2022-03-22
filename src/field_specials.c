@@ -91,7 +91,7 @@ void SetPlayerGotFirstFans(void);
 u16 GetNumFansOfPlayerInTrainerFanClub(void);
 
 static void RecordCyclingRoadResults(u32, u8);
-static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum);
+static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEventId, u8 paletteNum);
 static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId);
 static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId);
 static void Task_PCTurnOnEffect(u8);
@@ -503,7 +503,7 @@ void SpawnLinkPartnerObjectEvent(void)
     };
     u8 myLinkPlayerNumber;
     u8 playerFacingDirection;
-    u8 linkSpriteId;
+    u16 linkSpriteId;
     u8 i;
 
     myLinkPlayerNumber = GetMultiplayerId();
@@ -542,17 +542,19 @@ void SpawnLinkPartnerObjectEvent(void)
                 else
                     linkSpriteId = OBJ_EVENT_GFX_LINK_RS_MAY;
                 break;
-            case VERSION_EMERALD:
-                if (gLinkPlayers[i].gender == 0)
-                    linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
-                else
-                    linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
-                break;
             default:
                 if (gLinkPlayers[i].gender == 0)
                     linkSpriteId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL;
                 else
                     linkSpriteId = OBJ_EVENT_GFX_RIVAL_MAY_NORMAL;
+                break;
+            }
+            if (gLinkPlayers[i].outfit == OUTFIT_RS)
+            {
+                if (gLinkPlayers[i].gender == 0)
+                    linkSpriteId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
+                else
+                    linkSpriteId = OBJ_EVENT_GFX_LINK_RS_MAY;
                 break;
             }
             SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + MAP_OFFSET, coordOffsets[j][1] + y + MAP_OFFSET, 0);
@@ -564,7 +566,7 @@ void SpawnLinkPartnerObjectEvent(void)
     }
 }
 
-static void LoadLinkPartnerObjectEventSpritePalette(u8 graphicsId, u8 localEventId, u8 paletteNum)
+static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEventId, u8 paletteNum)
 {
     u8 adjustedPaletteNum;
     // Note: This temp var is necessary; paletteNum += 6 doesn't match.
@@ -2860,9 +2862,19 @@ void SetBattleTowerLinkPlayerGfx(void)
     for (i = 0; i < 2; i++)
     {
         if (gLinkPlayers[i].gender == MALE)
-            VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_BRENDAN_NORMAL);
+        {
+            if (gLinkPlayers[i].outfit == OUTFIT_RS)
+                VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_LINK_RS_BRENDAN);
+            else
+                VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL);
+        }
         else
-            VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL);
+        {
+            if (gLinkPlayers[i].outfit == OUTFIT_RS)
+                VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_LINK_RS_MAY);
+            else
+                VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL);
+        }
     }
 }
 
@@ -4388,4 +4400,16 @@ void SetPlayerGotFirstFans(void)
 u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
+}
+
+void SwapPlayersCostume(void)
+{
+    struct ObjectEvent *objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+    if (gSaveBlock2Ptr->costumeId == 0)
+        gSaveBlock2Ptr->costumeId = 1;
+    else
+        gSaveBlock2Ptr->costumeId = 0;
+    ObjectEventSetGraphicsId(objEvent, GetPlayerAvatarGraphicsIdByCurrentState());
+    ObjectEventTurn(objEvent, objEvent->movementDirection);
+    BlendPalettes(0xFFFFFFFF, 16, 0);
 }
