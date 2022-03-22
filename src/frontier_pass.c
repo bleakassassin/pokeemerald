@@ -1690,7 +1690,7 @@ static void InitFrontierMapSprites(void)
 
         sMapData->playerHeadSprite = &gSprites[spriteId];
         sMapData->playerHeadSprite->oam.priority = 0;
-        StartSpriteAnim(sMapData->playerHeadSprite, 2 * gSaveBlock2Ptr->playerGender + gSaveBlock2Ptr->costumeId);
+        StartSpriteAnim(sMapData->playerHeadSprite, 2 * gSaveBlock2Ptr->playerGender + gSaveBlock2Ptr->outfitId);
     }
 }
 

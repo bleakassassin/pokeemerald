@@ -181,7 +181,7 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
     [CONTROLLER_TERMINATOR_NOP]           = PlayerCmdEnd
 };
 
-static const u8 sCostumeBackPics[OUTFIT_TOTAL][GENDER_COUNT] = 
+static const u8 sOutfitBackPics[OUTFIT_TOTAL][GENDER_COUNT] = 
 {
     [OUTFIT_EMERALD] = {TRAINER_BACK_PIC_BRENDAN, TRAINER_BACK_PIC_MAY},
     [OUTFIT_RS]      = {TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN, TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY},
@@ -2328,7 +2328,7 @@ static void PlayerHandleDrawTrainerPic(void)
     // Use front pic table for any tag battles unless your partner is Steven.
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId != TRAINER_STEVEN_PARTNER)
     {
-        trainerPicId = GetTrainerFrontSpriteBasedOnPlayerCostumeAndGender(gSaveBlock2Ptr->costumeId, gSaveBlock2Ptr->playerGender);
+        trainerPicId = GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(gSaveBlock2Ptr->outfitId, gSaveBlock2Ptr->playerGender);
         DecompressTrainerFrontPic(trainerPicId, gActiveBattler);
         SetMultiuseSpriteTemplateToTrainerFront(trainerPicId, GetBattlerPosition(gActiveBattler));
         gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, GetBattlerSpriteSubpriority(gActiveBattler));
@@ -2344,7 +2344,7 @@ static void PlayerHandleDrawTrainerPic(void)
     // Use the back pic in any other scenario.
     else
     {
-        trainerPicId = sCostumeBackPics[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender];
+        trainerPicId = sOutfitBackPics[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender];
         DecompressTrainerBackPic(trainerPicId, gActiveBattler);
         SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
         gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, GetBattlerSpriteSubpriority(gActiveBattler));
@@ -2969,7 +2969,7 @@ static void PlayerHandleIntroTrainerBallThrow(void)
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[gActiveBattler]], 1);
 
     paletteNum = AllocSpritePalette(0xD6F8);
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[sCostumeBackPics[gSaveBlock2Ptr->costumeId][gSaveBlock2Ptr->playerGender]].data, 0x100 + paletteNum * 16, 32);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[sOutfitBackPics[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender]].data, 0x100 + paletteNum * 16, 32);
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
 
     taskId = CreateTask(Task_StartSendOutAnim, 5);

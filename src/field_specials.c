@@ -4402,13 +4402,13 @@ u8 Script_TryGainNewFanFromCounter(void)
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
-void SwapPlayersCostume(void)
+void SwapPlayersOutfit(void)
 {
     struct ObjectEvent *objEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    if (gSaveBlock2Ptr->costumeId == 0)
-        gSaveBlock2Ptr->costumeId = 1;
+    if (gSaveBlock2Ptr->outfitId == 0)
+        gSaveBlock2Ptr->outfitId = 1;
     else
-        gSaveBlock2Ptr->costumeId = 0;
+        gSaveBlock2Ptr->outfitId = 0;
     ObjectEventSetGraphicsId(objEvent, GetPlayerAvatarGraphicsIdByCurrentState());
     ObjectEventTurn(objEvent, objEvent->movementDirection);
     BlendPalettes(0xFFFFFFFF, 16, 0);

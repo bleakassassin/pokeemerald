@@ -321,7 +321,7 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.linkType = gLinkType;
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
-    gLocalLinkPlayer.outfit = gSaveBlock2Ptr->costumeId;
+    gLocalLinkPlayer.outfit = gSaveBlock2Ptr->outfitId;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_SYS_GAME_CLEAR))

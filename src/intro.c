@@ -1373,14 +1373,14 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     // Load sprite sheets
 	if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->playerGender == MALE)
 	{
-		if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 			LoadCompressedSpriteSheet(gSpriteSheet_IntroRSBrendan);
 		else
 			LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
 	}
 	else if (gSaveBlock2Ptr->playerGender == FEMALE)
 	{
-		if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 			LoadCompressedSpriteSheet(gSpriteSheet_IntroRSMay);
 		else
 			LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);

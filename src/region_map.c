@@ -1506,7 +1506,7 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     }
     if (gSaveBlock2Ptr->playerGender == FEMALE)
 	{
-		if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 		{
 			sheet.data = sRegionMapPlayerIcon_RSMayGfx;
 			palette.data = sRegionMapPlayerIcon_RSMayPal;
@@ -1517,7 +1517,7 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
 			palette.data = sRegionMapPlayerIcon_MayPal;
 		}
 	}
-    else if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+    else if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 	{
 		sheet.data = sRegionMapPlayerIcon_RSBrendanGfx;
 		palette.data = sRegionMapPlayerIcon_RSBrendanPal;

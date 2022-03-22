@@ -1209,7 +1209,7 @@ static bool8 LoadBikeScene(u8 scene, u8 taskId)
     case 2:
         if (gSaveBlock2Ptr->playerGender == MALE)
         {
-			if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+			if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 				LoadCompressedSpriteSheet(gSpriteSheet_CreditsRSBrendan);
 			else
 				LoadCompressedSpriteSheet(gSpriteSheet_CreditsBrendan);
@@ -1229,7 +1229,7 @@ static bool8 LoadBikeScene(u8 scene, u8 taskId)
         }
         else
         {
-			if (gSaveBlock2Ptr->costumeId == OUTFIT_RS)
+			if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
 				LoadCompressedSpriteSheet(gSpriteSheet_CreditsRSMay);
 			else
 				LoadCompressedSpriteSheet(gSpriteSheet_CreditsMay);
