@@ -160,7 +160,7 @@ Route113_Text_TrainerTipsRegisterKeyItems:
 	.string "Simply press SELECT to use a\n"
 	.string "registered item conveniently.\p"
 	.string "If you register multiple KEY ITEMS,\n"
-	.string "you can pick one from a pop-up menu.\$"
+	.string "you can pick one from a pop-up menu.$"
 
 Route113_Text_GlassWorkshopSign:
 	.string "GLASS WORKSHOP\n"
