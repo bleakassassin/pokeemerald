@@ -107,8 +107,8 @@ Text_TerminateLinkConfirmation:
 
 Text_TerminateLinkPleaseWait:
 	.string "Terminating link…\n"
-	.string "You will be escorted out of\l"
-	.string "the room. Please wait.$"
+	.string "You will be escorted out of the room.\l"
+	.string "Please wait.$"
 
 CableClub_Text_TooBusyToNotice:
 	.string "This Trainer is too busy to\n"
