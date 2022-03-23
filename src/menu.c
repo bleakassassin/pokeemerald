@@ -474,7 +474,7 @@ void DisplayYesNoMenuWithDefault(u8 initialCursorPos)
 
 u32 GetPlayerTextSpeed(void)
 {
-    if (gTextFlags.forceMidTextSpeed)
+    if (gTextFlags.forceMidTextSpeed && gSaveBlock2Ptr->optionsTextSpeed == OPTIONS_TEXT_SPEED_SLOW)
         return OPTIONS_TEXT_SPEED_MID;
     return gSaveBlock2Ptr->optionsTextSpeed;
 }
