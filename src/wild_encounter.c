@@ -33,8 +33,8 @@ extern const u8 EventScript_RepelWoreOff[];
 
 // Number of accessible fishing spots in each section of Route 119
 // Each section is an area of the route between the y coordinates in sRoute119WaterTileData
-#define NUM_FISHING_SPOTS_1 131
-#define NUM_FISHING_SPOTS_2 167
+#define NUM_FISHING_SPOTS_1 126
+#define NUM_FISHING_SPOTS_2 162
 #define NUM_FISHING_SPOTS_3 149
 #define NUM_FISHING_SPOTS (NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2 + NUM_FISHING_SPOTS_3)
 
@@ -68,9 +68,9 @@ static const struct WildPokemon sWildFeebas = {20, 25, SPECIES_FEEBAS};
 static const u16 sRoute119WaterTileData[] =
 {
 //yMin, yMax, numSpots in previous sections 
-     0,  45,  0,
-    46,  91,  NUM_FISHING_SPOTS_1,
-    92, 139,  NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2,
+    18,  45,  0,
+    46,  75,  NUM_FISHING_SPOTS_1,
+    98, 112,  NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2,
 };
 
 void DisableWildEncounters(bool8 disabled)
@@ -120,16 +120,29 @@ static bool8 CheckFeebas(void)
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE119)
      && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE119))
     {
+        u8 behavior;
+
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+        behavior = MapGridGetMetatileBehaviorAt(x, y);
         x -= MAP_OFFSET;
         y -= MAP_OFFSET;
 
+        if (MetatileBehavior_IsFeebasWater(behavior) ==  TRUE
+        && gSaveBlock1Ptr->weather == WEATHER_SUNNY
+        && IsNight() == FALSE)
+            return TRUE;
+
+        if (MetatileBehavior_IsFeebasWater(behavior) ==  TRUE
+        && gSaveBlock1Ptr->weather == WEATHER_RAIN_THUNDERSTORM
+        && IsNight() == TRUE)
+            return TRUE;
+
         // Get which third of the map the player is in
-        if (y >= sRoute119WaterTileData[3 * 0 + 0] && y <= sRoute119WaterTileData[3 * 0 + 1])
+        if (y <= sRoute119WaterTileData[3 * 0 + 1])
             route119Section = 0;
         if (y >= sRoute119WaterTileData[3 * 1 + 0] && y <= sRoute119WaterTileData[3 * 1 + 1])
             route119Section = 1;
-        if (y >= sRoute119WaterTileData[3 * 2 + 0] && y <= sRoute119WaterTileData[3 * 2 + 1])
+        if (y >= sRoute119WaterTileData[3 * 2 + 0])
             route119Section = 2;
 
         // 50% chance of encountering Feebas (assuming this is a Feebas spot)
@@ -145,13 +158,7 @@ static bool8 CheckFeebas(void)
             feebasSpots[i] = FeebasRandom() % NUM_FISHING_SPOTS;
             if (feebasSpots[i] == 0)
                 feebasSpots[i] = NUM_FISHING_SPOTS;
-            
-            // < 1 below is a pointless check, it will never be TRUE.
-            // >= 4 to skip fishing spots 1-3, because these are inaccessible
-            // spots at the top of the map, at (9,7), (7,13), and (15,16).
-            // The first accessible fishing spot is spot 4 at (18,18).
-            if (feebasSpots[i] < 1 || feebasSpots[i] >= 4)
-                i++;
+            i++;
         }
 
         // Check which fishing spot the player is at, and see if
