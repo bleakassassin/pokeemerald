@@ -4213,7 +4213,7 @@ const struct Item gItems[] =
 
     [ITEM_OVAL_CHARM] =
     {
-        .name = _("OVAL CHARM"),
+        .name = _("Oval Charm"),
         .itemId = ITEM_OVAL_CHARM,
         .price = 0,
         .description = sOvalCharmDesc,

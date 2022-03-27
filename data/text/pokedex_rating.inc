@@ -116,17 +116,17 @@ gBirchDexRatingText_OnANationwideBasis::
 
 gBirchDexRatingText_AllHoennMonsSeen::
 	.string "Why, congratulations!\p"
-	.string "You've seen all the POKéMON in the\n"
-	.string "HOENN POKéDEX!\p"
-	.string "You've been meeting new POKéMON at a\n"
+	.string "You've seen all the Pokémon in the\n"
+	.string "Hoenn Pokédex!\p"
+	.string "You've been meeting new Pokémon at a\n"
 	.string "good clip, haven't you?\p"
 	.string "Here, take this as a little reward for\n"
 	.string "all your hard work!$"
 
 gBirchDexRatingText_ImproveEggChances::
-	.string "PROF. BIRCH: Holding an OVAL CHARM\n"
+	.string "Prof. Birch: Holding an Oval Charm\n"
 	.string "will give you a better chance of\l"
-	.string "finding an EGG at the DAY CARE.$"
+	.string "finding an Egg at the Day Care.$"
 
 gBirchDexRatingText_NationalDexCompleted::
 	.string "Amazing!\n"

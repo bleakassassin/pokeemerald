@@ -1411,8 +1411,8 @@ static const u8 sHM08Desc[] = _(
 // Charms
 static const u8 sOvalCharmDesc[] = _(
     "Increases chance\n"
-    "of EGGS being found\n"
-    "at the DAY CARE.");
+    "of Eggs being found\n"
+    "at the Day Care.");
 
 static const u8 sShinyCharmDesc[] = _(
     "Increases chance\n"
