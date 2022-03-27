@@ -104,9 +104,12 @@ static void CreateInitialRoamerMon(void)
 
 void InitRoamer(void)
 {
-    ClearRoamerData();
-    ClearRoamerLocationData();
-    CreateInitialRoamerMon();
+    if (ROAMER->active == FALSE)
+    {
+        ClearRoamerData();
+        ClearRoamerLocationData();
+        CreateInitialRoamerMon();
+    }
 }
 
 void UpdateLocationHistoryForRoamer(void)
