@@ -4211,13 +4211,13 @@ const struct Item gItems[] =
 
 // Charms
 
-    [ITEM_15B] =
+    [ITEM_OVAL_CHARM] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("OVAL CHARM"),
+        .itemId = ITEM_OVAL_CHARM,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .description = sOvalCharmDesc,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },

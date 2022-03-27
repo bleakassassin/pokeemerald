@@ -21,9 +21,8 @@
 #define METATILE_ATTR_LAYER_SHIFT   12
 
 enum {
-    METATILE_LAYER_TYPE_NORMAL,  // Metatile uses middle and top bg layers
-    METATILE_LAYER_TYPE_COVERED, // Metatile uses bottom and middle bg layers
-    METATILE_LAYER_TYPE_SPLIT,   // Metatile uses bottom and top bg layers
+    METATILE_LAYER_TYPE_NORMAL,  // Metatile's top layer covers object events
+    METATILE_LAYER_TYPE_COVERED, // Object events cover metatile's top layer
 };
 
 #define METATILE_ID(tileset, name) (METATILE_##tileset##_##name)

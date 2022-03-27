@@ -64,6 +64,9 @@ ProfBirch_EventScript_RatePokedex::
 	buffernumberstring STR_VAR_1, VAR_0x8008  @ Num Hoenn seen
 	buffernumberstring STR_VAR_2, VAR_0x8009  @ Num Hoenn caught
 	msgbox gBirchDexRatingText_SoYouveSeenAndCaught, MSGBOX_DEFAULT
+	specialvar VAR_RESULT, SeenAllHoennMons
+	goto_if_eq VAR_RESULT, TRUE, ProfBirch_EventScript_SeenAllHoennMons
+ProfBirch_EventScript_RatingMessage::
 	call ProfBirch_EventScript_ShowRatingMessage
 	goto_if_eq VAR_0x800A, 0, Common_EventScript_NopReturn  @ National dex not enabled
 	setvar VAR_0x8004, 1
@@ -75,6 +78,14 @@ ProfBirch_EventScript_RatePokedex::
 	msgbox gBirchDexRatingText_OnANationwideBasis, MSGBOX_DEFAULT
 	specialvar VAR_RESULT, HasAllMons
 	goto_if_eq VAR_RESULT, TRUE, ProfBirch_EventScript_CompletedNationalDex
+	return
+
+ProfBirch_EventScript_SeenAllHoennMons::
+	checkitem ITEM_OVAL_CHARM
+	goto_if_eq VAR_RESULT, TRUE, ProfBirch_EventScript_RatingMessage
+	msgbox gBirchDexRatingText_AllHoennMonsSeen, MSGBOX_DEFAULT
+	giveitem ITEM_OVAL_CHARM
+	msgbox gBirchDexRatingText_ImproveEggChances, MSGBOX_DEFAULT
 	return
 
 ProfBirch_EventScript_CompletedNationalDex::

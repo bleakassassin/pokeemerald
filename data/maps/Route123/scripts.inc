@@ -4,6 +4,10 @@ Route123_MapScripts::
 
 Route123_OnTransition:
 	special SetRoute123Weather
+	getplayerxy VAR_TEMP_0, VAR_TEMP_1
+	goto_if_lt VAR_TEMP_0, 19, Common_EventScript_NopReturn
+	goto_if_gt VAR_TEMP_0, 90, Common_EventScript_NopReturn
+	setweather WEATHER_ROUTE123_CYCLE
 	end
 
 Route123_EventScript_GigaDrainGirl::
