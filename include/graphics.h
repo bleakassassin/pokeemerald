@@ -3797,6 +3797,8 @@ extern const u32 gItemIconPalette_RockTMHM[];
 extern const u32 gItemIconPalette_FlyingTMHM[];
 extern const u32 gItemIcon_HM[];
 // Charms
+extern const u32 gItemIcon_OvalCharm[];
+extern const u32 gItemIconPalette_OvalCharm[];
 extern const u32 gItemIcon_ShinyCharm[];
 extern const u32 gItemIconPalette_ShinyCharm[];
 // FireRed/LeafGreen key items

@@ -82,6 +82,13 @@ static const struct ListMenuTemplate sDaycareListMenuLevelTemplate =
     .cursorKind = 0
 };
 
+static const u8 sOvalCharmCompatibilityScores[] = {
+    [PARENTS_INCOMPATIBLE] = PARENTS_INCOMPATIBLE,
+    [PARENTS_LOW_COMPATIBILITY] = PARENTS_LOW_COMPATIBILITY_CHARM,
+    [PARENTS_MED_COMPATIBILITY] = PARENTS_MED_COMPATIBILITY_CHARM,
+    [PARENTS_MAX_COMPATIBILITY] = PARENTS_MAX_COMPATIBILITY_CHARM,
+};
+
 static const u8 *const sCompatibilityMessages[] =
 {
     gDaycareText_GetAlongVeryWell,
@@ -915,6 +922,8 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
     if (daycare->offspringPersonality == 0 && validEggs == DAYCARE_MON_COUNT && (daycare->mons[1].steps & 0xFF) == 0xFF)
     {
         u8 compatibility = GetDaycareCompatibilityScore(daycare);
+        if (CheckBagHasItem(ITEM_OVAL_CHARM, 1))
+			compatibility = sOvalCharmCompatibilityScores[compatibility];
         if (compatibility > (Random() * 100u) / USHRT_MAX)
             TriggerPendingDaycareEgg();
     }

@@ -114,6 +114,20 @@ gBirchDexRatingText_OnANationwideBasis::
 	.string "You've seen {STR_VAR_1} POKéMON,\n"
 	.string "and you've caught {STR_VAR_2} POKéMON…$"
 
+gBirchDexRatingText_AllHoennMonsSeen::
+	.string "Why, congratulations!\p"
+	.string "You've seen all the POKéMON in the\n"
+	.string "HOENN POKéDEX!\p"
+	.string "You've been meeting new POKéMON at a\n"
+	.string "good clip, haven't you?\p"
+	.string "Here, take this as a little reward for\n"
+	.string "all your hard work!$"
+
+gBirchDexRatingText_ImproveEggChances::
+	.string "PROF. BIRCH: Holding an OVAL CHARM\n"
+	.string "will give you a better chance of\l"
+	.string "finding an EGG at the DAY CARE.$"
+
 gBirchDexRatingText_NationalDexCompleted::
 	.string "Amazing!\n"
 	.string "You completed the NATIONAL POKéDEX!\p"
