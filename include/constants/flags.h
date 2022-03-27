@@ -276,7 +276,7 @@
 #define FLAG_RECEIVED_BELUE_BERRY            0xFC
 #define FLAG_ENABLE_RIVAL_MATCH_CALL         0xFD
 #define FLAG_RECEIVED_CHARCOAL               0xFE
-#define FLAG_LATIOS_OR_LATIAS_ROAMING        0xFF // I don't think this flag does anything
+#define FLAG_CAUGHT_ROAMING_LATI             0xFF // Edited Flag; previously did nothing, now only gets checked if player caught roaming Latios/Latias
 #define FLAG_RECEIVED_REPEAT_BALL            0x100
 #define FLAG_RECEIVED_OLD_ROD                0x101
 #define FLAG_RECEIVED_COIN_CASE              0x102
@@ -1380,7 +1380,7 @@
 #define FLAG_WON_LEAGUE_REMATCHES                   (SYSTEM_FLAGS + 0x1F) // Edited Flag; now set after beating Pokemon League rematches
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
-#define FLAG_UNUSED_0x881                           (SYSTEM_FLAGS + 0x21) // Unused Flag
+#define FLAG_SYS_ROAMING_LATIOS                     (SYSTEM_FLAGS + 0x21) // Edited Flag; tells game to generate Latios as roaming Hoenn Pokemon
 #define FLAG_UNUSED_0x882                           (SYSTEM_FLAGS + 0x22) // Unused Flag
 #define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
 #define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
@@ -1398,7 +1398,7 @@
 #define FLAG_UNUSED_0x88E                           (SYSTEM_FLAGS + 0x2E) // Unused Flag
 #define FLAG_UNUSED_0x88F                           (SYSTEM_FLAGS + 0x2F) // Unused Flag
 
-#define FLAG_SYS_TV_HOME                            (SYSTEM_FLAGS + 0x30)
+#define FLAG_SYS_TV_HOME                            (SYSTEM_FLAGS + 0x30) // Removed Flag; no real functional purpose in Emerald
 #define FLAG_SYS_TV_WATCH                           (SYSTEM_FLAGS + 0x31)
 #define FLAG_SYS_TV_START                           (SYSTEM_FLAGS + 0x32)
 #define FLAG_SYS_CHANGED_DEWFORD_TREND              (SYSTEM_FLAGS + 0x33)
@@ -1447,7 +1447,7 @@
 #define FLAG_LANDMARK_HUNTERS_HOUSE                 (SYSTEM_FLAGS + 0x5B)
 #define FLAG_LANDMARK_SEALED_CHAMBER                (SYSTEM_FLAGS + 0x5C)
 
-#define FLAG_SYS_TV_LATIAS_LATIOS                   (SYSTEM_FLAGS + 0x5D)
+#define FLAG_SYS_TV_LATIAS_LATIOS                   (SYSTEM_FLAGS + 0x5D) // Removed Flag; no real functional purpose in Emerald
 
 #define FLAG_LANDMARK_SKY_PILLAR                    (SYSTEM_FLAGS + 0x5E)
 

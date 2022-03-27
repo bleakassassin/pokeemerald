@@ -81,11 +81,9 @@ void ClearRoamerLocationData(void)
     sRoamerLocation[MAP_NUM] = 0;
 }
 
-static void CreateInitialRoamerMon(bool16 createLatios)
+static void CreateInitialRoamerMon(void)
 {
-    if (!createLatios)
-        ROAMER->species = SPECIES_LATIAS;
-    else
+    if (FlagGet(FLAG_SYS_ROAMING_LATIOS))
         ROAMER->species = SPECIES_LATIOS;
 
     CreateMon(&gEnemyParty[0], ROAMER->species, 40, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
@@ -104,12 +102,11 @@ static void CreateInitialRoamerMon(bool16 createLatios)
     sRoamerLocation[MAP_NUM] = sRoamerLocations[Random() % NUM_LOCATION_SETS][0];
 }
 
-// gSpecialVar_0x8004 here corresponds to the options in the multichoice MULTI_TV_LATI (0 for 'Red', 1 for 'Blue')
 void InitRoamer(void)
 {
     ClearRoamerData();
     ClearRoamerLocationData();
-    CreateInitialRoamerMon(gSpecialVar_0x8004);
+    CreateInitialRoamerMon();
 }
 
 void UpdateLocationHistoryForRoamer(void)
