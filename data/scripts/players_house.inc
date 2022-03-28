@@ -471,19 +471,14 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_MomApproachPlayerAfterTVFemale
 	msgbox PlayersHouse_1F_Text_WhatColorDidTheySay, MSGBOX_DEFAULT
 	multichoice 22, 8, MULTI_TV_LATI, TRUE
-	call_if_eq VAR_RESULT, 1, PlayersHouse_1F_EventScript_SetRoamingLatios
-	special InitRoamer
 	copyvar VAR_ROAMER_POKEMON, VAR_RESULT
+	special InitRoamer
 	msgbox PlayersHouse_1F_Text_StillUnknownPokemon, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_LITTLEROOT_HOUSES_STATE_MAY, 4
 	setvar VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4
 	releaseall
 	end
-	
-PlayersHouse_1F_EventScript_SetRoamingLatios::
-	setflag FLAG_SYS_ROAMING_LATIOS
-	return
 
 PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale::
 	setvar VAR_0x8008, MALE

@@ -83,7 +83,7 @@ void ClearRoamerLocationData(void)
 
 static void CreateInitialRoamerMon(void)
 {
-    if (FlagGet(FLAG_SYS_ROAMING_LATIOS))
+    if (VarGet(VAR_ROAMER_POKEMON) == 1)
         ROAMER->species = SPECIES_LATIOS;
 
     CreateMon(&gEnemyParty[0], ROAMER->species, 40, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);

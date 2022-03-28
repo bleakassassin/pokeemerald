@@ -277,8 +277,6 @@ void SavePlayerBag(void)
 
 void FixImportedSave(void)
 {
-    struct Roamer *roamer;
-
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
     {
         FlagClear(FLAG_REMATCH_SIDNEY);
@@ -287,10 +285,6 @@ void FixImportedSave(void)
         FlagClear(FLAG_REMATCH_DRAKE);
         FlagClear(FLAG_REMATCH_WALLACE);
         FlagClear(FLAG_CAUGHT_ROAMING_LATI);
-
-        roamer = &gSaveBlock1Ptr->roamer;
-        if (roamer->species == SPECIES_LATIOS)
-            FlagSet(FLAG_SYS_ROAMING_LATIOS);
         
         gSaveBlock1Ptr->registeredItem = 0;
 
