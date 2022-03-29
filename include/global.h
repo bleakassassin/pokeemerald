@@ -488,7 +488,8 @@ struct SaveBlock2
              u16 regionMapZoom:1; // whether the map is zoomed in
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 outfitId;
-    /*0x91*/ u8 filler_91[0x7];
+    /*0x91*/ bool8 autoRun;
+    /*0x92*/ u8 filler_92[0x6];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
@@ -503,7 +504,6 @@ struct SaveBlock2
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
     /*0xF2C*/ u16 optionsAttackStyle:1; // OPTIONS_ATTACK_STYLE_[TYPE/CATEGORY]
-    /*0xF2C*/ bool8 autoRun;
 }; // sizeof=0xF2D
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -587,6 +587,17 @@ struct Roamer
     /*0x12*/ u8 tough;
     /*0x13*/ bool8 active;
     /*0x14*/ u8 filler[0x8];
+};
+
+struct NewRoamer
+{
+    /*0x00*/ u32 ivs;
+    /*0x04*/ u32 personality;
+    /*0x08*/ u16 species;
+    /*0x0A*/ u16 hp;
+    /*0x0C*/ u8 level;
+    /*0x0D*/ u8 status;
+    /*0x0E*/ bool8 active;
 };
 
 struct RamScriptData
@@ -1012,7 +1023,8 @@ struct SaveBlock1
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3598*/ u8 unused_3598[0x180];
+    /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];
+    /*0x35D4*/ u8 unused_35D4[0x144];
     /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;

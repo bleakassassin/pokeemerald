@@ -285,6 +285,7 @@ void FixImportedSave(void)
         FlagClear(FLAG_REMATCH_DRAKE);
         FlagClear(FLAG_REMATCH_WALLACE);
         FlagClear(FLAG_CAUGHT_ROAMING_LATI);
+        FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
         
         gSaveBlock1Ptr->registeredItem = 0;
 

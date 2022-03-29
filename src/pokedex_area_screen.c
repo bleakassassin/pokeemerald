@@ -243,15 +243,14 @@ static bool8 DrawAreaGlow(void)
 static void FindMapsWithMon(u16 species)
 {
     u16 i;
-    struct Roamer *roamer;
+    u8 j;
 
     sPokedexAreaScreen->alteringCaveCounter = 0;
     sPokedexAreaScreen->alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
     if (sPokedexAreaScreen->alteringCaveId >= NUM_ALTERING_CAVE_TABLES)
         sPokedexAreaScreen->alteringCaveId = 0;
 
-    roamer = &gSaveBlock1Ptr->roamer;
-    if (species != roamer->species)
+    if (species != gSaveBlock1Ptr->roam[3].species && (species < SPECIES_RAIKOU || species > SPECIES_SUICUNE))
     {
         sPokedexAreaScreen->numOverworldAreas = 0;
         sPokedexAreaScreen->numSpecialAreas = 0;
@@ -307,15 +306,17 @@ static void FindMapsWithMon(u16 species)
     {
         // This is the roamer's species, show where the roamer is currently
         sPokedexAreaScreen->numSpecialAreas = 0;
-        if (roamer->active)
+        for (j = 0; j < TOTAL_ROAMING_POKEMON; j++)
         {
-            GetRoamerLocation(&sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, &sPokedexAreaScreen->overworldAreasWithMons[0].mapNum);
-            sPokedexAreaScreen->overworldAreasWithMons[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, sPokedexAreaScreen->overworldAreasWithMons[0].mapNum)->regionMapSectionId;
-            sPokedexAreaScreen->numOverworldAreas = 1;
-        }
-        else
-        {
-            sPokedexAreaScreen->numOverworldAreas = 0;
+            if (species == gSaveBlock1Ptr->roam[j].species && gSaveBlock1Ptr->roam[j].active)
+            {
+                GetRoamerLocation(j, &sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, &sPokedexAreaScreen->overworldAreasWithMons[0].mapNum);
+                sPokedexAreaScreen->overworldAreasWithMons[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, sPokedexAreaScreen->overworldAreasWithMons[0].mapNum)->regionMapSectionId;
+                sPokedexAreaScreen->numOverworldAreas = 1;
+				break;
+            }
+            else
+                sPokedexAreaScreen->numOverworldAreas = 0;
         }
     }
 }

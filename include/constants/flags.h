@@ -456,7 +456,7 @@
 #define FLAG_REMATCH_WALLACE                 0x1A9
 
 #define FLAG_ENABLE_WALLACE_MATCH_CALL       0x1AA // Edited Flag; enables Gym Leader Wallace Match Call after beating him in Sootopolis, cleared after beating him as Champion.
-#define FLAG_UNUSED_0x1AB                    0x1AB // Unused Flag
+#define FLAG_LEGENDARY_BEASTS_ROAMING        0x1AB // Edited Flag; set if triggered Legendary Johto trio roaming, cleared after entering Hall of Fame if any are defeated in battle
 
 #define FLAG_DEFEATED_DEOXYS                 0x1AC
 #define FLAG_BATTLED_DEOXYS                  0x1AD
@@ -1296,9 +1296,9 @@
 #define FLAG_UNUSED_0x4E1                                           0x4E1 // Unused Flag
 #define FLAG_UNUSED_0x4E2                                           0x4E2 // Unused Flag
 #define FLAG_UNUSED_0x4E3                                           0x4E3 // Unused Flag
-#define FLAG_UNUSED_0x4E4                                           0x4E4 // Unused Flag
-#define FLAG_UNUSED_0x4E5                                           0x4E5 // Unused Flag
-#define FLAG_UNUSED_0x4E6                                           0x4E6 // Unused Flag
+#define FLAG_DEFEATED_ROAMING_RAIKOU                                0x4E4 // Edited Flag; set if Raikou is defeated in battle, cleared after entering Hall of Fame
+#define FLAG_DEFEATED_ROAMING_ENTEI                                 0x4E5 // Edited Flag; set if Entei is defeated in battle, cleared after entering Hall of Fame
+#define FLAG_DEFEATED_ROAMING_SUICUNE                               0x4E6 // Edited Flag; set if Suicune is defeated in battle, cleared after entering Hall of Fame
 #define FLAG_DEFEATED_ARTICUNO                                      0x4E7 // Edited Flag; used for Articuno in Altering Cave
 #define FLAG_DEFEATED_ZAPDOS                                        0x4E8 // Edited Flag; used for Zapdos in Altering Cave
 #define FLAG_DEFEATED_MOLTRES                                       0x4E9 // Edited Flag; used for Moltres in Altering Cave
@@ -1398,7 +1398,7 @@
 #define FLAG_UNUSED_0x88E                           (SYSTEM_FLAGS + 0x2E) // Unused Flag
 #define FLAG_UNUSED_0x88F                           (SYSTEM_FLAGS + 0x2F) // Unused Flag
 
-#define FLAG_SYS_TV_HOME                            (SYSTEM_FLAGS + 0x30) // Removed Flag; no real functional purpose in Emerald
+#define FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER     (SYSTEM_FLAGS + 0x30) // Edited Flag; only set when triggering Legendary Johto trio roaming the first time, never cleared
 #define FLAG_SYS_TV_WATCH                           (SYSTEM_FLAGS + 0x31)
 #define FLAG_SYS_TV_START                           (SYSTEM_FLAGS + 0x32)
 #define FLAG_SYS_CHANGED_DEWFORD_TREND              (SYSTEM_FLAGS + 0x33)

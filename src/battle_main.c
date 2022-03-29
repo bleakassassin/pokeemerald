@@ -5208,7 +5208,9 @@ static void ReturnFromBattleToOverworld(void)
 #endif                                                                               // & with B_OUTCOME_WON (1) will return TRUE and deactivates the roamer.
         {
             SetRoamerInactive();
-            if (gBattleOutcome == B_OUTCOME_CAUGHT)
+            if (gBattleOutcome == B_OUTCOME_WON && gSpecialVar_0x8003 <= 2)
+                FlagSet(FLAG_DEFEATED_ROAMING_RAIKOU + gSpecialVar_0x8003);                
+            else if (gBattleOutcome == B_OUTCOME_CAUGHT && gSpecialVar_0x8003 == 3)
                 FlagSet(FLAG_CAUGHT_ROAMING_LATI);
         }
     }

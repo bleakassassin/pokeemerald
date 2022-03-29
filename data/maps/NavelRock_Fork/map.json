@@ -16,8 +16,8 @@
   "object_events": [],
   "warp_events": [
     {
-      "x": 4,
-      "y": 6,
+      "x": 3,
+      "y": 16,
       "elevation": 3,
       "dest_map": "MAP_NAVEL_ROCK_UP1",
       "dest_warp_id": 0
@@ -30,13 +30,23 @@
       "dest_warp_id": 1
     },
     {
-      "x": 22,
-      "y": 6,
+      "x": 23,
+      "y": 16,
       "elevation": 3,
       "dest_map": "MAP_NAVEL_ROCK_DOWN01",
       "dest_warp_id": 0
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 13,
+      "y": 14,
+      "elevation": 0,
+      "var": "VAR_TEMP_1",
+      "var_value": "0",
+      "script": "NavelRock_Fork_EventScript_LegendaryBeasts"
+    }
+  ],
   "bg_events": []
 }
