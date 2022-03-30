@@ -598,6 +598,7 @@ struct NewRoamer
     /*0x0C*/ u8 level;
     /*0x0D*/ u8 status;
     /*0x0E*/ bool8 active;
+    /*0x0F*/ u8 filler;
 };
 
 struct RamScriptData
@@ -1024,7 +1025,7 @@ struct SaveBlock1
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
     /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];
-    /*0x35D4*/ u8 unused_35D4[0x144];
+    /*0x35D8*/ u8 unused_35D8[0x140];
     /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
