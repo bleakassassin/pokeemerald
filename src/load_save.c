@@ -316,6 +316,9 @@ void FixImportedSave(void)
             FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
         }
 
+        if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 3)
+            FlagClear(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
+
         if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
         {
             FlagClear(FLAG_READ_STEVENS_LETTER);
@@ -325,9 +328,11 @@ void FixImportedSave(void)
             FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
 
             if (FlagGet(FLAG_BADGE08_GET) == TRUE)
+            {
                 FlagSet(FLAG_ENABLE_WALLACE_MATCH_CALL);
                 FlagClear(FLAG_ENABLE_JUAN_MATCH_CALL);
                 FlagClear(TRAINER_FLAGS_START + TRAINER_JUAN_1);
+            }
         }
         else
         {

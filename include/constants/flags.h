@@ -786,7 +786,7 @@
 #define FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT                          0x2E6
 #define FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN                       0x2E7
 #define FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT                          0x2E8
-#define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN            0x2E9 // Removed Flag; object removed
+#define FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL                           0x2E9 // Edited Flag; girl hidden until Team Magma is defeated at Space Center
 #define FLAG_HIDE_ROUTE_103_SNORLAX                                 0x2EA // Edited Flag; used for Snorlax on Route 103
 #define FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION                  0x2EB
 #define FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER                0x2EC

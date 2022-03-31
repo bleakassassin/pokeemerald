@@ -235,8 +235,8 @@
 #define VAR_SOOTOPOLIS_WALLACE_STATE         0x40D8
 #define VAR_HAS_TALKED_TO_SEAFLOOR_CAVERN_ENTRANCE_GRUNT 0x40D9
 #define VAR_REGISTER_BIRCH_STATE             0x40DA
-#define VAR_UNUSED_0x40DB                    0x40DB // Unused Var
-#define VAR_UNUSED_0x40DC                    0x40DC // Unused Var
+#define VAR_WEEK_TOTAL_WHEN_WISH             0x40DB // Copies week total when player makes wish at Mossdeep rock; Jirachi event won't occur until at least the next week (Var + 1)
+#define VAR_JIRACHI_WISH_STATE               0x40DC // Tracks progress in Jirachi event; 1: Spoke to wish girl, 2: Made wish, 3: Spoke to rocket scientist one week later, 4: Received Jirachi
 #define VAR_GIFT_PICHU_SLOT                  0x40DD
 #define VAR_GIFT_UNUSED_1                    0x40DE // Var is written to, but never read
 #define VAR_GIFT_UNUSED_2                    0x40DF // Var is written to, but never read
