@@ -384,7 +384,7 @@ MossdeepCity_SpaceCenter_1F_Text_WhatWasThat:
 
 MossdeepCity_SpaceCenter_1F_Text_SomeComet:
 	.string "It looks like some comet crashed just\n"
-	.string "outside the SPACE CENTER!\p"
+	.string "outside the Space Center!\p"
 	.string "Thankfully it didn't hit the rocket.\n"
 	.string "Another successful launch!$"
 
@@ -439,7 +439,7 @@ MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace:
 
 MossdeepCity_SpaceCenter_1F_Text_SpacePokemon:
 	.string "Something must have fallen from space!\n"
-	.string "If that was a POKéMON…$"
+	.string "If that was a Pokémon…$"
 
 MossdeepCity_SpaceCenter_1F_Text_AquaShouldBeatMagma:
 	.string "Team Aqua should take care of\n"

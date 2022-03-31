@@ -488,7 +488,7 @@ MossdeepCity_Text_SpecialSpaceCenterRock:
 	.string "That's what I do.$"
 
 MossdeepCity_Text_AboutToLaunch:
-	.string "The SPACE CENTER is about to launch\n"
+	.string "The Space Center is about to launch\n"
 	.string "another rocket into space.\p"
 	.string "I'm going to make another wish when\n"
 	.string "it takes flight.$"
@@ -504,19 +504,19 @@ MossdeepCity_Text_ShootingStarFellDown:
 	.string "Why don't you take it with you?$"
 
 MossdeepCity_Text_KeepMakingWishes:
-	.string "So that star was a POKéMON?\n"
+	.string "So that star was a Pokémon?\n"
 	.string "That's pretty incredible.\p"
 	.string "I'm going to keep making wishes to see\n"
 	.string "if one of mine will come true.$"
 
 MossdeepCity_EventScript_PlayerReceivedJirachi:
-	.string "{PLAYER} received JIRACHI!$"
+	.string "{PLAYER} received Jirachi!$"
 
 MossdeepCity_Text_ItsAWhiteRock:
 	.string "It's a white rock.$"
 	
 MossdeepCity_Text_MakeAWish:
-	.string "It's the SPACE CENTER's wishing rock.\n"
+	.string "It's the Space Center's wishing rock.\n"
 	.string "Do you want to make a wish?$"
 	
 MossdeepCity_Text_SeeIfItComesTrue:
