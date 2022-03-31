@@ -276,7 +276,7 @@
 #define FLAG_RECEIVED_BELUE_BERRY            0xFC
 #define FLAG_ENABLE_RIVAL_MATCH_CALL         0xFD
 #define FLAG_RECEIVED_CHARCOAL               0xFE
-#define FLAG_LATIOS_OR_LATIAS_ROAMING        0xFF // I don't think this flag does anything
+#define FLAG_CAUGHT_ROAMING_LATI             0xFF // Edited Flag; previously did nothing, now only gets checked if player caught roaming Latios/Latias
 #define FLAG_RECEIVED_REPEAT_BALL            0x100
 #define FLAG_RECEIVED_OLD_ROD                0x101
 #define FLAG_RECEIVED_COIN_CASE              0x102
@@ -456,7 +456,7 @@
 #define FLAG_REMATCH_WALLACE                 0x1A9
 
 #define FLAG_ENABLE_WALLACE_MATCH_CALL       0x1AA // Edited Flag; enables Gym Leader Wallace Match Call after beating him in Sootopolis, cleared after beating him as Champion.
-#define FLAG_UNUSED_0x1AB                    0x1AB // Unused Flag
+#define FLAG_LEGENDARY_BEASTS_ROAMING        0x1AB // Edited Flag; set if triggered Legendary Johto trio roaming, cleared after entering Hall of Fame if any are defeated in battle
 
 #define FLAG_DEFEATED_DEOXYS                 0x1AC
 #define FLAG_BATTLED_DEOXYS                  0x1AD
@@ -786,7 +786,7 @@
 #define FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT                          0x2E6
 #define FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN                       0x2E7
 #define FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT                          0x2E8
-#define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN            0x2E9 // Removed Flag; object removed
+#define FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL                           0x2E9 // Edited Flag; girl hidden until Team Magma is defeated at Space Center
 #define FLAG_HIDE_ROUTE_103_SNORLAX                                 0x2EA // Edited Flag; used for Snorlax on Route 103
 #define FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION                  0x2EB
 #define FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER                0x2EC
@@ -1296,9 +1296,9 @@
 #define FLAG_UNUSED_0x4E1                                           0x4E1 // Unused Flag
 #define FLAG_UNUSED_0x4E2                                           0x4E2 // Unused Flag
 #define FLAG_UNUSED_0x4E3                                           0x4E3 // Unused Flag
-#define FLAG_UNUSED_0x4E4                                           0x4E4 // Unused Flag
-#define FLAG_UNUSED_0x4E5                                           0x4E5 // Unused Flag
-#define FLAG_UNUSED_0x4E6                                           0x4E6 // Unused Flag
+#define FLAG_DEFEATED_ROAMING_RAIKOU                                0x4E4 // Edited Flag; set if Raikou is defeated in battle, cleared after entering Hall of Fame
+#define FLAG_DEFEATED_ROAMING_ENTEI                                 0x4E5 // Edited Flag; set if Entei is defeated in battle, cleared after entering Hall of Fame
+#define FLAG_DEFEATED_ROAMING_SUICUNE                               0x4E6 // Edited Flag; set if Suicune is defeated in battle, cleared after entering Hall of Fame
 #define FLAG_DEFEATED_ARTICUNO                                      0x4E7 // Edited Flag; used for Articuno in Altering Cave
 #define FLAG_DEFEATED_ZAPDOS                                        0x4E8 // Edited Flag; used for Zapdos in Altering Cave
 #define FLAG_DEFEATED_MOLTRES                                       0x4E9 // Edited Flag; used for Moltres in Altering Cave
@@ -1398,7 +1398,7 @@
 #define FLAG_UNUSED_0x88E                           (SYSTEM_FLAGS + 0x2E) // Unused Flag
 #define FLAG_UNUSED_0x88F                           (SYSTEM_FLAGS + 0x2F) // Unused Flag
 
-#define FLAG_SYS_TV_HOME                            (SYSTEM_FLAGS + 0x30)
+#define FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER     (SYSTEM_FLAGS + 0x30) // Edited Flag; only set when triggering Legendary Johto trio roaming the first time, never cleared
 #define FLAG_SYS_TV_WATCH                           (SYSTEM_FLAGS + 0x31)
 #define FLAG_SYS_TV_START                           (SYSTEM_FLAGS + 0x32)
 #define FLAG_SYS_CHANGED_DEWFORD_TREND              (SYSTEM_FLAGS + 0x33)
@@ -1447,7 +1447,7 @@
 #define FLAG_LANDMARK_HUNTERS_HOUSE                 (SYSTEM_FLAGS + 0x5B)
 #define FLAG_LANDMARK_SEALED_CHAMBER                (SYSTEM_FLAGS + 0x5C)
 
-#define FLAG_SYS_TV_LATIAS_LATIOS                   (SYSTEM_FLAGS + 0x5D)
+#define FLAG_SYS_TV_LATIAS_LATIOS                   (SYSTEM_FLAGS + 0x5D) // Removed Flag; no real functional purpose in Emerald
 
 #define FLAG_LANDMARK_SKY_PILLAR                    (SYSTEM_FLAGS + 0x5E)
 

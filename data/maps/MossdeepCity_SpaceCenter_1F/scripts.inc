@@ -11,8 +11,22 @@ MossdeepCity_SpaceCenter_1F_MapScripts::
 	.byte 0
 
 MossdeepCity_SpaceCenter_1F_OnTransition:
+	call_if_eq VAR_JIRACHI_WISH_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForJirachi
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma
 	end
+
+MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForJirachi::
+	dotimebasedevents
+	specialvar VAR_RESULT, GetWeekCount
+	buffernumberstring STR_VAR_1, VAR_RESULT
+	goto_if_le VAR_RESULT, VAR_WEEK_TOTAL_WHEN_WISH, Common_EventScript_NopReturn
+	setvar VAR_TEMP_1, 1
+	setobjectxyperm LOCALID_SCIENTIST_2, 3, 2
+	setobjectxyperm LOCALID_SAILOR, 5, 2
+	setobjectmovementtype LOCALID_SAILOR, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_WOMAN, 9, 2
+	setobjectmovementtype LOCALID_WOMAN, MOVEMENT_TYPE_FACE_UP
+	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_MoveObjectsForTeamMagma::
 	setobjectxyperm LOCALID_SAILOR, 1, 9
@@ -52,7 +66,10 @@ MossdeepCity_SpaceCenter_1F_EventScript_SetMagmaNote::
 
 MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter::
 	lock
+	goto_if_eq VAR_TEMP_1, 1, MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchJirachi
 	faceplayer
+	goto_if_eq VAR_TEMP_1, 2, MossdeepCity_SpaceCenter_1F_EventScript_JirachiPostLaunch
+MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchReturn::
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma
 	dotimebasedevents
 	specialvar VAR_RESULT, GetWeekCount
@@ -64,6 +81,57 @@ MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter::
 	waitmovement 0
 	release
 	end
+
+MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchJirachi::
+	setvar VAR_TEMP_1, 2
+	setvar VAR_JIRACHI_WISH_STATE, 3
+	msgbox MossdeepCity_SpaceCenter_1F_Text_ReadyToLaunch, MSGBOX_DEFAULT
+	closemessage
+	fadeoutbgm 0
+	playse SE_INTRO_BLAST
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	applymovement LOCALID_SCIENTIST_2, Common_Movement_FaceUp
+	applymovement LOCALID_SAILOR, Common_Movement_FaceUp
+	applymovement LOCALID_WOMAN, Common_Movement_FaceUp
+	waitse
+	playse SE_M_PETAL_DANCE
+	waitse
+	playse SE_MUGSHOT
+	delay 40
+	playmoncry SPECIES_JIRACHI, CRY_MODE_ENCOUNTER
+	waitmoncry
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceDown
+	applymovement LOCALID_SAILOR, Common_Movement_FaceDown
+	applymovement LOCALID_OLD_MAN, Common_Movement_FaceDown
+	applymovement LOCALID_WOMAN, Common_Movement_FaceDown
+	waitse
+	playse SE_M_STRENGTH
+	delay 40
+	fadeinbgm 0
+	msgbox MossdeepCity_SpaceCenter_1F_Text_WhatWasThat, MSGBOX_DEFAULT
+	getplayerxy VAR_TEMP_2, VAR_TEMP_3
+	call_if_eq VAR_TEMP_2, 6, MossdeepCity_SpaceCenter_1F_EventScript_JirachiPlayerLeft
+	call_if_eq VAR_TEMP_2, 7, MossdeepCity_SpaceCenter_1F_EventScript_JirachiPlayerDown
+	call_if_eq VAR_TEMP_2, 8, MossdeepCity_SpaceCenter_1F_EventScript_JirachiPlayerRight
+MossdeepCity_SpaceCenter_1F_EventScript_JirachiPostLaunch::
+	msgbox MossdeepCity_SpaceCenter_1F_Text_SomeComet, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_SpaceCenter_1F_EventScript_JirachiPlayerLeft::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	applymovement LOCALID_SCIENTIST_1, Common_Movement_FaceLeft
+	return
+
+MossdeepCity_SpaceCenter_1F_EventScript_JirachiPlayerDown::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	applymovement LOCALID_SCIENTIST_1, Common_Movement_FaceDown
+	return
+
+MossdeepCity_SpaceCenter_1F_EventScript_JirachiPlayerRight::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	applymovement LOCALID_SCIENTIST_1, Common_Movement_FaceRight
+	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYet::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent, MSGBOX_DEFAULT
@@ -96,8 +164,14 @@ MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma::
 MossdeepCity_SpaceCenter_1F_EventScript_Scientist::
 	lock
 	faceplayer
+	goto_if_eq VAR_TEMP_1, 2, MossdeepCity_SpaceCenter_1F_EventScript_ScientistJirachi
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma
 	msgbox MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_SpaceCenter_1F_EventScript_ScientistJirachi::
+	msgbox MossdeepCity_SpaceCenter_1F_Text_WhyWePrepare, MSGBOX_DEFAULT
 	release
 	end
 
@@ -111,6 +185,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma::
 MossdeepCity_SpaceCenter_1F_EventScript_SunStoneMan::
 	lock
 	faceplayer
+	goto_if_eq VAR_TEMP_1, 2, MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManJirachi
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma
 	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone
 	msgbox MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt, MSGBOX_DEFAULT
@@ -118,6 +193,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_SunStoneMan::
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	msgbox MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManJirachi::
+	msgbox MossdeepCity_SpaceCenter_1F_Text_WasMeteorShower, MSGBOX_DEFAULT
 	release
 	end
 
@@ -148,14 +228,14 @@ MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma::
 MossdeepCity_SpaceCenter_1F_EventScript_Woman::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
+	goto_if_eq VAR_TEMP_1, 2, MossdeepCity_SpaceCenter_1F_EventScript_WomanJirachi
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma
-	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal
-	goto MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma
+	msgbox MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace, MSGBOX_DEFAULT
+	release
 	end
 
-MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal::
-	msgbox MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace, MSGBOX_DEFAULT
+MossdeepCity_SpaceCenter_1F_EventScript_WomanJirachi::
+	msgbox MossdeepCity_SpaceCenter_1F_Text_SpacePokemon, MSGBOX_DEFAULT
 	release
 	end
 
@@ -167,17 +247,17 @@ MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma::
 MossdeepCity_SpaceCenter_1F_EventScript_OldMan::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
+	goto_if_eq VAR_TEMP_1, 2, MossdeepCity_SpaceCenter_1F_EventScript_OldManJirachi
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma
-	goto_if_lt VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal
-	goto MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma
-	end
-
-MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal::
 	msgbox MossdeepCity_SpaceCenter_1F_Text_RocketsBoggleMyMind, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
+	release
+	end
+
+MossdeepCity_SpaceCenter_1F_EventScript_OldManJirachi::
+	msgbox MossdeepCity_SpaceCenter_1F_Text_DownFromSpace, MSGBOX_DEFAULT
 	release
 	end
 
@@ -282,23 +362,31 @@ MossdeepCity_SpaceCenter_1F_Movement_MoveGruntFromStairs:
 	unlock_facing_direction
 	step_end
 
-MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent:
-	.string "The rocket's launch is imminent!$"
-
-MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber:
-	.string "The rocket launched safely!\n"
-	.string "That's successful launch no. {STR_VAR_1}!$"
-
 MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent:
 	.string "I know that things are a little\n"
 	.string "haywire right now, but…\p"
+MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent:
 	.string "The rocket's launch is imminent!$"
 
 MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber:
 	.string "I know that things are a little\n"
 	.string "haywire right now, but…\p"
+MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber:
 	.string "The rocket launched safely!\n"
 	.string "That's successful launch no. {STR_VAR_1}!$"
+
+MossdeepCity_SpaceCenter_1F_Text_ReadyToLaunch:
+	.string "Preparing for launch no. {STR_VAR_1}.\n"
+	.string "T-minus 3… 2… 1… Liftoff!$"
+
+MossdeepCity_SpaceCenter_1F_Text_WhatWasThat:
+	.string "Um… what was that?$"
+
+MossdeepCity_SpaceCenter_1F_Text_SomeComet:
+	.string "It looks like some comet crashed just\n"
+	.string "outside the SPACE CENTER!\p"
+	.string "Thankfully it didn't hit the rocket.\n"
+	.string "Another successful launch!$"
 
 MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection:
 	.string "A rocket launch demands perfection.\n"
@@ -307,6 +395,12 @@ MossdeepCity_SpaceCenter_1F_Text_RocketLaunchDemandsPerfection:
 	.string "is useless if 1% happens to be no good.\p"
 	.string "Despite that, we never stop trying.\n"
 	.string "Why? It's a dream that never ends.$"
+
+MossdeepCity_SpaceCenter_1F_Text_WhyWePrepare:
+	.string "This is why we prepare so meticulously\n"
+	.string "for each rocket launch.\p"
+	.string "Even the smallest issue on our end would\n"
+	.string "have led to a failed launch this time.$"
 
 MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter:
 	.string "Those Magma thugs have their sights\n"
@@ -321,8 +415,13 @@ MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt:
 	.string "have it.$"
 
 MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers:
-	.string "The Hoenn region has been famous for \n"
+	.string "The Hoenn region has been famous for\n"
 	.string "its meteor showers for a long time.$"
+
+MossdeepCity_SpaceCenter_1F_Text_WasMeteorShower:
+	.string "Was that a meteor shower just now?\p"
+	.string "It's an awfully strange time for one to\n"
+	.string "be happening.$"
 
 MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis:
 	.string "Team Magma can't be allowed to steal\n"
@@ -338,6 +437,10 @@ MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace:
 	.string "Some people claim that Pokémon came\n"
 	.string "from space. Could it be true?$"
 
+MossdeepCity_SpaceCenter_1F_Text_SpacePokemon:
+	.string "Something must have fallen from space!\n"
+	.string "If that was a POKéMON…$"
+
 MossdeepCity_SpaceCenter_1F_Text_AquaShouldBeatMagma:
 	.string "Team Aqua should take care of\n"
 	.string "Team Magma!\p"
@@ -348,6 +451,12 @@ MossdeepCity_SpaceCenter_1F_Text_RocketsBoggleMyMind:
 	.string "A giant chunk of metal bursts through\n"
 	.string "the skies and flies into space…\p"
 	.string "It boggles my mind!$"
+
+MossdeepCity_SpaceCenter_1F_Text_DownFromSpace:
+	.string "A giant chunk of metal bursts through\n"
+	.string "the skies and flies… down from space?\p"
+	.string "Thank goodness it didn't hit the rocket!\n"
+	.string "It was a beautiful sight!$"
 
 MossdeepCity_SpaceCenter_1F_Text_MagmaWantsToSpoilMyDream:
 	.string "A giant chunk of metal bursts through\n"

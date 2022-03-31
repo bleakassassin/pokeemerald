@@ -45,6 +45,10 @@ EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries::
 	return
 
 EverGrandeCity_HallOfFame_EventScript_SetRematchChampionCheck::
+	call_if_unset FLAG_CAUGHT_ROAMING_LATI, EverGrandeCity_HallOfFame_EventScript_ResetRoamingLati
+	call_if_set FLAG_DEFEATED_ROAMING_RAIKOU, EverGrandeCity_HallOfFame_EventScript_ResetJohtoRoamTrigger
+	call_if_set FLAG_DEFEATED_ROAMING_ENTEI, EverGrandeCity_HallOfFame_EventScript_ResetJohtoRoamTrigger
+	call_if_set FLAG_DEFEATED_ROAMING_SUICUNE, EverGrandeCity_HallOfFame_EventScript_ResetJohtoRoamTrigger
 	clearflag FLAG_ENABLE_WALLACE_MATCH_CALL
 	setflag FLAG_WON_LEAGUE_REMATCHES
 	return
@@ -71,6 +75,15 @@ EverGrandeCity_HallOfFame_EventScript_ShowBrendanBedroomStarter::
 	
 EverGrandeCity_HallOfFame_EventScript_ShowMayBedroomStarter::
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+	return
+
+EverGrandeCity_HallOfFame_EventScript_ResetRoamingLati::
+	setvar VAR_0x8003, 3
+	special InitRoamer
+	return
+
+EverGrandeCity_HallOfFame_EventScript_ResetJohtoRoamTrigger::
+	clearflag FLAG_LEGENDARY_BEASTS_ROAMING
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ReadyDexUpgradeEvent::

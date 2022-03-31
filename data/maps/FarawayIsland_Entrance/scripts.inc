@@ -47,7 +47,7 @@ FarawayIsland_Entrance_EventScript_Sign::
 	goto_if_eq VAR_OLD_SEA_MAP_STATE, 6, FarawayIsland_Entrance_EventScript_End
 	lockall
 	setvar VAR_OLD_SEA_MAP_STATE, 6
-	fadeoutbgm 1
+	fadeoutbgm 0
 	delay 60
 	setvar VAR_0x8004, 8  @ num loops
 	setvar VAR_0x8005, 35 @ delay

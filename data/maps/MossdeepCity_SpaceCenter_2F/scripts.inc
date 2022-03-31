@@ -286,6 +286,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	msgbox MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_MOSSDEEP_CITY_STATE, 3
+	clearflag FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL
 	fadedefaultbgm
 	fadescreen FADE_TO_BLACK
 	setvar VAR_MOSSDEEP_SPACE_CENTER_STATE, 3

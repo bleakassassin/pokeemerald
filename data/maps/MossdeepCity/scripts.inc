@@ -56,11 +56,99 @@ MossdeepCity_EventScript_Girl::
 	end
 
 MossdeepCity_EventScript_Woman::
-	msgbox MossdeepCity_Text_SpecialSpaceCenterRock, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_eq VAR_JIRACHI_WISH_STATE, 4, MossdeepCity_EventScript_WomanKeepMakingWishes
+	goto_if_eq VAR_JIRACHI_WISH_STATE, 3, MossdeepCity_EventScript_ReceiveJirachi
+	dotimebasedevents
+	specialvar VAR_RESULT, GetWeekCount
+	goto_if_gt VAR_RESULT, VAR_WEEK_TOTAL_WHEN_WISH, MossdeepCity_EventScript_WomanAboutToLaunch
+	goto_if_eq VAR_JIRACHI_WISH_STATE, 2, MossdeepCity_EventScript_WomanMakeWish
+	setvar VAR_JIRACHI_WISH_STATE, 1
+MossdeepCity_EventScript_WomanMakeWish::
+	msgbox MossdeepCity_Text_SpecialSpaceCenterRock, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_EventScript_ReceiveJirachi::
+	msgbox MossdeepCity_Text_ShootingStarFellDown, MSGBOX_DEFAULT
+	setvar VAR_TEMP_1, SPECIES_JIRACHI
+	givemon SPECIES_JIRACHI, 5
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, MossdeepCity_EventScript_ReceiveJirachiParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, MossdeepCity_EventScript_ReceiveJirachiPC
+	goto Common_EventScript_NoMoreRoomForPokemon
+
+MossdeepCity_EventScript_ReceiveJirachiParty::
+	call MossdeepCity_EventScript_ReceivedJirachiFanfare
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, MossdeepCity_EventScript_WomanKeepMakingWishes
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+MossdeepCity_EventScript_WomanKeepMakingWishes::
+	msgbox MossdeepCity_Text_KeepMakingWishes, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_EventScript_ReceiveJirachiPC::
+	call MossdeepCity_EventScript_ReceivedJirachiFanfare
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, MossdeepCity_EventScript_SendJirachiToPC
+	call Common_EventScript_NameReceivedBoxMon
+MossdeepCity_EventScript_SendJirachiToPC::
+	call Common_EventScript_TransferredToPC
+	goto MossdeepCity_EventScript_WomanKeepMakingWishes
+
+MossdeepCity_EventScript_ReceivedJirachiFanfare::
+	playfanfare MUS_OBTAIN_ITEM
+	setvar VAR_JIRACHI_WISH_STATE, 4
+	message MossdeepCity_EventScript_PlayerReceivedJirachi
+	waitmessage
+	waitfanfare
+	bufferspeciesname STR_VAR_1, SPECIES_JIRACHI
+	return
+
+MossdeepCity_EventScript_WomanAboutToLaunch::
+	msgbox MossdeepCity_Text_AboutToLaunch, MSGBOX_DEFAULT
+	release
 	end
 
 MossdeepCity_EventScript_WhiteRock::
-	msgbox MossdeepCity_Text_ItsAWhiteRock, MSGBOX_SIGN
+	lock
+	goto_if_ge VAR_JIRACHI_WISH_STATE, 3, MossdeepCity_EventScript_WhiteRockDent
+	dotimebasedevents
+	specialvar VAR_RESULT, GetWeekCount
+	goto_if_gt VAR_RESULT, VAR_WEEK_TOTAL_WHEN_WISH, MossdeepCity_EventScript_WhiteRockTag
+	goto_if_eq VAR_JIRACHI_WISH_STATE, 2, MossdeepCity_EventScript_WaitAndSee
+	goto_if_eq VAR_JIRACHI_WISH_STATE, 1, MossdeepCity_EventScript_WhiteRockWish
+MossdeepCity_EventScript_WhiteRockDefault::
+	msgbox MossdeepCity_Text_ItsAWhiteRock, MSGBOX_DEFAULT
+MossdeepCity_EventScript_WhiteRockEnd::
+	release
+	end
+
+MossdeepCity_EventScript_WhiteRockWish::
+	msgbox MossdeepCity_Text_MakeAWish, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, MossdeepCity_EventScript_WhiteRockEnd
+	setvar VAR_JIRACHI_WISH_STATE, 2
+	dotimebasedevents
+	specialvar VAR_WEEK_TOTAL_WHEN_WISH, GetWeekCount
+	msgbox MossdeepCity_Text_SeeIfItComesTrue, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_EventScript_WaitAndSee::
+	msgbox MossdeepCity_Text_SeeIfItComesTrueShort, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_EventScript_WhiteRockTag::
+	msgbox MossdeepCity_Text_TagDisappeared, MSGBOX_DEFAULT
+	release
+	end
+
+MossdeepCity_EventScript_WhiteRockDent::
+	msgbox MossdeepCity_Text_RockHasDent, MSGBOX_DEFAULT
+	release
 	end
 
 MossdeepCity_EventScript_GymSign::
@@ -399,8 +487,54 @@ MossdeepCity_Text_SpecialSpaceCenterRock:
 	.string "I use a wish tag to make it happen.\n"
 	.string "That's what I do.$"
 
+MossdeepCity_Text_AboutToLaunch:
+	.string "The SPACE CENTER is about to launch\n"
+	.string "another rocket into space.\p"
+	.string "I'm going to make another wish when\n"
+	.string "it takes flight.$"
+
+MossdeepCity_Text_ShootingStarFellDown:
+	.string "A shooting star fell down and struck\n"
+	.string "the wishing rock!\p"
+	.string "I'm OK, I'm just worried for the star.\n"
+	.string "I think it's alive!\p"
+	.string "It has your wish tag, too. It looks\n"
+	.string "like you literally wished for a star…\p"
+	.string "This is your wish come true, then.\n"
+	.string "Why don't you take it with you?$"
+
+MossdeepCity_Text_KeepMakingWishes:
+	.string "So that star was a POKéMON?\n"
+	.string "That's pretty incredible.\p"
+	.string "I'm going to keep making wishes to see\n"
+	.string "if one of mine will come true.$"
+
+MossdeepCity_EventScript_PlayerReceivedJirachi:
+	.string "{PLAYER} received JIRACHI!$"
+
 MossdeepCity_Text_ItsAWhiteRock:
 	.string "It's a white rock.$"
+	
+MossdeepCity_Text_MakeAWish:
+	.string "It's the SPACE CENTER's wishing rock.\n"
+	.string "Do you want to make a wish?$"
+	
+MossdeepCity_Text_SeeIfItComesTrue:
+	.string "You use a spare wish tag to wish upon\n"
+	.string "a star…\p"
+	.string "… … … … … …\n"
+	.string "… … … … … …\p"
+MossdeepCity_Text_SeeIfItComesTrueShort:
+	.string "Let's wait a bit and see if your wish\n"
+	.string "comes true!$"
+
+MossdeepCity_Text_TagDisappeared:
+	.string "Your wish tag isn't on the rock\n"
+	.string "anymore…$"
+
+MossdeepCity_Text_RockHasDent:
+	.string "The rock has a dent the size of a\n"
+	.string "meteorite.$"
 
 MossdeepCity_Text_GymSign:
 	.string "Mossdeep City Pokémon Gym\n"

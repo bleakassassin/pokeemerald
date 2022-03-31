@@ -284,6 +284,9 @@ void FixImportedSave(void)
         FlagClear(FLAG_REMATCH_GLACIA);
         FlagClear(FLAG_REMATCH_DRAKE);
         FlagClear(FLAG_REMATCH_WALLACE);
+        FlagClear(FLAG_CAUGHT_ROAMING_LATI);
+        FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
+        
         gSaveBlock1Ptr->registeredItem = 0;
 
         if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE )
@@ -313,6 +316,9 @@ void FixImportedSave(void)
             FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
         }
 
+        if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 3)
+            FlagClear(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
+
         if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
         {
             FlagClear(FLAG_READ_STEVENS_LETTER);
@@ -322,9 +328,11 @@ void FixImportedSave(void)
             FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
 
             if (FlagGet(FLAG_BADGE08_GET) == TRUE)
+            {
                 FlagSet(FLAG_ENABLE_WALLACE_MATCH_CALL);
                 FlagClear(FLAG_ENABLE_JUAN_MATCH_CALL);
                 FlagClear(TRAINER_FLAGS_START + TRAINER_JUAN_1);
+            }
         }
         else
         {
