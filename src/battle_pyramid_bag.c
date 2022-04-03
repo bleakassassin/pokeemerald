@@ -636,7 +636,7 @@ static void BagCursorMoved(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (onInit != TRUE)
     {
-        PlaySE(SE_SELECT);
+        PlaySE(SE_RG_BAG_CURSOR);
         ShakePyramidBag();
     }
     if (gPyramidBagMenu->toSwapPos == POS_NONE)

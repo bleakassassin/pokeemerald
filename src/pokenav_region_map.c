@@ -481,7 +481,7 @@ static u32 LoopedTask_ExitRegionMap(s32 taskState)
     switch (taskState)
     {
     case 0:
-        PlaySE(SE_SELECT);
+        PlaySE(SE_PC_OFF);
         PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         return LT_INC_AND_PAUSE;
     case 1:

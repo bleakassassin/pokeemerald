@@ -205,7 +205,7 @@ RustboroCity_DevonCorp_2F_EventScript_FinishReceivingFossilMon::
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_ReceivedFossilMonFanfare::
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_EVOLVED
 	message RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher
 	waitmessage
 	waitfanfare

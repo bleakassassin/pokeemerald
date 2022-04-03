@@ -560,7 +560,7 @@ static u32 LoopedTask_MoveMenuCursor(s32 state)
         SetMenuOptionGlow();
         StartOptionAnimations_CursorMoved();
         PrintCurrentOptionDescription();
-        PlaySE(SE_SELECT);
+        PlaySE(SE_DEX_SCROLL);
         return LT_INC_AND_PAUSE;
     case 1:
         if (AreMenuOptionSpritesMoving())

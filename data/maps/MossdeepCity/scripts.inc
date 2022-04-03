@@ -99,7 +99,7 @@ MossdeepCity_EventScript_SendJirachiToPC::
 	goto MossdeepCity_EventScript_WomanKeepMakingWishes
 
 MossdeepCity_EventScript_ReceivedJirachiFanfare::
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_EVOLVED
 	setvar VAR_JIRACHI_WISH_STATE, 4
 	message MossdeepCity_EventScript_PlayerReceivedJirachi
 	waitmessage

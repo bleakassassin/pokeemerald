@@ -404,10 +404,10 @@ static u32 MatchCallListCursorDown(s32 state)
         case 0:
             break;
         case 1:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             return LT_SET_STATE(2);
         case 2:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             // fall through
         default:
             return LT_INC_AND_PAUSE;
@@ -441,10 +441,10 @@ static u32 MatchCallListCursorUp(s32 state)
         case 0:
             break;
         case 1:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             return LT_SET_STATE(2);
         case 2:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             // fall through
         default:
             return LT_INC_AND_PAUSE;
@@ -478,10 +478,10 @@ static u32 MatchCallListPageDown(s32 state)
         case 0:
             break;
         case 1:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_PAGE);
             return LT_SET_STATE(2);
         case 2:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_PAGE);
             // fall through
         default:
             return LT_INC_AND_PAUSE;
@@ -515,10 +515,10 @@ static u32 MatchCallListPageUp(s32 state)
         case 0:
             break;
         case 1:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_PAGE);
             return LT_SET_STATE(2);
         case 2:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_PAGE);
             // fall through
         default:
             return LT_INC_AND_PAUSE;
@@ -721,7 +721,7 @@ static u32 ShowCheckPage(s32 state)
     switch (state)
     {
     case 0:
-        PlaySE(SE_SELECT);
+        PlaySE(SE_PIN);
         PokenavList_EraseListForCheckPage();
         UpdateWindowsToShowCheckPage(gfx);
         return LT_INC_AND_PAUSE;
@@ -756,7 +756,7 @@ static u32 ShowCheckPageDown(s32 state)
         delta = GetIndexDeltaOfNextCheckPageDown(topId);
         if (delta)
         {
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             gfx->pageDelta = delta;
             TrainerPicSlideOffscreen(gfx);
             return LT_INC_AND_PAUSE;
@@ -789,7 +789,7 @@ static u32 ExitCheckPage(s32 state)
     switch (state)
     {
     case 0:
-        PlaySE(SE_SELECT);
+        PlaySE(SE_BALL);
         TrainerPicSlideOffscreen(gfx);
         PokenavList_ReshowListFromCheckPage();
         return LT_INC_AND_PAUSE;
@@ -821,7 +821,7 @@ static u32 ShowCheckPageUp(s32 state)
         delta = GetIndexDeltaOfNextCheckPageUp(topId);
         if (delta)
         {
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             gfx->pageDelta = delta;
             TrainerPicSlideOffscreen(gfx);
             return LT_INC_AND_PAUSE;
@@ -853,7 +853,7 @@ static u32 ExitMatchCall(s32 state)
     switch (state)
     {
     case 0:
-        PlaySE(SE_SELECT);
+        PlaySE(SE_PC_OFF);
         SetPokeballIconsFlashing(FALSE);
         PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         SlideMenuHeaderDown();
