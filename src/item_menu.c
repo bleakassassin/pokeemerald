@@ -989,7 +989,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
         else
         {
             // Print registered icon
-            if ((TxRegItemsMenu_CheckRegisteredHasItem(itemId)) || (gSaveBlock1Ptr->registeredItem && gSaveBlock1Ptr->registeredItem == itemId))
+            if ((TxRegItemsMenu_CheckRegisteredHasItem(itemId)))
                 BlitBitmapToWindow(windowId, sRegisteredSelect_Gfx, 96, y - 1, 24, 16);
         }
     }
@@ -1617,7 +1617,7 @@ static void OpenContextMenu(u8 taskId)
                 gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_KeyItemsPocket);
                 memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_KeyItemsPocket, sizeof(sContextMenuItems_KeyItemsPocket));
-                if ((gSaveBlock1Ptr->registeredItem == gSpecialVar_ItemId) || (TxRegItemsMenu_CheckRegisteredHasItem(gSpecialVar_ItemId)))
+                if ((TxRegItemsMenu_CheckRegisteredHasItem(gSpecialVar_ItemId)))
                     gBagMenu->contextMenuItemsBuffer[1] = ACTION_DESELECT;
                 else if (ItemId_GetFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_CannotUse)
                 {
@@ -1928,11 +1928,7 @@ static void ItemMenu_Register(u8 taskId)
 
 static void ItemMenu_Deselect(u8 taskId)
 {
-    if (gSaveBlock1Ptr->registeredItem == gSpecialVar_ItemId)
-        gSaveBlock1Ptr->registeredItem = ITEM_NONE;
-    else
-        TxRegItemsMenu_RemoveRegisteredItem(gSpecialVar_ItemId);
-
+    TxRegItemsMenu_RemoveRegisteredItem(gSpecialVar_ItemId);
     gTasks[taskId].func = ItemMenu_FinishRegister;
 }
 

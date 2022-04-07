@@ -3120,16 +3120,16 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R:
-            AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_Decor2DescriptionsRegi[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor2DescriptionsRegi[selection], 0, NULL, 2, 1, 3);
             if (sFrontierExchangeCorner_Decor2Regi[selection] == 0xFFFF)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2Regi[selection]);
             }
             else
             {
-                FreeSpriteTilesByTag(5500);
-                FreeSpritePaletteByTag(5500);
-                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2Regi[selection], 33, 88, 0, 5500, 5500);
+                FreeSpriteTilesByTag(TAG_ITEM_ICON);
+                FreeSpritePaletteByTag(TAG_ITEM_ICON);
+                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2Regi[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
@@ -3137,11 +3137,11 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S:
-            AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_VitaminsDescriptionsSilver[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptionsSilver[selection], 0, NULL, 2, 1, 3);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsSilver[selection]);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G:
-            AddTextPrinterParameterized2(0, 1, sFrontierExchangeCorner_VitaminsDescriptionsGold[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptionsGold[selection], 0, NULL, 2, 1, 3);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsGold[selection]);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
