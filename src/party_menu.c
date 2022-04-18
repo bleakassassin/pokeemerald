@@ -338,7 +338,8 @@ static void DisplayLevelUpStatsPg1(u8);
 static void Task_DisplayLevelUpStatsPg2(u8);
 static void DisplayLevelUpStatsPg2(u8);
 static void Task_TryLearnNewMoves(u8);
-static void PartyMenuTryEvolution(u8);
+static void PartyMenuTryEvolution(u8, u16);
+static void CB2_ReturnToPartyMenuAfterEvolving(void);
 static void DisplayMonNeedsToReplaceMove(u8);
 static void DisplayMonLearnedMove(u8, u16);
 static void UseSacredAsh(u8);
@@ -4914,10 +4915,17 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     PlaySE(SE_SELECT);
     if (cannotUseEffect)
     {
-        gPartyMenuUseExitCallback = FALSE;
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE);
+        
+        if (targetSpecies != SPECIES_NONE)
+            PartyMenuTryEvolution(taskId, targetSpecies);
+        else
+        {
+            gPartyMenuUseExitCallback = FALSE;
+            DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        }
     }
     else
     {
@@ -4988,17 +4996,18 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
 
 static void Task_TryLearnNewMoves(u8 taskId)
 {
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 learnMove;
 
     if (WaitFanfare(0) && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
     {
         RemoveLevelUpStatsWindow();
-        learnMove = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], TRUE);
+        learnMove = MonTryLearningNewMove(mon, TRUE);
         gPartyMenu.learnMoveState = 1;
         switch (learnMove)
         {
         case 0: // No moves to learn
-            PartyMenuTryEvolution(taskId);
+            PartyMenuTryEvolution(taskId, GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE));
             break;
         case MON_HAS_MAX_MOVES:
             DisplayMonNeedsToReplaceMove(taskId);
@@ -5015,12 +5024,13 @@ static void Task_TryLearnNewMoves(u8 taskId)
 
 static void Task_TryLearningNextMove(u8 taskId)
 {
-    u16 result = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], FALSE);
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 result = MonTryLearningNewMove(mon, FALSE);
 
     switch (result)
     {
     case 0: // No moves to learn
-        PartyMenuTryEvolution(taskId);
+        PartyMenuTryEvolution(taskId, GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE));
         break;
     case MON_HAS_MAX_MOVES:
         DisplayMonNeedsToReplaceMove(taskId);
@@ -5033,15 +5043,17 @@ static void Task_TryLearningNextMove(u8 taskId)
     }
 }
 
-static void PartyMenuTryEvolution(u8 taskId)
+static void PartyMenuTryEvolution(u8 taskId, u16 targetSpecies)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE);
 
     if (targetSpecies != SPECIES_NONE)
     {
         FreePartyPointers();
-        gCB2_AfterEvolution = gPartyMenu.exitCallback;
+        if (CheckBagHasItem(gSpecialVar_ItemId, 1))
+            gCB2_AfterEvolution = CB2_ReturnToPartyMenuAfterEvolving;
+        else
+            gCB2_AfterEvolution = gPartyMenu.exitCallback;
         BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId);
         DestroyTask(taskId);
     }
@@ -5052,6 +5064,12 @@ static void PartyMenuTryEvolution(u8 taskId)
         else
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
     }
+}
+
+static void CB2_ReturnToPartyMenuAfterEvolving(void)
+{
+    gItemUseCB = ItemUseCB_RareCandy;
+    SetMainCallback2(CB2_ShowPartyMenuForItemUse);
 }
 
 static void DisplayMonNeedsToReplaceMove(u8 taskId)
