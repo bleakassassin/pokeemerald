@@ -9,10 +9,10 @@ EventScript_CutTree::
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelCut
 	checkpartymove MOVE_CUT
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CutWildMon
-	clearflag FLAG_SYS_WILD_HM
+	clearflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick 0, VAR_RESULT
-	buffermovename 1, MOVE_CUT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	buffermovename STR_VAR_2, MOVE_CUT
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 EventScript_InitCut::
 	closemessage
@@ -33,7 +33,7 @@ EventScript_UseCut::
 	goto EventScript_InitCut
 
 EventScript_CutWildMon::
-	setflag FLAG_SYS_WILD_HM
+	setflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, SPECIES_ZIGZAGOON
 	goto EventScript_InitCut
 
@@ -79,10 +79,10 @@ EventScript_RockSmash::
 	goto_if_eq VAR_RESULT, NO, EventScript_CancelSmash
 	checkpartymove MOVE_ROCK_SMASH
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_RockSmashWildMon
-	clearflag FLAG_SYS_WILD_HM
+	clearflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, VAR_RESULT
-	bufferpartymonnick 0, VAR_RESULT
-	buffermovename 1, MOVE_ROCK_SMASH
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
+	buffermovename STR_VAR_2, MOVE_ROCK_SMASH
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 EventScript_InitRockSmash::
@@ -109,7 +109,7 @@ EventScript_UseRockSmash::
 
 EventScript_RockSmashWildMon::
 	closemessage
-	setflag FLAG_SYS_WILD_HM
+	setflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, SPECIES_MAKUHITA
 	goto EventScript_InitRockSmash
 
@@ -163,7 +163,7 @@ EventScript_StrengthBoulder::
 	closemessage
 	checkpartymove MOVE_STRENGTH
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_StrengthWildMon
-	clearflag FLAG_SYS_WILD_HM
+	clearflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, VAR_RESULT
 EventScript_ActivateStrength::
 	dofieldeffect FLDEFF_USE_STRENGTH
@@ -179,7 +179,7 @@ EventScript_UseStrength::
 	end
 
 EventScript_StrengthWildMon::
-	setflag FLAG_SYS_WILD_HM
+	setflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, SPECIES_MAKUHITA
 	dofieldeffect FLDEFF_USE_STRENGTH
 	waitstate
@@ -223,8 +223,8 @@ EventScript_UseWaterfall::
 	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
 	checkpartymove MOVE_WATERFALL
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_WaterfallWildMon
-	clearflag FLAG_SYS_WILD_HM
-	bufferpartymonnick 0, VAR_RESULT
+	clearflag FLAG_SYS_WILD_FIELD_MOVE
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
 EventScript_InitWaterfall::
@@ -241,7 +241,7 @@ EventScript_CannotUseWaterfall::
 	end
 
 EventScript_WaterfallWildMon::
-	setflag FLAG_SYS_WILD_HM
+	setflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, SPECIES_WAILMER
 	goto EventScript_InitWaterfall
 
@@ -264,8 +264,8 @@ EventScript_UseDive::
 	goto_if_eq VAR_RESULT, NO, EventScript_EndDive
 	checkpartymove MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_DiveWildMon
-	clearflag FLAG_SYS_WILD_HM
-	bufferpartymonnick 0, VAR_RESULT
+	clearflag FLAG_SYS_WILD_FIELD_MOVE
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 EventScript_InitDive::	
@@ -283,7 +283,7 @@ EventScript_CantDive::
 	end
 
 EventScript_DiveWildMon::
-	setflag FLAG_SYS_WILD_HM
+	setflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, SPECIES_WAILMER
 	goto EventScript_InitDive
 
@@ -293,8 +293,8 @@ EventScript_UseDiveUnderwater::
 	goto_if_eq VAR_RESULT, NO, EventScript_EndSurface
 	checkpartymove MOVE_DIVE
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_SurfaceWildMon
-	clearflag FLAG_SYS_WILD_HM
-	bufferpartymonnick 0, VAR_RESULT
+	clearflag FLAG_SYS_WILD_FIELD_MOVE
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox Text_MonUsedDive, MSGBOX_DEFAULT
 EventScript_InitSurface::	
@@ -313,7 +313,7 @@ EventScript_CantSurface::
 	end
 
 EventScript_SurfaceWildMon::
-	setflag FLAG_SYS_WILD_HM
+	setflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, SPECIES_WAILMER
 	goto EventScript_InitSurface
 

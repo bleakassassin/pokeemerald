@@ -857,6 +857,6 @@ static void CB_FlyFromRegionMap(void)
             SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], WARP_ID_NONE);
         break;
     }
-    FlagSet(FLAG_SYS_WILD_HM);
+    FlagSet(FLAG_SYS_WILD_FIELD_MOVE);
     ReturnToFieldFromFlyMapSelect();
 }

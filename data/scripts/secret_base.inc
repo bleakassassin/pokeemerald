@@ -28,107 +28,75 @@ SecretBase_EventScript_CheckEntrance::
 	special GetSecretBaseTypeInFrontOfPlayer
 	special CheckPlayerHasSecretBase
 	goto_if_eq VAR_RESULT, TRUE, SecretBase_EventScript_AlreadyHasSecretBase
+	checkitem ITEM_TM43, 1
+	goto_if_eq VAR_RESULT, FALSE, SecretBase_EventScript_NoSecretPower
 	checkpartymove MOVE_SECRET_POWER
+	copyvar VAR_0x8004, VAR_RESULT
+	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_NewSecretBaseWildMon
+	clearflag FLAG_SYS_WILD_FIELD_MOVE
 	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_SECRET_POWER
-	goto_if_eq VAR_0x8007, SECRET_BASE_RED_CAVE, SecretBase_EventScript_Cave
-	goto_if_eq VAR_0x8007, SECRET_BASE_BROWN_CAVE, SecretBase_EventScript_Cave
-	goto_if_eq VAR_0x8007, SECRET_BASE_BLUE_CAVE, SecretBase_EventScript_Cave
-	goto_if_eq VAR_0x8007, SECRET_BASE_YELLOW_CAVE, SecretBase_EventScript_Cave
+SecretBase_EventScript_Init::
 	goto_if_eq VAR_0x8007, SECRET_BASE_TREE, SecretBase_EventScript_Tree
 	goto_if_eq VAR_0x8007, SECRET_BASE_SHRUB, SecretBase_EventScript_Shrub
-	end
-
 SecretBase_EventScript_Cave::
 	lockall
-	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_CaveNoSecretPower
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_IndentUseSecretPower, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
+	goto_if_eq VAR_0x8004, PARTY_SIZE, SecretBase_EventScript_SecretPowerInit
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
 	waitstate
 	goto SecretBase_EventScript_CaveEnter
-	end
 
-SecretBase_EventScript_CaveUseSecretPower::
-	lockall
-	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
-	waitstate
-	goto SecretBase_EventScript_CaveEnter
-	end
-
-SecretBase_EventScript_CaveNoSecretPower::
-	msgbox SecretBase_Text_SmallIndentInWall, MSGBOX_DEFAULT
-	releaseall
-	end
-
-SecretBase_EventScript_CaveEnter::
-	msgbox SecretBase_Text_DiscoveredSmallCavern, MSGBOX_DEFAULT
-	goto SecretBase_EventScript_InitSecretBase
-	end
+SecretBase_EventScript_NewSecretBaseWildMon::
+	setflag FLAG_SYS_WILD_FIELD_MOVE
+	setfieldeffectargument 0, SPECIES_ZIGZAGOON
+	goto SecretBase_EventScript_Init
 
 SecretBase_EventScript_Tree::
 	lockall
-	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_TreeNoSecretPower
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_TreeUseSecretPower, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
+	goto_if_eq VAR_0x8004, PARTY_SIZE, SecretBase_EventScript_SecretPowerInit
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
 	goto SecretBase_EventScript_TreeEnter
-	end
 
 SecretBase_EventScript_TreeUseSecretPower::
 	lockall
 	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
-	goto SecretBase_EventScript_TreeEnter
-	end
+SecretBase_EventScript_TreeEnter::
+	msgbox SecretBase_Text_VineDroppedDown, MSGBOX_DEFAULT
+	goto SecretBase_EventScript_InitSecretBase
 
 SecretBase_EventScript_TreeNoSecretPower::
 	msgbox SecretBase_Text_TreeCanBeClimbed, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SecretBase_EventScript_TreeEnter::
-	msgbox SecretBase_Text_VineDroppedDown, MSGBOX_DEFAULT
-	goto SecretBase_EventScript_InitSecretBase
-	end
-
 SecretBase_EventScript_Shrub::
 	lockall
-	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_ShrubNoSecretPower
-	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	msgbox SecretBase_Text_ClumpUseSecretPower, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
+	goto_if_eq VAR_0x8004, PARTY_SIZE, SecretBase_EventScript_SecretPowerInit
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
 	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
 	goto SecretBase_EventScript_ShrubEnter
-	end
 
 SecretBase_EventScript_ShrubUseSecretPower::
 	lockall
 	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
-	goto SecretBase_EventScript_ShrubEnter
-	end
-
-SecretBase_EventScript_ShrubNoSecretPower::
-	msgbox SecretBase_Text_ClumpOfGrass, MSGBOX_DEFAULT
-	releaseall
-	end
-
 SecretBase_EventScript_ShrubEnter::
 	msgbox SecretBase_Text_DiscoveredSmallEntrance, MSGBOX_DEFAULT
-	goto SecretBase_EventScript_InitSecretBase
-	end
-
 SecretBase_EventScript_InitSecretBase::
 	closemessage
 	playse SE_EXIT
@@ -141,6 +109,11 @@ SecretBase_EventScript_InitSecretBase::
 	special InitSecretBaseDecorationSprites
 	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	waitstate
+	end
+
+SecretBase_EventScript_ShrubNoSecretPower::
+	msgbox SecretBase_Text_ClumpOfGrass, MSGBOX_DEFAULT
+	releaseall
 	end
 
 SecretBase_EventScript_FirstEntrance::
@@ -186,10 +159,8 @@ SecretBase_EventScript_EnterPlayersBase::
 	end
 
 SecretBase_EventScript_AlreadyHasSecretBase::
-	checkpartymove MOVE_SECRET_POWER
-	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_NoSecretPower
-	setfieldeffectargument 0, VAR_RESULT
-	setorcopyvar VAR_0x8004, VAR_RESULT
+	checkitem ITEM_TM43, 1
+	goto_if_eq VAR_RESULT, FALSE, SecretBase_EventScript_NoSecretPower
 	lockall
 	special GetSecretBaseNearbyMapName
 	msgbox SecretBase_Text_WouldYouLikeToMoveBases, MSGBOX_YESNO
@@ -202,28 +173,38 @@ SecretBase_EventScript_AlreadyHasSecretBase::
 	fadescreenswapbuffers FADE_FROM_BLACK
 	msgbox SecretBase_Text_MovingCompletedUseSecretPower, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_CancelOnEntrance
-	bufferpartymonnick STR_VAR_1, VAR_0x8004
+	checkpartymove MOVE_SECRET_POWER
+	goto_if_eq VAR_RESULT, PARTY_SIZE, SecretBase_EventScript_SecretPowerWildMon
+	clearflag FLAG_SYS_WILD_FIELD_MOVE
+	setfieldeffectargument 0, VAR_RESULT
+	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	buffermovename STR_VAR_2, MOVE_SECRET_POWER
 	msgbox Text_MonUsedFieldMove, MSGBOX_DEFAULT
 	closemessage
+SecretBase_EventScript_SecretPowerInit::
 	closemessage
-	goto_if_eq VAR_0x8007, SECRET_BASE_RED_CAVE, SecretBase_EventScript_CaveUseSecretPower
-	goto_if_eq VAR_0x8007, SECRET_BASE_BROWN_CAVE, SecretBase_EventScript_CaveUseSecretPower
-	goto_if_eq VAR_0x8007, SECRET_BASE_BLUE_CAVE, SecretBase_EventScript_CaveUseSecretPower
-	goto_if_eq VAR_0x8007, SECRET_BASE_YELLOW_CAVE, SecretBase_EventScript_CaveUseSecretPower
 	goto_if_eq VAR_0x8007, SECRET_BASE_TREE, SecretBase_EventScript_TreeUseSecretPower
 	goto_if_eq VAR_0x8007, SECRET_BASE_SHRUB, SecretBase_EventScript_ShrubUseSecretPower
-	releaseall
-	end
+SecretBase_EventScript_CaveUseSecretPower::
+	lockall
+	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
+	waitstate
+SecretBase_EventScript_CaveEnter::
+	msgbox SecretBase_Text_DiscoveredSmallCavern, MSGBOX_DEFAULT
+	goto SecretBase_EventScript_InitSecretBase
+
+SecretBase_EventScript_SecretPowerWildMon::
+	setflag FLAG_SYS_WILD_FIELD_MOVE
+	setfieldeffectargument 0, SPECIES_ZIGZAGOON
+	goto SecretBase_EventScript_SecretPowerInit
 
 SecretBase_EventScript_NoSecretPower::
 	lockall
-	goto_if_eq VAR_0x8007, SECRET_BASE_RED_CAVE, SecretBase_EventScript_CaveNoSecretPower
-	goto_if_eq VAR_0x8007, SECRET_BASE_BROWN_CAVE, SecretBase_EventScript_CaveNoSecretPower
-	goto_if_eq VAR_0x8007, SECRET_BASE_BLUE_CAVE, SecretBase_EventScript_CaveNoSecretPower
-	goto_if_eq VAR_0x8007, SECRET_BASE_YELLOW_CAVE, SecretBase_EventScript_CaveNoSecretPower
 	goto_if_eq VAR_0x8007, SECRET_BASE_TREE, SecretBase_EventScript_TreeNoSecretPower
 	goto_if_eq VAR_0x8007, SECRET_BASE_SHRUB, SecretBase_EventScript_ShrubNoSecretPower
+SecretBase_EventScript_CaveNoSecretPower::
+	msgbox SecretBase_Text_SmallIndentInWall, MSGBOX_DEFAULT
+	releaseall
 	end
 
 SecretBase_EventScript_CancelOnEntrance::
@@ -257,18 +238,11 @@ SecretBase_EventScript_InitDecorations::
 
 SecretBase_EventScript_SetDecoration::
 	setvar VAR_0x8005, 0
-	goto SecretBase_EventScript_SetDecoration2
-	end
-
-SecretBase_EventScript_SetDecoration2::
 	special SetDecoration
 	end
 
 SecretBase_EventScript_PutAwayDecoration::
 	setvar VAR_0x8004, 0
-	goto SecretBase_EventScript_PutAwayDecorationLoop
-	end
-
 SecretBase_EventScript_PutAwayDecorationLoop::
 	special PutAwayDecorationIteration
 	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_PutAwayDecorationEnd
@@ -277,7 +251,6 @@ SecretBase_EventScript_PutAwayDecorationLoop::
 	removeobject VAR_0x8006
 	setflag VAR_0x8005  @ UB: VAR_0x8005 is set to a flag by PutAwayDecorationIteration, but ScrCmd_setflag doesn't use VarGet
 	goto SecretBase_EventScript_PutAwayDecorationLoop
-	end
 
 SecretBase_EventScript_PutAwayDecorationEnd::
 	end
@@ -310,7 +283,6 @@ SecretBase_EventScript_Trainer0::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer0DeclineBattle
 	msgbox SecretBase_Text_Trainer0AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer0PreChampion::
 	msgbox SecretBase_Text_Trainer0PreChampion, MSGBOX_DEFAULT
@@ -344,7 +316,6 @@ SecretBase_EventScript_Trainer1::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer1DeclineBattle
 	msgbox SecretBase_Text_Trainer1AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer1PreChampion::
 	msgbox SecretBase_Text_Trainer1PreChampion, MSGBOX_DEFAULT
@@ -378,7 +349,6 @@ SecretBase_EventScript_Trainer2::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer2DeclineBattle
 	msgbox SecretBase_Text_Trainer2AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer2PreChampion::
 	msgbox SecretBase_Text_Trainer2PreChampion, MSGBOX_DEFAULT
@@ -412,7 +382,6 @@ SecretBase_EventScript_Trainer3::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer3DeclineBattle
 	msgbox SecretBase_Text_Trainer3AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer3PreChampion::
 	msgbox SecretBase_Text_Trainer3PreChampion, MSGBOX_DEFAULT
@@ -446,7 +415,6 @@ SecretBase_EventScript_Trainer4::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer4DeclineBattle
 	msgbox SecretBase_Text_Trainer4AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer4PreChampion::
 	msgbox SecretBase_Text_Trainer4PreChampion, MSGBOX_DEFAULT
@@ -480,7 +448,6 @@ SecretBase_EventScript_Trainer5::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer5DeclineBattle
 	msgbox SecretBase_Text_Trainer5AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer5PreChampion::
 	msgbox SecretBase_Text_Trainer5PreChampion, MSGBOX_DEFAULT
@@ -514,7 +481,6 @@ SecretBase_EventScript_Trainer6::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer6DeclineBattle
 	msgbox SecretBase_Text_Trainer6AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer6PreChampion::
 	msgbox SecretBase_Text_Trainer6PreChampion, MSGBOX_DEFAULT
@@ -548,7 +514,6 @@ SecretBase_EventScript_Trainer7::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer7DeclineBattle
 	msgbox SecretBase_Text_Trainer7AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer7PreChampion::
 	msgbox SecretBase_Text_Trainer7PreChampion, MSGBOX_DEFAULT
@@ -582,7 +547,6 @@ SecretBase_EventScript_Trainer8::
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer8DeclineBattle
 	msgbox SecretBase_Text_Trainer8AcceptBattle, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_BattleTrainer
-	end
 
 SecretBase_EventScript_Trainer8PreChampion::
 	msgbox SecretBase_Text_Trainer8PreChampion, MSGBOX_DEFAULT
@@ -615,7 +579,17 @@ SecretBase_EventScript_Trainer9::
 	call Common_EventScript_SaveGame
 	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_Trainer9DeclineBattle
 	msgbox SecretBase_Text_Trainer9AcceptBattle, MSGBOX_DEFAULT
-	goto SecretBase_EventScript_BattleTrainer
+SecretBase_EventScript_BattleTrainer::
+	special PrepSecretBaseBattleFlags
+	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
+	setvar VAR_0x8005, 0
+	special DoSpecialTrainerBattle
+	waitstate
+	call_if_eq VAR_RESULT, B_OUTCOME_DREW, SecretBase_EventScript_DrewSecretBaseBattle
+	call_if_eq VAR_RESULT, B_OUTCOME_WON, SecretBase_EventScript_WonSecretBaseBattle
+	call_if_eq VAR_RESULT, B_OUTCOME_LOST, SecretBase_EventScript_LostSecretBaseBattle
+	special HealPlayerParty
+	release
 	end
 
 SecretBase_EventScript_Trainer9PreChampion::
@@ -633,19 +607,6 @@ SecretBase_EventScript_Trainer9DeclineBattle::
 
 SecretBase_EventScript_Trainer9PostBattle::
 	msgbox SecretBase_Text_Trainer9PostBattle, MSGBOX_DEFAULT
-	release
-	end
-
-SecretBase_EventScript_BattleTrainer::
-	special PrepSecretBaseBattleFlags
-	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
-	setvar VAR_0x8005, 0
-	special DoSpecialTrainerBattle
-	waitstate
-	call_if_eq VAR_RESULT, B_OUTCOME_DREW, SecretBase_EventScript_DrewSecretBaseBattle
-	call_if_eq VAR_RESULT, B_OUTCOME_WON, SecretBase_EventScript_WonSecretBaseBattle
-	call_if_eq VAR_RESULT, B_OUTCOME_LOST, SecretBase_EventScript_LostSecretBaseBattle
-	special HealPlayerParty
 	release
 	end
 
