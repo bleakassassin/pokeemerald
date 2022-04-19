@@ -3154,7 +3154,19 @@ static void BufferMonTrainerMemo(void)
 
         if (sum->metLocation < MAPSEC_NONE)
         {
-            GetMapNameHandleAquaHideout(metLocationString, sum->metLocation);
+            if (sum->metLocation == MAPSEC_AQUA_HIDEOUT_OLD)
+			{
+				if (sum->metGame == VERSION_RUBY)
+					GetMapNameGeneric(metLocationString, MAPSEC_MAGMA_HIDEOUT);
+				else
+					GetMapNameGeneric(metLocationString, MAPSEC_AQUA_HIDEOUT);
+			}
+			else if (sum->metLocation == MAPSEC_ROUTE_130 && (sum->species == SPECIES_WYNAUT || sum->species == SPECIES_WOBBUFFET || sum->species == SPECIES_PORYGON) && sum->metLevel > 0)
+				GetMapNameGeneric(metLocationString, MAPSEC_MIRAGE_ISLAND);
+			else if (sum->metLocation == MAPSEC_BATTLE_FRONTIER && (sum->metGame != VERSION_EMERALD))
+				StringCopy(metLocationString, gText_BattleTower);
+            else
+                GetMapNameGeneric(metLocationString, sum->metLocation);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
         }
 
