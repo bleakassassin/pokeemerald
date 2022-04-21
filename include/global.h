@@ -134,7 +134,7 @@
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
 
-#define REGISTERED_ITEMS_MAX 16
+#define REGISTERED_ITEMS_MAX 10
 
 struct Coords8
 {
@@ -486,10 +486,13 @@ struct SaveBlock2
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
+             u16 optionsAttackStyle:1; // OPTIONS_ATTACK_STYLE_[TYPE/CATEGORY]
+             u16 optionsDisableMatchCall:1; // OPTIONS_MATCH_CALL [ON/OFF]
+             u16 optionsCurrentFont:2;  // Specifies one of three fonts to use (Emerald, FR/LG, R/S)
     /*0x18*/ struct Pokedex pokedex;
-    /*0x90*/ u8 outfitId;
-    /*0x91*/ bool8 autoRun;
-    /*0x92*/ u8 filler_92[0x6];
+    /*0x90*/ u8 outfitId:7;
+    /*0x90*/ u8 autoRun:1;
+    /*0x91*/ u8 filler_91[0x7];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
     /*0xA8*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
@@ -503,8 +506,7 @@ struct SaveBlock2
     /*0x57C*/ struct RankingHall2P hallRecords2P[FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.
     /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x64C*/ struct BattleFrontier frontier;
-    /*0xF2C*/ u16 optionsAttackStyle:1; // OPTIONS_ATTACK_STYLE_[TYPE/CATEGORY]
-}; // sizeof=0xF2D
+}; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
@@ -1025,7 +1027,10 @@ struct SaveBlock1
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
     /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];
-    /*0x35D8*/ u8 unused_35D8[0x140];
+    /*0x35D8*/ u8 registeredItemLastSelected:4; //max 16 items
+               u8 registeredItemListCount:4;
+    /*0x35D9*/ struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
+    /*0x3601*/ u8 unused_3601[0x111];
     /*0x3718*/ u32 trainerHillTimes[4];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
@@ -1037,9 +1042,6 @@ struct SaveBlock1
     /*0x3D64*/ struct SaveTrainerHill trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
-               u8 registeredItemLastSelected:4; //max 16 items
-               u8 registeredItemListCount:4;
-               struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
