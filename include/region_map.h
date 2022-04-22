@@ -106,7 +106,6 @@ void CreateRegionMapCursor(u16 tileTag, u16 paletteTag);
 bool32 IsEventIslandMapSecId(u8 mapSecId);
 u8 *GetMapName(u8 *, u16, u16);
 u8 *GetMapNameGeneric(u8 *dest, u16 mapSecId);
-u8 *GetMapNameHandleAquaHideout(u8 *dest, u16 mapSecId);
 u16 CorrectSpecialMapSecId(u16 mapSecId);
 void ShowRegionMapForPokedexAreaScreen(struct RegionMap *regionMap);
 void PokedexAreaScreen_UpdateRegionMapVariablesAndVideoRegs(s16 x, s16 y);

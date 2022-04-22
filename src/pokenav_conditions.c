@@ -91,7 +91,7 @@ static u32 HandleConditionMenuInput(struct Pokenav_ConditionMenu *menu)
     {
         if (JOY_NEW(B_BUTTON))
         {
-            PlaySE(SE_SELECT);
+            PlaySE(SE_PC_OFF);
             menu->callback = GetConditionReturnCallback;
             ret = CONDITION_FUNC_RETURN;
         }
@@ -103,7 +103,7 @@ static u32 HandleConditionMenuInput(struct Pokenav_ConditionMenu *menu)
                 if (monListPtr->currIndex == monListPtr->listCount - 1)
                 {
                     // Cancel
-                    PlaySE(SE_SELECT);
+                    PlaySE(SE_PC_OFF);
                     menu->callback = GetConditionReturnCallback;
                     ret = CONDITION_FUNC_RETURN;
                 }
@@ -174,7 +174,7 @@ static u8 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *menu)
         // Prevent input wrapping in search mode
         if (!menu->inSearchMode || monListPtr->currIndex != 0)
         {
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             ret = SwitchConditionSummaryIndex(TRUE);
         }
     }
@@ -183,7 +183,7 @@ static u8 ConditionGraphHandleDpadInput(struct Pokenav_ConditionMenu *menu)
         // Prevent input wrapping in search mode
         if (!menu->inSearchMode || monListPtr->currIndex < monListPtr->listCount - 1)
         {
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             ret = SwitchConditionSummaryIndex(FALSE);
         }
     }

@@ -115,7 +115,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	bufferleadmonspeciesname STR_VAR_1
 	message LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon
 	waitmessage
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_EVOLVED
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
@@ -381,7 +381,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AddedJohtoStarter::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter::
 	call_if_ne VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 10, LittlerootTown_ProfessorBirchsLab_EventScript_PickedFinePokemon
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_EVOLVED
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter
 	waitmessage
 	waitfanfare

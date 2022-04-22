@@ -3154,7 +3154,19 @@ static void BufferMonTrainerMemo(void)
 
         if (sum->metLocation < MAPSEC_NONE)
         {
-            GetMapNameHandleAquaHideout(metLocationString, sum->metLocation);
+            if (sum->metLocation == MAPSEC_AQUA_HIDEOUT_OLD)
+			{
+				if (sum->metGame == VERSION_RUBY)
+					GetMapNameGeneric(metLocationString, MAPSEC_MAGMA_HIDEOUT);
+				else
+					GetMapNameGeneric(metLocationString, MAPSEC_AQUA_HIDEOUT);
+			}
+			else if (sum->metLocation == MAPSEC_ROUTE_130 && (sum->species == SPECIES_WYNAUT || sum->species == SPECIES_WOBBUFFET || sum->species == SPECIES_PORYGON) && sum->metLevel > 0)
+				GetMapNameGeneric(metLocationString, MAPSEC_MIRAGE_ISLAND);
+			else if (sum->metLocation == MAPSEC_BATTLE_FRONTIER && (sum->metGame != VERSION_EMERALD))
+				StringCopy(metLocationString, gText_BattleTower);
+            else
+                GetMapNameGeneric(metLocationString, sum->metLocation);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(4, metLocationString);
         }
 
@@ -3971,7 +3983,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
                                                           summary->species2,
                                                           summary->pid);
             else
-                HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2], 
+                HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2], 
                                            gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                                            summary->species2,
                                            summary->pid);
@@ -3981,7 +3993,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
             if (gMonSpritesGfxPtr != NULL)
             {
                 if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->unk40EF == TRUE)
-                    HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2],
+                    HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2],
                                                gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_LEFT],
                                                summary->species2, 
                                                summary->pid);
@@ -3994,7 +4006,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
             else
             {
                 if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->unk40EF == TRUE)
-                    HandleLoadSpecialPokePic_2(&gMonFrontPicTable[summary->species2],
+                    HandleLoadSpecialPokePic(&gMonFrontPicTable[summary->species2],
                                                 MonSpritesGfxManager_GetSpritePtr(MON_SPR_GFX_MANAGER_A, B_POSITION_OPPONENT_LEFT),
                                                 summary->species2,
                                                 summary->pid);

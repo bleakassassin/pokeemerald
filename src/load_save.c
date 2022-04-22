@@ -287,7 +287,7 @@ void FixImportedSave(void)
         FlagClear(FLAG_CAUGHT_ROAMING_LATI);
         FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
         
-        gSaveBlock1Ptr->registeredItem = 0;
+        gSaveBlock1Ptr->registeredItem = ITEM_NONE;
 
         if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE )
         {

@@ -481,7 +481,7 @@ static u32 LoopedTask_ExitRegionMap(s32 taskState)
     switch (taskState)
     {
     case 0:
-        PlaySE(SE_SELECT);
+        PlaySE(SE_PC_OFF);
         PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         return LT_INC_AND_PAUSE;
     case 1:
@@ -857,6 +857,6 @@ static void CB_FlyFromRegionMap(void)
             SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], WARP_ID_NONE);
         break;
     }
-    FlagSet(FLAG_SYS_WILD_HM);
+    FlagSet(FLAG_SYS_WILD_FIELD_MOVE);
     ReturnToFieldFromFlyMapSelect();
 }

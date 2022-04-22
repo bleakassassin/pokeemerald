@@ -490,10 +490,10 @@ static u32 LoopedTask_MoveSearchListCursorUp(s32 state)
         case 0:
             return LT_FINISH;
         case 1:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             return LT_SET_STATE(2);
         case 2:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             break;
         }
         return LT_INC_AND_PAUSE;
@@ -523,10 +523,10 @@ static u32 LoopedTask_MoveSearchListCursorDown(s32 state)
         case 0:
             return LT_FINISH;
         case 1:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             return LT_SET_STATE(2);
         case 2:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_SCROLL);
             break;
         }
         return LT_INC_AND_PAUSE;
@@ -556,10 +556,10 @@ static u32 LoopedTask_MoveSearchListPageUp(s32 state)
         case 0:
             return LT_FINISH;
         case 1:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_PAGE);
             return LT_SET_STATE(2);
         case 2:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_PAGE);
             break;
         }
         return LT_INC_AND_PAUSE;
@@ -589,10 +589,10 @@ static u32 LoopedTask_MoveSearchListPageDown(s32 state)
         case 0:
             return LT_FINISH;
         case 1:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_PAGE);
             return LT_SET_STATE(2);
         case 2:
-            PlaySE(SE_SELECT);
+            PlaySE(SE_DEX_PAGE);
             break;
         }
         return LT_INC_AND_PAUSE;
@@ -616,7 +616,7 @@ static u32 LoopedTask_ExitConditionSearchMenu(s32 state)
     switch (state)
     {
     case 0:
-        PlaySE(SE_SELECT);
+        PlaySE(SE_PC_OFF);
         PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         SlideMenuHeaderDown();
         return LT_INC_AND_PAUSE;
@@ -636,7 +636,7 @@ static u32 LoopedTask_SelectSearchResult(s32 state)
     switch (state)
     {
     case 0:
-        PlaySE(SE_SELECT);
+        PlaySE(SE_PIN);
         PokenavFadeScreen(POKENAV_FADE_TO_BLACK);
         return LT_INC_AND_PAUSE;
     case 1:
