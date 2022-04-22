@@ -300,6 +300,7 @@ const u8 gText_NumberItem_HM[] = _("{CLEAR_TO 0x11}{STR_VAR_1}{CLEAR 0x05}{STR_V
 const u8 gText_SizeSlash[] = _("SIZE /");
 const u8 gText_FirmSlash[] = _("FIRM /");
 const u8 gText_Var1DotVar2[] = _("{STR_VAR_1}.{STR_VAR_2}”");
+const u8 gText_Var1DotVar2_Metric[] = _("{STR_VAR_1}.{STR_VAR_2}cm");
 
 // Berry firmness strings
 const u8 gBerryFirmnessString_VerySoft[] = _("Very soft");
@@ -1507,13 +1508,17 @@ const u8 gText_TextSpeed[] = _("TEXT SPEED");
 const u8 gText_BattleScene[] = _("BATTLE EFFECTS");
 const u8 gText_BattleStyle[] = _("DIFFICULTY");
 const u8 gText_AttackStyle[] = _("ATTACK STYLE");
+const u8 gText_MatchCalls[] = _("MATCH CALLS");
 const u8 gText_Sound[] = _("SOUND");
 const u8 gText_Frame[] = _("FRAME");
+const u8 gText_Font[] = _("FONT");
 const u8 gText_OptionMenuCancel[] = _("CANCEL");
 const u8 gText_ButtonMode[] = _("BUTTON MODE");
 const u8 gText_TextSpeedSlow[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SLOW");
 const u8 gText_TextSpeedMid[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}MID");
 const u8 gText_TextSpeedFast[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FAST");
+const u8 gText_UnitSystemMetric[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}METRIC");
+const u8 gText_UnitSystemImperial[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}IMPERIAL");
 const u8 gText_BattleSceneOn[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}ON");
 const u8 gText_BattleSceneOff[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}OFF");
 const u8 gText_BattleStyleShift[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL");
@@ -1526,6 +1531,8 @@ const u8 gText_FrameType[] = _("{COLOR RED}{SHADOW LIGHT_RED}TYPE");
 const u8 gText_FrameTypeNumber[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}");
 const u8 gText_ButtonTypeDefault[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}DEFAULT");
 const u8 gText_ButtonTypeLEqualsA[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}L=A");
+const u8 gText_OptionFontEmerald[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}EMERALD");
+const u8 gText_OptionFontFireRed[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FRLG");
 const u8 gText_NumPlayerLink[] = _("{STR_VAR_1}P LINK");
 const u8 gText_BronzeCard[] = _("BRONZE");
 const u8 gText_CopperCard[] = _("COPPER");

@@ -1152,7 +1152,8 @@ bool32 TryStartMatchCall(void)
         && UpdateMatchCallMinutesCounter()
         && CheckMatchCallChance()
         && MapAllowsMatchCall()
-        && SelectMatchCallTrainer())
+        && SelectMatchCallTrainer()
+        && !gSaveBlock2Ptr->optionsDisableMatchCall)
     {
         StartMatchCall();
         return TRUE;
