@@ -14,6 +14,7 @@
 #include "constants/maps.h"
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
+#include "constants/trainer_hill.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -280,8 +281,6 @@ struct BattleTowerPokemon
     u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 friendship;
 };
-
-#define NULL_BATTLE_TOWER_POKEMON { .nickname = __("$$$$$$$$$$$") }
 
 struct EmeraldBattleTowerRecord
 {
@@ -832,7 +831,7 @@ struct TrainerNameRecord
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
-struct SaveTrainerHill
+struct TrainerHillSave
 {
     /*0x3D64*/ u32 timer;
     /*0x3D68*/ u32 bestTime;
@@ -844,7 +843,7 @@ struct SaveTrainerHill
     /*0x3D6E*/ u16 hasLost:1;
     /*0x3D6E*/ u16 maybeECardScanDuringChallenge:1;
     /*0x3D6E*/ u16 field_3D6E_0f:1;
-    /*0x3D6E*/ u16 tag:2;
+    /*0x3D6E*/ u16 mode:2; // HILL_MODE_*
 };
 
 struct WonderNewsMetadata
@@ -1031,7 +1030,7 @@ struct SaveBlock1
                u8 registeredItemListCount:4;
     /*0x35D9*/ struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
     /*0x3601*/ u8 unused_3601[0x111];
-    /*0x3718*/ u32 trainerHillTimes[4];
+    /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
@@ -1039,7 +1038,7 @@ struct SaveBlock1
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3D5A*/ u8 unused_3D5A[10];
-    /*0x3D64*/ struct SaveTrainerHill trainerHill;
+    /*0x3D64*/ struct TrainerHillSave trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3D88
 };
