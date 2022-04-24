@@ -236,6 +236,14 @@ static const u8 sMenuCursorDimensions[][2] =
 
 static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
 
+static const struct FontType sFontTypes[] = {
+    {gFontNormalLatinGlyphs, gFontNormalLatinGlyphWidths},
+    {gFontShortLatinGlyphs,  gFontShortLatinGlyphWidths},
+    {gFontTallLatinGlyphs,   gFontNormalLatinGlyphWidths},
+    {gFontLargeLatinGlyphs,  gFontNormalLatinGlyphWidths},
+    {gFontHGSSLatinGlyphs,   gFontHGSSLatinGlyphWidths}
+};
+
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
     gFonts = fonts;
@@ -1899,16 +1907,9 @@ static void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
     }
     else
     {
-        if (gSaveBlock2Ptr->optionsCurrentFont == 0)
-        {
-            glyphs = gFontNormalLatinGlyphs + (0x20 * glyphId);
-            gCurGlyph.width = gFontNormalLatinGlyphWidths[glyphId];
-        }
-        else
-        {
-            glyphs = gFontShortLatinGlyphs + (0x20 * glyphId);
-            gCurGlyph.width = gFontShortLatinGlyphWidths[glyphId];
-        }
+        u8 i = gSaveBlock2Ptr->optionsCurrentFont;
+        glyphs = sFontTypes[i].font + (0x20 * glyphId);
+        gCurGlyph.width = sFontTypes[i].width[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
@@ -1929,14 +1930,12 @@ static void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
 
 static u32 GetGlyphWidth_Normal(u16 glyphId, bool32 isJapanese)
 {
+    u8 i = gSaveBlock2Ptr->optionsCurrentFont;
+
     if (isJapanese == TRUE)
         return 8;
-    else {
-        if (gSaveBlock2Ptr->optionsCurrentFont == 0)
-            return gFontNormalLatinGlyphWidths[glyphId];
-        else
-            return gFontShortLatinGlyphWidths[glyphId];
-    }
+    else
+        return sFontTypes[i].width[glyphId];
 }
 
 static void DecompressGlyph_Bold(u16 glyphId)

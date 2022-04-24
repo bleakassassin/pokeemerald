@@ -5,6 +5,14 @@
 
 #define NUM_TEXT_PRINTERS 32
 
+#define FONT_TYPE_EMERALD 0
+#define FONT_TYPE_FRLG    1
+#define FONT_TYPE_RS_EUR  2
+#define FONT_TYPE_RS_USA  3
+#define FONT_TYPE_HGSS    4
+
+#define FONT_TYPES_COUNT 5
+
 // Given as a text speed when all the text should be
 // loaded at once but not copied to vram yet.
 #define TEXT_SKIP_DRAW 0xFF
@@ -130,6 +138,12 @@ struct TextGlyph
     u32 gfxBufferBottom[16];
     u8 width;
     u8 height;
+};
+
+struct FontType
+{
+    const u16 *font;
+    const u8 *width;
 };
 
 extern TextFlags gTextFlags;

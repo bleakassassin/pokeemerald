@@ -305,6 +305,15 @@ $(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/tall.latfont: $(FONTGFXDIR)/latin_tall.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/large.latfont: $(FONTGFXDIR)/latin_large.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/hgss.latfont: $(FONTGFXDIR)/latin_hgss.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
 	$(GFX) $< $@
 
