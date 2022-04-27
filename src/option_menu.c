@@ -65,12 +65,10 @@ static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
-static void DrawChoices_MatchCall(int selection, int y);
 static void DrawTextOption(void);
 static void DrawOptionMenuTexts(void);
 static void DrawBgWindowFrames(void);
 static int ProcessInput_Sound(int selection);
-static int ProcessInput_BattleStyle(int selection);
 static int ProcessInput_FrameType(int selection);
 static int ProcessInput_FontType(int selection);
 static int ProcessInput_Options_Two(int selection);
@@ -88,12 +86,12 @@ static const sItemFunctions[MENUITEM_COUNT] =
     [MENUITEM_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_ATTACKSTYLE]  = {DrawChoices_AttackStyle, ProcessInput_Options_Two},
-    [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Options_Two},
+    [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Sound},
     [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Two},
     [MENUITEM_UNIT_SYSTEM]  = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_FONT]         = {DrawChoices_FrameType,   ProcessInput_FontType}, 
-    [MENUITEM_MATCHCALL]    = {DrawChoices_MatchCall,   ProcessInput_Options_Two},
+    [MENUITEM_MATCHCALL]    = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_CANCEL]       = {NULL, NULL},
 };
 
@@ -103,9 +101,6 @@ EWRAM_DATA static struct OptionMenu *sOptions = NULL;
 static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text.gbapal");
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
-
-static const u8 sText_HpBar[] = _("HP BAR");
-static const u8 sText_ExpBar[] = _("EXP BAR");
 static const u8 sText_UnitSystem[] = _("UNIT SYSTEM");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
@@ -549,22 +544,10 @@ static void DrawChoices_BattleScene(int selection, int y)
     DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), y, styles[1]);
 }
 
-static int ProcessInput_BattleStyle(int selection)
-{
-    if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
-    {
-        selection ^= 1;
-    }
-
-    return selection;
-}
-
 static void DrawChoices_BattleStyle(int selection, int y)
 {
     u8 styles[2] = {0};
 
-    styles[0] = 0;
-    styles[1] = 0;
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_BattleStyleShift, 104, y, styles[0]);
@@ -573,7 +556,7 @@ static void DrawChoices_BattleStyle(int selection, int y)
 
 static void DrawChoices_AttackStyle(int selection, int y)
 {
-    u8 styles[2];
+    u8 styles[2] = {0};
 
     styles[selection] = 1;
 
@@ -602,28 +585,9 @@ static void DrawChoices_Sound(int selection, int y)
     DrawOptionMenuChoice(gText_SoundStereo, GetStringRightAlignXOffset(FONT_NORMAL, gText_SoundStereo, 198), y, styles[1]);
 }
 
-static int ButtonMode_ProcessInput(int selection)
-{
-    if (JOY_NEW(DPAD_RIGHT))
-    {
-        if (selection <= 1)
-            selection++;
-        else
-            selection = 0;
-    }
-    if (JOY_NEW(DPAD_LEFT))
-    {
-        if (selection != 0)
-            selection--;
-        else
-            selection = 2;
-    }
-    return selection;
-}
-
 static void DrawChoices_ButtonMode(int selection, int y)
 {
-    u8 styles[2];
+    u8 styles[2] = {0};
 
     styles[selection] = 1;
 
@@ -714,16 +678,6 @@ static void DrawChoices_FrameType(int selection, int y)
 
     DrawOptionMenuChoice(gText_FrameType, 104, y, 0);
     DrawOptionMenuChoice(text, 131, y, 1);
-}
-
-static void DrawChoices_MatchCall(int selection, int y)
-{
-    u8 styles[2] = {0};
-
-    styles[selection] = 1;
-
-    DrawOptionMenuChoice(gText_BattleSceneOn, 104, y, styles[0]);
-    DrawOptionMenuChoice(gText_BattleSceneOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleSceneOff, 198), y, styles[1]);
 }
 
 static void DrawTextOption(void)
