@@ -674,7 +674,7 @@ static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)
     *ptr++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(ptr, max, STR_CONV_MODE_RIGHT_ALIGN, 3);
     x = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, strbuf, 56);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, strbuf, x, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, strbuf, x, 0, TEXT_SKIP_DRAW, NULL);
 }
 
 static void CreateRibbonMonsList(void)

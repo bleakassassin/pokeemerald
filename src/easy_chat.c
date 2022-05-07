@@ -4003,10 +4003,10 @@ static void PrintEasyChatStdMessage(u8 msgId)
 
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     if (text1)
-        PrintEasyChatText(1, gSaveBlock2Ptr->optionsCurrentFont, text1, 0, 1, TEXT_SKIP_DRAW, 0);
+        PrintEasyChatText(1, gSaveBlock2Ptr->optionsCurrentFont, text1, 0, 0, TEXT_SKIP_DRAW, 0);
 
     if (text2)
-        PrintEasyChatText(1, gSaveBlock2Ptr->optionsCurrentFont, text2, 0, 17, TEXT_SKIP_DRAW, 0);
+        PrintEasyChatText(1, gSaveBlock2Ptr->optionsCurrentFont, text2, 0, 16, TEXT_SKIP_DRAW, 0);
 
     CopyWindowToVram(1, COPYWIN_FULL);
 }
@@ -4099,7 +4099,7 @@ static void PrintCurrentPhrase(void)
         }
 
         *str = EOS;
-        PrintEasyChatText(sScreenControl->windowId, gSaveBlock2Ptr->optionsCurrentFont, sScreenControl->phrasePrintBuffer, 0, i * 16 + 1, TEXT_SKIP_DRAW, 0);
+        PrintEasyChatText(sScreenControl->windowId, gSaveBlock2Ptr->optionsCurrentFont, sScreenControl->phrasePrintBuffer, 0, i * 16, TEXT_SKIP_DRAW, 0);
     }
 
     CopyWindowToVram(sScreenControl->windowId, COPYWIN_FULL);
@@ -4233,7 +4233,7 @@ static void PrintKeyboardGroupNames(void)
     int x, y;
 
     i = 0;
-    y = 97;
+    y = 96;
     while (1)
     {
         for (x = 0; x < 2; x++)
@@ -4257,7 +4257,7 @@ static void PrintKeyboardAlphabet(void)
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sEasyChatKeyboardAlphabet); i++)
-        PrintEasyChatText(2, gSaveBlock2Ptr->optionsCurrentFont, sEasyChatKeyboardAlphabet[i], 10, 97 + i * 16, TEXT_SKIP_DRAW, NULL);
+        PrintEasyChatText(2, gSaveBlock2Ptr->optionsCurrentFont, sEasyChatKeyboardAlphabet[i], 10, 96 + i * 16, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintInitialWordSelectText(void)
@@ -4318,7 +4318,6 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
 
     wordIndex = scrollOffset * NUM_WORD_SELECT_COLUMNS;
     y = (scrollOffset * 16 + 96) & 0xFF;
-    y++;
     for (i = 0; i < numRows; i++)
     {
         for (j = 0; j < 2; j++)
@@ -5082,7 +5081,7 @@ static void AddMainScreenButtonWindow(void)
         if (str)
         {
             int x = sFooterOptionXOffsets[footerIndex][i];
-            PrintEasyChatText(windowId, gSaveBlock2Ptr->optionsCurrentFont, str, x, 1, 0, NULL);
+            PrintEasyChatText(windowId, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0, 0, NULL);
         }
     }
 

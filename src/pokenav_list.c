@@ -224,7 +224,7 @@ static u32 LoopedTask_PrintListItems(s32 state)
         if (structPtr->iconDrawFunc != NULL)
             structPtr->iconDrawFunc(structPtr->listWindow.windowId, structPtr->printIndex, row);
 
-        AddTextPrinterParameterized(structPtr->listWindow.windowId, structPtr->listWindow.fontId, structPtr->itemTextBuffer, 8, (row << 4) + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(structPtr->listWindow.windowId, structPtr->listWindow.fontId, structPtr->itemTextBuffer, 8, (row << 4), TEXT_SKIP_DRAW, NULL);
         if (++structPtr->listWindow.numPrinted >= structPtr->listWindow.numToPrint)
         {
             // Finished printing items. If icons were being drawn, draw the
