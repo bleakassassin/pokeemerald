@@ -4392,7 +4392,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     else
         textPrinter.currentChar = sBattleDomePotentialTexts[trainerTourneyId];
 
-    textPrinter.fontId = FONT_NORMAL;
+    textPrinter.fontId = gSaveBlock2Ptr->optionsCurrentFont;
     textPrinter.windowId = windowId + 4;
     textPrinter.currentX = 0;
     textPrinter.y = 4;

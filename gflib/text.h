@@ -18,13 +18,14 @@
 #define TEXT_SKIP_DRAW 0xFF
 
 enum {
-    FONT_SMALL,
     FONT_NORMAL,
+    FONT_FRLG,
+    FONT_TALL,
+    FONT_LARGE,
+    FONT_HGSS,
     FONT_SHORT,
-    FONT_SHORT_COPY_1,
-    FONT_SHORT_COPY_2,
-    FONT_SHORT_COPY_3,
     FONT_BRAILLE,
+    FONT_SMALL,
     FONT_NARROW,
     FONT_SMALL_NARROW, // Very similar to FONT_SMALL, some glyphs are narrower
     FONT_BOLD, // JP glyph set only

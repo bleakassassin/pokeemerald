@@ -318,10 +318,9 @@ extern const u8 gText_BattleStyle[];
 extern const u8 gText_AttackStyle[];
 extern const u8 gText_MatchCalls[];
 extern const u8 gText_Sound[];
+extern const u8 gText_UnitSystem[];
 extern const u8 gText_Frame[];
 extern const u8 gText_Font[];
-extern const u8 gText_OptionFontFireRed[];
-extern const u8 gText_OptionFontEmerald[];
 extern const u8 gText_OptionMenuCancel[];
 extern const u8 gText_ButtonMode[];
 

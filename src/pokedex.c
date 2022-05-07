@@ -3167,7 +3167,7 @@ static void PrintInfoScreenText(const u8* str, u8 left, u8 top)
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
 
-    AddTextPrinterParameterized4(0, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(0, gSaveBlock2Ptr->optionsCurrentFont, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 #define tScrolling       data[0]
@@ -3752,7 +3752,7 @@ static void Task_LoadSizeScreen(u8 taskId)
 
             StringCopy(string, gText_SizeComparedTo);
             StringAppend(string, gSaveBlock2Ptr->playerName);
-            PrintInfoScreenText(string, GetStringCenterAlignXOffset(FONT_NORMAL, string, 0xF0), 0x79);
+            PrintInfoScreenText(string, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, string, 0xF0), 0x79);
             gMain.state++;
         }
         break;
@@ -4100,7 +4100,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     const u8 *description;
 
     if (newEntry)
-        PrintInfoScreenText(gText_PokedexRegistration, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PokedexRegistration, 0xF0), 0);
+        PrintInfoScreenText(gText_PokedexRegistration, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_PokedexRegistration, 0xF0), 0);
     if (value == 0)
         value = NationalToHoennOrder(num);
     else
@@ -4139,7 +4139,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         description = gPokedexEntries[num].description;
     else
         description = gExpandedPlaceholder_PokedexDescription;
-    PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, 0xF0), 0x5F);
+    PrintInfoScreenText(description, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, description, 0xF0), 0x5F);
 }
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)
@@ -4561,7 +4561,7 @@ static void PrintInfoSubMenuText(u8 windowId, const u8 *str, u8 left, u8 top)
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
 
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(windowId, gSaveBlock2Ptr->optionsCurrentFont, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void UnusedPrintNum(u8 windowId, u16 num, u8 left, u8 top)
@@ -4868,7 +4868,7 @@ static void PrintSearchText(const u8 *str, u32 x, u32 y)
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_DARK_GRAY;
-    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(0, gSaveBlock2Ptr->optionsCurrentFont, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void ClearSearchMenuRect(u32 x, u32 y, u32 width, u32 height)
@@ -5481,24 +5481,24 @@ static void PrintSelectedSearchParameters(u8 taskId)
     ClearSearchMenuRect(40, 16, 96, 80);
 
     searchParamId = gTasks[taskId].tCursorPos_Name + gTasks[taskId].tScrollOffset_Name;
-    PrintSearchText(sDexSearchNameOptions[searchParamId].title, 0x2D, 0x11);
+    PrintSearchText(sDexSearchNameOptions[searchParamId].title, 0x2D, 0x10);
 
     searchParamId = gTasks[taskId].tCursorPos_Color + gTasks[taskId].tScrollOffset_Color;
-    PrintSearchText(sDexSearchColorOptions[searchParamId].title, 0x2D, 0x21);
+    PrintSearchText(sDexSearchColorOptions[searchParamId].title, 0x2D, 0x20);
 
     searchParamId = gTasks[taskId].tCursorPos_TypeLeft + gTasks[taskId].tScrollOffset_TypeLeft;
-    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x2D, 0x31);
+    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x2D, 0x30);
 
     searchParamId = gTasks[taskId].tCursorPos_TypeRight + gTasks[taskId].tScrollOffset_TypeRight;
-    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x5D, 0x31);
+    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x5D, 0x30);
 
     searchParamId = gTasks[taskId].tCursorPos_Order + gTasks[taskId].tScrollOffset_Order;
-    PrintSearchText(sDexOrderOptions[searchParamId].title, 0x2D, 0x41);
+    PrintSearchText(sDexOrderOptions[searchParamId].title, 0x2D, 0x40);
 
     if (IsNationalPokedexEnabled())
     {
         searchParamId = gTasks[taskId].tCursorPos_Mode + gTasks[taskId].tScrollOffset_Mode;
-        PrintSearchText(sDexModeOptions[searchParamId].title, 0x2D, 0x51);
+        PrintSearchText(sDexModeOptions[searchParamId].title, 0x2D, 0x50);
     }
 }
 
@@ -5702,7 +5702,7 @@ static void CreateSearchParameterScrollArrows(u8 taskId)
 static void EraseAndPrintSearchTextBox(const u8* str)
 {
     ClearSearchMenuRect(8, 120, 224, 32);
-    PrintSearchText(str, 8, 121);
+    PrintSearchText(str, 8, 120);
 }
 
 static void EraseSelectorArrow(u32 y)

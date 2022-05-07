@@ -1116,7 +1116,7 @@ static bool32 IsDma3ManagerBusyWithBgCopy2(struct Pokenav_MatchCallGfx *gfx)
 
 static void PrintCallingDots(struct Pokenav_MatchCallGfx *gfx)
 {
-    AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, sText_CallingDots, 32, 1, 1, NULL);
+    AddTextPrinterParameterized(gfx->msgBoxWindowId, gSaveBlock2Ptr->optionsCurrentFont, sText_CallingDots, 32, 0, 1, NULL);
 }
 
 static bool32 WaitForCallingDotsText(struct Pokenav_MatchCallGfx *gfx)
@@ -1127,7 +1127,7 @@ static bool32 WaitForCallingDotsText(struct Pokenav_MatchCallGfx *gfx)
 
 static void PrintTrainerIsCloseBy(struct Pokenav_MatchCallGfx *gfx)
 {
-    AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, gText_TrainerCloseBy, 0, 1, 1, NULL);
+    AddTextPrinterParameterized(gfx->msgBoxWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_TrainerCloseBy, 0, 0, 1, NULL);
 }
 
 static bool32 WaitForTrainerIsCloseByText(struct Pokenav_MatchCallGfx *gfx)
@@ -1141,7 +1141,7 @@ static void PrintMatchCallMessage(struct Pokenav_MatchCallGfx *gfx)
     int index = PokenavList_GetSelectedIndex();
     const u8 *str = GetMatchCallMessageText(index, &gfx->newRematchRequest);
     u8 speed = GetPlayerTextSpeedDelay();
-    AddTextPrinterParameterized(gfx->msgBoxWindowId, FONT_NORMAL, str, 32, 1, speed, NULL);
+    AddTextPrinterParameterized(gfx->msgBoxWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, 32, 0, speed, NULL);
 }
 
 static bool32 WaitForMatchCallMessageText(struct Pokenav_MatchCallGfx *gfx)

@@ -355,25 +355,25 @@ static void CreatePCMultichoice(void)
         numChoices = 4;
         windowId = CreateWindowFromRect(0, 0, width, 8);
         SetStandardWindowBorderStyle(windowId, 0);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_HallOfFame, y, 33, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, y, 49, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_HallOfFame, y, 32, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LogOff, y, 48, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
         numChoices = 3;
         windowId = CreateWindowFromRect(0, 0, width, 6);
         SetStandardWindowBorderStyle(windowId, 0);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, y, 33, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LogOff, y, 32, TEXT_SKIP_DRAW, NULL);
     }
 
     // Change PC name if player has met Lanette
     if (FlagGet(FLAG_SYS_PC_LANETTE))
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LanettesPC, y, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LanettesPC, y, 0, TEXT_SKIP_DRAW, NULL);
     else
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, y, 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SomeonesPC, y, 0, TEXT_SKIP_DRAW, NULL);
 
     StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
-    PrintPlayerNameOnWindow(windowId, gStringVar4, y, 17);
+    PrintPlayerNameOnWindow(windowId, gStringVar4, y, 16);
     InitMenuInUpperLeftCornerNormal(windowId, numChoices, 0);
     CopyWindowToVram(windowId, COPYWIN_FULL);
     InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
@@ -382,7 +382,7 @@ static void CreatePCMultichoice(void)
 void ScriptMenu_DisplayPCStartupPrompt(void)
 {
     LoadMessageBoxAndFrameGfx(0, TRUE);
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_WhichPCShouldBeAccessed, 0, NULL, 2, 1, 3);
+    AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, gText_WhichPCShouldBeAccessed, 0, NULL, 2, 1, 3);
 }
 
 bool8 ScriptMenu_CreateLilycoveSSTidalMultichoice(void)
@@ -416,7 +416,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         sLilycoveSSTidalSelections[i] = 0xFF;
     }
 
-    GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH);
+    GetFontAttribute(gSaveBlock2Ptr->optionsCurrentFont, FONTATTR_MAX_LETTER_WIDTH);
 
     if (gSpecialVar_0x8004 == 0)
     {
@@ -529,7 +529,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
         {
             if (sLilycoveSSTidalSelections[i] != 0xFF)
             {
-                AddTextPrinterParameterized(windowId, FONT_NORMAL, sLilycoveSSTidalDestinations[sLilycoveSSTidalSelections[i]], 8, selectionCount * 16 + 1, TEXT_SKIP_DRAW, NULL);
+                AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, sLilycoveSSTidalDestinations[sLilycoveSSTidalSelections[i]], 8, selectionCount * 16, TEXT_SKIP_DRAW, NULL);
                 selectionCount++;
             }
         }
@@ -577,7 +577,7 @@ static void CreateDevonCorpFossilMultichoice(void)
         sDevonCorpFossilSelections[i] = 0xFF;
     }
 
-    GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH);
+    GetFontAttribute(gSaveBlock2Ptr->optionsCurrentFont, FONTATTR_MAX_LETTER_WIDTH);
 
     if (CheckBagHasItem(ITEM_HELIX_FOSSIL, 1) == TRUE)
     {
@@ -633,7 +633,7 @@ static void CreateDevonCorpFossilMultichoice(void)
         {
             if (sDevonCorpFossilSelections[i] != 0xFF)
             {
-                AddTextPrinterParameterized(windowId, FONT_NORMAL, sDevonCorpFossils[sDevonCorpFossilSelections[i]], 8, selectionCount * 16 + 1, TEXT_SKIP_DRAW, NULL);
+                AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, sDevonCorpFossils[sDevonCorpFossilSelections[i]], 8, selectionCount * 16, TEXT_SKIP_DRAW, NULL);
                 selectionCount++;
             }
         }
@@ -752,27 +752,27 @@ static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId)
     {
     case MULTI_WIRELESS_NO_BERRY:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptionsNoBerryCrush[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sWirelessOptionsNoBerryCrush[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     case MULTI_CABLE_CLUB_WITH_RECORD_MIX:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sCableClubOptions_WithRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sCableClubOptions_WithRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     case MULTI_WIRELESS_NO_RECORD:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sWirelessOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     case MULTI_WIRELESS_ALL_SERVICES:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_AllServices[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sWirelessOptions_AllServices[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     case MULTI_WIRELESS_NO_RECORD_BERRY:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sWirelessOptions_NoRecordMixBerryCrush[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sWirelessOptions_NoRecordMixBerryCrush[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     case MULTI_CABLE_CLUB_NO_RECORD_MIX:
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, FONT_NORMAL, sCableClubOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sCableClubOptions_NoRecordMix[Menu_GetCursorPos()], 0, NULL, 2, 1, 3);
         break;
     }
 }
@@ -795,15 +795,15 @@ static void CreateStartMenuForPokenavTutorial(void)
 {
     u8 windowId = CreateWindowFromRect(21, 0, 7, 18);
     SetStandardWindowBorderStyle(windowId, 0);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokedex, 8, 9, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokemon, 8, 25, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionBag, 8, 41, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionPokenav, 8, 57, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gSaveBlock2Ptr->playerName, 8, 73, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionSave, 8, 89, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionOption, 8, 105, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_MenuOptionExit, 8, 121, TEXT_SKIP_DRAW, NULL);
-    InitMenuNormal(windowId, FONT_NORMAL, 0, 9, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionPokedex, 8, 8, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionPokemon, 8, 24, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionBag, 8, 40, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionPokenav, 8, 56, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gSaveBlock2Ptr->playerName, 8, 72, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionSave, 8, 88, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionOption, 8, 104, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionExit, 8, 120, TEXT_SKIP_DRAW, NULL);
+    InitMenuNormal(windowId, gSaveBlock2Ptr->optionsCurrentFont, 0, 8, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
     InitMultichoiceNoWrap(FALSE, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), windowId, MULTI_FORCED_START_MENU);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
@@ -834,7 +834,7 @@ static int DisplayTextAndGetWidthInternal(const u8 *str)
 {
     u8 temp[64];
     StringExpandPlaceholders(temp, str);
-    return GetStringWidth(FONT_NORMAL, temp, 0);
+    return GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, temp, 0);
 }
 
 int DisplayTextAndGetWidth(const u8 *str, int prevWidth)

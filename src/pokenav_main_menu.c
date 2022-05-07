@@ -565,7 +565,7 @@ void PrintHelpBarText(u32 textId)
     struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
 
     DrawHelpBar(menu->helpBarWindowId);
-    AddTextPrinterParameterized3(menu->helpBarWindowId, FONT_NORMAL, 0, 1, sHelpBarTextColors, 0, sHelpBarTexts[textId]);
+    AddTextPrinterParameterized3(menu->helpBarWindowId, gSaveBlock2Ptr->optionsCurrentFont, 0, 1, sHelpBarTextColors, 0, sHelpBarTexts[textId]);
 }
 
 bool32 WaitForHelpBar(void)

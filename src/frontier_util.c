@@ -958,9 +958,9 @@ static bool8 IsWinStreakActive(u32 challenge)
 
 static void PrintAligned(const u8 *str, s32 y)
 {
-    s32 x = GetStringCenterAlignXOffset(FONT_NORMAL, str, 224);
-    y = (y * 8) + 1;
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x, y, TEXT_SKIP_DRAW, NULL);
+    s32 x = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 224);
+    y = (y * 8);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintHyphens(s32 y)
@@ -973,18 +973,18 @@ static void PrintHyphens(s32 y)
     text[i] = EOS;
 
     y = (y * 8) + 1;
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, text, 4, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, text, 4, y, TEXT_SKIP_DRAW, NULL);
 }
 
 // Battle Tower records.
 static void TowerPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x1, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x1, y, TEXT_SKIP_DRAW, NULL);
     if (num > MAX_STREAK)
         num = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_WinStreak);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void TowerPrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
@@ -1056,13 +1056,13 @@ static void ShowTowerResultsWindow(u8 battleMode)
         StringExpandPlaceholders(gStringVar4, gText_LinkMultiBattleRoomResults);
 
     PrintAligned(gStringVar4, 2);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 16, 49, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 16, 97, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv502, 16, 48, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 16, 98, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 72, 132, 49);
-    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_50, 72, 132, 65);
-    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 72, 132, 97);
-    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 72, 132, 113);
+    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 72, 132, 48);
+    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_50, 72, 132, 64);
+    TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 72, 132, 96);
+    TowerPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 72, 132, 112);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1079,10 +1079,10 @@ static u16 DomeGetWinStreak(u8 battleMode, u8 lvlMode)
 
 static void PrintTwoStrings(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
 {
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str1, x1, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str1, x1, y, TEXT_SKIP_DRAW, NULL);
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, str2);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void DomePrintPrevOrCurrentStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
@@ -1123,15 +1123,15 @@ static void ShowDomeResultsWindow(u8 battleMode)
         StringExpandPlaceholders(gStringVar4, gText_DoubleBattleTourneyResults);
 
     PrintAligned(gStringVar4, 0);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 33, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv502, 8, 32, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 8, 96, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    DomePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 64, 121, 33);
-    PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_50], 64, 121, 49);
-    PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_50], 64, 112, 65);
-    DomePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 64, 121, 97);
-    PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_OPEN], 64, 121, 113);
-    PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_OPEN], 64, 112, 129);
+    DomePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 64, 121, 32);
+    PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_50], 64, 121, 48);
+    PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_50], 64, 112, 64);
+    DomePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 64, 121, 96);
+    PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_OPEN], 64, 121, 112);
+    PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_OPEN], 64, 112, 128);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1139,12 +1139,12 @@ static void ShowDomeResultsWindow(u8 battleMode)
 // Battle Palace records.
 static void PalacePrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x1, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x1, y, TEXT_SKIP_DRAW, NULL);
     if (num > MAX_STREAK)
         num = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_WinStreak);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PalacePrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 y)
@@ -1199,13 +1199,13 @@ static void ShowPalaceResultsWindow(u8 battleMode)
         StringExpandPlaceholders(gStringVar4, gText_DoubleBattleHallResults);
 
     PrintAligned(gStringVar4, 2);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 16, 49, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 16, 97, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv502, 16, 48, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 16, 96, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 72, 131, 49);
-    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_50, 72, 131, 65);
-    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 72, 131, 97);
-    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 72, 131, 113);
+    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 72, 131, 48);
+    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_50, 72, 131, 64);
+    PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 72, 131, 96);
+    PalacePrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 72, 131, 112);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1222,10 +1222,10 @@ static u16 PikeGetWinStreak(u8 lvlMode)
 
 static void PikePrintCleared(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
 {
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str1, x1, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str1, x1, y, TEXT_SKIP_DRAW, NULL);
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, str2);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
@@ -1251,15 +1251,15 @@ static void ShowPikeResultsWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleChoiceResults);
     PrintAligned(gStringVar4, 0);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 33, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv502, 8, 32, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 8, 96, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 114, 33);
-    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_50], 64, 114, 49);
-    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_50], 64, 114, 65);
-    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 114, 97);
-    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_OPEN], 64, 114, 113);
-    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_OPEN], 64, 114, 129);
+    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 114, 32);
+    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_50], 64, 114, 48);
+    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_50], 64, 114, 64);
+    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 114, 96);
+    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_OPEN], 64, 114, 112);
+    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_OPEN], 64, 114, 128);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1267,12 +1267,12 @@ static void ShowPikeResultsWindow(void)
 // Battle Arena records.
 static void ArenaPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x1, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x1, y, TEXT_SKIP_DRAW, NULL);
     if (num > MAX_STREAK)
         num = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_KOsInARow);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void ArenaPrintRecordStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
@@ -1314,12 +1314,12 @@ static void ShowArenaResultsWindow(void)
     PrintHyphens(10);
     StringExpandPlaceholders(gStringVar4, gText_SetKOTourneyResults);
     PrintAligned(gStringVar4, 2);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 16, 49, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 16, 97, TEXT_SKIP_DRAW, NULL);
-    ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 72, 126, 49);
-    ArenaPrintRecordStreak(FRONTIER_LVL_50, 72, 126, 65);
-    ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 72, 126, 97);
-    ArenaPrintRecordStreak(FRONTIER_LVL_OPEN, 72, 126, 113);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv502, 16, 48, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 16, 96, TEXT_SKIP_DRAW, NULL);
+    ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 72, 126, 48);
+    ArenaPrintRecordStreak(FRONTIER_LVL_50, 72, 126, 64);
+    ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 72, 126, 96);
+    ArenaPrintRecordStreak(FRONTIER_LVL_OPEN, 72, 126, 112);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1327,16 +1327,16 @@ static void ShowArenaResultsWindow(void)
 // Battle Factory records.
 static void FactoryPrintStreak(const u8 *str, u16 num1, u16 num2, u8 x1, u8 x2, u8 x3, u8 y)
 {
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x1, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x1, y, TEXT_SKIP_DRAW, NULL);
     if (num1 > MAX_STREAK)
         num1 = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num1, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_WinStreak);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
 
     ConvertIntToDecimalStringN(gStringVar1, num2, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_TimesVar1);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x3, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x3, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void FactoryPrintRecordStreak(u8 battleMode, u8 lvlMode, u8 x1, u8 x2, u8 x3, u8 y)
@@ -1403,14 +1403,14 @@ static void ShowFactoryResultsWindow(u8 battleMode)
         StringExpandPlaceholders(gStringVar4, gText_BattleSwapDoubleResults);
 
     PrintAligned(gStringVar4, 0);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 33, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_RentalSwap, 152, 33, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv502, 8, 32, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_RentalSwap, 152, 32, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 8, 96, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 8, 64, 158, 49);
-    FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_50, 8, 64, 158, 65);
-    FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, 158, 113);
-    FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, 158, 129);
+    FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 8, 64, 158, 48);
+    FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_50, 8, 64, 158, 64);
+    FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, 158, 112);
+    FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, 158, 128);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1418,12 +1418,12 @@ static void ShowFactoryResultsWindow(u8 battleMode)
 // Battle Pyramid records.
 static void PyramidPrintStreak(const u8 *str, u16 num, u8 x1, u8 x2, u8 y)
 {
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x1, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x1, y, TEXT_SKIP_DRAW, NULL);
     if (num > MAX_STREAK)
         num = MAX_STREAK;
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, gText_FloorsCleared);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PyramidPrintRecordStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
@@ -1464,13 +1464,13 @@ static void ShowPyramidResultsWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
     StringExpandPlaceholders(gStringVar4, gText_BattleQuestResults);
     PrintAligned(gStringVar4, 2);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Lv502, 8, 49, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_OpenLv, 8, 97, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv502, 8, 48, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 8, 96, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 111, 49);
-    PyramidPrintRecordStreak(FRONTIER_LVL_50, 64, 111, 65);
-    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 111, 97);
-    PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 64, 111, 113);
+    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 111, 48);
+    PyramidPrintRecordStreak(FRONTIER_LVL_50, 64, 111, 64);
+    PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 111, 96);
+    PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 64, 111, 112);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1487,38 +1487,38 @@ static void ShowLinkContestResultsWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
     StringExpandPlaceholders(gStringVar4, gText_LinkContestResults);
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 208);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, x, 1, TEXT_SKIP_DRAW, NULL);
+    x = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 208);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x, 0, TEXT_SKIP_DRAW, NULL);
 
     str = gText_1st;
-    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 38) + 50;
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x, 25, TEXT_SKIP_DRAW, NULL);
+    x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 38) + 50;
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x, 24, TEXT_SKIP_DRAW, NULL);
 
     str = gText_2nd;
-    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 38) + 88;
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x, 25, TEXT_SKIP_DRAW, NULL);
+    x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 38) + 88;
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x, 24, TEXT_SKIP_DRAW, NULL);
 
     str = gText_3rd;
-    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 38) + 126;
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x, 25, TEXT_SKIP_DRAW, NULL);
+    x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 38) + 126;
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x, 24, TEXT_SKIP_DRAW, NULL);
 
     str = gText_4th;
-    x = GetStringRightAlignXOffset(FONT_NORMAL, str, 38) + 164;
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, str, x, 25, TEXT_SKIP_DRAW, NULL);
+    x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 38) + 164;
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str, x, 24, TEXT_SKIP_DRAW, NULL);
 
     x = 6;
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Cool, x, 41, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Beauty, x, 57, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Cute, x, 73, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Smart, x, 89, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_Tough, x, 105, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Cool, x, 40, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Beauty, x, 56, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Cute, x, 72, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Smart, x, 88, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Tough, x, 104, TEXT_SKIP_DRAW, NULL);
 
     for (i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
     {
         for (j = 0; j < CONTESTANT_COUNT; j++)
         {
             ConvertIntToDecimalStringN(gStringVar4, gSaveBlock2Ptr->contestLinkResults[i][j], STR_CONV_MODE_RIGHT_ALIGN, 4);
-            AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, (j * 38) + 64, (i * 16) + 41, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, (j * 38) + 64, (i * 16) + 40, TEXT_SKIP_DRAW, NULL);
         }
     }
 
@@ -2224,18 +2224,18 @@ static void Print1PRecord(s32 position, s32 x, s32 y, struct RankingHall1P *hall
     u8 text[32];
     u16 winStreak;
 
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_123Dot[position], x * 8, (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_123Dot[position], x * 8, (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
     hallRecord->name[PLAYER_NAME_LENGTH] = EOS;
     if (hallRecord->winStreak)
     {
         TVShowConvertInternationalString(text, hallRecord->name, hallRecord->language);
-        AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, text, (x + 2) * 8, (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, text, (x + 2) * 8, (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
         winStreak = hallRecord->winStreak;
         if (winStreak > MAX_STREAK)
             winStreak = MAX_STREAK;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
         StringExpandPlaceholders(gStringVar4, sHallFacilityToRecordsText[hallFacilityId]);
-        AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, GetStringRightAlignXOffset(FONT_NORMAL, sHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, sHallFacilityToRecordsText[hallFacilityId], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
     }
 }
 
@@ -2244,25 +2244,25 @@ static void Print2PRecord(s32 position, s32 x, s32 y, struct RankingHall2P *hall
     u8 text[32];
     u16 winStreak;
 
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gText_123Dot[position], x * 8, (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_123Dot[position], x * 8, (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
     if (hallRecord->winStreak)
     {
         hallRecord->name1[PLAYER_NAME_LENGTH] = EOS;
         hallRecord->name2[PLAYER_NAME_LENGTH] = EOS;
         TVShowConvertInternationalString(text, hallRecord->name1, hallRecord->language);
-        AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, text, (x + 2) * 8, (8 * (y + 5 * position - 1)) + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, text, (x + 2) * 8, (8 * (y + 5 * position - 1)) + 1, TEXT_SKIP_DRAW, NULL);
         if (IsStringJapanese(hallRecord->name2))
             TVShowConvertInternationalString(text, hallRecord->name2, LANGUAGE_JAPANESE);
         else
             StringCopy(text, hallRecord->name2);
-        AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, text, (x + 4) * 8, (8 * (y + 5 * position + 1)) + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, text, (x + 4) * 8, (8 * (y + 5 * position + 1)) + 1, TEXT_SKIP_DRAW, NULL);
 
         winStreak = hallRecord->winStreak;
         if (winStreak > MAX_STREAK)
             winStreak = MAX_STREAK;
         ConvertIntToDecimalStringN(gStringVar2, winStreak, STR_CONV_MODE_RIGHT_ALIGN, 4);
         StringExpandPlaceholders(gStringVar4, sHallFacilityToRecordsText[RANKING_HALL_TOWER_LINK]);
-        AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, GetStringRightAlignXOffset(FONT_NORMAL, sHallFacilityToRecordsText[RANKING_HALL_TOWER_LINK], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, sHallFacilityToRecordsText[RANKING_HALL_TOWER_LINK], 0xC8), (8 * (y + 5 * position)) + 1, TEXT_SKIP_DRAW, NULL);
     }
 }
 
@@ -2343,9 +2343,9 @@ static void PrintHallRecords(s32 hallFacilityId, s32 lvlMode)
 
     StringCopy(gStringVar1, sRecordsWindowChallengeTexts[hallFacilityId][0]);
     StringExpandPlaceholders(gStringVar4, sRecordsWindowChallengeTexts[hallFacilityId][1]);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    x = GetStringRightAlignXOffset(FONT_NORMAL, sLevelModeText[lvlMode], 0xD0);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, sLevelModeText[lvlMode], x, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, sLevelModeText[lvlMode], 0xD0);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, sLevelModeText[lvlMode], x, 1, TEXT_SKIP_DRAW, NULL);
     if (hallFacilityId == RANKING_HALL_TOWER_LINK)
     {
         gSaveBlock2Ptr->frontier.opponentNames[0][PLAYER_NAME_LENGTH] = EOS;
