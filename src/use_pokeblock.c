@@ -865,7 +865,7 @@ static void AskUsePokeblock(void)
     StringCopy(gStringVar4, stringBuffer);
     FillWindowPixelBuffer(WIN_TEXT, 17);
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
-    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
     CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
     CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
@@ -941,7 +941,7 @@ static void PrintWontEatAnymore(void)
 {
     FillWindowPixelBuffer(WIN_TEXT, 17);
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
-    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gText_WontEatAnymore, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, gSaveBlock2Ptr->optionsCurrentFont, gText_WontEatAnymore, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
     CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
 }
@@ -955,7 +955,7 @@ static void EraseMenuWindow(void)
 
 static void PrintMenuWindowText(const u8 *message)
 {
-    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0, 1, 0, NULL);
 }
 
 static void BufferEnhancedText(u8 *dest, u8 condition, s16 enhancement)
@@ -1378,12 +1378,12 @@ static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
     FillWindowPixelBuffer(WIN_NATURE, PIXEL_FILL(0));
     if (sMenu->info.curSelection != sMenu->info.numSelections - 1)
     {
-        AddTextPrinterParameterized(WIN_NAME, FONT_NORMAL, sMenu->monNameStrings[loadId], 0, 1, 0, NULL);
+        AddTextPrinterParameterized(WIN_NAME, gSaveBlock2Ptr->optionsCurrentFont, sMenu->monNameStrings[loadId], 0, 1, 0, NULL);
         partyIndex = GetPartyIdFromSelectionId(sMenu->info.curSelection);
         nature = GetNature(&gPlayerParty[partyIndex]);
         str = StringCopy(sMenu->info.natureText, gText_NatureSlash);
         str = StringCopy(str, gNatureNamePointers[nature]);
-        AddTextPrinterParameterized3(WIN_NATURE, FONT_NORMAL, 2, 1, sNatureTextColors, 0, sMenu->info.natureText);
+        AddTextPrinterParameterized3(WIN_NATURE, gSaveBlock2Ptr->optionsCurrentFont, 2, 1, sNatureTextColors, 0, sMenu->info.natureText);
     }
 
     if (firstPrint)

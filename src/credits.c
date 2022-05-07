@@ -400,8 +400,8 @@ static void PrintCreditsText(const u8 *string, u8 y, bool8 isTitle)
         color[2] = TEXT_COLOR_DARK_GRAY;
     }
 
-    x = GetStringCenterAlignXOffsetWithLetterSpacing(FONT_NORMAL, string, DISPLAY_WIDTH, 1);
-    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 1, 0, color, TEXT_SKIP_DRAW, string);
+    x = GetStringCenterAlignXOffsetWithLetterSpacing(gSaveBlock2Ptr->optionsCurrentFont, string, DISPLAY_WIDTH, 1);
+    AddTextPrinterParameterized4(0, gSaveBlock2Ptr->optionsCurrentFont, x, y, 1, 0, color, TEXT_SKIP_DRAW, string);
 }
 
 #define tMainTaskId data[1]

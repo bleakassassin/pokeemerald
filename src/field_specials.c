@@ -1888,11 +1888,11 @@ void ShowDeptStoreElevatorFloorSelect(void)
     sTutorMoveAndElevatorWindowId = AddWindow(&gElevatorFloor_WindowTemplate);
     SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
 
-    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_ElevatorNowOn, 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gText_ElevatorNowOn, xPos, 1, TEXT_SKIP_DRAW, NULL);
+    xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_ElevatorNowOn, 64);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_ElevatorNowOn, xPos, 0, TEXT_SKIP_DRAW, NULL);
 
-    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gDeptStoreFloorNames[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
+    xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gDeptStoreFloorNames[gSpecialVar_0x8005], 64);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, gDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 16, TEXT_SKIP_DRAW, NULL);
 
     PutWindowTilemap(sTutorMoveAndElevatorWindowId);
     CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPYWIN_FULL);
@@ -2695,14 +2695,14 @@ static void InitScrollableMultichoice(void)
     gScrollableMultichoice_ListMenuTemplate.header_X = 0;
     gScrollableMultichoice_ListMenuTemplate.item_X = 8;
     gScrollableMultichoice_ListMenuTemplate.cursor_X = 0;
-    gScrollableMultichoice_ListMenuTemplate.upText_Y = 1;
+    gScrollableMultichoice_ListMenuTemplate.upText_Y = 0;
     gScrollableMultichoice_ListMenuTemplate.cursorPal = 2;
     gScrollableMultichoice_ListMenuTemplate.fillValue = 1;
     gScrollableMultichoice_ListMenuTemplate.cursorShadowPal = 3;
     gScrollableMultichoice_ListMenuTemplate.lettersSpacing = 0;
     gScrollableMultichoice_ListMenuTemplate.itemVerticalPadding = 0;
     gScrollableMultichoice_ListMenuTemplate.scrollMultiple = 0;
-    gScrollableMultichoice_ListMenuTemplate.fontId = FONT_NORMAL;
+    gScrollableMultichoice_ListMenuTemplate.fontId = gSaveBlock2Ptr->optionsCurrentFont;
     gScrollableMultichoice_ListMenuTemplate.cursorKind = 0;
 }
 
@@ -3007,8 +3007,8 @@ void UpdateBattlePointsWindow(void)
     u8 string[32];
     u32 x;
     StringCopy(ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4), gText_BP);
-    x = GetStringRightAlignXOffset(FONT_NORMAL, string, 48);
-    AddTextPrinterParameterized(sBattlePointsWindowId, FONT_NORMAL, string, x, 1, 0, NULL);
+    x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, string, 48);
+    AddTextPrinterParameterized(sBattlePointsWindowId, gSaveBlock2Ptr->optionsCurrentFont, string, x, 0, 0, NULL);
 }
 
 void ShowBattlePointsWindow(void)
@@ -3094,7 +3094,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
         switch (menu)
         {
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, 2, 1, 3);
             if (sFrontierExchangeCorner_Decor1[selection] == 0xFFFF)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection]);
@@ -3107,7 +3107,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, 2, 1, 3);
             if (sFrontierExchangeCorner_Decor2[selection] == 0xFFFF)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection]);
@@ -3120,7 +3120,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor2DescriptionsRegi[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2DescriptionsRegi[selection], 0, NULL, 2, 1, 3);
             if (sFrontierExchangeCorner_Decor2Regi[selection] == 0xFFFF)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2Regi[selection]);
@@ -3133,19 +3133,19 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, 2, 1, 3);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptionsSilver[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptionsSilver[selection], 0, NULL, 2, 1, 3);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsSilver[selection]);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptionsGold[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptionsGold[selection], 0, NULL, 2, 1, 3);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsGold[selection]);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, 2, 1, 3);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
             break;
         }
@@ -3289,9 +3289,9 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
     {
         FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
         if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
         else
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
     }
 }
 
@@ -3314,9 +3314,9 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
         SetStandardWindowBorderStyle(task->tWindowId, 0);
 
         for (i = 0; i < MAX_SCROLL_MULTI_ON_SCREEN; i++)
-            AddTextPrinterParameterized5(task->tWindowId, FONT_NORMAL, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SKIP_DRAW, NULL, 0, 0);
+            AddTextPrinterParameterized5(task->tWindowId, gSaveBlock2Ptr->optionsCurrentFont, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SKIP_DRAW, NULL, 0, 0);
 
-        AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(task->tWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
     }

@@ -3167,7 +3167,7 @@ static void PrintInfoScreenText(const u8* str, u8 left, u8 top)
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
 
-    AddTextPrinterParameterized4(0, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(0, gSaveBlock2Ptr->optionsCurrentFont, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 #define tScrolling       data[0]
@@ -3752,7 +3752,7 @@ static void Task_LoadSizeScreen(u8 taskId)
 
             StringCopy(string, gText_SizeComparedTo);
             StringAppend(string, gSaveBlock2Ptr->playerName);
-            PrintInfoScreenText(string, GetStringCenterAlignXOffset(FONT_NORMAL, string, 0xF0), 0x79);
+            PrintInfoScreenText(string, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, string, 0xF0), 0x79);
             gMain.state++;
         }
         break;
@@ -4100,7 +4100,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     const u8 *description;
 
     if (newEntry)
-        PrintInfoScreenText(gText_PokedexRegistration, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PokedexRegistration, 0xF0), 0);
+        PrintInfoScreenText(gText_PokedexRegistration, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_PokedexRegistration, 0xF0), 0);
     if (value == 0)
         value = NationalToHoennOrder(num);
     else
@@ -4139,7 +4139,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         description = gPokedexEntries[num].description;
     else
         description = gExpandedPlaceholder_PokedexDescription;
-    PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, 0xF0), 0x5F);
+    PrintInfoScreenText(description, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, description, 0xF0), 0x5F);
 }
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)
@@ -4147,7 +4147,12 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     u8 buffer[16];
     u32 inches, feet;
     u8 i = 0;
+    int offset;
+    u8 result;
+    offset = 0;
 
+    if (gSaveBlock2Ptr->optionsUnitSystem == 0) //Imperial
+    {
     inches = (height * 10000) / 254;
     if (inches % 10 >= 5)
         inches += 10;
@@ -4173,15 +4178,62 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     buffer[i++] = CHAR_DBL_QUOTE_RIGHT;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
+    }
+    else //Metric
+    {
+        buffer[i++] = EXT_CTRL_CODE_BEGIN;
+        buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
+        i++;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_SPACE;
+
+        result = (height / 1000);
+        if (result == 0)
+        {
+            offset = 6;
+        }
+        else
+        {
+            buffer[i++] = result + CHAR_0;
+        }
+
+        result = (height % 1000) / 100;
+        if (result == 0 && offset != 0)
+        {
+            offset += 6;
+        }
+        else
+        {
+            buffer[i++] = result + CHAR_0;
+        }
+
+        buffer[i++] = (((height % 1000) % 100) / 10) + CHAR_0;
+        buffer[i++] = CHAR_COMMA;
+        buffer[i++] = (((height % 1000) % 100) % 10) + CHAR_0;
+        buffer[i++] = CHAR_SPACE;
+        buffer[i++] = CHAR_m;
+
+        buffer[i++] = EOS;
+        buffer[2] = offset;
+        PrintInfoScreenText(buffer, left, top);   
+    }
 }
 
 static void PrintMonWeight(u16 weight, u8 left, u8 top)
 {
     u8 buffer[16];
+    u8 buffer_metric[18];
     bool8 output;
-    u8 i;
+    u8 i = 0;
     u32 lbs = (weight * 100000) / 4536;
+    int offset = 0;
+    u8 result;
 
+    if (gSaveBlock2Ptr->optionsUnitSystem == 0) //Imperial
+    {
     if (lbs % 10u >= 5)
         lbs += 10;
     i = 0;
@@ -4231,6 +4283,41 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     buffer[i++] = CHAR_PERIOD;
     buffer[i++] = EOS;
     PrintInfoScreenText(buffer, left, top);
+    }
+    else //Metric
+    {
+        buffer_metric[i++] = EXT_CTRL_CODE_BEGIN;
+        buffer_metric[i++] = EXT_CTRL_CODE_CLEAR_TO;
+        i++;
+        buffer_metric[i++] = CHAR_SPACE;
+        buffer_metric[i++] = CHAR_SPACE;
+        buffer_metric[i++] = CHAR_SPACE;
+        buffer_metric[i++] = CHAR_SPACE;
+        buffer_metric[i++] = CHAR_SPACE;
+
+        result = (weight / 1000);
+        if (result == 0)
+            offset = 6;
+        else
+            buffer_metric[i++] = result + CHAR_0;
+
+        result = (weight % 1000) / 100;
+        if (result == 0 && offset != 0)
+            offset += 6;
+        else
+            buffer_metric[i++] = result + CHAR_0;
+
+        buffer_metric[i++] = (((weight % 1000) % 100) / 10) + CHAR_0;
+        buffer_metric[i++] = CHAR_COMMA;
+        buffer_metric[i++] = (((weight % 1000) % 100) % 10) + CHAR_0;
+        buffer_metric[i++] = CHAR_SPACE;
+        buffer_metric[i++] = CHAR_k;
+        buffer_metric[i++] = CHAR_g;
+
+        buffer_metric[i++] = EOS;
+        buffer_metric[2] = offset;
+        PrintInfoScreenText(buffer_metric, left, top);
+    }
 }
 
 const u8 *GetPokedexCategoryName(u16 dexNum) // unused
@@ -4474,7 +4561,7 @@ static void PrintInfoSubMenuText(u8 windowId, const u8 *str, u8 left, u8 top)
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_LIGHT_GRAY;
 
-    AddTextPrinterParameterized4(windowId, FONT_NORMAL, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(windowId, gSaveBlock2Ptr->optionsCurrentFont, left, top, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void UnusedPrintNum(u8 windowId, u16 num, u8 left, u8 top)
@@ -4781,7 +4868,7 @@ static void PrintSearchText(const u8 *str, u32 x, u32 y)
     color[0] = TEXT_COLOR_TRANSPARENT;
     color[1] = TEXT_DYNAMIC_COLOR_6;
     color[2] = TEXT_COLOR_DARK_GRAY;
-    AddTextPrinterParameterized4(0, FONT_NORMAL, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(0, gSaveBlock2Ptr->optionsCurrentFont, x, y, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 static void ClearSearchMenuRect(u32 x, u32 y, u32 width, u32 height)
@@ -5394,24 +5481,24 @@ static void PrintSelectedSearchParameters(u8 taskId)
     ClearSearchMenuRect(40, 16, 96, 80);
 
     searchParamId = gTasks[taskId].tCursorPos_Name + gTasks[taskId].tScrollOffset_Name;
-    PrintSearchText(sDexSearchNameOptions[searchParamId].title, 0x2D, 0x11);
+    PrintSearchText(sDexSearchNameOptions[searchParamId].title, 0x2D, 0x10);
 
     searchParamId = gTasks[taskId].tCursorPos_Color + gTasks[taskId].tScrollOffset_Color;
-    PrintSearchText(sDexSearchColorOptions[searchParamId].title, 0x2D, 0x21);
+    PrintSearchText(sDexSearchColorOptions[searchParamId].title, 0x2D, 0x20);
 
     searchParamId = gTasks[taskId].tCursorPos_TypeLeft + gTasks[taskId].tScrollOffset_TypeLeft;
-    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x2D, 0x31);
+    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x2D, 0x30);
 
     searchParamId = gTasks[taskId].tCursorPos_TypeRight + gTasks[taskId].tScrollOffset_TypeRight;
-    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x5D, 0x31);
+    PrintSearchText(sDexSearchTypeOptions[searchParamId].title, 0x5D, 0x30);
 
     searchParamId = gTasks[taskId].tCursorPos_Order + gTasks[taskId].tScrollOffset_Order;
-    PrintSearchText(sDexOrderOptions[searchParamId].title, 0x2D, 0x41);
+    PrintSearchText(sDexOrderOptions[searchParamId].title, 0x2D, 0x40);
 
     if (IsNationalPokedexEnabled())
     {
         searchParamId = gTasks[taskId].tCursorPos_Mode + gTasks[taskId].tScrollOffset_Mode;
-        PrintSearchText(sDexModeOptions[searchParamId].title, 0x2D, 0x51);
+        PrintSearchText(sDexModeOptions[searchParamId].title, 0x2D, 0x50);
     }
 }
 
@@ -5615,7 +5702,7 @@ static void CreateSearchParameterScrollArrows(u8 taskId)
 static void EraseAndPrintSearchTextBox(const u8* str)
 {
     ClearSearchMenuRect(8, 120, 224, 32);
-    PrintSearchText(str, 8, 121);
+    PrintSearchText(str, 8, 120);
 }
 
 static void EraseSelectorArrow(u32 y)

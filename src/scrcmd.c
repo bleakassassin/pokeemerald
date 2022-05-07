@@ -1306,7 +1306,7 @@ bool8 ScrCmd_messageinstant(struct ScriptContext *ctx)
         msg = (const u8 *)ctx->data[0];
     LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
-    AddTextPrinterParameterized(0, FONT_NORMAL, msg, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, msg, 0, 1, 0, NULL);
     return FALSE;
 }
 

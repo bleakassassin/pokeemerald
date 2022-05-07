@@ -487,7 +487,8 @@ struct SaveBlock2
              u16 regionMapZoom:1; // whether the map is zoomed in
              u16 optionsAttackStyle:1; // OPTIONS_ATTACK_STYLE_[TYPE/CATEGORY]
              u16 optionsDisableMatchCall:1; // OPTIONS_MATCH_CALL [ON/OFF]
-             u16 optionsCurrentFont:2;  // Specifies one of three fonts to use (Emerald, FR/LG, R/S)
+             u16 optionsUnitSystem:1; // OPTIONS_UNIT_SYSTEM [IMPERIAL/METRIC]
+             u16 optionsCurrentFont:3; // Specifies one of multiple fonts to use (Emerald, FR/LG, R/S Europe, R/S U.S., HG/SS)
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 outfitId:7;
     /*0x90*/ u8 autoRun:1;

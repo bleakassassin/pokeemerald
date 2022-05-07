@@ -1152,7 +1152,8 @@ bool32 TryStartMatchCall(void)
         && UpdateMatchCallMinutesCounter()
         && CheckMatchCallChance()
         && MapAllowsMatchCall()
-        && SelectMatchCallTrainer())
+        && SelectMatchCallTrainer()
+        && !gSaveBlock2Ptr->optionsDisableMatchCall)
     {
         StartMatchCall();
         return TRUE;
@@ -1400,7 +1401,7 @@ static void InitMatchCallTextPrinter(int windowId, const u8 *str)
     struct TextPrinterTemplate printerTemplate;
     printerTemplate.currentChar = str;
     printerTemplate.windowId = windowId;
-    printerTemplate.fontId = FONT_NORMAL;
+    printerTemplate.fontId = gSaveBlock2Ptr->optionsCurrentFont;
     printerTemplate.x = 32;
     printerTemplate.y = 1;
     printerTemplate.currentX = 32;

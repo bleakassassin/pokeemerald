@@ -305,6 +305,18 @@ $(FONTGFXDIR)/short.latfont: $(FONTGFXDIR)/latin_short.png
 $(FONTGFXDIR)/narrow.latfont: $(FONTGFXDIR)/latin_narrow.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/frlg.latfont: $(FONTGFXDIR)/latin_frlg.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/tall.latfont: $(FONTGFXDIR)/latin_tall.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/large.latfont: $(FONTGFXDIR)/latin_large.png
+	$(GFX) $< $@
+
+$(FONTGFXDIR)/hgss.latfont: $(FONTGFXDIR)/latin_hgss.png
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png
 	$(GFX) $< $@
 
@@ -321,12 +333,6 @@ $(FONTGFXDIR)/short.fwjpnfont: $(FONTGFXDIR)/japanese_short.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/braille.fwjpnfont: $(FONTGFXDIR)/braille.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/frlg_male.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_male_font.png
-	$(GFX) $< $@
-
-$(FONTGFXDIR)/frlg_female.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_female_font.png
 	$(GFX) $< $@
 
 
