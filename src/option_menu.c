@@ -182,13 +182,13 @@ static const u8 sText_TextSpeed[]   = _("Choose text-scrolling speed.");
 static const u8 sText_BattleScene[] = _("Toggle in-battle animations.");
 static const u8 sText_Difficulty[]  = _("Set battle difficulty.");
 static const u8 sText_AttackStyle[] = _("Set what determines attack power.");
-static const u8 sText_MatchCall[]   = _("Toggle calls from other TRAINERS.");
+static const u8 sText_MatchCall[]   = _("Toggle calls from other Trainers.");
 static const u8 sText_Sound[]       = _("Set audio output.");
 static const u8 sText_ButtonMode[]  = _("Set function of L/R Buttons.");
 static const u8 sText_UnitSystem[]  = _("Toggle between measuring systems.");
 static const u8 sText_FrameType[]   = _("Choose window frame style.");
 static const u8 sText_Font[]        = _("POKéMON EMERALD");
-static const u8 sText_Cancel[]      = _("Exit the OPTIONS menu.");
+static const u8 sText_Cancel[]      = _("Exit the Options menu.");
 static const u8 *const sOptionMenuItemDescriptions[MENUITEM_COUNT] =
 {
     [MENUITEM_TEXTSPEED]   = sText_TextSpeed,
