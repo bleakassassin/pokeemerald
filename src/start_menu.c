@@ -385,7 +385,7 @@ static void ShowSafariBallsWindow(void)
     DrawStdWindowFrame(sSafariBallsWindowId, FALSE);
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
-    AddTextPrinterParameterized(sSafariBallsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sSafariBallsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
 }
 
@@ -400,7 +400,7 @@ static void ShowPyramidFloorWindow(void)
     DrawStdWindowFrame(sBattlePyramidFloorWindowId, FALSE);
     StringCopy(gStringVar1, sPyramidFloorNames[gSaveBlock2Ptr->frontier.curChallengeBattleNum]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
-    AddTextPrinterParameterized(sBattlePyramidFloorWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sBattlePyramidFloorWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0, 0, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sBattlePyramidFloorWindowId, COPYWIN_GFX);
 }
 
