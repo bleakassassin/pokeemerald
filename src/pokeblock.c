@@ -692,7 +692,7 @@ static void HandleInitWindows(void)
 
 static void PrintOnPokeblockWindow(u8 windowId, const u8 *string, s32 x)
 {
-    AddTextPrinterParameterized4(windowId, gSaveBlock2Ptr->optionsCurrentFont, x, 1, 0, 0, sTextColor, 0, string);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, 1, 0, 0, sTextColor, 0, string);
 }
 
 static void DrawPokeblockMenuTitleText(void)

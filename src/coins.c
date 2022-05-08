@@ -18,7 +18,7 @@ void PrintCoinsString(u32 coinAmount)
     StringExpandPlaceholders(gStringVar4, gText_Coins);
 
     xAlign = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0x40);
-    AddTextPrinterParameterized(sCoinsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, xAlign, 1, 0, NULL);
+    AddTextPrinterParameterized(sCoinsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, xAlign, 0, 0, NULL);
 }
 
 void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)

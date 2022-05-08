@@ -486,8 +486,8 @@
 #define TRAINER_AMY_AND_LIV_2               482
 #define TRAINER_GINA_AND_MIA_1              483
 #define TRAINER_MIU_AND_YUKI                484
-#define TRAINER_AMY_AND_LIV_3               485
-#define TRAINER_GINA_AND_MIA_2              486
+#define TRAINER_WALLACE_LEADER              485
+#define TRAINER_STEVEN_CHAMPION             486
 #define TRAINER_AMY_AND_LIV_4               487
 #define TRAINER_AMY_AND_LIV_5               488
 #define TRAINER_AMY_AND_LIV_6               489
@@ -569,7 +569,7 @@
 #define TRAINER_CATHERINE_5                 565
 #define TRAINER_JULIO                       566
 #define TRAINER_GRUNT_SEAFLOOR_CAVERN_5     567
-#define TRAINER_GRUNT_UNUSED                568
+#define TRAINER_SIDNEY_2                    568
 #define TRAINER_GRUNT_MT_PYRE_4             569
 #define TRAINER_GRUNT_JAGGED_PASS           570
 #define TRAINER_MARC                        571
@@ -582,7 +582,7 @@
 #define TRAINER_HARRISON                    578
 #define TRAINER_GRUNT_MT_CHIMNEY_2          579
 #define TRAINER_CLARENCE                    580
-#define TRAINER_TERRY                       581
+#define TRAINER_PHOEBE_2                    581
 #define TRAINER_NATE                        582
 #define TRAINER_KATHLEEN                    583
 #define TRAINER_CLIFFORD                    584
@@ -634,8 +634,8 @@
 #define TRAINER_ALAN                        630
 #define TRAINER_CLARK                       631
 #define TRAINER_ERIC                        632
-#define TRAINER_LUCAS_2                     633
-#define TRAINER_MIKE_1                      634
+#define TRAINER_GLACIA_2                    633
+#define TRAINER_DRAKE_2                     634
 #define TRAINER_MIKE_2                      635
 #define TRAINER_TRENT_2                     636
 #define TRAINER_TRENT_3                     637
@@ -856,18 +856,12 @@
 #define TRAINER_LEAF                        852
 #define TRAINER_BRENDAN_PLACEHOLDER         853
 #define TRAINER_MAY_PLACEHOLDER             854
-#define TRAINER_WALLACE_LEADER              855
-#define TRAINER_STEVEN_CHAMPION             856
-#define TRAINER_SIDNEY_2                    857
-#define TRAINER_PHOEBE_2                    858
-#define TRAINER_GLACIA_2                    859
-#define TRAINER_DRAKE_2                     860
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                      861
+#define TRAINERS_COUNT                      855
 #define MAX_TRAINERS_COUNT                  864
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

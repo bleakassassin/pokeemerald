@@ -3289,9 +3289,9 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
     {
         FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
         if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 0, 0, NULL);
         else
-            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 1, 0, NULL);
+            AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 0, 0, NULL);
     }
 }
 

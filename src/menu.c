@@ -870,7 +870,7 @@ void HofPCTopBar_PrintPair(const u8 *string, const u8 *string2, bool8 noBg, u8 l
                       0,
                       string2);
         }
-        AddTextPrinterParameterized4(sHofPCTopBarWindowId, gSaveBlock2Ptr->optionsCurrentFont, 4, 1, 0, 0, color, 0, string);
+        AddTextPrinterParameterized4(sHofPCTopBarWindowId, gSaveBlock2Ptr->optionsCurrentFont, 4, 0, 0, 0, color, 0, string);
         if (copyToVram)
             CopyWindowToVram(sHofPCTopBarWindowId, COPYWIN_FULL);
     }

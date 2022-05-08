@@ -1611,9 +1611,9 @@ static void PrintPlayerNames(void)
             xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, text, 0x38);
 
             if (playerId == sBerryBlender->arrowIdToPlayerId[i])
-                Blender_AddTextPrinter(i, text, xPos, 1, 0, 2); // Highlight player's name in red
+                Blender_AddTextPrinter(i, text, xPos, 0, 0, 2); // Highlight player's name in red
             else
-                Blender_AddTextPrinter(i, text, xPos, 1, 0, 1);
+                Blender_AddTextPrinter(i, text, xPos, 0, 0, 1);
 
             PutWindowTilemap(i);
             CopyWindowToVram(i, COPYWIN_FULL);
@@ -3495,12 +3495,12 @@ static bool8 PrintBlendingResults(void)
             u8 *txtPtr;
 
             xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, sText_BlendingResults, 0xA8);
-            Blender_AddTextPrinter(5, sText_BlendingResults, xPos, 1, TEXT_SKIP_DRAW, 0);
+            Blender_AddTextPrinter(5, sText_BlendingResults, xPos, 0, TEXT_SKIP_DRAW, 0);
 
             if (sBerryBlender->numPlayers == BLENDER_MAX_PLAYERS)
-                yPos = 17;
+                yPos = 16;
             else
-                yPos = 21;
+                yPos = 20;
 
             for (i = 0; i < sBerryBlender->numPlayers; yPos += 16, i++)
             {
@@ -3518,7 +3518,7 @@ static bool8 PrintBlendingResults(void)
                 Blender_AddTextPrinter(5, sBerryBlender->stringVar, 0x54, yPos, TEXT_SKIP_DRAW, 3);
             }
 
-            Blender_AddTextPrinter(5, sText_MaximumSpeed, 0, 0x51, TEXT_SKIP_DRAW, 3);
+            Blender_AddTextPrinter(5, sText_MaximumSpeed, 0, 0x50, TEXT_SKIP_DRAW, 3);
             ConvertIntToDecimalStringN(sBerryBlender->stringVar, sBerryBlender->maxRPM / 100, STR_CONV_MODE_RIGHT_ALIGN, 3);
             StringAppend(sBerryBlender->stringVar, sText_Dot);
 
@@ -3527,8 +3527,8 @@ static bool8 PrintBlendingResults(void)
             StringAppend(sBerryBlender->stringVar, sText_RPM);
 
             xPos = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, sBerryBlender->stringVar, 0xA8);
-            Blender_AddTextPrinter(5, sBerryBlender->stringVar, xPos, 0x51, TEXT_SKIP_DRAW, 3);
-            Blender_AddTextPrinter(5, sText_Time, 0, 0x61, TEXT_SKIP_DRAW, 3);
+            Blender_AddTextPrinter(5, sBerryBlender->stringVar, xPos, 0x50, TEXT_SKIP_DRAW, 3);
+            Blender_AddTextPrinter(5, sText_Time, 0, 0x60, TEXT_SKIP_DRAW, 3);
 
             seconds = (sBerryBlender->gameFrameTime / 60) % 60;
             minutes = (sBerryBlender->gameFrameTime / (60 * 60));
@@ -3540,7 +3540,7 @@ static bool8 PrintBlendingResults(void)
             StringAppend(sBerryBlender->stringVar, sText_Sec);
 
             xPos = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, sBerryBlender->stringVar, 0xA8);
-            Blender_AddTextPrinter(5, sBerryBlender->stringVar, xPos, 0x61, TEXT_SKIP_DRAW, 3);
+            Blender_AddTextPrinter(5, sBerryBlender->stringVar, xPos, 0x60, TEXT_SKIP_DRAW, 3);
 
             sBerryBlender->framesToWait = 0;
             sBerryBlender->mainState++;
@@ -3694,7 +3694,7 @@ static bool8 PrintBlendingRanking(void)
     case 3:
         DrawStdFrameWithCustomTileAndPalette(5, 0, 1, 0xD);
         xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, sText_Ranking, 168);
-        Blender_AddTextPrinter(5, sText_Ranking, xPos, 1, TEXT_SKIP_DRAW, 0);
+        Blender_AddTextPrinter(5, sText_Ranking, xPos, 0, TEXT_SKIP_DRAW, 0);
 
         sBerryBlender->scoreIconIds[SCORE_BEST] = CreateSprite(&sSpriteTemplate_ScoreSymbols, 128, 52, 0);
         StartSpriteAnim(&gSprites[sBerryBlender->scoreIconIds[SCORE_BEST]], SCOREANIM_BEST_STATIC);
@@ -3710,7 +3710,7 @@ static bool8 PrintBlendingRanking(void)
 
         SortScores();
 
-        for (yPos = 41, i = 0; i < sBerryBlender->numPlayers; yPos += 16, i++)
+        for (yPos = 40, i = 0; i < sBerryBlender->numPlayers; yPos += 16, i++)
         {
             u8 place = sBerryBlender->playerPlaces[i];
 
@@ -3888,7 +3888,7 @@ static bool32 Blender_PrintText(s16 *textState, const u8 *string, s32 textSpeed)
     {
     case 0:
         DrawDialogFrameWithCustomTileAndPalette(4, FALSE, 0x14, 0xF);
-        Blender_AddTextPrinter(4, string, 0, 1, textSpeed, 0);
+        Blender_AddTextPrinter(4, string, 0, 0, textSpeed, 0);
         PutWindowTilemap(4);
         CopyWindowToVram(4, COPYWIN_FULL);
         (*textState)++;

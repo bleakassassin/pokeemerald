@@ -7135,7 +7135,14 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum)
 
 bool8 CheckSplitPhysical(u8 moveType)
 {
-    if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+    {
+        if (GetAttackStyleInRecordedBattle() == OPTIONS_ATTACK_STYLE_TYPE)
+            return IS_TYPE_PHYSICAL(moveType);
+        else
+            return IS_CATEGORY_PHYSICAL(gCurrentMove);
+    }
+    else if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
         return IS_TYPE_PHYSICAL(moveType);
     else
         return IS_CATEGORY_PHYSICAL(gCurrentMove);
@@ -7143,7 +7150,14 @@ bool8 CheckSplitPhysical(u8 moveType)
 
 bool8 CheckSplitSpecial(u8 moveType)
 {
-    if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+    {
+        if (GetAttackStyleInRecordedBattle() == OPTIONS_ATTACK_STYLE_TYPE)
+            return IS_TYPE_SPECIAL(moveType);
+        else
+            return IS_CATEGORY_SPECIAL(gCurrentMove);
+    }
+    else if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_TYPE || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
         return IS_TYPE_SPECIAL(moveType);
     else
         return IS_CATEGORY_SPECIAL(gCurrentMove);

@@ -760,18 +760,18 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     str = gText_MoveRelearnerBattleMoves;
     x = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0x80);
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, x, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPP;
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, 4, 0x29, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, 4, 0x28, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerPower;
     x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0x6A);
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0x19, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0x18, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerAccuracy;
     x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0x6A);
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0x29, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0x28, TEXT_SKIP_DRAW, NULL);
     if (chosenMove == LIST_CANCEL)
     {
         CopyWindowToVram(0, COPYWIN_GFX);
@@ -779,11 +779,11 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     move = &gBattleMoves[chosenMove];
     str = gTypeNames[move->type];
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, 4, 0x19, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, 4, 0x18, TEXT_SKIP_DRAW, NULL);
 
     x = 4 + GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gText_MoveRelearnerPP, 0);
     ConvertIntToDecimalStringN(buffer, move->pp, STR_CONV_MODE_LEFT_ALIGN, 2);
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, buffer, x, 0x29, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, buffer, x, 0x28, TEXT_SKIP_DRAW, NULL);
 
     if (move->power < 2)
     {
@@ -794,7 +794,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
         ConvertIntToDecimalStringN(buffer, move->power, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, 0x6A, 0x19, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, 0x6A, 0x18, TEXT_SKIP_DRAW, NULL);
 
     if (move->accuracy == 0)
     {
@@ -805,7 +805,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
         ConvertIntToDecimalStringN(buffer, move->accuracy, STR_CONV_MODE_LEFT_ALIGN, 3);
         str = buffer;
     }
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, 0x6A, 0x29, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, str, 0x6A, 0x28, TEXT_SKIP_DRAW, NULL);
 
     str = gMoveDescriptionPointers[chosenMove - 1];
     AddTextPrinterParameterized(0, FONT_NARROW, str, 0, 0x41, 0, NULL);
@@ -821,15 +821,15 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     str = gText_MoveRelearnerContestMovesTitle;
     x = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0x80);
-    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, str, x, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerAppeal;
     x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0x5C);
-    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0x19, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0x18, TEXT_SKIP_DRAW, NULL);
 
     str = gText_MoveRelearnerJam;
     x = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0x5C);
-    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0x29, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, str, x, 0x28, TEXT_SKIP_DRAW, NULL);
 
     if (chosenMove == MENU_NOTHING_CHOSEN)
     {
@@ -839,7 +839,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
 
     move = &gContestMoves[chosenMove];
     str = gContestMoveTypeTextPointers[move->contestCategory];
-    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, str, 4, 0x19, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, str, 4, 0x18, TEXT_SKIP_DRAW, NULL);
 
     str = gContestEffectDescriptionPointers[move->effect];
     AddTextPrinterParameterized(1, FONT_NARROW, str, 0, 0x41, TEXT_SKIP_DRAW, NULL);

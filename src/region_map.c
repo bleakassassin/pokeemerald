@@ -1763,7 +1763,7 @@ void CB2_OpenFlyMap(void)
         LoadPalette(sRegionMapFramePal, 0x10, sizeof(sRegionMapFramePal));
         PutWindowTilemap(2);
         FillWindowPixelBuffer(2, PIXEL_FILL(0));
-        AddTextPrinterParameterized(2, gSaveBlock2Ptr->optionsCurrentFont, gText_FlyToWhere, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(2, gSaveBlock2Ptr->optionsCurrentFont, gText_FlyToWhere, 0, 0, 0, NULL);
         ScheduleBgCopyTilemapToVram(0);
         gMain.state++;
         break;
@@ -1829,9 +1829,9 @@ static void DrawFlyDestTextWindow(void)
                     namePrinted = TRUE;
                     ClearStdWindowAndFrameToTransparent(0, FALSE);
                     DrawStdFrameWithCustomTileAndPalette(1, FALSE, 101, 13);
-                    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
+                    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, sFlyMap->regionMap.mapSecName, 0, 0, 0, NULL);
                     name = sMultiNameFlyDestinations[i].name[sFlyMap->regionMap.posWithinMapSec];
-                    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, name, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, name, 96), 17, 0, NULL);
+                    AddTextPrinterParameterized(1, gSaveBlock2Ptr->optionsCurrentFont, name, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, name, 96), 16, 0, NULL);
                     ScheduleBgCopyTilemapToVram(0);
                     sDrawFlyDestTextWindow = TRUE;
                 }
@@ -1850,7 +1850,7 @@ static void DrawFlyDestTextWindow(void)
                 // Window is already drawn, just empty it
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
             }
-            AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, sFlyMap->regionMap.mapSecName, 0, 1, 0, NULL);
+            AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, sFlyMap->regionMap.mapSecName, 0, 0, 0, NULL);
             ScheduleBgCopyTilemapToVram(0);
             sDrawFlyDestTextWindow = FALSE;
         }

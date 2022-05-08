@@ -5412,9 +5412,9 @@ static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
     printerTemplate.windowId = windowId;
     printerTemplate.fontId = gSaveBlock2Ptr->optionsCurrentFont;
     printerTemplate.x = 0;
-    printerTemplate.y = 1;
+    printerTemplate.y = 0;
     printerTemplate.currentX = 0;
-    printerTemplate.currentY = 1;
+    printerTemplate.currentY = 0;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
     printerTemplate.unk = 0;
@@ -5459,9 +5459,9 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
     printerTemplate.windowId = 4;
     printerTemplate.fontId = gSaveBlock2Ptr->optionsCurrentFont;
     printerTemplate.x = 0;
-    printerTemplate.y = 1;
+    printerTemplate.y = 0;
     printerTemplate.currentX = 0;
-    printerTemplate.currentY = 1;
+    printerTemplate.currentY = 0;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
     printerTemplate.unk = 0;
