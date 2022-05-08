@@ -401,7 +401,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .speechLost = {EC_WORD_A, EC_WORD_LOSS, EC_WORD_IS, EC_WORD_WHAT, EC_WORD_THIS, EC_WORD_IS},
     },
     {
-        .name = {_("カツアキ"), _("TYRESE"), _("ANDY"), _("PARIDE"), _("DAVID"), _("CHICHO")},
+        .name = {_("カツアキ"), _("TYRESE"), _("KEEGAN"), _("PARIDE"), _("DAVID"), _("CHICHO")},
         .otId = 0xD018,
         .facilityClass = FACILITY_CLASS_BLACK_BELT,
         .species = {SPECIES_BLAZIKEN, SPECIES_GOLEM, SPECIES_MACHAMP, SPECIES_RHYDON, SPECIES_HARIYAMA, SPECIES_AGGRON, SPECIES_MEDICHAM, SPECIES_ZANGOOSE, SPECIES_VIGOROTH, SPECIES_SLAKING},
