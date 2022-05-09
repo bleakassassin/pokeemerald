@@ -256,7 +256,7 @@ static void TxRegItemsMenu_ItemSwapChoosePrompt(u8 taskId)
     data = gTasks[taskId].data;
     ListMenuSetUnkIndicatorsStructField(data[5], 16, 1);
     gTxRegItemsMenu->toSwapPos = (TxRegItemsMenuItemPageInfo.itemsAbove + TxRegItemsMenuItemPageInfo.cursorPos);
-	TxRegItemsMenu_PrintSwappingCursor(ListMenuGetYCoordForPrintingArrowCursor(data[5]), 0, 0);	
+    TxRegItemsMenu_PrintSwappingCursor(ListMenuGetYCoordForPrintingArrowCursor(data[5]), 0, 0);
     UpdateSwapLineSpritesPos(gTxRegItemsMenu->swapLineSpriteIds, 5, 104, ((gTxRegItemsMenu->toSwapPos + 1) * 16 + 90));
     gTasks[taskId].func = TxRegItemsMenu_HandleSwapInput;
 }

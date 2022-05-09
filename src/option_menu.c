@@ -425,7 +425,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             }
         }
         HighlightOptionMenuItem(sOptions->visibleCursor);
-		DrawDescriptionText(sOptions->menuCursor);
+        DrawDescriptionText(sOptions->menuCursor);
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
@@ -451,7 +451,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
             }
         }
         HighlightOptionMenuItem(sOptions->visibleCursor);
-		DrawDescriptionText(sOptions->menuCursor);
+        DrawDescriptionText(sOptions->menuCursor);
     }
     else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
     {
