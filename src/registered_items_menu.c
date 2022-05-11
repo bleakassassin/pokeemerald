@@ -104,7 +104,7 @@ static const struct ListMenuTemplate gTxRegItemsMenu_List = //item storage list
     .lettersSpacing = FALSE,
     .itemVerticalPadding = 0,
     .scrollMultiple = FALSE,
-    .fontId = 7
+    .fontId = FONT_NARROW
 };
 
 

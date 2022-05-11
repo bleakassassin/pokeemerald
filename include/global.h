@@ -1029,8 +1029,8 @@ struct SaveBlock1
     /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];
     /*0x35D8*/ u8 registeredItemLastSelected:4; //max 16 items
                u8 registeredItemListCount:4;
-    /*0x35D9*/ struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
-    /*0x3601*/ u8 unused_3601[0x111];
+    /*0x35DC*/ struct RegisteredItemSlot registeredItems[REGISTERED_ITEMS_MAX];
+    /*0x3604*/ u8 unused_3604[0x114];
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
