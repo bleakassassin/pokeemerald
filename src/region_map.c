@@ -1505,23 +1505,23 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
         return;
     }
     if (gSaveBlock2Ptr->playerGender == FEMALE)
-	{
-		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
-		{
-			sheet.data = sRegionMapPlayerIcon_RSMayGfx;
-			palette.data = sRegionMapPlayerIcon_RSMayPal;
-		}
-		else
-		{
-			sheet.data = sRegionMapPlayerIcon_MayGfx;
-			palette.data = sRegionMapPlayerIcon_MayPal;
-		}
-	}
+    {
+        if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
+        {
+            sheet.data = sRegionMapPlayerIcon_RSMayGfx;
+            palette.data = sRegionMapPlayerIcon_RSMayPal;
+        }
+        else
+        {
+            sheet.data = sRegionMapPlayerIcon_MayGfx;
+            palette.data = sRegionMapPlayerIcon_MayPal;
+        }
+    }
     else if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
-	{
-		sheet.data = sRegionMapPlayerIcon_RSBrendanGfx;
-		palette.data = sRegionMapPlayerIcon_RSBrendanPal;
-	}
+    {
+        sheet.data = sRegionMapPlayerIcon_RSBrendanGfx;
+        palette.data = sRegionMapPlayerIcon_RSBrendanPal;
+    }
     LoadSpriteSheet(&sheet);
     LoadSpritePalette(&palette);
     spriteId = CreateSprite(&template, 0, 0, 1);

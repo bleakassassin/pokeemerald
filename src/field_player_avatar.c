@@ -273,8 +273,8 @@ static const u16 sPlayerAvatarGfxIds[OUTFIT_TOTAL][PLAYER_AVATAR_STATE_COUNT][GE
 
 static const u16 sPlayerSceneGfxIds[OUTFIT_TOTAL][2] =
 {
-	[OUTFIT_EMERALD]   = {OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL},
-	[OUTFIT_RS]        = {OBJ_EVENT_GFX_LINK_RS_BRENDAN,      OBJ_EVENT_GFX_LINK_RS_MAY},
+    [OUTFIT_EMERALD]   = {OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL},
+    [OUTFIT_RS]        = {OBJ_EVENT_GFX_LINK_RS_BRENDAN,      OBJ_EVENT_GFX_LINK_RS_MAY},
 };
 
 static const u8 sFRLGAvatarGfxIds[GENDER_COUNT] =
@@ -1274,7 +1274,7 @@ u16 GetPlayerAvatarGraphicsIdByStateIdAndGender(u8 state, u8 gender)
 
 u16 GetPlayerSceneGraphicsIdByGender(void)
 {
-	return sPlayerSceneGfxIds[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender];
+    return sPlayerSceneGfxIds[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender];
 }
 
 u16 GetFRLGAvatarGraphicsIdByGender(u8 gender)

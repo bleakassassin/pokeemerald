@@ -923,7 +923,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
     {
         u8 compatibility = GetDaycareCompatibilityScore(daycare);
         if (CheckBagHasItem(ITEM_OVAL_CHARM, 1))
-			compatibility = sOvalCharmCompatibilityScores[compatibility];
+            compatibility = sOvalCharmCompatibilityScores[compatibility];
         if (compatibility > (Random() * 100u) / USHRT_MAX)
             TriggerPendingDaycareEgg();
     }

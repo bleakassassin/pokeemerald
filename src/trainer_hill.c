@@ -165,30 +165,30 @@ static const u16 sPrizeListAttract[]     = {ITEM_TM45_ATTRACT,     ITEM_ETHER, I
 
 static const u16 *const sPrizeLists1[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
-	sPrizeListRareCandy1,
-	sPrizeListLuxuryBall1,
-	sPrizeListMaxRevive1,
-	sPrizeListMaxEther1,
-	sPrizeListElixir1,
-	sPrizeListRoar,
-	sPrizeListSludgeBomb,
-	sPrizeListToxic,
-	sPrizeListRareCandy1,
-	sPrizeListEarthQuake
+    sPrizeListRareCandy1,
+    sPrizeListLuxuryBall1,
+    sPrizeListMaxRevive1,
+    sPrizeListMaxEther1,
+    sPrizeListElixir1,
+    sPrizeListRoar,
+    sPrizeListSludgeBomb,
+    sPrizeListToxic,
+    sPrizeListRareCandy1,
+    sPrizeListEarthQuake
 };
 
 static const u16 *const sPrizeLists2[NUM_TRAINER_HILL_PRIZE_LISTS] =
 {
-	sPrizeListRareCandy2,
-	sPrizeListLuxuryBall2,
-	sPrizeListMaxRevive2,
-	sPrizeListMaxEther2,
-	sPrizeListElixir2,
-	sPrizeListMaxEther2,
-	sPrizeListTorment,
-	sPrizeListSkillSwap,
-	sPrizeListMaxRevive1,
-	sPrizeListAttract
+    sPrizeListRareCandy2,
+    sPrizeListLuxuryBall2,
+    sPrizeListMaxRevive2,
+    sPrizeListMaxEther2,
+    sPrizeListElixir2,
+    sPrizeListMaxEther2,
+    sPrizeListTorment,
+    sPrizeListSkillSwap,
+    sPrizeListMaxRevive1,
+    sPrizeListAttract
 };
 
 static const u16 *const *const sPrizeListSets[] =

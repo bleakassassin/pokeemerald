@@ -313,7 +313,7 @@ static void FindMapsWithMon(u16 species)
                 GetRoamerLocation(j, &sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, &sPokedexAreaScreen->overworldAreasWithMons[0].mapNum);
                 sPokedexAreaScreen->overworldAreasWithMons[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, sPokedexAreaScreen->overworldAreasWithMons[0].mapNum)->regionMapSectionId;
                 sPokedexAreaScreen->numOverworldAreas = 1;
-				break;
+                break;
             }
             else
                 sPokedexAreaScreen->numOverworldAreas = 0;

@@ -1371,21 +1371,21 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     u8 spriteId;
 
     // Load sprite sheets
-	if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->playerGender == MALE)
-	{
-		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
-			LoadCompressedSpriteSheet(gSpriteSheet_IntroRSBrendan);
-		else
-			LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
-	}
-	else if (gSaveBlock2Ptr->playerGender == FEMALE)
-	{
-		if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
-			LoadCompressedSpriteSheet(gSpriteSheet_IntroRSMay);
-		else
-			LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
-	}
-	else if (sIntroCharacterGender == MALE)
+    if (gSaveFileStatus != SAVE_STATUS_EMPTY && gSaveBlock2Ptr->playerGender == MALE)
+    {
+        if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroRSBrendan);
+        else
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
+    }
+    else if (gSaveBlock2Ptr->playerGender == FEMALE)
+    {
+        if (gSaveBlock2Ptr->outfitId == OUTFIT_RS)
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroRSMay);
+        else
+            LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
+    }
+    else if (sIntroCharacterGender == MALE)
             LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
         else
             LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);   
@@ -1408,7 +1408,7 @@ static void Task_Scene2_CreateSprites(u8 taskId)
         spriteId = CreateIntroBrendanSprite(DISPLAY_WIDTH + 32, 100);
     else if (gSaveBlock2Ptr->playerGender == FEMALE || sIntroCharacterGender == FEMALE)
         spriteId = CreateIntroMaySprite(DISPLAY_WIDTH + 32, 100);
-	else
+    else
         spriteId = CreateIntroBrendanSprite(DISPLAY_WIDTH + 32, 100);
 
     gSprites[spriteId].callback = SpriteCB_PlayerOnBicycle;
