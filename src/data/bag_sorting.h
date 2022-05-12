@@ -39,10 +39,10 @@ enum ItemSortType
     ITEM_TYPE_CANT_USE,
 };
 
-static const u8 sMenuText_ByType[] = _("BY TYPE");
-static const u8 sMenuText_ByNumber[] = _("BY NUMBER");
-static const u8 sMenuText_ByName[] = _("BY NAME");
-static const u8 sMenuText_ByAmount[] = _("BY AMOUNT");
+static const u8 sMenuText_ByType[] = _("By Type");
+static const u8 sMenuText_ByNumber[] = _("By Number");
+static const u8 sMenuText_ByName[] = _("By Name");
+static const u8 sMenuText_ByAmount[] = _("By Amount");
 static const u8 sText_SortItemsHow[] = _("How do you want to\nsort your items?");
 static const u8 sText_Type[] = _("type");
 static const u8 sText_Number[] = _("number");
