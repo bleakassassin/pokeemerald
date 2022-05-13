@@ -295,19 +295,15 @@ void FixImportedSave(void)
             RemoveBagItem(ITEM_ACRO_BIKE, 1);
             AddBagItem(ITEM_BICYCLE, 1);
         }
-
         if (gSaveBlock1Ptr->mapLayoutId == 420)
         {
             SetContinueGameWarpStatus();
             SetContinueGameWarpToHealLocation(HEAL_LOCATION_SLATEPORT_CITY);
         }
-        
         if (gSaveBlock2Ptr->optionsButtonMode >= OPTIONS_BUTTON_MODE_L_EQUALS_A)
             gSaveBlock2Ptr->optionsButtonMode--;
-
         if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
             VarSet(VAR_OLD_SEA_MAP_STATE, 5);
-
         if (VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 3)
         {
             VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);
@@ -315,10 +311,10 @@ void FixImportedSave(void)
             FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE);
             FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
         }
-
+        if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
+            FlagClear(FLAG_READ_STEVENS_LETTER);
         if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 3)
             FlagClear(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
-
         if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
         {
             FlagClear(FLAG_READ_STEVENS_LETTER);
