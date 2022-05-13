@@ -189,7 +189,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
-    if (input->pressedSelectButton && gSaveBlock1Ptr->registeredItems[1].itemId != ITEM_NONE)
+    if (input->pressedSelectButton && gSaveBlock1Ptr->registeredItems[1] != ITEM_NONE)
     {
         PlaySE(SE_WIN_OPEN);
         TxRegItemsMenu_OpenMenu();
