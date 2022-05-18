@@ -702,6 +702,20 @@ static const u8 sTextColors[][3] =
     {0, 7, 8}
 };
 
+static const u16 sPossibleMirageIslandSpecies[] = 
+{
+    SPECIES_PONYTA,
+    SPECIES_RAPIDASH,
+    SPECIES_HOPPIP,
+    SPECIES_SKIPLOOM,
+    SPECIES_JUMPLUFF,
+    SPECIES_MISDREAVUS,
+    SPECIES_WOBBUFFET,
+    SPECIES_SNEASEL,
+    SPECIES_DELIBIRD,
+    SPECIES_WYNAUT
+};
+
 static const u8 sAButton_Gfx[] = INCBIN_U8("graphics/summary_screen/a_button.4bpp");
 static const u8 sBButton_Gfx[] = INCBIN_U8("graphics/summary_screen/b_button.4bpp");
 
@@ -3161,8 +3175,15 @@ static void BufferMonTrainerMemo(void)
                 else
                     GetMapNameGeneric(metLocationString, MAPSEC_AQUA_HIDEOUT);
             }
-            else if (sum->metLocation == MAPSEC_ROUTE_130 && (sum->species == SPECIES_WYNAUT || sum->species == SPECIES_WOBBUFFET || sum->species == SPECIES_PORYGON) && sum->metLevel > 0)
-                GetMapNameGeneric(metLocationString, MAPSEC_MIRAGE_ISLAND);
+            else if (sum->metLocation == MAPSEC_ROUTE_130)
+            {
+                u8 i;
+                for (i = 0; i < ARRAY_COUNT(sPossibleMirageIslandSpecies); i++)
+                {
+                    if ((sum->species == sPossibleMirageIslandSpecies[i]) && sum->metLevel > 0)
+                        GetMapNameGeneric(metLocationString, MAPSEC_MIRAGE_ISLAND);
+                }
+            }
             else if (sum->metLocation == MAPSEC_BATTLE_FRONTIER && (sum->metGame != VERSION_EMERALD))
                 StringCopy(metLocationString, gText_BattleTower);
             else

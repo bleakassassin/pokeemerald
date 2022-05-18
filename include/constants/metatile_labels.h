@@ -298,6 +298,10 @@
 #define METATILE_Lilycove_Wailmer2         0x2A0
 #define METATILE_Lilycove_Wailmer3         0x2A1
 
+// gTileset_MauvilleGameCorner
+#define METATILE_MauvilleGameCorner_PrizeRedeem_Top     0x24D
+#define METATILE_MauvilleGameCorner_PrizeRedeem_Bottom  0x255
+
 // gTileset_MauvilleGym
 #define METATILE_MauvilleGym_FloorTile        0x21A
 #define METATILE_MauvilleGym_GreenBeamH1_Off  0x230

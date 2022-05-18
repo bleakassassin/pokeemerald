@@ -1051,10 +1051,10 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_BELLOSSOM
     },
-    [INGAME_TRADE_MEOWTH] =
+    [INGAME_TRADE_EEVEE] =
     {
-        .nickname = _("MEOWOW"),
-        .species = SPECIES_MEOWTH,
+        .nickname = _("LEVY"),
+        .species = SPECIES_EEVEE,
         .ivs = {4, 5, 4, 5, 4, 4},
         .abilityNum = 0,
         .otId = 91481,
@@ -1067,10 +1067,10 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_PIKACHU
     },
-    [INGAME_TRADE_BELLSPROUT] =
+    [INGAME_TRADE_FARFETCHD] =
     {
-        .nickname = _("BELLAMY"),
-        .species = SPECIES_BELLSPROUT,
+        .nickname = _("DUX"),
+        .species = SPECIES_FARFETCHD,
         .ivs = {5, 4, 5, 4, 4, 4},
         .abilityNum = 0,
         .otId = 38726,
@@ -1083,10 +1083,10 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_RALTS
     },
-    [INGAME_TRADE_NIDORAN_M] =
+    [INGAME_TRADE_SMOOCHUM] =
     {
-        .nickname = _("NIDOL"),
-        .species = SPECIES_NIDORAN_M,
+        .nickname = _("SMOOCHES"),
+        .species = SPECIES_SMOOCHUM,
         .ivs = {4, 4, 4, 5, 5, 4},
         .abilityNum = 0,
         .otId = 73996,
@@ -1143,7 +1143,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_THANK_YOU,
         EC_WORD_FOR,
         EC_POKEMON(PIKACHU),
-        EC_POKEMON_NATIONAL(MEOWTH),
+        EC_POKEMON_NATIONAL(EEVEE),
         EC_WORD_CRIES,
         EC_WORD_IN,
         EC_WORD_A,
@@ -1153,7 +1153,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_BE,
         EC_WORD_NICE,
         EC_WORD_TO,
-        EC_POKEMON_NATIONAL(NIDORAN_F),
+        EC_POKEMON_NATIONAL(SMOOCHUM),
         EC_WORD_EXCL,
         EC_POKEMON(VOLBEAT),
         EC_WORD_WILL,

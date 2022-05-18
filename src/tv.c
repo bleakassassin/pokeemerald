@@ -195,127 +195,91 @@ static const struct {
     u16 moves[MAX_MON_MOVES];
     u8 level;
     u8 location;
-    u8 group;
 } sPokeOutbreakSpeciesList[] = {
     {
         .species = SPECIES_RATTATA,
         .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP},
         .level = 3,
         .location = MAP_NUM(ROUTE101),
-        .group = MAP_GROUP(ROUTE101),
     },
     {
         .species = SPECIES_CATERPIE,
         .moves = {MOVE_TACKLE, MOVE_STRING_SHOT},
         .level = 4,
         .location = MAP_NUM(ROUTE102),
-        .group = MAP_GROUP(ROUTE102),
     },
     {
         .species = SPECIES_PIDGEY,
         .moves = {MOVE_TACKLE},
         .level = 4,
         .location = MAP_NUM(ROUTE103),
-        .group = MAP_GROUP(ROUTE103),
     },
     {
         .species = SPECIES_SPEAROW,
         .moves = {MOVE_PECK, MOVE_GROWL},
         .level = 5,
         .location = MAP_NUM(ROUTE104),
-        .group = MAP_GROUP(ROUTE104),
     },
     {
-        .species = SPECIES_LICKITUNG,
-        .moves = {MOVE_LICK, MOVE_SUPERSONIC, MOVE_DEFENSE_CURL},
-        .level = 13,
+        .species = SPECIES_BELLSPROUT,
+        .moves = {MOVE_VINE_WHIP, MOVE_GROWTH, MOVE_WRAP},
+        .level = 12,
         .location = MAP_NUM(ROUTE110),
-        .group = MAP_GROUP(ROUTE110),
     },
     {
-        .species = SPECIES_PONYTA,
-        .moves = {MOVE_TACKLE, MOVE_GROWL, MOVE_TAIL_WHIP, MOVE_EMBER},
+        .species = SPECIES_GROWLITHE,
+        .moves = {MOVE_BITE, MOVE_ROAR, MOVE_EMBER, MOVE_LEER},
         .level = 16,
         .location = MAP_NUM(ROUTE112),
-        .group = MAP_GROUP(ROUTE112),
     },
     {
         .species = SPECIES_EKANS,
         .moves = {MOVE_WRAP, MOVE_LEER, MOVE_POISON_STING, MOVE_BITE},
         .level = 17,
         .location = MAP_NUM(ROUTE114),
-        .group = MAP_GROUP(ROUTE114),
     },
     {
-        .species = SPECIES_EEVEE,
-        .moves = {MOVE_TACKLE, MOVE_TAIL_WHIP, MOVE_HELPING_HAND, MOVE_SAND_ATTACK},
-        .level = 8,
+        .species = SPECIES_MURKROW,
+        .moves = {MOVE_PECK, MOVE_ASTONISH, MOVE_PURSUIT, MOVE_HAZE},
+        .level = 22,
+        .location = MAP_NUM(ROUTE115),
+    },
+    {
+        .species = SPECIES_MEOWTH,
+        .moves = {MOVE_SCRATCH, MOVE_GROWL, MOVE_BITE},
+        .level = 10,
         .location = MAP_NUM(ROUTE116),
-        .group = MAP_GROUP(ROUTE116),
     },
     {
-        .species = SPECIES_SLOWPOKE,
-        .moves = {MOVE_TACKLE, MOVE_YAWN, MOVE_GROWL, MOVE_WATER_GUN},
-        .level = 15,
+        .species = SPECIES_BEEDRILL,
+        .moves = {MOVE_POISON_STING, MOVE_STRING_SHOT, MOVE_HARDEN, MOVE_FURY_ATTACK},
+        .level = 14,
         .location = MAP_NUM(ROUTE117),
-        .group = MAP_GROUP(ROUTE117),
     },
     {
         .species = SPECIES_TANGELA,
         .moves = {MOVE_GROWTH, MOVE_POISON_POWDER, MOVE_VINE_WHIP, MOVE_BIND},
         .level = 28,
         .location = MAP_NUM(ROUTE119),
-        .group = MAP_GROUP(ROUTE119),
     },
     {
-        .species = SPECIES_SCYTHER,
-        .moves = {MOVE_PURSUIT, MOVE_FALSE_SWIPE, MOVE_AGILITY, MOVE_WING_ATTACK},
-        .level = 27,
+        .species = SPECIES_YANMA,
+        .moves = {MOVE_QUICK_ATTACK, MOVE_DOUBLE_TEAM, MOVE_HYPNOSIS, MOVE_DETECT},
+        .level = 25,
         .location = MAP_NUM(ROUTE120),
-        .group = MAP_GROUP(ROUTE120),
     },
     {
-        .species = SPECIES_HYPNO,
-        .moves = {MOVE_HYPNOSIS, MOVE_DISABLE, MOVE_CONFUSION, MOVE_HEADBUTT},
+        .species = SPECIES_FURRET,
+        .moves = {MOVE_QUICK_ATTACK, MOVE_FURY_SWIPES, MOVE_HELPING_HAND, MOVE_SLAM},
         .level = 28,
         .location = MAP_NUM(ROUTE121),
-        .group = MAP_GROUP(ROUTE121),
     },
     {
         .species = SPECIES_HAUNTER,
         .moves = {MOVE_MEAN_LOOK, MOVE_CURSE, MOVE_NIGHT_SHADE, MOVE_SHADOW_PUNCH},
         .level = 28,
         .location = MAP_NUM(ROUTE123),
-        .group = MAP_GROUP(ROUTE123),
     },
-    {
-        .species = SPECIES_YANMA,
-        .moves = {MOVE_TACKLE, MOVE_FORESIGHT, MOVE_QUICK_ATTACK},
-        .level = 7,
-        .location = MAP_NUM(PETALBURG_WOODS),
-        .group = MAP_GROUP(PETALBURG_WOODS),
-    },
-    {
-        .species = SPECIES_TYROGUE,
-        .moves = {MOVE_TACKLE},
-        .level = 22,
-        .location = MAP_NUM(JAGGED_PASS),
-        .group = MAP_GROUP(JAGGED_PASS),
-    },
-    {
-        .species = SPECIES_MISDREAVUS,
-        .moves = {MOVE_ASTONISH, MOVE_CONFUSE_RAY, MOVE_MEAN_LOOK, MOVE_PSYBEAM},
-        .level = 30,
-        .location = MAP_NUM(MT_PYRE_SUMMIT),
-        .group = MAP_GROUP(MT_PYRE_SUMMIT),
-    },
-    {
-        .species = SPECIES_SWINUB,
-        .moves = {MOVE_ODOR_SLEUTH, MOVE_POWDER_SNOW, MOVE_ENDURE, MOVE_TAKE_DOWN},
-        .level = 32,
-        .location = MAP_NUM(SHOAL_CAVE_LOW_TIDE_ICE_ROOM),
-        .group = MAP_GROUP(SHOAL_CAVE_LOW_TIDE_ICE_ROOM),
-    }
 };
 
 static const u16 sGoldSymbolFlags[NUM_FRONTIER_FACILITIES] = {
@@ -1763,7 +1727,7 @@ static void TryStartRandomMassOutbreak(void)
             show->massOutbreak.moves[2] = sPokeOutbreakSpeciesList[outbreakIdx].moves[2];
             show->massOutbreak.moves[3] = sPokeOutbreakSpeciesList[outbreakIdx].moves[3];
             show->massOutbreak.locationMapNum = sPokeOutbreakSpeciesList[outbreakIdx].location;
-            show->massOutbreak.locationMapGroup = sPokeOutbreakSpeciesList[outbreakIdx].group;
+            show->massOutbreak.locationMapGroup = 0;
             show->massOutbreak.unused4 = 0;
             show->massOutbreak.probability = 50;
             show->massOutbreak.unused5 = 0;
@@ -4985,7 +4949,7 @@ static void DoTVShowPokemonNewsMassOutbreak(void)
     TVShow *show;
 
     show = &gSaveBlock1Ptr->tvShows[gSpecialVar_0x8004];
-    GetMapName(gStringVar1, Overworld_GetMapHeaderByGroupAndId(show->massOutbreak.locationMapGroup, show->massOutbreak.locationMapNum)->regionMapSectionId, 0);
+    GetMapName(gStringVar1, show->massOutbreak.locationMapNum, 0);
     StringCopy(gStringVar2, gSpeciesNames[show->massOutbreak.species]);
     TVShowDone();
     StartMassOutbreak();

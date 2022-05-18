@@ -590,11 +590,13 @@ static const struct MenuAction MultichoiceList_UnusedSSTidal3[] =
     {gText_Exit},
 };
 
-static const struct MenuAction MultichoiceList_UnusedSSTidal4[] =
+static const struct MenuAction MultichoiceList_GameCornerPokemon[] =
 {
-    {gText_SouthernIsland},
-    {gText_BirthIsland},
-    {gText_FarawayIsland},
+    {gText_TyrogueAndPrice},
+    {gText_MrMimeAndPrice},
+    {gText_LickitungAndPrice},
+    {gText_EeveeAndPrice},
+    {gText_PorygonAndPrice},
     {gText_Exit},
 };
 
@@ -869,7 +871,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_UNUSED_SSTIDAL_1]           = MULTICHOICE(MultichoiceList_UnusedSSTidal1),
     [MULTI_UNUSED_SSTIDAL_2]           = MULTICHOICE(MultichoiceList_UnusedSSTidal2),
     [MULTI_UNUSED_SSTIDAL_3]           = MULTICHOICE(MultichoiceList_UnusedSSTidal3),
-    [MULTI_UNUSED_SSTIDAL_4]           = MULTICHOICE(MultichoiceList_UnusedSSTidal4),
+    [MULTI_GAME_CORNER_POKEMON]        = MULTICHOICE(MultichoiceList_GameCornerPokemon),
     [MULTI_FOSSIL]                     = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_YESNO]                      = MULTICHOICE(MultichoiceList_YesNo),
     [MULTI_FRONTIER_RULES]             = MULTICHOICE(MultichoiceList_FrontierRules),

@@ -100,7 +100,7 @@
 #define MULTI_UNUSED_SSTIDAL_1             89 // These 4 were replaced by CreateLilycoveSSTidalMultichoice
 #define MULTI_UNUSED_SSTIDAL_2             90 //
 #define MULTI_UNUSED_SSTIDAL_3             91 //
-#define MULTI_UNUSED_SSTIDAL_4             92 //
+#define MULTI_GAME_CORNER_POKEMON          92 // Edited multichoice; used for prize Pokemon from Game Corner after beating the game
 #define MULTI_FOSSIL                       93 // Edited multichoice; exit only, populated by CreateDevonCorpFossilMultichoice
 #define MULTI_YESNO                        94
 #define MULTI_FRONTIER_RULES               95

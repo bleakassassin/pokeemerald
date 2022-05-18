@@ -102,12 +102,17 @@ void ClearRoamerLocationData(void)
 static void CreateInitialRoamerMon(u8 createRoamer)
 {
     if (createRoamer == 3)
+    {
         gSaveBlock1Ptr->roam[createRoamer].species = VarGet(VAR_ROAMER_POKEMON) + SPECIES_LATIAS;
+        gSaveBlock1Ptr->roam[createRoamer].level = 40;
+    }
     else
+    {
         gSaveBlock1Ptr->roam[createRoamer].species = createRoamer + SPECIES_RAIKOU;
+        gSaveBlock1Ptr->roam[createRoamer].level = 50;
+    }
 
     CreateMon(&gEnemyParty[0], gSaveBlock1Ptr->roam[createRoamer].species, 40, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
-    gSaveBlock1Ptr->roam[createRoamer].level = 40;
     gSaveBlock1Ptr->roam[createRoamer].status = 0;
     gSaveBlock1Ptr->roam[createRoamer].active = TRUE;
     gSaveBlock1Ptr->roam[createRoamer].ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);

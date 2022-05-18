@@ -5,7 +5,7 @@ BattleFrontier_Lounge6_EventScript_Trader::
 	lock
 	faceplayer
 	goto_if_set FLAG_BATTLE_FRONTIER_TRADE_DONE, BattleFrontier_Lounge6_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_MEOWTH
+	setvar VAR_0x8008, INGAME_TRADE_EEVEE
 	call BattleFrontier_Lounge6_EventScript_Trader_Part1
 	msgbox BattleFrontier_Lounge6_Text_WouldYouLikeToTrade, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_DeclineTrade
@@ -66,7 +66,7 @@ BattleFrontier_Lounge6_EventScript_Kobe::
 	lock
 	faceplayer
 	goto_if_set FLAG_KOBE_TRADE_DONE, BattleFrontier_Lounge6_EventScript_KobeTradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_BELLSPROUT
+	setvar VAR_0x8008, INGAME_TRADE_FARFETCHD
 	call BattleFrontier_Lounge6_EventScript_Trader_Part1
 	msgbox BattleFrontier_Lounge6_Text_IllTradeIfYouWant, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_KobeDeclineTrade
@@ -100,7 +100,7 @@ BattleFrontier_Lounge6_EventScript_Roman::
 	lock
 	faceplayer
 	goto_if_set FLAG_ROMAN_TRADE_DONE, BattleFrontier_Lounge6_EventScript_RomanTradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_NIDORAN_M
+	setvar VAR_0x8008, INGAME_TRADE_SMOOCHUM
 	call BattleFrontier_Lounge6_EventScript_Trader_Part1
 	msgbox BattleFrontier_Lounge6_Text_YouWillTradeWontYou, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_RomanDeclineTrade
@@ -165,7 +165,7 @@ BattleFrontier_Lounge6_EventScript_SkylarTradeCompleted::
 	end
 
 BattleFrontier_Lounge6_Text_WouldYouLikeToTrade:
-	.string "My POKéMON is a {STR_VAR_2}.\n"
+	.string "My POKéMON is an {STR_VAR_2}.\n"
 	.string "Do you know it?\l"
 	.string "It's quite cute and rather nice.\p"
 	.string "This little one, I could trade with\n"
@@ -245,7 +245,7 @@ BattleFrontier_Lounge6_Text_YouWontTradeMe:
 BattleFrontier_Lounge6_Text_GoingToMakeVolbeatStrong:
 	.string "I'm going to make VOLBEAT super\n"
 	.string "strong from this moment on!\p"
-	.string "I hope you do the same with NIDORAN♂!$"
+	.string "I hope you do the same with SMOOCHUM!$"
 
 BattleFrontier_Lounge6_Text_WillingToTradeIt:
 	.string "Check out this {STR_VAR_2}!\p"

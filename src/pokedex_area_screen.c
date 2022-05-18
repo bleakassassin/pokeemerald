@@ -12,6 +12,7 @@
 #include "region_map.h"
 #include "roamer.h"
 #include "rtc.h"
+#include "script.h"
 #include "sound.h"
 #include "string_util.h"
 #include "trig.h"
@@ -92,6 +93,8 @@ struct
     /*0xFBC*/ u8 areaUnknownGraphicsBuffer[0x600];
 } static EWRAM_DATA *sPokedexAreaScreen = NULL;
 
+extern const u8 AbnormalWeather_EventScript_CheckKyogreGroudonStatus[];
+
 static void FindMapsWithMon(u16);
 static void BuildAreaGlowTilemap(void);
 static void SetAreaHasMon(u16, u16);
@@ -111,7 +114,14 @@ static void DestroyAreaScreenSprites(void);
 static const u32 sAreaGlow_Pal[] = INCBIN_U32("graphics/pokedex/area_glow.gbapal");
 static const u32 sAreaGlow_Gfx[] = INCBIN_U32("graphics/pokedex/area_glow.4bpp.lz");
 
-static const u16 sSpeciesHiddenFromAreaScreen[] = { SPECIES_PORYGON };
+static const u16 sSpeciesHiddenFromAreaScreen[] = 
+{
+    SPECIES_PONYTA,
+    SPECIES_HOPPIP,
+    SPECIES_MISDREAVUS,
+    SPECIES_SNEASEL,
+    SPECIES_DELIBIRD
+};
 
 static const u16 sMovingRegionMapSections[3] =
 {
@@ -257,10 +267,15 @@ static void FindMapsWithMon(u16 species)
 
         // Check if this species should be hidden from the area map.
         // This only applies to Wynaut, to hide the encounters on Mirage Island.
-        for (i = 0; i < ARRAY_COUNT(sSpeciesHiddenFromAreaScreen); i++)
+        ScriptContext2_RunNewScript(AbnormalWeather_EventScript_CheckKyogreGroudonStatus);
+
+        if (VarGet(VAR_0x8004) < 2)
         {
-            if (sSpeciesHiddenFromAreaScreen[i] == species)
-                return;
+            for (i = 0; i < ARRAY_COUNT(sSpeciesHiddenFromAreaScreen); i++)
+            {
+                if (sSpeciesHiddenFromAreaScreen[i] == species)
+                    return;
+            }
         }
 
         // Add Pokémon with special encounter circumstances (i.e. not listed
