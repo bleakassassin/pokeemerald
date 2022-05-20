@@ -728,7 +728,7 @@ static void PrintDecorationCategoryMenuItems(u8 taskId)
             PrintDecorationCategoryMenuItem(windowId, i, 8, i * 16, FALSE, TEXT_SKIP_DRAW);
     }
 
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gTasks[taskId].tDecorationMenuCommand == DECOR_MENU_TRADE ? gText_Exit : gText_Cancel, 8, i * 16 + 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gTasks[taskId].tDecorationMenuCommand == DECOR_MENU_TRADE ? gText_Exit : gText_Cancel, 8, i * 16, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -738,7 +738,6 @@ static void PrintDecorationCategoryMenuItem(u8 winid, u8 category, u8 x, u8 y, b
     u8 *str;
 
     width = x == 8 ? 104 : 96;
-    y++;
     ColorMenuItemString(gStringVar4, disabled);
     str = StringLength(gStringVar4) + gStringVar4;
     StringCopy(str, sDecorationCategoryNames[category]);
@@ -1024,7 +1023,7 @@ static void PrintDecorationItemDescription(s32 itemIndex)
     else
         str = gDecorations[gCurDecorationItems[itemIndex]].description;
 
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, str, 0, 1, 0, 0);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, str, 0, 0, 0, 0);
 }
 
 static void RemoveDecorationItemsOtherWindows(void)

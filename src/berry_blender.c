@@ -3768,8 +3768,8 @@ void ShowBerryBlenderRecordWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
     xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_BlenderMaxSpeedRecord, 144);
-    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_234Players, 4, 41, 0, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_BlenderMaxSpeedRecord, xPos, 0, 0, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_234Players, 4, 40, 0, NULL);
 
     for (i = 0, yPos = 41; i < NUM_SCORE_TYPES; i++)
     {
