@@ -53,6 +53,10 @@ struct SpeciesItem
     u16 item;
 };
 
+static bool8 ShouldForceGameRuby(u16 species);
+static bool8 ShouldForceGameSapphire(u16 species);
+static bool8 ShouldForceGameFireRed(u16 species);
+static bool8 ShouldForceGameLeafGreen(u16 species);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
 static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
 static void EncryptBoxMon(struct BoxPokemon *boxMon);
@@ -2101,13 +2105,13 @@ static const u16 sHMMoves[] =
 
 static const struct SpeciesItem sAlteringCaveWildMonHeldItems[] =
 {
-    {SPECIES_KANGASKHAN, ITEM_GANLON_BERRY},
+    {SPECIES_CLEFAIRY,   ITEM_GANLON_BERRY},
     {SPECIES_MAGMAR,     ITEM_PETAYA_BERRY},
     {SPECIES_MAROWAK,    ITEM_NONE},
     {SPECIES_ELECTABUZZ, ITEM_SALAC_BERRY},
     {SPECIES_PRIMEAPE,   ITEM_LIECHI_BERRY},
-    {SPECIES_JYNX,       ITEM_NONE},
-    {SPECIES_MR_MIME,    ITEM_APICOT_BERRY},
+    {SPECIES_SWINUB,     ITEM_NONE},
+    {SPECIES_HYPNO,      ITEM_APICOT_BERRY},
     {SPECIES_STANTLER,  ITEM_PETAYA_BERRY},
     {SPECIES_SMEARGLE,  ITEM_SALAC_BERRY},
 };
@@ -2138,6 +2142,94 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
+};
+
+#define RUBY_POKEMON      4
+#define SAPPHIRE_POKEMON  1
+#define FIRERED_POKEMON  56
+#define LEAFGREEN_POKEMON 8
+
+const u16 sRubyPokemon[] =
+{
+    SPECIES_MEDITITE,
+    SPECIES_MEDICHAM,
+    SPECIES_ROSELIA,
+    SPECIES_ZANGOOSE
+};
+
+const u16 sSapphirePokemon[] =
+{
+    SPECIES_LUNATONE
+};
+
+const u16 sFireRedPokemon[] =
+{
+    SPECIES_CATERPIE,
+    SPECIES_BEEDRILL,
+    SPECIES_PIDGEY,
+    SPECIES_RATTATA,
+    SPECIES_SPEAROW,
+    SPECIES_EKANS,
+    SPECIES_NIDORAN_M,
+    SPECIES_CLEFAIRY,
+    SPECIES_PARAS,
+    SPECIES_VENONAT,
+    SPECIES_DIGLETT,
+    SPECIES_DUGTRIO,
+    SPECIES_MEOWTH,
+    SPECIES_PRIMEAPE,
+    SPECIES_GROWLITHE,
+    SPECIES_POLIWAG,
+    SPECIES_PONYTA,
+    SPECIES_SEEL,
+    SPECIES_DEWGONG,
+    SPECIES_SHELLDER,
+    SPECIES_HAUNTER,
+    SPECIES_ONIX,
+    SPECIES_HYPNO,
+    SPECIES_KINGLER,
+    SPECIES_EXEGGCUTE,
+    SPECIES_MAROWAK,
+    SPECIES_CHANSEY,
+    SPECIES_TANGELA,
+    SPECIES_KANGASKHAN,
+    SPECIES_SCYTHER,
+    SPECIES_ELECTABUZZ,
+    SPECIES_TAUROS,
+    SPECIES_LAPRAS,
+    SPECIES_SNORLAX,
+    SPECIES_ARTICUNO,
+    SPECIES_ZAPDOS,
+    SPECIES_MOLTRES,
+    SPECIES_DRATINI,
+    SPECIES_MEWTWO,
+    SPECIES_FURRET,
+    SPECIES_HOPPIP,
+    SPECIES_YANMA,
+    SPECIES_MURKROW,
+    SPECIES_UNOWN,
+    SPECIES_DUNSPARCE,
+    SPECIES_STEELIX,
+    SPECIES_QWILFISH,
+    SPECIES_SWINUB,
+    SPECIES_DELIBIRD,
+    SPECIES_RAIKOU,
+    SPECIES_ENTEI,
+    SPECIES_SUICUNE,
+    SPECIES_LARVITAR
+};
+
+const u16 sLeafGreenPokemon[] =
+{
+    SPECIES_NIDORAN_F,
+    SPECIES_BELLSPROUT,
+    SPECIES_SLOWPOKE,
+    SPECIES_KRABBY,
+    SPECIES_KINGLER,
+    SPECIES_MAGMAR,
+    SPECIES_MISDREAVUS,
+    SPECIES_SNEASEL,
+    SPECIES_MANTINE
 };
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
@@ -2198,6 +2290,18 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 value;
     u16 checksum;
     u32 shinyValue;
+    u8 version;
+
+    if (ShouldForceGameRuby(species))
+        version = VERSION_RUBY;
+    else if (ShouldForceGameSapphire(species))
+        version = VERSION_SAPPHIRE;
+    else if (ShouldForceGameFireRed(species))
+        version = VERSION_FIRE_RED;
+    else if (ShouldForceGameLeafGreen(species))
+        version = VERSION_LEAF_GREEN;
+    else
+        version = gGameVersion;
 
     ZeroBoxMonData(boxMon);
 
@@ -2224,7 +2328,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     {
         u16 j = 0;
         u16 shinyRolls = 2;
-        
+
         if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
             shinyRolls += 4;
 
@@ -2257,7 +2361,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     value = GetCurrentRegionMapSectionId();
     SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, &value);
     SetBoxMonData(boxMon, MON_DATA_MET_LEVEL, &level);
-    SetBoxMonData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
+    SetBoxMonData(boxMon, MON_DATA_MET_GAME, &version);
     value = ITEM_POKE_BALL;
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
@@ -2636,6 +2740,50 @@ void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
 
     CreateMon(mon, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_EVENT_LEGAL, &isEventLegal);
+}
+
+bool8 ShouldForceGameRuby(u16 species)
+{
+    u8 i;
+    for (i = 0; i < RUBY_POKEMON; i++)
+    {
+    if (sRubyPokemon[i] == species)
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 ShouldForceGameSapphire(u16 species)
+{
+    u8 i;
+    for (i = 0; i < SAPPHIRE_POKEMON; i++)
+    {
+    if (sSapphirePokemon[i] == species)
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 ShouldForceGameFireRed(u16 species)
+{
+    u8 i;
+    for (i = 0; i < FIRERED_POKEMON; i++)
+    {
+    if (sFireRedPokemon[i] == species)
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 ShouldForceGameLeafGreen(u16 species)
+{
+    u8 i;
+    for (i = 0; i < LEAFGREEN_POKEMON; i++)
+    {
+    if (sLeafGreenPokemon[i] == species)
+        return TRUE;
+    }
+    return FALSE;
 }
 
 // If FALSE, should load this game's Deoxys form. If TRUE, should load normal Deoxys form

@@ -42,17 +42,13 @@ extern const u8 gText_Super[];
 extern const u8 gText_Hyper[];
 extern const u8 gText_Master[];
 
-extern const u8 gText_Cool2[];
-extern const u8 gText_Beauty2[];
-extern const u8 gText_Cute2[];
-extern const u8 gText_Smart2[];
-extern const u8 gText_Tough2[];
-
 extern const u8 gText_Items[];
 extern const u8 gText_Key_Items[];
 extern const u8 gText_Poke_Balls[];
 extern const u8 gText_TMs_Hms[];
-extern const u8 gText_Berries2[];
+extern const u8 gText_Medicine[];
+extern const u8 gText_Battle_Items[];
+extern const u8 gText_Treasures[];
 
 extern const u8 gText_Single2[];
 extern const u8 gText_Double2[];
@@ -137,7 +133,6 @@ extern const u8 gText_DecorationWillBeDiscarded[];
 extern const u8 gText_CantThrowAwayInUse[];
 extern const u8 gText_DecorationThrownAway[];
 
-extern const u8 gText_PokeBalls[];
 extern const u8 gText_Berries[];
 extern const u8 gText_Berry[];
 
@@ -1253,6 +1248,11 @@ extern const u8 gText_TM24AndPrice[];
 extern const u8 gText_TM13AndPrice[];
 extern const u8 gText_50CoinsAndPrice[];
 extern const u8 gText_500CoinsAndPrice[];
+extern const u8 gText_TyrogueAndPrice[];
+extern const u8 gText_MrMimeAndPrice[];
+extern const u8 gText_LickitungAndPrice[];
+extern const u8 gText_EeveeAndPrice[];
+extern const u8 gText_PorygonAndPrice[];
 extern const u8 gText_Excellent2[];
 extern const u8 gText_NotSoGood[];
 extern const u8 gText_LilycoveCity[];

@@ -64,11 +64,15 @@
 // number of item slots that could fit in a single pocket, + 1 for Cancel.
 // This constant picks the max of the existing pocket sizes.
 // By default, the largest pocket is BAG_TMHM_COUNT at 64.
-#define MAX_POCKET_ITEMS  ((max(BAG_TMHM_COUNT,              \
+#define MAX_POCKET_ITEMS  ((max(BAG_ITEMS_COUNT,             \
+                            max(BAG_TMHM_COUNT,              \
                             max(BAG_BERRIES_COUNT,           \
-                            max(BAG_ITEMS_COUNT,             \
                             max(BAG_KEYITEMS_COUNT,          \
-                                BAG_POKEBALLS_COUNT))))) + 1)
+                            max(BAG_MEDICINE_COUNT,          \
+                            max(BAG_TREASURES_COUNT,         \
+                            max(BAG_POKEBALLS_COUNT,         \
+                            max(BAG_MAIL_COUNT,              \
+                                BAG_BATTLEITEMS_COUNT))))))))) + 1)
 
 // Up to 8 item slots can be visible at a time
 #define MAX_ITEMS_SHOWN 8
@@ -122,7 +126,7 @@ struct ListBuffer2 {
 };
 
 struct TempWallyBag {
-    struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    struct ItemSlot bagPocket_Medicine[BAG_MEDICINE_COUNT];
     struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     u16 cursorPosition[POCKETS_COUNT];
     u16 scrollPosition[POCKETS_COUNT];
@@ -393,7 +397,7 @@ static const struct YesNoFuncTable sYesNoSellItemFunctions = {ConfirmSell, Cance
 
 static const struct ScrollArrowsTemplate sBagScrollArrowsTemplate = {
     .firstArrowType = SCROLL_ARROW_LEFT,
-    .firstX = 28,
+    .firstX = 20,
     .firstY = 16,
     .secondArrowType = SCROLL_ARROW_RIGHT,
     .secondX = 100,
@@ -446,9 +450,9 @@ static const struct WindowTemplate sDefaultBagWindows[] =
     },
     [WIN_POCKET_NAME] = {
         .bg = 0,
-        .tilemapLeft = 4,
+        .tilemapLeft = 3,
         .tilemapTop = 1,
-        .width = 8,
+        .width = 9,
         .height = 2,
         .paletteNum = 1,
         .baseBlock = 0x1A1,
@@ -478,7 +482,7 @@ static const struct WindowTemplate sDefaultBagWindows[] =
         .width = 27,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x1B1,
+        .baseBlock = 0x1B3,
     },
     DUMMY_WIN_TEMPLATE,
 };
@@ -492,7 +496,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 7,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x21F,
     },
     [ITEMWIN_1x2] = {
         .bg = 1,
@@ -501,7 +505,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 7,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x21F,
     },
     [ITEMWIN_2x2] = {
         .bg = 1,
@@ -510,7 +514,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 14,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x21F,
     },
     [ITEMWIN_2x3] = {
         .bg = 1,
@@ -519,7 +523,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 14,
         .height = 6,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x21F,
     },
     [ITEMWIN_MESSAGE] = {
         .bg = 1,
@@ -528,7 +532,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 27,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x1B1,
+        .baseBlock = 0x1B3,
     },
     [ITEMWIN_YESNO_LOW] = { // Yes/No tucked in corner, for toss confirm
         .bg = 1,
@@ -537,7 +541,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 5,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x21F,
     },
     [ITEMWIN_YESNO_HIGH] = { // Yes/No higher up, positioned above a lower message box
         .bg = 1,
@@ -546,7 +550,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 5,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x21F,
     },
     [ITEMWIN_QUANTITY] = { // Used for quantity of items to Toss/Deposit
         .bg = 1,
@@ -555,7 +559,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 5,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x21D,
+        .baseBlock = 0x21F,
     },
     [ITEMWIN_QUANTITY_WIDE] = { // Used for quantity and price of items to Sell
         .bg = 1,
@@ -564,7 +568,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 10,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x245,
+        .baseBlock = 0x247,
     },
     [ITEMWIN_MONEY] = {
         .bg = 1,
@@ -573,7 +577,7 @@ static const struct WindowTemplate sContextMenuWindowTemplates[] =
         .width = 10,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x231,
+        .baseBlock = 0x233,
     },
 };
 
@@ -589,7 +593,7 @@ static EWRAM_DATA u8 sRegisteredItemsMenuIcon = 0xFF;
 
 void ResetBagScrollPositions(void)
 {
-    gBagPosition.pocket = ITEMS_POCKET;
+    gBagPosition.pocket = MEDICINE_POCKET;
     memset(gBagPosition.cursorPosition, 0, sizeof(gBagPosition.cursorPosition));
     memset(gBagPosition.scrollPosition, 0, sizeof(gBagPosition.scrollPosition));
 }
@@ -1007,7 +1011,7 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
         if (itemId >= ITEM_HM01 && itemId <= ITEM_HM08)
             BlitBitmapToWindow(windowId, gBagMenuHMIcon_Gfx, 8, y - 1, 16, 16);
 
-        if (gBagPosition.pocket != KEYITEMS_POCKET && ItemId_GetImportance(itemId) == FALSE)
+        if (gBagPosition.pocket != KEYITEMS_POCKET && gBagPosition.pocket != TMHM_POCKET)
         {
             // Print item quantity
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, BAG_ITEM_CAPACITY_DIGITS);
@@ -1223,7 +1227,7 @@ static void AddItemQuantityWindow(u8 windowType)
 
 static void PrintItemQuantity(u8 windowId, s16 quantity)
 {
-    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, BAG_ITEM_CAPACITY_DIGITS);
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_RIGHT_ALIGN, BAG_ITEM_CAPACITY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0x28), 0, 0, 0);
 }
@@ -1231,7 +1235,7 @@ static void PrintItemQuantity(u8 windowId, s16 quantity)
 // Prints the quantity of items to be sold and the amount that would be earned
 static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
 {
-    ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, BAG_ITEM_CAPACITY_DIGITS);
+    ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_RIGHT_ALIGN, BAG_ITEM_CAPACITY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
     AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0, 1, TEXT_SKIP_DRAW, 0);
     PrintMoneyAmount(windowId, 38, 1, moneyEarned, 0);
@@ -1419,15 +1423,16 @@ static void Task_SwitchBagPocket(u8 taskId)
     switch (tPocketSwitchState)
     {
     case 0:
-        DrawItemListBgRow(tPocketSwitchTimer);
+        if (tPocketSwitchTimer < 16)
+            DrawItemListBgRow(tPocketSwitchTimer);
         if (!(++tPocketSwitchTimer & 1))
         {
             if (tPocketSwitchDir == MENU_CURSOR_DELTA_RIGHT)
                 CopyPocketNameToWindow((u8)(tPocketSwitchTimer >> 1));
             else
-                CopyPocketNameToWindow((u8)(8 - (tPocketSwitchTimer >> 1)));
+                CopyPocketNameToWindow((u8)(9 - (tPocketSwitchTimer >> 1)));
         }
-        if (tPocketSwitchTimer == 16)
+        if (tPocketSwitchTimer == 18)
             tPocketSwitchState++;
         break;
     case 1:
@@ -1454,9 +1459,9 @@ static void DrawItemListBgRow(u8 y)
 static void DrawPocketIndicatorSquare(u8 x, bool8 isCurrentPocket)
 {
     if (!isCurrentPocket)
-        FillBgTilemapBufferRect_Palette0(2, 0x1017, x + 5, 3, 1, 1);
+        FillBgTilemapBufferRect_Palette0(2, 0x1017, x + 3, 3, 1, 1);
     else
-        FillBgTilemapBufferRect_Palette0(2, 0x102B, x + 5, 3, 1, 1);
+        FillBgTilemapBufferRect_Palette0(2, 0x102B, x + 3, 3, 1, 1);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -1652,7 +1657,9 @@ static void OpenContextMenu(u8 taskId)
         {
             switch (gBagPosition.pocket)
             {
+            case MEDICINE_POCKET:
             case ITEMS_POCKET:
+            case MAIL_POCKET:
                 gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ItemsPocket);
                 memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_ItemsPocket, sizeof(sContextMenuItems_ItemsPocket));
@@ -1677,6 +1684,8 @@ static void OpenContextMenu(u8 taskId)
                 }
                 break;
             case BALLS_POCKET:
+            case BATTLEITEMS_POCKET:
+            case TREASURES_POCKET:
                 gBagMenu->contextMenuItemsPtr = sContextMenuItems_BallsPocket;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BallsPocket);
                 break;
@@ -2102,8 +2111,8 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
     HideMapNamePopUpWindow();
     ChangeBgY_ScreenOff(0, 0, BG_COORD_SET);
 
-    if (button >= 2 && button <= REGISTERED_ITEMS_MAX+2)
-        registeredItem = gSaveBlock1Ptr->registeredItems[button-2].itemId;
+    if (button >= 2 && button <= REGISTERED_ITEMS_MAX + 2)
+        registeredItem = gSaveBlock1Ptr->registeredItems[button - 2];
     else
     {
         switch (button)
@@ -2113,7 +2122,7 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
             break;
         case 1:
             //return TRUE;
-            registeredItem = gSaveBlock1Ptr->registeredItems[0].itemId;
+            registeredItem = gSaveBlock1Ptr->registeredItems[0];
             break;
         default:
             return FALSE;
@@ -2143,7 +2152,7 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
             case 1:
                 break;
             default:
-                gSaveBlock1Ptr->registeredItems[button-2].itemId = ITEM_NONE;
+                gSaveBlock1Ptr->registeredItems[button - 2] = ITEM_NONE;
                 break;
             }
         }
@@ -2376,7 +2385,7 @@ static void PrepareBagForWallyTutorial(void)
     u32 i;
 
     sTempWallyBag = AllocZeroed(sizeof(*sTempWallyBag));
-    memcpy(sTempWallyBag->bagPocket_Items, gSaveBlock1Ptr->bagPocket_Items, sizeof(gSaveBlock1Ptr->bagPocket_Items));
+    memcpy(sTempWallyBag->bagPocket_Medicine, gSaveBlock1Ptr->bagPocket_Medicine, sizeof(gSaveBlock1Ptr->bagPocket_Medicine));
     memcpy(sTempWallyBag->bagPocket_PokeBalls, gSaveBlock1Ptr->bagPocket_PokeBalls, sizeof(gSaveBlock1Ptr->bagPocket_PokeBalls));
     sTempWallyBag->pocket = gBagPosition.pocket;
     for (i = 0; i < POCKETS_COUNT; i++)
@@ -2384,7 +2393,7 @@ static void PrepareBagForWallyTutorial(void)
         sTempWallyBag->cursorPosition[i] = gBagPosition.cursorPosition[i];
         sTempWallyBag->scrollPosition[i] = gBagPosition.scrollPosition[i];
     }
-    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Items, BAG_ITEMS_COUNT);
+    ClearItemSlots(gSaveBlock1Ptr->bagPocket_Medicine, BAG_ITEMS_COUNT);
     ClearItemSlots(gSaveBlock1Ptr->bagPocket_PokeBalls, BAG_POKEBALLS_COUNT);
     ResetBagScrollPositions();
 }
@@ -2393,7 +2402,7 @@ static void RestoreBagAfterWallyTutorial(void)
 {
     u32 i;
 
-    memcpy(gSaveBlock1Ptr->bagPocket_Items, sTempWallyBag->bagPocket_Items, sizeof(sTempWallyBag->bagPocket_Items));
+    memcpy(gSaveBlock1Ptr->bagPocket_Medicine, sTempWallyBag->bagPocket_Medicine, sizeof(sTempWallyBag->bagPocket_Medicine));
     memcpy(gSaveBlock1Ptr->bagPocket_PokeBalls, sTempWallyBag->bagPocket_PokeBalls, sizeof(sTempWallyBag->bagPocket_PokeBalls));
     gBagPosition.pocket = sTempWallyBag->pocket;
     for (i = 0; i < POCKETS_COUNT; i++)
@@ -2409,7 +2418,7 @@ void DoWallyTutorialBagMenu(void)
     PrepareBagForWallyTutorial();
     AddBagItem(ITEM_POTION, 1);
     AddBagItem(ITEM_POKE_BALL, 1);
-    GoToBagMenu(ITEMMENULOCATION_WALLY, ITEMS_POCKET, CB2_SetUpReshowBattleScreenAfterMenu2);
+    GoToBagMenu(ITEMMENULOCATION_WALLY, MEDICINE_POCKET, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
 
 #define tTimer data[8]
@@ -2502,16 +2511,16 @@ static void PrintPocketNames(const u8 *pocketName1, const u8 *pocketName2)
     u16 windowId;
     int offset;
 
-    window.width = 16;
+    window.width = 18;
     window.height = 2;
     windowId = AddWindow(&window);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-    offset = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, pocketName1, 0x40);
+    offset = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, pocketName1, 0x48);
     BagMenu_Print(windowId, gSaveBlock2Ptr->optionsCurrentFont, pocketName1, offset, 0, 0, 0, TEXT_SKIP_DRAW, COLORID_POCKET_NAME);
     if (pocketName2)
     {
-        offset = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, pocketName2, 0x40);
-        BagMenu_Print(windowId, gSaveBlock2Ptr->optionsCurrentFont, pocketName2, offset + 0x40, 0, 0, 0, TEXT_SKIP_DRAW, COLORID_POCKET_NAME);
+        offset = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, pocketName2, 0x48);
+        BagMenu_Print(windowId, gSaveBlock2Ptr->optionsCurrentFont, pocketName2, offset + 0x48, 0, 0, 0, TEXT_SKIP_DRAW, COLORID_POCKET_NAME);
     }
     CpuCopy32((u8*)GetWindowAttribute(windowId, WINDOW_TILE_DATA), gBagMenu->pocketNameBuffer, sizeof(gBagMenu->pocketNameBuffer));
     RemoveWindow(windowId);
@@ -2519,16 +2528,16 @@ static void PrintPocketNames(const u8 *pocketName1, const u8 *pocketName2)
 
 static void CopyPocketNameToWindow(u32 a)
 {
-    u8 (* tileDataBuffer)[32][32];
+    u8 (* tileDataBuffer)[36][32];
     u8* windowTileData;
     int b;
-    if (a > 8)
-        a = 8;
+    if (a > 9)
+        a = 9;
     tileDataBuffer = &gBagMenu->pocketNameBuffer;
-    windowTileData = (u8*)GetWindowAttribute(2, WINDOW_TILE_DATA);
-    CpuCopy32(tileDataBuffer[0][a], windowTileData, 0x100); // Top half of pocket name
-    b = a + 16;
-    CpuCopy32(tileDataBuffer[0][b], windowTileData + 0x100, 0x100); // Bottom half of pocket name
+    windowTileData = (u8*)GetWindowAttribute(WIN_POCKET_NAME, WINDOW_TILE_DATA);
+    CpuCopy32(tileDataBuffer[0][a], windowTileData, 0x120); // Top half of pocket name
+    b = a + 18;
+    CpuCopy32(tileDataBuffer[0][b], windowTileData + 0x120, 0x120); // Bottom half of pocket name
     CopyWindowToVram(WIN_POCKET_NAME, COPYWIN_GFX);
 }
 
@@ -2864,6 +2873,22 @@ static void SortItemsInBag(u8 pocket, u8 type)
     case TMHM_POCKET:
         itemMem = gSaveBlock1Ptr->bagPocket_TMHM;
         itemAmount = BAG_TMHM_COUNT;
+        break;
+    case MEDICINE_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_Medicine;
+        itemAmount = BAG_MEDICINE_COUNT;
+        break;
+    case BATTLEITEMS_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_BattleItems;
+        itemAmount = BAG_BATTLEITEMS_COUNT;
+        break;
+    case TREASURES_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_Treasures;
+        itemAmount = BAG_TREASURES_COUNT;
+        break;
+    case MAIL_POCKET:
+        itemMem = gSaveBlock1Ptr->bagPocket_Mail;
+        itemAmount = BAG_MAIL_COUNT;
         break;
     default:
         return;

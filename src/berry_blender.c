@@ -1188,9 +1188,9 @@ static void SetBerrySpriteData(struct Sprite* sprite, s16 x, s16 y, s16 bounceSp
 #undef sXSpeed
 #undef sYDownSpeed
 
-static void CreateBerrySprite(u16 a0, u8 playerId)
+static void CreateBerrySprite(u16 itemId, u8 playerId)
 {
-    u8 spriteId = CreateSpinningBerrySprite(a0 + FIRST_BERRY_INDEX - 10, 0, 80, playerId & 1);
+    u8 spriteId = CreateSpinningBerrySprite(ITEM_TO_BERRY(itemId) - 1, 0, 80, playerId & 1);
     SetBerrySpriteData(&gSprites[spriteId],
                         sBerrySpriteData[playerId][0],
                         sBerrySpriteData[playerId][1],
@@ -3768,8 +3768,8 @@ void ShowBerryBlenderRecordWindow(void)
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
 
     xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_BlenderMaxSpeedRecord, 144);
-    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_BlenderMaxSpeedRecord, xPos, 1, 0, NULL);
-    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_234Players, 4, 41, 0, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_BlenderMaxSpeedRecord, xPos, 0, 0, NULL);
+    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_234Players, 4, 40, 0, NULL);
 
     for (i = 0, yPos = 41; i < NUM_SCORE_TYPES; i++)
     {

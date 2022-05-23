@@ -174,10 +174,10 @@ static const struct SpriteTemplate sSpriteTemplate_MenuText =
     .callback = SpriteCallbackDummy,
 };
 
-static const u16 TradeScreenTextPalette[] = INCBIN_U16("graphics/trade/text.gbapal");
-static const struct SpritePalette gSpritePalette_TradeScreenText =
+static const u16 sTradeScreenTextPalette[] = INCBIN_U16("graphics/trade/text.gbapal");
+static const struct SpritePalette sSpritePalette_TradeScreenText =
 {
-    .data = TradeScreenTextPalette,
+    .data = sTradeScreenTextPalette,
     .tag = PALTAG_MENU_TEXT
 };
 
@@ -1051,10 +1051,10 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_BELLOSSOM
     },
-    [INGAME_TRADE_MEOWTH] =
+    [INGAME_TRADE_EEVEE] =
     {
-        .nickname = _("Meowow"),
-        .species = SPECIES_MEOWTH,
+        .nickname = _("Levy"),
+        .species = SPECIES_EEVEE,
         .ivs = {4, 5, 4, 5, 4, 4},
         .abilityNum = 0,
         .otId = 91481,
@@ -1067,10 +1067,10 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_PIKACHU
     },
-    [INGAME_TRADE_BELLSPROUT] =
+    [INGAME_TRADE_FARFETCHD] =
     {
-        .nickname = _("Bellamy"),
-        .species = SPECIES_BELLSPROUT,
+        .nickname = _("Dux"),
+        .species = SPECIES_FARFETCHD,
         .ivs = {5, 4, 5, 4, 4, 4},
         .abilityNum = 0,
         .otId = 38726,
@@ -1083,10 +1083,10 @@ static const struct InGameTrade sIngameTrades[] =
         .sheen = 10,
         .requestedSpecies = SPECIES_RALTS
     },
-    [INGAME_TRADE_NIDORAN_M] =
+    [INGAME_TRADE_SMOOCHUM] =
     {
-        .nickname = _("Nidol"),
-        .species = SPECIES_NIDORAN_M,
+        .nickname = _("Smooches"),
+        .species = SPECIES_SMOOCHUM,
         .ivs = {4, 4, 4, 5, 5, 4},
         .abilityNum = 0,
         .otId = 73996,
@@ -1143,7 +1143,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_THANK_YOU,
         EC_WORD_FOR,
         EC_POKEMON(PIKACHU),
-        EC_POKEMON_NATIONAL(MEOWTH),
+        EC_POKEMON_NATIONAL(EEVEE),
         EC_WORD_CRIES,
         EC_WORD_IN,
         EC_WORD_A,
@@ -1153,7 +1153,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_BE,
         EC_WORD_NICE,
         EC_WORD_TO,
-        EC_POKEMON_NATIONAL(NIDORAN_F),
+        EC_POKEMON_NATIONAL(SMOOCHUM),
         EC_WORD_EXCL,
         EC_POKEMON(VOLBEAT),
         EC_WORD_WILL,

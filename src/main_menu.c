@@ -371,7 +371,7 @@ static const struct WindowTemplate sWindowTemplates_MainMenu[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const struct WindowTemplate gNewGameBirchSpeechTextWindows[] =
+static const struct WindowTemplate sNewGameBirchSpeechTextWindows[] =
 {
     {
         .bg = 0,
@@ -457,7 +457,7 @@ static const struct MenuAction sMenuActions_Gender[] = {
     {gText_BirchGirl, NULL}
 };
 
-static const u8 *const gMalePresetNames[] = {
+static const u8 *const sMalePresetNames[] = {
     gText_DefaultNameStu,
     gText_DefaultNameMilton,
     gText_DefaultNameTom,
@@ -480,7 +480,7 @@ static const u8 *const gMalePresetNames[] = {
     gText_DefaultNameQuincy
 };
 
-static const u8 *const gFemalePresetNames[] = {
+static const u8 *const sFemalePresetNames[] = {
     gText_DefaultNameKimmy,
     gText_DefaultNameTiara,
     gText_DefaultNameBella,
@@ -1325,7 +1325,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
         }
         else
         {
-            InitWindows(gNewGameBirchSpeechTextWindows);
+            InitWindows(sNewGameBirchSpeechTextWindows);
             LoadMainMenuWindowFrameTiles(0, 0xF3);
             LoadMessageBoxGfx(0, 0xFC, 0xF0);
             NewGameBirchSpeech_ShowDialogueWindow(0, 1);
@@ -1851,7 +1851,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     REG_IME = savedIme;
     SetVBlankCallback(VBlankCB_MainMenu);
     SetMainCallback2(CB2_MainMenu);
-    InitWindows(gNewGameBirchSpeechTextWindows);
+    InitWindows(sNewGameBirchSpeechTextWindows);
     LoadMainMenuWindowFrameTiles(0, 0xF3);
     LoadMessageBoxGfx(0, 0xFC, 0xF0);
     PutWindowTilemap(0);
@@ -2087,7 +2087,7 @@ static void NewGameBirchSpeech_StartFadePlatformOut(u8 taskId, u8 delay)
 
 static void NewGameBirchSpeech_ShowGenderMenu(void)
 {
-    DrawMainMenuWindowBorder(&gNewGameBirchSpeechTextWindows[1], 0xF3);
+    DrawMainMenuWindowBorder(&sNewGameBirchSpeechTextWindows[1], 0xF3);
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     PrintMenuTable(1, ARRAY_COUNT(sMenuActions_Gender), sMenuActions_Gender);
     InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sMenuActions_Gender), 0);
@@ -2106,9 +2106,9 @@ static void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
     u8 i;
 
     if (gSaveBlock2Ptr->playerGender == MALE)
-        name = gMalePresetNames[nameId];
+        name = sMalePresetNames[nameId];
     else
-        name = gFemalePresetNames[nameId];
+        name = sFemalePresetNames[nameId];
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         gSaveBlock2Ptr->playerName[i] = name[i];
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
@@ -2117,7 +2117,7 @@ static void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
 static void CreateMainMenuErrorWindow(const u8* str)
 {
     FillWindowPixelBuffer(7, PIXEL_FILL(1));
-    AddTextPrinterParameterized(7, gSaveBlock2Ptr->optionsCurrentFont, str, 0, 1, 2, 0);
+    AddTextPrinterParameterized(7, gSaveBlock2Ptr->optionsCurrentFont, str, 0, 0, 2, 0);
     PutWindowTilemap(7);
     CopyWindowToVram(7, COPYWIN_GFX);
     DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[7], MAIN_MENU_BORDER_TILE);
@@ -2136,8 +2136,8 @@ static void MainMenu_FormatSavegameText(void)
 static void MainMenu_FormatSavegamePlayer(void)
 {
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPlayer);
-    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
-    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gSaveBlock2Ptr->playerName, 100), 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
+    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 16, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gSaveBlock2Ptr->playerName, 100), 16, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
 }
 
 static void MainMenu_FormatSavegameTime(void)
@@ -2146,11 +2146,11 @@ static void MainMenu_FormatSavegameTime(void)
     u8* ptr;
 
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime);
-    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0x6C, 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0x6C, 16, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
     ptr = ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *ptr = 0xF0;
     ConvertIntToDecimalStringN(ptr + 1, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0xD0), 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0xD0), 16, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
 }
 
 static void MainMenu_FormatSavegamePokedex(void)
@@ -2165,9 +2165,9 @@ static void MainMenu_FormatSavegamePokedex(void)
         else
             dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
         StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPokedex);
-        AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 33, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
+        AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 32, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
         ConvertIntToDecimalStringN(str, dexCount, STR_CONV_MODE_LEFT_ALIGN, 3);
-        AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 100), 33, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
+        AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 100), 32, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
     }
 }
 
@@ -2183,9 +2183,9 @@ static void MainMenu_FormatSavegameBadges(void)
             badgeCount++;
     }
     StringExpandPlaceholders(gStringVar4, gText_ContinueMenuBadges);
-    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0x6C, 33, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0x6C, 32, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
     ConvertIntToDecimalStringN(str, badgeCount, STR_CONV_MODE_LEADING_ZEROS, 1);
-    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0xD0), 33, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0xD0), 32, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
 }
 
 static void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)

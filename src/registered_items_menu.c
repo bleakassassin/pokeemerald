@@ -66,8 +66,8 @@ static void TxRegItemsMenu_PrintFunc(u8 windowId, u32 id, u8 yOffset);
 static void TxRegItemsMenu_PrintItemIcon(u16 itemId, u8 iconSlot);
 static void TxRegItemsMenu_DoItemSwap(u8 taskId, bool8 a);
 static void TxRegItemsMenu_PrintSwappingCursor(u8 y, u8 b, u8 speed);
-static void TxRegItemsMenu_MoveItemSlotInList(struct RegisteredItemSlot* registeredItemSlots_, u32 from, u32 to_);
-static void TxRegItemsMenu_CalcAndSetUsedSlotsCount(struct RegisteredItemSlot *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount);
+static void TxRegItemsMenu_MoveItemSlotInList(u16 *registeredItemSlots_, u32 from, u32 to_);
+static void TxRegItemsMenu_CalcAndSetUsedSlotsCount(u16 *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount);
 //helper cleanup
 static void TxRegItemsMenu_RemoveItemIcon(u8 iconSlot);
 static void TxRegItemsMenu_RemoveScrollIndicator(void);
@@ -315,7 +315,7 @@ static void TxRegItemsMenu_RefreshListMenu(void)
 
     for(i = 0; i < TxRegItemsMenuItemPageInfo.count - 1; i++)
     {
-        CopyItemName(gSaveBlock1Ptr->registeredItems[i].itemId, &gTxRegItemsMenu->itemNames[i][0]);
+        CopyItemName(gSaveBlock1Ptr->registeredItems[i], &gTxRegItemsMenu->itemNames[i][0]);
         gTxRegItemsMenu->listItems[i].name = &(gTxRegItemsMenu->itemNames[i][0]);
         gTxRegItemsMenu->listItems[i].id = i;
     }
@@ -336,7 +336,7 @@ static void TxRegItemsMenu_MoveCursor(s32 id, bool8 onInit, struct ListMenu *thi
     if (gTxRegItemsMenu->toSwapPos == NOT_SWAPPING)
     {
         if (id != LIST_CANCEL)
-            TxRegItemsMenu_PrintItemIcon(gSaveBlock1Ptr->registeredItems[id].itemId, gTxRegItemsMenu->iconSlot);
+            TxRegItemsMenu_PrintItemIcon(gSaveBlock1Ptr->registeredItems[id], gTxRegItemsMenu->iconSlot);
         else
             TxRegItemsMenu_PrintItemIcon(MSG_GO_BACK_TO_PREV, gTxRegItemsMenu->iconSlot);
         TxRegItemsMenu_RemoveItemIcon(gTxRegItemsMenu->iconSlot ^ 1);
@@ -378,7 +378,7 @@ static void TxRegItemsMenu_DoItemSwap(u8 taskId, bool8 a)
     s16 *data;
     u16 b;
     u8 lastSelected = gSaveBlock1Ptr->registeredItemLastSelected;
-    u16 lastSelectedItemId = gSaveBlock1Ptr->registeredItems[lastSelected].itemId;
+    u16 lastSelectedItemId = gSaveBlock1Ptr->registeredItems[lastSelected];
 
     data = gTasks[taskId].data;
     b = (TxRegItemsMenuItemPageInfo.itemsAbove + TxRegItemsMenuItemPageInfo.cursorPos);
@@ -411,16 +411,16 @@ static void TxRegItemsMenu_PrintSwappingCursor(u8 y, u8 b, u8 speed)
 }
 
 //registeredItems struct helper functions
-static void TxRegItemsMenu_MoveItemSlotInList(struct RegisteredItemSlot* registeredItemSlots_, u32 from, u32 to_)
+static void TxRegItemsMenu_MoveItemSlotInList(u16 *registeredItemSlots_, u32 from, u32 to_)
 {
     // dumb assignments needed to match
-    struct RegisteredItemSlot *registeredItemSlots = registeredItemSlots_;
+    u16 *registeredItemSlots = registeredItemSlots_;
     u32 to = to_;
 
     if (from != to)
     {
         s16 i, count;
-        struct RegisteredItemSlot firstSlot = registeredItemSlots[from];
+        u16 firstSlot = registeredItemSlots[from];
 
         if (to > from)
         {
@@ -444,7 +444,7 @@ u8 TxRegItemsMenu_CountUsedRegisteredItemSlots(void)
 
     for (i = 0; i < PC_ITEMS_COUNT; i++)
     {
-        if (gSaveBlock1Ptr->registeredItems[i].itemId != ITEM_NONE)
+        if (gSaveBlock1Ptr->registeredItems[i] != ITEM_NONE)
             usedSlots++;
     }
     return usedSlots;
@@ -463,9 +463,9 @@ void TxRegItemsMenu_RemoveRegisteredItem(u16 itemId)
     u8 i;
     for (i = i ; i < REGISTERED_ITEMS_MAX; i++)
     {
-        if (gSaveBlock1Ptr->registeredItems[i].itemId == itemId)
+        if (gSaveBlock1Ptr->registeredItems[i] == itemId)
         {
-            gSaveBlock1Ptr->registeredItems[i].itemId = ITEM_NONE;
+            gSaveBlock1Ptr->registeredItems[i] = ITEM_NONE;
             gSaveBlock1Ptr->registeredItemListCount--;
             TxRegItemsMenu_ChangeLastSelectedItemIndex(i);
             TxRegItemsMenu_CompactRegisteredItems();
@@ -482,9 +482,9 @@ void TxRegItemsMenu_CompactRegisteredItems(void)
     {
         for (j = i + 1; j < REGISTERED_ITEMS_MAX; j++)
         {
-            if (gSaveBlock1Ptr->registeredItems[i].itemId == ITEM_NONE)
+            if (gSaveBlock1Ptr->registeredItems[i] == ITEM_NONE)
             {
-                struct RegisteredItemSlot temp = gSaveBlock1Ptr->registeredItems[i];
+                u16 temp = gSaveBlock1Ptr->registeredItems[i];
                 gSaveBlock1Ptr->registeredItems[i] = gSaveBlock1Ptr->registeredItems[j];
                 gSaveBlock1Ptr->registeredItems[j] = temp;
             }
@@ -493,15 +493,15 @@ void TxRegItemsMenu_CompactRegisteredItems(void)
     gSaveBlock1Ptr->registeredItemListCount = TxRegItemsMenu_CountUsedRegisteredItemSlots();
 }
 
-static void TxRegItemsMenu_CalcAndSetUsedSlotsCount(struct RegisteredItemSlot *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount)
+static void TxRegItemsMenu_CalcAndSetUsedSlotsCount(u16 *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount)
 {
     u16 i;
-    struct RegisteredItemSlot *slots_ = slots;
+    u16 *slots_ = slots;
 
     (*usedSlotsCount) = 0;
     for (i = 0; i < count; i++)
     {
-        if (slots_[i].itemId != ITEM_NONE)
+        if (slots_[i] != ITEM_NONE)
             (*usedSlotsCount)++;
     }
 
@@ -518,7 +518,7 @@ bool8 TxRegItemsMenu_CheckRegisteredHasItem(u16 itemId)
 
     for (i = 0; i < REGISTERED_ITEMS_MAX; i++)
     {
-        if (gSaveBlock1Ptr->registeredItems[i].itemId == itemId)
+        if (gSaveBlock1Ptr->registeredItems[i] == itemId)
             return TRUE;
     }
     return FALSE;
@@ -530,7 +530,7 @@ u8 TxRegItemsMenu_GetRegisteredItemIndex(u16 itemId)
 
     for (i = 0; i < REGISTERED_ITEMS_MAX; i++)
     {
-        if (gSaveBlock1Ptr->registeredItems[i].itemId == itemId)
+        if (gSaveBlock1Ptr->registeredItems[i] == itemId)
             return i;
     }
     return 0xFF;
@@ -540,7 +540,7 @@ bool8 TxRegItemsMenu_AddRegisteredItem(u16 itemId)
 {
     u8 i;
     s8 freeSlot;
-    struct RegisteredItemSlot *newItems;
+    u16 *newItems;
 
     // Copy PC items
     newItems = AllocZeroed(sizeof(gSaveBlock1Ptr->registeredItems));
@@ -550,9 +550,9 @@ bool8 TxRegItemsMenu_AddRegisteredItem(u16 itemId)
     
     for (i = 0; i < REGISTERED_ITEMS_MAX; i++)
     {
-        if (gSaveBlock1Ptr->registeredItems[i].itemId == ITEM_NONE)
+        if (gSaveBlock1Ptr->registeredItems[i] == ITEM_NONE)
         {
-            newItems[i].itemId = itemId;
+            newItems[i] = itemId;
             gSaveBlock1Ptr->registeredItemListCount++;
             // Copy items back to the PC
             memcpy(gSaveBlock1Ptr->registeredItems, newItems, sizeof(gSaveBlock1Ptr->registeredItems));
@@ -566,10 +566,9 @@ bool8 TxRegItemsMenu_AddRegisteredItem(u16 itemId)
 void TxRegItemsMenu_RegisteredItemsMenuNewGame(void)
 {
     u8 i;
-    struct RegisteredItemSlot *newItems;
     for (i = i ; i < REGISTERED_ITEMS_MAX; i++)
     {
-        gSaveBlock1Ptr->registeredItems[i].itemId = ITEM_NONE;
+        gSaveBlock1Ptr->registeredItems[i] = ITEM_NONE;
     }
     gSaveBlock1Ptr->registeredItemLastSelected = 0;
     gSaveBlock1Ptr->registeredItemListCount = 0;
