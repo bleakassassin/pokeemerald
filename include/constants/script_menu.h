@@ -153,10 +153,10 @@
 #define STDSTRING_HYPER            7
 #define STDSTRING_MASTER           8
 #define STDSTRING_COOL2            9
-#define STDSTRING_BEAUTY2          10
-#define STDSTRING_CUTE2            11
-#define STDSTRING_SMART2           12
-#define STDSTRING_TOUGH2           13
+#define STDSTRING_MEDICINE         10
+#define STDSTRING_BATTLEITEMS      11
+#define STDSTRING_TREASURES        12
+#define STDSTRING_MAIL             13
 #define STDSTRING_ITEMS            14
 #define STDSTRING_KEYITEMS         15
 #define STDSTRING_POKEBALLS        16

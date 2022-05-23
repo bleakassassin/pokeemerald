@@ -75,6 +75,18 @@ void SetBagItemsPointers(void)
 
     gBagPockets[BERRIES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
     gBagPockets[BERRIES_POCKET].capacity = BAG_BERRIES_COUNT;
+
+    gBagPockets[MEDICINE_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Medicine;
+    gBagPockets[MEDICINE_POCKET].capacity = BAG_MEDICINE_COUNT;
+
+    gBagPockets[BATTLEITEMS_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_BattleItems;
+    gBagPockets[BATTLEITEMS_POCKET].capacity = BAG_BATTLEITEMS_COUNT;
+
+    gBagPockets[TREASURES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Treasures;
+    gBagPockets[TREASURES_POCKET].capacity = BAG_TREASURES_COUNT;
+
+    gBagPockets[MAIL_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Mail;
+    gBagPockets[MAIL_POCKET].capacity = BAG_MAIL_COUNT;
 }
 
 void CopyItemName(u16 itemId, u8 *dst)
@@ -89,7 +101,7 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
         if (quantity < 2)
             StringCopy(dst, ItemId_GetName(ITEM_POKE_BALL));
         else
-            StringCopy(dst, gText_PokeBalls);
+            StringCopy(dst, gText_Poke_Balls);
     }
     else
     {

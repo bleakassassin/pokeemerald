@@ -280,19 +280,18 @@ const u8 *const gPyramidBagMenu_ReturnToStrings[] =
 };
 
 const u8 gText_ReturnToVar1[] = _("Return to\n{STR_VAR_1}.");
-const u8 gText_ItemsPocket[] = _("ITEMS");
-const u8 gText_PokeBallsPocket[] = _("POKé BALLS");
-const u8 gText_TMHMPocket[] = _("TMs & HMs");
-const u8 gText_BerriesPocket[] = _("BERRIES");
-const u8 gText_KeyItemsPocket[] = _("KEY ITEMS");
 
 const u8 *const gPocketNamesStringsTable[] =
 {
-    [ITEMS_POCKET] = gText_ItemsPocket,
-    [BALLS_POCKET] = gText_PokeBallsPocket,
-    [TMHM_POCKET]  = gText_TMHMPocket,
-    [BERRIES_POCKET] = gText_BerriesPocket,
-    [KEYITEMS_POCKET] = gText_KeyItemsPocket
+    [MEDICINE_POCKET] = gText_Medicine,
+    [BALLS_POCKET] = gText_Poke_Balls,
+    [BATTLEITEMS_POCKET] = gText_Battle_Items,
+    [BERRIES_POCKET] = gText_Berries,
+    [TMHM_POCKET]  = gText_TMs_Hms,
+    [MAIL_POCKET] = gText_Mail,
+    [TREASURES_POCKET] = gText_Treasures,
+    [ITEMS_POCKET] = gText_Items,
+    [KEYITEMS_POCKET] = gText_Key_Items
 };
 
 const u8 gText_NumberItem_TMBerry[] = _("{NO}{STR_VAR_1}{CLEAR 0x07}{STR_VAR_2}");
@@ -703,16 +702,14 @@ const u8 gText_Normal[] = _("NORMAL");
 const u8 gText_Super[] = _("SUPER");
 const u8 gText_Hyper[] = _("HYPER");
 const u8 gText_Master[] = _("MASTER");
-const u8 gText_Cool2[] = _("COOL");
-const u8 gText_Beauty2[] = _("BEAUTY");
-const u8 gText_Cute2[] = _("CUTE");
-const u8 gText_Smart2[] = _("SMART");
-const u8 gText_Tough2[] = _("TOUGH");
-const u8 gText_Items[] = _("ITEMS");
+const u8 gText_Items[] = _("OTHER ITEMS");
 const u8 gText_Key_Items[] = _("KEY ITEMS");
 const u8 gText_Poke_Balls[] = _("POKé BALLS");
 const u8 gText_TMs_Hms[] = _("TMs & HMs");
-const u8 gText_Berries2[] = _("BERRIES");
+const u8 gText_Berries[] = _("BERRIES");
+const u8 gText_Medicine[] = _("MEDICINE");
+const u8 gText_Battle_Items[] = _("BATTLE ITEMS");
+const u8 gText_Treasures[] = _("TREASURES");
 const u8 gText_SomeonesPC[] = _("SOMEONE'S PC");
 const u8 gText_LanettesPC[] = _("LANETTE'S PC");
 const u8 gText_PlayersPC[] = _("{PLAYER}'s PC");
@@ -1860,6 +1857,4 @@ const u8 gText_Cancel5[] = _("CANCEL");
 const u8 gText_Ok2[] = _("OK");
 const u8 gText_Quiz[] = _("QUIZ");
 const u8 gText_Answer[] = _("ANSWER");
-const u8 gText_PokeBalls[] = _("POKé BALLS");
 const u8 gText_Berry[] = _("BERRY");
-const u8 gText_Berries[] = _("BERRIES");

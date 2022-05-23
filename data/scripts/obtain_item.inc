@@ -17,11 +17,15 @@ EventScript_ObtainItemMessage::
 
 EventScript_BufferPocketNameAndTryFanfare::
 	switch VAR_RESULT
-	case POCKET_ITEMS,      EventScript_BufferItemsPocket
-	case POCKET_KEY_ITEMS,  EventScript_BufferKeyItemsPocket
-	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
-	case POCKET_TM_HM,      EventScript_BufferTMHMsPocket
-	case POCKET_BERRIES,    EventScript_BufferBerriesPocket
+	case POCKET_ITEMS,        EventScript_BufferItemsPocket
+	case POCKET_KEY_ITEMS,    EventScript_BufferKeyItemsPocket
+	case POCKET_POKE_BALLS,   EventScript_BufferPokeballsPocket
+	case POCKET_TM_HM,        EventScript_BufferTMHMsPocket
+	case POCKET_BERRIES,      EventScript_BufferBerriesPocket
+	case POCKET_MEDICINE,     EventScript_BufferMedicinePocket
+	case POCKET_BATTLE_ITEMS, EventScript_BufferBattleItemsPocket
+	case POCKET_TREASURES,    EventScript_BufferTreasuresPocket
+	case POCKET_MAIL,         EventScript_BufferMailPocket
 	end
 
 EventScript_BufferItemsPocket::
@@ -47,6 +51,26 @@ EventScript_BufferTMHMsPocket::
 EventScript_BufferBerriesPocket::
 	bufferstdstring STR_VAR_3, STDSTRING_BERRIES
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferMedicinePocket::
+	bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferBattleItemsPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_BATTLEITEMS
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferTreasuresPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_TREASURES
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
+	return
+
+EventScript_BufferMailPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_MAIL
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedTMHM
 	return
 
 EventScript_ObtainedItem::

@@ -963,7 +963,7 @@ struct SaveBlock1
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
     /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
-    /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    /*0x560*/ struct ItemSlot bagPocket_Medicine[BAG_MEDICINE_COUNT];
     /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
@@ -971,7 +971,9 @@ struct SaveBlock1
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x988*/ u8 seen1[NUM_DEX_FLAG_BYTES];
     /*0x9BC*/ u16 berryBlenderRecords[3];
-    /*0x9C2*/ u8 unused_9C2[6];
+    /*0x9C2*/ u8 registeredItemLastSelected:4; //max 16 items
+              u8 registeredItemListCount:4;
+    /*0x9C3*/ u8 unused_9C3[5];
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
     /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
@@ -1021,11 +1023,9 @@ struct SaveBlock1
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];
-    /*0x35D8*/ u8 registeredItemLastSelected:4; //max 16 items
-               u8 registeredItemListCount:4;
-    /*0x35DA*/ u16 registeredItems[REGISTERED_ITEMS_MAX];
-    /*0x35EE*/ u8 unused_35EE[0x12A];
+    /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];;
+    /*0x35D8*/ u16 registeredItems[REGISTERED_ITEMS_MAX];
+    /*0x35EC*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
@@ -1036,7 +1036,10 @@ struct SaveBlock1
     /*0x3D5A*/ u8 unused_3D5A[10];
     /*0x3D64*/ struct TrainerHillSave trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
-    // sizeof: 0x3D88
+    /*0x3D88*/ struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
+    /*0x3DB4*/ struct ItemSlot bagPocket_Treasures[BAG_TREASURES_COUNT];
+    /*0x3E00*/ struct ItemSlot bagPocket_Mail[BAG_MAIL_COUNT];
+    // sizeof: 0x3E30
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

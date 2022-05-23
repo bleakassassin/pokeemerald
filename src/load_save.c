@@ -3,6 +3,7 @@
 #include "berry_powder.h"
 #include "event_data.h"
 #include "item.h"
+#include "item_menu.h"
 #include "load_save.h"
 #include "main.h"
 #include "overworld.h"
@@ -24,11 +25,15 @@ static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 struct LoadedSaveData
 {
  /*0x0000*/ struct ItemSlot items[BAG_ITEMS_COUNT];
- /*0x0078*/ struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
- /*0x00F0*/ struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
- /*0x0130*/ struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
- /*0x0230*/ struct ItemSlot berries[BAG_BERRIES_COUNT];
- /*0x02E8*/ struct Mail mail[MAIL_COUNT];
+ /*0x012C*/ struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
+ /*0x01A4*/ struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
+ /*0x01E4*/ struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
+ /*0x02E4*/ struct ItemSlot berries[BAG_BERRIES_COUNT];
+ /*0x039C*/ struct ItemSlot medicine[BAG_MEDICINE_COUNT];
+ /*0x0414*/ struct ItemSlot battleItems[BAG_BATTLEITEMS_COUNT];
+ /*0x0440*/ struct ItemSlot treasures[BAG_TREASURES_COUNT];
+ /*0x048C*/ struct ItemSlot bagMail[BAG_MAIL_COUNT];
+ /*0x04BC*/ struct Mail mail[MAIL_COUNT];
 };
 
 // EWRAM DATA
@@ -233,6 +238,22 @@ void LoadPlayerBag(void)
     for (i = 0; i < BAG_BERRIES_COUNT; i++)
         gLoadedSaveData.berries[i] = gSaveBlock1Ptr->bagPocket_Berries[i];
 
+    // load player medicine.
+    for (i = 0; i < BAG_MEDICINE_COUNT; i++)
+        gLoadedSaveData.medicine[i] = gSaveBlock1Ptr->bagPocket_Medicine[i];
+
+    // load player battle items.
+    for (i = 0; i < BAG_BATTLEITEMS_COUNT; i++)
+        gLoadedSaveData.battleItems[i] = gSaveBlock1Ptr->bagPocket_BattleItems[i];
+
+    // load player treasures.
+    for (i = 0; i < BAG_TREASURES_COUNT; i++)
+        gLoadedSaveData.treasures[i] = gSaveBlock1Ptr->bagPocket_Treasures[i];
+
+    // load player mail in bag.
+    for (i = 0; i < BAG_MAIL_COUNT; i++)
+        gLoadedSaveData.bagMail[i] = gSaveBlock1Ptr->bagPocket_Mail[i];
+
     // load mail.
     for (i = 0; i < MAIL_COUNT; i++)
         gLoadedSaveData.mail[i] = gSaveBlock1Ptr->mail[i];
@@ -265,6 +286,22 @@ void SavePlayerBag(void)
     for (i = 0; i < BAG_BERRIES_COUNT; i++)
         gSaveBlock1Ptr->bagPocket_Berries[i] = gLoadedSaveData.berries[i];
 
+    // save player medicine.
+    for (i = 0; i < BAG_MEDICINE_COUNT; i++)
+        gSaveBlock1Ptr->bagPocket_Medicine[i] = gLoadedSaveData.medicine[i];
+
+    // save player battle items.
+    for (i = 0; i < BAG_BATTLEITEMS_COUNT; i++)
+        gSaveBlock1Ptr->bagPocket_BattleItems[i] = gLoadedSaveData.battleItems[i];
+
+    // save player treasures.
+    for (i = 0; i < BAG_TREASURES_COUNT; i++)
+        gSaveBlock1Ptr->bagPocket_Treasures[i] = gLoadedSaveData.treasures[i];
+
+    // save player mail in bag.
+    for (i = 0; i < BAG_MAIL_COUNT; i++)
+        gSaveBlock1Ptr->bagPocket_Mail[i] = gLoadedSaveData.bagMail[i];
+
     // save mail.
     for (i = 0; i < MAIL_COUNT; i++)
         gSaveBlock1Ptr->mail[i] = gLoadedSaveData.mail[i];
@@ -277,6 +314,19 @@ void SavePlayerBag(void)
 
 void FixImportedSave(void)
 {
+    u8 i;
+    struct BagPocket *items = &gBagPockets[MEDICINE_POCKET];
+        
+    for (i = 0; i < BAG_MEDICINE_COUNT; i++)
+    {
+        if (ItemId_GetPocket(items->itemSlots[i].itemId) != POCKET_MEDICINE)
+        {
+            AddBagItem(items->itemSlots[i].itemId, items->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
+            items->itemSlots[i].itemId =  ITEM_NONE;
+            items->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
+        }
+    }
+
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
     {
         FlagClear(FLAG_REMATCH_SIDNEY);

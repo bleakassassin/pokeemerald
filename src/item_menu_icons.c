@@ -94,10 +94,14 @@ static const union AnimCmd sSpriteAnim_Bag_Berries[] =
 static const union AnimCmd *const sBagSpriteAnimTable[] =
 {
     sSpriteAnim_Bag_Closed,
-    sSpriteAnim_Bag_Items,
     sSpriteAnim_Bag_Pokeballs,
-    sSpriteAnim_Bag_TMsHMs,
+    sSpriteAnim_Bag_Pokeballs,
+    sSpriteAnim_Bag_Pokeballs,
     sSpriteAnim_Bag_Berries,
+    sSpriteAnim_Bag_TMsHMs,
+    sSpriteAnim_Bag_Items,
+    sSpriteAnim_Bag_Items,
+    sSpriteAnim_Bag_Items,
     sSpriteAnim_Bag_KeyItems
 };
 
@@ -492,7 +496,7 @@ void AddSwitchPocketRotatingBallSprite(s16 rotationDirection)
     u8 *spriteId = &gBagMenu->spriteIds[ITEMMENUSPRITE_BALL];
     LoadSpriteSheet(&sRotatingBallTable);
     LoadSpritePalette(&sRotatingBallPaletteTable);
-    *spriteId = CreateSprite(&sRotatingBallSpriteTemplate, 16, 16, 0);
+    *spriteId = CreateSprite(&sRotatingBallSpriteTemplate, 8, 16, 0);
     gSprites[*spriteId].data[0] = rotationDirection;
 }
 
