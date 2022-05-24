@@ -315,15 +315,23 @@ void SavePlayerBag(void)
 void FixImportedSave(void)
 {
     u8 i;
-    struct BagPocket *items = &gBagPockets[MEDICINE_POCKET];
+    struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
+    struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
         
-    for (i = 0; i < BAG_MEDICINE_COUNT; i++)
+    for (i = 0; i < BAG_MEDICINE_COUNT; i++) // BAG_MEDICINE_COUNT is the same as BAG_KEYITEMS_COUNT (30)
     {
-        if (ItemId_GetPocket(items->itemSlots[i].itemId) != POCKET_MEDICINE)
+        if (ItemId_GetPocket(medicine->itemSlots[i].itemId) != POCKET_MEDICINE) // Check for items moved to new pockets
         {
-            AddBagItem(items->itemSlots[i].itemId, items->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
-            items->itemSlots[i].itemId =  ITEM_NONE;
-            items->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
+            AddBagItem(medicine->itemSlots[i].itemId, medicine->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
+            medicine->itemSlots[i].itemId =  ITEM_NONE;
+            medicine->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
+        }
+
+        if (ItemId_GetPocket(keyitems->itemSlots[i].itemId) != POCKET_KEY_ITEMS) // Check for fossils
+        {
+            AddBagItem(keyitems->itemSlots[i].itemId, keyitems->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
+            keyitems->itemSlots[i].itemId =  ITEM_NONE;
+            keyitems->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
         }
     }
 
@@ -344,6 +352,11 @@ void FixImportedSave(void)
             RemoveBagItem(ITEM_MACH_BIKE, 1);
             RemoveBagItem(ITEM_ACRO_BIKE, 1);
             AddBagItem(ITEM_BICYCLE, 1);
+        }
+        if (CheckBagHasItem(ITEM_ROOT_FOSSIL, 1) == TRUE)
+        {
+            RemoveBagItem(ITEM_ROOT_FOSSIL, 1);
+            AddBagItem(ITEM_ROOT_FOSSIL, 1);
         }
         if (gSaveBlock1Ptr->mapLayoutId == 420)
         {
