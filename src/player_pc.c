@@ -2,6 +2,7 @@
 #include "constants/songs.h"
 #include "bg.h"
 #include "decoration.h"
+#include "event_data.h"
 #include "event_scripts.h"
 #include "event_object_movement.h"
 #include "field_screen_effect.h"
@@ -186,7 +187,6 @@ static const struct MenuAction sPlayerPCMenuActions[] =
 
 static const u8 sBedroomPC_OptionOrder[] =
 {
-    MENU_ITEMSTORAGE,
     MENU_MAILBOX,
     MENU_DECORATION,
     MENU_TURNOFF
@@ -207,12 +207,6 @@ static const struct MenuAction sItemStorage_MenuActions[] =
     [MENU_DEPOSIT]  = { gText_DepositItem,  ItemStorage_Deposit },
     [MENU_TOSS]     = { gText_TossItem,     ItemStorage_Toss },
     [MENU_EXIT]     = { gText_Cancel,       ItemStorage_Exit }
-};
-
-static const struct ItemSlot sNewGamePCItems[] =
-{
-    { ITEM_POTION, 1 },
-    { ITEM_NONE, 0 }
 };
 
 const struct MenuAction gMailboxMailOptions[] =
@@ -341,17 +335,6 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
 
 static const u8 sSwapArrowTextColors[] = {TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_DARK_GRAY};
 
-// Macro below is likely a fakematch, equivalent to sNewGamePCItems[i].quantity
-#define GET_QUANTITY(i) ((u16)((u16 *)sNewGamePCItems + 1)[i * 2])
-void NewGameInitPCItems(void)
-{
-    u8 i = 0;
-    ClearItemSlots(gSaveBlock1Ptr->pcItems, PC_ITEMS_COUNT);
-    for(; sNewGamePCItems[i].itemId != ITEM_NONE && GET_QUANTITY(i) &&
-        AddPCItem(sNewGamePCItems[i].itemId, GET_QUANTITY(i)) == TRUE; i++);
-}
-#undef GET_QUANTITY
-
 void BedroomPC(void)
 {
     sTopMenuOptionOrder = sBedroomPC_OptionOrder;
@@ -465,6 +448,42 @@ static void PlayerPC_Mailbox(u8 taskId)
     }
 }
 
+void Mailbox(void)
+{
+    u32 taskId;
+    u16 *data;
+
+    taskId = CreateTask(TaskDummy, 0);
+    data = gTasks[taskId].data;
+    gPlayerPCItemPageInfo.count = GetMailboxMailCount();
+
+    if (gPlayerPCItemPageInfo.count == 0)
+    {
+        // Mailbox cannot be opened if no mail is in PC
+        DisplayItemMessageOnField(taskId, gText_NoMailHere, PlayerPC_TurnOff);
+    }
+    else
+    {
+
+        gPlayerPCItemPageInfo.cursorPos = 0;
+        gPlayerPCItemPageInfo.itemsAbove = 0;
+        gPlayerPCItemPageInfo.scrollIndicatorTaskId = TASK_NONE;
+        Mailbox_CompactMailList();
+        SetPlayerPCListCount(taskId);
+        if (MailboxMenu_Alloc(gPlayerPCItemPageInfo.count) == TRUE)
+        {
+            ClearDialogWindowAndFrame(0, 0);
+            Mailbox_DrawMailboxMenu(taskId);
+            gTasks[taskId].func = Mailbox_ProcessInput;
+        }
+        else
+        {
+            // Alloc failed, exit Mailbox
+            DisplayItemMessageOnField(taskId, gText_NoMailHere, PlayerPC_TurnOff);
+        }
+    }
+}
+
 static void PlayerPC_Decoration(u8 taskId)
 {
     DoPlayerRoomDecorationMenu(taskId);
@@ -472,7 +491,7 @@ static void PlayerPC_Decoration(u8 taskId)
 
 static void PlayerPC_TurnOff(u8 taskId)
 {
-    if (sTopMenuNumOptions == NUM_BEDROOM_PC_OPTIONS) // Flimsy way to determine if Bedroom PC is in use
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F))
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
             ScriptContext1_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC);
@@ -677,7 +696,7 @@ static void Mailbox_DrawMailboxMenu(u8 taskId)
 {
     u8 windowId = MailboxMenu_AddWindow(MAILBOXWIN_TITLE);
     MailboxMenu_AddWindow(MAILBOXWIN_LIST);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Mailbox, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Mailbox, 0x40), 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Mailbox, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Mailbox, 0x40), 0, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].tListTaskId = MailboxMenu_CreateList(&gPlayerPCItemPageInfo);
     MailboxMenu_AddScrollArrows(&gPlayerPCItemPageInfo);
@@ -732,7 +751,10 @@ static void Mailbox_ReturnToPlayerPC(u8 taskId)
     DestroyListMenuTask(tListTaskId, NULL, NULL);
     ScheduleBgCopyTilemapToVram(0);
     MailboxMenu_Free();
-    ReshowPlayerPC(taskId);
+    if (FlagGet(FLAG_SYS_NATIVE_SAVE) == TRUE)
+        PlayerPC_TurnOff(taskId);
+    else
+        ReshowPlayerPC(taskId);
 }
 
 static void Mailbox_PrintMailOptions(u8 taskId)

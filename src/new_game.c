@@ -45,6 +45,7 @@
 #include "mystery_gift.h"
 #include "union_room_chat.h"
 #include "registered_items_menu.h"
+#include "constants/items.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -188,7 +189,8 @@ void NewGameInitData(void)
     ClearRoamerLocationData();
     gSaveBlock1Ptr->registeredItem = 0;
     ClearBag();
-    NewGameInitPCItems();
+    ClearItemSlots(gSaveBlock1Ptr->pcItems, PC_ITEMS_COUNT);
+    AddBagItem(ITEM_POTION, 1);
     TxRegItemsMenu_RegisteredItemsMenuNewGame();
     ClearPokeblocks();
     ClearDecorationInventories();
@@ -209,6 +211,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    FlagSet(FLAG_SYS_NATIVE_SAVE);
     gSaveBlock2Ptr->autoRun = FALSE;
     gSaveBlock2Ptr->outfitId = 0;
 }

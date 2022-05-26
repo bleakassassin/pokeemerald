@@ -746,7 +746,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
                 STR_CONV_MODE_LEFT_ALIGN,
                 5);
         }
-        if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
+        if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1)))
             StringCopy(gStringVar4, gText_SoldOutLabel);
         else
             StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
@@ -1135,7 +1135,7 @@ static void Task_BuyMenu(u8 taskId)
                 sShopData->totalCost = gDecorations[itemId].price;
             }
 
-            if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
+            if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1)))
                 BuyMenuDisplayMessage(taskId, gText_SoldOut, BuyMenuReturnToItemList);
             else if (!CheckBagHasSpace(itemId, 1))
                 BuyMenuDisplayMessage(taskId, gText_NoMoreRoomForThis, BuyMenuReturnToItemList);

@@ -334,6 +334,15 @@ void FixImportedSave(void)
             keyitems->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
         }
     }
+    if (gSaveBlock1Ptr->pcItems[0].itemId != ITEM_NONE && FlagGet(FLAG_SYS_NATIVE_SAVE) == TRUE) // Move PC items to bag if not imported save
+    {
+        for (i = 0; i < PC_ITEMS_COUNT; i++)
+        {
+            AddBagItem(gSaveBlock1Ptr->pcItems[i].itemId, gSaveBlock1Ptr->pcItems[i].quantity);
+            gSaveBlock1Ptr->pcItems[i].itemId = ITEM_NONE;
+            gSaveBlock1Ptr->pcItems[i].quantity = 0;
+        }
+    }
 
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
     {

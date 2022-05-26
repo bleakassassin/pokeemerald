@@ -22,7 +22,6 @@ extern const struct MenuAction gMailboxMailOptions[];
 void ReshowPlayerPC(u8 taskId);
 void CB2_PlayerPCExitBagMenu(void);
 void Mailbox_ReturnToMailListAfterDeposit(void);
-void NewGameInitPCItems(void);
 
 // Message IDs for Item Storage
 enum {
