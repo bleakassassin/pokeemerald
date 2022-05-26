@@ -966,6 +966,12 @@ CableClub_EventScript_FittingRoom::
 	goto_if_eq CableClub_EventScript_SwitchWardrobe
 	release
 	return
+
+CableClub_EventScript_ItsAFittingRoom::
+	lock
+	msgbox CableClub_Text_FittingRoom, MSGBOX_DEFAULT
+	release
+	return
 	
 CableClub_EventScript_SwitchWardrobe::
 	closemessage

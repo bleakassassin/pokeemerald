@@ -213,7 +213,7 @@ void NewGameInitData(void)
     ResetContestLinkResults();
     FlagSet(FLAG_SYS_NATIVE_SAVE);
     gSaveBlock2Ptr->autoRun = FALSE;
-    gSaveBlock2Ptr->outfitId = 0;
+    gSaveBlock2Ptr->outfitId = OUTFIT_RS;
 }
 
 static void ResetMiniGamesRecords(void)

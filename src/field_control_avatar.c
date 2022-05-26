@@ -1039,7 +1039,7 @@ int SetCableClubWarp(void)
 extern const u8 EventScript_ChangeAutoRun[];
 static bool8 EnableAutoRun(void)
 {
-    if (!FlagGet(FLAG_SYS_B_DASH) || !(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT))
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT))
         return FALSE;   //auto run unusable until you get running shoes
 
     PlaySE(SE_RG_CARD_FLIPPING);

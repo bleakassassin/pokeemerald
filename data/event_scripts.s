@@ -986,7 +986,8 @@ Common_EventScript_DirectCornerAttendant::
 	end
 	
 Common_EventScript_FittingRoom::
-	call CableClub_EventScript_FittingRoom
+	call_if_set FLAG_RECEIVED_ALT_OUTFIT CableClub_EventScript_FittingRoom
+	call_if_unset FLAG_RECEIVED_ALT_OUTFIT CableClub_EventScript_ItsAFittingRoom
 	end
 
 Common_EventScript_RemoveStaticPokemon::

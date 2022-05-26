@@ -1386,9 +1386,9 @@ static void Task_Scene2_CreateSprites(u8 taskId)
             LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
     }
     else if (sIntroCharacterGender == MALE)
-            LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
-        else
-            LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);   
+        LoadCompressedSpriteSheet(gSpriteSheet_IntroRSBrendan);
+    else
+        LoadCompressedSpriteSheet(gSpriteSheet_IntroRSMay);   
 
     LoadCompressedSpriteSheet(gSpriteSheet_IntroBicycle);
     LoadCompressedSpriteSheet(gSpriteSheet_IntroFlygon);
