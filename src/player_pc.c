@@ -81,7 +81,8 @@ struct ItemStorageMenu
     u8 itemNames[PC_ITEMS_COUNT + 1][ITEM_NAME_LENGTH + 10];
     u8 windowIds[ITEMPC_WIN_COUNT];
     u8 toSwapPos;
-    u8 spriteId;
+    u8 iconSlot;
+    u8 spriteId[2];
     u8 swapLineSpriteIds[SWAP_LINE_LENGTH];
 };
 
@@ -157,8 +158,8 @@ static void ItemStorage_DrawSwapArrow(u8 y, u8, u8 speed);
 static void ItemStorage_RemoveWindow(u8);
 static void ItemStorage_UpdateSwapLinePos(u8);
 static void ItemStorage_ProcessItemSwapInput(u8 taskId);
-static void ItemStorage_EraseItemIcon(void);
-static void ItemStorage_DrawItemIcon(u16 itemId);
+static void ItemStorage_EraseItemIcon(u8 iconSlot);
+static void ItemStorage_DrawItemIcon(u16 itemId, u8 iconSlot);
 static void ItemStorage_PrintDescription(s32 id);
 static void ItemStorage_EraseMainMenu(u8 taskId);
 static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu * thisMenu);
@@ -947,7 +948,8 @@ static void ItemStorage_Init(void)
     sItemStorageMenu = AllocZeroed(sizeof(*sItemStorageMenu));
     memset(sItemStorageMenu->windowIds, WINDOW_NONE, ITEMPC_WIN_COUNT);
     sItemStorageMenu->toSwapPos = NOT_SWAPPING;
-    sItemStorageMenu->spriteId = SPRITE_NONE;
+    sItemStorageMenu->spriteId[0] = SPRITE_NONE;
+    sItemStorageMenu->spriteId[1] = SPRITE_NONE;
 }
 
 static void ItemStorage_Free(void)
@@ -1019,11 +1021,12 @@ static void ItemStorage_MoveCursor(s32 id, bool8 onInit, struct ListMenu *list)
         PlaySE(SE_SELECT);
     if (sItemStorageMenu->toSwapPos == NOT_SWAPPING)
     {
-        ItemStorage_EraseItemIcon();
         if (id != LIST_CANCEL)
-            ItemStorage_DrawItemIcon(gSaveBlock1Ptr->pcItems[id].itemId);
+            ItemStorage_DrawItemIcon(gSaveBlock1Ptr->pcItems[id].itemId, sItemStorageMenu->iconSlot);
         else
-            ItemStorage_DrawItemIcon(MSG_GO_BACK_TO_PREV);
+            ItemStorage_DrawItemIcon(MSG_GO_BACK_TO_PREV, sItemStorageMenu->iconSlot);
+        ItemStorage_EraseItemIcon(sItemStorageMenu->iconSlot ^ 1);
+        sItemStorageMenu->iconSlot ^= 1;
         ItemStorage_PrintDescription(id);
     }
 }
@@ -1093,16 +1096,14 @@ static void ItemStorage_DrawSwapArrow(u8 y, u8 b, u8 speed)
         AddTextPrinterParameterized4(windowId, gSaveBlock2Ptr->optionsCurrentFont, 0, y, 0, 0, sSwapArrowTextColors, speed, gText_SelectorArrow2);
 }
 
-static void ItemStorage_DrawItemIcon(u16 itemId)
+static void ItemStorage_DrawItemIcon(u16 itemId, u8 iconSlot)
 {
     u8 spriteId;
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId;
+    u8* spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
 
     if (*spriteIdLoc == SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(TAG_ITEM_ICON);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON);
-        spriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, itemId);
+        spriteId = AddItemIconSprite(iconSlot + TAG_ITEM_ICON, iconSlot + TAG_ITEM_ICON, itemId);
         if (spriteId != MAX_SPRITES)
         {
             *spriteIdLoc = spriteId;
@@ -1113,13 +1114,13 @@ static void ItemStorage_DrawItemIcon(u16 itemId)
     }
 }
 
-static void ItemStorage_EraseItemIcon(void)
+static void ItemStorage_EraseItemIcon(u8 iconSlot)
 {
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId;
+    u8* spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
     if (*spriteIdLoc != SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(TAG_ITEM_ICON);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON);
+        FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
+        FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
         DestroySprite(&gSprites[*spriteIdLoc]);
         *spriteIdLoc = SPRITE_NONE;
     }
@@ -1263,7 +1264,7 @@ static void ItemStorage_ReturnToMenuSelect(u8 taskId)
 static void ItemStorage_ExitItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    ItemStorage_EraseItemIcon();
+    ItemStorage_EraseItemIcon(sItemStorageMenu->iconSlot ^ 1);
     ItemStorage_RemoveScrollIndicator();
     DestroyListMenuTask(tListTaskId, NULL, NULL);
     DestroySwapLineSprites(sItemStorageMenu->swapLineSpriteIds, SWAP_LINE_LENGTH);
