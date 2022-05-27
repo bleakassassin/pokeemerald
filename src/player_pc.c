@@ -2,6 +2,7 @@
 #include "constants/songs.h"
 #include "bg.h"
 #include "decoration.h"
+#include "event_data.h"
 #include "event_scripts.h"
 #include "event_object_movement.h"
 #include "field_screen_effect.h"
@@ -80,7 +81,8 @@ struct ItemStorageMenu
     u8 itemNames[PC_ITEMS_COUNT + 1][ITEM_NAME_LENGTH + 10];
     u8 windowIds[ITEMPC_WIN_COUNT];
     u8 toSwapPos;
-    u8 spriteId;
+    u8 iconSlot;
+    u8 spriteId[2];
     u8 swapLineSpriteIds[SWAP_LINE_LENGTH];
 };
 
@@ -156,8 +158,8 @@ static void ItemStorage_DrawSwapArrow(u8 y, u8, u8 speed);
 static void ItemStorage_RemoveWindow(u8);
 static void ItemStorage_UpdateSwapLinePos(u8);
 static void ItemStorage_ProcessItemSwapInput(u8 taskId);
-static void ItemStorage_EraseItemIcon(void);
-static void ItemStorage_DrawItemIcon(u16 itemId);
+static void ItemStorage_EraseItemIcon(u8 iconSlot);
+static void ItemStorage_DrawItemIcon(u16 itemId, u8 iconSlot);
 static void ItemStorage_PrintDescription(s32 id);
 static void ItemStorage_EraseMainMenu(u8 taskId);
 static void ItemStorage_MoveCursor(s32 id, bool8 b, struct ListMenu * thisMenu);
@@ -186,7 +188,6 @@ static const struct MenuAction sPlayerPCMenuActions[] =
 
 static const u8 sBedroomPC_OptionOrder[] =
 {
-    MENU_ITEMSTORAGE,
     MENU_MAILBOX,
     MENU_DECORATION,
     MENU_TURNOFF
@@ -207,12 +208,6 @@ static const struct MenuAction sItemStorage_MenuActions[] =
     [MENU_DEPOSIT]  = { gText_DepositItem,  ItemStorage_Deposit },
     [MENU_TOSS]     = { gText_TossItem,     ItemStorage_Toss },
     [MENU_EXIT]     = { gText_Cancel,       ItemStorage_Exit }
-};
-
-static const struct ItemSlot sNewGamePCItems[] =
-{
-    { ITEM_POTION, 1 },
-    { ITEM_NONE, 0 }
 };
 
 const struct MenuAction gMailboxMailOptions[] =
@@ -341,17 +336,6 @@ static const struct WindowTemplate sWindowTemplates_ItemStorage[ITEMPC_WIN_COUNT
 
 static const u8 sSwapArrowTextColors[] = {TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY, TEXT_COLOR_DARK_GRAY};
 
-// Macro below is likely a fakematch, equivalent to sNewGamePCItems[i].quantity
-#define GET_QUANTITY(i) ((u16)((u16 *)sNewGamePCItems + 1)[i * 2])
-void NewGameInitPCItems(void)
-{
-    u8 i = 0;
-    ClearItemSlots(gSaveBlock1Ptr->pcItems, PC_ITEMS_COUNT);
-    for(; sNewGamePCItems[i].itemId != ITEM_NONE && GET_QUANTITY(i) &&
-        AddPCItem(sNewGamePCItems[i].itemId, GET_QUANTITY(i)) == TRUE; i++);
-}
-#undef GET_QUANTITY
-
 void BedroomPC(void)
 {
     sTopMenuOptionOrder = sBedroomPC_OptionOrder;
@@ -465,6 +449,42 @@ static void PlayerPC_Mailbox(u8 taskId)
     }
 }
 
+void Mailbox(void)
+{
+    u32 taskId;
+    u16 *data;
+
+    taskId = CreateTask(TaskDummy, 0);
+    data = gTasks[taskId].data;
+    gPlayerPCItemPageInfo.count = GetMailboxMailCount();
+
+    if (gPlayerPCItemPageInfo.count == 0)
+    {
+        // Mailbox cannot be opened if no mail is in PC
+        DisplayItemMessageOnField(taskId, gText_NoMailHere, PlayerPC_TurnOff);
+    }
+    else
+    {
+
+        gPlayerPCItemPageInfo.cursorPos = 0;
+        gPlayerPCItemPageInfo.itemsAbove = 0;
+        gPlayerPCItemPageInfo.scrollIndicatorTaskId = TASK_NONE;
+        Mailbox_CompactMailList();
+        SetPlayerPCListCount(taskId);
+        if (MailboxMenu_Alloc(gPlayerPCItemPageInfo.count) == TRUE)
+        {
+            ClearDialogWindowAndFrame(0, 0);
+            Mailbox_DrawMailboxMenu(taskId);
+            gTasks[taskId].func = Mailbox_ProcessInput;
+        }
+        else
+        {
+            // Alloc failed, exit Mailbox
+            DisplayItemMessageOnField(taskId, gText_NoMailHere, PlayerPC_TurnOff);
+        }
+    }
+}
+
 static void PlayerPC_Decoration(u8 taskId)
 {
     DoPlayerRoomDecorationMenu(taskId);
@@ -472,7 +492,7 @@ static void PlayerPC_Decoration(u8 taskId)
 
 static void PlayerPC_TurnOff(u8 taskId)
 {
-    if (sTopMenuNumOptions == NUM_BEDROOM_PC_OPTIONS) // Flimsy way to determine if Bedroom PC is in use
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(LITTLEROOT_TOWN_BRENDANS_HOUSE_2F))
     {
         if (gSaveBlock2Ptr->playerGender == MALE)
             ScriptContext1_SetupScript(LittlerootTown_BrendansHouse_2F_EventScript_TurnOffPlayerPC);
@@ -504,7 +524,7 @@ static void InitItemStorageMenu(u8 taskId, u8 var)
 
 static void ItemStorageMenuPrint(const u8 *textPtr)
 {
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, textPtr, 0, 1, 0, 0);
 }
 
@@ -558,7 +578,7 @@ void CB2_PlayerPCExitBagMenu(void)
 static void ItemStorage_ReshowAfterBagMenu(void)
 {
     LoadMessageBoxAndBorderGfx();
-    DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, TRUE);
     InitItemStorageMenu(CreateTask(ItemStorage_HandleReturnToProcessInput, 0), 1);
     FadeInFromBlack();
 }
@@ -677,7 +697,7 @@ static void Mailbox_DrawMailboxMenu(u8 taskId)
 {
     u8 windowId = MailboxMenu_AddWindow(MAILBOXWIN_TITLE);
     MailboxMenu_AddWindow(MAILBOXWIN_LIST);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Mailbox, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Mailbox, 0x40), 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Mailbox, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Mailbox, 0x40), 0, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
     gTasks[taskId].tListTaskId = MailboxMenu_CreateList(&gPlayerPCItemPageInfo);
     MailboxMenu_AddScrollArrows(&gPlayerPCItemPageInfo);
@@ -732,7 +752,10 @@ static void Mailbox_ReturnToPlayerPC(u8 taskId)
     DestroyListMenuTask(tListTaskId, NULL, NULL);
     ScheduleBgCopyTilemapToVram(0);
     MailboxMenu_Free();
-    ReshowPlayerPC(taskId);
+    if (FlagGet(FLAG_SYS_NATIVE_SAVE) == TRUE)
+        PlayerPC_TurnOff(taskId);
+    else
+        ReshowPlayerPC(taskId);
 }
 
 static void Mailbox_PrintMailOptions(u8 taskId)
@@ -925,7 +948,8 @@ static void ItemStorage_Init(void)
     sItemStorageMenu = AllocZeroed(sizeof(*sItemStorageMenu));
     memset(sItemStorageMenu->windowIds, WINDOW_NONE, ITEMPC_WIN_COUNT);
     sItemStorageMenu->toSwapPos = NOT_SWAPPING;
-    sItemStorageMenu->spriteId = SPRITE_NONE;
+    sItemStorageMenu->spriteId[0] = SPRITE_NONE;
+    sItemStorageMenu->spriteId[1] = SPRITE_NONE;
 }
 
 static void ItemStorage_Free(void)
@@ -997,11 +1021,12 @@ static void ItemStorage_MoveCursor(s32 id, bool8 onInit, struct ListMenu *list)
         PlaySE(SE_SELECT);
     if (sItemStorageMenu->toSwapPos == NOT_SWAPPING)
     {
-        ItemStorage_EraseItemIcon();
         if (id != LIST_CANCEL)
-            ItemStorage_DrawItemIcon(gSaveBlock1Ptr->pcItems[id].itemId);
+            ItemStorage_DrawItemIcon(gSaveBlock1Ptr->pcItems[id].itemId, sItemStorageMenu->iconSlot);
         else
-            ItemStorage_DrawItemIcon(MSG_GO_BACK_TO_PREV);
+            ItemStorage_DrawItemIcon(MSG_GO_BACK_TO_PREV, sItemStorageMenu->iconSlot);
+        ItemStorage_EraseItemIcon(sItemStorageMenu->iconSlot ^ 1);
+        sItemStorageMenu->iconSlot ^= 1;
         ItemStorage_PrintDescription(id);
     }
 }
@@ -1071,16 +1096,14 @@ static void ItemStorage_DrawSwapArrow(u8 y, u8 b, u8 speed)
         AddTextPrinterParameterized4(windowId, gSaveBlock2Ptr->optionsCurrentFont, 0, y, 0, 0, sSwapArrowTextColors, speed, gText_SelectorArrow2);
 }
 
-static void ItemStorage_DrawItemIcon(u16 itemId)
+static void ItemStorage_DrawItemIcon(u16 itemId, u8 iconSlot)
 {
     u8 spriteId;
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId;
+    u8* spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
 
     if (*spriteIdLoc == SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(TAG_ITEM_ICON);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON);
-        spriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, itemId);
+        spriteId = AddItemIconSprite(iconSlot + TAG_ITEM_ICON, iconSlot + TAG_ITEM_ICON, itemId);
         if (spriteId != MAX_SPRITES)
         {
             *spriteIdLoc = spriteId;
@@ -1091,13 +1114,13 @@ static void ItemStorage_DrawItemIcon(u16 itemId)
     }
 }
 
-static void ItemStorage_EraseItemIcon(void)
+static void ItemStorage_EraseItemIcon(u8 iconSlot)
 {
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId;
+    u8* spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
     if (*spriteIdLoc != SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(TAG_ITEM_ICON);
-        FreeSpritePaletteByTag(TAG_ITEM_ICON);
+        FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
+        FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
         DestroySprite(&gSprites[*spriteIdLoc]);
         *spriteIdLoc = SPRITE_NONE;
     }
@@ -1227,7 +1250,7 @@ static void ItemStorage_ReturnToMenuSelect(u8 taskId)
     s16 *data = gTasks[taskId].data;
     if (!IsDma3ManagerBusyWithBgCopy())
     {
-        DrawDialogueFrame(0, 0);
+        DrawDialogueFrame(0, FALSE);
 
         // Select Withdraw/Toss by default depending on which was just exited
         if (!tInTossMenu)
@@ -1241,7 +1264,7 @@ static void ItemStorage_ReturnToMenuSelect(u8 taskId)
 static void ItemStorage_ExitItemList(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    ItemStorage_EraseItemIcon();
+    ItemStorage_EraseItemIcon(sItemStorageMenu->iconSlot ^ 1);
     ItemStorage_RemoveScrollIndicator();
     DestroyListMenuTask(tListTaskId, NULL, NULL);
     DestroySwapLineSprites(sItemStorageMenu->swapLineSpriteIds, SWAP_LINE_LENGTH);

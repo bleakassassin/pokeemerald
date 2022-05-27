@@ -1534,7 +1534,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
     {
 
         AddTextPrinterParameterized3(windowId,
-                                     gSaveBlock2Ptr->optionsCurrentFont,
+                                     FONT_SHORT,
                                      0,
                                      15 * i,
                                      color,
@@ -1543,7 +1543,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
 
         StringCopy(text, (statsDiff[i] >= 0) ? gText_Plus : gText_Dash);
         AddTextPrinterParameterized3(windowId,
-                                     gSaveBlock2Ptr->optionsCurrentFont,
+                                     FONT_SHORT,
                                      56,
                                      15 * i,
                                      color,
@@ -1556,7 +1556,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
 
         ConvertIntToDecimalStringN(text, abs(statsDiff[i]), STR_CONV_MODE_LEFT_ALIGN, 2);
         AddTextPrinterParameterized3(windowId,
-                                     gSaveBlock2Ptr->optionsCurrentFont,
+                                     FONT_SHORT,
                                      56 + x,
                                      15 * i,
                                      color,
@@ -1598,7 +1598,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
         x = 6 * (4 - numDigits);
 
         AddTextPrinterParameterized3(windowId,
-                                     gSaveBlock2Ptr->optionsCurrentFont,
+                                     FONT_SHORT,
                                      0,
                                      15 * i,
                                      color,
@@ -1606,7 +1606,7 @@ void DrawLevelUpWindowPg2(u16 windowId, u16 *currStats, u8 bgClr, u8 fgClr, u8 s
                                      sLvlUpStatStrings[i]);
 
         AddTextPrinterParameterized3(windowId,
-                                     gSaveBlock2Ptr->optionsCurrentFont,
+                                     FONT_SHORT,
                                      56 + x,
                                      15 * i,
                                      color,

@@ -903,7 +903,6 @@ LittlerootTown_EventScript_Mom::
 
 LittlerootTown_EventScript_SetReceivedRunningShoes::
 	removeobject LOCALID_MOM
-	setflag FLAG_SYS_B_DASH
 	setvar VAR_LITTLEROOT_TOWN_STATE, 4
 	release
 	end
@@ -913,7 +912,7 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_Text_SwitchShoesWithRunningShoes
 	waitfanfare
-	setflag FLAG_RECEIVED_RUNNING_SHOES
+	setflag FLAG_RECEIVED_ALT_OUTFIT
 	msgbox LittlerootTown_Text_ExplainRunningShoes, MSGBOX_DEFAULT
 	msgbox LittlerootTown_Text_ComeHomeIfAnythingHappens, MSGBOX_DEFAULT
 	closemessage
@@ -943,23 +942,20 @@ LittlerootTown_Text_WearTheseRunningShoes:
 	.string "You're your father's child, all right.\n"
 	.string "You look good together with Pokémon!\p"
 	.string "Here, honey! If you're going out on an\n"
-	.string "adventure, wear these Running Shoes.\p"
-	.string "They'll put a zip in your step!$"
+	.string "adventure, take this with you!$"
 
 LittlerootTown_Text_SwitchShoesWithRunningShoes:
-	.string "{PLAYER} switched shoes with the\n"
-	.string "Running Shoes.$"
+	.string "{PLAYER} received the Emerald Style!$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "Mom: {PLAYER}, those shoes came with\n"
-	.string "instructions.\p"
-	.string "“Press the B Button while wearing these\n"
-	.string "Running Shoes to run extra-fast!\p"
-	.string "“Press the R Button while standing in\n"
-	.string "them to toggle between automatically\l"
-	.string "walking and running when moving around.\p"
-	.string "“Slip on these Running Shoes and race\n"
-	.string "in the great outdoors!”$"
+	.string "Mom: You'll need an extra pair of\n"
+	.string "clothes if you'll be away for awhile.\p"
+	.string "Look at them! They match what your\n"
+	.string "neighbor's wearing. How adorable!\p"
+	.string "Make sure you change into them when\n"
+	.string "you're inside a fitting room!\p"
+	.string "You should be able to find them on the\n"
+	.string "second floor of any Pokémon Center.$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "… … … … … … … …\n"

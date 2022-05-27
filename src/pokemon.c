@@ -6745,12 +6745,12 @@ void SetWildMonHeldItem(void)
         u16 rnd = Random() % 100;
         u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);
         u16 chanceNoItem = 45;
-        u16 chanceCommon = 95;
+        u16 chanceNotRare = 95;
         if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG, 0)
             && GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES)
         {
             chanceNoItem = 20;
-            chanceCommon = 80;
+            chanceNotRare = 80;
         }
         if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
         {
@@ -6758,7 +6758,7 @@ void SetWildMonHeldItem(void)
             if (sAlteringCaveWildMonHeldItems[alteringCaveId].item != ITEM_NONE)
             {
                 // In Altering Cave with Pokemon that doesn't have wild hold items, use special item list
-                if (rnd < chanceCommon)
+                if (rnd < chanceNotRare)
                     return;
                 SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &sAlteringCaveWildMonHeldItems[alteringCaveId].item);
             }
@@ -6767,27 +6767,27 @@ void SetWildMonHeldItem(void)
                 // In Altering Cave with Pokemon that does have wild hold items, use normal items
                 if (rnd < chanceNoItem)
                     return;
-                if (rnd < chanceCommon)
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                if (rnd < chanceNotRare)
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                 else
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemRare);
             }
         }
         else
         {
-            if (gBaseStats[species].item1 == gBaseStats[species].item2 && gBaseStats[species].item1 != ITEM_NONE)
+            if (gBaseStats[species].itemCommon == gBaseStats[species].itemRare && gBaseStats[species].itemCommon != ITEM_NONE)
             {
                 // Both held items are the same, 100% chance to hold item
-                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
             }
             else
             {
                 if (rnd < chanceNoItem)
                     return;
-                if (rnd < chanceCommon)
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                if (rnd < chanceNotRare)
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemCommon);
                 else
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].itemRare);
             }
         }
     }

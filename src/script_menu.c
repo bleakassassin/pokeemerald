@@ -372,7 +372,10 @@ static void CreatePCMultichoice(void)
     else
         AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SomeonesPC, y, 0, TEXT_SKIP_DRAW, NULL);
 
-    StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
+    if (FlagGet(FLAG_SYS_NATIVE_SAVE))
+        StringExpandPlaceholders(gStringVar4, gText_Mailbox);
+    else
+        StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
     PrintPlayerNameOnWindow(windowId, gStringVar4, y, 16);
     InitMenuInUpperLeftCornerNormal(windowId, numChoices, 0);
     CopyWindowToVram(windowId, COPYWIN_FULL);

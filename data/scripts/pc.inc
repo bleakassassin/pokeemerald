@@ -25,12 +25,18 @@ EventScript_AccessPC::
 	end
 
 EventScript_AccessPlayersPC::
+	goto_if_set FLAG_SYS_NATIVE_SAVE, EventScript_AccessMailbox
 	playse SE_PC_LOGIN
 	msgbox gText_AccessedPlayersPC, MSGBOX_DEFAULT
 	special PlayerPC
 	waitstate
 	goto EventScript_PCMainMenu
 	end
+
+EventScript_AccessMailbox::
+	special Mailbox
+	waitstate
+	goto EventScript_PCMainMenu
 
 EventScript_AccessPokemonStorage::
 	playse SE_PC_LOGIN
