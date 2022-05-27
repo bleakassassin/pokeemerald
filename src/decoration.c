@@ -825,7 +825,7 @@ static void ReturnToActionsMenuFromCategories(u8 taskId)
 {
     RemoveDecorationWindow(WINDOW_DECORATION_CATEGORIES);
     AddDecorationActionsWindow();
-    DrawDialogueFrame(0, 0);
+    DrawDialogueFrame(0, FALSE);
     PrintCurMainMenuDescription();
     gTasks[taskId].func = HandleDecorationActionsMenuInput;
 }
@@ -2677,7 +2677,7 @@ static void FieldCB_StopPuttingAwayDecorations(void)
     u8 taskId;
 
     FadeInFromBlack();
-    DrawDialogueFrame(0, 1);
+    DrawDialogueFrame(0, TRUE);
     InitDecorationActionsWindow();
     taskId = CreateTask(Task_ReinitializeDecorationMenuHandler, 8);
     gTasks[taskId].tState = 0;
