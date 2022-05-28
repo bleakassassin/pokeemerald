@@ -77,8 +77,8 @@ static EWRAM_DATA u16 sLilycoveDeptStore_NeverRead = 0;
 static EWRAM_DATA u16 sLilycoveDeptStore_DefaultFloorChoice = 0;
 static EWRAM_DATA struct ListMenuItem *sScrollableMultichoice_ListMenuItem = NULL;
 static EWRAM_DATA u16 sScrollableMultichoice_ScrollOffset = 0;
-static EWRAM_DATA u16 sFrontierExchangeCorner_NeverRead = 0;
-static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId = 0;
+static EWRAM_DATA u8 sScrollableMultichoice_iconSlot = 0;
+static EWRAM_DATA u8 sScrollableMultichoice_ItemSpriteId[2] = {0};
 static EWRAM_DATA u8 sBattlePointsWindowId = 0;
 static EWRAM_DATA u8 sFrontierExchangeCorner_ItemIconWindowId = 0;
 static EWRAM_DATA u8 sPCBoxToSendMon = 0;
@@ -106,19 +106,19 @@ static void Task_MoveElevator(u8 taskId);
 static void MoveElevatorWindowLights(u16 floorDelta, bool8 descending);
 static void Task_MoveElevatorWindowLights(u8 taskId);
 static void Task_ShowScrollableMultichoice(u8 taskId);
-static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection);
+static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection, u8 iconSlot);
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection);
 static void InitScrollableMultichoice(void);
 static void ScrollableMultichoice_ProcessInput(u8 taskId);
 static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId);
 static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused);
+static void HideFrontierExchangeCornerItemIcon(u16 menu, u8 iconSlot);
 static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection);
 static void CloseScrollableMultichoice(u8 taskId);
 static void ScrollableMultichoice_RemoveScrollArrows(u8 taskId);
 static void Task_ScrollableMultichoice_WaitReturnToList(u8 taskId);
 static void Task_ScrollableMultichoice_ReturnToList(u8 taskId);
-static void ShowFrontierExchangeCornerItemIcon(u16 item);
+static void ShowFrontierExchangeCornerItemIcon(u16 item, u8 iconSlot);
 static void Task_DeoxysRockInteraction(u8 taskId);
 static void ChangeDeoxysRockLevel(u8 a0);
 static void WaitForDeoxysRockMovement(u8 taskId);
@@ -2643,11 +2643,13 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
 
     ScriptContext2_Enable();
     sScrollableMultichoice_ScrollOffset = 0;
-    sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
-    FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, 0);
+    sScrollableMultichoice_ItemSpriteId[0] = SPRITE_NONE;
+    sScrollableMultichoice_ItemSpriteId[1] = SPRITE_NONE;
+    FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, 0, sScrollableMultichoice_iconSlot);
+    HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sScrollableMultichoice_iconSlot ^ 1);
+    sScrollableMultichoice_iconSlot ^= 1;
     ShowBattleFrontierTutorWindow(task->tScrollMultiId, 0);
     sScrollableMultichoice_ListMenuItem = AllocZeroed(task->tNumItems * 8);
-    sFrontierExchangeCorner_NeverRead = 0;
     InitScrollableMultichoice();
 
     for (width = 0, i = 0; i < task->tNumItems; i++)
@@ -2718,10 +2720,10 @@ static void ScrollableMultichoice_MoveCursor(s32 itemIndex, bool8 onInit, struct
         ListMenuGetScrollAndRow(task->tListTaskId, &selection, NULL);
         sScrollableMultichoice_ScrollOffset = selection;
         ListMenuGetCurrentItemArrayId(task->tListTaskId, &selection);
-        HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sFrontierExchangeCorner_NeverRead);
-        FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, selection);
+        FillFrontierExchangeCornerWindowAndItemIcon(task->tScrollMultiId, selection, sScrollableMultichoice_iconSlot);
+        HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sScrollableMultichoice_iconSlot ^ 1);
+        sScrollableMultichoice_iconSlot ^= 1;
         ShowBattleFrontierTutorMoveDescription(task->tScrollMultiId, selection);
-        sFrontierExchangeCorner_NeverRead = selection;
     }
 }
 
@@ -2767,7 +2769,7 @@ static void CloseScrollableMultichoice(u8 taskId)
     u16 selection;
     struct Task *task = &gTasks[taskId];
     ListMenuGetCurrentItemArrayId(task->tListTaskId, &selection);
-    HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, selection);
+    HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sScrollableMultichoice_iconSlot ^ 1);
     ScrollableMultichoice_RemoveScrollArrows(taskId);
     DestroyListMenuTask(task->tListTaskId, NULL, NULL);
     Free(sScrollableMultichoice_ListMenuItem);
@@ -3083,10 +3085,12 @@ void CloseFrontierExchangeCornerItemIconWindow(void)
 
 #define TAG_ITEM_ICON 5500
 
-static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
+static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection, u8 iconSlot)
 {
     #include "data/battle_frontier/battle_frontier_exchange_corner.h"
 
+    u8 spriteId;
+    u8 *spriteIdPtr = &sScrollableMultichoice_ItemSpriteId[iconSlot];
     if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR)
     {
         gReservedSpritePaletteCount = 5;
@@ -3097,94 +3101,90 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, 2, 1, 3);
             if (sFrontierExchangeCorner_Decor1[selection] == 0xFFFF)
             {
-                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection]);
+                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection], iconSlot);
             }
             else
             {
-                FreeSpriteTilesByTag(TAG_ITEM_ICON);
-                FreeSpritePaletteByTag(TAG_ITEM_ICON);
-                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
+                spriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor1[selection], 33, 88, 0, iconSlot + TAG_ITEM_ICON, iconSlot + TAG_ITEM_ICON);
+                if (spriteId != MAX_SPRITES)
+                    *spriteIdPtr = spriteId;
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, 2, 1, 3);
             if (sFrontierExchangeCorner_Decor2[selection] == 0xFFFF)
             {
-                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection]);
+                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection], iconSlot);
             }
             else
             {
-                FreeSpriteTilesByTag(TAG_ITEM_ICON);
-                FreeSpritePaletteByTag(TAG_ITEM_ICON);
-                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
+                spriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, iconSlot + TAG_ITEM_ICON, iconSlot + TAG_ITEM_ICON);
+                if (spriteId != MAX_SPRITES)
+                    *spriteIdPtr = spriteId;
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R:
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2DescriptionsRegi[selection], 0, NULL, 2, 1, 3);
             if (sFrontierExchangeCorner_Decor2Regi[selection] == 0xFFFF)
             {
-                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2Regi[selection]);
+                ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2Regi[selection], iconSlot);
             }
             else
             {
-                FreeSpriteTilesByTag(TAG_ITEM_ICON);
-                FreeSpritePaletteByTag(TAG_ITEM_ICON);
-                sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2Regi[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
+                spriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2Regi[selection], 33, 88, 0, iconSlot + TAG_ITEM_ICON, iconSlot + TAG_ITEM_ICON);
+                if (spriteId != MAX_SPRITES)
+                    *spriteIdPtr = spriteId;
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, 2, 1, 3);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection], iconSlot);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S:
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptionsSilver[selection], 0, NULL, 2, 1, 3);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsSilver[selection]);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsSilver[selection], iconSlot);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G:
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptionsGold[selection], 0, NULL, 2, 1, 3);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsGold[selection]);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsGold[selection], iconSlot);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, 2, 1, 3);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection], iconSlot);
             break;
         }
     }
 }
 
-static void ShowFrontierExchangeCornerItemIcon(u16 item)
+static void ShowFrontierExchangeCornerItemIcon(u16 item, u8 iconSlot)
 {
-    FreeSpriteTilesByTag(TAG_ITEM_ICON);
-    FreeSpritePaletteByTag(TAG_ITEM_ICON);
-    sScrollableMultichoice_ItemSpriteId = AddItemIconSprite(TAG_ITEM_ICON, TAG_ITEM_ICON, item);
+    u8 spriteId;
+    u8* spriteIdPtr = &sScrollableMultichoice_ItemSpriteId[iconSlot];
 
-    if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
+    if (*spriteIdPtr == SPRITE_NONE)
     {
-        gSprites[sScrollableMultichoice_ItemSpriteId].oam.priority = 0;
-        gSprites[sScrollableMultichoice_ItemSpriteId].x = 36;
-        gSprites[sScrollableMultichoice_ItemSpriteId].y = 92;
-    }
-}
-
-static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
-{
-    if (sScrollableMultichoice_ItemSpriteId != MAX_SPRITES)
-    {
-        switch (menu)
+        spriteId = AddItemIconSprite(iconSlot + TAG_ITEM_ICON, iconSlot + TAG_ITEM_ICON, item);
+        if (spriteId != MAX_SPRITES)
         {
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-            gReservedSpritePaletteCount = 0;
-            DestroySpriteAndFreeResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
-            break;
+            *spriteIdPtr = spriteId;
+            gSprites[*spriteIdPtr].oam.priority = 0;
+            gSprites[*spriteIdPtr].x = 36;
+            gSprites[*spriteIdPtr].y = 92;
         }
-        sScrollableMultichoice_ItemSpriteId = MAX_SPRITES;
     }
+}
+
+static void HideFrontierExchangeCornerItemIcon(u16 menu, u8 iconSlot)
+{
+    u8 *spriteIdPtr = &sScrollableMultichoice_ItemSpriteId[iconSlot];
+    if (*spriteIdPtr == SPRITE_NONE)
+        return;
+
+    gReservedSpritePaletteCount = 0;
+    FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
+    FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
+    DestroySprite(&gSprites[*spriteIdPtr]);
+    *spriteIdPtr = SPRITE_NONE;
 }
 
 static const u16 sBattleFrontier_TutorMoves1[] =
