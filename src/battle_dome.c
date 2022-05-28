@@ -2254,6 +2254,7 @@ static void InitDomeTrainers(void)
     rankingScores = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(int) * NUM_STATS);
 
+    gSaveBlock2Ptr->frontier.domeLastOutfit = gSaveBlock2Ptr->outfitId;
     gSaveBlock2Ptr->frontier.domeLvlMode = gSaveBlock2Ptr->frontier.lvlMode + 1;
     gSaveBlock2Ptr->frontier.domeBattleMode = VarGet(VAR_FRONTIER_BATTLE_MODE) + 1;
     DOME_TRAINERS[0].trainerId = TRAINER_PLAYER;
@@ -4266,7 +4267,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 
     // Create trainer pic sprite
     if (trainerId == TRAINER_PLAYER)
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(gSaveBlock2Ptr->outfitId, gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(gSaveBlock2Ptr->frontier.domeLastOutfit, gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
     else if (trainerId == TRAINER_FRONTIER_BRAIN)
         sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 64, palSlot + 12, TAG_NONE);
     else
@@ -4740,7 +4741,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 
     // Draw left trainer sprite.
     if (trainerIds[0] == TRAINER_PLAYER)
-        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(gSaveBlock2Ptr->outfitId, gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
+        sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(gSaveBlock2Ptr->frontier.domeLastOutfit, gSaveBlock2Ptr->playerGender), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
     else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
         sInfoCard->spriteIds[arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 48, y + 88, palSlot + 12, TAG_NONE);
     else
@@ -4753,7 +4754,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
 
     // Draw right trainer sprite.
     if (trainerIds[1] == TRAINER_PLAYER)
-        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(gSaveBlock2Ptr->outfitId, gSaveBlock2Ptr->playerGender), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
+        sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(gSaveBlock2Ptr->frontier.domeLastOutfit, gSaveBlock2Ptr->playerGender), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
     else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
         sInfoCard->spriteIds[1 + arrId] = CreateTrainerPicSprite(GetDomeBrainTrainerPicId(), TRUE, x + 192, y + 88, palSlot + 13, TAG_NONE);
     else
