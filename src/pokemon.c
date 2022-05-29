@@ -35,6 +35,7 @@
 #include "text.h"
 #include "trainer_hill.h"
 #include "util.h"
+#include "wild_encounter.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
@@ -2290,7 +2291,15 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 value;
     u16 checksum;
     u32 shinyValue;
+    u32 otId;
+    u8 i = 0;
+    u8 shinyRolls = 2;
     u8 version;
+
+    otId = gSaveBlock2Ptr->playerTrainerId[0]
+          | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+          | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+          | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
     if (ShouldForceGameRuby(species))
         version = VERSION_RUBY;
@@ -2308,7 +2317,19 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     if (hasFixedPersonality)
         personality = fixedPersonality;
     else
-        personality = Random32();
+    {
+        if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+            shinyRolls += 4;
+
+        do
+        {
+            personality = Random32();
+            shinyValue = GET_SHINY_VALUE(otId, personality);
+            i++;
+        } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
+    }
+
+    SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
 
     // Determine original trainer ID
     if (otIdType == OT_ID_RANDOM_NO_SHINY)
@@ -2326,26 +2347,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
     else // Player is the OT
     {
-        u16 j = 0;
-        u16 shinyRolls = 2;
-
-        if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
-            shinyRolls += 4;
-
-        value = gSaveBlock2Ptr->playerTrainerId[0]
-              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-
-        do
-        {
-            personality = Random32();
-            shinyValue = GET_SHINY_VALUE(value, personality);
-            j++;
-        } while (shinyValue >= SHINY_ODDS && j < shinyRolls);
+        value = otId;
     }
     
-    SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
 
     checksum = CalculateBoxMonChecksum(boxMon);
@@ -2409,12 +2413,29 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
 {
     u32 personality;
+    u32 otId;
+    u32 shinyValue;
+    u8 i = 0;
+    u8 shinyRolls = 2;
+
+    otId = gSaveBlock2Ptr->playerTrainerId[0]
+          | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+          | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+          | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+        shinyRolls += 4;
+    shinyRolls += (gChainEncounterStreak * 2);
 
     do
     {
-        personality = Random32();
-    }
-    while (nature != GetNatureFromPersonality(personality));
+        do
+        {
+            personality = Random32();
+        } while (nature != GetNatureFromPersonality(personality));
+        shinyValue = GET_SHINY_VALUE(otId, personality);
+        i++;
+    } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
 
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
 }
@@ -2422,6 +2443,19 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
 void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
 {
     u32 personality;
+    u32 otId;
+    u32 shinyValue;
+    u8 i = 0;
+    u8 shinyRolls = 2;
+
+    otId = gSaveBlock2Ptr->playerTrainerId[0]
+          | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+          | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+          | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+        shinyRolls += 4;
+    shinyRolls += (gChainEncounterStreak * 2);
 
     if ((u8)(unownLetter - 1) < NUM_UNOWN_FORMS)
     {
@@ -2440,10 +2474,13 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
     {
         do
         {
-            personality = Random32();
-        }
-        while (nature != GetNatureFromPersonality(personality)
-            || gender != GetGenderFromSpeciesAndPersonality(species, personality));
+            do
+            {
+                personality = Random32();
+            } while (nature != GetNatureFromPersonality(personality) || gender != GetGenderFromSpeciesAndPersonality(species, personality));
+        shinyValue = GET_SHINY_VALUE(otId, personality);
+        i++;
+        } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
     }
 
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);

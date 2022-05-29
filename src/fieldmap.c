@@ -14,6 +14,7 @@
 #include "secret_base.h"
 #include "trainer_hill.h"
 #include "tv.h"
+#include "wild_encounter.h"
 #include "constants/rgb.h"
 #include "constants/metatile_behaviors.h"
 
@@ -73,6 +74,8 @@ void InitMap(void)
     InitMapLayoutData(&gMapHeader);
     SetOccupiedSecretBaseEntranceMetatiles(gMapHeader.events);
     RunOnLoadMapScript();
+    gChainEncounterStreak = 0;
+    gLastWildSpecies = SPECIES_NONE;
 }
 
 void InitMapFromSavedGame(void)

@@ -447,11 +447,27 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
     return parent;
 }
 
-static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
+static void TriggerPendingDaycareEgg(struct DayCare *daycare)
 {
     s32 parent;
     s32 natureTries = 0;
     u32 personality;
+    u32 shinyValue;
+    u8 shinyRolls = 2;
+    u8 i = 0;
+
+    u32 value = gSaveBlock2Ptr->playerTrainerId[0]
+          | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+          | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+          | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+    // Masuda method
+    if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_LANGUAGE) != GetBoxMonData(&daycare->mons[1].mon, MON_DATA_LANGUAGE))
+        shinyRolls += 10;
+
+    // Shiny Charm
+    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+        shinyRolls += 4;
 
     SeedRng2(gMain.vblankCounter2);
     parent = GetParentToInheritNature(daycare);
@@ -459,29 +475,12 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
     // don't inherit nature
     if (parent < 0)
     {
-        u16 j = 0;
-        u32 shinyValue;
-        u16 shinyRolls = 2;
-
-        u32 value = gSaveBlock2Ptr->playerTrainerId[0]
-              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-
-        // Masuda method
-        if (GetBoxMonData(&daycare->mons[0].mon, MON_DATA_LANGUAGE) != GetBoxMonData(&daycare->mons[1].mon, MON_DATA_LANGUAGE))
-            shinyRolls += 10;
-
-        // Shiny Charm
-        if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
-            shinyRolls += 4;
-
         do
         {
-            personality = Random32();
+            personality = (Random2() << 16) | ((Random() % 0xfffe) + 1);
             shinyValue = GET_SHINY_VALUE(value, personality);
-            j++;
-        } while (shinyValue >= SHINY_ODDS && j < shinyRolls);
+            i++;
+        } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
         
         daycare->offspringPersonality = personality;
     }
@@ -492,22 +491,22 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
 
         do
         {
-            personality = (Random2() << 16) | (Random());
-            if (wantedNature == GetNatureFromPersonality(personality) && personality != 0)
-                break; // found a personality with the same nature
+            do
+            {
+                personality = (Random2() << 16) | (Random());
+                if (wantedNature == GetNatureFromPersonality(personality) && personality != 0)
+                    break; // found a personality with the same nature
 
-            natureTries++;
-        } while (natureTries <= 2400);
+                natureTries++;
+            } while (natureTries <= 2400);
+            shinyValue = GET_SHINY_VALUE(value, personality);
+            i++;
+        } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
 
         daycare->offspringPersonality = personality;
     }
 
     FlagSet(FLAG_PENDING_DAYCARE_EGG);
-}
-
-void TriggerPendingDaycareEgg(void)
-{
-    _TriggerPendingDaycareEgg(&gSaveBlock1Ptr->daycare);
 }
 
 // Removes the selected index from the given IV list and shifts the remaining
@@ -925,7 +924,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
         if (CheckBagHasItem(ITEM_OVAL_CHARM, 1))
             compatibility = sOvalCharmCompatibilityScores[compatibility];
         if (compatibility > (Random() * 100u) / USHRT_MAX)
-            TriggerPendingDaycareEgg();
+            TriggerPendingDaycareEgg(&gSaveBlock1Ptr->daycare);
     }
 
     // Try to hatch Egg

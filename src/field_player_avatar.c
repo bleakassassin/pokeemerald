@@ -2018,6 +2018,8 @@ static bool8 Fishing_NotEvenNibble(struct Task *task)
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, gText_NotEvenANibble, 1, 0, 2, 1, 3);
+    gChainEncounterStreak = 0;
+    gLastWildSpecies = SPECIES_NONE;
     task->tStep = FISHING_SHOW_RESULT;
     return TRUE;
 }
@@ -2028,6 +2030,8 @@ static bool8 Fishing_GotAway(struct Task *task)
     StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], GetFishingNoCatchDirectionAnimNum(GetPlayerFacingDirection()));
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, gText_ItGotAway, 1, 0, 2, 1, 3);
+    gChainEncounterStreak = 0;
+    gLastWildSpecies = SPECIES_NONE;
     task->tStep++;
     return TRUE;
 }
