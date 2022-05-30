@@ -2538,7 +2538,7 @@ void LoadLinkContestPlayerPalettes(void)
             }
         }
     }
-    gReservedSpritePaletteCount = 0;
+    gReservedSpritePaletteCount = 8;
 }
 
 bool8 GiveMonArtistRibbon(void)
