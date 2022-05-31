@@ -1068,8 +1068,10 @@ bool8 MetatileBehavior_IsRegionMap(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsClosedSootopolisDoor(u8 metatileBehavior)
+bool8 MetatileBehavior_IsClosedSootopolisDoor(u8 metatileBehavior, u8 playerDir)
 {
+    if (playerDir != DIR_NORTH)
+        return FALSE;
     if (metatileBehavior == MB_CLOSED_SOOTOPOLIS_DOOR)
         return TRUE;
     else
