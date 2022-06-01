@@ -31,7 +31,8 @@ struct PlayerInfo
 {
     u32 trainerId;
     u8 name[PLAYER_NAME_LENGTH + 1];
-    u8 gender;
+    u8 gender:1;
+    u8 outfit:7;
     u16 battlerId;
     u16 language;
 };
@@ -65,7 +66,7 @@ struct RecordedBattleSave
     u8 recordMixFriendLanguage;
     u8 apprenticeLanguage;
     u8 battleRecord[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
-    u32 checksum;
+    u8 playersOutfit[MAX_BATTLERS_COUNT];
 };
 
 STATIC_ASSERT(sizeof(struct RecordedBattleSave) <= SECTOR_DATA_SIZE, RecordedBattleSaveFreeSpace);
@@ -158,6 +159,7 @@ void RecordedBattle_SetTrainerInfo(void)
         {
             sPlayers[i].trainerId = gLinkPlayers[i].trainerId;
             sPlayers[i].gender = gLinkPlayers[i].gender;
+            sPlayers[i].outfit = gLinkPlayers[i].outfit;
             sPlayers[i].battlerId = gLinkPlayers[i].id;
             sPlayers[i].language = gLinkPlayers[i].language;
 
@@ -184,6 +186,7 @@ void RecordedBattle_SetTrainerInfo(void)
                               | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
         sPlayers[0].gender = gSaveBlock2Ptr->playerGender;
+        sPlayers[0].outfit = gSaveBlock2Ptr->outfitId;
         sPlayers[0].battlerId = 0;
         sPlayers[0].language = gGameLanguage;
 
@@ -304,8 +307,6 @@ static bool32 IsRecordedBattleSaveValid(struct RecordedBattleSave *save)
         return FALSE;
     if (save->battleFlags & ILLEGAL_BATTLE_TYPES)
         return FALSE;
-    if (CalcByteArraySum((void*)(save), sizeof(*save) - 4) != save->checksum)
-        return FALSE;
 
     return TRUE;
 }
@@ -314,8 +315,6 @@ static bool32 RecordedBattleToSave(struct RecordedBattleSave *battleSave, struct
 {
     memset(saveSector, 0, SECTOR_SIZE);
     memcpy(saveSector, battleSave, sizeof(*battleSave));
-
-    saveSector->checksum = CalcByteArraySum((void*)(saveSector), sizeof(*saveSector) - 4);
 
     if (TryWriteSpecialSaveSector(SECTOR_ID_RECORDED_BATTLE, (void*)(saveSector)) != SAVE_STATUS_OK)
         return FALSE;
@@ -345,6 +344,7 @@ bool32 MoveRecordedBattleToSaveData(void)
         for (j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
             battleSave->playersName[i][j] = sPlayers[i].name[j];
         battleSave->playersGender[i] = sPlayers[i].gender;
+        battleSave->playersOutfit[i] = sPlayers[i].outfit;
         battleSave->playersLanguage[i] = sPlayers[i].language;
         battleSave->playersBattlers[i] = sPlayers[i].battlerId;
         battleSave->playersTrainerId[i] = sPlayers[i].trainerId;
@@ -552,6 +552,7 @@ static void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
                 var = TRUE;
         }
         gLinkPlayers[i].gender = src->playersGender[i];
+        gLinkPlayers[i].outfit = src->playersOutfit[i];
         gLinkPlayers[i].language = src->playersLanguage[i];
         gLinkPlayers[i].id = src->playersBattlers[i];
         gLinkPlayers[i].trainerId = src->playersTrainerId[i];

@@ -23,6 +23,7 @@
 #include "util.h"
 #include "window.h"
 #include "constants/battle_anim.h"
+#include "constants/trainers.h"
 #include "constants/songs.h"
 
 static void RecordedPlayerHandleGetMonData(void);
@@ -1195,7 +1196,10 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     }
     else
     {
-        trainerPicId = gLinkPlayers[0].gender;
+        if (gLinkPlayers[0].outfit == OUTFIT_RS)
+            trainerPicId = gLinkPlayers[0].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
+        else
+            trainerPicId = gLinkPlayers[0].gender;
     }
 
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
@@ -1676,7 +1680,12 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
         trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender;
     else
-        trainerPicId = gSaveBlock2Ptr->playerGender;
+    {
+        if (gLinkPlayers[0].outfit == OUTFIT_RS)
+            trainerPicId = gLinkPlayers[0].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
+        else
+            trainerPicId = gLinkPlayers[0].gender;
+    }
 
     LoadCompressedPalette(gTrainerBackPicPaletteTable[trainerPicId].data, 0x100 + paletteNum * 16, 32);
 
