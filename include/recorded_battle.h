@@ -22,6 +22,7 @@ u8 GetRecordedBattleFrontierFacility(void);
 u8 GetRecordedBattleFronterBrainSymbol(void);
 void RecordedBattle_SaveParties(void);
 u8 GetActiveBattlerLinkPlayerGender(void);
+u8 GetActiveBattlerLinkPlayerOutfit(void);
 void RecordedBattle_ClearFrontierPassFlag(void);
 void RecordedBattle_SetFrontierPassFlagFromHword(u16 flags);
 u8 RecordedBattle_GetFrontierPassFlag(void);

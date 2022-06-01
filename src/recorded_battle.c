@@ -670,6 +670,22 @@ u8 GetActiveBattlerLinkPlayerGender(void)
     return 0;
 }
 
+u8 GetActiveBattlerLinkPlayerOutfit(void)
+{
+    s32 i;
+
+    for (i = 0; i < MAX_LINK_PLAYERS; i++)
+    {
+        if (gLinkPlayers[i].id == gActiveBattler)
+            break;
+    }
+
+    if (i != MAX_LINK_PLAYERS)
+        return gLinkPlayers[i].outfit;
+
+    return 0;
+}
+
 void RecordedBattle_ClearFrontierPassFlag(void)
 {
     sFrontierPassFlag = 0;

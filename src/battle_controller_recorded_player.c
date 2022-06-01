@@ -1190,9 +1190,20 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            trainerPicId = GetActiveBattlerLinkPlayerGender();
+        {
+            trainerPicId = GetActiveBattlerLinkPlayerOutfit();
+            if (trainerPicId == OUTFIT_RS)
+                trainerPicId = GetActiveBattlerLinkPlayerGender() + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
+            else
+                trainerPicId = GetActiveBattlerLinkPlayerGender();
+        }
         else
-            trainerPicId = gLinkPlayers[gRecordedBattleMultiplayerId].gender;
+        {
+            if (gLinkPlayers[gRecordedBattleMultiplayerId].outfit == OUTFIT_RS)
+                trainerPicId = gLinkPlayers[gRecordedBattleMultiplayerId].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
+            else
+                trainerPicId = gLinkPlayers[gRecordedBattleMultiplayerId].gender;
+        }
     }
     else
     {
@@ -1678,7 +1689,12 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
 
     paletteNum = AllocSpritePalette(0xD6F9);
     if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
-        trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender;
+    {
+        if (gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].outfit == OUTFIT_RS)
+            trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
+        else
+            trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(gActiveBattler)].gender;
+    }
     else
     {
         if (gLinkPlayers[0].outfit == OUTFIT_RS)

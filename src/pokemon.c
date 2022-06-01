@@ -7132,7 +7132,7 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
         return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
 }
 
-u16 GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(u8 outfitId, u8 playerGender)
+u16 PlayerOutfitAndGenderToFrontTrainerPic(u8 outfitId, u8 playerGender)
 {
     u16 trainerPic;
 
