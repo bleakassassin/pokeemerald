@@ -2529,13 +2529,18 @@ void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
 {
     u32 personality;
     u32 otId;
+    u32 shinyValue;
+
+    otId = Random32();
 
     do
     {
-        otId = Random32();
         personality = Random32();
+        shinyValue = GET_SHINY_VALUE(otId, personality);
     }
-    while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE);
+    while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE || shinyValue < SHINY_ODDS
+        || personality % NUM_NATURES == NATURE_LONELY || personality % NUM_NATURES == NATURE_HASTY
+        || personality % NUM_NATURES == NATURE_MILD || personality % NUM_NATURES == NATURE_GENTLE);
     CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId);
 }
 
