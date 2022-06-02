@@ -1668,7 +1668,7 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
     for (i = 0; i < rows; i++)
     {
         for (j = 0; j < columns; j++)
-            AddTextPrinterParameterized(windowId, 1, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16), TEXT_SKIP_DRAW, NULL);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }

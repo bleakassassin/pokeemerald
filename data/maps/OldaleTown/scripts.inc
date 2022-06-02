@@ -10,14 +10,8 @@ OldaleTown_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_BlockWestEntrance
-	call_if_unset FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_MoveMartEmployee
-	call_if_set FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_SetOldaleState
+	call_if_eq VAR_OLDALE_TOWN_STATE, 0, OldaleTown_EventScript_MoveMartEmployee
 	end
-
-@ This script seems pointless because nothing uses VAR_OLDALE_TOWN_STATE
-OldaleTown_EventScript_SetOldaleState::
-	setvar VAR_OLDALE_TOWN_STATE, 1
-	return
 
 OldaleTown_EventScript_BlockWestEntrance::
 	setobjectxyperm LOCALID_FOOTPRINTS_MAN, 1, 11
@@ -41,8 +35,8 @@ OldaleTown_EventScript_MartEmployee::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_ExplainPotion
-	goto_if_set FLAG_TEMP_1, OldaleTown_EventScript_ExplainPotion
-	setflag FLAG_TEMP_1
+	goto_if_eq VAR_OLDALE_TOWN_STATE, 1, OldaleTown_EventScript_ExplainPokemonMartAgain
+	setvar VAR_OLDALE_TOWN_STATE, 1
 	playbgm MUS_FOLLOW_ME, FALSE
 	msgbox OldaleTown_Text_IWorkAtPokemonMart, MSGBOX_DEFAULT
 	closemessage
@@ -57,22 +51,21 @@ OldaleTown_EventScript_GoToMartSouth::
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerSouth
 	waitmovement 0
 	goto OldaleTown_EventScript_ExplainPokemonMart
-	end
 
 OldaleTown_EventScript_GoToMartNorth::
 	applymovement LOCALID_MART_EMPLOYEE, OldaleTown_Movement_EmployeeNorth
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerNorth
 	waitmovement 0
 	goto OldaleTown_EventScript_ExplainPokemonMart
-	end
 
 OldaleTown_EventScript_GoToMartEast::
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerEast
 	applymovement LOCALID_MART_EMPLOYEE, OldaleTown_Movement_EmployeeEast
 	waitmovement 0
 	goto OldaleTown_EventScript_ExplainPokemonMart
-	end
 
+OldaleTown_EventScript_ExplainPokemonMartAgain::
+	playbgm MUS_FOLLOW_ME, FALSE
 OldaleTown_EventScript_ExplainPokemonMart::
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
 	giveitem ITEM_POTION
