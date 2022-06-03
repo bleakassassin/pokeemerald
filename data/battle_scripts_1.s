@@ -1736,6 +1736,7 @@ BattleScript_EffectMoonlight::
 	goto BattleScript_PresentHealTarget
 
 BattleScript_EffectHiddenPower::
+	attackcanceler
 	hiddenpowercalc
 	goto BattleScript_EffectHit
 
