@@ -1346,7 +1346,7 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
         txtColor[0] = zero2;
     txtColor[1] = TEXT_DYNAMIC_COLOR_6;
     txtColor[2] = TEXT_DYNAMIC_COLOR_5;
-    AddTextPrinterParameterized4(windowId, gSaveBlock2Ptr->optionsCurrentFont, 0, 1, 0, 0, txtColor, TEXT_SKIP_DRAW, string);
+    AddTextPrinterParameterized4(windowId, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, 0, 0, txtColor, TEXT_SKIP_DRAW, string);
 
     tileBytesToBuffer = bytesToBuffer;
     if (tileBytesToBuffer > 6u)

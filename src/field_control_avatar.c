@@ -1040,7 +1040,7 @@ extern const u8 EventScript_ChangeAutoRun[];
 static bool8 EnableAutoRun(void)
 {
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT))
-        return FALSE;   //auto run unusable until you get running shoes
+        return FALSE;
 
     PlaySE(SE_RG_CARD_FLIPPING);
     if (gSaveBlock2Ptr->autoRun)
