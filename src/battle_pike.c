@@ -1024,6 +1024,9 @@ static u8 GetNextRoomType(void)
     if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_BRAIN)
         return gSaveBlock2Ptr->frontier.pikeHintedRoomType;
 
+    if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_DOUBLE_BATTLE && !AtLeastTwoAliveMons())
+        return PIKE_ROOM_NPC;
+
     // Check if the player walked into the same room that the lady gave a hint about.
     if (gSpecialVar_0x8007 == gSaveBlock2Ptr->frontier.pikeHintedRoomIndex)
     {
