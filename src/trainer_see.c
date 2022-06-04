@@ -5,6 +5,7 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
+#include "metatile_behavior.h"
 #include "pokemon.h"
 #include "script.h"
 #include "script_movement.h"
@@ -374,8 +375,14 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u8 ap
     u8 rangeX, rangeY;
     u8 i;
     u8 collision;
+    u8 tileBehavior;
 
     if (approachDistance == 0)
+        return 0;
+
+    // Check if riding westward current tiles to stop two swimmers on Route 134 from trying to battle
+    tileBehavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
+    if (MetatileBehavior_IsWestwardCurrent(tileBehavior))
         return 0;
 
     x = trainerObj->currentCoords.x;
