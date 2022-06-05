@@ -721,7 +721,7 @@ static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, s
     }
 
     FillWindowPixelBuffer(2, PIXEL_FILL(0));
-    BuyMenuPrint(2, description, 3, 1, 0, 0);
+    BuyMenuPrint(2, description, 3, 0, 0, 0);
 }
 
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
@@ -1195,7 +1195,7 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
     DrawStdFrameWithCustomTileAndPalette(3, FALSE, 1, 13);
     ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, BAG_ITEM_CAPACITY_DIGITS + 1);
     StringExpandPlaceholders(gStringVar4, gText_InBagVar1);
-    BuyMenuPrint(3, gStringVar4, 0, 1, 0, 0);
+    BuyMenuPrint(3, gStringVar4, 0, 0, 0, 0);
     tItemCount = 1;
     DrawStdFrameWithCustomTileAndPalette(4, FALSE, 1, 13);
     BuyMenuPrintItemQuantityAndPrice(taskId);
@@ -1355,10 +1355,10 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     FillWindowPixelBuffer(4, PIXEL_FILL(1));
-    PrintMoneyAmount(4, 38, 1, sShopData->totalCost, TEXT_SKIP_DRAW);
+    PrintMoneyAmount(4, 38, 0, sShopData->totalCost, TEXT_SKIP_DRAW);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, BUY_ITEM_CAPACITY_DIGITS);
     StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    BuyMenuPrint(4, gStringVar4, 0, 1, 0, 0);
+    BuyMenuPrint(4, gStringVar4, 0, 0, 0, 0);
 }
 
 static void ExitBuyMenu(u8 taskId)
