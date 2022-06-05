@@ -1403,9 +1403,9 @@ static void InitMatchCallTextPrinter(int windowId, const u8 *str)
     printerTemplate.windowId = windowId;
     printerTemplate.fontId = gSaveBlock2Ptr->optionsCurrentFont;
     printerTemplate.x = 32;
-    printerTemplate.y = 1;
+    printerTemplate.y = 0;
     printerTemplate.currentX = 32;
-    printerTemplate.currentY = 1;
+    printerTemplate.currentY = 0;
     printerTemplate.letterSpacing = 0;
     printerTemplate.lineSpacing = 0;
     printerTemplate.unk = 0;
