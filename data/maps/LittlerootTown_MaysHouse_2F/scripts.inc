@@ -69,7 +69,7 @@ RivalsHouse_2F_EventScript_AddedRivalStarter::
 RivalsHouse_2F_EventScript_ReceivedRivalStarter::
 	bufferspeciesname STR_VAR_1, VAR_TEMP_1
 	removeobject VAR_LAST_TALKED
-	playfanfare MUS_OBTAIN_ITEM
+	playfanfare MUS_EVOLVED
 	message RivalsHouse_2F_Text_ReceivedRivalStarter
 	waitmessage
 	waitfanfare
