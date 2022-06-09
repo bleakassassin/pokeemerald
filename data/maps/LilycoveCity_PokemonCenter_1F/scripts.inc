@@ -7,22 +7,6 @@ LilycoveCity_PokemonCenter_1F_MapScripts::
 
 LilycoveCity_PokemonCenter_1F_OnTransition:
 	setrespawn HEAL_LOCATION_LILYCOVE_CITY
-	goto LilycoveCity_PokemonCenter_1F_EventScript_SetLilycoveLadyGfx
-	end
-
-@ SetLilycoveLadyGfx returns TRUE if its the Contest Lady
-LilycoveCity_PokemonCenter_1F_EventScript_SetLilycoveLadyGfx::
-	special SetLilycoveLadyGfx
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon::
-	setflag FLAG_HIDE_LILYCOVE_POKEMON_CENTER_CONTEST_LADY_MON
-	end
-
-LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon::
-	clearflag FLAG_HIDE_LILYCOVE_POKEMON_CENTER_CONTEST_LADY_MON
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_Nurse::

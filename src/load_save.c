@@ -4,6 +4,7 @@
 #include "event_data.h"
 #include "item.h"
 #include "item_menu.h"
+#include "lilycove_lady.h"
 #include "load_save.h"
 #include "main.h"
 #include "overworld.h"
@@ -355,6 +356,7 @@ void FixImportedSave(void)
         FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
 
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+        InitLilycoveLady();
 
         if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE )
         {

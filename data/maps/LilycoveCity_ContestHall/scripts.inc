@@ -28,7 +28,12 @@
 .set LOCALID_CUTE_AUDIENCE_2, 31
 
 LilycoveCity_ContestHall_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, LilycoveCity_ContestHall_OnTransition
 	.byte 0
+
+LilycoveCity_ContestHall_OnTransition:
+	special SetLilycoveLadyGfx
+	end
 
 LilycoveCity_ContestHall_EventScript_Boy1::
 	msgbox LilycoveCity_ContestHall_Text_TodayWonSmartnessContest, MSGBOX_NPC

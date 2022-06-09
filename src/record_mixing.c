@@ -72,7 +72,7 @@ struct PlayerRecordEmerald
     /* 0x10ac */ struct RecordMixingDaycareMail daycareMail;
     /* 0x1124 */ struct EmeraldBattleTowerRecord battleTowerRecord;
     /* 0x1210 */ u16 giftItem;
-    /* 0x1214 */ LilycoveLady lilycoveLady;
+    /* 0x1214 */ struct LilycoveLady lilycoveLady;
     /* 0x1254 */ struct Apprentice apprentices[2];
     /* 0x12dc */ struct PlayerHallRecords hallRecords;
     /* 0x1434 */ u8 padding[16];
@@ -92,7 +92,7 @@ static OldMan *sOldManSave;
 static struct DewfordTrend *sDewfordTrendsSave;
 static struct RecordMixingDaycareMail *sRecordMixMailSave;
 static void *sBattleTowerSave;
-static LilycoveLady *sLilycoveLadySave;
+static struct LilycoveLady *sLilycoveLadySave;
 static void *sApprenticesSave;
 static void *sBattleTowerSave_Duplicate;
 static u32 sRecordStructSize;
@@ -114,7 +114,7 @@ static u8 GetMultiplayerId_(void);
 static void *GetPlayerRecvBuffer(u8);
 static void ReceiveOldManData(OldMan *, size_t, u8);
 static void ReceiveBattleTowerData(void *, size_t, u8);
-static void ReceiveLilycoveLadyData(LilycoveLady *, size_t, u8);
+static void ReceiveLilycoveLadyData(struct LilycoveLady *, size_t, u8);
 static void CalculateDaycareMailRandSum(const u8 *);
 static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *, size_t, u8, TVShow *);
 static void ReceiveGiftItem(u16 *, u8 );
@@ -286,7 +286,7 @@ static void ReceiveExchangePacket(u32 multiplayerId)
 static void PrintTextOnRecordMixing(const u8 *src)
 {
     DrawDialogueFrame(0, FALSE);
-    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, src, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(0, gSaveBlock2Ptr->optionsCurrentFont, src, 0, 0, 0, NULL);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 
@@ -679,33 +679,42 @@ static void ReceiveBattleTowerData(void *records, size_t recordSize, u8 multipla
     PutNewBattleTowerRecord((void *)records + recordSize * multiplayerId);
 }
 
-static void ReceiveLilycoveLadyData(LilycoveLady *records, size_t recordSize, u8 multiplayerId)
+static void ReceiveLilycoveLadyData(struct LilycoveLady *records, size_t recordSize, u8 multiplayerId)
 {
-    LilycoveLady *lilycoveLady;
+    struct LilycoveLady *lilycoveSent;
+    struct LilycoveLady *lilycoveReceived;
     u32 mixIndices[MAX_LINK_PLAYERS];
 
     ShufflePlayerIndices(mixIndices);
-    memcpy((void *)records + recordSize * multiplayerId, sLilycoveLadySave, sizeof(LilycoveLady));
+    memcpy((void *)records + recordSize * multiplayerId, sLilycoveLadySave, sizeof(struct LilycoveLady));
 
-    if (GetLilycoveLadyId() == 0)
+    lilycoveSent = malloc(sizeof(*lilycoveSent));
+    if (lilycoveSent == NULL)
+        return;
+
+    memcpy(lilycoveSent, sLilycoveLadySave, sizeof(struct LilycoveLady));
+
+    lilycoveReceived = (void *)records + recordSize * mixIndices[multiplayerId];
+    if (lilycoveReceived->id == 0) // either vanilla save w/Quiz Lady or hack save is mixed over
     {
-        lilycoveLady = malloc(sizeof(*lilycoveLady));
-        if (lilycoveLady == NULL)
-            return;
-
-        memcpy(lilycoveLady, sLilycoveLadySave, sizeof(LilycoveLady));
+        if (lilycoveReceived->hackId == 1) // start of filler for vanilla saves, only 1 in hack
+            memcpy(sLilycoveLadySave, lilycoveReceived, sizeof(struct LilycoveLady)); // copy all data if from hack save
+        else
+            memcpy(sLilycoveLadySave, lilycoveReceived, 0x17 * sizeof(u16)); // copy only Quiz Lady data if from vanilla save w/o hack data
     }
     else
-    {
-        lilycoveLady = NULL;
-    }
+        InitLilycoveQuizLady(); // reset Quiz Lady data that was sent to another game if mixed vanilla game had Favor or Contest
 
-    memcpy(sLilycoveLadySave, (void *)records + recordSize * mixIndices[multiplayerId], sizeof(LilycoveLady));
-    ResetLilycoveLadyForRecordMix();
-    if (lilycoveLady != NULL)
+    if (lilycoveReceived->id == 1) // vanilla save w/Favor Lady is mixed over
     {
-        QuizLadyClearQuestionForRecordMix(lilycoveLady);
-        free(lilycoveLady);
+        memcpy(&sLilycoveLadySave->hackId, lilycoveReceived, 0x9 * sizeof(u16));; // copy size of Favor Lady to favor part of modded struct
+        sLilycoveLadySave->favorLanguage = lilycoveReceived->question[8]; // fit mixed vanilla language into vanilla unused byte
+    } // don't mix over vanilla save w/Contest Lady
+    ResetLilycoveLadyForRecordMix();
+    if (lilycoveSent != NULL)
+    {
+        QuizLadyClearQuestionForRecordMix(lilycoveSent);
+        free(lilycoveSent);
     }
 }
 

@@ -766,9 +766,9 @@ struct DayCare
     u8 stepCounter;
 };
 
-struct LilycoveLadyQuiz
+struct LilycoveLady
 {
-    /*0x000*/ u8 id;
+    /*0x000*/ u8 id; // Set to 0 for Quiz Lady so that it can only mix Quiz Lady to vanilla games
     /*0x001*/ u8 state;
     /*0x002*/ u16 question[QUIZ_QUESTION_LEN];
     /*0x014*/ u16 correctAnswer;
@@ -780,41 +780,25 @@ struct LilycoveLadyQuiz
     /*0x02b*/ u8 questionId;
     /*0x02c*/ u8 prevQuestionId;
     /*0x02d*/ u8 language;
+    /*0x02e*/ u8 hackId; // Start of Favor Lady data; only read by hack
+    /*0x02f*/ u8 favorState;
+    /*0x030*/ bool8 likedItem;
+    /*0x031*/ u8 numItemsGiven;
+    /*0x032*/ u8 favorPlayerName[PLAYER_NAME_LENGTH + 1];
+    /*0x03A*/ u8 favorId;
+    /*0x03B*/ u8 favorLanguage;
+    /*0x03C*/ u16 itemId;
+    /*0x03E*/ u16 bestItem;
 };
 
-struct LilycoveLadyFavor
+struct ContestLady
 {
-    /*0x000*/ u8 id;
-    /*0x001*/ u8 state;
-    /*0x002*/ bool8 likedItem;
-    /*0x003*/ u8 numItemsGiven;
-    /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x00c*/ u8 favorId;
-    /*0x00e*/ u16 itemId;
-    /*0x010*/ u16 bestItem;
-    /*0x012*/ u8 language;
+    /*0x000*/ bool8 givenPokeblock;
+    /*0x001*/ u8 category;
+    /*0x002*/ u8 numGoodPokeblocksGiven:4;
+    /*0x002*/ u8 numOtherPokeblocksGiven:4;
+    /*0x003*/ u8 maxSheen;
 };
-
-struct LilycoveLadyContest
-{
-    /*0x000*/ u8 id;
-    /*0x001*/ bool8 givenPokeblock;
-    /*0x002*/ u8 numGoodPokeblocksGiven;
-    /*0x003*/ u8 numOtherPokeblocksGiven;
-    /*0x004*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x00c*/ u8 maxSheen;
-    /*0x00d*/ u8 category;
-    /*0x00e*/ u8 language;
-};
-
-typedef union // 3b58
-{
-    struct LilycoveLadyQuiz quiz;
-    struct LilycoveLadyFavor favor;
-    struct LilycoveLadyContest contest;
-    u8 id;
-    u8 pad[0x40];
-} LilycoveLady;
 
 struct WaldaPhrase
 {
@@ -977,7 +961,8 @@ struct SaveBlock1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 registeredItemLastSelected:4; //max 16 items
               u8 registeredItemListCount:4;
-    /*0x9C3*/ u8 unused_9C3[5];
+    /*0x9C3*/ u8 unused_9C3[1];
+    /*0x9C4*/ struct ContestLady contestLady;
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
     /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
@@ -1034,7 +1019,7 @@ struct SaveBlock1
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
-    /*0x3B58*/ LilycoveLady lilycoveLady;
+    /*0x3B58*/ struct LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3D5A*/ u8 unused_3D5A[10];

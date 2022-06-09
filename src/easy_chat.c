@@ -1506,15 +1506,15 @@ void ShowEasyChatScreen(void)
         displayedPersonType = EASY_CHAT_PERSON_BOY;
         break;
     case EASY_CHAT_TYPE_QUIZ_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer;
+        words = &gSaveBlock1Ptr->lilycoveLady.playerAnswer;
         break;
     case EASY_CHAT_TYPE_QUIZ_QUESTION:
         return;
     case EASY_CHAT_TYPE_QUIZ_SET_QUESTION:
-        words = gSaveBlock1Ptr->lilycoveLady.quiz.question;
+        words = gSaveBlock1Ptr->lilycoveLady.question;
         break;
     case EASY_CHAT_TYPE_QUIZ_SET_ANSWER:
-        words = &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer;
+        words = &gSaveBlock1Ptr->lilycoveLady.correctAnswer;
         break;
     case EASY_CHAT_TYPE_APPRENTICE:
         words = gSaveBlock2Ptr->apprentices[0].speechWon;
@@ -1532,7 +1532,7 @@ void ShowEasyChatScreen(void)
 
 static void CB2_QuizLadyQuestion(void)
 {
-    LilycoveLady *lilycoveLady;
+    struct LilycoveLady *lilycoveLady;
 
     UpdatePaletteFade();
     switch (gMain.state)
@@ -1544,7 +1544,7 @@ static void CB2_QuizLadyQuestion(void)
         if (!gPaletteFade.active)
         {
             lilycoveLady = &gSaveBlock1Ptr->lilycoveLady;
-            lilycoveLady->quiz.playerAnswer = EC_EMPTY_WORD;
+            lilycoveLady->playerAnswer = EC_EMPTY_WORD;
             CleanupOverworldWindowsAndTilemaps();
             DoQuizQuestionEasyChatScreen();
         }
@@ -1588,7 +1588,7 @@ static void DoQuizAnswerEasyChatScreen(void)
 {
     DoEasyChatScreen(
         EASY_CHAT_TYPE_QUIZ_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.playerAnswer,
+        &gSaveBlock1Ptr->lilycoveLady.playerAnswer,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1596,7 +1596,7 @@ static void DoQuizAnswerEasyChatScreen(void)
 static void DoQuizQuestionEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_QUESTION,
-        gSaveBlock1Ptr->lilycoveLady.quiz.question,
+        gSaveBlock1Ptr->lilycoveLady.question,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1604,7 +1604,7 @@ static void DoQuizQuestionEasyChatScreen(void)
 static void DoQuizSetAnswerEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_ANSWER,
-        &gSaveBlock1Ptr->lilycoveLady.quiz.correctAnswer,
+        &gSaveBlock1Ptr->lilycoveLady.correctAnswer,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -1612,7 +1612,7 @@ static void DoQuizSetAnswerEasyChatScreen(void)
 static void DoQuizSetQuestionEasyChatScreen(void)
 {
     DoEasyChatScreen(EASY_CHAT_TYPE_QUIZ_SET_QUESTION,
-        gSaveBlock1Ptr->lilycoveLady.quiz.question,
+        gSaveBlock1Ptr->lilycoveLady.question,
         CB2_ReturnToFieldContinueScript,
         EASY_CHAT_PERSON_DISPLAY_NONE);
 }
@@ -2886,7 +2886,7 @@ static int IsQuizQuestionEmpty(void)
     saveBlock1 = gSaveBlock1Ptr;
     for (i = 0; i < QUIZ_QUESTION_LEN; i++)
     {
-        if (saveBlock1->lilycoveLady.quiz.question[i] != EC_EMPTY_WORD)
+        if (saveBlock1->lilycoveLady.question[i] != EC_EMPTY_WORD)
             return FALSE;
     }
 
@@ -2895,11 +2895,11 @@ static int IsQuizQuestionEmpty(void)
 
 static int IsQuizAnswerEmpty(void)
 {
-    struct LilycoveLadyQuiz *quiz;
+    struct LilycoveLady *quiz;
     if (sEasyChatScreen->type == EASY_CHAT_TYPE_QUIZ_SET_ANSWER)
         return IsCurrentPhraseEmpty();
 
-    quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    quiz = &gSaveBlock1Ptr->lilycoveLady;
     return quiz->correctAnswer == EC_EMPTY_WORD ? TRUE : FALSE;
 }
 
@@ -2910,9 +2910,9 @@ static void GetQuizTitle(u8 *dst)
     DynamicPlaceholderTextUtil_Reset();
 
     // Buffer author's name
-    if (StringLength(saveBlock1->lilycoveLady.quiz.playerName) != 0)
+    if (StringLength(saveBlock1->lilycoveLady.playerName) != 0)
     {
-        TVShowConvertInternationalString(name, saveBlock1->lilycoveLady.quiz.playerName, saveBlock1->lilycoveLady.quiz.language);
+        TVShowConvertInternationalString(name, saveBlock1->lilycoveLady.playerName, saveBlock1->lilycoveLady.language);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, name);
     }
     else
