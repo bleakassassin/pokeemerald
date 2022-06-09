@@ -206,8 +206,8 @@ LilycoveCity_ContestHall_EventScript_Pikachu::
 	return
 
 LilycoveCity_ContestHall_Text_ImTheContestLady:
-	.string "I'm the CONTEST LADY!\n"
-	.string "I sure do love CONTESTS!$"
+	.string "I'm the Contest Lady!\n"
+	.string "I sure do love contests!$"
 
 LilycoveCity_ContestHall_Text_ThankForPokeblock:
 	.string "Thanks for your {POKEBLOCK} before!$"
@@ -223,7 +223,7 @@ LilycoveCity_ContestHall_Text_DontHaveAPokeblockCase:
 	.string "Please, may I have one {POKEBLOCK}?\n"
 	.string "All I'm asking for is one!\p"
 	.string "…Oh, but…\n"
-	.string "Don't you have a {POKEBLOCK} CASE?\l"
+	.string "Don't you have a {POKEBLOCK} Case?\l"
 	.string "That's no good. Next time, then!$"
 
 LilycoveCity_ContestHall_Text_AskingForOnePokeblock:
@@ -251,7 +251,7 @@ LilycoveCity_ContestHall_Text_WhatACheapskate:
 LilycoveCity_ContestHall_Text_IllUseYourPokeblock:
 	.string "Yay!\n"
 	.string "Thank you!\p"
-	.string "I'll feed my POKéMON your {POKEBLOCK}\n"
+	.string "I'll feed my Pokémon your {POKEBLOCK}\n"
 	.string "right away.$"
 
 LilycoveCity_ContestHall_Text_NoChangeThanks:
@@ -271,35 +271,35 @@ LilycoveCity_ContestHall_Text_ReallyImprovedThanks:
 LilycoveCity_ContestHall_Text_ReadyToEnterContests:
 	.string "Hmm…\p"
 	.string "I think we may be ready to enter\n"
-	.string "some CONTESTS.\p"
+	.string "some contests.\p"
 	.string "If you see us in one somewhere,\n"
 	.string "I hope you'll cheer for us.$"
 
 LilycoveCity_ContestHall_Text_WeWonPleaseHaveMon:
 	.string "{PLAYER}! Guess what?\p"
 	.string "We did it!\n"
-	.string "We won our CONTEST!\p"
+	.string "We won our contest!\p"
 	.string "I hope you could see us. We dazzled\n"
-	.string "the crowd and impressed the JUDGE!\p"
+	.string "the crowd and impressed the Judge!\p"
 	.string "If it wasn't for your help, I don't know\n"
 	.string "where we'd be.\p"
 	.string "Please have this as my thank-you gift!\n"
 	.string "I've already settled on a full team for\l"
-	.string "future CONTESTS.\p"
+	.string "future contests.\p"
 	.string "I figured you'd like it!$"
 
 LilycoveCity_ContestHall_Text_Received3rdStarter:
 	.string "{PLAYER} received a {STR_VAR_1} from\n"
-	.string "the CONTEST LADY!$"
+	.string "the Contest Lady!$"
 
 LilycoveCity_ContestHall_Text_WellEnterMoreContests:
 	.string "I'm gonna fully commit to my buddies\n"
-	.string "and enter more CONTESTS with them!\p"
-	.string "I believe that we can become CONTEST\n"
+	.string "and enter more contest with them!\p"
+	.string "I believe that we can become contest\n"
 	.string "masters together!$"
 
 LilycoveCity_ContestHall_Text_WeDidntWin:
-	.string "Did you see our CONTEST?\n"
+	.string "Did you see our contest?\n"
 	.string "We did our best, but it wasn't enough…\p"
 	.string "It was rough.\n"
 	.string "I hope we didn't disappoint you…\p"
@@ -307,7 +307,7 @@ LilycoveCity_ContestHall_Text_WeDidntWin:
 	.string "{STR_VAR_1} and I have what it takes!$"
 
 LilycoveCity_ContestHall_Text_WeLostBadly:
-	.string "I hope you didn't see our CONTEST.\n"
+	.string "I hope you didn't see our contest.\n"
 	.string "We lost… badly.\p"
 	.string "It was probably the worst feeling\n"
 	.string "I've ever had in my life…\p"

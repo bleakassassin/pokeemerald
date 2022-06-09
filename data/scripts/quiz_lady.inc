@@ -147,7 +147,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_FinishMakingQuiz::
 	end
 
 LilycoveCity_DepartmentStore_1F_Text_ImTheQuizLady:
-	.string "I'm the QUIZ LADY!\n"
+	.string "I'm the Quiz Lady!\n"
 	.string "I love quizzes!$"
 
 LilycoveCity_DepartmentStore_1F_Text_WaitingToTakeYourQuiz:
@@ -198,7 +198,7 @@ LilycoveCity_DepartmentStore_1F_Text_YouGotItRightYouveWonPersonsPrize:
 	.string "{STR_VAR_1}!$"
 
 LilycoveCity_DepartmentStore_1F_Text_YourBagIsFilledUp:
-	.string "Oh? Your BAG is filled up!\n"
+	.string "Oh? Your Bag is filled up!\n"
 	.string "Come see me when you have room.$"
 
 LilycoveCity_DepartmentStore_1F_Text_WrongTheCorrectAnswerIs:
