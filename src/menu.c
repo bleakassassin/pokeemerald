@@ -475,7 +475,7 @@ void DisplayYesNoMenuWithDefault(u8 initialCursorPos)
 u32 GetPlayerTextSpeed(void)
 {
     if (gTextFlags.forceMidTextSpeed && gSaveBlock2Ptr->optionsTextSpeed == OPTIONS_TEXT_SPEED_FAST)
-        return OPTIONS_TEXT_SPEED_MID;
+        return OPTIONS_TEXT_SPEED_SLOW;
     return gSaveBlock2Ptr->optionsTextSpeed;
 }
 
@@ -1668,7 +1668,7 @@ void PrintMenuGridTable(u8 windowId, u8 optionWidth, u8 columns, u8 rows, const 
     for (i = 0; i < rows; i++)
     {
         for (j = 0; j < columns; j++)
-            AddTextPrinterParameterized(windowId, 1, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
+            AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, menuActions[(i * columns) + j].text, (optionWidth * j) + 8, (i * 16), TEXT_SKIP_DRAW, NULL);
     }
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }

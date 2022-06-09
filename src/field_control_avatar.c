@@ -404,7 +404,7 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_TV;
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
         return EventScript_PC;
-    if (MetatileBehavior_IsClosedSootopolisDoor(metatileBehavior) == TRUE)
+    if (MetatileBehavior_IsClosedSootopolisDoor(metatileBehavior, direction) == TRUE)
         return EventScript_ClosedSootopolisDoor;
     if (MetatileBehavior_IsSkyPillarClosedDoor(metatileBehavior) == TRUE)
         return SkyPillar_Outside_EventScript_ClosedDoor;
@@ -1040,7 +1040,7 @@ extern const u8 EventScript_ChangeAutoRun[];
 static bool8 EnableAutoRun(void)
 {
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ON_FOOT))
-        return FALSE;   //auto run unusable until you get running shoes
+        return FALSE;
 
     PlaySE(SE_RG_CARD_FLIPPING);
     if (gSaveBlock2Ptr->autoRun)

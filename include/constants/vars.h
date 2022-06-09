@@ -155,7 +155,7 @@
 #define VAR_CONTEST_TYPE                     0x4088
 #define VAR_SECRET_BASE_INITIALIZED          0x4089
 #define VAR_CONTEST_PRIZE_PICKUP             0x408A
-#define VAR_UNUSED_0x408B                    0x408B // Unused Var
+#define VAR_CONTEST_LADY_STATE               0x408B // 0: normal, 1: won contest, 2: lost contest, 3: lost contest badly, 4: can't put on air, 5: gave 3rd starter mon
 #define VAR_LITTLEROOT_HOUSES_STATE_BRENDAN  0x408C
 #define VAR_LITTLEROOT_RIVAL_STATE           0x408D
 #define VAR_BOARD_BRINEY_BOAT_STATE          0x408E

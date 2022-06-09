@@ -60,10 +60,7 @@ MossdeepCity_EventScript_Woman::
 	faceplayer
 	goto_if_eq VAR_JIRACHI_WISH_STATE, 4, MossdeepCity_EventScript_WomanKeepMakingWishes
 	goto_if_eq VAR_JIRACHI_WISH_STATE, 3, MossdeepCity_EventScript_ReceiveJirachi
-	dotimebasedevents
-	specialvar VAR_RESULT, GetWeekCount
-	goto_if_gt VAR_RESULT, VAR_WEEK_TOTAL_WHEN_WISH, MossdeepCity_EventScript_WomanAboutToLaunch
-	goto_if_eq VAR_JIRACHI_WISH_STATE, 2, MossdeepCity_EventScript_WomanMakeWish
+	goto_if_eq VAR_JIRACHI_WISH_STATE, 2, MossdeepCity_EventScript_WomanCheckWeek
 	setvar VAR_JIRACHI_WISH_STATE, 1
 MossdeepCity_EventScript_WomanMakeWish::
 	msgbox MossdeepCity_Text_SpecialSpaceCenterRock, MSGBOX_DEFAULT
@@ -107,6 +104,12 @@ MossdeepCity_EventScript_ReceivedJirachiFanfare::
 	bufferspeciesname STR_VAR_1, SPECIES_JIRACHI
 	return
 
+MossdeepCity_EventScript_WomanCheckWeek::
+	dotimebasedevents
+	specialvar VAR_RESULT, GetWeekCount
+	goto_if_gt VAR_RESULT, VAR_WEEK_TOTAL_WHEN_WISH, MossdeepCity_EventScript_WomanAboutToLaunch
+	goto MossdeepCity_EventScript_WomanMakeWish
+
 MossdeepCity_EventScript_WomanAboutToLaunch::
 	msgbox MossdeepCity_Text_AboutToLaunch, MSGBOX_DEFAULT
 	release
@@ -115,10 +118,7 @@ MossdeepCity_EventScript_WomanAboutToLaunch::
 MossdeepCity_EventScript_WhiteRock::
 	lock
 	goto_if_ge VAR_JIRACHI_WISH_STATE, 3, MossdeepCity_EventScript_WhiteRockDent
-	dotimebasedevents
-	specialvar VAR_RESULT, GetWeekCount
-	goto_if_gt VAR_RESULT, VAR_WEEK_TOTAL_WHEN_WISH, MossdeepCity_EventScript_WhiteRockTag
-	goto_if_eq VAR_JIRACHI_WISH_STATE, 2, MossdeepCity_EventScript_WaitAndSee
+	goto_if_eq VAR_JIRACHI_WISH_STATE, 2, MossdeepCity_EventScript_RockCheckWeek
 	goto_if_eq VAR_JIRACHI_WISH_STATE, 1, MossdeepCity_EventScript_WhiteRockWish
 MossdeepCity_EventScript_WhiteRockDefault::
 	msgbox MossdeepCity_Text_ItsAWhiteRock, MSGBOX_DEFAULT
@@ -136,7 +136,10 @@ MossdeepCity_EventScript_WhiteRockWish::
 	release
 	end
 
-MossdeepCity_EventScript_WaitAndSee::
+MossdeepCity_EventScript_RockCheckWeek::
+	dotimebasedevents
+	specialvar VAR_RESULT, GetWeekCount
+	goto_if_gt VAR_RESULT, VAR_WEEK_TOTAL_WHEN_WISH, MossdeepCity_EventScript_WhiteRockTag
 	msgbox MossdeepCity_Text_SeeIfItComesTrueShort, MSGBOX_DEFAULT
 	release
 	end

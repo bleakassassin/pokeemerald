@@ -333,7 +333,7 @@
       "elevation": 3,
       "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger0"
+      "script": "RustboroCity_EventScript_StolenGoodsTrigger"
     },
     {
       "type": "trigger",
@@ -342,7 +342,7 @@
       "elevation": 3,
       "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger1"
+      "script": "RustboroCity_EventScript_StolenGoodsTrigger"
     },
     {
       "type": "trigger",
@@ -351,7 +351,7 @@
       "elevation": 3,
       "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger2"
+      "script": "RustboroCity_EventScript_StolenGoodsTrigger"
     },
     {
       "type": "trigger",
@@ -360,7 +360,7 @@
       "elevation": 3,
       "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger3"
+      "script": "RustboroCity_EventScript_StolenGoodsTrigger"
     },
     {
       "type": "trigger",
@@ -369,7 +369,7 @@
       "elevation": 3,
       "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "1",
-      "script": "RustboroCity_EventScript_StolenGoodsTrigger4"
+      "script": "RustboroCity_EventScript_StolenGoodsTrigger"
     },
     {
       "type": "trigger",
@@ -514,6 +514,42 @@
       "var": "VAR_RUSTBORO_CITY_STATE",
       "var_value": "7",
       "script": "RustboroCity_EventScript_RivalTrigger7"
+    },
+    {
+      "type": "trigger",
+      "x": 23,
+      "y": 25,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "1",
+      "script": "RustboroCity_EventScript_SkipStolenGoods"
+    },
+    {
+      "type": "trigger",
+      "x": 21,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "1",
+      "script": "RustboroCity_EventScript_SkipStolenGoods"
+    },
+    {
+      "type": "trigger",
+      "x": 20,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "1",
+      "script": "RustboroCity_EventScript_SkipStolenGoods"
+    },
+    {
+      "type": "trigger",
+      "x": 18,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_RUSTBORO_CITY_STATE",
+      "var_value": "1",
+      "script": "RustboroCity_EventScript_SkipStolenGoods"
     }
   ],
   "bg_events": [

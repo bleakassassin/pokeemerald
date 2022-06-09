@@ -5,6 +5,7 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "field_weather.h"
+#include "metatile_behavior.h"
 #include "pokemon.h"
 #include "script.h"
 #include "script_movement.h"
@@ -19,9 +20,6 @@
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 #include "constants/trainer_types.h"
-
-extern const struct SpritePalette sObjectEventSpritePalettes[];
-extern const struct SpritePalette gObjectEventPal_Npc1;
 
 // this file's functions
 static u8 CheckTrainer(u8 objectEventId);
@@ -183,7 +181,7 @@ static const struct SpriteTemplate sSpriteTemplate_ExclamationQuestionMark =
 static const struct SpriteTemplate sSpriteTemplate_HeartIcon =
 {
     .tileTag = TAG_NONE,
-    .paletteTag = FLDEFF_PAL_TAG_GENERAL_0,
+    .paletteTag = 0x1103,   ////LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_NPC_1)
     .oam = &sOamData_Icons,
     .anims = sSpriteAnimTable_Icons,
     .images = sSpriteImageTable_HeartIcon,
@@ -377,8 +375,14 @@ static u8 CheckPathBetweenTrainerAndPlayer(struct ObjectEvent *trainerObj, u8 ap
     u8 rangeX, rangeY;
     u8 i;
     u8 collision;
+    u8 tileBehavior;
 
     if (approachDistance == 0)
+        return 0;
+
+    // Check if riding westward current tiles to stop two swimmers on Route 134 from trying to battle
+    tileBehavior = gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior;
+    if (MetatileBehavior_IsWestwardCurrent(tileBehavior))
         return 0;
 
     x = trainerObj->currentCoords.x;
@@ -727,7 +731,7 @@ u8 FldEff_HeartIcon(void)
 {
     u8 spriteId;
 
-    LoadSpritePalette(&gObjectEventPal_Npc1);
+    LoadObjectEventPalette(0x1103); //LoadObjectEventPalette(OBJ_EVENT_PAL_TAG_NPC_1)
     spriteId = CreateSpriteAtEnd(&sSpriteTemplate_HeartIcon, 0, 0, 0x52);
 
     if (spriteId != MAX_SPRITES)
@@ -735,7 +739,6 @@ u8 FldEff_HeartIcon(void)
         struct Sprite *sprite = &gSprites[spriteId];
 
         SetIconSpriteData(sprite, FLDEFF_HEART_ICON, 0);
-        sprite->oam.paletteNum = 5;
     }
 
     return 0;

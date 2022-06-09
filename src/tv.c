@@ -1640,15 +1640,18 @@ void PutLilycoveContestLadyShowOnTheAir(void)
     if (gSpecialVar_Result != TRUE)
     {
         show = &gSaveBlock1Ptr->tvShows[sCurTVShowSlot];
-        BufferContestLadyLanguage(&show->contestLady.language);
+        show->contestLady.language = GAME_LANGUAGE;
         show->contestLady.pokemonNameLanguage = GAME_LANGUAGE;
         show->contestLady.kind = TVSHOW_LILYCOVE_CONTEST_LADY;
         show->contestLady.active = TRUE;
-        BufferContestLadyPlayerName(show->contestLady.playerName);
+        StringCopy(show->contestLady.playerName, gSaveBlock2Ptr->playerName);
         BufferContestLadyMonName(&show->contestLady.contestCategory, show->contestLady.nickname);
         show->contestLady.pokeblockState = GetContestLadyPokeblockState();
         StorePlayerIdInNormalShow(show);
+        VarSet(VAR_CONTEST_LADY_STATE, CONTESTLADYLIVE_STATE_INTRO);
     }
+    else
+        VarSet(VAR_CONTEST_LADY_STATE, CONTESTLADYLIVE_STATE_CANT_AIR);
 }
 
 static void InterviewAfter_FanClubLetter(void)
@@ -6848,7 +6851,10 @@ static void DoTVShowLilycoveContestLady(void)
         if (show->contestLady.pokeblockState == CONTEST_LADY_GOOD)
             sTVShowState = CONTESTLADYLIVE_STATE_WON;
         else if (show->contestLady.pokeblockState == CONTEST_LADY_NORMAL)
+        {
             sTVShowState = CONTESTLADYLIVE_STATE_LOST;
+            LowerContesetLadyOtherBlockCount();
+        }
         else // CONTEST_LADY_BAD
             sTVShowState = CONTESTLADYLIVE_STATE_LOST_BADLY;
         break;
@@ -6857,10 +6863,13 @@ static void DoTVShowLilycoveContestLady(void)
         TVShowConvertInternationalString(gStringVar3, show->contestLady.playerName, show->contestLady.language);
     case CONTESTLADYLIVE_STATE_LOST_BADLY:
         TVShowConvertInternationalString(gStringVar2, show->contestLady.nickname, show->contestLady.pokemonNameLanguage);
+        VarSet(VAR_CONTEST_LADY_STATE, sTVShowState);
         TVShowDone();
         break;
     }
     ShowFieldMessage(sTVLilycoveContestLadyTextGroup[state]);
+    if (VarGet(VAR_CONTEST_LADY_STATE) == CONTESTLADYLIVE_STATE_LOST_BADLY)
+        ResetContestLadyContestData();
 }
 
 static void TVShowDone(void)

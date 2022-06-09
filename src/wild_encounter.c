@@ -22,6 +22,7 @@
 #include "constants/game_stat.h"
 #include "constants/items.h"
 #include "constants/layouts.h"
+#include "constants/map_types.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
 
@@ -60,6 +61,9 @@ static bool8 IsAbilityAllowingEncounter(u8 level);
 
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
+EWRAM_DATA u8 gChainEncounterStreak = 0;
+EWRAM_DATA u16 gLastWildSpecies = SPECIES_NONE;
+EWRAM_DATA bool8 gIsFishingEncounter = FALSE;
 
 #include "data/wild_encounters.h"
 
@@ -386,9 +390,30 @@ static u8 PickWildMonNature(void)
 static void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm;
+    s16 x, y;
 
+    PlayerGetDestCoords(&x, &y);
     ZeroEnemyPartyMons();
     checkCuteCharm = TRUE;
+
+    if (species == gLastWildSpecies)
+    {
+        if (gMapHeader.mapType == MAP_TYPE_ROUTE && (MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == TRUE))
+        {
+            if (gChainEncounterStreak <= 40)
+                gChainEncounterStreak++;
+        }
+        else if (gIsFishingEncounter == TRUE)
+        {
+            if (gChainEncounterStreak <= 20)
+                gChainEncounterStreak += 2;
+        }
+    }
+    else
+    {
+        gChainEncounterStreak = 0;
+        gLastWildSpecies = species;
+    }
 
     switch (gBaseStats[species].genderRatio)
     {
@@ -425,7 +450,9 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
 {
     u8 wildMonIndex = 0;
     u8 level;
+    s16 x, y;
 
+    PlayerGetDestCoords(&x, &y);
     switch (area)
     {
     case WILD_AREA_LAND:
@@ -796,6 +823,7 @@ void FishingWildEncounter(u8 rod)
 {
     u16 species;
 
+    gIsFishingEncounter = TRUE;
     if (CheckFeebas() == TRUE)
     {
         u8 level = ChooseWildMonLevel(&sWildFeebas);

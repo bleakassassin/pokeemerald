@@ -4,14 +4,15 @@
 u8 GetLilycoveLadyId(void);
 void InitLilycoveLady(void);
 void ResetLilycoveLadyForRecordMix(void);
+void InitLilycoveQuizLady(void);
 void FieldCallback_FavorLadyEnableScriptContexts(void);
 void FieldCallback_QuizLadyEnableScriptContexts(void);
-void QuizLadyClearQuestionForRecordMix(const LilycoveLady *lilycoveLady);
+void QuizLadyClearQuestionForRecordMix(struct LilycoveLady *lilycoveLady);
 bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock);
 void BufferContestLadyMonName(u8 *dest1, u8 *dest2);
-void BufferContestLadyPlayerName(u8 *dest);
-void BufferContestLadyLanguage(u8 *dest);
 void BufferContestName(u8 *dest, u8 category);
 u8 GetContestLadyPokeblockState(void);
+void ResetContestLadyContestData(void);
+void LowerContesetLadyOtherBlockCount(void);
 
 #endif //GUARD_LILYCOVE_LADY_H

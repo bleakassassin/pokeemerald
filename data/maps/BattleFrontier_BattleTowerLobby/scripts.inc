@@ -411,7 +411,7 @@ BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeLinkMultisChallenge::
 	special LoadPlayerParty
 	closemessage
 	delay 2
-	tower_save 0
+	tower_save CHALLENGE_STATUS_LINKING
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_0, 255
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed

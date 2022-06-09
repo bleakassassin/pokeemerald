@@ -279,15 +279,14 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_WonDoubleBattle::
 
 BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom::
 	lockall
-	message BattleFrontier_BattlePikeRoomNormal_Text_WatchOut
 	applymovement LOCALID_OBJ_1, BattleFrontier_BattlePikeRoomNormal_Movement_MonApproachPlayer
+	msgbox BattleFrontier_BattlePikeRoomNormal_Text_WatchOut, MSGBOX_DEFAULT
 	waitmovement 0
 	pike_getstatusmon
 	copyvar VAR_0x8004, VAR_RESULT
 	call_if_eq VAR_0x8004, PIKE_STATUSMON_KIRLIA, BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack
 	call_if_eq VAR_0x8004, PIKE_STATUSMON_DUSCLOPS, BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack
 	msgbox BattleFrontier_BattlePikeRoomNormal_Text_AttacksWhenStartled, MSGBOX_DEFAULT
-	closemessage
 	releaseall
 	end
 

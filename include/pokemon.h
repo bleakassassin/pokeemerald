@@ -363,6 +363,7 @@ u8 GetSecretBaseTrainerClass(void);
 bool8 IsPlayerPartyAndPokemonStorageFull(void);
 bool8 IsPokemonStorageFull(void);
 void GetSpeciesName(u8 *name, u16 species);
+void GetTrainerName(u8 *name, u16 species);
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex);
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);
 void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex);
@@ -444,6 +445,6 @@ void DestroyMonSpritesGfxManager(u8 managerId);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
 bool8 CheckSplitPhysical(u8 moveType);
 bool8 CheckSplitSpecial(u8 moveType);
-u16 GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(u8 outfitId, u8 playerGender);
+u16 PlayerOutfitAndGenderToFrontTrainerPic(u8 outfitId, u8 playerGender);
 
 #endif // GUARD_POKEMON_H

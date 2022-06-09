@@ -35,6 +35,7 @@
 #include "text.h"
 #include "trainer_hill.h"
 #include "util.h"
+#include "wild_encounter.h"
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
@@ -44,6 +45,7 @@
 #include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/moves.h"
+#include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
@@ -2144,7 +2146,7 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
     .callback = SpriteCallbackDummy,
 };
 
-#define RUBY_POKEMON      4
+#define RUBY_POKEMON      5
 #define SAPPHIRE_POKEMON  1
 #define FIRERED_POKEMON  56
 #define LEAFGREEN_POKEMON 8
@@ -2154,7 +2156,8 @@ const u16 sRubyPokemon[] =
     SPECIES_MEDITITE,
     SPECIES_MEDICHAM,
     SPECIES_ROSELIA,
-    SPECIES_ZANGOOSE
+    SPECIES_ZANGOOSE,
+    SPECIES_JIRACHI
 };
 
 const u16 sSapphirePokemon[] =
@@ -2232,6 +2235,8 @@ const u16 sLeafGreenPokemon[] =
     SPECIES_MANTINE
 };
 
+static const u8 sText_OT_Wishmkr[] = _("WISHMKR");
+
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
     u8 *raw = (u8 *)boxMon;
@@ -2290,7 +2295,23 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 value;
     u16 checksum;
     u32 shinyValue;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    bool8 otGender;
+    u32 otId;
+    u8 metLocation;
+    u8 i = 0;
+    u8 shinyRolls = 2;
     u8 version;
+
+    otGender = gSaveBlock2Ptr->playerGender;
+    otId = gSaveBlock2Ptr->playerTrainerId[0]
+          | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+          | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+          | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+    metLocation = GetCurrentRegionMapSectionId();
+
+    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+        shinyRolls += 4;
 
     if (ShouldForceGameRuby(species))
         version = VERSION_RUBY;
@@ -2305,10 +2326,52 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
     ZeroBoxMonData(boxMon);
 
-    if (hasFixedPersonality)
+    if (species == SPECIES_JIRACHI) //Replicate Wishmaker Jirachi from US Colosseum Bonus Disc
+    {
+        otId = 0x00004E4Bu; //20043:00000
+        otGender = MALE;
+        metLocation = METLOC_FATEFUL_ENCOUNTER;
+        do
+        {
+            if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE)
+            {
+                do
+                {
+                    SeedRng(gRngValue >> 16);
+                    personality = Random() << 16 | Random();
+                } while (personality % NUM_NATURES != GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUM_NATURES);
+            }
+            else
+            {
+                SeedRng(gRngValue >> 16);
+                personality = Random() << 16 | Random();
+            }
+
+            shinyValue = GET_SHINY_VALUE(otId, personality);
+            i++;
+        } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
+    }
+    else if (hasFixedPersonality)
         personality = fixedPersonality;
     else
-        personality = Random32();
+    {
+        do
+        {
+            if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE)
+            {
+                do
+                {
+                    personality = Random32();
+                } while (personality % NUM_NATURES != GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUM_NATURES);
+            }
+            else
+                personality = Random32();
+            shinyValue = GET_SHINY_VALUE(otId, personality);
+            i++;
+        } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
+    }
+
+    SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
 
     // Determine original trainer ID
     if (otIdType == OT_ID_RANDOM_NO_SHINY)
@@ -2316,55 +2379,34 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         do
         {
             // Choose random OT IDs until one that results in a non-shiny Pokémon
-            value = Random32();
-            shinyValue = GET_SHINY_VALUE(value, personality);
+            otId = Random32();
+            shinyValue = GET_SHINY_VALUE(otId, personality);
         } while (shinyValue < SHINY_ODDS);
     }
     else if (otIdType == OT_ID_PRESET)
     {
-        value = fixedOtId;
-    }
-    else // Player is the OT
-    {
-        u16 j = 0;
-        u16 shinyRolls = 2;
-
-        if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
-            shinyRolls += 4;
-
-        value = gSaveBlock2Ptr->playerTrainerId[0]
-              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-
-        do
-        {
-            personality = Random32();
-            shinyValue = GET_SHINY_VALUE(value, personality);
-            j++;
-        } while (shinyValue >= SHINY_ODDS && j < shinyRolls);
+        otId = fixedOtId;
     }
     
-    SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
-    SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
+    SetBoxMonData(boxMon, MON_DATA_OT_ID, &otId);
 
     checksum = CalculateBoxMonChecksum(boxMon);
     SetBoxMonData(boxMon, MON_DATA_CHECKSUM, &checksum);
     EncryptBoxMon(boxMon);
     GetSpeciesName(speciesName, species);
+    GetTrainerName(otName, species);
     SetBoxMonData(boxMon, MON_DATA_NICKNAME, speciesName);
     SetBoxMonData(boxMon, MON_DATA_LANGUAGE, &gGameLanguage);
-    SetBoxMonData(boxMon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
+    SetBoxMonData(boxMon, MON_DATA_OT_NAME, otName);
     SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gBaseStats[species].growthRate][level]);
     SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gBaseStats[species].friendship);
-    value = GetCurrentRegionMapSectionId();
-    SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, &value);
+    SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, &metLocation);
     SetBoxMonData(boxMon, MON_DATA_MET_LEVEL, &level);
     SetBoxMonData(boxMon, MON_DATA_MET_GAME, &version);
     value = ITEM_POKE_BALL;
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
-    SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
+    SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &otGender);
 
     if (fixedIV < USE_RANDOM_IVS)
     {
@@ -2409,12 +2451,29 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
 {
     u32 personality;
+    u32 otId;
+    u32 shinyValue;
+    u8 i = 0;
+    u8 shinyRolls = 2;
+
+    otId = gSaveBlock2Ptr->playerTrainerId[0]
+          | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+          | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+          | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+        shinyRolls += 4;
+    shinyRolls += (gChainEncounterStreak * 2);
 
     do
     {
-        personality = Random32();
-    }
-    while (nature != GetNatureFromPersonality(personality));
+        do
+        {
+            personality = Random32();
+        } while (nature != GetNatureFromPersonality(personality));
+        shinyValue = GET_SHINY_VALUE(otId, personality);
+        i++;
+    } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
 
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
 }
@@ -2422,6 +2481,19 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
 void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
 {
     u32 personality;
+    u32 otId;
+    u32 shinyValue;
+    u8 i = 0;
+    u8 shinyRolls = 2;
+
+    otId = gSaveBlock2Ptr->playerTrainerId[0]
+          | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+          | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+          | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+
+    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+        shinyRolls += 4;
+    shinyRolls += (gChainEncounterStreak * 2);
 
     if ((u8)(unownLetter - 1) < NUM_UNOWN_FORMS)
     {
@@ -2440,10 +2512,13 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
     {
         do
         {
-            personality = Random32();
-        }
-        while (nature != GetNatureFromPersonality(personality)
-            || gender != GetGenderFromSpeciesAndPersonality(species, personality));
+            do
+            {
+                personality = Random32();
+            } while (nature != GetNatureFromPersonality(personality) || gender != GetGenderFromSpeciesAndPersonality(species, personality));
+        shinyValue = GET_SHINY_VALUE(otId, personality);
+        i++;
+        } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
     }
 
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
@@ -2454,13 +2529,18 @@ void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
 {
     u32 personality;
     u32 otId;
+    u32 shinyValue;
+
+    otId = Random32();
 
     do
     {
-        otId = Random32();
         personality = Random32();
+        shinyValue = GET_SHINY_VALUE(otId, personality);
     }
-    while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE);
+    while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE || shinyValue < SHINY_ODDS
+        || personality % NUM_NATURES == NATURE_LONELY || personality % NUM_NATURES == NATURE_HASTY
+        || personality % NUM_NATURES == NATURE_MILD || personality % NUM_NATURES == NATURE_GENTLE);
     CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId);
 }
 
@@ -4527,10 +4607,28 @@ void CopyMon(void *dest, void *src, size_t size)
 u8 GiveMonToPlayer(struct Pokemon *mon)
 {
     s32 i;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    bool8 otGender;
+    u32 otId;
+    s16 species;
 
-    SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
-    SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
-    SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
+    otGender = gSaveBlock2Ptr->playerGender;
+    otId = gSaveBlock2Ptr->playerTrainerId[0]
+          | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+          | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+          | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+    species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+
+    if (species == SPECIES_JIRACHI) //Replicate Wishmaker Jirachi from US Colosseum Bonus Disc
+    {
+        otGender = MALE;
+        otId = 0x00004E4Bu; //20043:00000
+    }
+
+    GetTrainerName(otName, species);
+    SetMonData(mon, MON_DATA_OT_NAME, otName);
+    SetMonData(mon, MON_DATA_OT_GENDER, &otGender);
+    SetMonData(mon, MON_DATA_OT_ID, &otId);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -4741,6 +4839,24 @@ void GetSpeciesName(u8 *name, u16 species)
             name[i] = gSpeciesNames[SPECIES_NONE][i];
         else
             name[i] = gSpeciesNames[species][i];
+
+        if (name[i] == EOS)
+            break;
+    }
+
+    name[i] = EOS;
+}
+
+void GetTrainerName(u8 *name, u16 species)
+{
+    s8 i;
+
+    for (i = 0; i <= PLAYER_NAME_LENGTH; i++)
+    {
+        if (species == SPECIES_JIRACHI)
+            name[i] = sText_OT_Wishmkr[i];
+        else
+            name[i] = gSaveBlock2Ptr->playerName[i];
 
         if (name[i] == EOS)
             break;
@@ -7021,7 +7137,7 @@ u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
         return FacilityClassToPicIndex(FACILITY_CLASS_BRENDAN);
 }
 
-u16 GetTrainerFrontSpriteBasedOnPlayerOutfitAndGender(u8 outfitId, u8 playerGender)
+u16 PlayerOutfitAndGenderToFrontTrainerPic(u8 outfitId, u8 playerGender)
 {
     u16 trainerPic;
 

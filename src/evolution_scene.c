@@ -816,8 +816,7 @@ static void Task_EvolutionScene(u8 taskId)
 
             DestroyTask(taskId);
             FreeMonSpritesGfx();
-            Free(sEvoStructPtr);
-            sEvoStructPtr = NULL;
+            FREE_AND_SET_NULL(sEvoStructPtr);
             FreeAllWindowBuffers();
             SetMainCallback2(gCB2_AfterEvolution);
         }
@@ -945,7 +944,7 @@ static void Task_EvolutionScene(u8 taskId)
                         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
                 }
             }
-            if (JOY_NEW(B_BUTTON))
+            else if (JOY_NEW(B_BUTTON))
             {
                 // Equivalent to selecting NO
                 HandleBattleWindow(0x18, 8, 0x1D, 0xD, WINDOW_CLEAR);
@@ -1151,19 +1150,15 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_EVO_SOUND:
         if (!gTasks[sEvoGraphicsTaskId].isActive)
         {
-            PlaySE(SE_EXP);
             gTasks[taskId].tState++;
         }
         break;
     case T_EVOSTATE_EVO_MON_ANIM:
-        if (IsSEPlaying())
-        {
-            // Restore bg, do mon anim/cry
-            Free(sBgAnimPal);
-            EvoScene_DoMonAnimAndCry(sEvoStructPtr->postEvoSpriteId, gTasks[taskId].tPostEvoSpecies);
-            memcpy(&gPlttBufferUnfaded[0x20], sEvoStructPtr->savedPalette, sizeof(sEvoStructPtr->savedPalette));
-            gTasks[taskId].tState++;
-        }
+        // Restore bg, do mon anim/cry
+        Free(sBgAnimPal);
+        EvoScene_DoMonAnimAndCry(sEvoStructPtr->postEvoSpriteId, gTasks[taskId].tPostEvoSpecies);
+        memcpy(&gPlttBufferUnfaded[0x20], sEvoStructPtr->savedPalette, sizeof(sEvoStructPtr->savedPalette));
+        gTasks[taskId].tState++;
         break;
     case T_EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
@@ -1213,8 +1208,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         if (!IsTextPrinterActive(0))
         {
             DestroyTask(taskId);
-            Free(sEvoStructPtr);
-            sEvoStructPtr = NULL;
+            FREE_AND_SET_NULL(sEvoStructPtr);
             gTextFlags.useAlternateDownArrow = 0;
             SetMainCallback2(gCB2_AfterEvolution);
         }
