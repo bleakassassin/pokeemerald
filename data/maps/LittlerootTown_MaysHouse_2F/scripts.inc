@@ -70,7 +70,7 @@ RivalsHouse_2F_EventScript_ReceivedRivalStarter::
 	bufferspeciesname STR_VAR_1, VAR_TEMP_1
 	removeobject VAR_LAST_TALKED
 	playfanfare MUS_EVOLVED
-	message RivalsHouse_2F_Text_ReceivedRivalStarter
+	message gText_ReceivedPokemon
 	waitmessage
 	waitfanfare
 	return
@@ -316,9 +316,6 @@ RivalsHouse_2F_Text_ItsRivalsPokeBall:
 	
 RivalsHouse_2F_Text_LeaveRightWhereItIs:
 	.string "Better leave it right where it is.$"
-	
-RivalsHouse_2F_Text_ReceivedRivalStarter:
-	.string "{PLAYER} received a {STR_VAR_1}!$"
 
 RivalsHouse_2F_Text_MayJustCheckingMyPokedex:
 	.string "MAY: {PLAYER}{KUN}!\p"

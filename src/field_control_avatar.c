@@ -671,7 +671,9 @@ static bool8 UpdatePoisonStepCounter(void)
 {
     u16 *ptr;
 
-    if ((GetLocationMusic(&gSaveBlock1Ptr->location) == MUS_B_PIKE && gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY) || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
+    if ((GetLocationMusic(&gSaveBlock1Ptr->location) == MUS_B_PIKE && gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY)
+        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR
+        || InTrainerHillChallenge())
     {
         ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
         (*ptr)++;

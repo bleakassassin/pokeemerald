@@ -1289,11 +1289,11 @@
 #define FLAG_UNUSED_0x4DA                                           0x4DA // Unused Flag
 #define FLAG_UNUSED_0x4DB                                           0x4DB // Unused Flag
 #define FLAG_UNUSED_0x4DC                                           0x4DC // Unused Flag
-#define FLAG_UNUSED_0x4DD                                           0x4DD // Unused Flag
-#define FLAG_UNUSED_0x4DE                                           0x4DE // Unused Flag
-#define FLAG_UNUSED_0x4DF                                           0x4DF // Unused Flag
-#define FLAG_UNUSED_0x4E0                                           0x4E0 // Unused Flag
-#define FLAG_UNUSED_0x4E1                                           0x4E1 // Unused Flag
+#define FLAG_TRAINER_HILL_RECEIVED_MON_PRIZE                        0x4DD // Edited Flag; set if player just received Pokemon prize, cleared when starting new challenge
+#define FLAG_TRAINER_HILL_MON_PRIZE_NORMAL                          0x4DE // Edited Flag; set if player received Bulbasaur for beating Normal Mode in 12 minutes
+#define FLAG_TRAINER_HILL_MON_PRIZE_VARIETY                         0x4DF // Edited Flag; set if player received Charmander for beating Variety Mode in 12 minutes
+#define FLAG_TRAINER_HILL_MON_PRIZE_UNIQUE                          0x4E0 // Edited Flag; set if player received Squirtle for beating Unique Mode in 12 minutes
+#define FLAG_TRAINER_HILL_MON_PRIZE_EXPERT                          0x4E1 // Edited Flag; set if player received Celebi for beating Expert Mode in 12 minutes
 #define FLAG_UNUSED_0x4E2                                           0x4E2 // Unused Flag
 #define FLAG_UNUSED_0x4E3                                           0x4E3 // Unused Flag
 #define FLAG_DEFEATED_ROAMING_RAIKOU                                0x4E4 // Edited Flag; set if Raikou is defeated in battle, cleared after entering Hall of Fame

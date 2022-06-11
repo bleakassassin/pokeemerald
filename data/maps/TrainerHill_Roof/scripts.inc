@@ -7,9 +7,10 @@ TrainerHill_Roof_EventScript_Owner::
 	trainerhill_settrainerflags
 	lock
 	faceplayer
+	goto_if_set FLAG_TRAINER_HILL_RECEIVED_MON_PRIZE, TrainerHill_Roof_EventScript_AlreadyReceivedPrize
+	goto_if_gt VAR_TRAINER_HILL_PENDING_MON_PRIZE, SPECIES_NONE, TrainerHill_Roof_ChatWithTheReceptionist
 	trainerhill_getownerstate
 	switch VAR_RESULT
-	case 0, TrainerHill_Roof_EventScript_Arrived
 	case 1, TrainerHill_Roof_EventScript_GivePrize
 	case 2, TrainerHill_Roof_EventScript_AlreadyReceivedPrize
 TrainerHill_Roof_EventScript_Arrived::
@@ -17,9 +18,9 @@ TrainerHill_Roof_EventScript_Arrived::
 TrainerHill_Roof_EventScript_GivePrize::
 	trainerhill_giveprize
 	switch VAR_RESULT
-	case 0, TrainerHill_Roof_EventScript_ReceivePrize
 	case 1, TrainerHill_Roof_EventScript_NoRoomForPrize
 	case 2, TrainerHill_Roof_EventScript_CheckFinalTime
+	case 3, TrainerHill_Roof_EventScript_GivePokemonPrize
 TrainerHill_Roof_EventScript_ReceivePrize::
 	msgbox TrainerHill_Roof_Text_HaveTheMostMarvelousGift, MSGBOX_DEFAULT
 	playfanfare MUS_LEVEL_UP
@@ -32,17 +33,17 @@ TrainerHill_Roof_EventScript_NoRoomForPrize::
 	msgbox TrainerHill_Roof_Text_HaveTheMostMarvelousGift, MSGBOX_DEFAULT
 	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
 	msgbox TrainerHill_Roof_Text_FullUpBeBackLaterForThis, MSGBOX_DEFAULT
-	goto TrainerHill_Roof_EventScript_CheckFinalTime
-
 TrainerHill_Roof_EventScript_CheckFinalTime::
+	setvar VAR_TEMP_1, 0
 	trainerhill_finaltime
 	switch VAR_RESULT
-	case 0, TrainerHill_Roof_EventScript_NewRecord
 	case 1, TrainerHill_Roof_EventScript_NoNewRecord
 	case 2, TrainerHill_Roof_EventScript_EndSpeakToOwner
 TrainerHill_Roof_EventScript_NewRecord::
 	msgbox TrainerHill_Roof_Text_GotHereMarvelouslyQuickly, MSGBOX_DEFAULT
-	goto TrainerHill_Roof_EventScript_EndSpeakToOwner
+TrainerHill_Roof_EventScript_EndSpeakToOwner::
+	msgbox TrainerHill_Roof_Text_ArriveZippierNextTime, MSGBOX_DEFAULT
+	release
 	end
 
 TrainerHill_Roof_EventScript_NoNewRecord::
@@ -50,13 +51,52 @@ TrainerHill_Roof_EventScript_NoNewRecord::
 	goto TrainerHill_Roof_EventScript_EndSpeakToOwner
 	end
 
-TrainerHill_Roof_EventScript_EndSpeakToOwner::
-	msgbox TrainerHill_Roof_Text_ArriveZippierNextTime, MSGBOX_DEFAULT
-	release
-	end
-
 TrainerHill_Roof_EventScript_AlreadyReceivedPrize::
 	msgbox TrainerHill_Roof_Text_ArriveZippierNextTime, MSGBOX_DEFAULT
 	release
 	end
 
+TrainerHill_Roof_EventScript_GivePokemonPrize::
+	msgbox TrainerHill_Roof_Text_HaveTheMostMarvelousGift, MSGBOX_DEFAULT
+	call_if_lt VAR_TEMP_1, SPECIES_CELEBI, TrainerHill_Roof_EventScript_GiveKantoStarter
+	call_if_eq VAR_TEMP_1, SPECIES_CELEBI, TrainerHill_Roof_EventScript_GiveCelebi
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, TrainerHill_Roof_EventScript_SendPrizeMonParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, TrainerHill_Roof_EventScript_SendPrizeMonPC
+	copyvar VAR_TRAINER_HILL_PENDING_MON_PRIZE, VAR_TEMP_1
+TrainerHill_Roof_ChatWithTheReceptionist::
+	msgbox TrainerHill_Roof_Text_PokemonFullChatWithReceptionist, MSGBOX_DEFAULT
+	goto TrainerHill_Roof_EventScript_CheckFinalTime
+
+TrainerHill_Roof_EventScript_GiveKantoStarter::
+	givemon VAR_TEMP_1, 5
+	return
+
+TrainerHill_Roof_EventScript_GiveCelebi::
+	givemon SPECIES_CELEBI, 10
+	return
+
+TrainerHill_Roof_EventScript_SendPrizeMonParty::
+	call TrainerHill_Roof_EventScript_ReceivedPrizeMon
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, TrainerHill_Roof_EventScript_CheckFinalTime
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto TrainerHill_Roof_EventScript_CheckFinalTime
+
+TrainerHill_Roof_EventScript_SendPrizeMonPC::
+	call TrainerHill_Roof_EventScript_ReceivedPrizeMon
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, TrainerHill_Roof_EventScript_3rdStarterTransferredToPC
+	call Common_EventScript_NameReceivedBoxMon
+TrainerHill_Roof_EventScript_3rdStarterTransferredToPC::
+	call Common_EventScript_TransferredToPC
+	goto TrainerHill_Roof_EventScript_CheckFinalTime
+
+TrainerHill_Roof_EventScript_ReceivedPrizeMon::
+	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	setflag FLAG_TRAINER_HILL_RECEIVED_MON_PRIZE
+	playfanfare MUS_EVOLVED
+	message TrainerHill_Roof_Text_ReceivedPrizeMon
+	waitmessage
+	waitfanfare
+	return

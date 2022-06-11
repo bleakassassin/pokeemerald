@@ -127,6 +127,7 @@ TrainerHill_Entrance_EventScript_EntryTrigger::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant
 	goto_if_unset FLAG_SYS_GAME_CLEAR, TrainerHill_Entrance_EventScript_Closed
+	goto_if_gt VAR_TRAINER_HILL_PENDING_MON_PRIZE, SPECIES_NONE, TrainerHill_Entrance_ReceivePrizeMon
 	msgbox TrainerHill_Entrance_Text_WelcomeToTrainerHill, MSGBOX_DEFAULT
 	trainerhill_getsaved
 	call_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_SaveGame
@@ -154,18 +155,29 @@ TrainerHill_Entrance_EventScript_Info::
 	end
 
 TrainerHill_Entrance_EventScript_ChooseChallenge::
-	multichoice 13, 2, MULTI_TAG_MATCH_TYPE, FALSE
+	trainerhill_unlockexpert
+	goto_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_ChooseChallengeNoExpert
+	multichoice 13, 2, MULTI_TAG_MATCH_TYPE_EXPERT, FALSE
 	switch VAR_RESULT
 	case 4, TrainerHill_Entrance_EventScript_CancelEntry
 	case MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_CancelEntry
+TrainerHill_Entrance_EventScript_StartChallenge::
 	trainerhill_setmode VAR_RESULT
 	setvar VAR_TRAINER_HILL_IS_ACTIVE, 1
 	setvar VAR_TEMP_5, 0
+	clearflag FLAG_TRAINER_HILL_RECEIVED_MON_PRIZE
 	special HealPlayerParty
 	msgbox TrainerHill_Entrance_Text_TimeProgessGetSetGo, MSGBOX_DEFAULT
 	trainerhill_start
 	releaseall
 	end
+
+TrainerHill_Entrance_EventScript_ChooseChallengeNoExpert::
+	multichoice 13, 4, MULTI_TAG_MATCH_TYPE, FALSE
+	switch VAR_RESULT
+	case 3, TrainerHill_Entrance_EventScript_CancelEntry
+	case MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_CancelEntry
+	goto TrainerHill_Entrance_EventScript_StartChallenge
 
 TrainerHill_Entrance_EventScript_CancelEntry::
 	setvar VAR_TEMP_5, 0
@@ -197,6 +209,45 @@ TrainerHill_Entrance_EventScript_Closed::
 	waitmovement 0
 	releaseall
 	end
+
+TrainerHill_Entrance_ReceivePrizeMon::
+	msgbox TrainerHill_Entrance_PrizeFromLastTime, MSGBOX_DEFAULT
+	call_if_lt VAR_TRAINER_HILL_PENDING_MON_PRIZE, SPECIES_CELEBI, TrainerHill_Roof_EventScript_GiveKantoStarter
+	call_if_eq VAR_TRAINER_HILL_PENDING_MON_PRIZE, SPECIES_CELEBI, TrainerHill_Roof_EventScript_GiveCelebi
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, TrainerHill_Entrance_EventScript_SendPrizeMonParty
+	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, TrainerHill_Entrance_EventScript_SendPrizeMonPC
+	msgbox TrainerHill_Entrance_Text_NoRoomForPokemon, MSGBOX_DEFAULT
+	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PushPlayerBackFromCounter
+	waitmovement 0
+	releaseall
+	end
+
+TrainerHill_Entrance_EventScript_SendPrizeMonParty::
+	call TrainerHill_Entrance_EventScript_ReceivedPrizeMon
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, TrainerHill_Entrance_EventScript_CancelEntry
+	call Common_EventScript_GetGiftMonPartySlot
+	call Common_EventScript_NameReceivedPartyMon
+	goto TrainerHill_Entrance_EventScript_CancelEntry
+
+TrainerHill_Entrance_EventScript_SendPrizeMonPC::
+	call TrainerHill_Entrance_EventScript_ReceivedPrizeMon
+	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, TrainerHill_Entrance_EventScript_3rdStarterTransferredToPC
+	call Common_EventScript_NameReceivedBoxMon
+TrainerHill_Entrance_EventScript_3rdStarterTransferredToPC::
+	call Common_EventScript_TransferredToPC
+	goto TrainerHill_Entrance_EventScript_CancelEntry
+
+TrainerHill_Entrance_EventScript_ReceivedPrizeMon::
+	bufferspeciesname STR_VAR_1, VAR_TRAINER_HILL_PENDING_MON_PRIZE
+	setvar VAR_TRAINER_HILL_PENDING_MON_PRIZE, SPECIES_NONE
+	playfanfare MUS_EVOLVED
+	message gText_ReceivedPokemon
+	waitmessage
+	waitfanfare
+	return
 
 TrainerHill_Entrance_Movement_PlayerFaceAttendant:
 	face_right
@@ -301,6 +352,18 @@ TrainerHill_Entrance_Text_StillGettingReady:
 	.string "Unfortunately, we're still getting\n"
 	.string "things ready. Please come back later!$"
 
+TrainerHill_Entrance_PrizeFromLastTime:
+	.string "Welcome back!\p"
+	.string "It appears you have a prize waiting\n"
+	.string "for you from your previous visit.\p"
+	.string "Here is your prize!$"
+
+TrainerHill_Entrance_Text_NoRoomForPokemon:
+	.string "Unfortunately, it seems you still\n"
+	.string "don't have room for this POKéMON.\p"
+	.string "Please come back when you've made\n$"
+	.string "room for it!$"
+
 TrainerHill_Entrance_Text_WelcomeToTrainerHill:
 	.string "Welcome!\p"
 	.string "This is the TRAINER HILL where\n"
@@ -396,9 +459,21 @@ TrainerHill_Roof_Text_HaveTheMostMarvelousGift:
 	.string "For a marvelous someone like you,\n"
 	.string "I have the most marvelous gift!$"
 
+TrainerHill_Roof_Text_ReceivedPrizeMon:
+	.string "{PLAYER} received a {STR_VAR_1} from the\n"
+	.string "TRAINER HILL owner!$"
+
 TrainerHill_Roof_Text_FullUpBeBackLaterForThis:
 	.string "Oh, no, full up with things!\n"
 	.string "You'll be back later for this!$"
+
+TrainerHill_Roof_Text_PokemonFullChatWithReceptionist:
+	.string "Oh, no, full up with POKéMON!\n"
+	.string "Now that just won't do!\p"
+	.string "Chat with the wonderful receptionist\n"
+	.string "at the entrance when you come back.\p"
+	.string "She'll give you this marvelous prize\n"
+	.string "there. I'll make sure of it!$"
 
 TrainerHill_Roof_Text_GotHereMarvelouslyQuickly:
 	.string "Oh, hold on here! Did you possibly get\n"
