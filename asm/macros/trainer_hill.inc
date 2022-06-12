@@ -106,3 +106,9 @@
 	copyvar VAR_0x8005, \mode
 	special CallTrainerHillFunction
 	.endm
+
+	@ Checks if player has received the Pokemon prizes for Normal, Variety, and Unique modes
+	.macro trainerhill_unlockexpert
+	setvar VAR_0x8004, TRAINER_HILL_FUNC_UNLOCK_EXPERT
+	special CallTrainerHillFunction
+	.endm

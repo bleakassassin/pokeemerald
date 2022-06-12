@@ -380,7 +380,7 @@ MauvilleCity_GameCorner_EventScript_ReceivedMonFanfare::
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
 	playfanfare MUS_EVOLVED
 	bufferspeciesname STR_VAR_1, VAR_TEMP_1
-	message MauvilleCity_GameCorner_Text_PlayerReceivedPokemon
+	message gText_ReceivedPokemon
 	waitmessage
 	waitfanfare
 	return
@@ -684,9 +684,6 @@ MauvilleCity_GameCorner_Text_WhichPrize:
 MauvilleCity_GameCorner_Text_SendToYourHomePC:
 	.string "Thank you!\n"
 	.string "We'll send it to your PC at home.$"
-
-MauvilleCity_GameCorner_Text_PlayerReceivedPokemon:
-	.string "{PLAYER} received {STR_VAR_1}!$"
 
 MauvilleCity_GameCorner_Text_NotEnoughCoins:
 	.string "You don't have enough Coins.$"

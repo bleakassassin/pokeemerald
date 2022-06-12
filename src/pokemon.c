@@ -2146,13 +2146,14 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
     .callback = SpriteCallbackDummy,
 };
 
-#define RUBY_POKEMON      5
+#define RUBY_POKEMON      6
 #define SAPPHIRE_POKEMON  1
 #define FIRERED_POKEMON  56
 #define LEAFGREEN_POKEMON 8
 
 const u16 sRubyPokemon[] =
 {
+    SPECIES_CELEBI,
     SPECIES_MEDITITE,
     SPECIES_MEDICHAM,
     SPECIES_ROSELIA,
@@ -2236,6 +2237,7 @@ const u16 sLeafGreenPokemon[] =
 };
 
 static const u8 sText_OT_Wishmkr[] = _("WISHMKR");
+static const u8 sText_OT_Agate[] = _("AGATE");
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
@@ -2302,6 +2304,11 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u8 i = 0;
     u8 shinyRolls = 2;
     u8 version;
+    u32 gcnRng;
+    u16 iv1;
+    u16 iv2;
+    u32 hId;
+    u32 lId;
 
     otGender = gSaveBlock2Ptr->playerGender;
     otId = gSaveBlock2Ptr->playerTrainerId[0]
@@ -2350,6 +2357,52 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             shinyValue = GET_SHINY_VALUE(otId, personality);
             i++;
         } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
+    }
+    else if (species == SPECIES_CELEBI) //Replicate unused Agate Celebi from the Pokemon Colosseum disc
+    {
+        otId = 0x00007991u; //31121:00000
+        otGender = FEMALE;
+        metLocation = METLOC_FATEFUL_ENCOUNTER;
+        if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE)
+        {
+            do
+            {
+                gcnRng = RtcGetSecondCount();
+                for (i = 0; i < Random32() >> 16; i++)
+                    gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                iv1 = gcnRng >> 16;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                iv2 = gcnRng >> 16;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                hId = gcnRng >> 16;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                lId = gcnRng >> 16;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                shinyValue = 0x0000 ^ 0x7991 ^ hId ^ lId;
+                personality = (hId << 16) | (lId); //CXD: RNG method used in Colosseum and XD: Gales of Darkness, seeded by RTC
+            } while (shinyValue < SHINY_ODDS || personality % NUM_NATURES != GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUM_NATURES);
+        }
+        else
+        {
+            do
+            {
+                gcnRng = RtcGetSecondCount();
+                for (i = 0; i < Random32() >> 16; i++)
+                    gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                iv1 = gcnRng >> 16;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                iv2 = gcnRng >> 16;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                hId = gcnRng >> 16;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                lId = gcnRng >> 16;
+                gcnRng = gcnRng * 0x000343FDu + 0x00269EC3u;
+                shinyValue = 0x0000 ^ 0x7991 ^ hId ^ lId;
+                personality = (hId << 16) | (lId); //CXD: RNG method used in Colosseum and XD: Gales of Darkness, seeded by RTC
+            } while (shinyValue < SHINY_ODDS);
+        }
     }
     else if (hasFixedPersonality)
         personality = fixedPersonality;
@@ -4625,6 +4678,12 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
         otId = 0x00004E4Bu; //20043:00000
     }
 
+    else if (species == SPECIES_CELEBI) //Replicate unused Agate Celebi from Pokemon Colosseum disc
+    {
+        otGender = FEMALE;
+        otId = 0x00007991u; //31121:00000
+    }
+
     GetTrainerName(otName, species);
     SetMonData(mon, MON_DATA_OT_NAME, otName);
     SetMonData(mon, MON_DATA_OT_GENDER, &otGender);
@@ -4855,6 +4914,8 @@ void GetTrainerName(u8 *name, u16 species)
     {
         if (species == SPECIES_JIRACHI)
             name[i] = sText_OT_Wishmkr[i];
+        else if (species == SPECIES_CELEBI)
+            name[i] = sText_OT_Agate[i];
         else
             name[i] = gSaveBlock2Ptr->playerName[i];
 
@@ -5653,10 +5714,10 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     return offset;
 }
 
-static void BufferStatRoseMessage(s32 arg0)
+static void BufferStatRoseMessage(s32 statIdx)
 {
     gBattlerTarget = gBattlerInMenuId;
-    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[arg0]]);
+    StringCopy(gBattleTextBuff1, gStatNamesTable[sStatsToRaise[statIdx]]);
     StringCopy(gBattleTextBuff2, gText_StatRose);
     BattleStringExpandPlaceholdersToDisplayedString(gText_DefendersStatRose);
 }
@@ -6072,13 +6133,13 @@ u16 GetLinkTrainerFlankId(u8 linkPlayerId)
     return flankId;
 }
 
-s32 GetBattlerMultiplayerId(u16 a1)
+s32 GetBattlerMultiplayerId(u16 id)
 {
-    s32 id;
-    for (id = 0; id < MAX_LINK_PLAYERS; id++)
-        if (gLinkPlayers[id].id == a1)
+    s32 multiplayerId;
+    for (multiplayerId = 0; multiplayerId < MAX_LINK_PLAYERS; multiplayerId++)
+        if (gLinkPlayers[multiplayerId].id == id)
             break;
-    return id;
+    return multiplayerId;
 }
 
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)

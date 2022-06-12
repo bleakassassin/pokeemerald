@@ -859,10 +859,10 @@ void LoadCustomWeatherSpritePalette(const struct SpritePalette *palette)
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
 }
 
-static void LoadDroughtWeatherPalette(u8 *gammaIndexPtr, u8 *a1)
+static void LoadDroughtWeatherPalette(u8 *palsIndex, u8 *palsOffset)
 {
-    *gammaIndexPtr = 0x20;
-    *a1 = 0x20;
+    *palsIndex = 0x20;
+    *palsOffset = 0x20;
 }
 
 void ResetDroughtWeatherPaletteLoading(void)
