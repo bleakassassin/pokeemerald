@@ -360,7 +360,7 @@ TrainerHill_Entrance_PrizeFromLastTime:
 
 TrainerHill_Entrance_Text_NoRoomForPokemon:
 	.string "Unfortunately, it seems you still\n"
-	.string "don't have room for this POKéMON.\p"
+	.string "don't have room for this Pokémon.\p"
 	.string "Please come back when you've made\n$"
 	.string "room for it!$"
 
@@ -461,14 +461,14 @@ TrainerHill_Roof_Text_HaveTheMostMarvelousGift:
 
 TrainerHill_Roof_Text_ReceivedPrizeMon:
 	.string "{PLAYER} received a {STR_VAR_1} from the\n"
-	.string "TRAINER HILL owner!$"
+	.string "Trainer Hill owner!$"
 
 TrainerHill_Roof_Text_FullUpBeBackLaterForThis:
 	.string "Oh, no, full up with things!\n"
 	.string "You'll be back later for this!$"
 
 TrainerHill_Roof_Text_PokemonFullChatWithReceptionist:
-	.string "Oh, no, full up with POKéMON!\n"
+	.string "Oh, no, full up with Pokémon!\n"
 	.string "Now that just won't do!\p"
 	.string "Chat with the wonderful receptionist\n"
 	.string "at the entrance when you come back.\p"
