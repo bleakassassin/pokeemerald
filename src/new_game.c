@@ -211,7 +211,6 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
-    FlagSet(FLAG_SYS_NATIVE_SAVE);
     gSaveBlock2Ptr->autoRun = FALSE;
     gSaveBlock2Ptr->outfitId = OUTFIT_RS;
 }

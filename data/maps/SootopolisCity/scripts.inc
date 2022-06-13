@@ -70,6 +70,7 @@ SootopolisCity_OnTransition:
 	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 4, SootopolisCity_EventScript_SetExitCaveOfOriginObjPos
 	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_SetOutsideGymObjPos
 	call_if_eq VAR_SOOTOPOLIS_CITY_STATE, 6, SootopolisCity_EventScript_SetExpertBlockCaveEntrance
+	call_if_ge VAR_SOOTOPOLIS_CITY_STATE, 7, SootopolisCity_EventScript_SetExpertAwayFromCaveEntrance
 	end
 
 SootopolisCity_EventScript_HideMapNamePopup::
@@ -145,6 +146,10 @@ SootopolisCity_EventScript_SetOutsideGymObjPos::
 
 SootopolisCity_EventScript_SetExpertBlockCaveEntrance::
 	setobjectxyperm LOCALID_EXPERT, 31, 18
+	return
+
+SootopolisCity_EventScript_SetExpertAwayFromCaveEntrance::
+	setobjectxyperm LOCALID_EXPERT, 36, 21
 	return
 
 SootopolisCity_OnWarp:
@@ -673,7 +678,9 @@ SootopolisCity_Movement_UnusedPanBack:
 SootopolisCity_EventScript_CaveOfOriginExpert::
 	lock
 	faceplayer
-	goto_if_ge VAR_SOOTOPOLIS_CITY_STATE, 6, SootopolisCity_EventScript_ExpertPostLegendaries
+	goto_if_ge VAR_SOOTOPOLIS_CITY_STATE, 7, SootopolisCity_EventScript_ExpertLifeStartsAndEnds
+	goto_if_set FLAG_CAUGHT_MEW, SootopolisCity_EventScript_ExpertCheckMew
+	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 6, SootopolisCity_EventScript_ExpertPostLegendaries
 	goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_ExpertLegendaries
 	goto_if_ge VAR_SOOTOPOLIS_CITY_STATE, 2, SootopolisCity_EventScript_ExpertLeadToCave
 	msgbox SootopolisCity_Text_CaveOfOriginPleaseLeave, MSGBOX_DEFAULT
@@ -692,6 +699,22 @@ SootopolisCity_EventScript_ExpertPostLegendaries::
 
 SootopolisCity_EventScript_ExpertLegendaries::
 	msgbox SootopolisCity_Text_AwakenedPokemonClash, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_EventScript_ExpertCheckMew::
+	specialvar VAR_RESULT CheckPartyForMew
+	goto_if_eq VAR_RESULT, FALSE, SootopolisCity_EventScript_ExpertPostLegendaries
+	msgbox SootopolisCity_Text_MewProvidesTheAnswer, MSGBOX_DEFAULT
+	closemessage
+	setvar VAR_SOOTOPOLIS_CITY_STATE, 7
+	applymovement VAR_LAST_TALKED, SootopolisCity_Movement_ExpertMoveAside
+	waitmovement 0
+	release
+	end
+
+SootopolisCity_EventScript_ExpertLifeStartsAndEnds::
+	msgbox SootopolisCity_Text_AllLifeStartsAndEnds, MSGBOX_DEFAULT
 	release
 	end
 
@@ -1520,6 +1543,25 @@ SootopolisCity_Text_CaveOfOriginSleepsToo:
 	.string "This is the Cave of Origin…\p"
 	.string "With the passing of the crisis,\n"
 	.string "the cave, too, shall sleep…$"
+
+SootopolisCity_Text_MewProvidesTheAnswer:
+	.string "This is the CAVE OF ORIGIN…\p"
+	.string "… … … … … …\p"
+	.string "Oh, my…\n"
+	.string "Is that a MEW, by chance?\p"
+	.string "It is said by many that MEW contains the\n"
+	.string "genetic code of all POKéMON…\p"
+	.string "Perhaps this could provide the answer\n"
+	.string "to where POKéMON come from?\p"
+	.string "Please, go inside.\n"
+	.string "Take this MEW to the cave's center.\p"
+	.string "You may find the answer down there…$"
+
+SootopolisCity_Text_AllLifeStartsAndEnds:
+	.string "All life starts at the CAVE OF ORIGIN,\n"
+	.string "and it all ends on MT. PYRE…\p"
+	.string "Where do people and POKéMON come from?\n"
+	.string "Where are we bound?$"
 
 SootopolisCity_Text_SootopolisSkyBeautiful:
 	.string "Sootopolis sprang up as a town in\n"

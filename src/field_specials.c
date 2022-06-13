@@ -4408,3 +4408,17 @@ void SwapPlayersOutfit(void)
     ObjectEventTurn(objEvent, objEvent->movementDirection);
     BlendPalettes(0xFFFFFFFF, 16, 0);
 }
+
+bool8 CheckPartyForMew(void)
+{
+    u8 partyCount = CalculatePlayerPartyCount();
+    u8 i;
+
+    for (i = 0; i < partyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_MEW)
+            return TRUE;
+    }
+
+    return FALSE;
+}

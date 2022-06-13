@@ -37,6 +37,7 @@ CaveOfOrigin_EventScript_Shake::
 	end
 
 CaveOfOrigin_EventScript_DisableTriggers::
+	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_TEMP_1, 1
 	setvar VAR_TEMP_2, 1
 	setvar VAR_TEMP_3, 1

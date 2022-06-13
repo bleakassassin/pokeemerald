@@ -42,6 +42,7 @@ EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries::
 	clearflag FLAG_DEFEATED_ARTICUNO
 	clearflag FLAG_DEFEATED_ZAPDOS
 	clearflag FLAG_DEFEATED_MOLTRES
+	clearflag FLAG_DEFEATED_MEWTWO
 	return
 
 EverGrandeCity_HallOfFame_EventScript_SetRematchChampionCheck::

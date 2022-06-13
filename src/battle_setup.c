@@ -543,6 +543,8 @@ void BattleSetup_StartLegendaryBattle(void)
         break;
     case SPECIES_MEW:
         CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, MUS_VS_MEW);
+    case SPECIES_MEWTWO:
+        CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, MUS_RG_VS_MEWTWO);
         break;
     }
 
