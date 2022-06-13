@@ -3112,14 +3112,14 @@
       "blockdata_filepath": "data/layouts/ScorchedSlab/map.bin"
     },
     {
-      "id": "LAYOUT_CAVE_OF_ORIGIN_UNUSED_B4F_LAVA",
-      "name": "CaveOfOrigin_Unused_B4F_Lava_Layout",
+      "id": "LAYOUT_CAVE_OF_ORIGIN_B4F_LAVA",
+      "name": "CaveOfOrigin_B4F_Lava_Layout",
       "width": 19,
       "height": 19,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/CaveOfOrigin_Unused_B4F_Lava/border.bin",
-      "blockdata_filepath": "data/layouts/CaveOfOrigin_Unused_B4F_Lava/map.bin"
+      "border_filepath": "data/layouts/CaveOfOrigin_B4F_Lava/border.bin",
+      "blockdata_filepath": "data/layouts/CaveOfOrigin_B4F_Lava/map.bin"
     },
     {
       "id": "LAYOUT_RUSTBORO_CITY_FLAT1_1F",
@@ -4192,14 +4192,14 @@
       "blockdata_filepath": "data/layouts/TrainerHill_Roof/map.bin"
     },
     {
-      "id": "LAYOUT_UNUSED_CAVE7",
-      "name": "UnusedCave7_Layout",
-      "width": 1,
-      "height": 1,
+      "id": "LAYOUT_CAVE_OF_ORIGIN_B4F_WATER",
+      "name": "CaveOfOrigin_B4F_Water_Layout",
+      "width": 19,
+      "height": 19,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
-      "border_filepath": "data/layouts/UnusedCave7/border.bin",
-      "blockdata_filepath": "data/layouts/UnusedCave7/map.bin"
+      "border_filepath": "data/layouts/CaveOfOrigin_B4F_Water/border.bin",
+      "blockdata_filepath": "data/layouts/CaveOfOrigin_B4F_Water/map.bin"
     },
     {
       "id": "LAYOUT_NAVEL_ROCK_EXTERIOR",

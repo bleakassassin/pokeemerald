@@ -735,7 +735,7 @@
 #define FLAG_UNUSED_0x2B5  0x2B5 // Unused Flag
 #define FLAG_UNUSED_0x2B6  0x2B6 // Unused Flag
 #define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
-#define FLAG_UNUSED_0x2B8  0x2B8 // Unused Flag
+#define FLAG_HIDE_MEW_CAVE_OF_ORIGIN                                0x2B8 // Edited Flag; used for Mew in Cave of Origin
 #define FLAG_HIDE_ARTICUNO                                          0x2B9 // Edited Flag; used for Articuno in Altering Cave
 #define FLAG_HIDE_ZAPDOS                                            0x2BA // Edited Flag; used for Zapdos in Altering Cave
 #define FLAG_HIDE_MOLTRES                                           0x2BB // Edited Flag; used for Moltres in Altering Cave
@@ -1294,8 +1294,8 @@
 #define FLAG_TRAINER_HILL_MON_PRIZE_VARIETY                         0x4DF // Edited Flag; set if player received Charmander for beating Variety Mode in 12 minutes
 #define FLAG_TRAINER_HILL_MON_PRIZE_UNIQUE                          0x4E0 // Edited Flag; set if player received Squirtle for beating Unique Mode in 12 minutes
 #define FLAG_TRAINER_HILL_MON_PRIZE_EXPERT                          0x4E1 // Edited Flag; set if player received Celebi for beating Expert Mode in 12 minutes
-#define FLAG_UNUSED_0x4E2                                           0x4E2 // Unused Flag
-#define FLAG_UNUSED_0x4E3                                           0x4E3 // Unused Flag
+#define FLAG_DEFEATED_MEWTWO                                        0x4E2 // Edited Flag; set if Mewtwo is defeated in battle, cleared after entering Hall of Fame
+#define FLAG_CAUGHT_MEWTWO                                          0x4E3 // Edited Flag; used for Mewtwo in in Cave of Origin
 #define FLAG_DEFEATED_ROAMING_RAIKOU                                0x4E4 // Edited Flag; set if Raikou is defeated in battle, cleared after entering Hall of Fame
 #define FLAG_DEFEATED_ROAMING_ENTEI                                 0x4E5 // Edited Flag; set if Entei is defeated in battle, cleared after entering Hall of Fame
 #define FLAG_DEFEATED_ROAMING_SUICUNE                               0x4E6 // Edited Flag; set if Suicune is defeated in battle, cleared after entering Hall of Fame

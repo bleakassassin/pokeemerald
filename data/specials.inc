@@ -540,3 +540,4 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special SwapPlayersOutfit
 	def_special BufferUnitSystemText
+	def_special CheckPartyForMew

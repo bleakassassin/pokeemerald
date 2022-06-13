@@ -354,6 +354,7 @@ void FixImportedSave(void)
         FlagClear(FLAG_REMATCH_WALLACE);
         FlagClear(FLAG_CAUGHT_ROAMING_LATI);
         FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
+        FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
 
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
         InitLilycoveLady();
@@ -415,7 +416,7 @@ void FixImportedSave(void)
             else
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
         }
-        //VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
+        VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
     }
 }
 
