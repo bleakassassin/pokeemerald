@@ -1545,22 +1545,22 @@ SootopolisCity_Text_CaveOfOriginSleepsToo:
 	.string "the cave, too, shall sleep…$"
 
 SootopolisCity_Text_MewProvidesTheAnswer:
-	.string "This is the CAVE OF ORIGIN…\p"
+	.string "This is the Cave of Origin…\p"
 	.string "… … … … … …\p"
 	.string "Oh, my…\n"
-	.string "Is that a MEW, by chance?\p"
-	.string "It is said by many that MEW contains the\n"
-	.string "genetic code of all POKéMON…\p"
+	.string "Is that a Mew, by chance?\p"
+	.string "It is said by many that Mew contains the\n"
+	.string "genetic code of all Pokémon\p"
 	.string "Perhaps this could provide the answer\n"
-	.string "to where POKéMON come from?\p"
+	.string "to where Pokémon come from?\p"
 	.string "Please, go inside.\n"
-	.string "Take this MEW to the cave's center.\p"
+	.string "Take this Mew to the cave's center.\p"
 	.string "You may find the answer down there…$"
 
 SootopolisCity_Text_AllLifeStartsAndEnds:
-	.string "All life starts at the CAVE OF ORIGIN,\n"
-	.string "and it all ends on MT. PYRE…\p"
-	.string "Where do people and POKéMON come from?\n"
+	.string "All life starts at the Cave of Origin,\n"
+	.string "and it all ends on Mt. Pyre…\p"
+	.string "Where do people and Pokémon come from?\n"
 	.string "Where are we bound?$"
 
 SootopolisCity_Text_SootopolisSkyBeautiful:
