@@ -380,7 +380,7 @@ LilycoveCity_ContestHall_Text_AreYouEnjoyingThisContest:
 LilycoveCity_ContestHall_Text_EnteredWrongContest:
 	.string "Ayayayay…\n"
 	.string "I entered the wrong CONTEST.\p"
-	.string "I entered this tough POKéMON in\n"
+	.string "I entered this TOUGH POKéMON in\n"
 	.string "the SMARTNESS CONTEST…\p"
 	.string "Come on, wow them with a smart-looking\n"
 	.string "ROCK SMASH.$"

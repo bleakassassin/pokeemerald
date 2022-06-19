@@ -170,7 +170,7 @@ MauvilleCity_BikeShop_Text_MachHandbookWhichPage:
 MauvilleCity_BikeShop_Text_HowToRideMachBike:
 	.string "A BICYCLE moves in the direction that\n"
 	.string "the + Control Pad is pressed.\p"
-	.string "Press the R Button to switcht to\n"
+	.string "Press the R Button to switch to\n"
 	.string "MACH GEAR.\p"
 	.string "You can switch back to ACRO GEAR by\n"
 	.string "pressing the R Button again.\p"
