@@ -1380,7 +1380,7 @@
 #define FLAG_WON_LEAGUE_REMATCHES                   (SYSTEM_FLAGS + 0x1F) // Edited Flag; now set after beating Pokemon League rematches
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
-#define FLAG_UNUSED_0x881                           (SYSTEM_FLAGS + 0x21) // Unused Flag
+#define FLAG_HEALED_AT_POKEMON_CENTER               (SYSTEM_FLAGS + 0x21) // Edited Flag; used to shorten Pokemon Center lady dialogue after first heal
 #define FLAG_UNUSED_0x882                           (SYSTEM_FLAGS + 0x22) // Unused Flag
 #define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
 #define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag

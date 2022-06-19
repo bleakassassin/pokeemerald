@@ -51,8 +51,8 @@
 
 // PC main menu options
 enum {
-    OPTION_WITHDRAW,
     OPTION_DEPOSIT,
+    OPTION_WITHDRAW,
     OPTION_MOVE_MONS,
     OPTION_MOVE_ITEMS,
     OPTION_EXIT,

@@ -4,11 +4,15 @@ Common_EventScript_PkmnCenterNurse::
 	setvar VAR_0x8004, 0
 	specialvar VAR_RESULT, CountPlayerTrainerStars
 	goto_if_eq VAR_RESULT, 4, EventScript_PkmnCenterNurse_GoldCard
+	goto_if_set FLAG_HEALED_AT_POKEMON_CENTER, EventScript_PkmnCenterNurse_HealedBefore
 	msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_HealPkmn
 	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_Goodbye
-	end
+	setflag FLAG_HEALED_AT_POKEMON_CENTER
+	goto EventScript_PkmnCenterNurse_HealPkmn
 
+EventScript_PkmnCenterNurse_HealedBefore::
+	msgbox gText_WouldYouLikeToRestYourPkmnShort, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, EventScript_PkmnCenterNurse_HealPkmn
 EventScript_PkmnCenterNurse_Goodbye::
 	message gText_WeHopeToSeeYouAgain
 	return

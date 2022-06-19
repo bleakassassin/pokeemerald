@@ -948,7 +948,7 @@ LittlerootTown_Text_SwitchShoesWithRunningShoes:
 	.string "{PLAYER} received the Emerald Style!$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "Mom: You'll need an extra pair of\n"
+	.string "Mom: You'll need an extra change of\n"
 	.string "clothes if you'll be away for awhile.\p"
 	.string "Look at them! They match what your\n"
 	.string "neighbor's wearing. How adorable!\p"
