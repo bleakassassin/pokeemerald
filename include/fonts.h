@@ -20,7 +20,7 @@ extern const u8 gFontFRLGLatinGlyphWidths[];
 extern const u16 gFontTallLatinGlyphs[];
 extern const u16 gFontLargeLatinGlyphs[];
 extern const u8 gFontTallLatinGlyphWidths[];
-extern const u16 gFontHGSSLatinGlyphs[];
-extern const u8 gFontHGSSLatinGlyphWidths[];
+extern const u16 gFontGenIVLatinGlyphs[];
+extern const u8 gFontGenIVLatinGlyphWidths[];
 
 #endif // GUARD_FONTS_H

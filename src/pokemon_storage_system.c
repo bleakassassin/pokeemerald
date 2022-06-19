@@ -575,6 +575,7 @@ EWRAM_DATA static bool8 sIsMonBeingMoved = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxId = 0;
 EWRAM_DATA static u8 sMovingMonOrigBoxPos = 0;
 EWRAM_DATA static bool8 sAutoActionOn = 0;
+EWRAM_DATA static const u8 *sMainMenuOptionOrder = NULL;
 
 // Main tasks
 static void EnterPokeStorage(u8);
@@ -886,6 +887,24 @@ struct {
     [OPTION_MOVE_MONS]  = {gText_MovePokemon,     gText_MoveMonDescription},
     [OPTION_MOVE_ITEMS] = {gText_MoveItems,       gText_MoveItemsDescription},
     [OPTION_EXIT]       = {gText_SeeYa,           gText_SeeYaDescription}
+};
+
+static const u8 sMainMenu_NormalOrder[] =
+{
+    OPTION_DEPOSIT,
+    OPTION_WITHDRAW,
+    OPTION_MOVE_MONS,
+    OPTION_MOVE_ITEMS,
+    OPTION_EXIT
+};
+
+static const u8 sMainMenu_OrganizedOrder[] =
+{
+    OPTION_MOVE_MONS,
+    OPTION_DEPOSIT,
+    OPTION_WITHDRAW,
+    OPTION_MOVE_ITEMS,
+    OPTION_EXIT
 };
 
 static const struct WindowTemplate sWindowTemplate_MainMenu =
@@ -1549,7 +1568,7 @@ static void Task_PCMainMenu(u8 taskId)
         LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, 0);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
-        AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, 2, 1, 3);
+        AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sMainMenuTexts[sMainMenuOptionOrder[task->tSelectedOption]].desc, TEXT_SKIP_DRAW, NULL, 2, 1, 3);
         CopyWindowToVram(0, COPYWIN_FULL);
         CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
         task->tState++;
@@ -1573,7 +1592,7 @@ static void Task_PCMainMenu(u8 taskId)
             {
                 task->tSelectedOption = task->tNextOption;
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
-                AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sMainMenuTexts[task->tSelectedOption].desc, 0, NULL, 2, 1, 3);
+                AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sMainMenuTexts[sMainMenuOptionOrder[task->tSelectedOption]].desc, 0, NULL, 2, 1, 3);
             }
             break;
         case MENU_B_PRESSED:
@@ -1585,14 +1604,14 @@ static void Task_PCMainMenu(u8 taskId)
             DestroyTask(taskId);
             break;
         default:
-            if (task->tInput == OPTION_WITHDRAW && CountPartyMons() == PARTY_SIZE)
+            if (sMainMenuOptionOrder[task->tInput] == OPTION_WITHDRAW && CountPartyMons() == PARTY_SIZE)
             {
                 // Can't withdraw
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
                 AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, gText_PartyFull, 0, NULL, 2, 1, 3);
                 task->tState = STATE_ERROR_MSG;
             }
-            else if (task->tInput == OPTION_DEPOSIT && CountPartyMons() == 1)
+            else if (sMainMenuOptionOrder[task->tInput] == OPTION_DEPOSIT && CountPartyMons() == 1)
             {
                 // Can't deposit
                 FillWindowPixelBuffer(0, PIXEL_FILL(1));
@@ -1642,7 +1661,8 @@ static void Task_PCMainMenu(u8 taskId)
         if (!gPaletteFade.active)
         {
             CleanupOverworldWindowsAndTilemaps();
-            EnterPokeStorage(task->tInput);
+            sCurrentBoxOption = task->tInput;
+            EnterPokeStorage(sMainMenuOptionOrder[task->tInput]);
             RemoveWindow(task->tWindowId);
             DestroyTask(taskId);
         }
@@ -1686,7 +1706,11 @@ static void CreateMainMenu(u8 whichMenu, s16 *windowIdPtr)
     windowId = AddWindow(&template);
 
     DrawStdWindowFrame(windowId, FALSE);
-    PrintMenuTable(windowId, OPTIONS_COUNT, (void *)sMainMenuTexts);
+    if (FlagGet(FLAG_ORGANIZED_POKEMON_STORAGE))
+        sMainMenuOptionOrder = sMainMenu_OrganizedOrder;
+    else
+        sMainMenuOptionOrder = sMainMenu_NormalOrder;
+    PrintMenuActionTextsInUpperLeftCorner(windowId, OPTIONS_COUNT, (void *)sMainMenuTexts, sMainMenuOptionOrder);
     InitMenuInUpperLeftCornerNormal(windowId, OPTIONS_COUNT, whichMenu);
     *windowIdPtr = windowId;
 }
@@ -2000,7 +2024,6 @@ static void CB2_PokeStorage(void)
 static void EnterPokeStorage(u8 boxOption)
 {
     ResetTasks();
-    sCurrentBoxOption = boxOption;
     sStorage = Alloc(sizeof(*sStorage));
     if (sStorage == NULL)
     {
@@ -3994,16 +4017,16 @@ static void PrintDisplayMonInfo(void)
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
         AddTextPrinterParameterized(WIN_DISPLAY_INFO, gSaveBlock2Ptr->optionsCurrentFont, sStorage->displayMonNameText, 6, 0, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 15, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 29, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, gSaveBlock2Ptr->optionsCurrentFont, sStorage->displayMonSpeciesName, 6, 15, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 30, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SMALL, sStorage->displayMonItemName, 6, 43, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
         AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SMALL, sStorage->displayMonItemName, 6, 0, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(WIN_DISPLAY_INFO, gSaveBlock2Ptr->optionsCurrentFont, sStorage->displayMonNameText, 6, 13, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonSpeciesName, 6, 28, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, gSaveBlock2Ptr->optionsCurrentFont, sStorage->displayMonSpeciesName, 6, 28, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 43, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(WIN_DISPLAY_INFO, COPYWIN_GFX);
@@ -4307,7 +4330,7 @@ static void PrintMessage(u8 id)
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
     FillWindowPixelBuffer(WIN_MESSAGE, PIXEL_FILL(1));
-    AddTextPrinterParameterized(WIN_MESSAGE, gSaveBlock2Ptr->optionsCurrentFont, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(WIN_MESSAGE, gSaveBlock2Ptr->optionsCurrentFont, sStorage->messageText, 0, 0, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(WIN_MESSAGE, 2, 14);
     PutWindowTilemap(WIN_MESSAGE);
     CopyWindowToVram(WIN_MESSAGE, COPYWIN_GFX);

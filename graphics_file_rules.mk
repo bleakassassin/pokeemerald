@@ -314,7 +314,7 @@ $(FONTGFXDIR)/tall.latfont: $(FONTGFXDIR)/latin_tall.png
 $(FONTGFXDIR)/large.latfont: $(FONTGFXDIR)/latin_large.png
 	$(GFX) $< $@
 
-$(FONTGFXDIR)/hgss.latfont: $(FONTGFXDIR)/latin_hgss.png
+$(FONTGFXDIR)/gen_iv.latfont: $(FONTGFXDIR)/latin_gen_iv.png
 	$(GFX) $< $@
 
 $(FONTGFXDIR)/small_narrow.latfont: $(FONTGFXDIR)/latin_small_narrow.png

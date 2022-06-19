@@ -20,7 +20,7 @@ static u16 FontFunc_Normal(struct TextPrinter *);
 static u16 FontFunc_FRLG(struct TextPrinter *);
 static u16 FontFunc_Tall(struct TextPrinter *);
 static u16 FontFunc_Large(struct TextPrinter *);
-static u16 FontFunc_HGSS(struct TextPrinter *);
+static u16 FontFunc_GenIV(struct TextPrinter *);
 static u16 FontFunc_Short(struct TextPrinter *);
 static u16 FontFunc_Narrow(struct TextPrinter *);
 static u16 FontFunc_SmallNarrow(struct TextPrinter *);
@@ -30,7 +30,7 @@ static void DecompressGlyph_Short(u16, bool32);
 static void DecompressGlyph_FRLG(u16, bool32);
 static void DecompressGlyph_Tall(u16, bool32);
 static void DecompressGlyph_Large(u16, bool32);
-static void DecompressGlyph_HGSS(u16, bool32);
+static void DecompressGlyph_GenIV(u16, bool32);
 static void DecompressGlyph_Narrow(u16, bool32);
 static void DecompressGlyph_SmallNarrow(u16, bool32);
 static void DecompressGlyph_Bold(u16);
@@ -90,7 +90,7 @@ static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
     { FONT_FRLG,         GetGlyphWidth_Main },
     { FONT_TALL,         GetGlyphWidth_Main },
     { FONT_LARGE,        GetGlyphWidth_Main },
-    { FONT_HGSS,         GetGlyphWidth_Main },
+    { FONT_GEN_IV,       GetGlyphWidth_Main },
     { FONT_SHORT,        GetGlyphWidth_Short },
     { FONT_BRAILLE,      GetGlyphWidth_Braille },
     { FONT_SMALL,        GetGlyphWidth_Small },
@@ -164,8 +164,8 @@ static const struct FontInfo sFontInfos[] =
         .bgColor = 1,
         .shadowColor = 3,
     },
-    [FONT_HGSS] = {
-        .fontFunction = FontFunc_HGSS,
+    [FONT_GEN_IV] = {
+        .fontFunction = FontFunc_GenIV,
         .maxLetterWidth = 6,
         .maxLetterHeight =  16,
         .letterSpacing = 0,
@@ -242,7 +242,7 @@ static const u8 sMenuCursorDimensions[][2] =
     [FONT_FRLG]         = { 8,  15 },
     [FONT_TALL]         = { 8,  15 },
     [FONT_LARGE]        = { 8,  15 },
-    [FONT_HGSS]         = { 8,  15 },
+    [FONT_GEN_IV]       = { 8,  15 },
     [FONT_SHORT]        = { 8,  14 },
     [FONT_BRAILLE]      = { 8,  16 },
     [FONT_SMALL]        = { 8,  12 },
@@ -258,7 +258,7 @@ static const struct FontType sFontTypes[] = {
     {gFontFRLGLatinGlyphs,   gFontFRLGLatinGlyphWidths},
     {gFontTallLatinGlyphs,   gFontTallLatinGlyphWidths},
     {gFontLargeLatinGlyphs,  gFontTallLatinGlyphWidths},
-    {gFontHGSSLatinGlyphs,   gFontHGSSLatinGlyphWidths}
+    {gFontGenIVLatinGlyphs,   gFontGenIVLatinGlyphWidths}
 };
 
 static void SetFontsPointer(const struct FontInfo *fonts)
@@ -759,13 +759,13 @@ static u16 FontFunc_Large(struct TextPrinter *textPrinter)
     return RenderText(textPrinter);
 }
 
-static u16 FontFunc_HGSS(struct TextPrinter *textPrinter)
+static u16 FontFunc_GenIV(struct TextPrinter *textPrinter)
 {
     struct TextPrinterSubStruct *subStruct = (struct TextPrinterSubStruct *)(&textPrinter->subStructFields);
 
     if (subStruct->hasFontIdBeenSet == FALSE)
     {
-        subStruct->fontId = FONT_HGSS;
+        subStruct->fontId = FONT_GEN_IV;
         subStruct->hasFontIdBeenSet = TRUE;
     }
     return RenderText(textPrinter);
@@ -1194,8 +1194,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         case FONT_LARGE:
             DecompressGlyph_Large(currChar, textPrinter->japanese);
             break;
-        case FONT_HGSS:
-            DecompressGlyph_HGSS(currChar, textPrinter->japanese);
+        case FONT_GEN_IV:
+            DecompressGlyph_GenIV(currChar, textPrinter->japanese);
             break;
         case FONT_NARROW:
             DecompressGlyph_Narrow(currChar, textPrinter->japanese);
@@ -2034,12 +2034,12 @@ static void DecompressGlyph_Large(u16 glyphId, bool32 isJapanese)
     gCurGlyph.height = 15;
 }
 
-static void DecompressGlyph_HGSS(u16 glyphId, bool32 isJapanese)
+static void DecompressGlyph_GenIV(u16 glyphId, bool32 isJapanese)
 {
     const u16* glyphs;
 
-    glyphs = gFontHGSSLatinGlyphs + (0x20 * glyphId);
-    gCurGlyph.width = gFontHGSSLatinGlyphWidths[glyphId];
+    glyphs = gFontGenIVLatinGlyphs + (0x20 * glyphId);
+    gCurGlyph.width = gFontGenIVLatinGlyphWidths[glyphId];
 
     if (gCurGlyph.width <= 8)
     {
