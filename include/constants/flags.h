@@ -1381,7 +1381,7 @@
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
 #define FLAG_HEALED_AT_POKEMON_CENTER               (SYSTEM_FLAGS + 0x21) // Edited Flag; used to shorten Pokemon Center lady dialogue after first heal
-#define FLAG_UNUSED_0x882                           (SYSTEM_FLAGS + 0x22) // Unused Flag
+#define FLAG_ORGANIZED_POKEMON_STORAGE              (SYSTEM_FLAGS + 0x22) // Edited Flag; set if Lanette moved the "Move Pokemon" setting in storage system to the top
 #define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
 #define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
 #define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag

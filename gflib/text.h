@@ -9,7 +9,7 @@
 #define FONT_TYPE_FRLG    1
 #define FONT_TYPE_RS_EUR  2
 #define FONT_TYPE_RS_USA  3
-#define FONT_TYPE_HGSS    4
+#define FONT_TYPE_GEN_IV  4
 
 #define FONT_TYPES_COUNT 5
 
@@ -22,7 +22,7 @@ enum {
     FONT_FRLG,
     FONT_TALL,
     FONT_LARGE,
-    FONT_HGSS,
+    FONT_GEN_IV,
     FONT_SHORT,
     FONT_BRAILLE,
     FONT_SMALL,

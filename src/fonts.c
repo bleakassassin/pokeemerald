@@ -253,8 +253,8 @@ ALIGNED(4) const u8 gFontTallLatinGlyphWidths[] = {
     8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  8,  3,
 };
 
-ALIGNED(4) const u16 gFontHGSSLatinGlyphs[] = INCBIN_U16("graphics/fonts/hgss.latfont");
-ALIGNED(4) const u8 gFontHGSSLatinGlyphWidths[] = {
+ALIGNED(4) const u16 gFontGenIVLatinGlyphs[] = INCBIN_U16("graphics/fonts/gen_iv.latfont");
+ALIGNED(4) const u8 gFontGenIVLatinGlyphWidths[] = {
     3,  6,  6,  6,  6,  6,  6,  6,  6,  6,  3,  6,  6,  6,  6,  6,
     7,  6,  6,  6,  6,  6,  6,  6,  3,  6,  6,  6,  6,  6,  5,  3,
     5,  5,  6,  6,  6,  8,  6,  6,  6,  6,  6,  6,  8,  7,  6,  3,

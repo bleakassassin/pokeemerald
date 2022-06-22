@@ -6003,6 +6003,7 @@ static void Cmd_drawlvlupbox(void)
             ShowBg(1);
             gBattlescriptCurrInstr++;
         }
+        gBattle_BG2_X = 0;
         break;
     }
 }

@@ -19,7 +19,38 @@ Route114_LanettesHouse_EventScript_Lanette::
 	end
 
 Route114_LanettesHouse_EventScript_OfferAdvice::
-	msgbox Route114_LanettesHouse_Text_OrganizeYourBoxes, MSGBOX_DEFAULT
+	goto_if_set FLAG_ORGANIZED_POKEMON_STORAGE, Route114_LanettesHouse_EventScript_RestoreOptionOrder
+	msgbox Route114_LanettesHouse_Text_OrganixeBoxesEfficiently, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route114_LanettesHouse_EventScript_MovePokemonAtTop
+	goto Route114_LanettesHouse_EventScript_DontChangeOptionOrder
+
+Route114_LanettesHouse_EventScript_RestoreOptionOrder::
+	msgbox Route114_LanettesHouse_Text_WantToReturnMenuOrder, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, Route114_LanettesHouse_EventScript_DepositPokemonAtTop
+Route114_LanettesHouse_EventScript_DontChangeOptionOrder::
+	msgbox Route114_LanettesHouse_Text_ThoughtItWasDeduction, MSGBOX_DEFAULT
+	release
+	end
+
+Route114_LanettesHouse_EventScript_MovePokemonAtTop::
+	msgbox Route114_LanettesHouse_Text_WhatIThoughtPleaseWait, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+	setflag FLAG_ORGANIZED_POKEMON_STORAGE
+	delay 120
+	fadescreen FADE_FROM_BLACK
+	msgbox Route114_LanettesHouse_Text_MovePokemonAtTopOfMenu, MSGBOX_DEFAULT
+	release
+	end
+
+Route114_LanettesHouse_EventScript_DepositPokemonAtTop::
+	msgbox Route114_LanettesHouse_Text_WhatIThoughtPleaseWait, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+	clearflag FLAG_ORGANIZED_POKEMON_STORAGE
+	delay 120
+	fadescreen FADE_FROM_BLACK
+	msgbox Route114_LanettesHouse_Text_ReturnedNormalMenuOrder, MSGBOX_DEFAULT
 	release
 	end
 
@@ -52,6 +83,42 @@ Route114_LanettesHouse_Text_EverythingClutteredKeepThis:
 	.string "things end up this way…\p"
 	.string "This is embarrassing… Please keep\n"
 	.string "this a secret in exchange for this.$"
+
+Route114_LanettesHouse_Text_OrganixeBoxesEfficiently:
+	.string "Oh, {PLAYER}{KUN}.\p"
+	.string "You want to organize your BOXES in the\n"
+	.string "PC more efficiently, don't you?$"
+
+Route114_LanettesHouse_Text_WhatIThoughtPleaseWait:
+	.string "That's what I thought.\p"
+	.string "How I arrived at that conclusion is a\n"
+	.string "simple deductive process.\p"
+	.string "…Just because you took the trouble to\n"
+	.string "talk to me.\p"
+	.string "Then please wait for a while.$"
+
+Route114_LanettesHouse_Text_MovePokemonAtTopOfMenu:
+	.string "It's done.\p"
+	.string "I set up “MOVE POKéMON” at the top of\n"
+	.string "the menu in the PC.\p"
+	.string "If you want to return it to normal,\n"
+	.string "please talk to me again.$"
+
+Route114_LanettesHouse_Text_WantToReturnMenuOrder:
+	.string "Oh, {PLAYER}{KUN}.\p"
+	.string "You want to return the order of the menu\n"
+	.string "in the PC back to normal, don't you?$"
+
+Route114_LanettesHouse_Text_ReturnedNormalMenuOrder:
+	.string "Now, it's done.\p"
+	.string "I returned the order of the menu in the\n"
+	.string "PC back to normal.\p"
+	.string "If you want “MOVE POKéMON” at the top\n"
+	.string "of the menu, please talk to me again.$"
+
+Route114_LanettesHouse_Text_ThoughtItWasDeduction:
+	.string "Oh, I see.\n"
+	.string "I thought it was a simple deduction.$"
 
 Route114_LanettesHouse_Text_OrganizeYourBoxes:
 	.string "May I offer advice about my Pokémon\n"

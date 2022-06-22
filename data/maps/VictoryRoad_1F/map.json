@@ -55,10 +55,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WALLY",
-      "x": 12,
-      "y": 25,
+      "x": 31,
+      "y": 12,
       "elevation": 4,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -172,8 +172,8 @@
   "coord_events": [
     {
       "type": "trigger",
-      "x": 2,
-      "y": 23,
+      "x": 34,
+      "y": 3,
       "elevation": 4,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
       "var_value": "0",
@@ -181,12 +181,21 @@
     },
     {
       "type": "trigger",
-      "x": 3,
-      "y": 23,
+      "x": 34,
+      "y": 4,
       "elevation": 4,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
       "var_value": "0",
       "script": "VictoryRoad_1F_EventScript_WallyBattleTrigger2"
+    },
+    {
+      "type": "trigger",
+      "x": 34,
+      "y": 5,
+      "elevation": 0,
+      "var": "VAR_VICTORY_ROAD_1F_STATE",
+      "var_value": "0",
+      "script": "VictoryRoad_1F_EventScript_WallyBattleTrigger3"
     }
   ],
   "bg_events": [

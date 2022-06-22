@@ -291,7 +291,7 @@ gSpecials::
 	def_special GetPokeblockNameByMonNature
 	def_special GetSecretBaseNearbyMapName
 	def_special CheckRelicanthWailord
-	def_special ShouldDoBrailleRegirockEffectOld
+	def_special CheckPartyForMew
 	def_special DoOrbEffect
 	def_special FadeOutOrbEffect
 	def_special WaitWeather
@@ -540,4 +540,3 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special SwapPlayersOutfit
 	def_special BufferUnitSystemText
-	def_special CheckPartyForMew
