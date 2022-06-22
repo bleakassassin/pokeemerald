@@ -86,7 +86,7 @@ Route114_LanettesHouse_Text_EverythingClutteredKeepThis:
 
 Route114_LanettesHouse_Text_OrganixeBoxesEfficiently:
 	.string "Oh, {PLAYER}{KUN}.\p"
-	.string "You want to organize your BOXES in the\n"
+	.string "You want to organize your Boxes in the\n"
 	.string "PC more efficiently, don't you?$"
 
 Route114_LanettesHouse_Text_WhatIThoughtPleaseWait:
@@ -99,7 +99,7 @@ Route114_LanettesHouse_Text_WhatIThoughtPleaseWait:
 
 Route114_LanettesHouse_Text_MovePokemonAtTopOfMenu:
 	.string "It's done.\p"
-	.string "I set up “MOVE POKéMON” at the top of\n"
+	.string "I set up “Move Pokémon” at the top of\n"
 	.string "the menu in the PC.\p"
 	.string "If you want to return it to normal,\n"
 	.string "please talk to me again.$"
@@ -113,7 +113,7 @@ Route114_LanettesHouse_Text_ReturnedNormalMenuOrder:
 	.string "Now, it's done.\p"
 	.string "I returned the order of the menu in the\n"
 	.string "PC back to normal.\p"
-	.string "If you want “MOVE POKéMON” at the top\n"
+	.string "If you want “Move Pokémon” at the top\n"
 	.string "of the menu, please talk to me again.$"
 
 Route114_LanettesHouse_Text_ThoughtItWasDeduction:
