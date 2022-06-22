@@ -260,6 +260,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireMayFie
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireMayFishing;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireMayWatering;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireMayDecorating;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MachokeCarryingBox;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_MachokeFacingAway;
 
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
@@ -518,6 +520,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_RS_MAY_FISHING] =           &gObjectEventGraphicsInfo_RubySapphireMayFishing,
     [OBJ_EVENT_GFX_RS_MAY_WATERING] =          &gObjectEventGraphicsInfo_RubySapphireMayWatering,
     [OBJ_EVENT_GFX_RS_MAY_DECORATING] =        &gObjectEventGraphicsInfo_RubySapphireMayDecorating,
+    [OBJ_EVENT_GFX_MACHOKE_CARRYING_BOX] =     &gObjectEventGraphicsInfo_MachokeCarryingBox,
+    [OBJ_EVENT_GFX_MACHOKE_FACING_AWAY] =      &gObjectEventGraphicsInfo_MachokeFacingAway,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

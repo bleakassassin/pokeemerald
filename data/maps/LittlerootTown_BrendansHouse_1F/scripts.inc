@@ -222,6 +222,12 @@ PlayersHouse_1F_Text_RegisteredMom:
 	.string "Registered MOM\n"
 	.string "in the POKéNAV.$"
 
+PlayersHouse_1F_Text_Machoke1:
+	.string "Gyao, gyao gyaoh…$"
+
+PlayersHouse_1F_Text_Machoke2:
+	.string "Gwagwah gwah…$"
+
 PlayersHouse_1F_Text_Vigoroth1:
 	.string "Fugiiiiih!$"
 

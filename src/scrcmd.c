@@ -1490,10 +1490,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     u8 xWindow, yWindow, xText, yText;
     u8 temp;
 
-    // + 6 for the 6 bytes at the start of a braille message (brailleformat macro)
-    // In RS these bytes are used to position the text and window, but
-    // in Emerald they are unused and position is calculated below instead
-    StringExpandPlaceholders(gStringVar4, ptr + 6);
+    StringExpandPlaceholders(gStringVar4, ptr);
 
     width = GetStringWidth(FONT_BRAILLE, gStringVar4, -1) / 8u;
 

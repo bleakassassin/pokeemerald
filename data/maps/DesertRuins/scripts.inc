@@ -40,7 +40,7 @@ DesertRuins_EventScript_ShowRegirock::
 DesertRuins_EventScript_CaveEntranceMiddle::
 	lockall
 	goto_if_set FLAG_SYS_REGIROCK_PUZZLE_COMPLETED, DesertRuins_EventScript_BigHoleInWall
-	braillemsgbox DesertRuins_Braille_UseRockSmash
+	braillemsgbox DesertRuins_Braille_UseStrength
 	releaseall
 	end
 
@@ -51,7 +51,7 @@ DesertRuins_EventScript_BigHoleInWall::
 
 DesertRuins_EventScript_CaveEntranceSide::
 	lockall
-	braillemsgbox DesertRuins_Braille_UseRockSmash
+	braillemsgbox DesertRuins_Braille_UseStrength
 	releaseall
 	end
 

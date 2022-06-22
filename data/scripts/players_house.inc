@@ -371,6 +371,26 @@ PlayersHouse_1F_EventScript_DidYouMeetProfBirch::
 	release
 	end
 
+PlayersHouse_1F_EventScript_Machoke1::
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_MACHOKE, CRY_MODE_NORMAL
+	msgbox PlayersHouse_1F_Text_Machoke1, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
+PlayersHouse_1F_EventScript_Machoke2::
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_MACHOKE, CRY_MODE_NORMAL
+	msgbox PlayersHouse_1F_Text_Machoke2, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
 PlayersHouse_1F_EventScript_Vigoroth1::
 	lock
 	faceplayer

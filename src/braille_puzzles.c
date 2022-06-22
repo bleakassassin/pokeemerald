@@ -93,19 +93,14 @@ bool8 CheckRelicanthWailord(void)
 {
     // Emerald change: why did they flip it?
     // First comes Wailord
-    if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2, 0) == SPECIES_WAILORD)
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES2, 0) == SPECIES_RELICANTH)
     {
         CalculatePlayerPartyCount();
         // Last comes Relicanth
-        if (GetMonData(&gPlayerParty[gPlayerPartyCount - 1], MON_DATA_SPECIES2, 0) == SPECIES_RELICANTH)
+        if (GetMonData(&gPlayerParty[gPlayerPartyCount - 1], MON_DATA_SPECIES2, 0) == SPECIES_WAILORD)
             return TRUE;
     }
     return FALSE;
-}
-
-// THEORY: this was caused by block commenting out all of the older R/S braille functions but leaving the call to it itself, which creates the nullsub.
-void ShouldDoBrailleRegirockEffectOld(void)
-{
 }
 
 #define tDelayCounter  data[1]
@@ -170,17 +165,17 @@ bool8 ShouldDoBrailleRegirockEffect(void)
         && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(DESERT_RUINS)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(DESERT_RUINS))
     {
-        if (gSaveBlock1Ptr->pos.x == 6 && gSaveBlock1Ptr->pos.y == 23)
+        if (gSaveBlock1Ptr->pos.x == 10 && gSaveBlock1Ptr->pos.y == 23)
         {
             sIsRegisteelPuzzle = FALSE;
             return TRUE;
         }
-        else if (gSaveBlock1Ptr->pos.x == 5 && gSaveBlock1Ptr->pos.y == 23)
+        else if (gSaveBlock1Ptr->pos.x == 9 && gSaveBlock1Ptr->pos.y == 23)
         {
             sIsRegisteelPuzzle = FALSE;
             return TRUE;
         }
-        else if (gSaveBlock1Ptr->pos.x == 7 && gSaveBlock1Ptr->pos.y == 23)
+        else if (gSaveBlock1Ptr->pos.x == 11 && gSaveBlock1Ptr->pos.y == 23)
         {
             sIsRegisteelPuzzle = FALSE;
             return TRUE;
@@ -253,11 +248,6 @@ static void DoBrailleRegisteelEffect(void)
     PlaySE(SE_BANG);
     FlagSet(FLAG_SYS_REGISTEEL_PUZZLE_COMPLETED);
     ScriptContext2_Disable();
-}
-
-// theory: another commented out DoBrailleWait and Task_BrailleWait.
-static void DoBrailleWait(void)
-{
 }
 
 // this used to be FldEff_UseFlyAncientTomb . why did GF merge the 2 functions?

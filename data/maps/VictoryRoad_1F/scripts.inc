@@ -7,15 +7,21 @@ VictoryRoad_1F_MapScripts::
 VictoryRoad_1F_OnTransition:
 	call_if_eq VAR_VICTORY_ROAD_1F_STATE, 1, VictoryRoad_1F_EventScript_SetEntranceWallyPos1
 	call_if_eq VAR_VICTORY_ROAD_1F_STATE, 2, VictoryRoad_1F_EventScript_SetEntranceWallyPos2
+	call_if_eq VAR_VICTORY_ROAD_1F_STATE, 3, VictoryRoad_1F_EventScript_SetEntranceWallyPos3
 	end
 
 VictoryRoad_1F_EventScript_SetEntranceWallyPos1::
-	setobjectxyperm LOCALID_WALLY_ENTRANCE, 2, 24
+	setobjectxyperm LOCALID_WALLY_ENTRANCE, 33, 3
 	setobjectmovementtype LOCALID_WALLY_ENTRANCE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 VictoryRoad_1F_EventScript_SetEntranceWallyPos2::
-	setobjectxyperm LOCALID_WALLY_ENTRANCE, 3, 24
+	setobjectxyperm LOCALID_WALLY_ENTRANCE, 33, 4
+	setobjectmovementtype LOCALID_WALLY_ENTRANCE, MOVEMENT_TYPE_FACE_DOWN
+	return
+
+VictoryRoad_1F_EventScript_SetEntranceWallyPos3::
+	setobjectxyperm LOCALID_WALLY_ENTRANCE, 33, 5
 	setobjectmovementtype LOCALID_WALLY_ENTRANCE, MOVEMENT_TYPE_FACE_DOWN
 	return
 
@@ -37,8 +43,17 @@ VictoryRoad_1F_EventScript_WallyBattleTrigger2::
 	goto VictoryRoad_1F_EventScript_WallyEntranceBattle
 	end
 
+VictoryRoad_1F_EventScript_WallyBattleTrigger3::
+	lockall
+	setvar VAR_0x8008, 3
+	addobject LOCALID_WALLY_ENTRANCE
+	applymovement LOCALID_WALLY_ENTRANCE, VictoryRoad_1F_Movement_WallyApproachPlayer3
+	waitmovement 0
+	goto VictoryRoad_1F_EventScript_WallyEntranceBattle
+	end
+
 VictoryRoad_1F_EventScript_WallyEntranceBattle::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_WALLY_VR_1, VictoryRoad_1F_Text_WallyEntranceDefeat
@@ -51,30 +66,19 @@ VictoryRoad_1F_EventScript_WallyEntranceBattle::
 	end
 
 VictoryRoad_1F_Movement_WallyApproachPlayer1:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
 	walk_up
-	step_end
-
 VictoryRoad_1F_Movement_WallyApproachPlayer2:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
 	walk_up
+VictoryRoad_1F_Movement_WallyApproachPlayer3:
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_right
+	walk_right
 	step_end
 
 @ This Wally appears near the entrance once his battle is triggered and remains there until the Hall of Fame is entered
