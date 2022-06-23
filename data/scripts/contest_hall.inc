@@ -913,7 +913,13 @@ ContestHall_EventScript_GetPlayer3ObjEventId::
 	return
 
 ContestHall_EventScript_GetPlayer4ObjEventId::
+	goto_if_ne VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_GetSinglePlayerObjEventId
 	setvar VAR_TEMP_3, LOCALID_CONTESTANT_4
+	return
+
+ContestHall_EventScript_GetSinglePlayerObjEventId::
+	removeobject LOCALID_CONTESTANT_4
+	setvar VAR_TEMP_3, OBJ_EVENT_ID_PLAYER
 	return
 
 ContestHall_EventScript_CongratulateWinner::
@@ -931,10 +937,8 @@ ContestHall_EventScript_CongratulateWinner::
 
 ContestHall_EventScript_CongratsWinner::
 	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_CongratsWinnerLink
-	removeobject LOCALID_CONTESTANT_4
 	special SpawnCameraObject
 	setobjectxyperm OBJ_EVENT_ID_CAMERA, 9, 5
-	setvar VAR_TEMP_3, OBJ_EVENT_ID_PLAYER
 	msgbox ContestHall_Text_CongratsTrainerXandMon, MSGBOX_DEFAULT
 	return
 
