@@ -289,7 +289,7 @@ LilycoveCity_ContestHall_Text_Received3rdStarter:
 
 LilycoveCity_ContestHall_Text_WellEnterMoreContests:
 	.string "I'm gonna fully commit to my buddies\n"
-	.string "and enter more contest with them!\p"
+	.string "and enter more contests with them!\p"
 	.string "I believe that we can become contest\n"
 	.string "masters together!$"
 
