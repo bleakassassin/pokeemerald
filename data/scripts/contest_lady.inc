@@ -10,13 +10,10 @@ LilycoveCity_ContestHall_EventScript_ContestLady::
 	goto_if_eq VAR_CONTEST_LADY_STATE, 1, LilycoveCity_ContestHall_EventScript_WonContest
 	goto_if_eq VAR_CONTEST_LADY_STATE, 2, LilycoveCity_ContestHall_EventScript_LostContest
 	goto_if_eq VAR_CONTEST_LADY_STATE, 3, LilycoveCity_ContestHall_EventScript_StartFromScratch
+	specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
+	goto_if_eq VAR_RESULT, 1, LilycoveCity_ContestHall_EventScript_ReadyToEnterContests
 	specialvar VAR_RESULT, HasPlayerGivenContestLadyPokeblock
 	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_ContestHall_EventScript_AskForPokeblock
-	goto_if_unset FLAG_DAILY_GAVE_CONTEST_LADY_POKEBLOCK, LilycoveCity_ContestHall_EventScript_AskForAnotherPokeblock
-	msgbox LilycoveCity_ContestHall_Text_ThankForPokeblock, MSGBOX_DEFAULT
-	release
-	end
-
 LilycoveCity_ContestHall_EventScript_AskForAnotherPokeblock::
 	msgbox LilycoveCity_ContestHall_Text_AskingForAnotherPokeblock, MSGBOX_YESNO
 	goto LilycoveCity_ContestHall_EventScript_GiveAnotherPokeblock
@@ -24,7 +21,7 @@ LilycoveCity_ContestHall_EventScript_AskForAnotherPokeblock::
 LilycoveCity_ContestHall_EventScript_LostContest::
 	msgbox LilycoveCity_ContestHall_Text_WeDidntWin, MSGBOX_DEFAULT
 	setvar VAR_CONTEST_LADY_STATE, 0
-	goto_if_unset FLAG_DAILY_GAVE_CONTEST_LADY_POKEBLOCK, LilycoveCity_ContestHall_EventScript_AskForAnotherPokeblock
+	goto LilycoveCity_ContestHall_EventScript_AskForAnotherPokeblock
 	release
 	end
 
@@ -53,7 +50,6 @@ LilycoveCity_ContestHall_EventScript_DeclineGivePokeblock::
 @ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_ContestHall_EventScript_GivePokeblock::
 	msgbox LilycoveCity_ContestHall_Text_IllUseYourPokeblock, MSGBOX_DEFAULT
-	setflag FLAG_DAILY_GAVE_CONTEST_LADY_POKEBLOCK
 	special SetContestLadyGivenPokeblock
 	special GetContestLadyMonSpecies
 	applymovement VAR_LAST_TALKED, LilycoveCity_ContestHall_Movement_LadyFaceMon
@@ -92,8 +88,9 @@ LilycoveCity_ContestHall_EventScript_CheckAirContestLadyShow::
 	end
 
 LilycoveCity_ContestHall_EventScript_AirContestLadyShow::
-	msgbox LilycoveCity_ContestHall_Text_ReadyToEnterContests, MSGBOX_DEFAULT
 	special PutLilycoveContestLadyShowOnTheAir
+LilycoveCity_ContestHall_EventScript_ReadyToEnterContests::
+	msgbox LilycoveCity_ContestHall_Text_ReadyToEnterContests, MSGBOX_DEFAULT
 	release
 	end
 
@@ -209,9 +206,6 @@ LilycoveCity_ContestHall_Text_ImTheContestLady:
 	.string "I'm the CONTEST LADY!\n"
 	.string "I sure do love CONTESTS!$"
 
-LilycoveCity_ContestHall_Text_ThankForPokeblock:
-	.string "Thanks for your {POKEBLOCK} before!$"
-
 LilycoveCity_ContestHall_Text_MyFriendDisplaysQuality:
 	.string "This is my friend {STR_VAR_1}!\n"
 	.string "It's the epitome of {STR_VAR_2}!\p"
@@ -232,9 +226,10 @@ LilycoveCity_ContestHall_Text_AskingForOnePokeblock:
 	.string "All I'm asking for is one!$"
 
 LilycoveCity_ContestHall_Text_AskingForAnotherPokeblock:
-	.string "The {POKEBLOCK} I gave {STR_VAR_1} the other\n"
-	.string "day did all that it could.\p"
-	.string "We can do better, though!\n"
+	.string "Thanks for your {POKEBLOCK} before!\p"
+	.string "I think it did all that it could for\n"
+	.string "{STR_VAR_1}, though.\p"
+	.string "We can do better!\n"
 	.string "I want {STR_VAR_1} to show off as much\l"
 	.string "of its {STR_VAR_2} as possible!\p"
 	.string "I hope this isn't too much to ask, but\n"
@@ -309,13 +304,13 @@ LilycoveCity_ContestHall_Text_WeDidntWin:
 LilycoveCity_ContestHall_Text_WeLostBadly:
 	.string "I hope you didn't see our CONTEST.\n"
 	.string "We lost… badly.\p"
-	.string "It was probably the worst feeling\n"
-	.string "I've ever had in my life…\p"
+	.string "It was probably the worst feeling I've\n"
+	.string "ever had in my life…\p"
 	.string "… … … … … …\p"
-	.string "I decided it was best to start over\n"
-	.string "and build back up from square one.\p"
-	.string "I think I've still got what it takes\n"
-	.string "to be a master coordinator!$"
+	.string "I decided it was best to start over and\n"
+	.string "build back up from square one.\p"
+	.string "I think I've still got what it takes to be\n"
+	.string "a master coordinator!$"
 
 LilycoveCity_ContestHall_Text_Zigzagoon:
 	.string "{STR_VAR_1}: Guguuh!$"
