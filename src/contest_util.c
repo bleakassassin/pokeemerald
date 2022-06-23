@@ -2509,36 +2509,17 @@ void LoadLinkContestPlayerPalettes(void)
 {
     int i;
     u8 objectEventId;
-    int version;
     struct Sprite *sprite;
     static const u8 sContestantLocalIds[CONTESTANT_COUNT] = { 3, 4, 5, 14 };
 
-    gReservedSpritePaletteCount = 12;
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
         for (i = 0; i < gNumLinkContestPlayers; i++)
         {
             objectEventId = GetObjectEventIdByLocalIdAndMap(sContestantLocalIds[i], gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             sprite = &gSprites[gObjectEvents[objectEventId].spriteId];
-            sprite->oam.paletteNum = 6 + i;
-            version = (u8)gLinkPlayers[i].version;
-            if (version == VERSION_RUBY || version == VERSION_SAPPHIRE || gLinkPlayers[i].outfit == OUTFIT_RS)
-            {
-                if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gObjectEventPal_RubySapphireBrendan, 0x160 + i * 0x10, 0x20);
-                else
-                    LoadPalette(gObjectEventPal_RubySapphireMay, 0x160 + i * 0x10, 0x20);
-            }
-            else
-            {
-                if (gLinkPlayers[i].gender == MALE)
-                    LoadPalette(gObjectEventPal_Brendan, 0x160 + i * 0x10, 0x20);
-                else
-                    LoadPalette(gObjectEventPal_May, 0x160 + i * 0x10, 0x20);
-            }
         }
     }
-    gReservedSpritePaletteCount = 8;
 }
 
 bool8 GiveMonArtistRibbon(void)
