@@ -2051,7 +2051,7 @@ static void CB2_ReturnToPokeStorage(void)
     }
     else
     {
-        sStorage->boxOption = sCurrentBoxOption;
+        sStorage->boxOption = sMainMenuOptionOrder[sCurrentBoxOption];
         sStorage->isReopening = TRUE;
         sStorage->state = 0;
         sStorage->taskId = CreateTask(Task_InitPokeStorage, 3);
