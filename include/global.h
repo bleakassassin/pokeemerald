@@ -957,7 +957,8 @@ struct SaveBlock1
     /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    /*0x988*/ u8 seen1[NUM_DEX_FLAG_BYTES];
+    /*0x988*/ struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
+    /*0x9B4*/ u8 unused_9B4[8];
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 registeredItemLastSelected:4; //max 16 items
               u8 registeredItemListCount:4;
@@ -1018,17 +1019,16 @@ struct SaveBlock1
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
-    /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
+    /*0x3B24*/ struct ItemSlot bagPocket_Mail[BAG_MAIL_COUNT];
+    /*0x3B54*/ u8 unused_3B54[4];
     /*0x3B58*/ struct LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3D5A*/ u8 unused_3D5A[10];
     /*0x3D64*/ struct TrainerHillSave trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
-    /*0x3D88*/ struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
-    /*0x3DB4*/ struct ItemSlot bagPocket_Treasures[BAG_TREASURES_COUNT];
-    /*0x3E00*/ struct ItemSlot bagPocket_Mail[BAG_MAIL_COUNT];
-    // sizeof: 0x3E30
+    /*0x3D88*/ struct ItemSlot bagPocket_Treasures[BAG_TREASURES_COUNT];
+    // sizeof: 0x3DD4
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
