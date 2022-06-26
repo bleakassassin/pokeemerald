@@ -962,8 +962,7 @@ struct SaveBlock1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 registeredItemLastSelected:4; //max 16 items
               u8 registeredItemListCount:4;
-    /*0x9C3*/ u8 unused_9C3[1];
-    /*0x9C4*/ struct ContestLady contestLady;
+    /*0x9C3*/ u8 unused_9C3[5];
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
     /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
@@ -1020,7 +1019,7 @@ struct SaveBlock1
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ struct ItemSlot bagPocket_Mail[BAG_MAIL_COUNT];
-    /*0x3B54*/ u8 unused_3B54[4];
+    /*0x3B54*/ struct ContestLady contestLady;
     /*0x3B58*/ struct LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];

@@ -364,8 +364,6 @@ void FixImportedSave(void)
     u8 i;
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
-    struct BagPocket *battleitems = &gBagPockets[BATTLEITEMS_POCKET];
-    struct BagPocket *mail = &gBagPockets[MAIL_POCKET];
 
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
     {
@@ -381,13 +379,8 @@ void FixImportedSave(void)
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
         InitLilycoveLady();
 
-        for (i = 0;  i < 13; i++) // 13 * 4 is the size of the backup Pokedex "seen" indexes
-        {
-            battleitems->itemSlots[i].itemId =  ITEM_NONE;
-            battleitems->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
-            mail->itemSlots[i].itemId =  ITEM_NONE;
-            mail->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
-        }
+        ClearItemSlots(gSaveBlock1Ptr->bagPocket_BattleItems, BAG_BATTLEITEMS_COUNT);
+        ClearItemSlots(gSaveBlock1Ptr->bagPocket_Mail, BAG_MAIL_COUNT);
 
         for (i = 0; i < TM_FLAGS; i++)
         {
