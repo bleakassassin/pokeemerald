@@ -364,32 +364,8 @@ void FixImportedSave(void)
     u8 i;
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
-        
-    for (i = 0; i < BAG_MEDICINE_COUNT; i++) // BAG_MEDICINE_COUNT is the same as BAG_KEYITEMS_COUNT (30)
-    {
-        if (ItemId_GetPocket(medicine->itemSlots[i].itemId) != POCKET_MEDICINE) // Check for items moved to new pockets
-        {
-            AddBagItem(medicine->itemSlots[i].itemId, medicine->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
-            medicine->itemSlots[i].itemId =  ITEM_NONE;
-            medicine->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
-        }
-
-        if (ItemId_GetPocket(keyitems->itemSlots[i].itemId) != POCKET_KEY_ITEMS) // Check for fossils
-        {
-            AddBagItem(keyitems->itemSlots[i].itemId, keyitems->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
-            keyitems->itemSlots[i].itemId =  ITEM_NONE;
-            keyitems->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
-        }
-    }
-    if (gSaveBlock1Ptr->pcItems[0].itemId != ITEM_NONE && FlagGet(FLAG_SYS_NATIVE_SAVE) == TRUE) // Move PC items to bag if not imported save
-    {
-        for (i = 0; i < PC_ITEMS_COUNT; i++)
-        {
-            AddBagItem(gSaveBlock1Ptr->pcItems[i].itemId, gSaveBlock1Ptr->pcItems[i].quantity);
-            gSaveBlock1Ptr->pcItems[i].itemId = ITEM_NONE;
-            gSaveBlock1Ptr->pcItems[i].quantity = 0;
-        }
-    }
+    struct BagPocket *battleitems = &gBagPockets[BATTLEITEMS_POCKET];
+    struct BagPocket *mail = &gBagPockets[MAIL_POCKET];
 
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
     {
@@ -405,6 +381,14 @@ void FixImportedSave(void)
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
         InitLilycoveLady();
 
+        for (i = 0;  i < 13; i++) // 13 * 4 is the size of the backup Pokedex "seen" indexes
+        {
+            battleitems->itemSlots[i].itemId =  ITEM_NONE;
+            battleitems->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
+            mail->itemSlots[i].itemId =  ITEM_NONE;
+            mail->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
+        }
+
         for (i = 0; i < TM_FLAGS; i++)
         {
             if (FlagGet(sTMFlagChecks[i][0]))
@@ -418,11 +402,6 @@ void FixImportedSave(void)
             RemoveBagItem(ITEM_MACH_BIKE, 1);
             RemoveBagItem(ITEM_ACRO_BIKE, 1);
             AddBagItem(ITEM_BICYCLE, 1);
-        }
-        if (CheckBagHasItem(ITEM_ROOT_FOSSIL, 1) == TRUE)
-        {
-            RemoveBagItem(ITEM_ROOT_FOSSIL, 1);
-            AddBagItem(ITEM_ROOT_FOSSIL, 1);
         }
         if (gSaveBlock1Ptr->mapLayoutId == 420)
         {
@@ -472,6 +451,33 @@ void FixImportedSave(void)
         }
         VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
     }
+        
+    for (i = 0; i < BAG_MEDICINE_COUNT; i++) // BAG_MEDICINE_COUNT is the same as BAG_KEYITEMS_COUNT (30)
+    {
+        if (ItemId_GetPocket(medicine->itemSlots[i].itemId) != POCKET_MEDICINE) // Check for items moved to new pockets
+        {
+            AddBagItem(medicine->itemSlots[i].itemId, medicine->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
+            medicine->itemSlots[i].itemId =  ITEM_NONE;
+            medicine->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
+        }
+
+        if (ItemId_GetPocket(keyitems->itemSlots[i].itemId) != POCKET_KEY_ITEMS) // Check for fossils
+        {
+            AddBagItem(keyitems->itemSlots[i].itemId, keyitems->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
+            keyitems->itemSlots[i].itemId =  ITEM_NONE;
+            keyitems->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
+        }
+    }
+    if (gSaveBlock1Ptr->pcItems[0].itemId != ITEM_NONE && FlagGet(FLAG_SYS_NATIVE_SAVE) == TRUE) // Move PC items to bag if not imported save
+    {
+        for (i = 0; i < PC_ITEMS_COUNT; i++)
+        {
+            AddBagItem(gSaveBlock1Ptr->pcItems[i].itemId, gSaveBlock1Ptr->pcItems[i].quantity);
+            gSaveBlock1Ptr->pcItems[i].itemId = ITEM_NONE;
+            gSaveBlock1Ptr->pcItems[i].quantity = 0;
+        }
+    }
+
 }
 
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)
