@@ -88,7 +88,7 @@ static const sItemFunctions[MENUITEM_COUNT] =
 {
     [MENUITEM_TEXTSPEED]    = {DrawChoices_TextSpeed,   ProcessInput_Options_Three},
     [MENUITEM_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
-    [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
+    [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Three},
     [MENUITEM_ATTACKSTYLE]  = {DrawChoices_AttackStyle, ProcessInput_Options_Two},
     [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Sound},
     [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Two},
@@ -180,7 +180,7 @@ static const struct BgTemplate sOptionMenuBgTemplates[] =
 static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};// Descriptions
 static const u8 sText_TextSpeed[]   = _("Choose text-scrolling speed.");
 static const u8 sText_BattleScene[] = _("Toggle in-battle animations.");
-static const u8 sText_Difficulty[]  = _("Set battle difficulty.");
+static const u8 sText_Difficulty[]  = _("Set battle difficulty and EXP. gain.");
 static const u8 sText_AttackStyle[] = _("Set what determines attack power.");
 static const u8 sText_MatchCall[]   = _("Toggle calls from other TRAINERS.");
 static const u8 sText_Sound[]       = _("Set audio output.");
@@ -282,7 +282,7 @@ void CB2_InitOptionMenu(void)
         sOptions = AllocZeroed(sizeof(*sOptions));
         sOptions->sel[MENUITEM_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
         sOptions->sel[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
-        sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
+        sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsDifficulty;
         sOptions->sel[MENUITEM_ATTACKSTYLE] = gSaveBlock2Ptr->optionsAttackStyle;
         sOptions->sel[MENUITEM_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
         sOptions->sel[MENUITEM_SOUND]       = gSaveBlock2Ptr->optionsSound;
@@ -469,7 +469,7 @@ static void Task_OptionMenuSave(u8 taskId)
 {
     gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_TEXTSPEED];
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_BATTLESCENE];
-    gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_BATTLESTYLE];
+    gSaveBlock2Ptr->optionsDifficulty      = sOptions->sel[MENUITEM_BATTLESTYLE];
     gSaveBlock2Ptr->optionsAttackStyle      = sOptions->sel[MENUITEM_ATTACKSTYLE];
     gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel[MENUITEM_MATCHCALL];
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_SOUND];
@@ -623,12 +623,9 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 
 static void DrawChoices_TextSpeed(int selection, int y)
 {
-    u8 styles[3];
+    u8 styles[3] = {0};
     s32 widthSlow, widthMid, widthFast, xMid;
 
-    styles[0] = 0;
-    styles[1] = 0;
-    styles[2] = 0;
     styles[selection] = 1;
 
     DrawOptionMenuChoice(gText_TextSpeedSlow, 104, y, styles[0]);
@@ -656,12 +653,22 @@ static void DrawChoices_BattleScene(int selection, int y)
 
 static void DrawChoices_BattleStyle(int selection, int y)
 {
-    u8 styles[2] = {0};
+    u8 styles[3] = {0};
+    s32 widthEasy, widthNormal, widthHard, xMid;
 
     styles[selection] = 1;
 
-    DrawOptionMenuChoice(gText_BattleStyleShift, 104, y, styles[0]);
-    DrawOptionMenuChoice(gText_BattleStyleSet, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleStyleSet, 214), y, styles[1]);
+    DrawOptionMenuChoice(gText_DifficultyEasy, 104, y, styles[0]);
+
+    widthEasy = GetStringWidth(FONT_NORMAL, gText_DifficultyEasy, 0);
+    widthNormal = GetStringWidth(FONT_NORMAL, gText_DifficultyNormal, 0);
+    widthHard = GetStringWidth(FONT_NORMAL, gText_DifficultyHard, 0);
+
+    widthNormal -= 94;
+    xMid = (widthEasy - widthNormal - widthHard) / 2 + 112;
+
+    DrawOptionMenuChoice(gText_DifficultyNormal, xMid, y, styles[1]);
+    DrawOptionMenuChoice(gText_DifficultyHard, GetStringRightAlignXOffset(FONT_NORMAL, gText_DifficultyHard, 214), y, styles[2]);
 }
 
 static void DrawChoices_AttackStyle(int selection, int y)

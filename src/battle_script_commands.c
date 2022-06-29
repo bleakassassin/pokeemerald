@@ -3275,7 +3275,7 @@ static void Cmd_getexp(void)
                 else
                     holdEffect = ItemId_GetHoldEffect(item);
 
-                if (holdEffect == HOLD_EFFECT_EXP_SHARE)
+                if (holdEffect == HOLD_EFFECT_EXP_SHARE && gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_EASY)
                     viaExpShare++;
             }
 
@@ -3288,6 +3288,17 @@ static void Cmd_getexp(void)
                     *exp = 1;
 
                 gExpShareExp = calculatedExp / 2 / viaExpShare;
+                if (gExpShareExp == 0)
+                    gExpShareExp = 1;
+            }
+            else if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_EASY) // difficulty is set to easy
+            {
+                *exp = SAFE_DIV(calculatedExp / 2, viaSentIn);
+                if (*exp == 0)
+                    *exp = 1;
+
+                viaExpShare = gSaveBlock1Ptr->playerPartyCount;
+                gExpShareExp = calculatedExp / 2;
                 if (gExpShareExp == 0)
                     gExpShareExp = 1;
             }
@@ -3314,13 +3325,15 @@ static void Cmd_getexp(void)
             else
                 holdEffect = ItemId_GetHoldEffect(item);
 
-            if (holdEffect != HOLD_EFFECT_EXP_SHARE && !(gBattleStruct->sentInPokes & 1))
+            if (holdEffect != HOLD_EFFECT_EXP_SHARE && gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_EASY && !(gBattleStruct->sentInPokes & 1))
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
-            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL
+                || GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_IS_EGG)
+                || !GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SANITY_HAS_SPECIES))
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.getexpState = 5;
@@ -3343,7 +3356,7 @@ static void Cmd_getexp(void)
                     else
                         gBattleMoveDamage = 0;
 
-                    if (holdEffect == HOLD_EFFECT_EXP_SHARE)
+                    if (holdEffect == HOLD_EFFECT_EXP_SHARE || gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_EASY)
                         gBattleMoveDamage += gExpShareExp;
                     if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
