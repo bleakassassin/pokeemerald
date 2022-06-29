@@ -2847,7 +2847,7 @@ BattleScript_FaintedMonTryChoose::
 	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_FaintedMonSendOutNew
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonSendOutNew
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonSendOutNew
-	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, OPTIONS_BATTLE_STYLE_SET, BattleScript_FaintedMonSendOutNew
+	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, OPTIONS_DIFFICULTY_HARD, BattleScript_FaintedMonSendOutNew
 	jumpifcantswitch BS_PLAYER1, BattleScript_FaintedMonSendOutNew
 @ Yes/No for sending out a new Pokémon when the opponent is switching
 	printstring STRINGID_ENEMYABOUTTOSWITCHPKMN
@@ -3056,22 +3056,22 @@ BattleScript_FrontierTrainerBattleWon_End:
 BattleScript_SmokeBallEscape::
 	playanimation BS_ATTACKER, B_ANIM_SMOKEBALL_ESCAPE
 	printstring STRINGID_PKMNFLEDUSINGITS
-	waitmessage B_WAIT_TIME_LONG
+	waitmessage B_WAIT_TIME_SHORT
 	end2
 
 BattleScript_RanAwayUsingMonAbility::
 	printstring STRINGID_PKMNFLEDUSING
-	waitmessage B_WAIT_TIME_LONG
+	waitmessage B_WAIT_TIME_SHORT
 	end2
 
 BattleScript_GotAwaySafely::
 	printstring STRINGID_GOTAWAYSAFELY
-	waitmessage B_WAIT_TIME_LONG
+	waitmessage B_WAIT_TIME_SHORT
 	end2
 
 BattleScript_WildMonFled::
 	printstring STRINGID_WILDPKMNFLED
-	waitmessage B_WAIT_TIME_LONG
+	waitmessage B_WAIT_TIME_SHORT
 	end2
 
 BattleScript_PrintCantRunFromTrainer::
@@ -3080,7 +3080,7 @@ BattleScript_PrintCantRunFromTrainer::
 
 BattleScript_PrintFailedToRunString::
 	printfromtable gNoEscapeStringIds
-	waitmessage B_WAIT_TIME_LONG
+	waitmessage B_WAIT_TIME_MED
 	end2
 
 BattleScript_PrintCantEscapeFromBattle::

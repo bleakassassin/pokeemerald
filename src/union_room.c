@@ -289,19 +289,19 @@ static void PrintNumPlayersWaitingForMsg(u8 windowId, u8 capacityCode, u8 string
     switch (capacityCode << 8)
     {
     case LINK_GROUP_CAPACITY(0, 2):
-        PrintUnionRoomText(windowId, 1, sPlayersNeededOrModeTexts[0][stringId - 1], 0, 1, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, gSaveBlock2Ptr->optionsCurrentFont, sPlayersNeededOrModeTexts[0][stringId - 1], 0, 0, UR_COLOR_DEFAULT);
         break;
     case LINK_GROUP_CAPACITY(0, 4):
-        PrintUnionRoomText(windowId, 1, sPlayersNeededOrModeTexts[1][stringId - 1], 0, 1, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, gSaveBlock2Ptr->optionsCurrentFont, sPlayersNeededOrModeTexts[1][stringId - 1], 0, 0, UR_COLOR_DEFAULT);
         break;
     case LINK_GROUP_CAPACITY(2, 5):
-        PrintUnionRoomText(windowId, 1, sPlayersNeededOrModeTexts[2][stringId - 1], 0, 1, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, gSaveBlock2Ptr->optionsCurrentFont, sPlayersNeededOrModeTexts[2][stringId - 1], 0, 0, UR_COLOR_DEFAULT);
         break;
     case LINK_GROUP_CAPACITY(3, 5):
-        PrintUnionRoomText(windowId, 1, sPlayersNeededOrModeTexts[3][stringId - 1], 0, 1, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, gSaveBlock2Ptr->optionsCurrentFont, sPlayersNeededOrModeTexts[3][stringId - 1], 0, 0, UR_COLOR_DEFAULT);
         break;
     case LINK_GROUP_CAPACITY(2, 4):
-        PrintUnionRoomText(windowId, 1, sPlayersNeededOrModeTexts[4][stringId - 1], 0, 1, UR_COLOR_DEFAULT);
+        PrintUnionRoomText(windowId, gSaveBlock2Ptr->optionsCurrentFont, sPlayersNeededOrModeTexts[4][stringId - 1], 0, 0, UR_COLOR_DEFAULT);
         break;
     }
 
@@ -313,10 +313,10 @@ static void PrintPlayerNameAndIdOnWindow(u8 windowId)
     u8 text[30];
     u8 *txtPtr;
 
-    PrintUnionRoomText(windowId, 1, gSaveBlock2Ptr->playerName, 0, 1, UR_COLOR_DEFAULT);
+    PrintUnionRoomText(windowId, gSaveBlock2Ptr->optionsCurrentFont, gSaveBlock2Ptr->playerName, 0, 0, UR_COLOR_DEFAULT);
     txtPtr = StringCopy(text, sText_ID);
     ConvertIntToDecimalStringN(txtPtr, ReadAsU16(gSaveBlock2Ptr->playerTrainerId), STR_CONV_MODE_LEADING_ZEROS, 5);
-    PrintUnionRoomText(windowId, 1, text, 0, 17, UR_COLOR_DEFAULT);
+    PrintUnionRoomText(windowId, gSaveBlock2Ptr->optionsCurrentFont, text, 0, 16, UR_COLOR_DEFAULT);
 }
 
 static void GetAwaitingCommunicationText(u8 *dst, u8 caseId)

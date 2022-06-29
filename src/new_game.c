@@ -93,14 +93,15 @@ static void SetDefaultOptions(void)
 {
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
-    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
-    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
+    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
+    gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->optionsAttackStyle = OPTIONS_ATTACK_STYLE_TYPE;
     gSaveBlock2Ptr->optionsDisableMatchCall = FALSE;
     gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock2Ptr->optionsUnitSystem = 0;
+    gSaveBlock2Ptr->optionsCurrentFont = FONT_NORMAL;
 }
 
 static void ClearPokedexFlags(void)
