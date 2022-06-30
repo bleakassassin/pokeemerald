@@ -3175,12 +3175,14 @@ static void BufferMonTrainerMemo(void)
                 else
                     GetMapNameGeneric(metLocationString, MAPSEC_AQUA_HIDEOUT);
             }
-            else if (sum->metLocation == MAPSEC_ROUTE_130)
+            else if (sum->metLocation == MAPSEC_ROUTE_130 && sum->metLevel > 0)
             {
                 u8 i;
+                GetMapNameGeneric(metLocationString, sum->metLocation);
+
                 for (i = 0; i < ARRAY_COUNT(sPossibleMirageIslandSpecies); i++)
                 {
-                    if ((sum->species == sPossibleMirageIslandSpecies[i]) && sum->metLevel > 0)
+                    if ((sum->species == sPossibleMirageIslandSpecies[i]))
                         GetMapNameGeneric(metLocationString, MAPSEC_MIRAGE_ISLAND);
                 }
             }
