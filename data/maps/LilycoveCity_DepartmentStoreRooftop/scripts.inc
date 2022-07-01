@@ -71,11 +71,9 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_VendingMachine::
 	message LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike
 	waitmessage
 	showmoneybox 0, 0
-	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink
-	end
-
-LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink::
+LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink_FreshWater::
 	multichoice 16, 0, MULTI_VENDING_MACHINE, FALSE
+LilycoveCity_DepartmentStoreRooftop_EventScript_ConfirmDrink::
 	copyvar VAR_TEMP_1, VAR_RESULT
 	switch VAR_TEMP_1
 	case 0, LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater
@@ -83,7 +81,6 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink::
 	case 2, LilycoveCity_DepartmentStoreRooftop_EventScript_Lemonade
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink, MSGBOX_DEFAULT
 	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine
-	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_FreshWater::
 	setvar VAR_TEMP_0, ITEM_FRESH_WATER
@@ -142,7 +139,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink::
 	bufferitemname STR_VAR_2, VAR_TEMP_0
 	bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
-	random 64  @ 1/64 chance of an additional drink dropping
+	random 32  @ 1/32 chance of an additional drink dropping
 	goto_if_ne VAR_RESULT, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink
 	checkitemspace VAR_TEMP_0
 	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink
@@ -152,7 +149,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink::
 	bufferitemname STR_VAR_2, VAR_TEMP_0
 	bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
-	random 64  @ 1/64 * the prev 1/64 chance of a third additional drink dropping, ~ 0.02% chance
+	random 32  @ 1/32 * the prev 1/32 chance of a third additional drink dropping, ~ 0.10% chance
 	goto_if_ne VAR_RESULT, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink
 	checkitemspace VAR_TEMP_0
 	goto_if_eq VAR_RESULT, 0, LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink
@@ -162,14 +159,18 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink::
 	bufferitemname STR_VAR_2, VAR_TEMP_0
 	bufferstdstring STR_VAR_3, STDSTRING_MEDICINE
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
-	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink
-	end
-
 LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseNewDrink::
 	message LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike
 	waitmessage
-	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink
-	end
+	switch VAR_TEMP_1
+	case 0, LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink_FreshWater
+	case 1, LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink_SodaPop
+	multichoicedefault 16, 0, MULTI_VENDING_MACHINE, 2, FALSE
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ConfirmDrink
+
+LilycoveCity_DepartmentStoreRooftop_EventScript_ChooseDrink_SodaPop::
+	multichoicedefault 16, 0, MULTI_VENDING_MACHINE, 1, FALSE
+	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ConfirmDrink
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_NotEnoughMoneyForDrink::
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_NotEnoughMoney, MSGBOX_DEFAULT
@@ -178,9 +179,6 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_NotEnoughMoneyForDrink::
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_NoRoomForDrink::
 	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
-	goto LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine
-	end
-
 LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine::
 	hidemoneybox
 	releaseall
