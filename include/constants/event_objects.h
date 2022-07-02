@@ -2,7 +2,7 @@
 #define GUARD_CONSTANTS_EVENT_OBJECTS_H
 
 #define OBJ_EVENT_GFX_BRENDAN_NORMAL               0
-#define OBJ_EVENT_GFX_BRENDAN_MACH_BIKE            1
+#define OBJ_EVENT_GFX_BRENDAN_BIKE                 1
 #define OBJ_EVENT_GFX_BRENDAN_SURFING              2
 #define OBJ_EVENT_GFX_BRENDAN_FIELD_MOVE           3
 #define OBJ_EVENT_GFX_QUINTY_PLUMP                 4
@@ -64,7 +64,7 @@
 #define OBJ_EVENT_GFX_BERRY_TREE                  60
 #define OBJ_EVENT_GFX_BERRY_TREE_EARLY_STAGES     61
 #define OBJ_EVENT_GFX_BERRY_TREE_LATE_STAGES      62
-#define OBJ_EVENT_GFX_BRENDAN_ACRO_BIKE           63
+#define OBJ_EVENT_GFX_UNUSED_63                   63
 #define OBJ_EVENT_GFX_PROF_BIRCH                  64
 #define OBJ_EVENT_GFX_MAN_4                       65
 #define OBJ_EVENT_GFX_MAN_5                       66
@@ -91,8 +91,8 @@
 #define OBJ_EVENT_GFX_PUSHABLE_BOULDER            87
 #define OBJ_EVENT_GFX_MR_BRINEYS_BOAT             88
 #define OBJ_EVENT_GFX_MAY_NORMAL                  89
-#define OBJ_EVENT_GFX_MAY_MACH_BIKE               90
-#define OBJ_EVENT_GFX_MAY_ACRO_BIKE               91
+#define OBJ_EVENT_GFX_UNUSED_90                   90
+#define OBJ_EVENT_GFX_MAY_BIKE                    91
 #define OBJ_EVENT_GFX_MAY_SURFING                 92
 #define OBJ_EVENT_GFX_MAY_FIELD_MOVE              93
 #define OBJ_EVENT_GFX_TRUCK                       94
@@ -102,13 +102,13 @@
 #define OBJ_EVENT_GFX_ZIGZAGOON_1                 98
 #define OBJ_EVENT_GFX_ARTIST                      99
 #define OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL       100
-#define OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE    101
-#define OBJ_EVENT_GFX_RIVAL_BRENDAN_ACRO_BIKE    102
+#define OBJ_EVENT_GFX_RIVAL_BRENDAN_BIKE         101
+#define OBJ_EVENT_GFX_MACHOKE_CARRYING_BOX       102
 #define OBJ_EVENT_GFX_RIVAL_BRENDAN_SURFING      103
 #define OBJ_EVENT_GFX_RIVAL_BRENDAN_FIELD_MOVE   104
 #define OBJ_EVENT_GFX_RIVAL_MAY_NORMAL           105
-#define OBJ_EVENT_GFX_RIVAL_MAY_MACH_BIKE        106
-#define OBJ_EVENT_GFX_RIVAL_MAY_ACRO_BIKE        107
+#define OBJ_EVENT_GFX_RIVAL_MAY_BIKE             106
+#define OBJ_EVENT_GFX_MACHOKE_FACING_AWAY        107
 #define OBJ_EVENT_GFX_RIVAL_MAY_SURFING          108
 #define OBJ_EVENT_GFX_RIVAL_MAY_FIELD_MOVE       109
 #define OBJ_EVENT_GFX_CAMERAMAN                  110
@@ -241,23 +241,19 @@
 #define OBJ_EVENT_GFX_LUGIA                      237
 #define OBJ_EVENT_GFX_HOOH                       238
 #define OBJ_EVENT_GFX_RS_BRENDAN_NORMAL          239
-#define OBJ_EVENT_GFX_RS_BRENDAN_MACH_BIKE       240
-#define OBJ_EVENT_GFX_RS_BRENDAN_ACRO_BIKE       241
-#define OBJ_EVENT_GFX_RS_BRENDAN_SURFING         242
-#define OBJ_EVENT_GFX_RS_BRENDAN_FIELD_MOVE      243
-#define OBJ_EVENT_GFX_RS_BRENDAN_FISHING         244
-#define OBJ_EVENT_GFX_RS_BRENDAN_WATERING        245
-#define OBJ_EVENT_GFX_RS_BRENDAN_DECORATING      246
-#define OBJ_EVENT_GFX_RS_MAY_NORMAL              247
-#define OBJ_EVENT_GFX_RS_MAY_MACH_BIKE           248
-#define OBJ_EVENT_GFX_RS_MAY_ACRO_BIKE           249
-#define OBJ_EVENT_GFX_RS_MAY_SURFING             250
-#define OBJ_EVENT_GFX_RS_MAY_FIELD_MOVE          251
-#define OBJ_EVENT_GFX_RS_MAY_FISHING             252
-#define OBJ_EVENT_GFX_RS_MAY_WATERING            253
-#define OBJ_EVENT_GFX_RS_MAY_DECORATING          254
-#define OBJ_EVENT_GFX_MACHOKE_CARRYING_BOX       255
-#define OBJ_EVENT_GFX_MACHOKE_FACING_AWAY        256
+#define OBJ_EVENT_GFX_RS_BRENDAN_BIKE            240
+#define OBJ_EVENT_GFX_RS_BRENDAN_SURFING         241
+#define OBJ_EVENT_GFX_RS_BRENDAN_FIELD_MOVE      242
+#define OBJ_EVENT_GFX_RS_BRENDAN_FISHING         243
+#define OBJ_EVENT_GFX_RS_BRENDAN_WATERING        244
+#define OBJ_EVENT_GFX_RS_BRENDAN_DECORATING      245
+#define OBJ_EVENT_GFX_RS_MAY_NORMAL              246
+#define OBJ_EVENT_GFX_RS_MAY_BIKE                247
+#define OBJ_EVENT_GFX_RS_MAY_SURFING             248
+#define OBJ_EVENT_GFX_RS_MAY_FIELD_MOVE          249
+#define OBJ_EVENT_GFX_RS_MAY_FISHING             250
+#define OBJ_EVENT_GFX_RS_MAY_WATERING            251
+#define OBJ_EVENT_GFX_RS_MAY_DECORATING          252
 
 // NOTE: By default, the max value for NUM_OBJ_EVENT_GFX is 239.
 //
@@ -268,7 +264,7 @@
 // object graphics that can be removed. If more graphics are needed, anything that
 // stores graphics ids will need to be increased in size. See wiki entry below:
 // https://github.com/pret/pokeemerald/wiki/Feature-Branches#overworld-expansion
-#define NUM_OBJ_EVENT_GFX                        257
+#define NUM_OBJ_EVENT_GFX                        253
 
 
 // These are dynamic object gfx ids.

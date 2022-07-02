@@ -13,9 +13,6 @@ $(OBJEVENTGFXDIR)/people/brendan/field_move.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/brendan/surfing.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/brendan/mach_bike.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 4 -mheight 4
-
 $(OBJEVENTGFXDIR)/people/brendan/acro_bike.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
@@ -104,9 +101,6 @@ $(OBJEVENTGFXDIR)/people/may/field_move.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/may/surfing.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/may/mach_bike.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 4 -mheight 4
-
 $(OBJEVENTGFXDIR)/people/may/acro_bike.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
@@ -132,9 +126,6 @@ $(OBJEVENTGFXDIR)/people/ruby_sapphire_brendan/field_move.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/ruby_sapphire_brendan/surfing.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(OBJEVENTGFXDIR)/people/ruby_sapphire_brendan/mach_bike.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 4 -mheight 4
-
 $(OBJEVENTGFXDIR)/people/ruby_sapphire_brendan/acro_bike.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
@@ -155,9 +146,6 @@ $(OBJEVENTGFXDIR)/people/ruby_sapphire_may/field_move.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/ruby_sapphire_may/surfing.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 4 -mheight 4
-
-$(OBJEVENTGFXDIR)/people/ruby_sapphire_may/mach_bike.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(OBJEVENTGFXDIR)/people/ruby_sapphire_may/acro_bike.4bpp: %.4bpp: %.png
