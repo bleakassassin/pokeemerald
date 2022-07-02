@@ -119,12 +119,12 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             input->heldDirection = TRUE;
             input->heldDirection2 = TRUE;
         }
-        if (newKeys & R_BUTTON)
-            input->pressedRButton = TRUE;
     }
 
     if (forcedMove == FALSE)
     {
+        if (newKeys & R_BUTTON)
+            input->pressedRButton = TRUE;
         if (tileTransitionState == T_TILE_CENTER && runningState == MOVING)
             input->tookStep = TRUE;
         if (forcedMove == FALSE && tileTransitionState == T_TILE_CENTER)
@@ -140,6 +140,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     struct MapPosition position;
     u8 playerDirection;
     u16 metatileBehavior;
+    u8 tileTransitionState = gPlayerAvatar.tileTransitionState;
 
     gSpecialVar_LastTalked = 0;
     gSelectedObjectEvent = 0;
@@ -201,19 +202,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedRButton && EnableAutoRun())
         return TRUE;
 
-    if (input->pressedRButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    if (input->pressedRButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_BIKE))
     {
-        if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
+        if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_BIKE) && FlagGet(FLAG_MACH_GEAR))
         {
-            SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
             FlagClear(FLAG_MACH_GEAR);
             PlaySE(SE_BIKE_BELL);
         }
         else if (gPlayerAvatar.acroBikeState == ACRO_STATE_NORMAL)
         {
-            SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_MACH_BIKE);
             FlagSet(FLAG_MACH_GEAR);
-            ObjectEventClearHeldMovementIfActive(&gObjectEvents[gPlayerAvatar.objectEventId]);
             PlaySE(SE_BIKE_BELL);
             if (gPlayerAvatar.runningState == MOVING)
                 gPlayerAvatar.bikeFrameCounter = 20;
