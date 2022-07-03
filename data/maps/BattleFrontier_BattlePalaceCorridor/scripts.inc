@@ -124,7 +124,7 @@ BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom:
 BattleFrontier_BattlePalaceCorridor_Text_PeopleAndMonAreSame:
 	.string "People and Pokémon, they are but\n"
 	.string "the same…\p"
-	.string "Their individual NATURE makes them\n"
+	.string "Their individual Nature makes them\n"
 	.string "good at certain things, and not good\l"
 	.string "at others.$"
 
