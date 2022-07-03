@@ -364,6 +364,8 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerEnter::
 BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerSilver::
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_LetsSeeYourStrategy, MSGBOX_DEFAULT
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_DoTuckerBattle
+	special SpawnCameraObject
+	setobjectxyperm OBJ_EVENT_ID_CAMERA, 9, 5
 	switch VAR_RESULT
 	case B_OUTCOME_LOST, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker
 	case B_OUTCOME_FORFEITED, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker
@@ -392,6 +394,8 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerGoldIntro::
 BattleFrontier_BattleDomeBattleRoom_EventScript_BattleTuckerGold::
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_UnleashAllPowerIPossess, MSGBOX_DEFAULT
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_DoTuckerBattle
+	special SpawnCameraObject
+	setobjectxyperm OBJ_EVENT_ID_CAMERA, 9, 5
 	switch VAR_RESULT
 	case B_OUTCOME_LOST, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker
 	case B_OUTCOME_FORFEITED, BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker
@@ -418,6 +422,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DoTuckerBattle::
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerStepForward2
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerStepForward
 	waitmovement 0
+	special RemoveCameraObject
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle
 	return
 
