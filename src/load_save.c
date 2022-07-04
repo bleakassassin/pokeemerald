@@ -372,7 +372,6 @@ void FixImportedSave(void)
         FlagClear(FLAG_REMATCH_GLACIA);
         FlagClear(FLAG_REMATCH_DRAKE);
         FlagClear(FLAG_REMATCH_WALLACE);
-        FlagClear(FLAG_CAUGHT_ROAMING_LATI);
         FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
         FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
 

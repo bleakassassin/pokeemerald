@@ -276,7 +276,7 @@
 #define FLAG_RECEIVED_BELUE_BERRY            0xFC
 #define FLAG_ENABLE_RIVAL_MATCH_CALL         0xFD
 #define FLAG_RECEIVED_CHARCOAL               0xFE
-#define FLAG_CAUGHT_ROAMING_LATI             0xFF // Edited Flag; previously did nothing, now only gets checked if player caught roaming Latios/Latias
+#define FLAG_DEFEATED_ROAMING_LATI           0xFF // Edited Flag; previously did nothing, now only gets checked if player defeats roaming Latios/Latias
 #define FLAG_RECEIVED_REPEAT_BALL            0x100
 #define FLAG_RECEIVED_OLD_ROD                0x101
 #define FLAG_RECEIVED_COIN_CASE              0x102
