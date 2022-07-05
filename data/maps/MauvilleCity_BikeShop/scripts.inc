@@ -33,11 +33,9 @@ MauvilleCity_BikeShop_EventScript_Assistant::
 	end
 
 MauvilleCity_BikeShop_EventScript_MachBikeHandbook::
+	lock
 	message MauvilleCity_BikeShop_Text_MachHandbookWhichPage
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
-	end
-
 MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage::
 	multichoice 0, 0, MULTI_MACH_BIKE_INFO, FALSE
 	switch VAR_RESULT
@@ -52,30 +50,25 @@ MauvilleCity_BikeShop_EventScript_HowToRide::
 	message MauvilleCity_BikeShop_Text_HowToRideMachBike
 	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
-	end
 
 MauvilleCity_BikeShop_EventScript_HowToTurn::
 	message MauvilleCity_BikeShop_Text_HowToTurnMachBike
 	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
-	end
 
 MauvilleCity_BikeShop_EventScript_SandySlopes::
 	message MauvilleCity_BikeShop_Text_SandySlopes
 	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage
-	end
 
 MauvilleCity_BikeShop_EventScript_ExitMachHandbook::
 	release
 	end
 
 MauvilleCity_BikeShop_EventScript_AcroBikeHandbook::
+	lock
 	message MauvilleCity_BikeShop_Text_AcroHandbookWhichPage
 	waitmessage
-	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
-	end
-
 MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage::
 	multichoice 0, 0, MULTI_ACRO_BIKE_INFO, FALSE
 	switch VAR_RESULT
@@ -90,19 +83,16 @@ MauvilleCity_BikeShop_EventScript_Wheelies::
 	message MauvilleCity_BikeShop_Text_Wheelies
 	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
-	end
 
 MauvilleCity_BikeShop_EventScript_BunnyHops::
 	message MauvilleCity_BikeShop_Text_BunnyHops
 	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
-	end
 
 MauvilleCity_BikeShop_EventScript_Jumps::
 	message MauvilleCity_BikeShop_Text_Jumps
 	waitmessage
 	goto MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage
-	end
 
 MauvilleCity_BikeShop_EventScript_ExitAcroHandbook::
 	release

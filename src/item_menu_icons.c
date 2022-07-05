@@ -430,6 +430,8 @@ void RemoveBagSprite(u8 id)
     u8 *spriteId = &gBagMenu->spriteIds[id];
     if (*spriteId != SPRITE_NONE)
     {
+        FreeSpriteTilesByTag(id + TAG_BAG_GFX);
+        FreeSpritePaletteByTag(id + TAG_BAG_GFX);
         FreeSpriteOamMatrix(&gSprites[*spriteId]);
         DestroySprite(&gSprites[*spriteId]);
         *spriteId = SPRITE_NONE;
@@ -565,7 +567,13 @@ void RemoveBagItemIconSprite(u8 id)
 //         spriteId[id] = SPRITE_NONE;
 //     }
 // #else
-    RemoveBagSprite(id + ITEMMENUSPRITE_ITEM);
+    u8 *spriteId = &gBagMenu->spriteIds[id + ITEMMENUSPRITE_ITEM];
+    if (*spriteId != SPRITE_NONE)
+    {
+        FreeSpriteOamMatrix(&gSprites[*spriteId]);
+        DestroySprite(&gSprites[*spriteId]);
+        *spriteId = SPRITE_NONE;
+    }
 // #endif
 }
 

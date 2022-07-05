@@ -1021,11 +1021,11 @@ static void ItemStorage_MoveCursor(s32 id, bool8 onInit, struct ListMenu *list)
         PlaySE(SE_SELECT);
     if (sItemStorageMenu->toSwapPos == NOT_SWAPPING)
     {
+        ItemStorage_EraseItemIcon(sItemStorageMenu->iconSlot ^ 1);
         if (id != LIST_CANCEL)
             ItemStorage_DrawItemIcon(gSaveBlock1Ptr->pcItems[id].itemId, sItemStorageMenu->iconSlot);
         else
             ItemStorage_DrawItemIcon(MSG_GO_BACK_TO_PREV, sItemStorageMenu->iconSlot);
-        ItemStorage_EraseItemIcon(sItemStorageMenu->iconSlot ^ 1);
         sItemStorageMenu->iconSlot ^= 1;
         ItemStorage_PrintDescription(id);
     }
@@ -1103,6 +1103,8 @@ static void ItemStorage_DrawItemIcon(u16 itemId, u8 iconSlot)
 
     if (*spriteIdLoc == SPRITE_NONE)
     {
+        FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
+        FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
         spriteId = AddItemIconSprite(iconSlot + TAG_ITEM_ICON, iconSlot + TAG_ITEM_ICON, itemId);
         if (spriteId != MAX_SPRITES)
         {
@@ -1119,8 +1121,7 @@ static void ItemStorage_EraseItemIcon(u8 iconSlot)
     u8* spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
     if (*spriteIdLoc != SPRITE_NONE)
     {
-        FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);
-        FreeSpritePaletteByTag(iconSlot + TAG_ITEM_ICON);
+        FreeSpriteOamMatrix(&gSprites[*spriteIdLoc]);
         DestroySprite(&gSprites[*spriteIdLoc]);
         *spriteIdLoc = SPRITE_NONE;
     }
