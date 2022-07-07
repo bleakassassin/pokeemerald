@@ -1869,7 +1869,7 @@ static bool8 WaterfallFieldEffect_WaitForShowMon(struct Task *task, struct Objec
 
 static bool8 WaterfallFieldEffect_RideUp(struct Task *task, struct ObjectEvent *objectEvent)
 {
-    ObjectEventSetHeldMovement(objectEvent, GetWalkSlowMovementAction(DIR_NORTH));
+    ObjectEventSetHeldMovement(objectEvent, GetWalkNormalMovementAction(DIR_NORTH));
     task->tState++;
     return FALSE;
 }

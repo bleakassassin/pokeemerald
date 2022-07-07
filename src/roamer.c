@@ -112,7 +112,7 @@ static void CreateInitialRoamerMon(u8 createRoamer)
         gSaveBlock1Ptr->roam[createRoamer].level = 50;
     }
 
-    CreateMon(&gEnemyParty[0], gSaveBlock1Ptr->roam[createRoamer].species, 40, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
+    CreateMon(&gEnemyParty[0], gSaveBlock1Ptr->roam[createRoamer].species, gSaveBlock1Ptr->roam[createRoamer].level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
     gSaveBlock1Ptr->roam[createRoamer].status = 0;
     gSaveBlock1Ptr->roam[createRoamer].active = TRUE;
     gSaveBlock1Ptr->roam[createRoamer].ivs = GetMonData(&gEnemyParty[0], MON_DATA_IVS);
