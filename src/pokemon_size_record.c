@@ -46,6 +46,7 @@ static const u8 sGiftRibbonsMonDataIds[GIFT_RIBBONS_COUNT - 4] =
 };
 
 extern const u8 gText_DecimalPoint[];
+extern const u8 gText_Comma[];
 extern const u8 gText_Marco[];
 
 static const u8 gText_Inch[] = _("inch");
@@ -147,7 +148,10 @@ static void FormatMonSizeRecord(u8 *string, u32 size)
         size = (f64)(size * 10) / (CM_PER_INCH * 10);
 
     string = ConvertIntToDecimalStringN(string, size / 10, STR_CONV_MODE_LEFT_ALIGN, 8);
-    string = StringAppend(string, gText_DecimalPoint);
+    if (gSaveBlock2Ptr->optionsUnitSystem == 0)
+        string = StringAppend(string, gText_DecimalPoint);
+    else
+        string = StringAppend(string, gText_Comma);
     ConvertIntToDecimalStringN(string, size % 10, STR_CONV_MODE_LEFT_ALIGN, 1);
 }
 

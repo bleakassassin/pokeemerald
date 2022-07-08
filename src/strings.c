@@ -1679,6 +1679,7 @@ const u8 gText_AcceptThisPkmn[] = _("Accept this Pokémon?");
 const u8 gText_4Spaces[] = _("    "); // Unused
 const u8 gText_SamePkmnInPartyAlready[] = _("Same {PKMN} in party already.");
 const u8 gText_DecimalPoint[] = _(".");
+const u8 gText_Comma[] = _(",");
 const u8 gText_SavingPlayer[] = _("Player");
 const u8 gText_SavingBadges[] = _("Badges");
 const u8 gText_SavingPokedex[] = _("Pokédex");

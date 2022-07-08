@@ -4315,8 +4315,7 @@ Route129_Text_TishaDefeat:
 Route129_Text_TishaPostBattle:
 	.string "Don't you hate making mistakes when\n"
 	.string "you're in a rush?\p"
-	.string "That's why I try to take things\n"
-	.string "slowly.$"
+	.string "That's why I try to take things slowly.$"
 
 Route129_Text_ClarenceIntro:
 	.string "Surfing isn't as easy as it seems,\n"
