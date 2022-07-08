@@ -1,6 +1,5 @@
 CableClub_Text_WelcomeWhichCableClubService:
-	.string "Welcome to the Pokémon Cable\n"
-	.string "Club.\p"
+	.string "Welcome to the Pokémon Cable Club.\p"
 	.string "Which of our services do you wish\n"
 	.string "to use?$"
 
