@@ -2405,6 +2405,23 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             } while (shinyValue < SHINY_ODDS);
         }
     }
+    else if (species == SPECIES_UNOWN) //Use RNG method for Unown in FR/LG
+    {
+        do
+        {
+            if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE)
+            {
+                do
+                {
+                    personality = Random() << 16 | Random(); 
+                } while (personality % NUM_NATURES != GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUM_NATURES);
+            }
+            else
+                personality = Random() << 16 | Random();
+            shinyValue = GET_SHINY_VALUE(otId, personality);
+            i++;
+        } while (shinyValue >= SHINY_ODDS && i < shinyRolls);
+    }
     else if (hasFixedPersonality)
         personality = fixedPersonality;
     else
