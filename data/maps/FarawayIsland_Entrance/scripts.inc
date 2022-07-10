@@ -59,6 +59,7 @@ FarawayIsland_Entrance_EventScript_Sign::
 	waitmoncry
 	playmoncry SPECIES_MOLTRES, CRY_MODE_ENCOUNTER
 	waitmoncry
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	delay 30
 	msgbox FarawayIsland_Entrance_Text_PokemonFlyingAbove, MSGBOX_DEFAULT
 	fadeinbgm 1
