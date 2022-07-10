@@ -994,8 +994,7 @@ LittlerootTown_Text_CanYouGoSeeWhatsHappening:
 	.string "I can hear their cries!\p"
 	.string "I want to go see what's going on,\n"
 	.string "but I don't have any Pokémon…\p"
-	.string "Can you go see what's happening\n"
-	.string "for me?$"
+	.string "Can you go see what's happening for me?$"
 
 LittlerootTown_Text_YouSavedBirch:
 	.string "You saved Prof. Birch!\n"
