@@ -10,7 +10,7 @@ OldaleTown_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	setflag FLAG_VISITED_OLDALE_TOWN
 	call_if_unset FLAG_ADVENTURE_STARTED, OldaleTown_EventScript_BlockWestEntrance
-	call_if_eq VAR_OLDALE_TOWN_STATE, 0, OldaleTown_EventScript_MoveMartEmployee
+	call_if_unset FLAG_OLDALE_MART_EMPLOYEE, OldaleTown_EventScript_MoveMartEmployee
 	end
 
 OldaleTown_EventScript_BlockWestEntrance::
@@ -35,8 +35,8 @@ OldaleTown_EventScript_MartEmployee::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_POTION_OLDALE, OldaleTown_EventScript_ExplainPotion
-	goto_if_eq VAR_OLDALE_TOWN_STATE, 1, OldaleTown_EventScript_ExplainPokemonMartAgain
-	setvar VAR_OLDALE_TOWN_STATE, 1
+	goto_if_set FLAG_OLDALE_MART_EMPLOYEE, OldaleTown_EventScript_ExplainPokemonMartAgain
+	setflag FLAG_OLDALE_MART_EMPLOYEE
 	playbgm MUS_FOLLOW_ME, FALSE
 	msgbox OldaleTown_Text_IWorkAtPokemonMart, MSGBOX_DEFAULT
 	closemessage
