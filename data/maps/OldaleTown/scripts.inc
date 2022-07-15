@@ -19,6 +19,7 @@ OldaleTown_EventScript_BlockWestEntrance::
 	return
 
 OldaleTown_EventScript_MoveMartEmployee::
+	goto_if_set FLAG_RECEIVED_POTION_OLDALE, Common_EventScript_NopReturn
 	setobjectxyperm LOCALID_MART_EMPLOYEE, 13, 14
 	setobjectmovementtype LOCALID_MART_EMPLOYEE, MOVEMENT_TYPE_FACE_DOWN
 	return
