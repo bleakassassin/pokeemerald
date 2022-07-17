@@ -174,7 +174,7 @@
       "type": "trigger",
       "x": 34,
       "y": 3,
-      "elevation": 4,
+      "elevation": 0,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
       "var_value": "0",
       "script": "VictoryRoad_1F_EventScript_WallyBattleTrigger1"
@@ -183,7 +183,7 @@
       "type": "trigger",
       "x": 34,
       "y": 4,
-      "elevation": 4,
+      "elevation": 0,
       "var": "VAR_VICTORY_ROAD_1F_STATE",
       "var_value": "0",
       "script": "VictoryRoad_1F_EventScript_WallyBattleTrigger2"

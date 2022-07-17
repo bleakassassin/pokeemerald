@@ -335,7 +335,7 @@ static u16 GetCurrentMapWildMonHeaderId(void)
                 i += alteringCaveId;
             }
             else if (gMapHeader.regionMapSectionId == MAPSEC_SKY_PILLAR &&
-                     VarGet(VAR_SOOTOPOLIS_CITY_STATE) == 6)
+                     VarGet(VAR_SOOTOPOLIS_CITY_STATE) >= 6)
                 i += 1;
             return i;
         }
