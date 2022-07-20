@@ -5125,7 +5125,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     {
         gIsFishingEncounter = FALSE;
         ResetSpriteData();
-        if (gLeveledUpInBattle == 0 || gBattleOutcome != B_OUTCOME_WON)
+        if (gLeveledUpInBattle == 0 || (gBattleOutcome != B_OUTCOME_WON && gBattleOutcome != B_OUTCOME_CAUGHT))
         {
             gBattleMainFunc = ReturnFromBattleToOverworld;
             return;

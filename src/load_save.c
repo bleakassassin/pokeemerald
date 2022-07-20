@@ -365,6 +365,12 @@ void FixImportedSave(void)
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
 
+    if (VarGet(VAR_SAVE_COMPATIBILITY) == VERSION_LAUNCH)
+    {
+        AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
+        VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
+    }
+
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
     {
         FlagClear(FLAG_REMATCH_SIDNEY);
