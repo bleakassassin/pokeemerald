@@ -612,7 +612,7 @@ static void CreateApprenticeMenu(u8 menu)
     case APPRENTICE_ASK_GIVE:
         left = 18;
         top = 8;
-        strings[0] = gText_Give;
+        strings[0] = gText_ApprenticeGive;
         strings[1] = gText_NoNeed;
         break;
     case APPRENTICE_ASK_YES_NO:

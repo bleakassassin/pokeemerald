@@ -319,7 +319,7 @@ static void TxRegItemsMenu_RefreshListMenu(void)
         gTxRegItemsMenu->listItems[i].name = &(gTxRegItemsMenu->itemNames[i][0]);
         gTxRegItemsMenu->listItems[i].id = i;
     }
-    StringCopy(&(gTxRegItemsMenu->itemNames[i][0]) ,gText_Cancel2);
+    StringCopy(&(gTxRegItemsMenu->itemNames[i][0]) ,gText_Cancel);
     gTxRegItemsMenu->listItems[i].name = &(gTxRegItemsMenu->itemNames[i][0]);
     gTxRegItemsMenu->listItems[i].id = -2;
     gMultiuseListMenuTemplate = gTxRegItemsMenu_List;
@@ -407,7 +407,7 @@ static void TxRegItemsMenu_PrintSwappingCursor(u8 y, u8 b, u8 speed)
     if (b == 0xFF)
         FillWindowPixelRect(windowId, PIXEL_FILL(1), x, y, GetMenuCursorDimensionByFont(1, 0), GetMenuCursorDimensionByFont(1, 1));
     else
-        AddTextPrinterParameterized4(windowId, 1, x, y, 0, 0, sSwapArrowTextColors, speed, gText_SelectorArrow2);
+        AddTextPrinterParameterized4(windowId, 1, x, y, 0, 0, sSwapArrowTextColors, speed, gText_SelectorArrow);
 }
 
 //registeredItems struct helper functions

@@ -4620,7 +4620,7 @@ static void CB2_SaveAndEndTrade(void)
     {
     case 0:
         gMain.state++;
-        StringExpandPlaceholders(gStringVar4, gText_CommunicationStandby5);
+        StringExpandPlaceholders(gStringVar4, gText_CommunicationStandby);
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:
@@ -4952,7 +4952,7 @@ static void CB2_SaveAndEndWirelessTrade(void)
     {
     case 0:
         gMain.state = 1;
-        StringExpandPlaceholders(gStringVar4, gText_CommunicationStandby5);
+        StringExpandPlaceholders(gStringVar4, gText_CommunicationStandby);
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 1:

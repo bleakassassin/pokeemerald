@@ -781,7 +781,7 @@ static void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(0, PIXEL_FILL(0xA));
                 FillWindowPixelBuffer(1, PIXEL_FILL(0xA));
                 AddTextPrinterParameterized3(0, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
+                AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_Option);
                 PutWindowTilemap(0);
                 PutWindowTilemap(1);
                 CopyWindowToVram(0, COPYWIN_GFX);
@@ -795,7 +795,7 @@ static void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(4, PIXEL_FILL(0xA));
                 AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
                 AddTextPrinterParameterized3(3, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(4, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
+                AddTextPrinterParameterized3(4, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_Option);
                 MainMenu_FormatSavegameText();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -814,8 +814,8 @@ static void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(5, PIXEL_FILL(0xA));
                 AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
                 AddTextPrinterParameterized3(3, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(4, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryGift);
-                AddTextPrinterParameterized3(5, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
+                AddTextPrinterParameterized3(4, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MysteryGift);
+                AddTextPrinterParameterized3(5, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_Option);
                 MainMenu_FormatSavegameText();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -838,9 +838,9 @@ static void Task_DisplayMainMenu(u8 taskId)
                 FillWindowPixelBuffer(6, PIXEL_FILL(0xA));
                 AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuContinue);
                 AddTextPrinterParameterized3(3, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuNewGame);
-                AddTextPrinterParameterized3(4, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryGift2);
+                AddTextPrinterParameterized3(4, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MysteryGift);
                 AddTextPrinterParameterized3(5, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuMysteryEvents);
-                AddTextPrinterParameterized3(6, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
+                AddTextPrinterParameterized3(6, gSaveBlock2Ptr->optionsCurrentFont, 0, 0, sTextColor_Headers, TEXT_SKIP_DRAW, gText_Option);
                 MainMenu_FormatSavegameText();
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
@@ -2135,7 +2135,7 @@ static void MainMenu_FormatSavegameText(void)
 
 static void MainMenu_FormatSavegamePlayer(void)
 {
-    StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPlayer);
+    StringExpandPlaceholders(gStringVar4, gText_Player);
     AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 16, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
     AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gSaveBlock2Ptr->playerName, 100), 16, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gSaveBlock2Ptr->playerName);
 }
@@ -2145,7 +2145,7 @@ static void MainMenu_FormatSavegameTime(void)
     u8 str[0x20];
     u8* ptr;
 
-    StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime);
+    StringExpandPlaceholders(gStringVar4, gText_Time);
     AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0x6C, 16, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
     ptr = ConvertIntToDecimalStringN(str, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     *ptr = 0xF0;
@@ -2164,7 +2164,7 @@ static void MainMenu_FormatSavegamePokedex(void)
             dexCount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
         else
             dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);
-        StringExpandPlaceholders(gStringVar4, gText_ContinueMenuPokedex);
+        StringExpandPlaceholders(gStringVar4, gText_Pokedex);
         AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0, 32, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
         ConvertIntToDecimalStringN(str, dexCount, STR_CONV_MODE_LEFT_ALIGN, 3);
         AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 100), 32, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
@@ -2182,7 +2182,7 @@ static void MainMenu_FormatSavegameBadges(void)
         if (FlagGet(i))
             badgeCount++;
     }
-    StringExpandPlaceholders(gStringVar4, gText_ContinueMenuBadges);
+    StringExpandPlaceholders(gStringVar4, gText_Badges);
     AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, 0x6C, 32, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
     ConvertIntToDecimalStringN(str, badgeCount, STR_CONV_MODE_LEADING_ZEROS, 1);
     AddTextPrinterParameterized3(2, gSaveBlock2Ptr->optionsCurrentFont, GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, str, 0xD0), 32, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);

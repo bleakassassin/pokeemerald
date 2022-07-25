@@ -549,7 +549,7 @@ static u32 LoopedTask_CloseMonMarkingsWindow(s32 state)
 static u8 *UnusedPrintNumberString(u8 *dst, u16 num)
 {
     u8 *txtPtr = ConvertIntToDecimalStringN(dst, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
-    txtPtr = StringCopy(txtPtr, gText_Number2);
+    txtPtr = StringCopy(txtPtr, gText_Number);
 
     return txtPtr;
 }
@@ -584,7 +584,7 @@ static bool32 UpdateConditionGraphMenuWindows(u8 mode, u16 bufferIndex, bool8 wi
             text[2] = TEXT_COLOR_BLUE;
             text[3] = TEXT_COLOR_TRANSPARENT;
             text[4] = TEXT_COLOR_LIGHT_BLUE;
-            StringCopy(&text[5], gText_Number2);
+            StringCopy(&text[5], gText_Number);
             AddTextPrinterParameterized(menu->listIndexWindowId, gSaveBlock2Ptr->optionsCurrentFont, text, 4, 1, 0, NULL);
             ConvertIntToDecimalStringN(&text[5], GetConditionMonDataBuffer(), STR_CONV_MODE_RIGHT_ALIGN, 4);
             AddTextPrinterParameterized(menu->listIndexWindowId, gSaveBlock2Ptr->optionsCurrentFont, text, 28, 1, 0, NULL);

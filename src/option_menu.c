@@ -118,7 +118,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_UNITSYSTEM]  = gText_UnitSystem,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_FONT]        = gText_Font,
-    [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
+    [MENUITEM_CANCEL]      = gText_Cancel,
 };
 
 static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpeedMid, gText_TextSpeedFast};

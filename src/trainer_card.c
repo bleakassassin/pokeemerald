@@ -1067,10 +1067,10 @@ static void PrintPokedexOnCard(void)
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         if (!sData->isHoenn)
-            AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardPokedex);
+            AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Pokedex);
         else
-            AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 16, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardPokedex);
-        StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString6);
+            AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 16, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Pokedex);
+        StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString);
         if (!sData->isHoenn)
         {
             xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 144);
@@ -1095,9 +1095,9 @@ static void PrintTimeOnCard(void)
     u32 x, y, totalWidth;
 
     if (!sData->isHoenn)
-        AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 20, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardTime);
+        AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 20, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Time);
     else
-        AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 16, 89, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardTime);
+        AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 16, 89, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Time);
 
     if (sData->isLink)
     {
@@ -1114,7 +1114,7 @@ static void PrintTimeOnCard(void)
         hours = 999;
     if (minutes > 59)
         minutes = 59;
-    width = GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gText_Colon2, 0);
+    width = GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gText_Colon, 0);
 
     if (!sData->isHoenn)
     {
@@ -1133,7 +1133,7 @@ static void PrintTimeOnCard(void)
     ConvertIntToDecimalStringN(gStringVar4, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
     AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
     x += 18;
-    AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SKIP_DRAW, gText_Colon2);
+    AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SKIP_DRAW, gText_Colon);
     x += width;
     ConvertIntToDecimalStringN(gStringVar4, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);

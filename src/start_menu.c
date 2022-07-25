@@ -1327,14 +1327,14 @@ static void ShowSaveInfoWindow(void)
 
     // Print player name
     yOffset += 16;
-    AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SavingPlayer, 0, yOffset, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Player, 0, yOffset, TEXT_SKIP_DRAW, NULL);
     BufferSaveMenuText(SAVE_MENU_NAME, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0x70);
     PrintPlayerNameOnWindow(sSaveInfoWindowId, gStringVar4, xOffset, yOffset);
 
     // Print badge count
     yOffset += 16;
-    AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SavingBadges, 0, yOffset, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Badges, 0, yOffset, TEXT_SKIP_DRAW, NULL);
     BufferSaveMenuText(SAVE_MENU_BADGES, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0x70);
     AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);
@@ -1343,7 +1343,7 @@ static void ShowSaveInfoWindow(void)
     {
         // Print pokedex count
         yOffset += 16;
-        AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SavingPokedex, 0, yOffset, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Pokedex, 0, yOffset, TEXT_SKIP_DRAW, NULL);
         BufferSaveMenuText(SAVE_MENU_CAUGHT, gStringVar4, color);
         xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0x70);
         AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);
@@ -1351,7 +1351,7 @@ static void ShowSaveInfoWindow(void)
 
     // Print play time
     yOffset += 16;
-    AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SavingTime, 0, yOffset, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Time, 0, yOffset, TEXT_SKIP_DRAW, NULL);
     BufferSaveMenuText(SAVE_MENU_PLAY_TIME, gStringVar4, color);
     xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 0x70);
     AddTextPrinterParameterized(sSaveInfoWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);

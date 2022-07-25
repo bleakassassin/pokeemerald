@@ -798,14 +798,14 @@ static void CreateStartMenuForPokenavTutorial(void)
 {
     u8 windowId = CreateWindowFromRect(21, 0, 7, 18);
     SetStandardWindowBorderStyle(windowId, 0);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionPokedex, 8, 8, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionPokemon, 8, 24, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionBag, 8, 40, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionPokenav, 8, 56, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuPokedex, 8, 8, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuPokemon, 8, 24, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuBag, 8, 40, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuPokenav, 8, 56, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gSaveBlock2Ptr->playerName, 8, 72, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionSave, 8, 88, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionOption, 8, 104, TEXT_SKIP_DRAW, NULL);
-    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOptionExit, 8, 120, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuSave, 8, 88, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuOption, 8, 104, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_MenuExit, 8, 120, TEXT_SKIP_DRAW, NULL);
     InitMenuNormal(windowId, gSaveBlock2Ptr->optionsCurrentFont, 0, 8, 16, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), 0);
     InitMultichoiceNoWrap(FALSE, ARRAY_COUNT(MultichoiceList_ForcedStartMenu), windowId, MULTI_FORCED_START_MENU);
     CopyWindowToVram(windowId, COPYWIN_FULL);

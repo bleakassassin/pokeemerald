@@ -519,7 +519,7 @@ const u8 *GetExpandedPlaceholder(u32 id)
     };
 
     if (id >= ARRAY_COUNT(funcs))
-        return gText_ExpandedPlaceholder_Empty;
+        return gText_EmptyString;
     else
         return funcs[id]();
 }
