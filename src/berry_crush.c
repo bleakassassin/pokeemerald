@@ -412,7 +412,7 @@ static const u8 *const sMessages[] =
     [MSG_NO_BERRIES]   = gText_YouHaveNoBerries,
     [MSG_DROPPED]      = gText_MemberDroppedOut,
     [MSG_TIMES_UP]     = gText_TimesUpNoGoodPowder,
-    [MSG_COMM_STANDBY] = gText_CommunicationStandby2,
+    [MSG_COMM_STANDBY] = gText_CommunicationStandby,
 };
 
 static const struct BgTemplate sBgTemplates[4] =
@@ -905,7 +905,7 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] =
 
 static const u8 *const sResultsTexts[] =
 {
-    [RESULTS_PAGE_PRESSES]  = gText_SpaceTimes2, // " times"
+    [RESULTS_PAGE_PRESSES]  = gText_SpaceTimes, // " times"
     [RESULTS_PAGE_RANDOM]   = gText_XDotY,       // "##.##", for Neatness, Cooperation, or Power value
     [RESULTS_PAGE_CRUSHING] = gText_Var1Berry,
 
@@ -1685,7 +1685,7 @@ static void PrintCrushingResults(struct BerryCrushGame *game)
     // Print seconds value
     ConvertIntToDecimalStringN(gStringVar1, game->gfx.secondsInt, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar2, game->gfx.secondsFrac, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_XDotY2);
+    StringExpandPlaceholders(gStringVar4, gText_XDotY);
     x -= GetStringWidth(FONT_SHORT, gStringVar4, -1);
     AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
 
@@ -1711,7 +1711,7 @@ static void PrintCrushingResults(struct BerryCrushGame *game)
             pressingSpeedFrac += *(i + sPressingSpeedConversionTable); // It's accessed in a different way here for unknown reason
     ConvertIntToDecimalStringN(gStringVar1, game->pressingSpeed >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, pressingSpeedFrac / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_XDotY3);
+    StringExpandPlaceholders(gStringVar4, gText_XDotY);
     x -= GetStringWidth(FONT_SHORT, gStringVar4, -1);
     if (game->newRecord)
         AddTextPrinterParameterized3(game->gfx.resultsWindowId, FONT_SHORT, x, y, sTextColorTable[COLORID_RED], 0, gStringVar4);
@@ -1814,8 +1814,8 @@ static void Task_ShowRankings(u8 taskId)
         break;
     case 1:
         // Print header text
-        xPos = 96 - GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gText_BerryCrush2, -1) / 2u;
-        AddTextPrinterParameterized3(tWindowId, gSaveBlock2Ptr->optionsCurrentFont, xPos, 1, sTextColorTable[COLORID_BLUE], 0, gText_BerryCrush2);
+        xPos = 96 - GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gText_BerryCrush, -1) / 2u;
+        AddTextPrinterParameterized3(tWindowId, gSaveBlock2Ptr->optionsCurrentFont, xPos, 1, sTextColorTable[COLORID_BLUE], 0, gText_BerryCrush);
         xPos = 96 - GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gText_PressingSpeedRankings, -1) / 2u;
         AddTextPrinterParameterized3(tWindowId, gSaveBlock2Ptr->optionsCurrentFont, xPos, 17, sTextColorTable[COLORID_BLUE], 0, gText_PressingSpeedRankings);
 
@@ -1835,7 +1835,7 @@ static void Task_ShowRankings(u8 taskId)
             }
             ConvertIntToDecimalStringN(gStringVar1, (u16)tPressingSpeeds(i) >> 8, STR_CONV_MODE_RIGHT_ALIGN, 3);
             ConvertIntToDecimalStringN(gStringVar2, score / 1000000, STR_CONV_MODE_LEADING_ZEROS, 2);
-            StringExpandPlaceholders(gStringVar4, gText_XDotY3);
+            StringExpandPlaceholders(gStringVar4, gText_XDotY);
             xPos -= GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, -1);
             AddTextPrinterParameterized3(tWindowId, gSaveBlock2Ptr->optionsCurrentFont, xPos, yPos, sTextColorTable[COLORID_GRAY], 0, gStringVar4);
             yPos += 16;

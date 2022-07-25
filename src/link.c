@@ -324,10 +324,7 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.outfit = gSaveBlock2Ptr->outfitId;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
-    if (FlagGet(FLAG_SYS_GAME_CLEAR))
-    {
-        gLocalLinkPlayer.progressFlags |= 0x10;
-    }
+    gLocalLinkPlayer.progressFlags |= 0x10;
 }
 
 static void VBlankCB_LinkError(void)

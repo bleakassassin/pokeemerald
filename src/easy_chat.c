@@ -471,7 +471,7 @@ static const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
         .fourFooterOptions = FALSE,
         .titleText = NULL,
         .instructionsText1 = gText_CombineNineWordsOrPhrases,
-        .instructionsText2 = gText_AndMakeAMessage2,
+        .instructionsText2 = gText_AndMakeAMessage,
         .confirmText1 = gText_TheMailMessage,
         .confirmText2 = gText_IsAsShownOkay,
     },
@@ -602,7 +602,7 @@ static const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
         .frameId = FRAMEID_COMBINE_TWO_WORDS,
         .fourFooterOptions = FALSE,
         .titleText = gText_GoodSaying,
-        .instructionsText1 = gText_CombineTwoWordsOrPhrases2,
+        .instructionsText1 = gText_CombineTwoWordsOrPhrases,
         .instructionsText2 = gText_ToTeachHerAGoodSaying,
         .confirmText1 = gText_TheAnswer,
         .confirmText2 = gText_IsAsShownOkay,
@@ -1187,9 +1187,9 @@ static const u8 sFooterOptionXOffsets[NUM_FOOTER_TYPES][4] = {
 };
 
 static const u8 *const sFooterTextOptions[NUM_FOOTER_TYPES][4] = {
-    [FOOTER_NORMAL] = {gText_DelAll, gText_Cancel5, gText_Ok2, NULL},
-    [FOOTER_QUIZ]   = {gText_DelAll, gText_Cancel5, gText_Ok2, gText_Quiz},
-    [FOOTER_ANSWER] = {gText_DelAll, gText_Cancel5, gText_Ok2, gText_Answer},
+    [FOOTER_NORMAL] = {gText_DelAll, gText_Cancel, gText_Ok2, NULL},
+    [FOOTER_QUIZ]   = {gText_DelAll, gText_Cancel, gText_Ok2, gText_Quiz},
+    [FOOTER_ANSWER] = {gText_DelAll, gText_Cancel, gText_Ok2, gText_Answer},
 };
 
 #include "data/easy_chat/easy_chat_groups.h"

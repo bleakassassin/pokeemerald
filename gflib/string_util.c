@@ -387,7 +387,7 @@ u8 *StringBraille(u8 *dest, const u8 *src)
     const u8 setBrailleFont[] = {
         EXT_CTRL_CODE_BEGIN,
         EXT_CTRL_CODE_FONT,
-        6,
+        FONT_BRAILLE,
         EOS
     };
     const u8 gotoLine2[] = {
@@ -519,7 +519,7 @@ const u8 *GetExpandedPlaceholder(u32 id)
     };
 
     if (id >= ARRAY_COUNT(funcs))
-        return gText_ExpandedPlaceholder_Empty;
+        return gText_EmptyString;
     else
         return funcs[id]();
 }

@@ -651,7 +651,7 @@ static void ListMenuDrawCursor(struct ListMenu *list)
     switch (list->template.cursorKind)
     {
     case 0:
-        ListMenuPrint(list, gText_SelectorArrow2, x, y);
+        ListMenuPrint(list, gText_SelectorArrow, x, y);
         break;
     case 1:
         break;

@@ -552,23 +552,14 @@ static const u8 sMugshotsTrainerPicIDsTable[MUGSHOTS_COUNT] =
     [MUGSHOT_STEVEN]   = TRAINER_PIC_STEVEN,
     [MUGSHOT_CHAMPION] = TRAINER_PIC_CHAMPION_WALLACE,
 };
-static const s16 sMugshotsOpponentRotationScales[MUGSHOTS_COUNT][2] =
+static const s16 sMugshotsOpponentCoords[MUGSHOTS_COUNT] =
 {
-    [MUGSHOT_SIDNEY] =   {0x200, 0x200},
-    [MUGSHOT_PHOEBE] =   {0x200, 0x200},
-    [MUGSHOT_GLACIA] =   {0x1B0, 0x1B0},
-    [MUGSHOT_DRAKE] =    {0x1A0, 0x1A0},
-    [MUGSHOT_STEVEN] =   {0x188, 0x188},
-    [MUGSHOT_CHAMPION] = {0x188, 0x188},
-};
-static const s16 sMugshotsOpponentCoords[MUGSHOTS_COUNT][2] =
-{
-    [MUGSHOT_SIDNEY] =   { 0,  0},
-    [MUGSHOT_PHOEBE] =   { 0,  0},
-    [MUGSHOT_GLACIA] =   {-4,  4},
-    [MUGSHOT_DRAKE] =    { 0,  5},
-    [MUGSHOT_STEVEN] =   { 0,  7},
-    [MUGSHOT_CHAMPION] = {-8,  7},
+    [MUGSHOT_SIDNEY] =     0,
+    [MUGSHOT_PHOEBE] =     0,
+    [MUGSHOT_GLACIA] =   -10,
+    [MUGSHOT_DRAKE] =     -4,
+    [MUGSHOT_STEVEN] =     0,
+    [MUGSHOT_CHAMPION] = -18,
 };
 
 static const TransitionSpriteCallback sMugshotTrainerPicFuncs[] =
@@ -2593,8 +2584,8 @@ static void Mugshots_CreateTrainerPics(struct Task *task)
 
     s16 mugshotId = task->tMugshotId;
     task->tOpponentSpriteId = CreateTrainerSprite(sMugshotsTrainerPicIDsTable[mugshotId],
-                                                  sMugshotsOpponentCoords[mugshotId][0] - 32,
-                                                  sMugshotsOpponentCoords[mugshotId][1] + 42,
+                                                  sMugshotsOpponentCoords[mugshotId] - 32,
+                                                  42,
                                                   0, gDecompressionBuffer);
     task->tPlayerSpriteId = CreateTrainerSprite(PlayerOutfitAndGenderToFrontTrainerPic(gSaveBlock2Ptr->outfitId, gSaveBlock2Ptr->playerGender),
                                                 DISPLAY_WIDTH + 32,
@@ -2622,7 +2613,7 @@ static void Mugshots_CreateTrainerPics(struct Task *task)
     CalcCenterToCornerVec(opponentSprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
     CalcCenterToCornerVec(playerSprite, SPRITE_SHAPE(64x32), SPRITE_SIZE(64x32), ST_OAM_AFFINE_DOUBLE);
 
-    SetOamMatrixRotationScaling(opponentSprite->oam.matrixNum, sMugshotsOpponentRotationScales[mugshotId][0], sMugshotsOpponentRotationScales[mugshotId][1], 0);
+    SetOamMatrixRotationScaling(opponentSprite->oam.matrixNum, 0x200, 0x200, 0);
     SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 512, 0);
 }
 

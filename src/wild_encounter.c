@@ -133,11 +133,13 @@ static bool8 CheckFeebas(void)
 
         if (MetatileBehavior_IsFeebasWater(behavior) ==  TRUE
         && gSaveBlock1Ptr->weather == WEATHER_SUNNY
+        && (y <= sRoute119WaterTileData[3 * 0 + 1])
         && IsNight() == FALSE)
             return TRUE;
 
         if (MetatileBehavior_IsFeebasWater(behavior) ==  TRUE
         && gSaveBlock1Ptr->weather == WEATHER_RAIN_THUNDERSTORM
+        && (y >= sRoute119WaterTileData[3 * 2 + 0])
         && IsNight() == TRUE)
             return TRUE;
 

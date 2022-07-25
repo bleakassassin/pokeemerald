@@ -184,7 +184,8 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     u8 spriteIds[SPRITE_ARR_ID_COUNT];
     bool8 unk40EF;
     s16 switchCounter; // Used for various switch statement cases that decompress/load graphics or pokemon data
-    u8 unk_filler4[6];
+    bool8 showCategory;
+    u8 unk_filler4[5];
 } *sMonSummaryScreen = NULL;
 EWRAM_DATA u8 gLastViewedMonIndex = 0;
 static EWRAM_DATA u8 sMoveSlotToReplace = 0;
@@ -1585,13 +1586,13 @@ static void Task_HandleInput(u8 taskId)
         }
         else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
         {
-            if (JOY_HELD(SELECT_BUTTON))
+            if (JOY_NEW(SELECT_BUTTON))
             {
-                SetMoveCategoryIcons();
-            }
-            else
-            {
-                SetMoveTypeIcons();
+                if (sMonSummaryScreen->showCategory == TRUE)
+                    SetMoveTypeIcons();
+                else
+                    SetMoveCategoryIcons();
+                sMonSummaryScreen->showCategory ^= 1;
             }
         }
     }
@@ -1965,13 +1966,13 @@ static void Task_HandleInput_MoveSelect(u8 taskId)
         }
         else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
         {
-            if (JOY_HELD(SELECT_BUTTON))
+            if (JOY_NEW(SELECT_BUTTON))
             {
-                SetMoveCategoryIcons();
-            }
-            else
-            {
-                SetMoveTypeIcons();
+                if (sMonSummaryScreen->showCategory == TRUE)
+                    SetMoveTypeIcons();
+                else
+                    SetMoveCategoryIcons();
+                sMonSummaryScreen->showCategory ^= 1;
             }
         }
     }
@@ -2104,13 +2105,13 @@ static void Task_HandleInput_MovePositionSwitch(u8 taskId)
         }
         else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
         {
-            if (JOY_HELD(SELECT_BUTTON))
+            if (JOY_NEW(SELECT_BUTTON))
             {
-                SetMoveCategoryIcons();
-            }
-            else
-            {
-                SetMoveTypeIcons();
+                if (sMonSummaryScreen->showCategory == TRUE)
+                    SetMoveTypeIcons();
+                else
+                    SetMoveCategoryIcons();
+                sMonSummaryScreen->showCategory ^= 1;
             }
         }
     }
@@ -2271,15 +2272,19 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
             }
             else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
             {
-                if (JOY_HELD(SELECT_BUTTON))
+                if (JOY_NEW(SELECT_BUTTON))
                 {
-                    SetMoveCategoryIcons();
-                    SetNewMoveCategoryIcon();
-                }
-                else
-                {
-                    SetMoveTypeIcons();
-                    SetNewMoveTypeIcon();
+                    if (sMonSummaryScreen->showCategory == TRUE)
+                    {
+                        SetMoveTypeIcons();
+                        SetNewMoveTypeIcon();
+                    }
+                    else
+                    {
+                        SetMoveCategoryIcons();
+                        SetNewMoveCategoryIcon();
+                    }
+                    sMonSummaryScreen->showCategory ^= 1;
                 }
             }
         }
@@ -2362,15 +2367,19 @@ static void Task_HandleInputCantForgetHMsMoves(u8 taskId)
         }
         else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES && gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY)
         {
-            if (JOY_HELD(SELECT_BUTTON))
+            if (JOY_NEW(SELECT_BUTTON))
             {
-                SetMoveCategoryIcons();
-                SetNewMoveCategoryIcon();
-            }
-            else
-            {
-                SetMoveTypeIcons();
-                SetNewMoveTypeIcon();
+                if (sMonSummaryScreen->showCategory == TRUE)
+                {
+                    SetMoveTypeIcons();
+                    SetNewMoveTypeIcon();
+                }
+                else
+                {
+                    SetMoveCategoryIcons();
+                    SetNewMoveCategoryIcon();
+                }
+                sMonSummaryScreen->showCategory ^= 1;
             }
         }
     }
@@ -2873,12 +2882,12 @@ static void PrintPageNamesAndStats(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE, gText_BattleMoves, 2, 0, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE, gText_ContestMoves, 2, 0, 0, 1);
 
-    stringXPos = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Cancel2, 62);
+    stringXPos = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Cancel, 62);
     iconXPos = stringXPos - 16;
     if (iconXPos < 0)
         iconXPos = 0;
     PrintAOrBButtonIcon(PSS_LABEL_WINDOW_PROMPT_CANCEL, FALSE, iconXPos);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_PROMPT_CANCEL, gText_Cancel2, stringXPos, 0, 0, 0);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_PROMPT_CANCEL, gText_Cancel, stringXPos, 0, 0, 0);
 
     stringXPos = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Info, 62);
     iconXPos = stringXPos - 16;
@@ -2896,23 +2905,23 @@ static void PrintPageNamesAndStats(void)
 
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_INFO_RENTAL, gText_RentalPkmn, 0, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_INFO_TYPE, gText_TypeSlash, 0, 0, 0, 0);
-    statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_HP4, 42);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_HP4, statsXPos, 0, 0, 1);
-    statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Attack3, 42);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack3, statsXPos, 16, 0, 1);
-    statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Defense3, 42);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense3, statsXPos, 32, 0, 1);
-    statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpAtk4, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk4, statsXPos, 0, 0, 1);
-    statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpDef4, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef4, statsXPos, 16, 0, 1);
-    statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Speed2, 36);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed2, statsXPos, 32, 0, 1);
+    statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_HP, 42);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_HP, statsXPos, 0, 0, 1);
+    statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Attack, 42);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack, statsXPos, 16, 0, 1);
+    statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Defense, 42);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense, statsXPos, 32, 0, 1);
+    statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpAtk, 36);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk, statsXPos, 0, 0, 1);
+    statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpDef, 36);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef, statsXPos, 16, 0, 1);
+    statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Speed, 36);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed, statsXPos, 32, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, gText_ExpPoints, 6, 0, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, gText_NextLv, 6, 16, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS, gText_Status, 2, 0, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Power, 0, 0, 0, 1);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Accuracy2, 0, 16, 0, 1);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, gText_Accuracy, 0, 16, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM, gText_Appeal, 0, 0, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_APPEAL_JAM, gText_Jam, 0, 16, 0, 1);
 }
@@ -3228,7 +3237,7 @@ static void BufferNatureString(void)
 {
     struct PokemonSummaryScreenData *sumStruct = sMonSummaryScreen;
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNatureNamePointers[sumStruct->summary.nature]);
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gText_EmptyString5);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gText_EmptyString);
 }
 
 static void GetMetLevelString(u8 *output)
@@ -3847,8 +3856,16 @@ static void SetTypeIcons(void)
         SetMonTypeIcons();
         break;
     case PSS_PAGE_BATTLE_MOVES:
-        SetMoveTypeIcons();
-        SetNewMoveTypeIcon();
+        if (sMonSummaryScreen->showCategory == FALSE)
+        {
+            SetMoveTypeIcons();
+            SetNewMoveTypeIcon();
+        }
+        else
+        {
+            SetMoveCategoryIcons();
+            SetNewMoveCategoryIcon();
+        }
         break;
     case PSS_PAGE_CONTEST_MOVES:
         SetContestMoveTypeIcons();

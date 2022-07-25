@@ -279,40 +279,32 @@ static const u8 sTimeColonInvisibleTextColors[6] = {TEXT_COLOR_TRANSPARENT, TEXT
 
 static const u8 sOutfitFrontPics[OUTFIT_TOTAL][GENDER_COUNT] = 
 {
-    [OUTFIT_EMERALD] = {TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY},
+    [OUTFIT_EMERALD] = {TRAINER_PIC_BRENDAN,    TRAINER_PIC_MAY},
     [OUTFIT_RS]      = {TRAINER_PIC_RS_BRENDAN, TRAINER_PIC_RS_MAY},
 };
 
-static const u8 sTrainerPicOffset[2][GENDER_COUNT][2] =
+static const u8 sTrainerPicOffset[][2] =
 {
-    // Kanto
-    {
-        [MALE]   = {13, 4},
-        [FEMALE] = {13, 4}
-    },
-    // Hoenn
-    {
-        [MALE]   = {1, 0},
-        [FEMALE] = {1, 0}
-    },
+    {13, 4}, // Kanto
+    {1, 0},  // Hoenn
 };
 
-static const u8 sTrainerPicFacilityClass[][GENDER_COUNT] =
+static const u8 sTrainerPics[][GENDER_COUNT] =
 {
     [CARD_TYPE_FRLG] =
     {
-        [MALE]   = FACILITY_CLASS_RED,
-        [FEMALE] = FACILITY_CLASS_LEAF
+        [MALE]   = TRAINER_PIC_RED,
+        [FEMALE] = TRAINER_PIC_LEAF
     },
     [CARD_TYPE_RS] =
     {
-        [MALE]   = FACILITY_CLASS_RS_BRENDAN,
-        [FEMALE] = FACILITY_CLASS_RS_MAY
+        [MALE]   = TRAINER_PIC_RS_BRENDAN,
+        [FEMALE] = TRAINER_PIC_RS_MAY
     },
     [CARD_TYPE_EMERALD] =
     {
-        [MALE]   = FACILITY_CLASS_BRENDAN,
-        [FEMALE] = FACILITY_CLASS_MAY
+        [MALE]   = TRAINER_PIC_BRENDAN,
+        [FEMALE] = TRAINER_PIC_MAY
     }
 };
 
@@ -1075,10 +1067,10 @@ static void PrintPokedexOnCard(void)
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         if (!sData->isHoenn)
-            AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardPokedex);
+            AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Pokedex);
         else
-            AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 16, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardPokedex);
-        StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString6);
+            AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 16, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Pokedex);
+        StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString);
         if (!sData->isHoenn)
         {
             xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 144);
@@ -1103,9 +1095,9 @@ static void PrintTimeOnCard(void)
     u32 x, y, totalWidth;
 
     if (!sData->isHoenn)
-        AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 20, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardTime);
+        AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 20, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Time);
     else
-        AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 16, 89, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardTime);
+        AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, 16, 89, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Time);
 
     if (sData->isLink)
     {
@@ -1122,7 +1114,7 @@ static void PrintTimeOnCard(void)
         hours = 999;
     if (minutes > 59)
         minutes = 59;
-    width = GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gText_Colon2, 0);
+    width = GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gText_Colon, 0);
 
     if (!sData->isHoenn)
     {
@@ -1141,7 +1133,7 @@ static void PrintTimeOnCard(void)
     ConvertIntToDecimalStringN(gStringVar4, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
     AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
     x += 18;
-    AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SKIP_DRAW, gText_Colon2);
+    AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SKIP_DRAW, gText_Colon);
     x += width;
     ConvertIntToDecimalStringN(gStringVar4, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
     AddTextPrinterParameterized3(1, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
@@ -1881,22 +1873,13 @@ static u8 VersionToCardType(u8 version)
 
 static void CreateTrainerCardTrainerPic(void)
 {
+    u8 trainerPicId;
+
     if (InUnionRoom() == TRUE && gReceivedRemoteLinkPlayers == 1)
-    {
-        CreateTrainerCardTrainerPicSprite(FacilityClassToPicIndex(sData->trainerCard.facilityClass),
-                    TRUE,
-                    sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
-                    sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],
-                    8,
-                    2);
-    }
+        trainerPicId = FacilityClassToPicIndex(sData->trainerCard.facilityClass);
+    else if (sData->trainerCard.outfit != OUTFIT_EMERALD)
+        trainerPicId = sOutfitFrontPics[sData->trainerCard.outfit][sData->trainerCard.gender];
     else
-    {
-        CreateTrainerCardTrainerPicSprite(sOutfitFrontPics[sData->trainerCard.outfit][sData->trainerCard.gender],
-                    TRUE,
-                    sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
-                    sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],
-                    8,
-                    2);
-    }
+        trainerPicId = sTrainerPics[sData->cardType][sData->trainerCard.gender];
+    CreateTrainerCardTrainerPicSprite(trainerPicId, TRUE, sTrainerPicOffset[sData->isHoenn][0], sTrainerPicOffset[sData->isHoenn][1], 8, 2);
 }

@@ -2869,7 +2869,7 @@ static void CB2_CheckPlayAgainLink(void)
             sBerryBlender->gameEndState = 5;
         break;
     case 5:
-        Blender_PrintText(&sBerryBlender->textState, gText_SavingDontTurnOff2, 0);
+        Blender_PrintText(&sBerryBlender->textState, gText_SavingDontTurnOff_Chat, 0);
         SetLinkStandbyCallback();
         sBerryBlender->gameEndState++;
         break;
