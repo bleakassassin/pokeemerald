@@ -210,7 +210,6 @@ u32 GetRegionMapCallback(void)
 
 static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
 {
-    struct RegionMap *regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
     switch (DoRegionMapInputCallback())
     {
     case MAP_INPUT_MOVE_END:
@@ -223,14 +222,10 @@ static u32 HandleRegionMapInput(struct Pokenav_RegionMapMenu *state)
         state->callback = GetExitRegionMapMenuId;
         return POKENAV_MAP_FUNC_EXIT;
     case MAP_INPUT_R_BUTTON:
-        if (FlagGet(FLAG_BADGE06_GET) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+        if (CanFlyToLocation())
         {
-            if ((regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY || regionMap->mapSecType == MAPSECTYPE_ROUTE || regionMap->mapSecType == MAPSECTYPE_BATTLE_FRONTIER))
-            {
-                SetMainCallback2(CB_FlyFromRegionMap);
-                return POKENAV_MENU_FUNC_EXIT;
-            }
-        m4aSongNumStart(SE_FAILURE);
+            SetMainCallback2(CB_FlyFromRegionMap);
+            return POKENAV_MENU_FUNC_EXIT;
         }
     }
 
@@ -424,7 +419,7 @@ static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
     case 1:
         if (UpdateRegionMapZoom() || IsChangeBgYForZoomActive())
             return LT_PAUSE;
-        if (FlagGet(FLAG_BADGE06_GET) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+        if (CanFlyToLocation())
             PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT_FLY);
         else
             PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT);
@@ -459,8 +454,7 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
     case 2:
         if (UpdateRegionMapZoom() || IsChangeBgYForZoomActive())
             return LT_PAUSE;
-
-        if (FlagGet(FLAG_BADGE06_GET) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
+        if (CanFlyToLocation())
             PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN_FLY);
         else
             PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN);
@@ -589,6 +583,10 @@ static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
         SetCityZoomTextInvisibility(TRUE);
         break;
     }
+    if (CanFlyToLocation())
+        PrintHelpBarText(IsRegionMapZoomed() ? HELPBAR_MAP_ZOOMED_IN_FLY : HELPBAR_MAP_ZOOMED_OUT_FLY);
+    else
+        PrintHelpBarText(IsRegionMapZoomed() ? HELPBAR_MAP_ZOOMED_IN : HELPBAR_MAP_ZOOMED_OUT);
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy_(struct Pokenav_RegionMapGfx *state)
@@ -769,94 +767,17 @@ static void CB_FlyFromRegionMap(void)
     struct RegionMap *regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
     m4aSongNumStart(SE_USE_ITEM);
     WaitForPokenavShutdownFade();
-    switch (regionMap->mapSecId)
-    {
-    case MAPSEC_SOUTHERN_ISLAND:
-        SetWarpDestinationToHealLocation(HEAL_LOCATION_SOUTHERN_ISLAND_EXTERIOR);
-        break;
-    case MAPSEC_BATTLE_FRONTIER:
-        SetWarpDestinationToHealLocation(HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST);
-        break;
-    case MAPSEC_LITTLEROOT_TOWN:
-        SetWarpDestinationToHealLocation(gSaveBlock2Ptr->playerGender == MALE ? HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE : HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE);
-        break;
-    case MAPSEC_EVER_GRANDE_CITY:
-        SetWarpDestinationToHealLocation(FlagGet(FLAG_LANDMARK_POKEMON_LEAGUE) && regionMap->posWithinMapSec == 0 ? HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE : HEAL_LOCATION_EVER_GRANDE_CITY);
-        break;
-    case MAPSEC_ROUTE_101:
-    case MAPSEC_ROUTE_102:
-    case MAPSEC_ROUTE_107:
-    case MAPSEC_ROUTE_108:
-    case MAPSEC_ROUTE_118:
-    case MAPSEC_ROUTE_127:
-    case MAPSEC_ROUTE_128:
-    case MAPSEC_ROUTE_132:
-    case MAPSEC_ROUTE_133:
-    case MAPSEC_ROUTE_134:
-        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 0);
-        break;
-    case MAPSEC_ROUTE_103:
-    case MAPSEC_ROUTE_105:
-    case MAPSEC_ROUTE_106:
-    case MAPSEC_ROUTE_109:
-    case MAPSEC_ROUTE_113:
-    case MAPSEC_ROUTE_115:
-    case MAPSEC_ROUTE_117:
-    case MAPSEC_ROUTE_121:
-    case MAPSEC_ROUTE_122:
-    case MAPSEC_ROUTE_123:
-    case MAPSEC_ROUTE_124:
-    case MAPSEC_ROUTE_125:
-    case MAPSEC_ROUTE_131:
-        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 1);
-        break;
-    case MAPSEC_ROUTE_116:
-        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 5);
-        break;
-    case MAPSEC_ROUTE_112:
-        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 6);
-        break;
-    case MAPSEC_ROUTE_120:
-        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], regionMap->posWithinMapSec >= 2 ? 3 : 2);
-        break;
-    case MAPSEC_ROUTE_104:
-        SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], regionMap->posWithinMapSec == 0 ? 9 : 8);
-        break;
-    case MAPSEC_ROUTE_110:
-        if (regionMap->posWithinMapSec == 0 && FlagGet(FLAG_LANDMARK_NEW_MAUVILLE))
-            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 7);
-        else
-            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 6);
-        break;
-    case MAPSEC_ROUTE_111:
-        if (regionMap->posWithinMapSec <= 1)
-            SetWarpDestinationToHealLocation(HEAL_LOCATION_ROUTE111_REST_STOP);
-        else if (regionMap->posWithinMapSec >= 4)
-            SetWarpDestinationToHealLocation(gMapHealLocations[regionMap->mapSecId][2]);
-        else
-            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 5);
-        break;
-    case MAPSEC_ROUTE_114:
-        if (regionMap->posWithinMapSec == 3)
-            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 7);
-        else if  (regionMap->posWithinMapSec == 1)
-            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 5);
-        else
-            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 6);
-        break;
-    case MAPSEC_ROUTE_119:
-        if (regionMap->posWithinMapSec >= 4)
-            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], 2);
-        else
-            SetWarpDestinationToHealLocation(gMapHealLocations[regionMap->mapSecId][2]);
-        break;
-    default:
-        if (gMapHealLocations[regionMap->mapSecId][2] != 0)
-            SetWarpDestinationToHealLocation(gMapHealLocations[regionMap->mapSecId][2]);
-        else
-            SetWarpDestinationToMapWarp(gMapHealLocations[regionMap->mapSecId][0], gMapHealLocations[regionMap->mapSecId][1], WARP_ID_NONE);
-        break;
-    }
+    FlyToLocation(regionMap->mapSecId, regionMap->posWithinMapSec);
     FlagSet(FLAG_SYS_WILD_FIELD_MOVE);
     ReturnToFieldFromFlyMapSelect();
+}
+
+bool8 CanFlyToLocation(void)
+{
+    struct RegionMap *regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
+
+    if (FlagGet(FLAG_BADGE06_GET) && Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE
+        && (regionMap->mapSecType == MAPSECTYPE_CITY_CANFLY || regionMap->mapSecType == MAPSECTYPE_ROUTE || regionMap->mapSecType == MAPSECTYPE_BATTLE_FRONTIER))
+        return TRUE;
+    return FALSE;
 }
