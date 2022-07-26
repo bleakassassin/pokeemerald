@@ -42,6 +42,7 @@ struct Pokenav_RegionMapGfx
     struct Sprite *cityZoomTextSprites[3];
     u8 tilemapBuffer[BG_SCREEN_SIZE];
     u8 cityZoomPics[NUM_CITY_MAPS][200];
+    u8 lastHelpText;
 };
 
 struct CityMapEntry
@@ -409,6 +410,8 @@ static u32 LoopedTask_UpdateInfoAfterCursorMove(s32 taskState)
 
 static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
 {
+    u8 currentHelpText;
+    struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     switch (taskState)
     {
     case 0:
@@ -420,9 +423,11 @@ static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
         if (UpdateRegionMapZoom() || IsChangeBgYForZoomActive())
             return LT_PAUSE;
         if (CanFlyToLocation())
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT_FLY);
+            currentHelpText = HELPBAR_MAP_ZOOMED_OUT_FLY;
         else
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_OUT);
+            currentHelpText = HELPBAR_MAP_ZOOMED_OUT;
+        PrintHelpBarText(currentHelpText);
+        state->lastHelpText = currentHelpText;
         return LT_INC_AND_PAUSE;
     case 2:
         if (WaitForHelpBar())
@@ -437,6 +442,7 @@ static u32 LoopedTask_RegionMapZoomOut(s32 taskState)
 
 static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
 {
+    u8 currentHelpText;
     struct Pokenav_RegionMapGfx *state = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP_ZOOM);
     switch (taskState)
     {
@@ -455,9 +461,11 @@ static u32 LoopedTask_RegionMapZoomIn(s32 taskState)
         if (UpdateRegionMapZoom() || IsChangeBgYForZoomActive())
             return LT_PAUSE;
         if (CanFlyToLocation())
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN_FLY);
+            currentHelpText = HELPBAR_MAP_ZOOMED_IN_FLY;
         else
-            PrintHelpBarText(HELPBAR_MAP_ZOOMED_IN);
+            currentHelpText = HELPBAR_MAP_ZOOMED_IN;
+        PrintHelpBarText(currentHelpText);
+        state->lastHelpText = currentHelpText;
         return LT_INC_AND_PAUSE;
     case 3:
         if (WaitForHelpBar())
@@ -548,6 +556,7 @@ static bool32 TryFreeTempTileDataBuffers(void)
 
 static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
 {
+    u8 currentHelpText;
     struct RegionMap *regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
     switch (regionMap->mapSecType)
     {
@@ -584,9 +593,14 @@ static void UpdateMapSecInfoWindow(struct Pokenav_RegionMapGfx *state)
         break;
     }
     if (CanFlyToLocation())
-        PrintHelpBarText(IsRegionMapZoomed() ? HELPBAR_MAP_ZOOMED_IN_FLY : HELPBAR_MAP_ZOOMED_OUT_FLY);
+        currentHelpText = IsRegionMapZoomed() ? HELPBAR_MAP_ZOOMED_IN_FLY : HELPBAR_MAP_ZOOMED_OUT_FLY;
     else
-        PrintHelpBarText(IsRegionMapZoomed() ? HELPBAR_MAP_ZOOMED_IN : HELPBAR_MAP_ZOOMED_OUT);
+        currentHelpText = IsRegionMapZoomed() ? HELPBAR_MAP_ZOOMED_IN : HELPBAR_MAP_ZOOMED_OUT;
+    if (state->lastHelpText != currentHelpText)
+    {
+        PrintHelpBarText(currentHelpText);
+        state->lastHelpText = currentHelpText;
+    }
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy_(struct Pokenav_RegionMapGfx *state)
