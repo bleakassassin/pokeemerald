@@ -1550,7 +1550,7 @@ SootopolisCity_Text_MewProvidesTheAnswer:
 	.string "Oh, my…\n"
 	.string "Is that a Mew, by chance?\p"
 	.string "It is said by many that Mew contains the\n"
-	.string "genetic code of all Pokémon\p"
+	.string "genetic code of all Pokémon…\p"
 	.string "Perhaps this could provide the answer\n"
 	.string "to where Pokémon come from?\p"
 	.string "Please, go inside.\n"
