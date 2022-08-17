@@ -166,7 +166,7 @@ extern const u8 gText_ABtnRegistrationCounter[];
 extern const u8 gText_MixingRecords[];
 extern const u8 gText_RecordMixingComplete[];
 extern const u8 gText_IsThisTheCorrectTime[];
-extern const u8 gText_PkmnFainted3[];
+extern const u8 gText_PkmnFainted_FldPsn[];
 extern const u8 gText_Coins[];
 extern const u8 gText_Silver[];
 extern const u8 gText_Gold[];
@@ -492,6 +492,8 @@ extern const u8 gText_NumberClear01[];
 extern const u8 gText_5MarksPokemon[];
 extern const u8 gText_UnkHeight[];
 extern const u8 gText_UnkWeight[];
+extern const u8 gText_UnkHeightMetric[];
+extern const u8 gText_UnkWeightMetric[];
 extern const u8 gText_HTHeight[];
 extern const u8 gText_WTWeight[];
 extern const u8 gText_SearchingPleaseWait[];
@@ -2939,5 +2941,12 @@ extern const u8 gText_PkmnSwap[];
 extern const u8 gText_Swap[];
 extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
+
+// Naming Screen
+extern const u8 gText_MoveOkBack[];
+extern const u8 gText_YourName[];
+extern const u8 gText_BoxName[];
+extern const u8 gText_PkmnsNickname[];
+extern const u8 gText_TellHimTheWords[];
 
 #endif // GUARD_STRINGS_H

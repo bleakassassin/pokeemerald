@@ -38,7 +38,7 @@ bool8 SetUpFieldMove_Strength(void)
 static void FieldCallback_Strength(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_UseStrength);
+    ScriptContext_SetupScript(EventScript_UseStrength);
 }
 
 bool8 FldEff_UseStrength(void)
@@ -54,5 +54,5 @@ bool8 FldEff_UseStrength(void)
 static void StartStrengthFieldEffect(void)
 {
     FieldEffectActiveListRemove(FLDEFF_USE_STRENGTH);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
