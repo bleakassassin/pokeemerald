@@ -133,14 +133,14 @@ static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
 void Special_ShowDiploma(void)
 {
     SetMainCallback2(CB2_ShowDiploma);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void Special_ViewWallClock(void)
 {
     gMain.savedCallback = CB2_ReturnToField;
     SetMainCallback2(CB2_ViewWallClock);
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
 }
 
 void ResetCyclingRoadChallengeData(void)
@@ -181,7 +181,7 @@ static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
     if (numFrames < 3600)
     {
         ConvertIntToDecimalStringN(gStringVar2, numFrames / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
-        gStringVar2[2] = CHAR_PERIOD;
+        gStringVar2[2] = CHAR_DEC_SEPARATOR;
         ConvertIntToDecimalStringN(&gStringVar2[3], ((numFrames % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar2, gText_SpaceSeconds);
     }
@@ -800,7 +800,7 @@ static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId)
         if ((++sSlidingDoorFrame) == ARRAY_COUNT(sPetalburgGymSlidingDoorMetatiles))
         {
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
     }
     else
@@ -1471,7 +1471,7 @@ bool8 ScriptCheckFreePokemonStorageSpace(void)
 
 bool8 IsPokerusInParty(void)
 {
-    if (!CheckPartyPokerus(gPlayerParty, 0x3f))
+    if (!CheckPartyPokerus(gPlayerParty, (1 << PARTY_SIZE) - 1))
         return FALSE;
 
     return TRUE;
@@ -1518,7 +1518,7 @@ static void Task_ShakeCamera(u8 taskId)
 static void StopCameraShake(u8 taskId)
 {
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 #undef horizontalPan
@@ -1873,7 +1873,7 @@ static void Task_MoveElevator(u8 taskId)
         {
             PlaySE(SE_DING_DONG);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             InstallCameraPanAheadCallback();
         }
     }
@@ -1884,7 +1884,7 @@ void ShowDeptStoreElevatorFloorSelect(void)
     int xPos;
 
     sTutorMoveAndElevatorWindowId = AddWindow(&gElevatorFloor_WindowTemplate);
-    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
+    SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, FALSE);
 
     xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_ElevatorNowOn, 64);
     AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_ElevatorNowOn, xPos, 0, TEXT_SKIP_DRAW, NULL);
@@ -2639,7 +2639,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     struct WindowTemplate template;
     struct Task *task = &gTasks[taskId];
 
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     sScrollableMultichoice_ScrollOffset = 0;
     sScrollableMultichoice_ItemSpriteId[0] = SPRITE_NONE;
     sScrollableMultichoice_ItemSpriteId[1] = SPRITE_NONE;
@@ -2672,7 +2672,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     template = CreateWindowTemplate(0, task->tLeft, task->tTop, task->tWidth, task->tHeight, 0xF, 0x64);
     windowId = AddWindow(&template);
     task->tWindowId = windowId;
-    SetStandardWindowBorderStyle(windowId, 0);
+    SetStandardWindowBorderStyle(windowId, FALSE);
 
     gScrollableMultichoice_ListMenuTemplate.totalItems = task->tNumItems;
     gScrollableMultichoice_ListMenuTemplate.maxShowed = task->tMaxItemsOnScreen;
@@ -2756,7 +2756,7 @@ static void ScrollableMultichoice_ProcessInput(u8 taskId)
             // Handle selection while keeping the menu open
             ScrollableMultichoice_RemoveScrollArrows(taskId);
             task->func = Task_ScrollableMultichoice_WaitReturnToList;
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
         break;
     }
@@ -2771,12 +2771,12 @@ static void CloseScrollableMultichoice(u8 taskId)
     ScrollableMultichoice_RemoveScrollArrows(taskId);
     DestroyListMenuTask(task->tListTaskId, NULL, NULL);
     Free(sScrollableMultichoice_ListMenuItem);
-    ClearStdWindowAndFrameToTransparent(task->tWindowId, 1);
+    ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
     FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
     CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
     RemoveWindow(task->tWindowId);
     DestroyTask(taskId);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 // Never run, tKeepOpenAfterSelect is FALSE for all scrollable multichoices.
@@ -2799,14 +2799,14 @@ void ScrollableMultichoice_TryReturnToList(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ScrollableMultichoice_WaitReturnToList);
     if (taskId == TASK_NONE)
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
     else
         gTasks[taskId].tKeepOpenAfterSelect++; // Return to list
 }
 
 static void Task_ScrollableMultichoice_ReturnToList(u8 taskId)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     ScrollableMultichoice_UpdateScrollArrows(taskId);
     gTasks[taskId].func = ScrollableMultichoice_ProcessInput;
 }
@@ -3025,7 +3025,7 @@ void ShowBattlePointsWindow(void)
     };
 
     sBattlePointsWindowId = AddWindow(&sBattlePoints_WindowTemplate);
-    SetStandardWindowBorderStyle(sBattlePointsWindowId, 0);
+    SetStandardWindowBorderStyle(sBattlePointsWindowId, FALSE);
     UpdateBattlePointsWindow();
     CopyWindowToVram(sBattlePointsWindowId, COPYWIN_GFX);
 }
@@ -3071,7 +3071,7 @@ void ShowFrontierExchangeCornerItemIconWindow(void)
     };
 
     sFrontierExchangeCorner_ItemIconWindowId = AddWindow(&sFrontierExchangeCorner_ItemIconWindowTemplate);
-    SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, 0);
+    SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, FALSE);
     CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, COPYWIN_GFX);
 }
 
@@ -3096,7 +3096,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection,
         switch (menu)
         {
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
-            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             if (sFrontierExchangeCorner_Decor1[selection] == 0xFFFF)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection], iconSlot);
@@ -3109,7 +3109,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection,
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             if (sFrontierExchangeCorner_Decor2[selection] == 0xFFFF)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection], iconSlot);
@@ -3122,7 +3122,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection,
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R:
-            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2DescriptionsRegi[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2DescriptionsRegi[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             if (sFrontierExchangeCorner_Decor2Regi[selection] == 0xFFFF)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2Regi[selection], iconSlot);
@@ -3135,19 +3135,19 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection,
             }
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection], iconSlot);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S:
-            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptionsSilver[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptionsSilver[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsSilver[selection], iconSlot);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G:
-            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptionsGold[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_VitaminsDescriptionsGold[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_VitaminsGold[selection], iconSlot);
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, 2, 1, 3);
+            AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
             ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection], iconSlot);
             break;
         }
@@ -3242,7 +3242,7 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
         if (gSpecialVar_0x8006 == 0)
         {
             sTutorMoveAndElevatorWindowId = AddWindow(&sBattleFrontierTutor_WindowTemplate);
-            SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, 0);
+            SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, FALSE);
         }
         ShowBattleFrontierTutorMoveDescription(menu, selection);
     }
@@ -3309,7 +3309,7 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
     {
         struct Task *task = &gTasks[taskId];
         ListMenuGetScrollAndRow(task->tListTaskId, &scrollOffset, &selectedRow);
-        SetStandardWindowBorderStyle(task->tWindowId, 0);
+        SetStandardWindowBorderStyle(task->tWindowId, FALSE);
 
         for (i = 0; i < MAX_SCROLL_MULTI_ON_SCREEN; i++)
             AddTextPrinterParameterized5(task->tWindowId, gSaveBlock2Ptr->optionsCurrentFont, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SKIP_DRAW, NULL, 0, 0);
@@ -3433,7 +3433,7 @@ static void Task_DeoxysRockInteraction(u8 taskId)
     if (FlagGet(FLAG_DEOXYS_ROCK_COMPLETE) == TRUE)
     {
         gSpecialVar_Result = 3;
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
     else
@@ -3454,7 +3454,7 @@ static void Task_DeoxysRockInteraction(u8 taskId)
         {
             FlagSet(FLAG_DEOXYS_ROCK_COMPLETE);
             gSpecialVar_Result = 2;
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             DestroyTask(taskId);
         }
         else
@@ -3499,7 +3499,7 @@ static void WaitForDeoxysRockMovement(u8 taskId)
 {
     if (FieldEffectActiveListContains(FLDEFF_MOVE_DEOXYS_ROCK) == FALSE)
     {
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
     }
 }
@@ -3900,7 +3900,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             SetCloseLinkCallback();
 
         gBattleTypeFlags = sBattleTowerMultiBattleTypeFlags;
-        EnableBothScriptContexts();
+        ScriptContext_Enable();
         DestroyTask(taskId);
         break;
     }
@@ -3986,7 +3986,7 @@ static void Task_CloseBattlePikeCurtain(u8 taskId)
         if (tCurrentFrame == 3)
         {
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
     }
 }
