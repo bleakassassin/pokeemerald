@@ -267,7 +267,7 @@ static void FindMapsWithMon(u16 species)
 
         // Check if this species should be hidden from the area map.
         // This only applies to Wynaut, to hide the encounters on Mirage Island.
-        ScriptContext2_RunNewScript(AbnormalWeather_EventScript_CheckKyogreGroudonStatus);
+        RunScriptImmediately(AbnormalWeather_EventScript_CheckKyogreGroudonStatus);
 
         if (VarGet(VAR_0x8004) < 2)
         {

@@ -201,7 +201,7 @@ static void TxRegItemsMenu_ProcessInput(u8 taskId)
             break;
         case LIST_CANCEL:
             PlaySE(SE_SELECT);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
             TxRegItemsMenu_CloseMenu(taskId);
             break;
         default:
@@ -358,7 +358,7 @@ static void TxRegItemsMenu_PrintFunc(u8 windowId, u32 id, u8 yOffset)
 static void TxRegItemsMenu_PrintItemIcon(u16 itemId, u8 iconSlot)
 {
     u8 spriteId;
-    u8* spriteIdLoc = &gTxRegItemsMenu->spriteId[iconSlot];
+    u8 *spriteIdLoc = &gTxRegItemsMenu->spriteId[iconSlot];
 
     if (*spriteIdLoc == SPRITE_NONE)
     {
@@ -578,7 +578,7 @@ void TxRegItemsMenu_RegisteredItemsMenuNewGame(void)
 //helper cleanup
 static void TxRegItemsMenu_RemoveItemIcon(u8 iconSlot) //remove item storage selected item icon
 {
-    u8* spriteIdLoc = &gTxRegItemsMenu->spriteId[iconSlot];
+    u8 *spriteIdLoc = &gTxRegItemsMenu->spriteId[iconSlot];
     if (*spriteIdLoc != SPRITE_NONE)
     {
         FreeSpriteTilesByTag(iconSlot + TAG_ITEM_ICON);

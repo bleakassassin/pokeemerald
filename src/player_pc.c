@@ -1099,11 +1099,7 @@ static void ItemStorage_DrawSwapArrow(u8 y, u8 b, u8 speed)
 static void ItemStorage_DrawItemIcon(u16 itemId, u8 iconSlot)
 {
     u8 spriteId;
-<<<<<<< HEAD
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
-=======
-    u8 *spriteIdLoc = &sItemStorageMenu->spriteId;
->>>>>>> master
+    u8 *spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
 
     if (*spriteIdLoc == SPRITE_NONE)
     {
@@ -1122,11 +1118,7 @@ static void ItemStorage_DrawItemIcon(u16 itemId, u8 iconSlot)
 
 static void ItemStorage_EraseItemIcon(u8 iconSlot)
 {
-<<<<<<< HEAD
-    u8* spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
-=======
-    u8 *spriteIdLoc = &sItemStorageMenu->spriteId;
->>>>>>> master
+    u8 *spriteIdLoc = &sItemStorageMenu->spriteId[iconSlot];
     if (*spriteIdLoc != SPRITE_NONE)
     {
         FreeSpriteOamMatrix(&gSprites[*spriteIdLoc]);

@@ -930,8 +930,8 @@ static bool8 TryToWakeSnorlax(void)
 
 static void ItemUseOnFieldCB_BlueFluteSnorlax(u8 taskId)
 {
-    ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Route103_EventScript_WakeSnorlax);
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Route103_EventScript_WakeSnorlax);
     DestroyTask(taskId);
 }
 
@@ -1192,11 +1192,11 @@ static bool8 TryToScopeKecleon(void)
 
 static void ItemUseOnFieldCB_DevonScopeKecleon(u8 taskId)
 {
-    ScriptContext2_Enable();
+    LockPlayerFieldControls();
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(FORTREE_CITY) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(FORTREE_CITY))
-        ScriptContext1_SetupScript(FortreeCity_EventScript_UseDevonScope);
+        ScriptContext_SetupScript(FortreeCity_EventScript_UseDevonScope);
     else
-        ScriptContext1_SetupScript(EventScript_BattleKecleon);
+        ScriptContext_SetupScript(EventScript_BattleKecleon);
     DestroyTask(taskId);
 }
 
