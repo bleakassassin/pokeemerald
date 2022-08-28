@@ -500,6 +500,8 @@ extern const u8 gText_SearchingPleaseWait[];
 extern const u8 gText_SearchCompleted[];
 extern const u8 gText_NoMatchingPkmnWereFound[];
 extern const u8 gText_SelectorArrow[];
+extern const u8 gText_EmptyHeight[];
+extern const u8 gText_EmptyWeight[];
 
 // birch dex rating text
 extern const u8 gBirchDexRatingText_LessThan10[];

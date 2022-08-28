@@ -29,6 +29,9 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#define INDENT_IMPERIAL 0x81
+#define INDENT_METRIC   0x90
+
 enum
 {
     PAGE_MAIN,
@@ -4126,18 +4129,18 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     PrintInfoScreenText(gText_WTWeight, 0x60, 0x49);
     if (owned)
     {
-        PrintMonHeight(gPokedexEntries[num].height, 0x81, 0x39);
-        PrintMonWeight(gPokedexEntries[num].weight, 0x81, 0x49);
+        PrintMonHeight(gPokedexEntries[num].height, INDENT_IMPERIAL, 0x39);
+        PrintMonWeight(gPokedexEntries[num].weight, INDENT_IMPERIAL, 0x49);
     }
     else if (gSaveBlock2Ptr->optionsUnitSystem == 0)
     {
-        PrintInfoScreenText(gText_UnkHeight, 0x81, 0x39);
-        PrintInfoScreenText(gText_UnkWeight, 0x81, 0x49);
+        PrintInfoScreenText(gText_UnkHeight, INDENT_IMPERIAL, 0x39);
+        PrintInfoScreenText(gText_UnkWeight, INDENT_IMPERIAL, 0x49);
     }
     else
     {
-        PrintInfoScreenText(gText_UnkHeightMetric, 0x81, 0x39);
-        PrintInfoScreenText(gText_UnkWeightMetric, 0x81, 0x49);
+        PrintInfoScreenText(gText_UnkHeightMetric, INDENT_METRIC, 0x39);
+        PrintInfoScreenText(gText_UnkWeightMetric, INDENT_METRIC, 0x49);
     }
     if (owned)
         description = gPokedexEntries[num].description;
@@ -4184,45 +4187,9 @@ static void PrintMonHeight(u16 height, u8 left, u8 top)
     PrintInfoScreenText(buffer, left, top);
     }
     else //Metric
-    {
-        buffer[i++] = EXT_CTRL_CODE_BEGIN;
-        buffer[i++] = EXT_CTRL_CODE_CLEAR_TO;
-        i++;
-        buffer[i++] = CHAR_SPACE;
-        buffer[i++] = CHAR_SPACE;
-        buffer[i++] = CHAR_SPACE;
-        buffer[i++] = CHAR_SPACE;
-        buffer[i++] = CHAR_SPACE;
-
-        result = (height / 1000);
-        if (result == 0)
-        {
-            offset = 6;
-        }
-        else
-        {
-            buffer[i++] = result + CHAR_0;
-        }
-
-        result = (height % 1000) / 100;
-        if (result == 0 && offset != 0)
-        {
-            offset += 6;
-        }
-        else
-        {
-            buffer[i++] = result + CHAR_0;
-        }
-
-        buffer[i++] = (((height % 1000) % 100) / 10) + CHAR_0;
-        buffer[i++] = CHAR_COMMA;
-        buffer[i++] = (((height % 1000) % 100) % 10) + CHAR_0;
-        buffer[i++] = CHAR_SPACE;
-        buffer[i++] = CHAR_m;
-
-        buffer[i++] = EOS;
-        buffer[2] = offset;
-        PrintInfoScreenText(buffer, left, top);   
+    {   
+        PrintInfoScreenText(gText_EmptyHeight, INDENT_METRIC, top);
+        PrintDecimalNum(0, height, INDENT_METRIC, top);
     }
 }
 
@@ -4290,37 +4257,8 @@ static void PrintMonWeight(u16 weight, u8 left, u8 top)
     }
     else //Metric
     {
-        buffer_metric[i++] = EXT_CTRL_CODE_BEGIN;
-        buffer_metric[i++] = EXT_CTRL_CODE_CLEAR_TO;
-        i++;
-        buffer_metric[i++] = CHAR_SPACE;
-        buffer_metric[i++] = CHAR_SPACE;
-        buffer_metric[i++] = CHAR_SPACE;
-        buffer_metric[i++] = CHAR_SPACE;
-        buffer_metric[i++] = CHAR_SPACE;
-
-        result = (weight / 1000);
-        if (result == 0)
-            offset = 6;
-        else
-            buffer_metric[i++] = result + CHAR_0;
-
-        result = (weight % 1000) / 100;
-        if (result == 0 && offset != 0)
-            offset += 6;
-        else
-            buffer_metric[i++] = result + CHAR_0;
-
-        buffer_metric[i++] = (((weight % 1000) % 100) / 10) + CHAR_0;
-        buffer_metric[i++] = CHAR_COMMA;
-        buffer_metric[i++] = (((weight % 1000) % 100) % 10) + CHAR_0;
-        buffer_metric[i++] = CHAR_SPACE;
-        buffer_metric[i++] = CHAR_k;
-        buffer_metric[i++] = CHAR_g;
-
-        buffer_metric[i++] = EOS;
-        buffer_metric[2] = offset;
-        PrintInfoScreenText(buffer_metric, left, top);
+        PrintInfoScreenText(gText_EmptyWeight, INDENT_METRIC, top);
+        PrintDecimalNum(0, weight, INDENT_METRIC, top);
     }
 }
 
@@ -4605,7 +4543,7 @@ static void UnusedPrintMonName(u8 windowId, const u8 *name, u8 left, u8 top)
     PrintInfoSubMenuText(windowId, str, left, top);
 }
 
-// Unused in the English version, used to print height/weight in versions which use metric system.
+// Used in hack to print height/weight when using metric units.
 static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
 {
     u8 str[6];
@@ -4637,7 +4575,7 @@ static void PrintDecimalNum(u8 windowId, u16 num, u8 left, u8 top)
     }
 
     str[2] = CHAR_0 + ((num % 1000) % 100) / 10;
-    str[3] = CHAR_DEC_SEPARATOR;
+    str[3] = CHAR_COMMA;
     str[4] = CHAR_0 + ((num % 1000) % 100) % 10;
     str[5] = EOS;
     PrintInfoSubMenuText(windowId, str, left, top);
