@@ -40,8 +40,8 @@ EverGrandeCity_ChampionsRoom_EventScript_EnterRoom::
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
 	goto EverGrandeCity_ChampionsRoom_EventScript_Steven
-    releaseall
-    end
+	releaseall
+	end
 
 EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace:
 	walk_up
