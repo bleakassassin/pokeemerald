@@ -368,7 +368,7 @@ void FixImportedSave(void)
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VERSION_LAUNCH)
     {
         AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
-        VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
+        VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
     }
 
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
@@ -448,7 +448,7 @@ void FixImportedSave(void)
             else
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
         }
-        VarSet(VAR_SAVE_COMPATIBILITY, LATEST_VERSION);
+        VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
     }
         
     for (i = 0; i < BAG_MEDICINE_COUNT; i++) // BAG_MEDICINE_COUNT is the same as BAG_KEYITEMS_COUNT (30)

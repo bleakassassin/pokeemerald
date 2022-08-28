@@ -144,11 +144,6 @@ PlayersHouse_2F_Movement_MomExitsFemale:
 	delay_8
 	step_end
 
-PlayersHouse_1F_EventScript_SetWatchedBroadcast::
-	setvar VAR_LITTLEROOT_INTRO_STATE, 7
-	releaseall
-	end
-
 PlayersHouse_1F_EventScript_PetalburgGymReportMale::
 	applymovement VAR_0x8005, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
@@ -171,7 +166,7 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale::
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomReturnToSeatMale
 	waitmovement 0
-	goto PlayersHouse_1F_EventScript_SetWatchedBroadcast
+	releaseall
 	end
 
 PlayersHouse_1F_EventScript_PetalburgGymReportFemale::
@@ -196,7 +191,7 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale::
 	setvar VAR_TEMP_1, 1
 	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MomReturnToSeatFemale
 	waitmovement 0
-	goto PlayersHouse_1F_EventScript_SetWatchedBroadcast
+	releaseall
 	end
 
 PlayersHouse_1F_EventScript_MomNoticeGymBroadcast::
@@ -215,6 +210,7 @@ PlayersHouse_1F_EventScript_WatchGymBroadcast::
 	msgbox PlayersHouse_1F_Text_ReportFromPetalburgGym, MSGBOX_DEFAULT
 	fadedefaultbgm
 	special TurnOffTVScreen
+	setvar VAR_LITTLEROOT_INTRO_STATE, 7
 	delay 35
 	return
 
