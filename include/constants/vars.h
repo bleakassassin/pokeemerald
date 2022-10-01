@@ -161,7 +161,7 @@
 #define VAR_BOARD_BRINEY_BOAT_STATE                      0x408E
 #define VAR_DEVON_CORP_3F_STATE                          0x408F
 #define VAR_BRINEY_HOUSE_STATE                           0x4090
-#define VAR_UNUSED_0x4091                                0x4091 // Unused Var
+#define VAR_OLD_SEA_MAP_STATE                            0x4091 // 1: Spoke to reporter, 2: Interviewed, 3: Watched, 4: 1 day later and been in Altering Cave, 5: Received item, 6: Read sign at Faraway Island
 #define VAR_LITTLEROOT_INTRO_STATE                       0x4092
 #define VAR_MAUVILLE_GYM_STATE                           0x4093
 #define VAR_LILYCOVE_MUSEUM_2F_STATE                     0x4094
