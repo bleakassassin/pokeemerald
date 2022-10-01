@@ -87,6 +87,7 @@ void ClearRoamerData(void)
 void ClearRoamerLocationData(void)
 {
     u8 i;
+
     for (sSlot = 0; sSlot < TOTAL_ROAMING_POKEMON; sSlot++)
     {
         for (i = 0; i < ARRAY_COUNT(sLocationHistory); i++)
@@ -146,6 +147,7 @@ void UpdateLocationHistoryForRoamer(void)
 void RoamerMoveToOtherLocationSet(void)
 {
     u8 mapNum = 0;
+
     for (sSlot = 0; sSlot < TOTAL_ROAMING_POKEMON; sSlot++)
     {
         if (gSaveBlock1Ptr->roam[sSlot].active)
@@ -185,8 +187,8 @@ void RoamerMove(void)
                         // Choose a new map (excluding the first) within this set
                         // Also exclude a map if the roamer was there 2 moves ago
                         mapNum = sRoamerLocations[locSet][(Random() % (NUM_LOCATIONS_PER_SET - 1)) + 1];
-                        if (!(sLocationHistory[sSlot][2][MAP_GRP] == ROAMER_MAP_GROUP 
-                           && sLocationHistory[sSlot][2][MAP_NUM] == mapNum) 
+                        if (!(sLocationHistory[sSlot][2][MAP_GRP] == ROAMER_MAP_GROUP
+                           && sLocationHistory[sSlot][2][MAP_NUM] == mapNum)
                            && mapNum != MAP_NUM(UNDEFINED))
                             break;
                     }

@@ -315,8 +315,8 @@ static void Task_RecordMixing_Main(u8 taskId)
     switch (tState)
     {
     case 0: // init
-        sSentRecord = malloc(sizeof(*sSentRecord));
-        sReceivedRecords = malloc(sizeof(*sReceivedRecords) * MAX_LINK_PLAYERS);
+        sSentRecord = Alloc(sizeof(*sSentRecord));
+        sReceivedRecords = Alloc(sizeof(*sReceivedRecords) * MAX_LINK_PLAYERS);
         SetLocalLinkPlayerId(gSpecialVar_0x8005);
         VarSet(VAR_TEMP_0, 1);
         sReadyToReceive = FALSE;
@@ -358,8 +358,8 @@ static void Task_RecordMixing_Main(u8 taskId)
     case 5: // Wait for the task created by CreateTask_ReestablishCableClubLink
         if (!gTasks[tLinkTaskId].isActive)
         {
-            free(sReceivedRecords);
-            free(sSentRecord);
+            Free(sReceivedRecords);
+            Free(sSentRecord);
             SetLinkWaitingForScript();
             if (gWirelessCommType != 0)
                 CreateTask(Task_ReturnToFieldRecordMixing, 10);
@@ -444,7 +444,7 @@ static void Task_MixingRecordsRecv(u8 taskId)
         }
         break;
     case 1: // wait for handshake
-        if (gReceivedRemoteLinkPlayers != 0)
+        if (gReceivedRemoteLinkPlayers)
         {
             ConvertIntToDecimalStringN(gStringVar1, GetMultiplayerId_(), STR_CONV_MODE_LEADING_ZEROS, 2);
             task->tState = 5;
@@ -688,7 +688,7 @@ static void ReceiveLilycoveLadyData(struct LilycoveLady *records, size_t recordS
     ShufflePlayerIndices(mixIndices);
     memcpy((void *)records + recordSize * multiplayerId, sLilycoveLadySave, sizeof(struct LilycoveLady));
 
-    lilycoveSent = malloc(sizeof(*lilycoveSent));
+    lilycoveSent = Alloc(sizeof(*lilycoveSent));
     if (lilycoveSent == NULL)
         return;
 
@@ -714,7 +714,7 @@ static void ReceiveLilycoveLadyData(struct LilycoveLady *records, size_t recordS
     if (lilycoveSent != NULL)
     {
         QuizLadyClearQuestionForRecordMix(lilycoveSent);
-        free(lilycoveSent);
+        Free(lilycoveSent);
     }
 }
 
@@ -888,7 +888,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
     for (i = 0; i < linkPlayerCount; i++)
     {
         mixMail = (void *)records + i * recordSize;
-        
+
         // Count number of players that have at least
         // one daycare Pokémon with no held item
         if (canHoldItem[i][0] == TRUE || canHoldItem[i][1] == TRUE)
@@ -954,7 +954,7 @@ static void ReceiveDaycareMailData(struct RecordMixingDaycareMail *records, size
     case 4:
         // 4 players can swap, select which 2 pairings will swap
         ptr = idxs;
-        
+
         // Swap pair 1
         playerSlot1 = sDaycareMailSwapIds_4Player[tableId][0];
         playerSlot2 = sDaycareMailSwapIds_4Player[tableId][1];

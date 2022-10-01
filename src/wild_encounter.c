@@ -71,7 +71,7 @@ static const struct WildPokemon sWildFeebas = {20, 25, SPECIES_FEEBAS};
 
 static const u16 sRoute119WaterTileData[] =
 {
-//yMin, yMax, numSpots in previous sections 
+//yMin, yMax, numSpots in previous sections
     18,  45,  0,
     46,  75,  NUM_FISHING_SPOTS_1,
     98, 112,  NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2,
