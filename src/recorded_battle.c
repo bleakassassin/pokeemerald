@@ -478,8 +478,8 @@ bool32 MoveRecordedBattleToSaveData(void)
             break;
     }
 
-    free(battleSave);
-    free(savSection);
+    Free(battleSave);
+    Free(savSection);
     return ret;
 }
 

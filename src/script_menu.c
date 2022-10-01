@@ -330,7 +330,7 @@ bool16 ScriptMenu_CreatePCMultichoice(void)
 
 static void CreatePCMultichoice(void)
 {
-    u8 y = 8;
+    u8 x = 8;
     u32 pixelWidth = 0;
     u8 width;
     u8 numChoices;
@@ -355,28 +355,28 @@ static void CreatePCMultichoice(void)
         numChoices = 4;
         windowId = CreateWindowFromRect(0, 0, width, 8);
         SetStandardWindowBorderStyle(windowId, FALSE);
-        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_HallOfFame, y, 32, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LogOff, y, 48, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_HallOfFame, x, 32, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LogOff, x, 48, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
         numChoices = 3;
         windowId = CreateWindowFromRect(0, 0, width, 6);
         SetStandardWindowBorderStyle(windowId, FALSE);
-        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LogOff, y, 32, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LogOff, x, 32, TEXT_SKIP_DRAW, NULL);
     }
 
     // Change PC name if player has met Lanette
     if (FlagGet(FLAG_SYS_PC_LANETTE))
-        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LanettesPC, y, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_LanettesPC, x, 0, TEXT_SKIP_DRAW, NULL);
     else
-        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SomeonesPC, y, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, gSaveBlock2Ptr->optionsCurrentFont, gText_SomeonesPC, x, 0, TEXT_SKIP_DRAW, NULL);
 
     if (FlagGet(FLAG_SYS_NATIVE_SAVE))
         StringExpandPlaceholders(gStringVar4, gText_Mailbox);
     else
         StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
-    PrintPlayerNameOnWindow(windowId, gStringVar4, y, 16);
+    PrintPlayerNameOnWindow(windowId, gStringVar4, x, 16);
     InitMenuInUpperLeftCornerNormal(windowId, numChoices, 0);
     CopyWindowToVram(windowId, COPYWIN_FULL);
     InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
