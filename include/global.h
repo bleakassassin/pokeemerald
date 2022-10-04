@@ -486,12 +486,13 @@ struct SaveBlock2
     /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
              u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-             u16 optionsDifficulty:2; // OPTIONS_DIFFICULTY_[EASY/NORMAL/HARD], formerly OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
+             u16 optionsDifficulty:2; // OPTIONS_DIFFICULTY_[EASY/NORMAL/HARD]
              u16 optionsAttackStyle:1; // OPTIONS_ATTACK_STYLE_[TYPE/CATEGORY]
-             u16 optionsDisableMatchCall:1; // OPTIONS_MATCH_CALL [ON/OFF]
-             u16 optionsUnitSystem:1; // OPTIONS_UNIT_SYSTEM [IMPERIAL/METRIC]
+             u16 optionsDisableMatchCall:1; // OPTIONS_MATCH_CALL_[ON/OFF]
+             u16 optionsUnitSystem:1; // OPTIONS_UNIT_SYSTEM_[IMPERIAL/METRIC]
              u16 optionsCurrentFont:3; // Specifies one of multiple fonts to use (Emerald, FR/LG, R/S Europe, R/S U.S., HG/SS)
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 outfitId:7;
