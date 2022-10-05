@@ -382,6 +382,7 @@ void FixImportedSave(void)
         FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
 
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+        gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
         InitLilycoveLady();
 
         ClearItemSlots(gSaveBlock1Ptr->bagPocket_BattleItems, BAG_BATTLEITEMS_COUNT);
