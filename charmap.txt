@@ -64,6 +64,7 @@ RIGHT_ARROW = 7C
 SUPER_E     = 84
 '<'         = 85
 '>'         = 86
+STAR        = 87
 SUPER_RE    = A0
 '0'         = A1
 '1'         = A2
