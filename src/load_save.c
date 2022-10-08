@@ -56,45 +56,45 @@ static const u16 sTMFlagChecks[][2] =
 {
     {FLAG_ITEM_ROUTE_115_TM01,                          ITEM_TM01},
     {FLAG_ITEM_METEOR_FALLS_B1F_2R_TM02,                ITEM_TM02},
-    {FLAG_RECEIVED_TM03,                                 ITEM_TM03},
-    {FLAG_RECEIVED_TM04,                                 ITEM_TM04},
-    {FLAG_RECEIVED_TM05,                                 ITEM_TM05},
-    {FLAG_ITEM_FIERY_PATH_TM06,                          ITEM_TM06},
+    {FLAG_RECEIVED_TM03,                                ITEM_TM03},
+    {FLAG_RECEIVED_TM04,                                ITEM_TM04},
+    {FLAG_RECEIVED_TM05,                                ITEM_TM05},
+    {FLAG_ITEM_FIERY_PATH_TM06,                         ITEM_TM06},
     {FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM07,                ITEM_TM07},
-    {FLAG_RECEIVED_TM08,                                 ITEM_TM08},
-    {FLAG_RECEIVED_TM09,                                 ITEM_TM09},
-    {FLAG_RECEIVED_TM10,                                 ITEM_TM10},
+    {FLAG_RECEIVED_TM08,                                ITEM_TM08},
+    {FLAG_RECEIVED_TM09,                                ITEM_TM09},
+    {FLAG_RECEIVED_TM10,                                ITEM_TM10},
     {FLAG_ITEM_SCORCHED_SLAB_TM11,                      ITEM_TM11},
     {FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_TM13,           ITEM_TM13},
     {FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_TM18, ITEM_TM18},
-    {FLAG_RECEIVED_TM19,                                 ITEM_TM19},
+    {FLAG_RECEIVED_TM19,                                ITEM_TM19},
     {FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_TM22,             ITEM_TM22},
     {FLAG_ITEM_METEOR_FALLS_1F_1R_TM23,                 ITEM_TM23},
-    {FLAG_GOT_TM24_FROM_WATTSON,                         ITEM_TM24},
+    {FLAG_GOT_TM24_FROM_WATTSON,                        ITEM_TM24},
     {FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM26,             ITEM_TM26},
-    {FLAG_RECEIVED_TM28,                                 ITEM_TM28},
+    {FLAG_RECEIVED_TM28,                                ITEM_TM28},
     {FLAG_ITEM_VICTORY_ROAD_B1F_TM29,                   ITEM_TM29},
     {FLAG_ITEM_MT_PYRE_6F_TM30,                         ITEM_TM30},
-    {FLAG_RECEIVED_TM31,                                 ITEM_TM31},
+    {FLAG_RECEIVED_TM31,                                ITEM_TM31},
     {FLAG_HIDDEN_ITEM_ROUTE_113_TM32,                   ITEM_TM32},
-    {FLAG_RECEIVED_TM34,                                 ITEM_TM34},
-    {FLAG_RECEIVED_TM27,                                 ITEM_TM35}, // Cozmo gives the player TM35 (Flamethrower) instead of TM27 (Return) in the hack.
-    {FLAG_RECEIVED_TM36,                                 ITEM_TM36},
+    {FLAG_RECEIVED_TM34,                                ITEM_TM34},
+    {FLAG_RECEIVED_TM27,                                ITEM_TM35}, // Cozmo gives the player TM35 (Flamethrower) instead of TM27 (Return) in the hack.
+    {FLAG_RECEIVED_TM36,                                ITEM_TM36},
     {FLAG_ITEM_ROUTE_111_TM37,                          ITEM_TM37},
-    {FLAG_RECEIVED_TM39,                                 ITEM_TM39},
-    {FLAG_RECEIVED_TM40,                                 ITEM_TM40},
-    {FLAG_RECEIVED_TM41,                                 ITEM_TM41},
-    {FLAG_RECEIVED_TM42,                                 ITEM_TM42},
-    {FLAG_RECEIVED_TM44,                                 ITEM_TM42},
-    {FLAG_RECEIVED_TM45,                                 ITEM_TM42},
-    {FLAG_RECEIVED_SECRET_POWER,                         ITEM_TM43},
-    {FLAG_RECEIVED_TM44,                                 ITEM_TM44},
-    {FLAG_RECEIVED_TM45,                                 ITEM_TM45},
-    {FLAG_RECEIVED_TM46,                                 ITEM_TM46},
-    {FLAG_DELIVERED_STEVEN_LETTER,                       ITEM_TM47},
+    {FLAG_RECEIVED_TM39,                                ITEM_TM39},
+    {FLAG_RECEIVED_TM40,                                ITEM_TM40},
+    {FLAG_RECEIVED_TM41,                                ITEM_TM41},
+    {FLAG_RECEIVED_TM42,                                ITEM_TM42},
+    {FLAG_RECEIVED_TM44,                                ITEM_TM42},
+    {FLAG_RECEIVED_TM45,                                ITEM_TM42},
+    {FLAG_RECEIVED_SECRET_POWER,                        ITEM_TM43},
+    {FLAG_RECEIVED_TM44,                                ITEM_TM44},
+    {FLAG_RECEIVED_TM45,                                ITEM_TM45},
+    {FLAG_RECEIVED_TM46,                                ITEM_TM46},
+    {FLAG_DELIVERED_STEVEN_LETTER,                      ITEM_TM47},
     {FLAG_ITEM_MT_PYRE_EXTERIOR_TM48,                   ITEM_TM48},
-    {FLAG_RECEIVED_TM49,                                 ITEM_TM49},
-    {FLAG_RECEIVED_TM50,                                 ITEM_TM50},
+    {FLAG_RECEIVED_TM49,                                ITEM_TM49},
+    {FLAG_RECEIVED_TM50,                                ITEM_TM50},
 };
 
 // code
@@ -365,6 +365,14 @@ void FixImportedSave(void)
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
 
+    if (VarGet(VAR_SAVE_COMPATIBILITY) <= VERSION_CATCH_EXP_EVOLVE_FIX)
+    {
+        gSaveBlock1Ptr->giftRibbons[COUNTRY_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[NATIONAL_RIBBON - FIRST_GIFT_RIBBON] = DIFFICULTY_CLEARING_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[EARTH_RIBBON - FIRST_GIFT_RIBBON] = HUNDRED_STRAIGHT_WINS_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[WORLD_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
+    }
+
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VERSION_LAUNCH)
     {
         AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
@@ -382,7 +390,7 @@ void FixImportedSave(void)
         FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
 
         gSaveBlock1Ptr->registeredItem = ITEM_NONE;
-        gSaveBlock2Ptr->optionsDifficulty++;
+        gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
         InitLilycoveLady();
 
         ClearItemSlots(gSaveBlock1Ptr->bagPocket_BattleItems, BAG_BATTLEITEMS_COUNT);

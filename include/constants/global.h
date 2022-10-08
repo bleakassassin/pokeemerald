@@ -135,9 +135,12 @@
 #define OPTIONS_SOUND_MONO 0
 #define OPTIONS_SOUND_STEREO 1
 
+#define OPTIONS_BATTLE_STYLE_SHIFT 0
+#define OPTIONS_BATTLE_STYLE_SET 1
+
 #define OPTIONS_DIFFICULTY_EASY 0 // enables modern experience sharing
-#define OPTIONS_DIFFICULTY_NORMAL 1 // formerly OPTIONS_BATTLE_STYLE_SHIFT
-#define OPTIONS_DIFFICULTY_HARD 2 // formerly OPTIONS_BATTLE_STYLE_SET, also disables badge boosts
+#define OPTIONS_DIFFICULTY_NORMAL 1 // default difficulty
+#define OPTIONS_DIFFICULTY_HARD 2 // disables badge boosts
 
 #define OPTIONS_ATTACK_STYLE_TYPE 0
 #define OPTIONS_ATTACK_STYLE_CATEGORY 1
@@ -165,8 +168,9 @@
 #define OUTFIT_RS       1
 #define OUTFIT_TOTAL    2
 
-#define VANILLA_SAVE   0
-#define VERSION_LAUNCH 1
-#define VERSION_LATEST 2 // VERSION_CATCH_EXP_EVOLVE_FIX
+#define VANILLA_SAVE                 0
+#define VERSION_LAUNCH               1
+#define VERSION_CATCH_EXP_EVOLVE_FIX 2
+#define VERSION_LATEST               3 // VERSION_RIBBON_DESCRIPTIONS
 
 #endif // GUARD_CONSTANTS_GLOBAL_H

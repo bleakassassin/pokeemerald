@@ -10,7 +10,7 @@ static const u16 sFrontierExchangeCorner_Decor1[] =
     DECOR_CYNDAQUIL_DOLL,
     DECOR_CHIKORITA_DOLL,
     DECOR_TOTODILE_DOLL,
-    0xFFFF
+    ITEM_LIST_END
 };
 
 static const u16 sFrontierExchangeCorner_Decor2[] =
@@ -20,7 +20,7 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
     DECOR_VENUSAUR_DOLL,
     DECOR_CHARIZARD_DOLL,
     DECOR_BLASTOISE_DOLL,
-    0xFFFF
+    ITEM_LIST_END
 };
 
 static const u16 sFrontierExchangeCorner_Decor2Regi[] =
@@ -33,7 +33,7 @@ static const u16 sFrontierExchangeCorner_Decor2Regi[] =
     DECOR_REGIROCK_DOLL,
     DECOR_REGICE_DOLL,
     DECOR_REGISTEEL_DOLL,
-    0xFFFF
+    ITEM_LIST_END
 };
 
 static const u16 sFrontierExchangeCorner_Vitamins[] =
@@ -51,7 +51,7 @@ static const u16 sFrontierExchangeCorner_Vitamins[] =
     ITEM_SALAC_BERRY,
     ITEM_PETAYA_BERRY,
     ITEM_APICOT_BERRY,
-    0xFFFF
+    ITEM_LIST_END
 };
 
 static const u16 sFrontierExchangeCorner_VitaminsSilver[] =
@@ -70,7 +70,7 @@ static const u16 sFrontierExchangeCorner_VitaminsSilver[] =
     ITEM_PETAYA_BERRY,
     ITEM_APICOT_BERRY,
     ITEM_LANSAT_BERRY,
-    0xFFFF
+    ITEM_LIST_END
 };
 
 static const u16 sFrontierExchangeCorner_VitaminsGold[] =
@@ -90,7 +90,7 @@ static const u16 sFrontierExchangeCorner_VitaminsGold[] =
     ITEM_APICOT_BERRY,
     ITEM_LANSAT_BERRY,
     ITEM_STARF_BERRY,
-    0xFFFF
+    ITEM_LIST_END
 };
 
 static const u16 sFrontierExchangeCorner_HoldItems[] =
@@ -110,7 +110,7 @@ static const u16 sFrontierExchangeCorner_HoldItems[] =
     ITEM_CHOICE_BAND,
     ITEM_FOCUS_BAND,
     ITEM_SCOPE_LENS,
-    0xFFFF
+    ITEM_LIST_END
 };
 
 static const u8 *const sFrontierExchangeCorner_Decor1Descriptions[] =

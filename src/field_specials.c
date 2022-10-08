@@ -1967,27 +1967,6 @@ void BufferVarsForIVRater(void)
 
     for (i = 0; i < NUM_STATS; i++)
         gSpecialVar_0x8005 += ivStorage[i];
-
-    gSpecialVar_0x8006 = 0;
-    gSpecialVar_0x8007 = ivStorage[STAT_HP];
-
-    for (i = 1; i < NUM_STATS; i++)
-    {
-        if (ivStorage[gSpecialVar_0x8006] < ivStorage[i])
-        {
-            gSpecialVar_0x8006 = i;
-            gSpecialVar_0x8007 = ivStorage[i];
-        }
-        else if (ivStorage[gSpecialVar_0x8006] == ivStorage[i])
-        {
-            u16 randomNumber = Random();
-            if (randomNumber & 1)
-            {
-                gSpecialVar_0x8006 = i;
-                gSpecialVar_0x8007 = ivStorage[i];
-            }
-        }
-    }
 }
 
 bool8 UsedPokemonCenterWarp(void)
@@ -3097,7 +3076,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection,
         {
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            if (sFrontierExchangeCorner_Decor1[selection] == 0xFFFF)
+            if (sFrontierExchangeCorner_Decor1[selection] == ITEM_LIST_END)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection], iconSlot);
             }
@@ -3110,7 +3089,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection,
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
             AddTextPrinterParameterized2(0, gSaveBlock2Ptr->optionsCurrentFont, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            if (sFrontierExchangeCorner_Decor2[selection] == 0xFFFF)
+            if (sFrontierExchangeCorner_Decor2[selection] == ITEM_LIST_END)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection], iconSlot);
             }

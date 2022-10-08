@@ -23,6 +23,7 @@ enum
     MENUITEM_TEXTSPEED,
     MENUITEM_BATTLESCENE,
     MENUITEM_BATTLESTYLE,
+    MENUITEM_DIFFICULTY,
     MENUITEM_ATTACKSTYLE,
     MENUITEM_MATCHCALL,
     MENUITEM_SOUND,
@@ -67,6 +68,7 @@ static int ProcessInput_Options_Three(int selection);
 static void DrawChoices_TextSpeed(int selection, int y);
 static void DrawChoices_BattleScene(int selection, int y);
 static void DrawChoices_BattleStyle(int selection, int y);
+static void DrawChoices_Difficulty(int selection, int y);
 static void DrawChoices_AttackStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
@@ -88,7 +90,8 @@ static const sItemFunctions[MENUITEM_COUNT] =
 {
     [MENUITEM_TEXTSPEED]    = {DrawChoices_TextSpeed,   ProcessInput_Options_Three},
     [MENUITEM_BATTLESCENE]  = {DrawChoices_BattleScene, ProcessInput_Options_Two},
-    [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Three},
+    [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
+    [MENUITEM_DIFFICULTY]   = {DrawChoices_Difficulty,  ProcessInput_Options_Three},
     [MENUITEM_ATTACKSTYLE]  = {DrawChoices_AttackStyle, ProcessInput_Options_Two},
     [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Sound},
     [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Two},
@@ -111,6 +114,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_TEXTSPEED]   = gText_TextSpeed,
     [MENUITEM_BATTLESCENE] = gText_BattleScene,
     [MENUITEM_BATTLESTYLE] = gText_BattleStyle,
+    [MENUITEM_DIFFICULTY]  = gText_Difficulty,
     [MENUITEM_ATTACKSTYLE] = gText_AttackStyle,
     [MENUITEM_MATCHCALL]   = gText_MatchCalls,
     [MENUITEM_SOUND]       = gText_Sound,
@@ -180,6 +184,7 @@ static const struct BgTemplate sOptionMenuBgTemplates[] =
 static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};// Descriptions
 static const u8 sText_TextSpeed[]   = _("Choose text-scrolling speed.");
 static const u8 sText_BattleScene[] = _("Toggle in-battle animations.");
+static const u8 sText_BattleStyle[] = _("Toggle switch prompt for foe's next {PKMN}.");
 static const u8 sText_Difficulty[]  = _("Set battle difficulty and Exp. gain.");
 static const u8 sText_AttackStyle[] = _("Set what determines attack power.");
 static const u8 sText_MatchCall[]   = _("Toggle calls from other Trainers.");
@@ -193,7 +198,8 @@ static const u8 *const sOptionMenuItemDescriptions[MENUITEM_COUNT] =
 {
     [MENUITEM_TEXTSPEED]   = sText_TextSpeed,
     [MENUITEM_BATTLESCENE] = sText_BattleScene,
-    [MENUITEM_BATTLESTYLE] = sText_Difficulty,
+    [MENUITEM_BATTLESTYLE] = sText_BattleStyle,
+    [MENUITEM_DIFFICULTY]  = sText_Difficulty,
     [MENUITEM_ATTACKSTYLE] = sText_AttackStyle,
     [MENUITEM_MATCHCALL]   = sText_MatchCall,
     [MENUITEM_SOUND]       = sText_Sound,
@@ -282,7 +288,8 @@ void CB2_InitOptionMenu(void)
         sOptions = AllocZeroed(sizeof(*sOptions));
         sOptions->sel[MENUITEM_TEXTSPEED]   = gSaveBlock2Ptr->optionsTextSpeed;
         sOptions->sel[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
-        sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsDifficulty;
+        sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
+        sOptions->sel[MENUITEM_DIFFICULTY]  = gSaveBlock2Ptr->optionsDifficulty;
         sOptions->sel[MENUITEM_ATTACKSTYLE] = gSaveBlock2Ptr->optionsAttackStyle;
         sOptions->sel[MENUITEM_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
         sOptions->sel[MENUITEM_SOUND]       = gSaveBlock2Ptr->optionsSound;
@@ -469,7 +476,8 @@ static void Task_OptionMenuSave(u8 taskId)
 {
     gSaveBlock2Ptr->optionsTextSpeed        = sOptions->sel[MENUITEM_TEXTSPEED];
     gSaveBlock2Ptr->optionsBattleSceneOff   = sOptions->sel[MENUITEM_BATTLESCENE];
-    gSaveBlock2Ptr->optionsDifficulty      = sOptions->sel[MENUITEM_BATTLESTYLE];
+    gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_BATTLESTYLE];
+    gSaveBlock2Ptr->optionsDifficulty       = sOptions->sel[MENUITEM_DIFFICULTY];
     gSaveBlock2Ptr->optionsAttackStyle      = sOptions->sel[MENUITEM_ATTACKSTYLE];
     gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel[MENUITEM_MATCHCALL];
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_SOUND];
@@ -652,6 +660,16 @@ static void DrawChoices_BattleScene(int selection, int y)
 }
 
 static void DrawChoices_BattleStyle(int selection, int y)
+{
+    u8 styles[2] = {0};
+
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_BattleStyleShift, 104, y, styles[0]);
+    DrawOptionMenuChoice(gText_BattleStyleSet, GetStringRightAlignXOffset(FONT_NORMAL, gText_BattleStyleSet, 214), y, styles[1]);
+}
+
+static void DrawChoices_Difficulty(int selection, int y)
 {
     u8 styles[3] = {0};
     s32 widthEasy, widthNormal, widthHard, xMid;
