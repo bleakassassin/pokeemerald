@@ -3192,7 +3192,9 @@ static void BufferMonTrainerMemo(void)
 
         if (sum->metLocation < MAPSEC_NONE)
         {
-            if (sum->metLocation == MAPSEC_AQUA_HIDEOUT_OLD)
+            if (sum->metGame == VERSION_GAMECUBE)
+                StringCopy(metLocationString, gText_DistantLand);
+            else if (sum->metLocation == MAPSEC_AQUA_HIDEOUT_OLD)
             {
                 if (sum->metGame == VERSION_RUBY)
                     GetMapNameGeneric(metLocationString, MAPSEC_MAGMA_HIDEOUT);
@@ -3228,7 +3230,7 @@ static void BufferMonTrainerMemo(void)
         {
             text = gText_XNatureFatefulEncounter;
         }
-        else if (sum->metLocation != METLOC_IN_GAME_TRADE && DidMonComeFromGBAGames())
+        else if (sum->metLocation != METLOC_IN_GAME_TRADE && (DidMonComeFromGBAGames() || sum->metGame == VERSION_GAMECUBE))
         {
             text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureObtainedInTrade : gText_XNatureProbablyMetAt;
         }
