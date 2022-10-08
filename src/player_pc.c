@@ -1025,7 +1025,7 @@ static void ItemStorage_MoveCursor(s32 id, bool8 onInit, struct ListMenu *list)
         if (id != LIST_CANCEL)
             ItemStorage_DrawItemIcon(gSaveBlock1Ptr->pcItems[id].itemId, sItemStorageMenu->iconSlot);
         else
-            ItemStorage_DrawItemIcon(MSG_GO_BACK_TO_PREV, sItemStorageMenu->iconSlot);
+            ItemStorage_DrawItemIcon(ITEM_LIST_END, sItemStorageMenu->iconSlot);
         sItemStorageMenu->iconSlot ^= 1;
         ItemStorage_PrintDescription(id);
     }
