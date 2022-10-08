@@ -3456,9 +3456,9 @@ static void PrintRibbonCount(void)
 
 static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n)
 {
-    static const u8 sTextNatureDown[] = _("{COLOR}{07}");
-    static const u8 sTextNatureUp[] = _("{COLOR}{09}");
-    static const u8 sTextNatureNeutral[] = _("{COLOR}{01}");
+    static const u8 sTextNatureDown[] = _("{COLOR}{12}{SHADOW}{11}");
+    static const u8 sTextNatureUp[] = _("{COLOR}{14}{SHADOW}{13}");
+    static const u8 sTextNatureNeutral[] = _("{COLOR}{01}{SHADOW}{02}");
     u8 *txtPtr;
 
     if (natureMod == 0)
@@ -3517,9 +3517,9 @@ static void DisplayStatsOrIVRanks(bool8 mode)
 static u8 ConvertIVsToSymbols(u8 *dest, u8 idx, u8 stat)
 {
     u8 iv;
-    static const u8 sStatRankOneStar[] = _("    {STAR}");
-    static const u8 sStatRankTwoStars[] = _("  {STAR}{STAR}");
-    static const u8 sStatRankThreeStars[] = _("{STAR}{STAR}{STAR}");
+    static const u8 sStatRankOneStar[] = _("{COLOR}{01}{SHADOW}{02}    {STAR}");
+    static const u8 sStatRankTwoStars[] = _("{COLOR}{01}{SHADOW}{02}  {STAR}{STAR}");
+    static const u8 sStatRankThreeStars[] = _("{COLOR}{01}{SHADOW}{02}{STAR}{STAR}{STAR}");
     static const u8 sStatRankSilver[] = _("{COLOR}{02}{SHADOW}{04}{STAR}{STAR}{STAR}");
     static const u8 sStatRankGold[] = _("{COLOR}{06}{SHADOW}{04}{STAR}{STAR}{STAR}");
 
