@@ -365,96 +365,96 @@ void FixImportedSave(void)
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
 
-    if (VarGet(VAR_SAVE_COMPATIBILITY) != VERSION_LATEST)
+    if (VarGet(VAR_SAVE_COMPATIBILITY) <= VERSION_CATCH_EXP_EVOLVE_FIX)
     {
-        if (VarGet(VAR_SAVE_COMPATIBILITY) <= VERSION_CATCH_EXP_EVOLVE_FIX)
+        gSaveBlock1Ptr->giftRibbons[COUNTRY_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[NATIONAL_RIBBON - FIRST_GIFT_RIBBON] = DIFFICULTY_CLEARING_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[EARTH_RIBBON - FIRST_GIFT_RIBBON] = HUNDRED_STRAIGHT_WINS_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[WORLD_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
+    }
+
+    if (VarGet(VAR_SAVE_COMPATIBILITY) == VERSION_LAUNCH)
+    {
+        AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
+        VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
+    }
+
+    if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
+    {
+        FlagClear(FLAG_REMATCH_SIDNEY);
+        FlagClear(FLAG_REMATCH_PHOEBE);
+        FlagClear(FLAG_REMATCH_GLACIA);
+        FlagClear(FLAG_REMATCH_DRAKE);
+        FlagClear(FLAG_REMATCH_WALLACE);
+        FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
+        FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
+
+        gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+        gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
+        InitLilycoveLady();
+
+        ClearItemSlots(gSaveBlock1Ptr->bagPocket_BattleItems, BAG_BATTLEITEMS_COUNT);
+        ClearItemSlots(gSaveBlock1Ptr->bagPocket_Mail, BAG_MAIL_COUNT);
+
+        for (i = 0; i < TM_FLAGS; i++)
         {
-            gSaveBlock1Ptr->giftRibbons[COUNTRY_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
-            gSaveBlock1Ptr->giftRibbons[NATIONAL_RIBBON - FIRST_GIFT_RIBBON] = DIFFICULTY_CLEARING_RIBBON;
-            gSaveBlock1Ptr->giftRibbons[EARTH_RIBBON - FIRST_GIFT_RIBBON] = HUNDRED_STRAIGHT_WINS_RIBBON;
-            gSaveBlock1Ptr->giftRibbons[WORLD_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
+            if (FlagGet(sTMFlagChecks[i][0]))
+                AddBagItem(sTMFlagChecks[i][1], 1);
         }
+        if (VarGet(VAR_TRICK_HOUSE_LEVEL) > 5)
+            AddBagItem(ITEM_TM12, 1);
 
-        if (VarGet(VAR_SAVE_COMPATIBILITY) == VERSION_LAUNCH)
-            AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
-
-        if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
+        if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE)
         {
-            FlagClear(FLAG_REMATCH_SIDNEY);
-            FlagClear(FLAG_REMATCH_PHOEBE);
-            FlagClear(FLAG_REMATCH_GLACIA);
-            FlagClear(FLAG_REMATCH_DRAKE);
-            FlagClear(FLAG_REMATCH_WALLACE);
-            FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
-            FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
+            RemoveBagItem(ITEM_MACH_BIKE, 1);
+            RemoveBagItem(ITEM_ACRO_BIKE, 1);
+            AddBagItem(ITEM_BICYCLE, 1);
+        }
+        if (gSaveBlock1Ptr->mapLayoutId == 420)
+        {
+            SetContinueGameWarpStatus();
+            SetContinueGameWarpToHealLocation(HEAL_LOCATION_SLATEPORT_CITY);
+        }
+        if (gSaveBlock2Ptr->optionsButtonMode >= OPTIONS_BUTTON_MODE_L_EQUALS_A)
+            gSaveBlock2Ptr->optionsButtonMode--;
+        if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
+            VarSet(VAR_OLD_SEA_MAP_STATE, 5);
+        if (VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 3)
+        {
+            VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);
+            FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL);
+            FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE);
+            FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
+        }
+        if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
+            FlagClear(FLAG_READ_STEVENS_LETTER);
+        if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 3)
+            FlagClear(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
+        if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
+        {
+            FlagClear(FLAG_READ_STEVENS_LETTER);
+            FlagSet(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
+            FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
+            FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
+            FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
 
-            gSaveBlock1Ptr->registeredItem = ITEM_NONE;
-            gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
-            InitLilycoveLady();
+            if (FlagGet(FLAG_BADGE08_GET) == TRUE)
+            {
+                FlagSet(FLAG_ENABLE_WALLACE_MATCH_CALL);
+                FlagClear(FLAG_ENABLE_JUAN_MATCH_CALL);
+                FlagClear(TRAINER_FLAGS_START + TRAINER_JUAN_1);
+            }
+        }
+        else
+        {
+            FlagClear(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
+            FlagClear(FLAG_HIDE_ROUTE_103_SNORLAX);
+            FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
 
-            ClearItemSlots(gSaveBlock1Ptr->bagPocket_BattleItems, BAG_BATTLEITEMS_COUNT);
-            ClearItemSlots(gSaveBlock1Ptr->bagPocket_Mail, BAG_MAIL_COUNT);
-
-            for (i = 0; i < TM_FLAGS; i++)
-            {
-                if (FlagGet(sTMFlagChecks[i][0]))
-                    AddBagItem(sTMFlagChecks[i][1], 1);
-            }
-            if (VarGet(VAR_TRICK_HOUSE_LEVEL) > 5)
-                AddBagItem(ITEM_TM12, 1);
-
-            if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE)
-            {
-                RemoveBagItem(ITEM_MACH_BIKE, 1);
-                RemoveBagItem(ITEM_ACRO_BIKE, 1);
-                AddBagItem(ITEM_BICYCLE, 1);
-            }
-            if (gSaveBlock1Ptr->mapLayoutId == 420)
-            {
-                SetContinueGameWarpStatus();
-                SetContinueGameWarpToHealLocation(HEAL_LOCATION_SLATEPORT_CITY);
-            }
-            if (gSaveBlock2Ptr->optionsButtonMode >= OPTIONS_BUTTON_MODE_L_EQUALS_A)
-                gSaveBlock2Ptr->optionsButtonMode--;
-            if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
-                VarSet(VAR_OLD_SEA_MAP_STATE, 5);
-            if (VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 3)
-            {
-                VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);
-                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL);
-                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE);
-                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
-            }
-            if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
-                FlagClear(FLAG_READ_STEVENS_LETTER);
-            if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 3)
-                FlagClear(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
-            if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
-            {
-                FlagClear(FLAG_READ_STEVENS_LETTER);
-                FlagSet(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
-                FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
-                FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
-                FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
-
-                if (FlagGet(FLAG_BADGE08_GET) == TRUE)
-                {
-                    FlagSet(FLAG_ENABLE_WALLACE_MATCH_CALL);
-                    FlagClear(FLAG_ENABLE_JUAN_MATCH_CALL);
-                    FlagClear(TRAINER_FLAGS_START + TRAINER_JUAN_1);
-                }
-            }
+            if (gSaveBlock2Ptr->playerGender == MALE)
+                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
             else
-            {
-                FlagClear(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
-                FlagClear(FLAG_HIDE_ROUTE_103_SNORLAX);
-                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
-
-                if (gSaveBlock2Ptr->playerGender == MALE)
-                    FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
-                else
-                    FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
-            }
+                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
         }
         VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
     }
