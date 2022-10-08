@@ -365,6 +365,14 @@ void FixImportedSave(void)
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
 
+    if (VarGet(VAR_SAVE_COMPATIBILITY) <= VERSION_CATCH_EXP_EVOLVE_FIX)
+    {
+        gSaveBlock1Ptr->giftRibbons[COUNTRY_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[NATIONAL_RIBBON - FIRST_GIFT_RIBBON] = DIFFICULTY_CLEARING_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[EARTH_RIBBON - FIRST_GIFT_RIBBON] = HUNDRED_STRAIGHT_WINS_RIBBON;
+        gSaveBlock1Ptr->giftRibbons[WORLD_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
+    }
+
     if (VarGet(VAR_SAVE_COMPATIBILITY) == VERSION_LAUNCH)
     {
         AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch

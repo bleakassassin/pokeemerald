@@ -168,8 +168,9 @@
 #define OUTFIT_RS       1
 #define OUTFIT_TOTAL    2
 
-#define VANILLA_SAVE   0
-#define VERSION_LAUNCH 1
-#define VERSION_LATEST 2 // VERSION_CATCH_EXP_EVOLVE_FIX
+#define VANILLA_SAVE                 0
+#define VERSION_LAUNCH               1
+#define VERSION_CATCH_EXP_EVOLVE_FIX 2
+#define VERSION_LATEST               3 // VERSION_RIBBON_DESCRIPTIONS
 
 #endif // GUARD_CONSTANTS_GLOBAL_H

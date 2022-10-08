@@ -146,6 +146,9 @@
 // corresponds to one of the special ribbons listed
 // in gGiftRibbonDescriptionPointers. Most of these were
 // never distributed
+#define GENERIC_TOURNAMENT_RIBBON 32 // used for Pokémon with Country or World Ribbons if save file doesn't have a tourney champion gift ribbon set
+#define DIFFICULTY_CLEARING_RIBBON 43 // used for purified Shadow Pokémon
+#define HUNDRED_STRAIGHT_WINS_RIBBON 45 // used for Pokémon that cleared Mt. Battle
 #define MAX_GIFT_RIBBON 64
 
 #define MIN_LEVEL 1

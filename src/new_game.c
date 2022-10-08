@@ -215,6 +215,10 @@ void NewGameInitData(void)
     ResetContestLinkResults();
     gSaveBlock2Ptr->autoRun = FALSE;
     gSaveBlock2Ptr->outfitId = OUTFIT_RS;
+    gSaveBlock1Ptr->giftRibbons[COUNTRY_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
+    gSaveBlock1Ptr->giftRibbons[NATIONAL_RIBBON - FIRST_GIFT_RIBBON] = DIFFICULTY_CLEARING_RIBBON;
+    gSaveBlock1Ptr->giftRibbons[EARTH_RIBBON - FIRST_GIFT_RIBBON] = HUNDRED_STRAIGHT_WINS_RIBBON;
+    gSaveBlock1Ptr->giftRibbons[WORLD_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
 }
 
 static void ResetMiniGamesRecords(void)
