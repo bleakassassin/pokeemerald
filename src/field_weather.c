@@ -281,7 +281,7 @@ static void BuildColorMaps(void)
     s16 diff;
 
     for (j = 0; j <= 12; j++)
-        sBasePaletteGammaTypes[j] = GAMMA_NORMAL;
+        sBasePaletteColorMapTypes[j] = GAMMA_NORMAL;
 
     sPaletteColorMapTypes = sBasePaletteColorMapTypes;
     for (i = 0; i < 2; i++)
@@ -1113,8 +1113,8 @@ void ResetPreservedPalettesInWeather(void)
     sPaletteColorMapTypes = sBasePaletteColorMapTypes;
 }
 
-void UpdatePaletteGammaType(u8 index, u8 gammaType)
+void UpdatePaletteColorMapType(u8 index, u8 gammaType)
 {
     if (index != 0xFF)
-        sBasePaletteGammaTypes[index + 16] = gammaType;
+        sBasePaletteColorMapTypes[index + 16] = gammaType;
 }

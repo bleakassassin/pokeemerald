@@ -148,7 +148,7 @@ enum
     GAMMA_ALT,
 };
 
-void UpdatePaletteGammaType(u8 index, u8 gammaType);
+void UpdatePaletteColorMapType(u8 index, u8 gammaType);
 
 // field_weather_effect.c
 extern const u8 gWeatherFogHorizontalTiles[];

@@ -175,7 +175,7 @@
       "y": 31,
       "elevation": 0,
       "dest_map": "MAP_ROUTE134",
-      "dest_warp_id": 0
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [],
