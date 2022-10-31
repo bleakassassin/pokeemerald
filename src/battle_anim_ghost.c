@@ -814,7 +814,7 @@ void AnimTask_DestinyBondWhiteShadow(u8 taskId)
         for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
         {
             if (battler != gBattleAnimAttacker
-             && battler != (gBattleAnimAttacker ^ 2)
+             && battler != BATTLE_PARTNER(gBattleAnimAttacker)
              && IsBattlerSpriteVisible(battler))
             {
                 spriteId = CreateSprite(&gDestinyBondWhiteShadowSpriteTemplate, baseX, baseY, 55);
@@ -1004,7 +1004,7 @@ static void AnimTask_CurseStretchingBlackBg_Step1(u8 taskId)
         right = DISPLAY_WIDTH;
         top = 0;
         bottom = 112;
-        selectedPalettes = GetBattleBgPalettesMask(1, 0, 0, 0, 0, 0, 0);
+        selectedPalettes = GetBattlePalettesMask(TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE);
         BeginNormalPaletteFade(selectedPalettes, 0, 16, 16, RGB(0, 0, 0));
         gTasks[taskId].func = AnimTask_CurseStretchingBlackBg_Step2;
     }
@@ -1034,7 +1034,7 @@ static void AnimCurseNail(struct Sprite *sprite)
     s16 xDelta;
     s16 xDelta2;
 
-    InitSpritePosToAnimAttacker(sprite, 1);
+    InitSpritePosToAnimAttacker(sprite, TRUE);
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
         xDelta = 24;
