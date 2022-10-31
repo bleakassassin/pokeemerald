@@ -51,6 +51,7 @@ extern u32 gPlttBufferTransferPending;
 extern u8 gPaletteDecompressionBuffer[];
 extern u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE];
 extern u16 gPlttBufferFaded[PLTT_BUFFER_SIZE];
+extern bool8 gScriptBufferedFadeActive;
 
 void LoadCompressedPalette(const u32 *src, u16 offset, u16 size);
 void LoadPalette(const void *src, u16 offset, u16 size);

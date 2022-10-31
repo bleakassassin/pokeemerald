@@ -65,6 +65,7 @@ EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sFiller = 0;
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_DECOMP_BUFFER_SIZE] = {0};
+EWRAM_DATA bool8 gScriptBufferedFadeActive = FALSE;
 
 static const struct PaletteStructTemplate sDummyPaletteStructTemplate = {
     .id = 0xFFFF,
@@ -90,8 +91,11 @@ void LoadCompressedPalette(const u32 *src, u16 offset, u16 size)
 
 void LoadPalette(const void *src, u16 offset, u16 size)
 {
-    CpuCopy16(src, &gPlttBufferUnfaded[offset], size);
-    CpuCopy16(src, &gPlttBufferFaded[offset], size);
+    DmaCopy16(3, src, gPlttBufferUnfaded + offset, size);
+    if (gScriptBufferedFadeActive)
+        DmaCopy16(3, src, gPaletteDecompressionBuffer + offset * 2, size);
+    else
+        DmaCopy16(3, src, gPlttBufferFaded + offset, size);
 }
 
 void FillPalette(u16 value, u16 offset, u16 size)

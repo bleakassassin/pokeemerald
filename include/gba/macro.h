@@ -31,14 +31,17 @@
 
 #define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, ((size)/(32/8) & 0x1FFFFF))
 
-#define DmaSet(dmaNum, src, dest, control)        \
-{                                                 \
-    vu32 *dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum; \
-    dmaRegs[0] = (vu32)(src);                     \
-    dmaRegs[1] = (vu32)(dest);                    \
-    dmaRegs[2] = (vu32)(control);                 \
-    dmaRegs[2];                                   \
-}
+#define DmaSet(dmaNum, src, dest, control)                                                                            \
+do {                                                                                                                  \
+    vu32 *_dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum;                                                                    \
+    u32 _eval_src = (u32)(src);                                                                                       \
+    u32 _eval_dst = (u32)(dest);                                                                                      \
+    u32 _eval_ctl = (u32)(control);                                                                                   \
+    register u32 _r_src asm("r0") = _eval_src;                                                                        \
+    register u32 _r_dst asm("r1") = _eval_dst;                                                                        \
+    register u32 _r_ctl asm("r2") = _eval_ctl;                                                                        \
+    asm volatile("stmia %0!, {%1, %2, %3}" : "+l" (_dmaRegs) : "l" (_r_src), "l" (_r_dst), "l" (_r_ctl) : "memory");  \
+} while (0)
 
 #define DMA_FILL(dmaNum, value, dest, size, bit)                                              \
 {                                                                                             \

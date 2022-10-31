@@ -484,7 +484,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter::
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed FADE_TO_BLACK, 8
+	fadescreenswapbuffers FADE_TO_BLACK
 	call SootopolisCity_EventScript_SetRoughWater
 	removeobject LOCALID_GROUDON
 	removeobject LOCALID_KYOGRE
@@ -537,7 +537,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive::
 	waitmovement 0
 	special RemoveCameraObject
 	delay 60
-	fadescreenspeed FADE_TO_BLACK, 8
+	fadescreenswapbuffers FADE_TO_BLACK
 	call SootopolisCity_EventScript_SetRoughWater
 	removeobject LOCALID_GROUDON
 	removeobject LOCALID_KYOGRE
