@@ -94,6 +94,12 @@ enum {
     MON_DATA_SPEED2,
     MON_DATA_SPATK2,
     MON_DATA_SPDEF2,
+    MON_DATA_HYPER_TRAINED_HP,
+    MON_DATA_HYPER_TRAINED_ATK,
+    MON_DATA_HYPER_TRAINED_DEF,
+    MON_DATA_HYPER_TRAINED_SPEED,
+    MON_DATA_HYPER_TRAINED_SPATK,
+    MON_DATA_HYPER_TRAINED_SPDEF,
 };
 
 struct PokemonSubstruct0
@@ -103,7 +109,13 @@ struct PokemonSubstruct0
     u32 experience;
     u8 ppBonuses;
     u8 friendship;
-    u16 filler;
+    u16 filler:10;
+    u8 hyperTrainedHp:1;
+    u8 hyperTrainedAtk:1;
+    u8 hyperTrainedDef:1;
+    u8 hyperTrainedSpeed:1;
+    u8 hyperTrainedSpAtk:1;
+    u8 hyperTrainedSpDef:1;
 };
 
 struct PokemonSubstruct1
