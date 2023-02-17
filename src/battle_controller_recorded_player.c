@@ -1703,7 +1703,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
             trainerPicId = gLinkPlayers[0].gender;
     }
 
-    LoadCompressedPalette(gTrainerBackPicPaletteTable[trainerPicId].data, 0x100 + paletteNum * 16, 32);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[trainerPicId].data, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
 
