@@ -502,7 +502,7 @@ static void Task_TrainerCard(u8 taskId)
     case STATE_WAIT_LINK_PARTNER:
         SetCloseLinkCallback();
         DrawDialogueFrame(WIN_MSG, TRUE);
-        AddTextPrinterParameterized(WIN_MSG, gSaveBlock2Ptr->optionsCurrentFont, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
+        AddTextPrinterParameterized(WIN_MSG, gSaveBlock2Ptr->optionsCurrentFont, gText_WaitingTrainerFinishReading, 0, 0, 255, 0);
         CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
         sData->mainState = STATE_CLOSE_CARD_LINK;
         break;
@@ -1009,7 +1009,7 @@ static void PrintNameOnCardFront(void)
     if (sData->cardType == CARD_TYPE_FRLG)
         AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 20, 28, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
     else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 16, 33, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 16, 32, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
 }
 
 static void PrintIdOnCard(void)
@@ -1023,12 +1023,12 @@ static void PrintIdOnCard(void)
     if (sData->cardType == CARD_TYPE_FRLG)
     {
         xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, buffer, 80) + 132;
-        top = 9;
+        top = 8;
     }
     else
     {
         xPos = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, buffer, 96) + 120;
-        top = 9;
+        top = 8;
     }
 
     AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, xPos, top, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
@@ -1037,26 +1037,19 @@ static void PrintIdOnCard(void)
 static void PrintMoneyOnCard(void)
 {
     s32 xOffset;
-    u8 top;
 
     if (!sData->isHoenn)
         AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 20, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMoney);
     else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 16, 57, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMoney);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 16, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMoney);
 
     ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.money, STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
     if (!sData->isHoenn)
-    {
         xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 144);
-        top = 56;
-    }
     else
-    {
         xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 128);
-        top = 57;
-    }
-    AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, xOffset, top, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, xOffset, 56, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
 }
 
 static u16 GetCaughtMonsCount(void)
@@ -1070,25 +1063,19 @@ static u16 GetCaughtMonsCount(void)
 static void PrintPokedexOnCard(void)
 {
     s32 xOffset;
-    u8 top;
+
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
         if (!sData->isHoenn)
             AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Pokedex);
         else
-            AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 16, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Pokedex);
+            AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 16, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Pokedex);
         StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString);
         if (!sData->isHoenn)
-        {
             xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 144);
-            top = 72;
-        }
         else
-        {
             xOffset = GetStringRightAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, 128);
-            top = 73;
-        }
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, xOffset, top, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, xOffset, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
     }
 }
 
@@ -1099,12 +1086,12 @@ static void PrintTimeOnCard(void)
     u16 hours;
     u16 minutes;
     s32 width;
-    u32 x, y, totalWidth;
+    u32 x, totalWidth;
 
     if (!sData->isHoenn)
         AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 20, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Time);
     else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 16, 89, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Time);
+        AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, 16, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_Time);
 
     if (sData->isLink)
     {
@@ -1126,30 +1113,28 @@ static void PrintTimeOnCard(void)
     if (!sData->isHoenn)
     {
         x = 144;
-        y = 88;
     }
     else
     {
         x = 128;
-        y = 89;
     }
     totalWidth = width + 30;
     x -= totalWidth;
 
-    FillWindowPixelRect(WIN_CARD_TEXT, PIXEL_FILL(0), x, y, totalWidth, 15);
+    FillWindowPixelRect(WIN_CARD_TEXT, PIXEL_FILL(0), x, 88, totalWidth, 15);
     ConvertIntToDecimalStringN(gStringVar4, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, x, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
     x += 18;
-    AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SKIP_DRAW, gText_Colon);
+    AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, x, 88, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SKIP_DRAW, gText_Colon);
     x += width;
     ConvertIntToDecimalStringN(gStringVar4, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
+    AddTextPrinterParameterized3(WIN_CARD_TEXT, gSaveBlock2Ptr->optionsCurrentFont, x, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
 }
 
 static void PrintProfilePhraseOnCard(void)
 {
-    static const u8 yOffsetsLine1[] = {113, 104};
-    static const u8 yOffsetsLine2[] = {129, 120};
+    static const u8 yOffsetsLine1[] = {112, 104};
+    static const u8 yOffsetsLine2[] = {128, 120};
 
     if (sData->isLink)
     {

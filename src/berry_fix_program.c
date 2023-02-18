@@ -324,7 +324,7 @@ static void BerryFix_GpuSet(void)
 
     width = GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, sText_BerryProgramUpdate, 0);
     left = (208 - width) / 2;
-    AddTextPrinterParameterized3(WIN_TITLE, gSaveBlock2Ptr->optionsCurrentFont, left, 2, sBerryProgramTextColors, TEXT_SKIP_DRAW, sText_BerryProgramUpdate);
+    AddTextPrinterParameterized3(WIN_TITLE, gSaveBlock2Ptr->optionsCurrentFont, left, 0, sBerryProgramTextColors, TEXT_SKIP_DRAW, sText_BerryProgramUpdate);
 
     CopyWindowToVram(WIN_GAME_NAMES, COPYWIN_GFX);
     CopyWindowToVram(WIN_TURN_OFF_TITLE, COPYWIN_GFX);

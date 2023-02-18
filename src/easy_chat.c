@@ -3948,7 +3948,7 @@ static void PrintTitle(void)
 
     xOffset = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, titleText, 144);
     FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
-    PrintEasyChatTextWithColors(WIN_TITLE, gSaveBlock2Ptr->optionsCurrentFont, titleText, xOffset, 1, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    PrintEasyChatTextWithColors(WIN_TITLE, gSaveBlock2Ptr->optionsCurrentFont, titleText, xOffset, 0, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(WIN_TITLE);
     CopyWindowToVram(WIN_TITLE, COPYWIN_FULL);
 }

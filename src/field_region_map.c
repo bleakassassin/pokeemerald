@@ -152,7 +152,7 @@ static void FieldUpdateRegionMap(void)
         case 1:
             DrawStdFrameWithCustomTileAndPalette(WIN_TITLE, FALSE, 0x27, 0xd);
             offset = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Hoenn, 0x38);
-            AddTextPrinterParameterized(WIN_TITLE, gSaveBlock2Ptr->optionsCurrentFont, gText_Hoenn, offset, 1, 0, NULL);
+            AddTextPrinterParameterized(WIN_TITLE, gSaveBlock2Ptr->optionsCurrentFont, gText_Hoenn, offset, 0, 0, NULL);
             ScheduleBgCopyTilemapToVram(0);
             DrawStdFrameWithCustomTileAndPalette(WIN_MAPSEC_NAME, FALSE, 0x27, 0xd);
             PrintRegionMapSecName();
@@ -204,7 +204,7 @@ static void PrintRegionMapSecName(void)
     if (sFieldRegionMapHandler->regionMap.mapSecType != MAPSECTYPE_NONE)
     {
         FillWindowPixelBuffer(WIN_MAPSEC_NAME, PIXEL_FILL(1));
-        AddTextPrinterParameterized(WIN_MAPSEC_NAME, gSaveBlock2Ptr->optionsCurrentFont, sFieldRegionMapHandler->regionMap.mapSecName, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(WIN_MAPSEC_NAME, gSaveBlock2Ptr->optionsCurrentFont, sFieldRegionMapHandler->regionMap.mapSecName, 0, 0, 0, NULL);
         ScheduleBgCopyTilemapToVram(WIN_MAPSEC_NAME);
     }
     else

@@ -568,7 +568,7 @@ static void VBlankCB(void)
 static void ShowMessage(const u8 *str)
 {
     DrawDialogFrameWithCustomTileAndPalette(WIN_MSG, FALSE, 0x200, 0xF);
-    AddTextPrinterParameterized(WIN_MSG, gSaveBlock2Ptr->optionsCurrentFont, str, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_MSG, gSaveBlock2Ptr->optionsCurrentFont, str, 0, 0, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -583,21 +583,21 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
     case 0:
         DrawStdFrameWithCustomTileAndPalette(WIN_TIME, FALSE, 0x214, 0xE);
 
-        AddTextPrinterParameterized(WIN_TIME, gSaveBlock2Ptr->optionsCurrentFont, gText_PresentTime, 0, 1, TEXT_SKIP_DRAW, 0);
+        AddTextPrinterParameterized(WIN_TIME, gSaveBlock2Ptr->optionsCurrentFont, gText_PresentTime, 0, 0, TEXT_SKIP_DRAW, 0);
         PrintTime(
             WIN_TIME,
             0,
-            17,
+            16,
             gLocalTime.days,
             gLocalTime.hours,
             gLocalTime.minutes,
             gLocalTime.seconds);
 
-        AddTextPrinterParameterized(WIN_TIME, gSaveBlock2Ptr->optionsCurrentFont, gText_PreviousTime, 0, 33, TEXT_SKIP_DRAW, 0);
+        AddTextPrinterParameterized(WIN_TIME, gSaveBlock2Ptr->optionsCurrentFont, gText_PreviousTime, 0, 32, TEXT_SKIP_DRAW, 0);
         PrintTime(
             WIN_TIME,
             0,
-            49,
+            48,
             gSaveBlock2Ptr->lastBerryTreeUpdate.days,
             gSaveBlock2Ptr->lastBerryTreeUpdate.hours,
             gSaveBlock2Ptr->lastBerryTreeUpdate.minutes,

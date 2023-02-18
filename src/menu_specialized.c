@@ -179,7 +179,7 @@ static const struct ListMenuTemplate sMoveRelearnerMovesListTemplate =
     .header_X = 0,
     .item_X = 8,
     .cursor_X = 0,
-    .upText_Y = 1,
+    .upText_Y = 0,
     .cursorPal = 2,
     .fillValue = 1,
     .cursorShadowPal = 3,
@@ -809,7 +809,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, gSaveBlock2Ptr->optionsCurrentFont, str, 106, 40, TEXT_SKIP_DRAW, NULL);
 
     str = gMoveDescriptionPointers[chosenMove - 1];
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NARROW, str, 0, 65, 0, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NARROW, str, 0, 64, 0, NULL);
 }
 
 static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
@@ -843,7 +843,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     AddTextPrinterParameterized(RELEARNERWIN_DESC_CONTEST, gSaveBlock2Ptr->optionsCurrentFont, str, 4, 24, TEXT_SKIP_DRAW, NULL);
 
     str = gContestEffectDescriptionPointers[move->effect];
-    AddTextPrinterParameterized(RELEARNERWIN_DESC_CONTEST, FONT_NARROW, str, 0, 65, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(RELEARNERWIN_DESC_CONTEST, FONT_NARROW, str, 0, 64, TEXT_SKIP_DRAW, NULL);
 
     CopyWindowToVram(RELEARNERWIN_DESC_CONTEST, COPYWIN_GFX);
 }
