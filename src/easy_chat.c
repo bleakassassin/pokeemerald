@@ -227,18 +227,23 @@ static void DoQuizQuestionEasyChatScreen(void);
 static void DoQuizSetAnswerEasyChatScreen(void);
 static void DoQuizSetQuestionEasyChatScreen(void);
 
-#define PALTAG_TRIANGLE_CURSOR 0
-#define PALTAG_RECTANGLE_CURSOR 1
-#define PALTAG_MISC_UI 2
-#define PALTAG_RS_INTERVIEW_FRAME 3
+enum {
+    PALTAG_TRIANGLE_CURSOR,
+    PALTAG_RECTANGLE_CURSOR,
+    PALTAG_MISC_UI,
+    PALTAG_RS_INTERVIEW_FRAME,  
+};
 
-#define GFXTAG_TRIANGLE_CURSOR 0
-#define GFXTAG_RECTANGLE_CURSOR 1
-#define GFXTAG_SCROLL_INDICATOR 2
-#define GFXTAG_START_SELECT_BUTTONS 3
-#define GFXTAG_MODE_WINDOW 4
-#define GFXTAG_RS_INTERVIEW_FRAME 5
-#define GFXTAG_BUTTON_WINDOW 6
+enum {
+    GFXTAG_TRIANGLE_CURSOR,
+    GFXTAG_RECTANGLE_CURSOR,
+    GFXTAG_SCROLL_INDICATOR,
+    GFXTAG_START_SELECT_BUTTONS,
+    GFXTAG_MODE_WINDOW,
+    GFXTAG_RS_INTERVIEW_FRAME,
+    GFXTAG_BUTTON_WINDOW,  
+};
+
 
 // State values for sEasyChatScreen->inputState
 // Control which input handler to use in HandleEasyChatInput
@@ -375,6 +380,13 @@ enum {
     WINANIM_RETURN_TO_KEYBOARD,
     WINANIM_KEYBOARD_SWITCH_OUT,
     WINANIM_KEYBOARD_SWITCH_IN,
+};
+
+// Window IDs
+enum {
+    WIN_TITLE,
+    WIN_MSG,
+    WIN_INPUT_SELECT, // Word groups, word list, and keyboard
 };
 
 // Values for text frame tilemap
@@ -815,7 +827,7 @@ static const struct BgTemplate sEasyChatBgTemplates[] = {
 };
 
 static const struct WindowTemplate sEasyChatWindowTemplates[] = {
-    {
+    [WIN_TITLE] = {
         .bg = 1,
         .tilemapLeft = 6,
         .tilemapTop = 0,
@@ -824,7 +836,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .paletteNum = 10,
         .baseBlock = 0x10,
     },
-    {
+    [WIN_MSG] = {
         .bg = 0,
         .tilemapLeft = 3,
         .tilemapTop = 15,
@@ -833,7 +845,7 @@ static const struct WindowTemplate sEasyChatWindowTemplates[] = {
         .paletteNum = 15,
         .baseBlock = 0xA,
     },
-    {
+    [WIN_INPUT_SELECT] = {
         .bg = 2,
         .tilemapLeft = 1,
         .tilemapTop = 0,
@@ -868,17 +880,17 @@ static const u8 *const sEasyChatKeyboardAlphabet[NUM_ALPHABET_ROWS] =
 static const struct SpriteSheet sSpriteSheets[] = {
     {
         .data = sTriangleCursor_Gfx,
-        .size = 0x20,
+        .size = sizeof(sTriangleCursor_Gfx),
         .tag = GFXTAG_TRIANGLE_CURSOR
     },
     {
         .data = sScrollIndicator_Gfx,
-        .size = 0x100,
+        .size = sizeof(sScrollIndicator_Gfx),
         .tag = GFXTAG_SCROLL_INDICATOR
     },
     {
         .data = sStartSelectButtons_Gfx,
-        .size = 0x100,
+        .size = sizeof(sStartSelectButtons_Gfx),
         .tag = GFXTAG_START_SELECT_BUTTONS
     },
     {0}
@@ -3935,10 +3947,10 @@ static void PrintTitle(void)
         return;
 
     xOffset = GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, titleText, 144);
-    FillWindowPixelBuffer(0, PIXEL_FILL(0));
-    PrintEasyChatTextWithColors(0, gSaveBlock2Ptr->optionsCurrentFont, titleText, xOffset, 1, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
+    PrintEasyChatTextWithColors(WIN_TITLE, gSaveBlock2Ptr->optionsCurrentFont, titleText, xOffset, 1, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+    PutWindowTilemap(WIN_TITLE);
+    CopyWindowToVram(WIN_TITLE, COPYWIN_FULL);
 }
 
 static void PrintEasyChatText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
@@ -3958,10 +3970,10 @@ static void PrintEasyChatTextWithColors(u8 windowId, u8 fontId, const u8 *str, u
 static void PrintInitialInstructions(void)
 {
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 17);
-    LoadUserWindowBorderGfx(1, 1, BG_PLTT_ID(14));
-    DrawTextBorderOuter(1, 1, 14);
+    LoadUserWindowBorderGfx(WIN_MSG, 1, BG_PLTT_ID(14));
+    DrawTextBorderOuter(WIN_MSG, 1, 14);
     PrintEasyChatStdMessage(MSG_INSTRUCTIONS);
-    PutWindowTilemap(1);
+    PutWindowTilemap(WIN_MSG);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -4005,14 +4017,14 @@ static void PrintEasyChatStdMessage(u8 msgId)
         break;
     }
 
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
+    FillWindowPixelBuffer(WIN_MSG, PIXEL_FILL(1));
     if (text1)
-        PrintEasyChatText(1, gSaveBlock2Ptr->optionsCurrentFont, text1, 0, 0, TEXT_SKIP_DRAW, 0);
+        PrintEasyChatText(WIN_MSG, gSaveBlock2Ptr->optionsCurrentFont, text1, 0, 0, TEXT_SKIP_DRAW, 0);
 
     if (text2)
-        PrintEasyChatText(1, gSaveBlock2Ptr->optionsCurrentFont, text2, 0, 16, TEXT_SKIP_DRAW, 0);
+        PrintEasyChatText(WIN_MSG, gSaveBlock2Ptr->optionsCurrentFont, text2, 0, 16, TEXT_SKIP_DRAW, 0);
 
-    CopyWindowToVram(1, COPYWIN_FULL);
+    CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
 }
 
 static void CreateEasyChatYesNoMenu(u8 initialCursorPos)
@@ -4199,14 +4211,14 @@ static void AdjustBgTilemapForFooter(void)
 
 static void DrawLowerWindow(void)
 {
-    PutWindowTilemap(2);
-    CopyBgTilemapBufferToVram(2);
+    PutWindowTilemap(WIN_INPUT_SELECT);
+    CopyBgTilemapBufferToVram(WIN_INPUT_SELECT);
 }
 
 static void InitLowerWindowText(u32 whichText)
 {
     ResetLowerWindowScroll();
-    FillWindowPixelBuffer(2, PIXEL_FILL(1));
+    FillWindowPixelBuffer(WIN_INPUT_SELECT, PIXEL_FILL(1));
     switch (whichText)
     {
     case TEXT_GROUPS:
@@ -4220,7 +4232,7 @@ static void InitLowerWindowText(u32 whichText)
         break;
     }
 
-    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
 }
 
 static void PrintKeyboardText(void)
@@ -4249,7 +4261,7 @@ static void PrintKeyboardGroupNames(void)
                 return;
             }
 
-            PrintEasyChatText(2, gSaveBlock2Ptr->optionsCurrentFont, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SKIP_DRAW, NULL);
+            PrintEasyChatText(WIN_INPUT_SELECT, gSaveBlock2Ptr->optionsCurrentFont, GetEasyChatWordGroupName(groupId), x * 84 + 10, y, TEXT_SKIP_DRAW, NULL);
         }
 
         y += 16;
@@ -4261,7 +4273,7 @@ static void PrintKeyboardAlphabet(void)
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sEasyChatKeyboardAlphabet); i++)
-        PrintEasyChatText(2, gSaveBlock2Ptr->optionsCurrentFont, sEasyChatKeyboardAlphabet[i], 10, 96 + i * 16, TEXT_SKIP_DRAW, NULL);
+        PrintEasyChatText(WIN_INPUT_SELECT, gSaveBlock2Ptr->optionsCurrentFont, sEasyChatKeyboardAlphabet[i], 10, 96 + i * 16, TEXT_SKIP_DRAW, NULL);
 }
 
 static void PrintInitialWordSelectText(void)
@@ -4331,16 +4343,16 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
             {
                 CopyEasyChatWordPadded(sScreenControl->wordSelectPrintBuffer, easyChatWord, 0);
                 if (!DummyWordCheck(easyChatWord))
-                    PrintEasyChatText(2, gSaveBlock2Ptr->optionsCurrentFont, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, NULL);
+                    PrintEasyChatText(WIN_INPUT_SELECT, gSaveBlock2Ptr->optionsCurrentFont, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, NULL);
                 else // Never reached
-                    PrintEasyChatTextWithColors(2, gSaveBlock2Ptr->optionsCurrentFont, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GRAY);
+                    PrintEasyChatTextWithColors(WIN_INPUT_SELECT, gSaveBlock2Ptr->optionsCurrentFont, sScreenControl->wordSelectPrintBuffer, (j * 13 + 3) * 8, y, TEXT_SKIP_DRAW, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_LIGHT_GRAY);
             }
         }
 
         y += 16;
     }
 
-    CopyWindowToVram(2, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
 }
 
 static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
@@ -4364,15 +4376,15 @@ static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
         var1 = 0;
     }
 
-    FillWindowPixelRect(2, PIXEL_FILL(1), 0, y, 224, var2);
+    FillWindowPixelRect(WIN_INPUT_SELECT, PIXEL_FILL(1), 0, y, 224, var2);
     if (var1)
-        FillWindowPixelRect(2, PIXEL_FILL(1), 0, 0, 224, var1);
+        FillWindowPixelRect(WIN_INPUT_SELECT, PIXEL_FILL(1), 0, 0, 224, var1);
 }
 
 static void ClearWordSelectWindow(void)
 {
-    FillWindowPixelBuffer(2, PIXEL_FILL(1));
-    CopyWindowToVram(2, COPYWIN_GFX);
+    FillWindowPixelBuffer(WIN_INPUT_SELECT, PIXEL_FILL(1));
+    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
 }
 
 static void InitLowerWindowAnim(int winAnimType)
