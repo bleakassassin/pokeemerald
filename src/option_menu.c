@@ -1,23 +1,22 @@
 #include "global.h"
 #include "option_menu.h"
-#include "main.h"
-#include "menu.h"
-#include "scanline_effect.h"
-#include "palette.h"
-#include "sprite.h"
-#include "task.h"
-#include "malloc.h"
 #include "bg.h"
 #include "gpu_regs.h"
-#include "window.h"
+#include "international_string_util.h"
+#include "main.h"
+#include "malloc.h"
+#include "menu.h"
+#include "palette.h"
+#include "scanline_effect.h"
+#include "sprite.h"
+#include "strings.h"
+#include "task.h"
 #include "text.h"
 #include "text_window.h"
-#include "international_string_util.h"
-#include "strings.h"
+#include "window.h"
 #include "gba/m4a_internal.h"
 #include "constants/rgb.h"
 
-// Menu items
 enum
 {
     MENUITEM_TEXTSPEED,
@@ -35,10 +34,9 @@ enum
     MENUITEM_COUNT,
 };
 
-// Window Ids
 enum
 {
-    WIN_TEXT_OPTION,
+    WIN_HEADER,
     WIN_OPTIONS,
     WIN_DESCRIPTIONS
 };
@@ -54,7 +52,6 @@ struct OptionMenu
     int visibleCursor;
 };
 
-// this file's functions
 static void Task_OptionMenuFadeIn(u8 taskId);
 static void Task_OptionMenuProcessInput(u8 taskId);
 static void Task_OptionMenuSave(u8 taskId);
@@ -75,7 +72,7 @@ static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
-static void DrawTextOption(void);
+static void DrawHeaderText(void);
 static void DrawOptionMenuTexts(void);
 static void DrawDescriptionText(int cursor);
 static void DrawBgWindowFrames(void);
@@ -129,7 +126,7 @@ static const u8 *const sTextSpeedStrings[] = {gText_TextSpeedSlow, gText_TextSpe
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {
-    {
+    [WIN_HEADER] = {
         .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 0,
@@ -138,7 +135,7 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .paletteNum = 1,
         .baseBlock = 2
     },
-    {
+    [WIN_OPTIONS] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 3,
@@ -147,7 +144,7 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .paletteNum = 1,
         .baseBlock = 0x3A
     },
-    {
+    [WIN_DESCRIPTIONS] = {
         .bg = 1,
         .tilemapLeft = 1,
         .tilemapTop = 17,
@@ -161,24 +158,24 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
 
 static const struct BgTemplate sOptionMenuBgTemplates[] =
 {
-   {
-       .bg = 1,
-       .charBaseIndex = 1,
-       .mapBaseIndex = 30,
-       .screenSize = 0,
-       .paletteMode = 0,
-       .priority = 0,
-       .baseTile = 0
-   },
-   {
-       .bg = 0,
-       .charBaseIndex = 1,
-       .mapBaseIndex = 31,
-       .screenSize = 0,
-       .paletteMode = 0,
-       .priority = 1,
-       .baseTile = 0
-   }
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 0,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    }
 };
 
 static const u16 sOptionMenuBg_Pal[] = {RGB(17, 18, 31)};// Descriptions
@@ -276,12 +273,12 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 4:
-        LoadPalette(sOptionMenuBg_Pal, 0, sizeof(sOptionMenuBg_Pal));
-        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, 0x70, 0x20);
+        LoadPalette(sOptionMenuBg_Pal, BG_PLTT_ID(0), sizeof(sOptionMenuBg_Pal));
+        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 5:
-        LoadPalette(sOptionMenuText_Pal, 16, sizeof(sOptionMenuText_Pal));
+        LoadPalette(sOptionMenuText_Pal, BG_PLTT_ID(1), sizeof(sOptionMenuText_Pal));
         gMain.state++;
         break;
     case 6:
@@ -300,8 +297,8 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 7:
-        PutWindowTilemap(WIN_TEXT_OPTION);
-        DrawTextOption();
+        PutWindowTilemap(WIN_HEADER);
+        DrawHeaderText();
         gMain.state++;
         break;
     case 8:
@@ -332,7 +329,7 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 12:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(MainCB2);
         return;
@@ -356,6 +353,7 @@ static void ScrollMenu(int direction)
     AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[menuItem], 8, (pos * Y_DIFF), TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(WIN_OPTIONS, COPYWIN_GFX);
 }
+
 static void ScrollAll(int direction) // to bottom or top
 {
     int i, y, menuItem, pos;
@@ -486,7 +484,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
     gSaveBlock2Ptr->optionsCurrentFont      = sOptions->sel[MENUITEM_FONT];
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
 }
 
@@ -564,7 +562,7 @@ static int ProcessInput_FrameType(int selection)
             selection = 0;
 
         LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
-        LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
+        LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
     }
     if (JOY_NEW(DPAD_LEFT))
     {
@@ -574,7 +572,7 @@ static int ProcessInput_FrameType(int selection)
             selection = WINDOW_FRAMES_COUNT - 1;
 
         LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
-        LoadPalette(GetWindowFrameTilesPal(selection)->pal, 0x70, 0x20);
+        LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
     }
     return selection;
 }
@@ -616,13 +614,13 @@ static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
     u8 dst[16];
     u16 i;
 
-    for (i = 0; *text != EOS && i <= 14; i++)
+    for (i = 0; *text != EOS && i < ARRAY_COUNT(dst) - 1; i++)
         dst[i] = *(text++);
 
     if (style != 0)
     {
-        dst[2] = 4;
-        dst[5] = 5;
+        dst[2] = TEXT_COLOR_RED;
+        dst[5] = TEXT_COLOR_LIGHT_RED;
     }
 
     dst[i] = EOS;
@@ -750,7 +748,7 @@ static void DrawChoices_FrameType(int selection, int y)
     {
         text[i] = n % 10 + CHAR_0;
         i++;
-        text[i] = 0x77;
+        text[i] = CHAR_SPACER;
         i++;
     }
 
@@ -760,7 +758,7 @@ static void DrawChoices_FrameType(int selection, int y)
     DrawOptionMenuChoice(text, 131, y, 1);
 }
 
-static void DrawTextOption(void)
+static void DrawHeaderText(void)
 {   
     u8 color_white[3];
 
@@ -768,8 +766,8 @@ static void DrawTextOption(void)
     color_white[1] = 1;
     color_white[2] = 6;
 
-    AddTextPrinterParameterized4(WIN_TEXT_OPTION, FONT_NORMAL, 8, 1, 0, 0, color_white, TEXT_SKIP_DRAW, gText_Option);
-    CopyWindowToVram(WIN_TEXT_OPTION, COPYWIN_FULL);
+    AddTextPrinterParameterized4(WIN_HEADER, FONT_NORMAL, 8, 1, 0, 0, color_white, TEXT_SKIP_DRAW, gText_Option);
+    CopyWindowToVram(WIN_HEADER, COPYWIN_FULL);
 }
 
 static void DrawOptionMenuTexts(void)

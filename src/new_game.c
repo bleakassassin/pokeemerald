@@ -44,8 +44,8 @@
 #include "berry_powder.h"
 #include "mystery_gift.h"
 #include "union_room_chat.h"
-#include "registered_items_menu.h"
 #include "constants/items.h"
+#include "registered_items_menu.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -189,7 +189,7 @@ void NewGameInitData(void)
     ResetPokemonStorageSystem();
     ClearRoamerData();
     ClearRoamerLocationData();
-    gSaveBlock1Ptr->registeredItem = 0;
+    gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
     ClearItemSlots(gSaveBlock1Ptr->pcItems, PC_ITEMS_COUNT);
     AddBagItem(ITEM_POTION, 1);

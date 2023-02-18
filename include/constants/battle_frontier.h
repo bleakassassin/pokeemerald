@@ -31,7 +31,6 @@
 #define CHALLENGE_STATUS_PAUSED   2
 #define CHALLENGE_STATUS_WON      3
 #define CHALLENGE_STATUS_LOST     4
-#define CHALLENGE_STATUS_LINKING  5
 
 // Special trainer battles.
 #define SPECIAL_BATTLE_TOWER 0
