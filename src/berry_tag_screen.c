@@ -626,7 +626,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
         switch (data[0])
         {
         case 0x30:
-            FillWindowPixelBuffer(0, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_BERRY_NAME, PIXEL_FILL(0));
             break;
         case 0x40:
             PrintBerryNumberAndName();
@@ -636,7 +636,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             CreateBerrySprite();
             break;
         case 0x60:
-            FillWindowPixelBuffer(1, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_SIZE_FIRM, PIXEL_FILL(0));
             break;
         case 0x70:
             PrintBerrySize();
@@ -648,7 +648,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             SetFlavorCirclesVisiblity();
             break;
         case 0xA0:
-            FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_DESC, PIXEL_FILL(0));
             break;
         case 0xB0:
             PrintBerryDescription1();
@@ -663,7 +663,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
         switch (data[0])
         {
         case 0x30:
-            FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_DESC, PIXEL_FILL(0));
             break;
         case 0x40:
             PrintBerryDescription2();
@@ -675,7 +675,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             SetFlavorCirclesVisiblity();
             break;
         case 0x70:
-            FillWindowPixelBuffer(1, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_SIZE_FIRM, PIXEL_FILL(0));
             break;
         case 0x80:
             PrintBerryFirmness();
@@ -688,7 +688,7 @@ static void Task_DisplayAnotherBerry(u8 taskId)
             CreateBerrySprite();
             break;
         case 0xB0:
-            FillWindowPixelBuffer(0, PIXEL_FILL(0));
+            FillWindowPixelBuffer(WIN_BERRY_NAME, PIXEL_FILL(0));
             break;
         case 0xC0:
             PrintBerryNumberAndName();
