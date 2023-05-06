@@ -453,8 +453,8 @@ static void TriggerPendingDaycareEgg(struct DayCare *daycare)
     s32 natureTries = 0;
     u32 personality;
     u32 shinyValue;
-    u8 shinyRolls = 2;
-    u8 i = 0;
+    u32 shinyRolls = 2;
+    u32 i = 0;
 
     u32 value = gSaveBlock2Ptr->playerTrainerId[0]
           | (gSaveBlock2Ptr->playerTrainerId[1] << 8)

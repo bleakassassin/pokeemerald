@@ -2307,8 +2307,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     bool8 otGender;
     u32 otId;
     u8 metLocation;
-    u8 i = 0;
-    u8 shinyRolls = 2;
+    u32 i = 0;
+    u32 shinyRolls = 2;
     u8 version;
     u32 gcnRng;
     u16 iv1;
@@ -2529,8 +2529,8 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
     u32 personality;
     u32 otId;
     u32 shinyValue;
-    u8 i = 0;
-    u8 shinyRolls = 2;
+    u32 i = 0;
+    u32 shinyRolls = 2;
 
     otId = gSaveBlock2Ptr->playerTrainerId[0]
           | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
@@ -2559,8 +2559,8 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
     u32 personality;
     u32 otId;
     u32 shinyValue;
-    u8 i = 0;
-    u8 shinyRolls = 2;
+    u32 i = 0;
+    u32 shinyRolls = 2;
 
     otId = gSaveBlock2Ptr->playerTrainerId[0]
           | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
