@@ -371,13 +371,13 @@
 // gTileset_MossdeepGym
 #define METATILE_MossdeepGym_YellowArrow_Right  0x250
 
-// gTileset_MossdeepGym from R/S
-#define METATILE_RS_MossdeepGym_RedArrow_Right        0x204
-#define METATILE_RS_MossdeepGym_RedArrow_Left         0x20C
-#define METATILE_RS_MossdeepGym_RedArrow_Up           0x20D
-#define METATILE_RS_MossdeepGym_RedArrow_Down         0x205
-#define METATILE_RS_MossdeepGym_Switch_Up             0x238
-#define METATILE_RS_MossdeepGym_Switch_Down           0x239
+// gTileset_RSMossdeepGym
+#define METATILE_RSMossdeepGym_RedArrow_Right        0x204
+#define METATILE_RSMossdeepGym_RedArrow_Left         0x20C
+#define METATILE_RSMossdeepGym_RedArrow_Up           0x20D
+#define METATILE_RSMossdeepGym_RedArrow_Down         0x205
+#define METATILE_RSMossdeepGym_Switch_Up             0x238
+#define METATILE_RSMossdeepGym_Switch_Down           0x239
 
 // gTileset_Mossdeep
 #define METATILE_Mossdeep_Door              0x2A1

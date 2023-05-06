@@ -122,7 +122,7 @@ AlteringCave_EventScript_LegendaryBird::
 	copyvar VAR_0x8004, VAR_TEMP_1
 	setvar VAR_0x8005, 60
 	setvar VAR_0x8006, 0
-	special CreateEventLegalEnemyMon
+	special CreateEnemyEventMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate
