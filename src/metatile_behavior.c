@@ -96,10 +96,8 @@ static const u8 sTileBitAttributes[NUM_METATILE_BEHAVIORS] =
     [MB_PACIFIDLOG_HORIZONTAL_LOG_LEFT]  = TILE_FLAG_UNUSED,
     [MB_PACIFIDLOG_HORIZONTAL_LOG_RIGHT] = TILE_FLAG_UNUSED,
     [MB_FORTREE_BRIDGE]                  = TILE_FLAG_UNUSED,
-    [MB_BRIDGE_OVER_POND_MED_EDGE_1]     = TILE_FLAG_UNUSED,
-    [MB_BRIDGE_OVER_POND_MED_EDGE_2]     = TILE_FLAG_UNUSED,
-    [MB_BRIDGE_OVER_POND_HIGH_EDGE_1]    = TILE_FLAG_UNUSED,
-    [MB_BRIDGE_OVER_POND_HIGH_EDGE_2]    = TILE_FLAG_UNUSED,
+    [MB_BRIDGE_OVER_POND_MED_EDGE]       = TILE_FLAG_UNUSED,
+    [MB_BRIDGE_OVER_POND_HIGH_EDGE]      = TILE_FLAG_UNUSED,
     [MB_UNUSED_BRIDGE]                   = TILE_FLAG_UNUSED,
     [MB_BIKE_BRIDGE_OVER_BARRIER]        = TILE_FLAG_UNUSED,
     [MB_SECRET_BASE_SCENERY]             = TILE_FLAG_UNUSED,
@@ -768,8 +766,7 @@ bool8 MetatileBehavior_IsBridgeOverWater(u8 metatileBehavior)
       || metatileBehavior == MB_BRIDGE_OVER_POND_LOW
       || metatileBehavior == MB_BRIDGE_OVER_POND_MED
       || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH)
-      || (metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE_1
-       || metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE_2
+      || (metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE
        || metatileBehavior == MB_UNUSED_BRIDGE
        || metatileBehavior == MB_BIKE_BRIDGE_OVER_BARRIER))
         return TRUE;
@@ -787,12 +784,10 @@ u8 MetatileBehavior_GetBridgeType(u8 metatileBehavior)
      && metatileBehavior <= MB_BRIDGE_OVER_POND_HIGH)
         return metatileBehavior - MB_BRIDGE_OVER_OCEAN;
 
-    if (metatileBehavior >= MB_BRIDGE_OVER_POND_MED_EDGE_1
-     && metatileBehavior <= MB_BRIDGE_OVER_POND_MED_EDGE_2)
+    if (metatileBehavior == MB_BRIDGE_OVER_POND_MED_EDGE)
         return BRIDGE_TYPE_POND_MED;
 
-    if (metatileBehavior >= MB_BRIDGE_OVER_POND_HIGH_EDGE_1
-     && metatileBehavior <= MB_BRIDGE_OVER_POND_HIGH_EDGE_2)
+    if (metatileBehavior == MB_BRIDGE_OVER_POND_HIGH_EDGE)
         return BRIDGE_TYPE_POND_HIGH;
 
     return BRIDGE_TYPE_OCEAN;
