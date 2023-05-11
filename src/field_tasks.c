@@ -393,7 +393,7 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
             tToRaiseX = tPrevX;
             tToRaiseY = tPrevY;
             tState = 2;
-            tDelay = 8;
+            tDelay = 7;
         }
         else
         {
@@ -409,7 +409,7 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
             // they were previously standing on, try and set it half-submerged (sinking)
             TrySetLogBridgeHalfSubmerged(x, y, TRUE);
             tState = 2;
-            tDelay = 8;
+            tDelay = 7;
         }
 
         tPrevX = x;
@@ -555,7 +555,7 @@ static void FortreeBridgePerStepCallback(u8 taskId)
         if (!isFortreeBridgePrev)
             break;
 
-        tBounceTime = 16;
+        tBounceTime = 8;
         tState = 2;
         // fallthrough
     case 2:
