@@ -781,6 +781,7 @@ static void CB_FlyFromRegionMap(void)
     struct RegionMap *regionMap = GetSubstructPtr(POKENAV_SUBSTRUCT_REGION_MAP);
     m4aSongNumStart(SE_USE_ITEM);
     WaitForPokenavShutdownFade();
+    FreeRegionMapSubstruct1();
     FlyToLocation(regionMap->mapSecId, regionMap->posWithinMapSec);
     FlagSet(FLAG_SYS_WILD_FIELD_MOVE);
     ReturnToFieldFromFlyMapSelect();
