@@ -1043,22 +1043,22 @@ static u16 GetPrizeItemId(void)
     prizeList = sPrizeLists[i];
 
     // Which prize is given from the list depends on the time scored.
-    // The prize for any time after 12 minutes is the same in every list.
-    // The prizes for a time under 12 minutes are:
+    // The prize for any time after 14 minutes is the same in every list.
+    // The prizes for a time under 14 minutes are:
     // - ITEM_MOON_STONE (Normal)
     // - ITEM_WHITE_HERB (Variety)
     // - ITEM_ELIXIR     (Unique)
     // - ITEM_PP_UP      (Expert)
     minutes = (signed)(gSaveBlock1Ptr->trainerHill.timer) / (60 * 60);
-    if (minutes < 12 && mode <= HILL_MODE_EXPERT && !FlagGet(FLAG_TRAINER_HILL_MON_PRIZE_NORMAL + mode))
+    if (minutes < 14 && mode <= HILL_MODE_EXPERT && !FlagGet(FLAG_TRAINER_HILL_MON_PRIZE_NORMAL + mode))
         return sPokemonPrizeList[mode];
-    if (minutes < 12)
+    if (minutes < 14)
         id = 0; // Depends on list
-    else if (minutes < 13)
+    else if (minutes < 15)
         id = 1; // ITEM_MAX_ETHER
-    else if (minutes < 14)
-        id = 2; // ITEM_MAX_REVIVE
     else if (minutes < 16)
+        id = 2; // ITEM_MAX_REVIVE
+    else if (minutes < 17)
         id = 3; // ITEM_MAX_POTION
     else if (minutes < 18)
         id = 4; // ITEM_ETHER
