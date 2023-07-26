@@ -7,8 +7,9 @@ struct TxRegItemsMenu_ItemPageStruct
     u16 itemsAbove;
     u8 pageItems;
     u8 count;
-    u8 filler[3];
+    u8 filler[2];
     u8 scrollIndicatorTaskId;
+    u8 flashTaskId;
 };
 
 void TxRegItemsMenu_RegisteredItemsMenuNewGame(void);
