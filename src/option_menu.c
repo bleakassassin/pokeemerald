@@ -324,7 +324,7 @@ void CB2_InitOptionMenu(void)
     case 11:
         taskId = CreateTask(Task_OptionMenuFadeIn, 0);
         
-        AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 240 / 2, 20, 124,
+        AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 232, 20, 124,
           MENUITEM_COUNT - 1, 110, 110, 0);
 
         for (i = 0; i < OPTIONS_ON_SCREEN; i++)
