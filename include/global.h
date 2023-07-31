@@ -509,7 +509,8 @@ struct SaveBlock2
              u16 optionsDisableMatchCall:1; // OPTIONS_MATCH_CALL_[ON/OFF]
              u16 optionsUnitSystem:1; // OPTIONS_UNIT_SYSTEM_[IMPERIAL/METRIC]
              u16 optionsCurrentFont:3; // Specifies one of multiple fonts to use (Emerald, FR/LG, R/S Europe, R/S U.S., HG/SS)
-             //u16 padding:12;
+             u16 optionsMessageBox:1; // OPTIONS_MESSAGE_BOX_[GREEN/BLUE]
+             //u16 padding:11;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 outfitId:7;
     /*0x90*/ u8 autoRun:1;

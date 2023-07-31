@@ -28,6 +28,7 @@ enum
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
     MENUITEM_UNITSYSTEM,
+    MENUITEM_MESSAGEBOX,
     MENUITEM_FRAMETYPE,
     MENUITEM_FONT,
     MENUITEM_CANCEL,
@@ -70,6 +71,7 @@ static void DrawChoices_AttackStyle(int selection, int y);
 static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_UnitSystem(int selection, int y);
+static void DrawChoices_MessageBox(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_Font(int selection, int y);
 static void DrawHeaderText(void);
@@ -93,6 +95,7 @@ static const sItemFunctions[MENUITEM_COUNT] =
     [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Sound},
     [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Two},
     [MENUITEM_UNITSYSTEM]   = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
+    [MENUITEM_MESSAGEBOX]   = {DrawChoices_MessageBox,  ProcessInput_Options_Two},
     [MENUITEM_FRAMETYPE]    = {DrawChoices_FrameType,   ProcessInput_FrameType},
     [MENUITEM_FONT]         = {DrawChoices_FrameType,   ProcessInput_FontType}, 
     [MENUITEM_MATCHCALL]    = {DrawChoices_BattleScene, ProcessInput_Options_Two},
@@ -117,6 +120,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_SOUND]       = gText_Sound,
     [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
     [MENUITEM_UNITSYSTEM]  = gText_UnitSystem,
+    [MENUITEM_MESSAGEBOX]  = gText_MessageBox,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
     [MENUITEM_FONT]        = gText_Font,
     [MENUITEM_CANCEL]      = gText_Cancel,
@@ -188,6 +192,7 @@ static const u8 sText_MatchCall[]   = _("Toggle calls from other TRAINERS.");
 static const u8 sText_Sound[]       = _("Set audio output.");
 static const u8 sText_ButtonMode[]  = _("Set function of L/R Buttons.");
 static const u8 sText_UnitSystem[]  = _("Toggle between measuring systems.");
+static const u8 sText_MessageBox[]  = _("Choose message box color.");
 static const u8 sText_FrameType[]   = _("Choose window frame style.");
 static const u8 sText_Font[]        = _("POKéMON EMERALD");
 static const u8 sText_Cancel[]      = _("Exit the OPTIONS menu.");
@@ -202,6 +207,7 @@ static const u8 *const sOptionMenuItemDescriptions[MENUITEM_COUNT] =
     [MENUITEM_SOUND]       = sText_Sound,
     [MENUITEM_BUTTONMODE]  = sText_ButtonMode,
     [MENUITEM_UNITSYSTEM]  = sText_UnitSystem,
+    [MENUITEM_MESSAGEBOX]  = sText_MessageBox,
     [MENUITEM_FRAMETYPE]   = sText_FrameType,
     [MENUITEM_FONT]        = sText_Font,
     [MENUITEM_CANCEL]      = sText_Cancel,
@@ -292,6 +298,7 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_SOUND]       = gSaveBlock2Ptr->optionsSound;
         sOptions->sel[MENUITEM_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_UNITSYSTEM]  = gSaveBlock2Ptr->optionsUnitSystem;
+        sOptions->sel[MENUITEM_MESSAGEBOX]  = gSaveBlock2Ptr->optionsMessageBox;
         sOptions->sel[MENUITEM_FRAMETYPE]   = gSaveBlock2Ptr->optionsWindowFrameType;
         sOptions->sel[MENUITEM_FONT]        = gSaveBlock2Ptr->optionsCurrentFont;
         gMain.state++;
@@ -481,6 +488,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_SOUND];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_BUTTONMODE];
     gSaveBlock2Ptr->optionsUnitSystem       = sOptions->sel[MENUITEM_UNITSYSTEM];
+    gSaveBlock2Ptr->optionsMessageBox       = sOptions->sel[MENUITEM_MESSAGEBOX];
     gSaveBlock2Ptr->optionsWindowFrameType  = sOptions->sel[MENUITEM_FRAMETYPE];
     gSaveBlock2Ptr->optionsCurrentFont      = sOptions->sel[MENUITEM_FONT];
 
@@ -725,6 +733,16 @@ static void DrawChoices_UnitSystem(int selection, int y)
 
     DrawOptionMenuChoice(gText_UnitSystemImperial, 104, y, styles[0]);
     DrawOptionMenuChoice(gText_UnitSystemMetric, GetStringRightAlignXOffset(FONT_NORMAL, gText_UnitSystemMetric, 214), y, styles[1]);
+}
+
+static void DrawChoices_MessageBox(int selection, int y)
+{
+    u8 styles[2] = {0};
+
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_MessageBoxGreen, 104, y, styles[0]);
+    DrawOptionMenuChoice(gText_MessageBoxBlue, GetStringRightAlignXOffset(FONT_NORMAL, gText_MessageBoxBlue, 214), y, styles[1]);
 }
 
 static void DrawChoices_FrameType(int selection, int y)
