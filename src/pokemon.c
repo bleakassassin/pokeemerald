@@ -2152,8 +2152,8 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
 
 #define RUBY_POKEMON      6
 #define SAPPHIRE_POKEMON  1
-#define FIRERED_POKEMON  56
-#define LEAFGREEN_POKEMON 8
+#define FIRERED_POKEMON  57
+#define LEAFGREEN_POKEMON 9
 
 const u16 sRubyPokemon[] =
 {
@@ -2172,6 +2172,9 @@ const u16 sSapphirePokemon[] =
 
 const u16 sFireRedPokemon[] =
 {
+    SPECIES_BULBASAUR,
+    SPECIES_CHARMANDER,
+    SPECIES_SQUIRTLE,
     SPECIES_CATERPIE,
     SPECIES_BEEDRILL,
     SPECIES_PIDGEY,
