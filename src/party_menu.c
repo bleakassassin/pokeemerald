@@ -215,6 +215,13 @@ struct PartyMenuBox
     u8 statusSpriteId;
 };
 
+static const u16 sUltimateMoves[] =
+{
+    TUTOR_MOVE_BLAST_BURN,
+    TUTOR_MOVE_HYDRO_CANNON,
+    TUTOR_MOVE_FRENZY_PLANT
+};
+
 // EWRAM vars
 static EWRAM_DATA struct PartyMenuInternal *sPartyMenuInternal = NULL;
 EWRAM_DATA struct PartyMenu gPartyMenu = {0};
@@ -2035,6 +2042,7 @@ static void Task_HandleCancelParticipationYesNoInput(u8 taskId)
 static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
 {
     u16 move;
+    u8 i;
 
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
@@ -2045,6 +2053,20 @@ static u8 CanMonLearnTMTutor(struct Pokemon *mon, u16 item, u8 tutor)
             return CANNOT_LEARN_MOVE;
         else
             move = ItemIdToBattleMoveId(item);
+    }
+    else if (tutor == TUTOR_ULTIMATE_MOVES)
+    {
+        for (i = 0; i < ARRAY_COUNT(sUltimateMoves); i++)
+        {
+            if (CanLearnTutorMove(GetMonData(mon, MON_DATA_SPECIES), sUltimateMoves[i]))
+            {
+                gPartyMenu.data1 = move = GetTutorMove(sUltimateMoves[i]);
+                StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
+                break;
+            }
+        }
+        if (i == 3)
+            return CANNOT_LEARN_MOVE;
     }
     else
     {
@@ -5357,25 +5379,38 @@ static void TryTutorSelectedMon(u8 taskId)
 {
     struct Pokemon *mon;
     s16 *move;
+    u8 i;
 
     if (!gPaletteFade.active)
     {
         mon = &gPlayerParty[gPartyMenu.slotId];
         move = &gPartyMenu.data1;
         GetMonNickname(mon, gStringVar1);
-        gPartyMenu.data1 = GetTutorMove(gSpecialVar_0x8005);
-        StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
+        if (gSpecialVar_0x8005 < TUTOR_ULTIMATE_MOVES)
+        {
+            gPartyMenu.data1 = GetTutorMove(gSpecialVar_0x8005);
+            StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
+        }
         move[1] = 2;
         switch (CanMonLearnTMTutor(mon, 0, gSpecialVar_0x8005))
         {
         case CANNOT_LEARN_MOVE:
-            DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);
+            if (gSpecialVar_0x8005 == TUTOR_ULTIMATE_MOVES)
+                DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnUltimateMove);
+            else
+                DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);
             return;
         case ALREADY_KNOWS_MOVE:
             DisplayLearnMoveMessageAndClose(taskId, gText_PkmnAlreadyKnows);
             return;
         default:
-            if (GiveMoveToMon(mon, gPartyMenu.data1) != MON_HAS_MAX_MOVES)
+            if (gSpecialVar_0x8005 == TUTOR_ULTIMATE_MOVES && GetMonData(mon, MON_DATA_FRIENDSHIP) != MAX_FRIENDSHIP)
+            {
+                gSpecialVar_Result = 2;
+                Task_ClosePartyMenu(taskId);
+                return;
+            }
+            else if (GiveMoveToMon(mon, gPartyMenu.data1) != MON_HAS_MAX_MOVES)
             {
                 Task_LearnedMove(taskId);
                 return;

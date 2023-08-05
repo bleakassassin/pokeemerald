@@ -174,8 +174,8 @@ BattleFrontier_Lounge7_EventScript_Sailor::
 	msgbox BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong, MSGBOX_NPC
 	end
 
-BattleFrontier_Lounge7_EventScript_Gentleman::
-	msgbox BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful, MSGBOX_NPC
+BattleFrontier_Lounge7_EventScript_UltimateMoveSheet::
+	msgbox BattleFrontier_Lounge7_Text_ThesePokemonCanLearn, MSGBOX_SIGN
 	end
 
 BattleFrontier_Lounge7_Text_LeftTutorIntro:
@@ -257,17 +257,15 @@ BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong:
 	.string "But if that were true, they wouldn't\n"
 	.string "stay out here together, would they?$"
 
-BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful:
-	.string "When I was just a wee YOUNGSTER,\n"
-	.string "those ladies were strong and beautiful.\p"
-	.string "They were idols among us TRAINERS.\p"
-	.string "Even now, age hasn't dulled their\n"
-	.string "abilities.\p"
-	.string "In fact, their POKéMON moves have\n"
-	.string "grown even more polished.\p"
-	.string "But… For some reason, I can't help\n"
-	.string "but feel this…\p"
-	.string "Time is so cruel…$"
+BattleFrontier_Lounge7_Text_ThesePokemonCanLearn:
+	.string "These POKéMON can learn the\n"
+	.string "ultimate moves…\p"
+	.string "The blazing FIRE-type POKéMON:\n"
+	.string "CHARIZARD and TYPHLOSION!\p"
+	.string "The restless WATER-type POKéMON:\n"
+	.string "BLASTOISE and FERALIGATR!\p"
+	.string "The quiet GRASS-type POKéMON:\n"
+	.string "VENUSAUR and MEGANIUM!$"
 
 BattleFrontier_Lounge7_Text_SoftboiledDesc::
 	.string "Recovers up to\n"

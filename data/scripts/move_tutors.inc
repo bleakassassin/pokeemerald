@@ -218,6 +218,37 @@ MoveTutor_EventScript_ExplosionTaught::
 	release
 	end
 
+BattleFrontier_Lounge7_EventScript_UltimateMoveTutor::
+	lock
+	faceplayer
+	goto_if_set FLAG_SPOKE_TO_ULTIMATE_MOVE_TUTOR, MoveTutor_EventScript_UltimateMoveSkipIntro
+	msgbox MoveTutor_Text_UltimateMoveIntro, MSGBOX_YESNO
+	setflag FLAG_SPOKE_TO_ULTIMATE_MOVE_TUTOR
+	goto MoveTutor_EventScript_UltimateMoveTeach
+
+MoveTutor_EventScript_UltimateMoveSkipIntro::
+	msgbox MoveTutor_Text_UltimateMoveTeach, MSGBOX_YESNO
+MoveTutor_EventScript_UltimateMoveTeach::
+	goto_if_eq VAR_RESULT, NO, MoveTutor_EventScript_UltimateMoveDeclined
+	msgbox MoveTutor_Text_UltimateMoveWhichMon, MSGBOX_DEFAULT
+	setvar VAR_0x8005, TUTOR_ULTIMATE_MOVES
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, MoveTutor_EventScript_UltimateMoveDeclined
+	goto_if_eq VAR_RESULT, 2, MoveTutor_EventScript_UltimateMoveNotMaxFriendship
+	msgbox MoveTutor_Text_UltimateMoveTaught, MSGBOX_DEFAULT
+	release
+	end
+
+MoveTutor_EventScript_UltimateMoveDeclined::
+	msgbox MoveTutor_Text_UltimateMoveDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+MoveTutor_EventScript_UltimateMoveNotMaxFriendship::
+	msgbox MoveTutor_Text_UltimateMoveNotMaxFriendship, MSGBOX_DEFAULT
+	release
+	end
+
 MoveTutor_EventScript_OpenPartyMenu::
 	special ChooseMonForMoveTutor
 	waitstate

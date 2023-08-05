@@ -1287,7 +1287,7 @@
 #define FLAG_UNUSED_0x4D8                                           0x4D8 // Unused Flag
 #define FLAG_UNUSED_0x4D9                                           0x4D9 // Unused Flag
 #define FLAG_UNUSED_0x4DA                                           0x4DA // Unused Flag
-#define FLAG_UNUSED_0x4DB                                           0x4DB // Unused Flag
+#define FLAG_SPOKE_TO_ULTIMATE_MOVE_TUTOR                           0x4DB // Edited Flag; set if player spoke to old man in Battle Frontier move tutor lounge
 #define FLAG_OLDALE_MART_EMPLOYEE                                   0x4DC // Edited Flag; set if player spoke to Oldale Mart Employee
 #define FLAG_TRAINER_HILL_RECEIVED_MON_PRIZE                        0x4DD // Edited Flag; set if player just received Pokemon prize, cleared when starting new challenge
 #define FLAG_TRAINER_HILL_MON_PRIZE_NORMAL                          0x4DE // Edited Flag; set if player received Bulbasaur for beating Normal Mode in 12 minutes
