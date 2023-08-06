@@ -261,11 +261,11 @@ BattleFrontier_Lounge7_Text_ThesePokemonCanLearn:
 	.string "These POKéMON can learn the\n"
 	.string "ultimate moves…\p"
 	.string "The blazing FIRE-type POKéMON:\n"
-	.string "CHARIZARD and TYPHLOSION!\p"
+	.string "CHARIZARD!\p"
 	.string "The restless WATER-type POKéMON:\n"
-	.string "BLASTOISE and FERALIGATR!\p"
+	.string "BLASTOISE!\p"
 	.string "The quiet GRASS-type POKéMON:\n"
-	.string "VENUSAUR and MEGANIUM!$"
+	.string "VENUSAUR!$"
 
 BattleFrontier_Lounge7_Text_SoftboiledDesc::
 	.string "Recovers up to\n"
