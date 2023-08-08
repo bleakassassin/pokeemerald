@@ -73,8 +73,8 @@ static void TxRegItemsMenu_PrintItemIcon(u16 itemId, u8 iconSlot);
 static void TxRegItemsMenu_DoItemSwap(u8 taskId, bool8 a);
 static void TxRegItemsMenu_UpdateSwapLinePos(u8 y);
 static void TxRegItemsMenu_PrintSwappingCursor(u8 y, u8 b, u8 speed);
-static void TxRegItemsMenu_MoveItemSlotInList(u16 *registeredItemSlots_, u32 from, u32 to_);
-static void TxRegItemsMenu_CalcAndSetUsedSlotsCount(u16 *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount);
+static void TxRegItemsMenu_MoveItemSlotInList(u8 *registeredItemSlots_, u32 from, u32 to_);
+static void TxRegItemsMenu_CalcAndSetUsedSlotsCount(u8 *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount);
 //helper cleanup
 static void TxRegItemsMenu_RemoveItemIcon(u8 iconSlot);
 static void TxRegItemsMenu_RemoveScrollIndicator(void);
@@ -112,6 +112,20 @@ static const struct ListMenuTemplate gTxRegItemsMenu_List = //item storage list
     .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
     .fontId = FONT_NARROW,
     .cursorKind = CURSOR_BLACK_ARROW,
+};
+
+const u16 gRegisteredItems[REGISTERED_ITEMS_MAX + 1] =
+{
+    [REGISTER_ITEM_COIN_CASE] = ITEM_COIN_CASE,
+    [REGISTER_ITEM_ITEMFINDER] = ITEM_ITEMFINDER,
+    [REGISTER_ITEM_OLD_ROD] = ITEM_OLD_ROD,
+    [REGISTER_ITEM_GOOD_ROD] = ITEM_GOOD_ROD,
+    [REGISTER_ITEM_SUPER_ROD] = ITEM_SUPER_ROD,
+    [REGISTER_ITEM_WAILMER_PAIL] = ITEM_WAILMER_PAIL,
+    [REGISTER_ITEM_POKEBLOCK_CASE] = ITEM_POKEBLOCK_CASE,
+    [REGISTER_ITEM_DEVON_SCOPE] = ITEM_DEVON_SCOPE,
+    [REGISTER_ITEM_BICYCLE] = ITEM_BICYCLE,
+    [REGISTER_ITEM_POWDER_JAR] = ITEM_POWDER_JAR,
 };
 
 // EWRAM
@@ -333,7 +347,7 @@ static void TxRegItemsMenu_RefreshListMenu(void)
 
     for(i = 0; i < TxRegItemsMenuItemPageInfo.count - 1; i++)
     {
-        CopyItemName(gSaveBlock1Ptr->registeredItems[i], &gTxRegItemsMenu->itemNames[i][0]);
+        CopyItemName(gRegisteredItems[gSaveBlock1Ptr->registeredItems[i]], &gTxRegItemsMenu->itemNames[i][0]);
         gTxRegItemsMenu->listItems[i].name = &(gTxRegItemsMenu->itemNames[i][0]);
         gTxRegItemsMenu->listItems[i].id = i;
     }
@@ -354,7 +368,7 @@ static void TxRegItemsMenu_MoveCursor(s32 id, bool8 onInit, struct ListMenu *thi
     if (gTxRegItemsMenu->toSwapPos == NOT_SWAPPING)
     {
         if (id != LIST_CANCEL)
-            TxRegItemsMenu_PrintItemIcon(gSaveBlock1Ptr->registeredItems[id], gTxRegItemsMenu->iconSlot);
+            TxRegItemsMenu_PrintItemIcon(gRegisteredItems[gSaveBlock1Ptr->registeredItems[id]], gTxRegItemsMenu->iconSlot);
         else
             TxRegItemsMenu_PrintItemIcon(MSG_GO_BACK_TO_PREV, gTxRegItemsMenu->iconSlot);
         TxRegItemsMenu_RemoveItemIcon(gTxRegItemsMenu->iconSlot ^ 1);
@@ -419,7 +433,7 @@ static void TxRegItemsMenu_DoItemSwap(u8 taskId, bool8 a)
     s16 *data;
     u16 b;
     u8 lastSelected = gSaveBlock1Ptr->registeredItemLastSelected;
-    u16 lastSelectedItemId = gSaveBlock1Ptr->registeredItems[lastSelected];
+    u8 lastSelectedItemId = gRegisteredItems[gSaveBlock1Ptr->registeredItems[lastSelected]];
 
     data = gTasks[taskId].data;
     b = (TxRegItemsMenuItemPageInfo.itemsAbove + TxRegItemsMenuItemPageInfo.cursorPos);
@@ -461,16 +475,16 @@ static void TxRegItemsMenu_PrintSwappingCursor(u8 y, u8 b, u8 speed)
 }
 
 //registeredItems struct helper functions
-static void TxRegItemsMenu_MoveItemSlotInList(u16 *registeredItemSlots_, u32 from, u32 to_)
+static void TxRegItemsMenu_MoveItemSlotInList(u8 *registeredItemSlots_, u32 from, u32 to_)
 {
     // dumb assignments needed to match
-    u16 *registeredItemSlots = registeredItemSlots_;
+    u8 *registeredItemSlots = registeredItemSlots_;
     u32 to = to_;
 
     if (from != to)
     {
         s16 i, count;
-        u16 firstSlot = registeredItemSlots[from];
+        u8 firstSlot = registeredItemSlots[from];
 
         if (to > from)
         {
@@ -500,6 +514,18 @@ u8 TxRegItemsMenu_CountUsedRegisteredItemSlots(void)
     return usedSlots;
 }
 
+u8 MapRegisteredItem(u16 itemId)
+{
+    u8 i;
+
+    for (i = 1; i < REGISTERED_ITEMS_MAX + 1; i++)
+    {
+        if (gRegisteredItems[i] == itemId)
+            return i;
+    }
+    return ITEM_NONE;
+}
+
 static void TxRegItemsMenu_ChangeLastSelectedItemIndex(u8 index)
 {
     if (gSaveBlock1Ptr->registeredItemLastSelected == index)
@@ -513,7 +539,7 @@ void TxRegItemsMenu_RemoveRegisteredItem(u16 itemId)
     u8 i;
     for (i = i ; i < REGISTERED_ITEMS_MAX; i++)
     {
-        if (gSaveBlock1Ptr->registeredItems[i] == itemId)
+        if (gRegisteredItems[gSaveBlock1Ptr->registeredItems[i]] == itemId)
         {
             gSaveBlock1Ptr->registeredItems[i] = ITEM_NONE;
             gSaveBlock1Ptr->registeredItemListCount--;
@@ -543,10 +569,10 @@ void TxRegItemsMenu_CompactRegisteredItems(void)
     gSaveBlock1Ptr->registeredItemListCount = TxRegItemsMenu_CountUsedRegisteredItemSlots();
 }
 
-static void TxRegItemsMenu_CalcAndSetUsedSlotsCount(u16 *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount)
+static void TxRegItemsMenu_CalcAndSetUsedSlotsCount(u8 *slots, u8 count, u8 *arg2, u8 *usedSlotsCount, u8 maxUsedSlotsCount)
 {
     u16 i;
-    u16 *slots_ = slots;
+    u8 *slots_ = slots;
 
     (*usedSlotsCount) = 0;
     for (i = 0; i < count; i++)
@@ -568,7 +594,7 @@ bool8 TxRegItemsMenu_CheckRegisteredHasItem(u16 itemId)
 
     for (i = 0; i < REGISTERED_ITEMS_MAX; i++)
     {
-        if (gSaveBlock1Ptr->registeredItems[i] == itemId)
+        if (gRegisteredItems[gSaveBlock1Ptr->registeredItems[i]] == itemId)
             return TRUE;
     }
     return FALSE;
@@ -580,7 +606,7 @@ u8 TxRegItemsMenu_GetRegisteredItemIndex(u16 itemId)
 
     for (i = 0; i < REGISTERED_ITEMS_MAX; i++)
     {
-        if (gSaveBlock1Ptr->registeredItems[i] == itemId)
+        if (gRegisteredItems[gSaveBlock1Ptr->registeredItems[i]] == itemId)
             return i;
     }
     return 0xFF;
@@ -588,13 +614,14 @@ u8 TxRegItemsMenu_GetRegisteredItemIndex(u16 itemId)
 
 bool8 TxRegItemsMenu_AddRegisteredItem(u16 itemId)
 {
-    u8 i;
+    u8 i, index;
     s8 freeSlot;
-    u16 *newItems;
+    u8 *newItems;
 
     // Copy PC items
     newItems = AllocZeroed(sizeof(gSaveBlock1Ptr->registeredItems));
     memcpy(newItems, gSaveBlock1Ptr->registeredItems, sizeof(gSaveBlock1Ptr->registeredItems));
+    index = MapRegisteredItem(itemId);
 
     //check for a free slot
     
@@ -602,7 +629,7 @@ bool8 TxRegItemsMenu_AddRegisteredItem(u16 itemId)
     {
         if (gSaveBlock1Ptr->registeredItems[i] == ITEM_NONE)
         {
-            newItems[i] = itemId;
+            newItems[i] = index;
             gSaveBlock1Ptr->registeredItemListCount++;
             // Copy items back to the PC
             memcpy(gSaveBlock1Ptr->registeredItems, newItems, sizeof(gSaveBlock1Ptr->registeredItems));
@@ -616,7 +643,7 @@ bool8 TxRegItemsMenu_AddRegisteredItem(u16 itemId)
 void TxRegItemsMenu_RegisteredItemsMenuNewGame(void)
 {
     u8 i;
-    for (i = i ; i < REGISTERED_ITEMS_MAX; i++)
+    for (i = 0 ; i < REGISTERED_ITEMS_MAX; i++)
     {
         gSaveBlock1Ptr->registeredItems[i] = ITEM_NONE;
     }

@@ -139,8 +139,6 @@
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
 
-#define REGISTERED_ITEMS_MAX 10
-
 struct Coords8
 {
     s8 x;
@@ -1050,8 +1048,8 @@ struct SaveBlock1
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];;
-    /*0x35D8*/ u16 registeredItems[REGISTERED_ITEMS_MAX];
+    /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];
+    /*0x35D8*/ u8 unused_35d8[0x14];
     /*0x35EC*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
@@ -1061,7 +1059,7 @@ struct SaveBlock1
     /*0x3B58*/ struct LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
-    /*0x3D5A*/ u8 unused_3D5A[10];
+    /*0x3D5A*/ u8 registeredItems[REGISTERED_ITEMS_MAX];
     /*0x3D64*/ struct TrainerHillSave trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
     /*0x3D88*/ struct ItemSlot bagPocket_Treasures[BAG_TREASURES_COUNT];

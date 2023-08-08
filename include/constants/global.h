@@ -68,6 +68,7 @@
 #define GIFT_RIBBONS_COUNT 11
 #define SAVED_TRENDS_COUNT 5
 #define PYRAMID_BAG_ITEMS_COUNT 10
+#define REGISTERED_ITEMS_MAX 10
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.
@@ -173,6 +174,7 @@
 #define VANILLA_SAVE                 0
 #define VERSION_LAUNCH               1
 #define VERSION_CATCH_EXP_EVOLVE_FIX 2
-#define VERSION_LATEST               3 // VERSION_RIBBON_DESCRIPTIONS
+#define VERSION_RIBBON_DESCRIPTIONS  3
+#define VERSION_LATEST               4 // VERSION_SAVE_REFACTOR
 
 #endif // GUARD_CONSTANTS_GLOBAL_H

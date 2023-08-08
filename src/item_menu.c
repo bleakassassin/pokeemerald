@@ -2116,7 +2116,7 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
     HideMapNamePopUpWindow();
     ChangeBgY_ScreenOff(0, 0, BG_COORD_SET);
     if (button >= 2 && button <= REGISTERED_ITEMS_MAX + 2)
-        registeredItem = gSaveBlock1Ptr->registeredItems[button - 2];
+        registeredItem = gRegisteredItems[gSaveBlock1Ptr->registeredItems[button - 2]];
     else
     {
         switch (button)
@@ -2126,7 +2126,7 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
             break;
         case 1:
             //return TRUE;
-            registeredItem = gSaveBlock1Ptr->registeredItems[0];
+            registeredItem = gRegisteredItems[gSaveBlock1Ptr->registeredItems[0]];
             break;
         default:
             return FALSE;
