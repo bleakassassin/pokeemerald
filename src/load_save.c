@@ -362,12 +362,15 @@ void SavePlayerBag(void)
 void FixImportedSave(void)
 {
     u8 i;
+    u16 version;
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
 
-    if (VarGet(VAR_SAVE_COMPATIBILITY) != VERSION_LATEST)
+    version = VarGet(VAR_SAVE_COMPATIBILITY);
+
+    if (version != VERSION_LATEST)
     {
-        if (VarGet(VAR_SAVE_COMPATIBILITY) <= VERSION_CATCH_EXP_EVOLVE_FIX)
+        if (version <= VERSION_CATCH_EXP_EVOLVE_FIX)
         {
             gSaveBlock1Ptr->giftRibbons[COUNTRY_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
             gSaveBlock1Ptr->giftRibbons[NATIONAL_RIBBON - FIRST_GIFT_RIBBON] = DIFFICULTY_CLEARING_RIBBON;
@@ -375,10 +378,10 @@ void FixImportedSave(void)
             gSaveBlock1Ptr->giftRibbons[WORLD_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
         }
 
-        if (VarGet(VAR_SAVE_COMPATIBILITY) == VERSION_LAUNCH)
+        if (version == VERSION_LAUNCH)
             AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
 
-        if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
+        if (version == VANILLA_SAVE)
         {
             FlagClear(FLAG_REMATCH_SIDNEY);
             FlagClear(FLAG_REMATCH_PHOEBE);
