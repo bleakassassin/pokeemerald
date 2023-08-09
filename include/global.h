@@ -608,16 +608,13 @@ struct Roamer
     /*0x14*/ u8 filler[0x8];
 };
 
-struct NewRoamer
+struct RoamerTrio
 {
-    /*0x00*/ u32 ivs;
-    /*0x04*/ u32 personality;
-    /*0x08*/ u16 species;
-    /*0x0A*/ u16 hp;
-    /*0x0C*/ u8 level;
-    /*0x0D*/ u8 status;
-    /*0x0E*/ bool8 active;
-    /*0x0F*/ u8 filler;
+    /*0x00*/ u32 personality;
+    /*0x04*/ u8 ivs; // Stored as one byte to recreate roaming IV bug
+    /*0x05*/ u8 hp;
+    /*0x06*/ u8 status;
+    /*0x07*/ bool8 active;
 };
 
 struct RamScriptData
@@ -1048,8 +1045,8 @@ struct SaveBlock1
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];
-    /*0x35D8*/ u8 unused_35d8[0x14];
+    /*0x3598*/ struct RoamerTrio roamerTrio[TOTAL_ROAMING_POKEMON - 1];
+    /*0x35B0*/ u8 unused_35b0[0x3C];
     /*0x35EC*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;

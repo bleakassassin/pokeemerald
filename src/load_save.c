@@ -11,6 +11,7 @@
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
+#include "roamer.h"
 #include "save_location.h"
 #include "trainer_hill.h"
 #include "gba/flash_internal.h"
@@ -370,6 +371,19 @@ void FixImportedSave(void)
 
     if (version != VERSION_LATEST)
     {
+        if (version >= VERSION_LAUNCH)
+        {
+            if (VarGet(VAR_LITTLEROOT_HOUSES_STATE_MAY) >= 4) // var set to 4 after triggering roaming Lati
+                FlagSet(FLAG_DEFEATED_ROAMING_LATI);
+            if (FlagGet(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER) == TRUE)
+            {
+                ClearRoamerData();
+                ClearRoamerLocationData();
+                FlagSet(FLAG_DEFEATED_ROAMING_RAIKOU);
+                FlagSet(FLAG_DEFEATED_ROAMING_ENTEI);
+                FlagSet(FLAG_DEFEATED_ROAMING_SUICUNE);
+            }
+        }
         if (version <= VERSION_CATCH_EXP_EVOLVE_FIX)
         {
             gSaveBlock1Ptr->giftRibbons[COUNTRY_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
@@ -377,7 +391,6 @@ void FixImportedSave(void)
             gSaveBlock1Ptr->giftRibbons[EARTH_RIBBON - FIRST_GIFT_RIBBON] = HUNDRED_STRAIGHT_WINS_RIBBON;
             gSaveBlock1Ptr->giftRibbons[WORLD_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
         }
-
         if (version == VERSION_LAUNCH)
             AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
 
@@ -405,7 +418,6 @@ void FixImportedSave(void)
             }
             if (VarGet(VAR_TRICK_HOUSE_LEVEL) > 5)
                 AddBagItem(ITEM_TM12, 1);
-
             if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE)
             {
                 RemoveBagItem(ITEM_MACH_BIKE, 1);
@@ -459,7 +471,7 @@ void FixImportedSave(void)
                     FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
             }
         }
-        VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
+        //VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
     }
         
     for (i = 0; i < BAG_MEDICINE_COUNT; i++) // BAG_MEDICINE_COUNT is the same as BAG_KEYITEMS_COUNT (30)
