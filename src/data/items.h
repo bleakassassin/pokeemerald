@@ -3141,10 +3141,10 @@ const struct Item gItems[] =
 
     [ITEM_MACH_BIKE] =
     {
-        .name = _("MACH BIKE"),
+        .name = _("BICYCLE"),
         .itemId = ITEM_MACH_BIKE,
         .price = 0,
-        .description = sMachBikeDesc,
+        .description = sBicycleDesc,
         .importance = 1,
         .registrability = TRUE,
         .pocket = POCKET_KEY_ITEMS,
@@ -3305,10 +3305,10 @@ const struct Item gItems[] =
 
     [ITEM_ACRO_BIKE] =
     {
-        .name = _("ACRO BIKE"),
+        .name = _("BICYCLE"),
         .itemId = ITEM_ACRO_BIKE,
         .price = 0,
-        .description = sAcroBikeDesc,
+        .description = sBicycleDesc,
         .importance = 1,
         .registrability = TRUE,
         .pocket = POCKET_KEY_ITEMS,
@@ -4377,8 +4377,7 @@ const struct Item gItems[] =
         .registrability = TRUE,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_Bike,
-        .secondaryId = BICYCLE,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
     [ITEM_TOWN_MAP] =

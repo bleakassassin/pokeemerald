@@ -68,7 +68,7 @@
 #define GIFT_RIBBONS_COUNT 11
 #define SAVED_TRENDS_COUNT 5
 #define PYRAMID_BAG_ITEMS_COUNT 10
-#define REGISTERED_ITEMS_MAX 10
+#define REGISTERED_ITEMS_LIST_COUNT 10
 
 // Number of facilities for Ranking Hall.
 // 7 facilities for single mode + tower double mode + tower multi mode.

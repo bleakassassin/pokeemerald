@@ -279,7 +279,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_GREEN_SCARF] = {gItemIcon_Scarf, gItemIconPalette_GreenScarf},
     [ITEM_YELLOW_SCARF] = {gItemIcon_Scarf, gItemIconPalette_YellowScarf},
     // Key items
-    [ITEM_MACH_BIKE] = {gItemIcon_MachBike, gItemIconPalette_MachBike},
+    [ITEM_MACH_BIKE] = {gItemIcon_Bicycle, gItemIconPalette_Bicycle},
     [ITEM_COIN_CASE] = {gItemIcon_CoinCase, gItemIconPalette_CoinCase},
     [ITEM_ITEMFINDER] = {gItemIcon_Itemfinder, gItemIconPalette_Itemfinder},
     [ITEM_OLD_ROD] = {gItemIcon_OldRod, gItemIconPalette_OldRod},
@@ -292,7 +292,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_DEVON_GOODS] = {gItemIcon_DevonGoods, gItemIconPalette_DevonGoods},
     [ITEM_SOOT_SACK] = {gItemIcon_SootSack, gItemIconPalette_SootSack},
     [ITEM_BASEMENT_KEY] = {gItemIcon_BasementKey, gItemIconPalette_OldKey},
-    [ITEM_ACRO_BIKE] = {gItemIcon_AcroBike, gItemIconPalette_AcroBike},
+    [ITEM_ACRO_BIKE] = {gItemIcon_Bicycle, gItemIconPalette_Bicycle},
     [ITEM_POKEBLOCK_CASE] = {gItemIcon_PokeblockCase, gItemIconPalette_PokeblockCase},
     [ITEM_LETTER] = {gItemIcon_Letter, gItemIconPalette_LavaCookieAndLetter},
     [ITEM_EON_TICKET] = {gItemIcon_EonTicket, gItemIconPalette_EonTicket},

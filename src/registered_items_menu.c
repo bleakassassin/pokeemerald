@@ -40,8 +40,8 @@
 
 struct TxRegItemsMenu_Struct
 {
-    struct ListMenuItem listItems[REGISTERED_ITEMS_MAX + 1];
-    u8 itemNames[REGISTERED_ITEMS_MAX + 1][ITEM_NAME_LENGTH + 1];
+    struct ListMenuItem listItems[REGISTERED_ITEMS_LIST_COUNT + 1];
+    u8 itemNames[REGISTERED_ITEMS_LIST_COUNT + 1][ITEM_NAME_LENGTH + 1];
     u8 windowIds[1];
     u8 toSwapPos;
     u8 spriteId[SPRITE_COPIES];
@@ -114,18 +114,20 @@ static const struct ListMenuTemplate gTxRegItemsMenu_List = //item storage list
     .cursorKind = CURSOR_BLACK_ARROW,
 };
 
-const u16 gRegisteredItems[REGISTERED_ITEMS_MAX + 1] =
+const u16 gRegisteredItems[] =
 {
-    [REGISTER_ITEM_COIN_CASE] = ITEM_COIN_CASE,
-    [REGISTER_ITEM_ITEMFINDER] = ITEM_ITEMFINDER,
-    [REGISTER_ITEM_OLD_ROD] = ITEM_OLD_ROD,
-    [REGISTER_ITEM_GOOD_ROD] = ITEM_GOOD_ROD,
-    [REGISTER_ITEM_SUPER_ROD] = ITEM_SUPER_ROD,
-    [REGISTER_ITEM_WAILMER_PAIL] = ITEM_WAILMER_PAIL,
-    [REGISTER_ITEM_POKEBLOCK_CASE] = ITEM_POKEBLOCK_CASE,
-    [REGISTER_ITEM_DEVON_SCOPE] = ITEM_DEVON_SCOPE,
-    [REGISTER_ITEM_BICYCLE] = ITEM_BICYCLE,
-    [REGISTER_ITEM_POWDER_JAR] = ITEM_POWDER_JAR,
+    ITEM_NONE,
+    ITEM_MACH_BIKE,
+    ITEM_ACRO_BIKE,
+    ITEM_OLD_ROD,
+    ITEM_GOOD_ROD,
+    ITEM_SUPER_ROD,
+    ITEM_ITEMFINDER,
+    ITEM_POKEBLOCK_CASE,
+    ITEM_WAILMER_PAIL,
+    ITEM_DEVON_SCOPE,
+    ITEM_COIN_CASE,
+    ITEM_POWDER_JAR
 };
 
 // EWRAM
@@ -194,7 +196,7 @@ static void TxRegItemsMenu_InitDataAndCreateListMenu(u8 taskId)
 
     data = gTasks[taskId].data;
     TxRegItemsMenu_CompactRegisteredItems();
-    TxRegItemsMenu_CalcAndSetUsedSlotsCount(gSaveBlock1Ptr->registeredItems, REGISTERED_ITEMS_MAX, &(TxRegItemsMenuItemPageInfo.pageItems), &(TxRegItemsMenuItemPageInfo.count), 3);
+    TxRegItemsMenu_CalcAndSetUsedSlotsCount(gSaveBlock1Ptr->registeredItems, REGISTERED_ITEMS_LIST_COUNT, &(TxRegItemsMenuItemPageInfo.pageItems), &(TxRegItemsMenuItemPageInfo.count), 3);
     SetCursorWithinListBounds(&(TxRegItemsMenuItemPageInfo.itemsAbove), &(TxRegItemsMenuItemPageInfo.cursorPos), TxRegItemsMenuItemPageInfo.pageItems, TxRegItemsMenuItemPageInfo.count);
     TxRegItemsMenu_RefreshListMenu();
     data[5] = ListMenuInit(&gMultiuseListMenuTemplate, TxRegItemsMenuItemPageInfo.itemsAbove, TxRegItemsMenuItemPageInfo.cursorPos);
@@ -518,7 +520,7 @@ u8 MapRegisteredItem(u16 itemId)
 {
     u8 i;
 
-    for (i = 1; i < REGISTERED_ITEMS_MAX + 1; i++)
+    for (i = 1; i < ARRAY_COUNT(gRegisteredItems) + 1; i++)
     {
         if (gRegisteredItems[i] == itemId)
             return i;
@@ -537,7 +539,7 @@ static void TxRegItemsMenu_ChangeLastSelectedItemIndex(u8 index)
 void TxRegItemsMenu_RemoveRegisteredItem(u16 itemId)
 {
     u8 i;
-    for (i = i ; i < REGISTERED_ITEMS_MAX; i++)
+    for (i = i ; i < REGISTERED_ITEMS_LIST_COUNT; i++)
     {
         if (gRegisteredItems[gSaveBlock1Ptr->registeredItems[i]] == itemId)
         {
@@ -554,9 +556,9 @@ void TxRegItemsMenu_CompactRegisteredItems(void)
     u16 i;
     u16 j;
 
-    for (i = 0; i < REGISTERED_ITEMS_MAX - 1; i++)
+    for (i = 0; i < REGISTERED_ITEMS_LIST_COUNT - 1; i++)
     {
-        for (j = i + 1; j < REGISTERED_ITEMS_MAX; j++)
+        for (j = i + 1; j < REGISTERED_ITEMS_LIST_COUNT; j++)
         {
             if (gSaveBlock1Ptr->registeredItems[i] == ITEM_NONE)
             {
@@ -592,7 +594,7 @@ bool8 TxRegItemsMenu_CheckRegisteredHasItem(u16 itemId)
 {
     u8 i;
 
-    for (i = 0; i < REGISTERED_ITEMS_MAX; i++)
+    for (i = 0; i < REGISTERED_ITEMS_LIST_COUNT; i++)
     {
         if (gRegisteredItems[gSaveBlock1Ptr->registeredItems[i]] == itemId)
             return TRUE;
@@ -604,7 +606,7 @@ u8 TxRegItemsMenu_GetRegisteredItemIndex(u16 itemId)
 {
     u8 i;
 
-    for (i = 0; i < REGISTERED_ITEMS_MAX; i++)
+    for (i = 0; i < REGISTERED_ITEMS_LIST_COUNT; i++)
     {
         if (gRegisteredItems[gSaveBlock1Ptr->registeredItems[i]] == itemId)
             return i;
@@ -625,7 +627,7 @@ bool8 TxRegItemsMenu_AddRegisteredItem(u16 itemId)
 
     //check for a free slot
     
-    for (i = 0; i < REGISTERED_ITEMS_MAX; i++)
+    for (i = 0; i < REGISTERED_ITEMS_LIST_COUNT; i++)
     {
         if (gSaveBlock1Ptr->registeredItems[i] == ITEM_NONE)
         {
@@ -643,7 +645,7 @@ bool8 TxRegItemsMenu_AddRegisteredItem(u16 itemId)
 void TxRegItemsMenu_RegisteredItemsMenuNewGame(void)
 {
     u8 i;
-    for (i = 0 ; i < REGISTERED_ITEMS_MAX; i++)
+    for (i = 0 ; i < REGISTERED_ITEMS_LIST_COUNT; i++)
     {
         gSaveBlock1Ptr->registeredItems[i] = ITEM_NONE;
     }

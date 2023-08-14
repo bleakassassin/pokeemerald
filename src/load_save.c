@@ -371,8 +371,13 @@ void FixImportedSave(void)
 
     if (version != VERSION_LATEST)
     {
-        if (version >= VERSION_LAUNCH)
+        if (version <= VERSION_RIBBON_DESCRIPTIONS)
         {
+            if (CheckBagHasItem(ITEM_BICYCLE, 1))
+            {
+                RemoveBagItem(ITEM_BICYCLE, 1);
+                AddBagItem(ITEM_MACH_BIKE, 1); // return a vanilla bike to saves to prevent breaking game if save is brought back to vanilla
+            }
             if (VarGet(VAR_LITTLEROOT_HOUSES_STATE_MAY) >= 4) // var set to 4 after triggering roaming Lati
                 FlagSet(FLAG_DEFEATED_ROAMING_LATI);
             if (FlagGet(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER) == TRUE)
@@ -418,12 +423,6 @@ void FixImportedSave(void)
             }
             if (VarGet(VAR_TRICK_HOUSE_LEVEL) > 5)
                 AddBagItem(ITEM_TM12, 1);
-            if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE)
-            {
-                RemoveBagItem(ITEM_MACH_BIKE, 1);
-                RemoveBagItem(ITEM_ACRO_BIKE, 1);
-                AddBagItem(ITEM_BICYCLE, 1);
-            }
             if (gSaveBlock1Ptr->mapLayoutId == 420)
             {
                 SetContinueGameWarpStatus();

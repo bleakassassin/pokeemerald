@@ -478,17 +478,6 @@
 
 #define ITEMS_COUNT 377
 
-#define REGISTER_ITEM_COIN_CASE 1
-#define REGISTER_ITEM_ITEMFINDER 2
-#define REGISTER_ITEM_OLD_ROD 3
-#define REGISTER_ITEM_GOOD_ROD 4
-#define REGISTER_ITEM_SUPER_ROD 5
-#define REGISTER_ITEM_WAILMER_PAIL 6
-#define REGISTER_ITEM_POKEBLOCK_CASE 7
-#define REGISTER_ITEM_DEVON_SCOPE 8
-#define REGISTER_ITEM_BICYCLE 9
-#define REGISTER_ITEM_POWDER_JAR 10
-
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
 // Its icon is defined at ITEMS_COUNT as the "return to field" arrow
 #define ITEM_LIST_END 0xFFFF
