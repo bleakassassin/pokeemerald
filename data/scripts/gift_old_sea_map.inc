@@ -16,6 +16,7 @@ OldSeaMap_Give:
 	setvar VAR_TEMP_0, 1
 	giveitem ITEM_OLD_SEA_MAP
 	setflag FLAG_HIDE_OCEANIC_MUSEUM_REPORTER
+	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
 	setflag FLAG_RECEIVED_OLD_SEA_MAP
 OldSeaMap_Obtained:
 	vmessage MysteryGift_Text_TryUsingItAtLilycovePort

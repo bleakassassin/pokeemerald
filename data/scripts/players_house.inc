@@ -210,6 +210,7 @@ PlayersHouse_1F_EventScript_WatchGymBroadcast::
 	msgbox PlayersHouse_1F_Text_ReportFromPetalburgGym, MSGBOX_DEFAULT
 	fadedefaultbgm
 	special TurnOffTVScreen
+	setflag FLAG_SYS_TV_HOME
 	setvar VAR_LITTLEROOT_INTRO_STATE, 7
 	delay 35
 	return

@@ -380,6 +380,13 @@ void FixImportedSave(void)
                 FlagSet(FLAG_OCEANIC_MUSEUM_MET_REPORTER);
                 VarSet(VAR_OLD_SEA_MAP_STATE, var - 1); // decrement var to account for restored vanilla reporter check, ignore if never spoken to
             }
+            if (version != VANILLA_SAVE)
+            {
+                if (FlagGet(FLAG_IS_CHAMPION) == TRUE) // flag previously used for FLAG_WON_LEAGUE_REMATCHES
+                    FlagSet(FLAG_WON_LEAGUE_REMATCHES);
+                if (FlagGet(FLAG_SYS_TV_HOME) == TRUE) // flag previously used for FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER
+                    FlagSet(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
+            }
             if (CheckBagHasItem(ITEM_BICYCLE, 1))
             {
                 RemoveBagItem(ITEM_BICYCLE, 1);
@@ -387,6 +394,10 @@ void FixImportedSave(void)
             }
             if (VarGet(VAR_LITTLEROOT_HOUSES_STATE_MAY) >= 4) // var set to 4 after triggering roaming Lati
                 FlagSet(FLAG_DEFEATED_ROAMING_LATI);
+            if (VarGet(VAR_LITTLEROOT_INTRO_STATE) >= 7) // var set to 7 after watching TV at beginning of game in vanilla
+                FlagSet(FLAG_SYS_TV_HOME);
+            if (VarGet(VAR_LITTLEROOT_TOWN_STATE) >= 4) // var set to 4 after getting Running Shoes in vanilla
+                FlagSet(FLAG_SYS_B_DASH);
             if (FlagGet(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER) == TRUE)
             {
                 ClearRoamerData();
@@ -395,8 +406,19 @@ void FixImportedSave(void)
                 FlagSet(FLAG_DEFEATED_ROAMING_ENTEI);
                 FlagSet(FLAG_DEFEATED_ROAMING_SUICUNE);
             }
+            if (VarGet(VAR_MOSSDEEP_CITY_STATE) <= 2)
+                FlagSet(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
             if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
                 FlagSet(FLAG_READ_STEVENS_LETTER);
+            if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
+                FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
+            if (FlagGet(FLAG_RECEIVED_MYSTIC_TICKET) == TRUE)
+                FlagSet(FLAG_ENABLE_SHIP_NAVEL_ROCK);
+            if (FlagGet(FLAG_RECEIVED_AURORA_TICKET) == TRUE)
+                FlagSet(FLAG_ENABLE_SHIP_BIRTH_ISLAND);
+            if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
+                FlagSet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND);
+            FlagSet(FLAG_IS_CHAMPION);
         }
         if (version <= VERSION_CATCH_EXP_EVOLVE_FIX)
         {
@@ -415,7 +437,6 @@ void FixImportedSave(void)
             FlagClear(FLAG_REMATCH_GLACIA);
             FlagClear(FLAG_REMATCH_DRAKE);
             FlagClear(FLAG_REMATCH_WALLACE);
-            FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
             FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
 
             gSaveBlock1Ptr->registeredItem = ITEM_NONE;
@@ -448,12 +469,9 @@ void FixImportedSave(void)
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE);
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
             }
-            if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 3)
-                FlagClear(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
             if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
             {
                 FlagSet(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
-                FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
                 FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
                 FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
 

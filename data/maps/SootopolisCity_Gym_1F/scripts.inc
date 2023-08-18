@@ -130,6 +130,7 @@ SootopolisCity_Gym_1F_EventScript_WallaceDefeated::
 SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	msgbox SootopolisCity_Gym_1F_Text_RewardThisTicket, MSGBOX_DEFAULT
 	giveitem ITEM_AURORA_TICKET
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
 	setflag FLAG_RECEIVED_AURORA_TICKET
 	msgbox SootopolisCity_Gym_1F_EventScript_StrangeThing, MSGBOX_DEFAULT
 	closemessage

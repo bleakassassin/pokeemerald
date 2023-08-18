@@ -733,8 +733,8 @@
 #define FLAG_UNUSED_0x2B3  0x2B3 // Unused Flag
 #define FLAG_UNUSED_0x2B4  0x2B4 // Unused Flag
 #define FLAG_UNUSED_0x2B5  0x2B5 // Unused Flag
-#define FLAG_UNUSED_0x2B6  0x2B6 // Unused Flag
-#define FLAG_UNUSED_0x2B7  0x2B7 // Unused Flag
+#define FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL                           0x2B6 // Edited Flag; girl hidden until Team Magma is defeated at Space Center
+#define FLAG_HIDE_ROUTE_103_SNORLAX                                 0x2B7 // Edited Flag; used for Snorlax on Route 103
 #define FLAG_HIDE_MEW_CAVE_OF_ORIGIN                                0x2B8 // Edited Flag; used for Mew in Cave of Origin
 #define FLAG_HIDE_ARTICUNO                                          0x2B9 // Edited Flag; used for Articuno in Altering Cave
 #define FLAG_HIDE_ZAPDOS                                            0x2BA // Edited Flag; used for Zapdos in Altering Cave
@@ -786,8 +786,8 @@
 #define FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT                          0x2E6
 #define FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN                       0x2E7
 #define FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT                          0x2E8
-#define FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL                           0x2E9 // Edited Flag; girl hidden until Team Magma is defeated at Space Center
-#define FLAG_HIDE_ROUTE_103_SNORLAX                                 0x2EA // Edited Flag; used for Snorlax on Route 103
+#define FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN            0x2E9
+#define FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY                    0x2EA
 #define FLAG_HIDE_SAFARI_ZONE_SOUTH_EAST_EXPANSION                  0x2EB
 #define FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER                0x2EC
 #define FLAG_HIDE_SLATEPORT_CITY_SCOTT                              0x2ED
@@ -1377,12 +1377,12 @@
 #define FLAG_VISITED_SOOTOPOLIS_CITY                (SYSTEM_FLAGS + 0x1D)
 #define FLAG_VISITED_EVER_GRANDE_CITY               (SYSTEM_FLAGS + 0x1E)
 
-#define FLAG_WON_LEAGUE_REMATCHES                   (SYSTEM_FLAGS + 0x1F) // Edited Flag; now set after beating Pokemon League rematches
+#define FLAG_IS_CHAMPION                            (SYSTEM_FLAGS + 0x1F) // Seems to be related to linking.
 #define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
 
 #define FLAG_HEALED_AT_POKEMON_CENTER               (SYSTEM_FLAGS + 0x21) // Edited Flag; used to shorten Pokemon Center lady dialogue after first heal
 #define FLAG_ORGANIZED_POKEMON_STORAGE              (SYSTEM_FLAGS + 0x22) // Edited Flag; set if Lanette moved the "Move Pokemon" setting in storage system to the top
-#define FLAG_UNUSED_0x883                           (SYSTEM_FLAGS + 0x23) // Unused Flag
+#define FLAG_WON_LEAGUE_REMATCHES                   (SYSTEM_FLAGS + 0x23) // Edited Flag; set after beating Pokemon League rematches
 #define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
 #define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag
 #define FLAG_UNUSED_0x886                           (SYSTEM_FLAGS + 0x26) // Unused Flag
@@ -1396,9 +1396,9 @@
 #define FLAG_SYS_CRUISE_MODE                        (SYSTEM_FLAGS + 0x2D)
 
 #define FLAG_UNUSED_0x88E                           (SYSTEM_FLAGS + 0x2E) // Unused Flag
-#define FLAG_UNUSED_0x88F                           (SYSTEM_FLAGS + 0x2F) // Unused Flag
+#define FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER     (SYSTEM_FLAGS + 0x2F) // Edited Flag; set when triggering Legendary Johto trio roaming the first time, never cleared
 
-#define FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER     (SYSTEM_FLAGS + 0x30) // Edited Flag; only set when triggering Legendary Johto trio roaming the first time, never cleared
+#define FLAG_SYS_TV_HOME                            (SYSTEM_FLAGS + 0x30) 
 #define FLAG_SYS_TV_WATCH                           (SYSTEM_FLAGS + 0x31)
 #define FLAG_SYS_TV_START                           (SYSTEM_FLAGS + 0x32)
 #define FLAG_SYS_CHANGED_DEWFORD_TREND              (SYSTEM_FLAGS + 0x33)
@@ -1452,7 +1452,7 @@
 #define FLAG_LANDMARK_SKY_PILLAR                    (SYSTEM_FLAGS + 0x5E)
 
 #define FLAG_SYS_SHOAL_ITEM                         (SYSTEM_FLAGS + 0x5F)
-#define FLAG_SYS_B_DASH                             (SYSTEM_FLAGS + 0x60) // Removed Flag; you start off with the Running Shoes
+#define FLAG_SYS_B_DASH                             (SYSTEM_FLAGS + 0x60) // RECEIVED Running Shoes
 #define FLAG_SYS_CTRL_OBJ_DELETE                    (SYSTEM_FLAGS + 0x61)
 #define FLAG_SYS_RESET_RTC_ENABLE                   (SYSTEM_FLAGS + 0x62)
 
@@ -1476,8 +1476,8 @@
 
 #define FLAG_MAP_SCRIPT_CHECKED_DEOXYS              (SYSTEM_FLAGS + 0x73)
 #define FLAG_DEOXYS_ROCK_COMPLETE                   (SYSTEM_FLAGS + 0x74)
-#define FLAG_ENABLE_SHIP_BIRTH_ISLAND               (SYSTEM_FLAGS + 0x75) // Removed Flag; functionally redundant with FLAG_RECEIVED_AURORA_TICKET
-#define FLAG_ENABLE_SHIP_FARAWAY_ISLAND             (SYSTEM_FLAGS + 0x76) // Removed Flag; functionally redundant with FLAG_RECEIVED_OLD_SEA_MAP
+#define FLAG_ENABLE_SHIP_BIRTH_ISLAND               (SYSTEM_FLAGS + 0x75)
+#define FLAG_ENABLE_SHIP_FARAWAY_ISLAND             (SYSTEM_FLAGS + 0x76)
 
 #define FLAG_SHOWN_BOX_WAS_FULL_MESSAGE             (SYSTEM_FLAGS + 0x77)
 
@@ -1491,7 +1491,7 @@
 #define FLAG_LANDMARK_ALTERING_CAVE                 (SYSTEM_FLAGS + 0x7D)
 #define FLAG_LANDMARK_DESERT_UNDERPASS              (SYSTEM_FLAGS + 0x7E)
 #define FLAG_LANDMARK_ARTISAN_CAVE                  (SYSTEM_FLAGS + 0x7F)
-#define FLAG_ENABLE_SHIP_NAVEL_ROCK                 (SYSTEM_FLAGS + 0x80) // Removed Flag; functionally redundant with FLAG_RECEIVED_MYSTIC_TICKET
+#define FLAG_ENABLE_SHIP_NAVEL_ROCK                 (SYSTEM_FLAGS + 0x80)
 #define FLAG_ARRIVED_AT_NAVEL_ROCK                  (SYSTEM_FLAGS + 0x81)
 #define FLAG_LANDMARK_TRAINER_HILL                  (SYSTEM_FLAGS + 0x82)
 
