@@ -1769,8 +1769,8 @@ void UpdateTVShowsPerDay(u16 days)
     ResolveWorldOfMastersShow(days);
     ResolveNumberOneShow(days);
     TryStartRandomMassOutbreak();
-    if (VarGet(VAR_OLD_SEA_MAP_STATE) == 3)
-        VarSet(VAR_OLD_SEA_MAP_STATE, 4);
+    if (VarGet(VAR_OLD_SEA_MAP_STATE) == 2)
+        VarSet(VAR_OLD_SEA_MAP_STATE, 3);
 }
 
 static void UpdateMassOutbreakTimeLeft(u16 days)
@@ -4908,11 +4908,11 @@ static void DoTVShowRecentHappenings(void)
         return;
     }
     ShowFieldMessage(sTVRecentHappeninssTextGroup[state]);
-    if (VarGet(VAR_OLD_SEA_MAP_STATE) == 2)
+    if (VarGet(VAR_OLD_SEA_MAP_STATE) == 1)
     {
         FlagSet(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
         if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == FALSE)
-            VarSet(VAR_OLD_SEA_MAP_STATE, 3);
+            VarSet(VAR_OLD_SEA_MAP_STATE, 2);
     }
 }
 

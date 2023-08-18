@@ -74,9 +74,15 @@ MossdeepCity_StevensHouse_Movement_StevenReturn:
 
 MossdeepCity_StevensHouse_EventScript_BeldumPokeball::
 	lockall
+	goto_if_unset FLAG_READ_STEVENS_LETTER, MossdeepCity_StevensHouse_EventScript_LetterUnread
 	msgbox MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MossdeepCity_StevensHouse_EventScript_LeaveBeldum
 	goto MossdeepCity_StevensHouse_EventScript_GiveBeldum
+	end
+
+MossdeepCity_StevensHouse_EventScript_LetterUnread::
+	msgbox MossdeepCity_StevensHouse_Text_LetterLooksImportant, MSGBOX_DEFAULT
+	releaseall
 	end
 
 MossdeepCity_StevensHouse_EventScript_LeaveBeldum::
@@ -187,9 +193,9 @@ MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
 MossdeepCity_StevensHouse_Text_ObtainedBeldum:
 	.string "{PLAYER} obtained a BELDUM.$"
 
-@ Unused
-MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon:
-	.string "There is no space for another POKéMON.$"
+MossdeepCity_StevensHouse_Text_LetterLooksImportant:
+	.string "That letter looks important.\n"
+	.string "It's probably best to read it first.$"
 
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:
 	.string "{PLAYER} left the POKé BALL where\n"

@@ -363,7 +363,7 @@ void SavePlayerBag(void)
 void FixImportedSave(void)
 {
     u8 i;
-    u16 version;
+    u16 version, var;
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
 
@@ -373,6 +373,13 @@ void FixImportedSave(void)
     {
         if (version <= VERSION_RIBBON_DESCRIPTIONS)
         {
+            var = VarGet(VAR_OLD_SEA_MAP_STATE);
+
+            if (var >= 1)
+            {
+                FlagSet(FLAG_OCEANIC_MUSEUM_MET_REPORTER);
+                VarSet(VAR_OLD_SEA_MAP_STATE, var - 1); // decrement var to account for restored vanilla reporter check, ignore if never spoken to
+            }
             if (CheckBagHasItem(ITEM_BICYCLE, 1))
             {
                 RemoveBagItem(ITEM_BICYCLE, 1);
@@ -388,6 +395,8 @@ void FixImportedSave(void)
                 FlagSet(FLAG_DEFEATED_ROAMING_ENTEI);
                 FlagSet(FLAG_DEFEATED_ROAMING_SUICUNE);
             }
+            if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
+                FlagSet(FLAG_READ_STEVENS_LETTER);
         }
         if (version <= VERSION_CATCH_EXP_EVOLVE_FIX)
         {
@@ -431,7 +440,7 @@ void FixImportedSave(void)
             if (gSaveBlock2Ptr->optionsButtonMode >= OPTIONS_BUTTON_MODE_L_EQUALS_A)
                 gSaveBlock2Ptr->optionsButtonMode--;
             if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
-                VarSet(VAR_OLD_SEA_MAP_STATE, 5);
+                VarSet(VAR_OLD_SEA_MAP_STATE, 4);
             if (VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 3)
             {
                 VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);
@@ -439,13 +448,10 @@ void FixImportedSave(void)
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE);
                 FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
             }
-            if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
-                FlagClear(FLAG_READ_STEVENS_LETTER);
             if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 3)
                 FlagClear(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
             if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
             {
-                FlagClear(FLAG_READ_STEVENS_LETTER);
                 FlagSet(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
                 FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
                 FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);

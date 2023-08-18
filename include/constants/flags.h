@@ -120,7 +120,7 @@
 
 #define FLAG_MACH_GEAR                       0x68 // Edited Flag; used for switching bike modes
 
-#define FLAG_READ_STEVENS_LETTER             0x69 // Edited Flag; used to progress post-game state
+#define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69
 #define FLAG_RECEIVED_HM04                   0x6A
 #define FLAG_RECEIVED_HM06                   0x6B
 #define FLAG_WHITEOUT_TO_LAVARIDGE           0x6C // Set after defeating Flannery, so the player cant white out from poison before receiving Go Goggles
@@ -1286,7 +1286,7 @@
 #define FLAG_UNUSED_0x4D7                                           0x4D7 // Unused Flag
 #define FLAG_UNUSED_0x4D8                                           0x4D8 // Unused Flag
 #define FLAG_UNUSED_0x4D9                                           0x4D9 // Unused Flag
-#define FLAG_UNUSED_0x4DA                                           0x4DA // Unused Flag
+#define FLAG_READ_STEVENS_LETTER                                    0x4DA // Edited Flag; used to progress post-game state
 #define FLAG_SPOKE_TO_ULTIMATE_MOVE_TUTOR                           0x4DB // Edited Flag; set if player spoke to old man in Battle Frontier move tutor lounge
 #define FLAG_OLDALE_MART_EMPLOYEE                                   0x4DC // Edited Flag; set if player spoke to Oldale Mart Employee
 #define FLAG_TRAINER_HILL_RECEIVED_MON_PRIZE                        0x4DD // Edited Flag; set if player just received Pokemon prize, cleared when starting new challenge
