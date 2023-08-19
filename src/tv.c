@@ -539,7 +539,7 @@ static const u8 *const sTVPokemonTodayFailedTextGroup[] = {
     gTVPokemonTodayFailedText06
 };
 
-static const u8 *const sTVPokemonAnslerTextGroup[] = {
+static const u8 *const sTVPokemonAnglerTextGroup[] = {
     gTVPokemonAnglerText00,
     gTVPokemonAnglerText01
 };
@@ -5563,7 +5563,7 @@ static void DoTVShowPokemonAngler(void)
         TVShowDone();
         break;
     }
-    ShowFieldMessage(sTVPokemonAnslerTextGroup[state]);
+    ShowFieldMessage(sTVPokemonAnglerTextGroup[state]);
 }
 
 static void DoTVShowTheWorldOfMasters(void)
