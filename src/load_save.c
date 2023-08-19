@@ -86,8 +86,6 @@ static const u16 sTMFlagChecks[][2] =
     {FLAG_RECEIVED_TM40,                                ITEM_TM40},
     {FLAG_RECEIVED_TM41,                                ITEM_TM41},
     {FLAG_RECEIVED_TM42,                                ITEM_TM42},
-    {FLAG_RECEIVED_TM44,                                ITEM_TM42},
-    {FLAG_RECEIVED_TM45,                                ITEM_TM42},
     {FLAG_RECEIVED_SECRET_POWER,                        ITEM_TM43},
     {FLAG_RECEIVED_TM44,                                ITEM_TM44},
     {FLAG_RECEIVED_TM45,                                ITEM_TM45},
