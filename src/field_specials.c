@@ -3443,7 +3443,7 @@ void ScrollableMultichoice_ClosePersistentMenu(void)
 #undef tTaskId
 
 #define DEOXYS_ROCK_LEVELS 11
-#define ROCK_PAL_ID 10
+#define ROCK_PAL_ID 1
 
 void DoDeoxysRockInteraction(void)
 {

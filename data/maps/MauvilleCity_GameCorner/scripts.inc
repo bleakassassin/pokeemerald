@@ -268,7 +268,7 @@ MauvilleCity_GameCorner_EventScript_PrizeCornerPokemon::
 MauvilleCity_GameCorner_EventScript_ChoosePokemonPrizeMessage::
 	message MauvilleCity_GameCorner_Text_WhichPrize
 	waitmessage
-	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, 0
 	showcoinsbox 1, 1
 	goto MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize
 
@@ -286,35 +286,35 @@ MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize::
 	goto MauvilleCity_GameCorner_EventScript_CancelRedemption
 
 MauvilleCity_GameCorner_EventScript_Tyrogue::
-	setvar VAR_TEMP_1, SPECIES_TYROGUE
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TYROGUE
 	setvar VAR_TEMP_2, 2500
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 
 MauvilleCity_GameCorner_EventScript_MrMime::
-	setvar VAR_TEMP_1, SPECIES_MR_MIME
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_MR_MIME
 	setvar VAR_TEMP_2, 2800
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 
 MauvilleCity_GameCorner_EventScript_Lickitung::
-	setvar VAR_TEMP_1, SPECIES_LICKITUNG
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_LICKITUNG
 	setvar VAR_TEMP_2, 4600
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 
 MauvilleCity_GameCorner_EventScript_Eevee::
-	setvar VAR_TEMP_1, SPECIES_EEVEE
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_EEVEE
 	setvar VAR_TEMP_2, 5500
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 
 MauvilleCity_GameCorner_EventScript_Porygon::
-	setvar VAR_TEMP_1, SPECIES_PORYGON
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_PORYGON
 	setvar VAR_TEMP_2, 6500
 MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_TRANSFERRED_SPECIES
 	msgbox MauvilleCity_GameCorner_Text_SoYourChoiceIsX, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize
 	checkcoins VAR_RESULT
 	goto_if_lt VAR_RESULT, VAR_TEMP_2, MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon
-	switch VAR_TEMP_1
+	switch VAR_TEMP_TRANSFERRED_SPECIES
 	case SPECIES_TYROGUE, MauvilleCity_GameCorner_EventScript_GiveTyrogue
 	case SPECIES_MR_MIME, MauvilleCity_GameCorner_EventScript_GiveMrMime
 	case SPECIES_LICKITUNG, MauvilleCity_GameCorner_EventScript_GiveLickitung
@@ -379,7 +379,7 @@ MauvilleCity_GameCorner_EventScript_ReceivedMonFanfare::
 	playse SE_SHOP
 	msgbox MauvilleCity_GameCorner_Text_HereYouGo, MSGBOX_DEFAULT
 	playfanfare MUS_EVOLVED
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_TRANSFERRED_SPECIES
 	message gText_ReceivedPokemon
 	waitmessage
 	waitfanfare

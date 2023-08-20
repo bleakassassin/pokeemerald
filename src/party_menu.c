@@ -4926,7 +4926,7 @@ static void Task_PartyMenuReplaceMove(u8 taskId)
         RemoveMonPPBonus(mon, GetMoveSlotToReplace());
         move = gPartyMenu.data1;
         SetMonMoveSlot(mon, move, GetMoveSlotToReplace());
-        if (item >= ITEM_TM01_FOCUS_PUNCH && (GetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace()) > pp))
+        if (item >= ITEM_TM01 && (GetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace()) > pp))
         {
             SetMonData(mon, MON_DATA_PP1 + GetMoveSlotToReplace(), &pp);
         }

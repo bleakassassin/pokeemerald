@@ -69,7 +69,7 @@ MossdeepCity_EventScript_WomanMakeWish::
 
 MossdeepCity_EventScript_ReceiveJirachi::
 	msgbox MossdeepCity_Text_ShootingStarFellDown, MSGBOX_DEFAULT
-	setvar VAR_TEMP_1, SPECIES_JIRACHI
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_JIRACHI
 	givemon SPECIES_JIRACHI, 5
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, MossdeepCity_EventScript_ReceiveJirachiParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, MossdeepCity_EventScript_ReceiveJirachiPC

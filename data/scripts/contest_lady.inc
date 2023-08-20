@@ -96,10 +96,10 @@ LilycoveCity_ContestHall_EventScript_ReadyToEnterContests::
 
 LilycoveCity_ContestHall_EventScript_WonContest::
 	msgbox LilycoveCity_ContestHall_Text_WeWonPleaseHaveMon, MSGBOX_DEFAULT
-	setvar VAR_TEMP_1, SPECIES_TORCHIC
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TORCHIC
 	call_if_eq VAR_STARTER_MON, 0, LilycoveCity_ContestHall_EventScript_GiveMudkip
 	call_if_eq VAR_STARTER_MON, 1, LilycoveCity_ContestHall_EventScript_GiveTreecko
-	givemon VAR_TEMP_1, 5
+	givemon VAR_TEMP_TRANSFERRED_SPECIES, 5
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LilycoveCity_ContestHall_EventScript_Send3rdStarterParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LilycoveCity_ContestHall_EventScript_Send3rdStarterPC
 	goto Common_EventScript_NoMoreRoomForPokemon
@@ -107,11 +107,11 @@ LilycoveCity_ContestHall_EventScript_WonContest::
 	end
 
 LilycoveCity_ContestHall_EventScript_GiveMudkip::
-	setvar VAR_TEMP_1, SPECIES_MUDKIP
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_MUDKIP
 	return
 
 LilycoveCity_ContestHall_EventScript_GiveTreecko::
-	setvar VAR_TEMP_1, SPECIES_TREECKO
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TREECKO
 	return
 
 LilycoveCity_ContestHall_EventScript_Send3rdStarterParty::
@@ -135,7 +135,7 @@ LilycoveCity_ContestHall_EventScript_EnterMoreContests::
 	end
 
 LilycoveCity_ContestHall_EventScript_Received3rdStarter::
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_TRANSFERRED_SPECIES
 	setvar VAR_CONTEST_LADY_STATE, 5
 	playfanfare MUS_EVOLVED
 	message LilycoveCity_ContestHall_Text_Received3rdStarter

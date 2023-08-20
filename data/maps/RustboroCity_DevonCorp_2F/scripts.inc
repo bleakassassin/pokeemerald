@@ -152,14 +152,14 @@ RustboroCity_DevonCorp_2F_EventScript_StillRegenerating::
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_FossilMonReady::
-	setvar VAR_TEMP_1, SPECIES_AERODACTYL
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_AERODACTYL
 	call_if_eq VAR_WHICH_FOSSIL_REVIVED, 1, RustboroCity_DevonCorp_2F_EventScript_LileepReady
 	call_if_eq VAR_WHICH_FOSSIL_REVIVED, 2, RustboroCity_DevonCorp_2F_EventScript_AnorithReady
 	call_if_eq VAR_WHICH_FOSSIL_REVIVED, 3, RustboroCity_DevonCorp_2F_EventScript_OmanyteReady
 	call_if_eq VAR_WHICH_FOSSIL_REVIVED, 4, RustboroCity_DevonCorp_2F_EventScript_KabutoReady
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_TRANSFERRED_SPECIES
 	msgbox RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife, MSGBOX_DEFAULT
-	givemon VAR_TEMP_1, 20
+	givemon VAR_TEMP_TRANSFERRED_SPECIES, 20
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonPC
 	msgbox RustboroCity_DevonCorp_2F_Text_TooManyPokemon, MSGBOX_DEFAULT
@@ -167,19 +167,19 @@ RustboroCity_DevonCorp_2F_EventScript_FossilMonReady::
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_LileepReady::
-	setvar VAR_TEMP_1, SPECIES_LILEEP
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_LILEEP
 	return
 
 RustboroCity_DevonCorp_2F_EventScript_AnorithReady::
-	setvar VAR_TEMP_1, SPECIES_ANORITH
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_ANORITH
 	return
 
 RustboroCity_DevonCorp_2F_EventScript_OmanyteReady::
-	setvar VAR_TEMP_1, SPECIES_OMANYTE
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_OMANYTE
 	return
 
 RustboroCity_DevonCorp_2F_EventScript_KabutoReady::
-	setvar VAR_TEMP_1, SPECIES_KABUTO
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_KABUTO
 	return
 
 RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonParty::
@@ -198,7 +198,7 @@ RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonPC::
 RustboroCity_DevonCorp_2F_EventScript_TransferFossilMonToPC::
 	call Common_EventScript_TransferredToPC
 RustboroCity_DevonCorp_2F_EventScript_FinishReceivingFossilMon::
-	setvar VAR_TEMP_1, 0
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, 0
 	setvar VAR_FOSSIL_RESURRECTION_STATE, 0
 	setflag FLAG_RECEIVED_REVIVED_FOSSIL_MON
 	release
