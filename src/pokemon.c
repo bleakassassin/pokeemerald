@@ -2676,7 +2676,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
 void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
 {
     s32 i;
-    u8 nickname[30];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     u8 language;
     u8 value;
 
@@ -2730,7 +2730,7 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src)
 void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50)
 {
     s32 i;
-    u8 nickname[30];
+    u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
     u8 level;
     u8 language;
     u8 value;
@@ -4985,7 +4985,7 @@ void CopyPlayerPartyMonToBattleData(u8 battlerId, u8 partyIndex)
 {
     u16 *hpSwitchout;
     s32 i;
-    u8 nickname[POKEMON_NAME_LENGTH * 2];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
 
     gBattleMons[battlerId].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     gBattleMons[battlerId].item = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM, NULL);
@@ -6555,15 +6555,26 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     {
         return 0;
     }
-    else if (tm < 32)
+
+    // Fewer than 64 moves, use GF's method (for matching).
+    if (sizeof(struct TMHMLearnset) <= 8)
     {
-        u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
+        if (tm < 32)
+        {
+            u32 mask = 1 << tm;
+            return gTMHMLearnsets[species].as_u32s[0] & mask;
+        }
+        else
+        {
+            u32 mask = 1 << (tm - 32);
+            return gTMHMLearnsets[species].as_u32s[1] & mask;
+        }
     }
     else
     {
-        u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
+        u32 index = tm / 32;
+        u32 mask = 1 << (tm % 32);
+        return gTMHMLearnsets[species].as_u32s[index] & mask;
     }
 }
 
@@ -6573,15 +6584,25 @@ u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
     {
         return 0;
     }
-    else if (tm < 32)
+    // Fewer than 64 moves, use GF's method (for matching).
+    if (sizeof(struct TMHMLearnset) <= 8)
     {
-        u32 mask = 1 << tm;
-        return gTMHMLearnsets[species][0] & mask;
+        if (tm < 32)
+        {
+            u32 mask = 1 << tm;
+            return gTMHMLearnsets[species].as_u32s[0] & mask;
+        }
+        else
+        {
+            u32 mask = 1 << (tm - 32);
+            return gTMHMLearnsets[species].as_u32s[1] & mask;
+        }
     }
     else
     {
-        u32 mask = 1 << (tm - 32);
-        return gTMHMLearnsets[species][1] & mask;
+        u32 index = tm / 32;
+        u32 mask = 1 << (tm % 32);
+        return gTMHMLearnsets[species].as_u32s[index] & mask;
     }
 }
 

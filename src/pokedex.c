@@ -3756,7 +3756,7 @@ static void Task_LoadSizeScreen(u8 taskId)
 
             StringCopy(string, gText_SizeComparedTo);
             StringAppend(string, gSaveBlock2Ptr->playerName);
-            PrintInfoScreenText(string, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, string, 0xF0), 0x79);
+            PrintInfoScreenText(string, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, string, DISPLAY_WIDTH), 121);
             gMain.state++;
         }
         break;
@@ -4073,14 +4073,14 @@ static void Task_ExitCaughtMonPage(u8 taskId)
 
 static void SpriteCB_SlideCaughtMonToCenter(struct Sprite *sprite)
 {
-    if (sprite->x < 0x78)
+    if (sprite->x < DISPLAY_WIDTH / 2)
         sprite->x += 2;
-    if (sprite->x > 0x78)
+    if (sprite->x > DISPLAY_WIDTH / 2)
         sprite->x -= 2;
 
-    if (sprite->y < 0x50)
+    if (sprite->y < DISPLAY_HEIGHT / 2)
         sprite->y += 1;
-    if (sprite->y > 0x50)
+    if (sprite->y > DISPLAY_HEIGHT / 2)
         sprite->y -= 1;
 }
 
@@ -4104,7 +4104,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     const u8 *description;
 
     if (newEntry)
-        PrintInfoScreenText(gText_PokedexRegistration, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_PokedexRegistration, 0xF0), 0);
+        PrintInfoScreenText(gText_PokedexRegistration, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_PokedexRegistration, DISPLAY_WIDTH), 0);
     if (value == 0)
         value = NationalToHoennOrder(num);
     else
@@ -4148,7 +4148,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         description = gPokedexEntries[num].description;
     else
         description = sExpandedPlaceholder_PokedexDescription;
-    PrintInfoScreenText(description, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, description, 0xF0), 0x5F);
+    PrintInfoScreenText(description, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, description, DISPLAY_WIDTH), 95);
 }
 
 static void PrintMonHeight(u16 height, u8 left, u8 top)

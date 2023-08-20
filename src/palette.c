@@ -64,7 +64,7 @@ static EWRAM_DATA struct PaletteStruct sPaletteStructs[NUM_PALETTE_STRUCTS] = {0
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sFiller = 0;
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
-EWRAM_DATA u8 gPaletteDecompressionBuffer[PLTT_SIZE] = {0};
+EWRAM_DATA u8 ALIGNED(2) gPaletteDecompressionBuffer[PLTT_SIZE] = {0};
 EWRAM_DATA bool8 gScriptBufferedFadeActive = FALSE;
 
 static const struct PaletteStructTemplate sDummyPaletteStructTemplate = {
@@ -444,7 +444,7 @@ static u8 UpdateNormalPaletteFade(void)
         else
         {
             selectedPalettes = gPaletteFade_selectedPalettes >> 16;
-            paletteOffset = 256;
+            paletteOffset = OBJ_PLTT_OFFSET;
         }
 
         while (selectedPalettes)
