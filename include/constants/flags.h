@@ -1285,8 +1285,8 @@
 #define FLAG_UNUSED_0x4D5                                           0x4D5 // Unused Flag
 #define FLAG_UNUSED_0x4D6                                           0x4D6 // Unused Flag
 #define FLAG_UNUSED_0x4D7                                           0x4D7 // Unused Flag
-#define FLAG_UNUSED_0x4D8                                           0x4D8 // Unused Flag
-#define FLAG_UNUSED_0x4D9                                           0x4D9 // Unused Flag
+#define FLAG_RECEIVED_OVAL_CHARM                                    0x4D8 // Edited Flag; set if player speaks to Birch after obtaining all Hoenn Dex Pokemon
+#define FLAG_RECEIVED_SHINY_CHARM                                   0x4D9 // Edited Flag; set if player speaks to Birch after obtaining all Pokemon
 #define FLAG_READ_STEVENS_LETTER                                    0x4DA // Edited Flag; used to progress post-game state
 #define FLAG_SPOKE_TO_ULTIMATE_MOVE_TUTOR                           0x4DB // Edited Flag; set if player spoke to old man in Battle Frontier move tutor lounge
 #define FLAG_OLDALE_MART_EMPLOYEE                                   0x4DC // Edited Flag; set if player spoke to Oldale Mart Employee

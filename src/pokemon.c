@@ -2325,7 +2325,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
           | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
     metLocation = GetCurrentRegionMapSectionId();
 
-    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+    if (FlagGet(FLAG_RECEIVED_SHINY_CHARM) == TRUE)
         shinyRolls += 4;
 
     if (ShouldForceGameRuby(species))
@@ -2539,7 +2539,7 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
           | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
           | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
-    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+    if (FlagGet(FLAG_RECEIVED_SHINY_CHARM) == TRUE)
         shinyRolls += 4;
     shinyRolls += (gChainEncounterStreak * 2);
 
@@ -2569,7 +2569,7 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
           | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
           | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
 
-    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+    if (FlagGet(FLAG_RECEIVED_SHINY_CHARM) == TRUE)
         shinyRolls += 4;
     shinyRolls += (gChainEncounterStreak * 2);
 

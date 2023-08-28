@@ -653,14 +653,6 @@ const u32 gItemIconPalette_FlyingTMHM[] = INCBIN_U32("graphics/items/icon_palett
 
 const u32 gItemIcon_HM[] = INCBIN_U32("graphics/items/icons/hm.4bpp.lz");
 
-// Charms
-
-const u32 gItemIcon_OvalCharm[] = INCBIN_U32("graphics/items/icons/oval_charm.4bpp.lz");
-const u32 gItemIconPalette_OvalCharm[] = INCBIN_U32("graphics/items/icon_palettes/oval_charm.gbapal.lz");
-
-const u32 gItemIcon_ShinyCharm[] = INCBIN_U32("graphics/items/icons/shiny_charm.4bpp.lz");
-const u32 gItemIconPalette_ShinyCharm[] = INCBIN_U32("graphics/items/icon_palettes/shiny_charm.gbapal.lz");
-
 // FireRed/LeafGreen key items
 
 const u32 gItemIcon_OaksParcel[] = INCBIN_U32("graphics/items/icons/oaks_parcel.4bpp.lz");

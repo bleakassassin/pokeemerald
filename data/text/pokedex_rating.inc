@@ -123,6 +123,9 @@ gBirchDexRatingText_AllHoennMonsSeen::
 	.string "Here, take this as a little reward for\n"
 	.string "all your hard work!$"
 
+gBirchDexRatingText_ReceivedOvalCharm::
+	.string "{PLAYER} received the OVAL CHARM!$"
+
 gBirchDexRatingText_ImproveEggChances::
 	.string "PROF. BIRCH: Holding an OVAL CHARM\n"
 	.string "will give you a better chance of\l"
@@ -141,6 +144,9 @@ gBirchDexRatingText_NationalDexCompleted::
 	.string "your POKéMON!\p"
 	.string "It's a unique treasure deserving of\n"
 	.string "something special. Here, take this!$"
+
+gBirchDexRatingText_ReceivedShinyCharm::
+	.string "{PLAYER} received the SHINY CHARM!$"
 	
 gBirchDexRatingText_ImproveShinyChances::
 	.string "PROF. BIRCH: That will improve your\n"

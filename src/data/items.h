@@ -4209,26 +4209,24 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
 
-// Charms
-
-    [ITEM_OVAL_CHARM] =
+    [ITEM_15B] =
     {
-        .name = _("OVAL CHARM"),
-        .itemId = ITEM_OVAL_CHARM,
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
         .price = 0,
-        .description = sOvalCharmDesc,
-        .pocket = POCKET_KEY_ITEMS,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_SHINY_CHARM] =
+    [ITEM_15C] =
     {
-        .name = _("SHINY CHARM"),
-        .itemId = ITEM_SHINY_CHARM,
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
         .price = 0,
-        .description = sShinyCharmDesc,
-        .pocket = POCKET_KEY_ITEMS,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },

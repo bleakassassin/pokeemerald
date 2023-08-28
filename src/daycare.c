@@ -464,7 +464,7 @@ static void TriggerPendingDaycareEgg(struct DayCare *daycare)
         shinyRolls += 10;
 
     // Shiny Charm
-    if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
+    if (FlagGet(FLAG_RECEIVED_SHINY_CHARM) == TRUE)
         shinyRolls += 4;
 
     SeedRng2(gMain.vblankCounter2);
@@ -919,7 +919,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
     if (daycare->offspringPersonality == 0 && validEggs == DAYCARE_MON_COUNT && (daycare->mons[1].steps & 0xFF) == 0xFF)
     {
         u8 compatibility = GetDaycareCompatibilityScore(daycare);
-        if (CheckBagHasItem(ITEM_OVAL_CHARM, 1))
+        if (FlagGet(FLAG_RECEIVED_OVAL_CHARM) == TRUE)
             compatibility = sOvalCharmCompatibilityScores[compatibility];
         if (compatibility > (Random() * 100u) / USHRT_MAX)
             TriggerPendingDaycareEgg(&gSaveBlock1Ptr->daycare);

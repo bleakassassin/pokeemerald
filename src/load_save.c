@@ -390,6 +390,16 @@ void FixImportedSave(void)
                 RemoveBagItem(ITEM_BICYCLE, 1);
                 AddBagItem(ITEM_MACH_BIKE, 1); // return a vanilla bike to saves to prevent breaking game if save is brought back to vanilla
             }
+            if (CheckBagHasItem(ITEM_15B, 1))
+            {
+                FlagSet(FLAG_RECEIVED_OVAL_CHARM); // enable Oval Charm functionality
+                RemoveBagItem(ITEM_15B, 1);
+            }
+            if (CheckBagHasItem(ITEM_15C, 1))
+            {
+                FlagSet(FLAG_RECEIVED_SHINY_CHARM); // enable Shiny Charm functionality
+                RemoveBagItem(ITEM_15C, 1);
+            }
             if (VarGet(VAR_LITTLEROOT_HOUSES_STATE_MAY) >= 4) // var set to 4 after triggering roaming Lati
                 FlagSet(FLAG_DEFEATED_ROAMING_LATI);
             if (VarGet(VAR_LITTLEROOT_INTRO_STATE) >= 7) // var set to 7 after watching TV at beginning of game in vanilla
