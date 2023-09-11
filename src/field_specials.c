@@ -1282,6 +1282,11 @@ u16 GetBattleTowerSinglesStreak(void)
     return GetGameStat(GAME_STAT_BATTLE_TOWER_SINGLES_STREAK);
 }
 
+void BufferEReaderTrainerName(void)
+{
+    GetEreaderTrainerName(gStringVar1);
+}
+
 u16 GetSlotMachineId(void)
 {
     static const u8 sSlotMachineRandomSeeds[SLOT_MACHINE_COUNT] = {12, 2, 4, 5, 1, 8, 7, 11, 3, 10, 9, 6};

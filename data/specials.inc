@@ -245,6 +245,7 @@ gSpecials::
 	def_special CallBattleTowerFunc
 	def_special CallBattleDomeFunction
 	def_special CallBattlePalaceFunction
+	def_special CopyEReaderTrainerGreeting
 	def_special DoSpecialTrainerBattle
 	def_special CallBattleArenaFunction
 	def_special CallBattleFactoryFunction
@@ -294,6 +295,7 @@ gSpecials::
 	def_special DoOrbEffect
 	def_special FadeOutOrbEffect
 	def_special WaitWeather
+	def_special BufferEReaderTrainerName
 	def_special GetSlotMachineId
 	def_special GetPlayerFacingDirection
 	def_special FoundAbandonedShipRoom1Key
