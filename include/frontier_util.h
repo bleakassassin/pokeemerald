@@ -8,6 +8,7 @@ void ResetWinStreaks(void);
 u32 GetCurrentFacilityWinStreak(void);
 void ResetFrontierTrainerIds(void);
 u8 GetPlayerSymbolCountForFacility(u8 facility);
+void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monLevel, u16 *speciesArray, u16 *itemsArray, u8 *count);
 void ShowRankingHallRecordsWindow(void);
 void ScrollRankingHallRecordsWindow(void);
 void ClearRankingHallRecords(void);

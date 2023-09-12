@@ -985,6 +985,48 @@ static void SetTowerBattleWon(void)
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
 }
 
+// Checks if the next trainer in Battle Tower should be the E-Reader trainer.
+static bool8 ShouldBattleEReaderTrainer(u8 lvlMode, u16 winStreak)
+{
+    u8 trainerTeamLevel;
+    u8 monLevel;
+    s32 i;
+    u16 validSpecies[6];
+    u16 validItems[6];
+    u8 numEligibleMons;
+
+    numEligibleMons = 0;
+
+    ValidateEReaderTrainer();
+
+    if (gSpecialVar_Result != 0 || gSaveBlock3Ptr->ereaderTrainer.winStreak != winStreak)
+        return FALSE;
+
+    if (lvlMode != FRONTIER_LVL_50)
+        trainerTeamLevel = 100;
+    else
+        trainerTeamLevel = 50;
+
+    for (i = 0; i < 3; i++)
+    {
+        monLevel = gSaveBlock3Ptr->ereaderTrainer.party[i].level;
+        if (gSaveBlock3Ptr->ereaderTrainer.party[i].level != trainerTeamLevel)
+            return FALSE;
+
+        AppendIfValid(
+            gSaveBlock3Ptr->ereaderTrainer.party[i].species,
+            gSaveBlock3Ptr->ereaderTrainer.party[i].heldItem,
+            1,
+            lvlMode,
+            monLevel,
+            validSpecies,
+            validItems,
+            &numEligibleMons);
+    }
+
+    return (numEligibleMons == 3);
+}
+
 static bool8 ChooseSpecialBattleTowerTrainer(void)
 {
     s32 i, j, validMons;
@@ -998,6 +1040,12 @@ static bool8 ChooseSpecialBattleTowerTrainer(void)
         return FALSE;
 
     winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
+    if (ShouldBattleEReaderTrainer(lvlMode, winStreak))
+    {
+        gTrainerBattleOpponent_A = TRAINER_EREADER;
+        return TRUE;
+    }
+
     for (i = 0; i < BATTLE_TOWER_RECORD_COUNT; i++)
     {
         u32 *record = (u32 *)(&gSaveBlock2Ptr->frontier.towerRecords[i]);
