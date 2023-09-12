@@ -885,6 +885,7 @@ u8 LoadGameSave(u8 saveType)
     case SAVE_NORMAL:
     default:
         status = TryLoadSaveSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
+        TryReadSpecialSaveSector(SECTOR_ID_TRAINER_HILL, (u8 *)gSaveBlock3Ptr);
         CopyPartyAndObjectsFromSave();
         gSaveFileStatus = status;
         gGameContinueCallback = 0;

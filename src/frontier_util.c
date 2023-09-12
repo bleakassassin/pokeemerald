@@ -1698,7 +1698,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
     {
     case FRONTIER_BEFORE_TEXT:
         if (trainerId == TRAINER_EREADER)
-            FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);
+            FrontierSpeechToString(gSaveBlock3Ptr->ereaderTrainer.greeting);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
             CopyFrontierBrainText(FALSE);
         else if (trainerId < FRONTIER_TRAINERS_COUNT)
@@ -1711,7 +1711,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
     case FRONTIER_PLAYER_LOST_TEXT:
         if (trainerId == TRAINER_EREADER)
         {
-            FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerLost);
+            FrontierSpeechToString(gSaveBlock3Ptr->ereaderTrainer.farewellPlayerLost);
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {
@@ -1739,7 +1739,7 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
     case FRONTIER_PLAYER_WON_TEXT:
         if (trainerId == TRAINER_EREADER)
         {
-            FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerWon);
+            FrontierSpeechToString(gSaveBlock3Ptr->ereaderTrainer.farewellPlayerWon);
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {

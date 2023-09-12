@@ -366,7 +366,7 @@ struct BattleFrontier
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
     /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[BATTLE_TOWER_RECORD_COUNT]; // From record mixing.
     /*0xBEB*/ struct BattleTowerInterview towerInterview;
-    /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
+    /*0xBEC*/ u8 unused_BEC[0xBC];
     /*0xCA8*/ u8 challengeStatus;
     /*0xCA9*/ u8 lvlMode:2;
               u8 challengePaused:1;
@@ -1049,10 +1049,10 @@ struct SaveBlock1
     /*0x31B3*/ struct ExternalEventData externalEventData;
     /*0x31C7*/ struct ExternalEventFlags externalEventFlags;
     /*0x31DC*/ struct Roamer roamer;
-    /*0x31F8*/ struct EnigmaBerry enigmaBerry;
+    /*0x31F8*/ u8 unused_31F8[0x34];
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
     /*0x3598*/ struct RoamerTrio roamerTrio[TOTAL_ROAMING_POKEMON - 1];
-    /*0x35B0*/ u8 unused_35b0[0x3C];
+    /*0x35B0*/ u8 unused_35B0[0x3C];
     /*0x35EC*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
@@ -1070,6 +1070,15 @@ struct SaveBlock1
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
+
+struct SaveBlock3
+{
+    /*0x0*/ struct BattleTowerEReaderTrainer ereaderTrainer;
+    /*0xBC*/ struct EnigmaBerry enigmaBerry;
+    //*0xF0*/ struct TrainerHillChallenge challenge; // sizeof=0xF0 without it, excluded until English-friendly Trainer Hill cards appear
+}; // sizeof=0xFB8 with Trainer Hill struct
+
+extern struct SaveBlock3* gSaveBlock3Ptr;
 
 struct MapPosition
 {

@@ -760,14 +760,14 @@ static void SetPlayerBerryDataInBattleStruct(void)
     if (IsEnigmaBerryValid() == TRUE)
     {
         for (i = 0; i < BERRY_NAME_LENGTH; i++)
-            battleBerry->name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
+            battleBerry->name[i] = gSaveBlock3Ptr->enigmaBerry.berry.name[i];
         battleBerry->name[i] = EOS;
 
         for (i = 0; i < BERRY_ITEM_EFFECT_COUNT; i++)
-            battleBerry->itemEffect[i] = gSaveBlock1Ptr->enigmaBerry.itemEffect[i];
+            battleBerry->itemEffect[i] = gSaveBlock3Ptr->enigmaBerry.itemEffect[i];
 
-        battleBerry->holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-        battleBerry->holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
+        battleBerry->holdEffect = gSaveBlock3Ptr->enigmaBerry.holdEffect;
+        battleBerry->holdEffectParam = gSaveBlock3Ptr->enigmaBerry.holdEffectParam;
     }
     else
     {
@@ -795,22 +795,22 @@ static void SetAllPlayersBerryData(void)
         {
             for (i = 0; i < BERRY_NAME_LENGTH; i++)
             {
-                gEnigmaBerries[0].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
-                gEnigmaBerries[2].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
+                gEnigmaBerries[0].name[i] = gSaveBlock3Ptr->enigmaBerry.berry.name[i];
+                gEnigmaBerries[2].name[i] = gSaveBlock3Ptr->enigmaBerry.berry.name[i];
             }
             gEnigmaBerries[0].name[i] = EOS;
             gEnigmaBerries[2].name[i] = EOS;
 
             for (i = 0; i < BERRY_ITEM_EFFECT_COUNT; i++)
             {
-                gEnigmaBerries[0].itemEffect[i] = gSaveBlock1Ptr->enigmaBerry.itemEffect[i];
-                gEnigmaBerries[2].itemEffect[i] = gSaveBlock1Ptr->enigmaBerry.itemEffect[i];
+                gEnigmaBerries[0].itemEffect[i] = gSaveBlock3Ptr->enigmaBerry.itemEffect[i];
+                gEnigmaBerries[2].itemEffect[i] = gSaveBlock3Ptr->enigmaBerry.itemEffect[i];
             }
 
-            gEnigmaBerries[0].holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-            gEnigmaBerries[2].holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-            gEnigmaBerries[0].holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
-            gEnigmaBerries[2].holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
+            gEnigmaBerries[0].holdEffect = gSaveBlock3Ptr->enigmaBerry.holdEffect;
+            gEnigmaBerries[2].holdEffect = gSaveBlock3Ptr->enigmaBerry.holdEffect;
+            gEnigmaBerries[0].holdEffectParam = gSaveBlock3Ptr->enigmaBerry.holdEffectParam;
+            gEnigmaBerries[2].holdEffectParam = gSaveBlock3Ptr->enigmaBerry.holdEffectParam;
         }
         else
         {

@@ -942,15 +942,15 @@ const struct BerryTree gBlankBerryTree = {};
 // unused
 void ClearEnigmaBerries(void)
 {
-    CpuFill16(0, &gSaveBlock1Ptr->enigmaBerry, sizeof(gSaveBlock1Ptr->enigmaBerry));
+    CpuFill16(0, &gSaveBlock3Ptr->enigmaBerry, sizeof(gSaveBlock3Ptr->enigmaBerry));
 }
 
 void SetEnigmaBerry(u8 *src)
 {
     u32 i;
-    u8 *dest = (u8 *)&gSaveBlock1Ptr->enigmaBerry;
+    u8 *dest = (u8 *)&gSaveBlock3Ptr->enigmaBerry;
 
-    for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry); i++)
+    for (i = 0; i < sizeof(gSaveBlock3Ptr->enigmaBerry); i++)
         dest[i] = src[i];
 }
 
@@ -962,7 +962,7 @@ static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 
     dest = (u8 *)enigmaBerry;
     checksum = 0;
-    for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry) - sizeof(gSaveBlock1Ptr->enigmaBerry.checksum); i++)
+    for (i = 0; i < sizeof(gSaveBlock3Ptr->enigmaBerry) - sizeof(gSaveBlock3Ptr->enigmaBerry.checksum); i++)
         checksum += dest[i];
 
     return checksum;
@@ -970,11 +970,11 @@ static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 
 bool32 IsEnigmaBerryValid(void)
 {
-    if (!gSaveBlock1Ptr->enigmaBerry.berry.stageDuration)
+    if (!gSaveBlock3Ptr->enigmaBerry.berry.stageDuration)
         return FALSE;
-    if (!gSaveBlock1Ptr->enigmaBerry.berry.maxYield)
+    if (!gSaveBlock3Ptr->enigmaBerry.berry.maxYield)
         return FALSE;
-    if (GetEnigmaBerryChecksum(&gSaveBlock1Ptr->enigmaBerry) != gSaveBlock1Ptr->enigmaBerry.checksum)
+    if (GetEnigmaBerryChecksum(&gSaveBlock3Ptr->enigmaBerry) != gSaveBlock3Ptr->enigmaBerry.checksum)
         return FALSE;
     return TRUE;
 }
@@ -982,7 +982,7 @@ bool32 IsEnigmaBerryValid(void)
 const struct Berry *GetBerryInfo(u8 berry)
 {
     if (berry == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) && IsEnigmaBerryValid())
-        return (struct Berry *)(&gSaveBlock1Ptr->enigmaBerry.berry);
+        return (struct Berry *)(&gSaveBlock3Ptr->enigmaBerry.berry);
     else
     {
         if (berry == BERRY_NONE || berry > ITEM_TO_BERRY(LAST_BERRY_INDEX))

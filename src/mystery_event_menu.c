@@ -260,7 +260,10 @@ static void CB2_MysteryEventMenu(void)
             u16 status = RunMysteryEventScript(gDecompressionBuffer);
             CpuFill32(0, gDecompressionBuffer, 0x7D4);
             if (!GetEventLoadMessage(gStringVar4, status))
+            {
                 TrySavingData(SAVE_NORMAL);
+                TryWriteSpecialSaveSector(SECTOR_ID_TRAINER_HILL, (u8 *)gSaveBlock3Ptr);
+            }
             gMain.state++;
         }
         break;

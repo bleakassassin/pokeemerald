@@ -397,13 +397,6 @@ bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
     if (numTrainers < 1 || numTrainers > NUM_TRAINER_HILL_TRAINERS)
         return FALSE;
 
-    // Validate trainers
-    for (i = 0; i < numTrainers; i++)
-    {
-        if (!ValidateTrainerChecksum(&hillSet->trainers[i]))
-            return FALSE;
-    }
-
     // Validate checksum
     checksum = CalcByteArraySum((u8 *)hillSet->trainers, numTrainers * sizeof(struct EReaderTrainerHillTrainer));
     if (checksum != hillSet->checksum)

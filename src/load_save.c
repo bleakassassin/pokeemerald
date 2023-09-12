@@ -43,6 +43,7 @@ struct LoadedSaveData
 EWRAM_DATA struct SaveBlock2ASLR gSaveblock2 = {0};
 EWRAM_DATA struct SaveBlock1ASLR gSaveblock1 = {0};
 EWRAM_DATA struct PokemonStorageASLR gPokemonStorage = {0};
+EWRAM_DATA struct SaveBlock3 gSaveBlock3 = {0};
 
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 EWRAM_DATA u32 gLastEncryptionKey = 0;
@@ -52,6 +53,7 @@ bool32 gFlashMemoryPresent;
 struct SaveBlock1 *gSaveBlock1Ptr;
 struct SaveBlock2 *gSaveBlock2Ptr;
 struct PokemonStorage *gPokemonStoragePtr;
+struct SaveBlock3 *gSaveBlock3Ptr;
 
 static const u16 sTMFlagChecks[][2] =
 {
@@ -130,6 +132,7 @@ void SetSaveBlocksPointers(u16 offset)
     gSaveBlock2Ptr = (void *)(&gSaveblock2) + offset;
     *sav1_LocalVar = (void *)(&gSaveblock1) + offset;
     gPokemonStoragePtr = (void *)(&gPokemonStorage) + offset;
+    gSaveBlock3Ptr = &gSaveBlock3;
 
     SetBagItemsPointers();
     SetDecorationInventoriesPointers();
