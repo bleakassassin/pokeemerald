@@ -146,7 +146,7 @@ static void CB2_MysteryEventMenu(void)
     case 1:
         if (!gPaletteFade.active)
         {
-            PrintMysteryMenuText(WIN_MSG, gText_LinkStandby2, 1, 2, 1);
+            PrintMysteryMenuText(WIN_MSG, gText_LinkStandby2, 1, 0, 1);
             gMain.state++;
         }
         break;
@@ -162,7 +162,7 @@ static void CB2_MysteryEventMenu(void)
         if ((gLinkStatus & LINK_STAT_MASTER) && (gLinkStatus & LINK_STAT_PLAYER_COUNT) > 4)
         {
             PlaySE(SE_PIN);
-            PrintMysteryMenuText(WIN_MSG, gText_PressAToLoadEvent, 1, 2, 1);
+            PrintMysteryMenuText(WIN_MSG, gText_PressAToLoadEvent, 1, 0, 1);
             gMain.state++;
         }
         if (JOY_NEW(B_BUTTON))
@@ -184,7 +184,7 @@ static void CB2_MysteryEventMenu(void)
                 PlaySE(SE_SELECT);
                 CheckShouldAdvanceLinkState();
                 DrawStdFrameWithCustomTileAndPalette(WIN_LOADING, TRUE, 1, 0xD);
-                PrintMysteryMenuText(WIN_LOADING, gText_LoadingEvent, 1, 2, 0);
+                PrintMysteryMenuText(WIN_LOADING, gText_LoadingEvent, 1, 0, 0);
                 PutWindowTilemap(WIN_LOADING);
                 CopyWindowToVram(WIN_LOADING, COPYWIN_FULL);
                 gMain.state++;
@@ -199,7 +199,7 @@ static void CB2_MysteryEventMenu(void)
         else
         {
             GetEventLoadMessage(gStringVar4, MEVENT_STATUS_LOAD_ERROR);
-            PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 2, 1);
+            PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 0, 1);
             gMain.state = 13;
         }
         break;
@@ -212,19 +212,19 @@ static void CB2_MysteryEventMenu(void)
                 {
                     SetCloseLinkCallback();
                     GetEventLoadMessage(gStringVar4, MEVENT_STATUS_LOAD_ERROR);
-                    PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 2, 1);
+                    PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 0, 1);
                     gMain.state = 13;
                 }
                 else if (CheckLanguageMatch())
                 {
-                    PrintMysteryMenuText(WIN_MSG, gText_DontRemoveCableTurnOff, 1, 2, 1);
+                    PrintMysteryMenuText(WIN_MSG, gText_DontRemoveCableTurnOff, 1, 0, 1);
                     gMain.state++;
                 }
                 else
                 {
                     CloseLink();
                     GetEventLoadMessage(gStringVar4, MEVENT_STATUS_LOAD_ERROR);
-                    PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 2, 1);
+                    PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 0, 1);
                     gMain.state = 13;
                 }
             }
@@ -268,7 +268,7 @@ static void CB2_MysteryEventMenu(void)
         }
         break;
     case 12:
-        PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 2, 1);
+        PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 0, 1);
         gMain.state++;
         break;
     case 13:
@@ -299,7 +299,7 @@ static void CB2_MysteryEventMenu(void)
     {
         CloseLink();
         GetEventLoadMessage(gStringVar4, MEVENT_STATUS_LOAD_ERROR);
-        PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 2, 1);
+        PrintMysteryMenuText(WIN_MSG, gStringVar4, 1, 0, 1);
         gMain.state = 13;
     }
 
