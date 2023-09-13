@@ -113,6 +113,7 @@ static void SetKeyboardCursorToLastColumn(void);
 static u8 GetLastAlphabetColumn(u8);
 static void ReduceToValidWordSelectColumn(void);
 static bool8 IsSelectedWordIndexInvalid(void);
+static int DidPlayerInputMysteryEventPhrase(void);
 static int DidPlayerInputMysteryGiftPhrase(void);
 static u16 DidPlayerInputABerryMasterWifePhrase(void);
 static bool8 InitEasyChatScreenControl_(void);
@@ -689,6 +690,13 @@ static const u8 sAlphabetGroupIdMap[NUM_ALPHABET_ROWS][NUM_ALPHABET_COLUMNS] = {
     { 7,  8,  9, 10, 11, 12,  0},
     {13, 14, 15, 16, 17, 18, 19},
     {20, 21, 22, 23, 24, 25, 26},
+};
+
+static const u16 sMysteryEventPhrase[NUM_QUESTIONNAIRE_WORDS] = {
+    EC_WORD_MYSTERY,
+    EC_WORD_EVENT,
+    EC_WORD_IS,
+    EC_WORD_EXCITING,
 };
 
 static const u16 sMysteryGiftPhrase[NUM_QUESTIONNAIRE_WORDS] = {
@@ -2969,10 +2977,14 @@ static void SetSpecialEasyChatResult(void)
     {
     case EASY_CHAT_TYPE_PROFILE:
         FlagSet(FLAG_SYS_CHAT_USED);
+        if (DidPlayerInputMysteryEventPhrase())
+            gSpecialVar_0x8004 = 1;
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
         if (DidPlayerInputMysteryGiftPhrase())
             gSpecialVar_0x8004 = 2;
+        else if (DidPlayerInputMysteryEventPhrase())
+            gSpecialVar_0x8004 = 1;
         else
             gSpecialVar_0x8004 = 0;
         break;
@@ -2984,6 +2996,11 @@ static void SetSpecialEasyChatResult(void)
         gSpecialVar_0x8004 = DidPlayerInputABerryMasterWifePhrase();
         break;
     }
+}
+
+static int DidPlayerInputMysteryEventPhrase(void)
+{
+    return !IsPhraseDifferentThanPlayerInput(sMysteryEventPhrase, ARRAY_COUNT(sMysteryEventPhrase));
 }
 
 static int DidPlayerInputMysteryGiftPhrase(void)
