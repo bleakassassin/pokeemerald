@@ -293,11 +293,11 @@ void LoadPlayerBag(void)
 
     // load player battle items.
     for (i = 0; i < BAG_BATTLEITEMS_COUNT; i++)
-        gLoadedSaveData.battleItems[i] = gSaveBlock1Ptr->bagPocket_BattleItems[i];
+        gLoadedSaveData.battleItems[i] = gSaveBlock2Ptr->frontier.bagPocket_BattleItems[i];
 
     // load player treasures.
     for (i = 0; i < BAG_TREASURES_COUNT; i++)
-        gLoadedSaveData.treasures[i] = gSaveBlock1Ptr->bagPocket_Treasures[i];
+        gLoadedSaveData.treasures[i] = gSaveBlock2Ptr->frontier.bagPocket_Treasures[i];
 
     // load player mail in bag.
     for (i = 0; i < BAG_MAIL_COUNT; i++)
@@ -341,11 +341,11 @@ void SavePlayerBag(void)
 
     // save player battle items.
     for (i = 0; i < BAG_BATTLEITEMS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_BattleItems[i] = gLoadedSaveData.battleItems[i];
+        gSaveBlock2Ptr->frontier.bagPocket_BattleItems[i] = gLoadedSaveData.battleItems[i];
 
     // save player treasures.
     for (i = 0; i < BAG_TREASURES_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Treasures[i] = gLoadedSaveData.treasures[i];
+        gSaveBlock2Ptr->frontier.bagPocket_Treasures[i] = gLoadedSaveData.treasures[i];
 
     // save player mail in bag.
     for (i = 0; i < BAG_MAIL_COUNT; i++)
@@ -383,6 +383,11 @@ void FixImportedSave(void)
             }
             if (version != VANILLA_SAVE)
             {
+                InitLilycoveLady();
+                memcpy(gSaveBlock2Ptr->frontier.bagPocket_BattleItems, gSaveBlock1Ptr->seen1, sizeof(gSaveBlock2Ptr->frontier.bagPocket_BattleItems));
+                memcpy(gSaveBlock1Ptr->bagPocket_Mail, gSaveBlock1Ptr->seen2, sizeof(gSaveBlock1Ptr->bagPocket_Mail));
+                memcpy(gSaveBlock1Ptr->seen1, gSaveBlock2Ptr->pokedex.seen, sizeof(gSaveBlock2Ptr->pokedex.seen));
+                memcpy(gSaveBlock1Ptr->seen2, gSaveBlock2Ptr->pokedex.seen, sizeof(gSaveBlock2Ptr->pokedex.seen));
                 if (FlagGet(FLAG_IS_CHAMPION) == TRUE) // flag previously used for FLAG_WON_LEAGUE_REMATCHES
                     FlagSet(FLAG_WON_LEAGUE_REMATCHES);
                 if (FlagGet(FLAG_SYS_TV_HOME) == TRUE) // flag previously used for FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER
@@ -454,8 +459,8 @@ void FixImportedSave(void)
             gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
             InitLilycoveLady();
 
-            ClearItemSlots(gSaveBlock1Ptr->bagPocket_BattleItems, BAG_BATTLEITEMS_COUNT);
-            ClearItemSlots(gSaveBlock1Ptr->bagPocket_Mail, BAG_MAIL_COUNT);
+            ClearItemSlots(gSaveBlock2Ptr->frontier.bagPocket_BattleItems, BAG_BATTLEITEMS_COUNT);
+            ClearItemSlots(gSaveBlock2Ptr->frontier.bagPocket_Treasures, BAG_TREASURES_COUNT);
 
             for (i = 0; i < TM_FLAGS; i++)
             {

@@ -202,6 +202,12 @@ struct Pokedex
     /*0x44*/ u8 seen[NUM_DEX_FLAG_BYTES];
 };
 
+struct ItemSlot
+{
+    u16 itemId;
+    u16 quantity;
+};
+
 struct PokemonJumpRecords
 {
     u16 jumpsInRow;
@@ -366,7 +372,9 @@ struct BattleFrontier
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
     /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[BATTLE_TOWER_RECORD_COUNT]; // From record mixing.
     /*0xBEB*/ struct BattleTowerInterview towerInterview;
-    /*0xBEC*/ u8 unused_BEC[0xBC];
+    /*0xBEC*/ struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
+    /*0xC18*/ struct ItemSlot bagPocket_Treasures[BAG_TREASURES_COUNT];
+    /*0xC64*/ u8 unused_C64[0x44];
     /*0xCA8*/ u8 challengeStatus;
     /*0xCA9*/ u8 lvlMode:2;
               u8 challengePaused:1;
@@ -578,12 +586,6 @@ struct WarpData
     s8 warpId;
     //u8 padding;
     s16 x, y;
-};
-
-struct ItemSlot
-{
-    u16 itemId;
-    u16 quantity;
 };
 
 struct Pokeblock
@@ -993,8 +995,7 @@ struct SaveBlock1
     /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    /*0x988*/ struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
-    /*0x9B4*/ u8 unused_9B4[8];
+    /*0x988*/ u8 seen1[NUM_DEX_FLAG_BYTES];
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 registeredItemLastSelected:4; //max 16 items
               u8 registeredItemListCount:4;
@@ -1049,7 +1050,8 @@ struct SaveBlock1
     /*0x31B3*/ struct ExternalEventData externalEventData;
     /*0x31C7*/ struct ExternalEventFlags externalEventFlags;
     /*0x31DC*/ struct Roamer roamer;
-    /*0x31F8*/ u8 unused_31F8[0x34];
+    /*0x31F8*/ struct ItemSlot bagPocket_Mail[BAG_MAIL_COUNT];
+    /*0x3228*/ struct ContestLady contestLady;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
     /*0x3598*/ struct RoamerTrio roamerTrio[TOTAL_ROAMING_POKEMON - 1];
     /*0x35B0*/ u8 unused_35B0[0x3C];
@@ -1057,16 +1059,14 @@ struct SaveBlock1
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
-    /*0x3B24*/ struct ItemSlot bagPocket_Mail[BAG_MAIL_COUNT];
-    /*0x3B54*/ struct ContestLady contestLady;
+    /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
     /*0x3B58*/ struct LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     /*0x3D5A*/ u8 registeredItems[REGISTERED_ITEMS_LIST_COUNT];
     /*0x3D64*/ struct TrainerHillSave trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
-    /*0x3D88*/ struct ItemSlot bagPocket_Treasures[BAG_TREASURES_COUNT];
-    // sizeof: 0x3DD4
+    // sizeof: 0x3D88
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

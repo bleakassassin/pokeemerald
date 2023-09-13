@@ -2883,11 +2883,11 @@ static void SortItemsInBag(u8 pocket, u8 type)
         itemAmount = BAG_MEDICINE_COUNT;
         break;
     case BATTLEITEMS_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_BattleItems;
+        itemMem = gSaveBlock2Ptr->frontier.bagPocket_BattleItems;
         itemAmount = BAG_BATTLEITEMS_COUNT;
         break;
     case TREASURES_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_Treasures;
+        itemMem = gSaveBlock2Ptr->frontier.bagPocket_Treasures;
         itemAmount = BAG_TREASURES_COUNT;
         break;
     case MAIL_POCKET:
