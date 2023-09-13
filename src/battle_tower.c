@@ -2965,6 +2965,23 @@ void ValidateEReaderTrainer(void)
     }
 }
 
+void ConvertEReaderTrainerFacilityClassToEmerald(void)
+{
+    s32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sRubyFacilityClassToEmerald); i++)
+    {
+        if (sRubyFacilityClassToEmerald[i][0] == gSaveBlock3Ptr->ereaderTrainer.facilityClass)
+            break;
+    }
+    if (i != ARRAY_COUNT(sRubyFacilityClassToEmerald))
+        gSaveBlock3Ptr->ereaderTrainer.facilityClass = sRubyFacilityClassToEmerald[i][1];
+    else
+        gSaveBlock3Ptr->ereaderTrainer.facilityClass = FACILITY_CLASS_YOUNGSTER;
+
+    SetEReaderTrainerChecksum(&gSaveBlock3Ptr->ereaderTrainer);
+}
+
 static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer)
 {
     s32 i;
