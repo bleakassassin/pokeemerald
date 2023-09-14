@@ -23,6 +23,7 @@
 static void UpdateVanillaSave(void);
 static void UpdateOldHackSave(void);
 static void UpdateGiftRibbons(void);
+static void CheckProgressFlags(void);
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 #define SAVEBLOCK_MOVE_RANGE    128
@@ -424,7 +425,6 @@ static void UpdateVanillaSave(void)
     else
     {
         FlagClear(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
-        FlagClear(FLAG_HIDE_ROUTE_103_SNORLAX);
         FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
 
         if (gSaveBlock2Ptr->playerGender == MALE)
@@ -432,6 +432,7 @@ static void UpdateVanillaSave(void)
         else
             FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
     }
+    CheckProgressFlags();
 }
 
 static void UpdateOldHackSave(void)
@@ -486,25 +487,30 @@ static void UpdateOldHackSave(void)
         FlagSet(FLAG_DEFEATED_ROAMING_ENTEI);
         FlagSet(FLAG_DEFEATED_ROAMING_SUICUNE);
     }
-    if (VarGet(VAR_MOSSDEEP_CITY_STATE) <= 2)
-        FlagSet(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
-    if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
-        FlagSet(FLAG_READ_STEVENS_LETTER);
-    if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
-        FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
     if (FlagGet(FLAG_RECEIVED_MYSTIC_TICKET) == TRUE)
         FlagSet(FLAG_ENABLE_SHIP_NAVEL_ROCK);
     if (FlagGet(FLAG_RECEIVED_AURORA_TICKET) == TRUE)
         FlagSet(FLAG_ENABLE_SHIP_BIRTH_ISLAND);
     if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
         FlagSet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND);
-    FlagSet(FLAG_IS_CHAMPION);
+    CheckProgressFlags();
 
     if (version <= VERSION_CATCH_EXP_EVOLVE_FIX)
         UpdateGiftRibbons();
 
     if (version == VERSION_LAUNCH)
         AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
+}
+
+static void CheckProgressFlags(void)
+{
+    FlagSet(FLAG_IS_CHAMPION);
+    if (VarGet(VAR_MOSSDEEP_CITY_STATE) <= 2)
+        FlagSet(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
+    if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
+        FlagSet(FLAG_READ_STEVENS_LETTER);
+    if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
+        FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
 }
 
 static void UpdateGiftRibbons(void)
