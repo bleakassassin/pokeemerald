@@ -106,6 +106,8 @@ u8 LoadGameSave(u8 saveType);
 u16 GetSaveBlocksPointersBaseOffset(void);
 u32 TryReadSpecialSaveSector(u8 sector, u8 *dst);
 u32 TryWriteSpecialSaveSector(u8 sector, u8 *src);
+void UpdateSaveVersion(void);
+void MoveItemsToCorrectPocket(void);
 void Task_LinkFullSave(u8 taskId);
 
 // save_failed_screen.c
