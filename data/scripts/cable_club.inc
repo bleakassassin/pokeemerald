@@ -1312,13 +1312,6 @@ EventScript_CloseMossdeepGameCornerBarrier::
 	return
 
 CableClub_OnResume:
-	specialvar VAR_0x8008, IsWirelessAdapterConnected
-	goto_if_eq VAR_0x8008, FALSE, CableClub_DisableUnionRoomNurseText
-	special InitUnionRoom
-	end
-
-CableClub_DisableUnionRoomNurseText:
-	setflag FLAG_NURSE_UNION_ROOM_REMINDER
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_InfoMan2::
