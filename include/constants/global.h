@@ -85,6 +85,7 @@
 
 #define TRAINER_ID_LENGTH 4
 #define MAX_MON_MOVES 4
+#define ALL_MOVES_MASK ((1 << MAX_MON_MOVES) - 1)
 
 #define ROAMING_LATI 3
 #define TOTAL_ROAMING_POKEMON 4
