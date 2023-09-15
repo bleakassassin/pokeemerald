@@ -2927,7 +2927,7 @@ void GetEreaderTrainerName(u8 *dst)
 {
     s32 i;
 
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         dst[i] = gSaveBlock3Ptr->ereaderTrainer.name[i];
 
     dst[i] = EOS;
