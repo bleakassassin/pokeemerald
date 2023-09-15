@@ -1178,6 +1178,9 @@ static void UpdateOldHackSave(void)
 
     if (sOldSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
         gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+    else
+        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;      
+    gSaveBlock2Ptr->optionsDifficulty = sOldSaveBlock2Ptr->optionsDifficulty;
     gSaveBlock2Ptr->optionsBattleSceneOff = sOldSaveBlock2Ptr->optionsBattleSceneOff;
     gSaveBlock2Ptr->regionMapZoom = sOldSaveBlock2Ptr->regionMapZoom;
     gSaveBlock2Ptr->optionsAttackStyle = sOldSaveBlock2Ptr->optionsAttackStyle;
