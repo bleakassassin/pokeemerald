@@ -77,10 +77,7 @@ static const u8 sRoamerLocations[][6] =
 
 void ClearRoamerData(void)
 {
-    for (sSlot = 0; sSlot < ROAMING_LATI; sSlot++)
-    {
-        memset(&gSaveBlock1Ptr->roamerTrio[sSlot], 0, sizeof(*&gSaveBlock1Ptr->roamerTrio[sSlot]));
-    }
+    memset(gSaveBlock1Ptr->roamerTrio, 0, sizeof(gSaveBlock1Ptr->roamerTrio));
     memset(ROAMER, 0, sizeof(*ROAMER));
     ROAMER->species = SPECIES_LATIAS;
 }

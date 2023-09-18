@@ -1229,7 +1229,6 @@ static void UpdateOldHackSave(void)
     if (FlagGet(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER) == TRUE)
     {
         ClearRoamerData();
-        ClearRoamerLocationData();
         FlagSet(FLAG_DEFEATED_ROAMING_RAIKOU);
         FlagSet(FLAG_DEFEATED_ROAMING_ENTEI);
         FlagSet(FLAG_DEFEATED_ROAMING_SUICUNE);
@@ -1241,6 +1240,14 @@ static void UpdateOldHackSave(void)
     if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
         FlagSet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND);
     CheckProgressFlags();    
+
+    gSaveBlock1Ptr->roamer.ivs = sOldSaveBlock1Ptr->roam[ROAMING_LATI].ivs;
+    gSaveBlock1Ptr->roamer.personality = sOldSaveBlock1Ptr->roam[ROAMING_LATI].personality;
+    gSaveBlock1Ptr->roamer.species = sOldSaveBlock1Ptr->roam[ROAMING_LATI].species;
+    gSaveBlock1Ptr->roamer.hp = sOldSaveBlock1Ptr->roam[ROAMING_LATI].hp;
+    gSaveBlock1Ptr->roamer.level = sOldSaveBlock1Ptr->roam[ROAMING_LATI].level;
+    gSaveBlock1Ptr->roamer.status = sOldSaveBlock1Ptr->roam[ROAMING_LATI].status;
+    gSaveBlock1Ptr->roamer.active = sOldSaveBlock1Ptr->roam[ROAMING_LATI].active;
 
     if (version <= VERSION_CATCH_EXP_EVOLVE_FIX)
         UpdateGiftRibbons();
