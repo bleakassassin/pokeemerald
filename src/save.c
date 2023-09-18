@@ -1076,6 +1076,7 @@ static void UpdateVanillaSave(void)
     FlagClear(FLAG_REMATCH_WALLACE);
     FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
 
+    gSaveBlock1Ptr->registeredItems[0] = MapRegisteredItem(gSaveBlock1Ptr->registeredItem);
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
     InitLilycoveLady();
