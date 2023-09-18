@@ -728,13 +728,16 @@ PetalburgCity_Gym_Movement_PlayerExitWithWallyEast:
 	delay_8
 	step_end
 
+PetalburgCity_Gym_EventScript_GotEReaderTicket::
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough::
 	msgbox PetalburgCity_Gym_Text_DadNoAmountOfTrainingIsEnough, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgCity_Gym_EventScript_SawStoryOnTV::
-	removeitem ITEM_EON_TICKET
+	checkitem ITEM_EON_TICKET
+	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_GotEReaderTicket
 	msgbox PetalburgCity_Gym_Text_DadSawStoryOnTV, MSGBOX_DEFAULT
 	giveitem ITEM_EON_TICKET
 	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
