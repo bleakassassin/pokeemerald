@@ -6,7 +6,7 @@ FieryPath_OnTransition:
 	call_if_unset FLAG_LANDMARK_FIERY_PATH, FieryPath_EventScript_MoveScottToFallarbor
 	setflag FLAG_LANDMARK_FIERY_PATH
 	call_if_set FLAG_ITEM_FIERY_PATH_FIRE_STONE, FieryPath_EventScript_SetBoulders_FireStone
-	call_if_set FLAG_ITEM_FIERY_PATH_TM06, FieryPath_EventScript_SetBoulders_TM06
+	call_if_set FLAG_ITEM_FIERY_PATH_TM_TOXIC, FieryPath_EventScript_SetBoulders_TM06
 	end
 
 FieryPath_EventScript_SetBoulders_FireStone:

@@ -24,7 +24,8 @@ enum {
     SCROLL_ARROW_LEFT,
     SCROLL_ARROW_RIGHT,
     SCROLL_ARROW_UP,
-    SCROLL_ARROW_DOWN
+    SCROLL_ARROW_DOWN,
+    SCROLL_ARROW_FLASH
 };
 
 struct ListMenu;
@@ -90,6 +91,7 @@ struct ScrollArrowsTemplate
     u16 tileTag;
     u16 palTag;
     u8 palNum;
+    u8 registerFlash;
 };
 
 struct CursorStruct

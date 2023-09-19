@@ -5,7 +5,8 @@ MeteorFalls_StevensCave_MapScripts::
 
 MeteorFalls_StevensCave_EventScript_Steven::
 	lock
-	goto_if_set FLAG_DEFEATED_METEOR_FALLS_STEVEN, MeteorFalls_StevensCave_EventScript_Defeated
+	goto_if_set FLAG_DAILY_WON_STEVEN_REMATCH, MeteorFalls_StevensCave_EventScript_Defeated
+	goto_if_set FLAG_DEFEATED_METEOR_FALLS_STEVEN, MeteorFalls_StevensCave_EventScript_RematchText
 	waitse
 	playse SE_PIN
 	applymovement LOCALID_STEVEN, Common_Movement_ExclamationMark
@@ -15,9 +16,11 @@ MeteorFalls_StevensCave_EventScript_Steven::
 	applymovement LOCALID_STEVEN, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst, MSGBOX_DEFAULT
+MeteorFalls_StevensCave_EventScript_StevenBattle::
 	trainerbattle_no_intro TRAINER_STEVEN, MeteorFalls_StevensCave_Text_StevenDefeat
 	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_METEOR_FALLS_STEVEN
+	setflag FLAG_DAILY_WON_STEVEN_REMATCH
 	release
 	end
 
@@ -27,6 +30,11 @@ MeteorFalls_StevensCave_EventScript_Defeated::
 	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
 	release
 	end
+
+MeteorFalls_StevensCave_EventScript_RematchText::
+	faceplayer
+	msgbox MeteorFalls_StevensCave_Text_TestSkillsAgainstYou, MSGBOX_DEFAULT
+	goto MeteorFalls_StevensCave_EventScript_StevenBattle
 
 MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst:
 	.string "Steven: Oh, wow, {PLAYER}{KUN}.\n"
@@ -40,6 +48,11 @@ MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst:
 	.string "surface of our game since our last match.\p"
 	.string "Okay, {PLAYER}{KUN}, if you're going to mount\n"
 	.string "a serious challenge, expect the worst!$"
+
+MeteorFalls_StevensCave_Text_TestSkillsAgainstYou:
+	.string "STEVEN: So you've returned, {PLAYER}{KUN}.\p"
+	.string "Let me test my skills against you\n"
+	.string "once again!$"
 
 MeteorFalls_StevensCave_Text_StevenDefeat:
 	.string "You…\n"
@@ -56,4 +69,3 @@ MeteorFalls_StevensCave_Text_MyPredictionCameTrue:
 	.string "… … … … … …\n"
 	.string "… … … … … …\p"
 	.string "Fufufu, even I couldn't tell you that.$"
-

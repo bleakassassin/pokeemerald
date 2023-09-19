@@ -18,7 +18,7 @@ MauvilleCity_BikeShop_EventScript_SkipGreeting::
 MauvilleCity_BikeShop_EventScript_YesFar::
 	setflag FLAG_RECEIVED_BIKE
 	msgbox MauvilleCity_BikeShop_Text_GiveYouABike, MSGBOX_DEFAULT
-	giveitem ITEM_BICYCLE
+	giveitem ITEM_MACH_BIKE
 	msgbox MauvilleCity_BikeShop_Text_ExplainBike, MSGBOX_DEFAULT
 	special SwapRegisteredBike
 	release

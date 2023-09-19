@@ -31,20 +31,20 @@ LittlerootTown_MaysHouse_2F_EventScript_RivalsPokeBall::
 	msgbox RivalsHouse_2F_Text_ItsRivalsPokeBall, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RivalsHouse_2F_EventScript_LeaveRivalStarter
 RivalsHouse_2F_EventScript_TakeRivalStarter::
-	setvar VAR_TEMP_1, SPECIES_TREECKO
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TREECKO
 	call_if_eq VAR_STARTER_MON, 0, RivalsHouse_2F_EventScript_GiveTorchic
 	call_if_eq VAR_STARTER_MON, 1, RivalsHouse_2F_EventScript_GiveMudkip
-	givemon VAR_TEMP_1, 5
+	givemon VAR_TEMP_TRANSFERRED_SPECIES, 5
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, RivalsHouse_2F_EventScript_SendRivalStarterParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, RivalsHouse_2F_EventScript_SendRivalStarterPC
 	goto Common_EventScript_NoMoreRoomForPokemon
 
 RivalsHouse_2F_EventScript_GiveTorchic::
-	setvar VAR_TEMP_1, SPECIES_TORCHIC
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TORCHIC
 	return
 
 RivalsHouse_2F_EventScript_GiveMudkip::
-	setvar VAR_TEMP_1, SPECIES_MUDKIP
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_MUDKIP
 	return
 
 RivalsHouse_2F_EventScript_SendRivalStarterParty::
@@ -67,7 +67,7 @@ RivalsHouse_2F_EventScript_AddedRivalStarter::
 	end
 
 RivalsHouse_2F_EventScript_ReceivedRivalStarter::
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_TRANSFERRED_SPECIES
 	removeobject VAR_LAST_TALKED
 	playfanfare MUS_EVOLVED
 	message gText_ReceivedPokemon

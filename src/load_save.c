@@ -1,10 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "berry_powder.h"
-#include "event_data.h"
 #include "item.h"
-#include "item_menu.h"
-#include "lilycove_lady.h"
 #include "load_save.h"
 #include "main.h"
 #include "overworld.h"
@@ -16,13 +13,10 @@
 #include "gba/flash_internal.h"
 #include "decoration_inventory.h"
 #include "agb_flash.h"
-#include "constants/heal_locations.h"
-#include "constants/items.h"
 
 static void ApplyNewEncryptionKeyToAllEncryptedData(u32 encryptionKey);
 
 #define SAVEBLOCK_MOVE_RANGE    128
-#define TM_FLAGS 41
 
 struct LoadedSaveData
 {
@@ -42,6 +36,7 @@ struct LoadedSaveData
 EWRAM_DATA struct SaveBlock2ASLR gSaveblock2 = {0};
 EWRAM_DATA struct SaveBlock1ASLR gSaveblock1 = {0};
 EWRAM_DATA struct PokemonStorageASLR gPokemonStorage = {0};
+EWRAM_DATA struct SaveBlock3 gSaveBlock3 = {0};
 
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 EWRAM_DATA u32 gLastEncryptionKey = 0;
@@ -51,51 +46,7 @@ bool32 gFlashMemoryPresent;
 struct SaveBlock1 *gSaveBlock1Ptr;
 struct SaveBlock2 *gSaveBlock2Ptr;
 struct PokemonStorage *gPokemonStoragePtr;
-
-static const u16 sTMFlagChecks[][2] =
-{
-    {FLAG_ITEM_ROUTE_115_TM01,                          ITEM_TM01},
-    {FLAG_ITEM_METEOR_FALLS_B1F_2R_TM02,                ITEM_TM02},
-    {FLAG_RECEIVED_TM03,                                ITEM_TM03},
-    {FLAG_RECEIVED_TM04,                                ITEM_TM04},
-    {FLAG_RECEIVED_TM05,                                ITEM_TM05},
-    {FLAG_ITEM_FIERY_PATH_TM06,                         ITEM_TM06},
-    {FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_TM07,                ITEM_TM07},
-    {FLAG_RECEIVED_TM08,                                ITEM_TM08},
-    {FLAG_RECEIVED_TM09,                                ITEM_TM09},
-    {FLAG_RECEIVED_TM10,                                ITEM_TM10},
-    {FLAG_ITEM_SCORCHED_SLAB_TM11,                      ITEM_TM11},
-    {FLAG_ITEM_ABANDONED_SHIP_ROOMS_B1F_TM13,           ITEM_TM13},
-    {FLAG_ITEM_ABANDONED_SHIP_HIDDEN_FLOOR_ROOM_1_TM18, ITEM_TM18},
-    {FLAG_RECEIVED_TM19,                                ITEM_TM19},
-    {FLAG_ITEM_SAFARI_ZONE_NORTH_WEST_TM22,             ITEM_TM22},
-    {FLAG_ITEM_METEOR_FALLS_1F_1R_TM23,                 ITEM_TM23},
-    {FLAG_GOT_TM24_FROM_WATTSON,                        ITEM_TM24},
-    {FLAG_ITEM_SEAFLOOR_CAVERN_ROOM_9_TM26,             ITEM_TM26},
-    {FLAG_RECEIVED_TM28,                                ITEM_TM28},
-    {FLAG_ITEM_VICTORY_ROAD_B1F_TM29,                   ITEM_TM29},
-    {FLAG_ITEM_MT_PYRE_6F_TM30,                         ITEM_TM30},
-    {FLAG_RECEIVED_TM31,                                ITEM_TM31},
-    {FLAG_HIDDEN_ITEM_ROUTE_113_TM32,                   ITEM_TM32},
-    {FLAG_RECEIVED_TM34,                                ITEM_TM34},
-    {FLAG_RECEIVED_TM27,                                ITEM_TM35}, // Cozmo gives the player TM35 (Flamethrower) instead of TM27 (Return) in the hack.
-    {FLAG_RECEIVED_TM36,                                ITEM_TM36},
-    {FLAG_ITEM_ROUTE_111_TM37,                          ITEM_TM37},
-    {FLAG_RECEIVED_TM39,                                ITEM_TM39},
-    {FLAG_RECEIVED_TM40,                                ITEM_TM40},
-    {FLAG_RECEIVED_TM41,                                ITEM_TM41},
-    {FLAG_RECEIVED_TM42,                                ITEM_TM42},
-    {FLAG_RECEIVED_TM44,                                ITEM_TM42},
-    {FLAG_RECEIVED_TM45,                                ITEM_TM42},
-    {FLAG_RECEIVED_SECRET_POWER,                        ITEM_TM43},
-    {FLAG_RECEIVED_TM44,                                ITEM_TM44},
-    {FLAG_RECEIVED_TM45,                                ITEM_TM45},
-    {FLAG_RECEIVED_TM46,                                ITEM_TM46},
-    {FLAG_DELIVERED_STEVEN_LETTER,                      ITEM_TM47},
-    {FLAG_ITEM_MT_PYRE_EXTERIOR_TM48,                   ITEM_TM48},
-    {FLAG_RECEIVED_TM49,                                ITEM_TM49},
-    {FLAG_RECEIVED_TM50,                                ITEM_TM50},
-};
+struct SaveBlock3 *gSaveBlock3Ptr;
 
 // code
 void CheckForFlashMemory(void)
@@ -131,6 +82,7 @@ void SetSaveBlocksPointers(u16 offset)
     gSaveBlock2Ptr = (void *)(&gSaveblock2) + offset;
     *sav1_LocalVar = (void *)(&gSaveblock1) + offset;
     gPokemonStoragePtr = (void *)(&gPokemonStorage) + offset;
+    gSaveBlock3Ptr = &gSaveBlock3;
 
     SetBagItemsPointers();
     SetDecorationInventoriesPointers();
@@ -258,7 +210,6 @@ void CopyPartyAndObjectsFromSave(void)
 {
     LoadPlayerParty();
     LoadObjectEvents();
-    FixImportedSave();
 }
 
 void LoadPlayerBag(void)
@@ -291,11 +242,11 @@ void LoadPlayerBag(void)
 
     // load player battle items.
     for (i = 0; i < BAG_BATTLEITEMS_COUNT; i++)
-        gLoadedSaveData.battleItems[i] = gSaveBlock1Ptr->bagPocket_BattleItems[i];
+        gLoadedSaveData.battleItems[i] = gSaveBlock2Ptr->frontier.bagPocket_BattleItems[i];
 
     // load player treasures.
     for (i = 0; i < BAG_TREASURES_COUNT; i++)
-        gLoadedSaveData.treasures[i] = gSaveBlock1Ptr->bagPocket_Treasures[i];
+        gLoadedSaveData.treasures[i] = gSaveBlock2Ptr->frontier.bagPocket_Treasures[i];
 
     // load player mail in bag.
     for (i = 0; i < BAG_MAIL_COUNT; i++)
@@ -339,11 +290,11 @@ void SavePlayerBag(void)
 
     // save player battle items.
     for (i = 0; i < BAG_BATTLEITEMS_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_BattleItems[i] = gLoadedSaveData.battleItems[i];
+        gSaveBlock2Ptr->frontier.bagPocket_BattleItems[i] = gLoadedSaveData.battleItems[i];
 
     // save player treasures.
     for (i = 0; i < BAG_TREASURES_COUNT; i++)
-        gSaveBlock1Ptr->bagPocket_Treasures[i] = gLoadedSaveData.treasures[i];
+        gSaveBlock2Ptr->frontier.bagPocket_Treasures[i] = gLoadedSaveData.treasures[i];
 
     // save player mail in bag.
     for (i = 0; i < BAG_MAIL_COUNT; i++)
@@ -357,134 +308,6 @@ void SavePlayerBag(void)
     gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;
     ApplyNewEncryptionKeyToBagItems(encryptionKeyBackup);
     gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
-}
-
-void FixImportedSave(void)
-{
-    u8 i;
-    struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
-    struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
-
-    if (VarGet(VAR_SAVE_COMPATIBILITY) != VERSION_LATEST)
-    {
-        if (VarGet(VAR_SAVE_COMPATIBILITY) <= VERSION_CATCH_EXP_EVOLVE_FIX)
-        {
-            gSaveBlock1Ptr->giftRibbons[COUNTRY_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
-            gSaveBlock1Ptr->giftRibbons[NATIONAL_RIBBON - FIRST_GIFT_RIBBON] = DIFFICULTY_CLEARING_RIBBON;
-            gSaveBlock1Ptr->giftRibbons[EARTH_RIBBON - FIRST_GIFT_RIBBON] = HUNDRED_STRAIGHT_WINS_RIBBON;
-            gSaveBlock1Ptr->giftRibbons[WORLD_RIBBON - FIRST_GIFT_RIBBON] = GENERIC_TOURNAMENT_RIBBON;
-        }
-
-        if (VarGet(VAR_SAVE_COMPATIBILITY) == VERSION_LAUNCH)
-            AddBagItem(ITEM_HEART_SCALE, 1); // Courtesy gift for players affected by catch exp. evolution glitch
-
-        if (VarGet(VAR_SAVE_COMPATIBILITY) == VANILLA_SAVE)
-        {
-            FlagClear(FLAG_REMATCH_SIDNEY);
-            FlagClear(FLAG_REMATCH_PHOEBE);
-            FlagClear(FLAG_REMATCH_GLACIA);
-            FlagClear(FLAG_REMATCH_DRAKE);
-            FlagClear(FLAG_REMATCH_WALLACE);
-            FlagClear(FLAG_SYS_LEGENDARY_BEASTS_FIRST_TRIGGER);
-            FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
-
-            gSaveBlock1Ptr->registeredItem = ITEM_NONE;
-            gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
-            InitLilycoveLady();
-
-            ClearItemSlots(gSaveBlock1Ptr->bagPocket_BattleItems, BAG_BATTLEITEMS_COUNT);
-            ClearItemSlots(gSaveBlock1Ptr->bagPocket_Mail, BAG_MAIL_COUNT);
-
-            for (i = 0; i < TM_FLAGS; i++)
-            {
-                if (FlagGet(sTMFlagChecks[i][0]))
-                    AddBagItem(sTMFlagChecks[i][1], 1);
-            }
-            if (VarGet(VAR_TRICK_HOUSE_LEVEL) > 5)
-                AddBagItem(ITEM_TM12, 1);
-
-            if (CheckBagHasItem(ITEM_MACH_BIKE, 1) == TRUE || CheckBagHasItem(ITEM_ACRO_BIKE, 1) == TRUE)
-            {
-                RemoveBagItem(ITEM_MACH_BIKE, 1);
-                RemoveBagItem(ITEM_ACRO_BIKE, 1);
-                AddBagItem(ITEM_BICYCLE, 1);
-            }
-            if (gSaveBlock1Ptr->mapLayoutId == 420)
-            {
-                SetContinueGameWarpStatus();
-                SetContinueGameWarpToHealLocation(HEAL_LOCATION_SLATEPORT_CITY);
-            }
-            if (gSaveBlock2Ptr->optionsButtonMode >= OPTIONS_BUTTON_MODE_L_EQUALS_A)
-                gSaveBlock2Ptr->optionsButtonMode--;
-            if (FlagGet(FLAG_RECEIVED_OLD_SEA_MAP) == TRUE)
-                VarSet(VAR_OLD_SEA_MAP_STATE, 5);
-            if (VarGet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE) >= 3)
-            {
-                VarSet(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2);
-                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CYNDAQUIL);
-                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_TOTODILE);
-                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_POKEBALL_CHIKORITA);
-            }
-            if (FlagGet(FLAG_RECEIVED_BELDUM) == TRUE)
-                FlagClear(FLAG_READ_STEVENS_LETTER);
-            if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 3)
-                FlagClear(FLAG_HIDE_MOSSDEEP_WISH_ROCK_GIRL);
-            if (FlagGet(FLAG_SYS_GAME_CLEAR) == FALSE)
-            {
-                FlagClear(FLAG_READ_STEVENS_LETTER);
-                FlagSet(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
-                FlagSet(FLAG_HIDE_ROUTE_103_SNORLAX);
-                FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
-                FlagSet(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
-
-                if (FlagGet(FLAG_BADGE08_GET) == TRUE)
-                {
-                    FlagSet(FLAG_ENABLE_WALLACE_MATCH_CALL);
-                    FlagClear(FLAG_ENABLE_JUAN_MATCH_CALL);
-                    FlagClear(TRAINER_FLAGS_START + TRAINER_JUAN_1);
-                }
-            }
-            else
-            {
-                FlagClear(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
-                FlagClear(FLAG_HIDE_ROUTE_103_SNORLAX);
-                FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
-
-                if (gSaveBlock2Ptr->playerGender == MALE)
-                    FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL);
-                else
-                    FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL);
-            }
-        }
-        VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
-    }
-        
-    for (i = 0; i < BAG_MEDICINE_COUNT; i++) // BAG_MEDICINE_COUNT is the same as BAG_KEYITEMS_COUNT (30)
-    {
-        if (ItemId_GetPocket(medicine->itemSlots[i].itemId) != POCKET_MEDICINE) // Check for items moved to new pockets
-        {
-            AddBagItem(medicine->itemSlots[i].itemId, medicine->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
-            medicine->itemSlots[i].itemId =  ITEM_NONE;
-            medicine->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
-        }
-
-        if (ItemId_GetPocket(keyitems->itemSlots[i].itemId) != POCKET_KEY_ITEMS) // Check for fossils
-        {
-            AddBagItem(keyitems->itemSlots[i].itemId, keyitems->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
-            keyitems->itemSlots[i].itemId =  ITEM_NONE;
-            keyitems->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
-        }
-    }
-    if (gSaveBlock1Ptr->pcItems[0].itemId != ITEM_NONE && FlagGet(FLAG_SYS_NATIVE_SAVE) == TRUE) // Move PC items to bag if not imported save
-    {
-        for (i = 0; i < PC_ITEMS_COUNT; i++)
-        {
-            AddBagItem(gSaveBlock1Ptr->pcItems[i].itemId, gSaveBlock1Ptr->pcItems[i].quantity);
-            gSaveBlock1Ptr->pcItems[i].itemId = ITEM_NONE;
-            gSaveBlock1Ptr->pcItems[i].quantity = 0;
-        }
-    }
-
 }
 
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)

@@ -58,17 +58,17 @@ TrainerHill_Roof_EventScript_AlreadyReceivedPrize::
 
 TrainerHill_Roof_EventScript_GivePokemonPrize::
 	msgbox TrainerHill_Roof_Text_HaveTheMostMarvelousGift, MSGBOX_DEFAULT
-	call_if_lt VAR_TEMP_1, SPECIES_CELEBI, TrainerHill_Roof_EventScript_GiveKantoStarter
-	call_if_eq VAR_TEMP_1, SPECIES_CELEBI, TrainerHill_Roof_EventScript_GiveCelebi
+	call_if_lt VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CELEBI, TrainerHill_Roof_EventScript_GiveKantoStarter
+	call_if_eq VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CELEBI, TrainerHill_Roof_EventScript_GiveCelebi
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, TrainerHill_Roof_EventScript_SendPrizeMonParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, TrainerHill_Roof_EventScript_SendPrizeMonPC
-	copyvar VAR_TRAINER_HILL_PENDING_MON_PRIZE, VAR_TEMP_1
+	copyvar VAR_TRAINER_HILL_PENDING_MON_PRIZE, VAR_TEMP_TRANSFERRED_SPECIES
 TrainerHill_Roof_ChatWithTheReceptionist::
 	msgbox TrainerHill_Roof_Text_PokemonFullChatWithReceptionist, MSGBOX_DEFAULT
 	goto TrainerHill_Roof_EventScript_CheckFinalTime
 
 TrainerHill_Roof_EventScript_GiveKantoStarter::
-	givemon VAR_TEMP_1, 5
+	givemon VAR_TEMP_TRANSFERRED_SPECIES, 5
 	return
 
 TrainerHill_Roof_EventScript_GiveCelebi::
@@ -93,7 +93,7 @@ TrainerHill_Roof_EventScript_3rdStarterTransferredToPC::
 	goto TrainerHill_Roof_EventScript_CheckFinalTime
 
 TrainerHill_Roof_EventScript_ReceivedPrizeMon::
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
+	bufferspeciesname STR_VAR_1, VAR_TEMP_TRANSFERRED_SPECIES
 	setflag FLAG_TRAINER_HILL_RECEIVED_MON_PRIZE
 	playfanfare MUS_EVOLVED
 	message TrainerHill_Roof_Text_ReceivedPrizeMon

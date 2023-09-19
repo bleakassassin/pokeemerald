@@ -15,7 +15,7 @@ CableClub_EventScript_ShowMysteryGiftMan::
 	
 CableClub_EventScript_TicketMysteryGiftMan::
 	goto_if_set FLAG_EXCHANGED_SCANNER, CableClub_EventScript_ShowMysteryGiftMan
-	goto_if_eq VAR_OLD_SEA_MAP_STATE, 4, CableClub_EventScript_ShowMysteryGiftMan
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 3, CableClub_EventScript_ShowMysteryGiftMan
 	goto_if_set FLAG_ENABLE_JUAN_MATCH_CALL, CableClub_EventScript_CheckImportedSave
 	goto CableClub_EventScript_HideOrShowMysteryGiftManMain
 
@@ -30,7 +30,7 @@ CableClub_EventScript_HideMysteryGiftMan::
 CableClub_EventScript_MysteryGiftMan::
 	goto_if_eq VAR_TEMP_1, 1, CableClub_EventScript_MysteryGiftThankYou
 	goto_if_eq VAR_TEMP_0, 1, CableClub_EventScript_TryUsingItAtLilycovePort
-	goto_if_eq VAR_OLD_SEA_MAP_STATE, 4, MysteryGiftScript_OldSeaMap
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 3, MysteryGiftScript_OldSeaMap
 	goto_if_set FLAG_EXCHANGED_SCANNER, MysteryGiftScript_MysticTicket
 	goto_if_unset FLAG_RECEIVED_AURORA_TICKET, MysteryGiftScript_AuroraTicket
 	specialvar VAR_RESULT, ShouldDistributeEonTicket
@@ -755,37 +755,36 @@ EventScript_TradeCenter_Chair3::
 	waitstate
 	end
 
-@ VAR_TEMP_1 for below scripts set by ReceiveGiftItem
 EventScript_RecordCenter_Spot0::
 	setvar VAR_0x8005, 0
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot1::
 	setvar VAR_0x8005, 1
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot2::
 	setvar VAR_0x8005, 2
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 EventScript_RecordCenter_Spot3::
 	setvar VAR_0x8005, 3
 	special RecordMixingPlayerSpotTriggered
 	waitstate
-	goto_if_ne VAR_TEMP_1, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
+	goto_if_ne VAR_TEMP_RECORD_MIX_GIFT_ITEM, ITEM_NONE, RecordCorner_EventScript_ReceivedGiftItem
 	end
 
 RecordCorner_EventScript_ReceivedGiftItem::
-	bufferitemname STR_VAR_2, VAR_TEMP_1
+	bufferitemname STR_VAR_2, VAR_TEMP_RECORD_MIX_GIFT_ITEM
 	message RecordCorner_Text_PlayerSentOverOneX
 	waitmessage
 	waitbuttonpress
@@ -826,7 +825,7 @@ TradeCenter_EventScript_Attendant::
 	end
 
 RecordCorner_EventScript_Attendant::
-	goto_if_ne VAR_TEMP_0, 0, RecordCorner_EventScript_AlreadyMixed
+	goto_if_ne VAR_TEMP_MIXED_RECORDS, 0, RecordCorner_EventScript_AlreadyMixed
 	special Script_FacePlayer
 	message RecordCorner_Text_TakeSeatAndWait
 	waitmessage

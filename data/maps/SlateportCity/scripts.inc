@@ -566,8 +566,8 @@ SlateportCity_EventScript_PowerTMClerk::
 
 	.align 2
 SlateportCity_Pokemart_Incenses:
-	.2byte ITEM_SEA_INCENSE  @ Sea Incense
-	.2byte ITEM_LAX_INCENSE  @ Lax Incense
+	.2byte ITEM_SEA_INCENSE
+	.2byte ITEM_LAX_INCENSE
 	.2byte ITEM_NONE
 	release
 	end

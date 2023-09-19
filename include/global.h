@@ -20,15 +20,14 @@
 #define BLOCK_CROSS_JUMP asm("");
 
 // to help in decompiling
-#define asm_comment(x) asm volatile("@ -- " x " -- ")
 #define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 #define NAKED __attribute__((naked))
 
 /// IDE support
 #if defined(__APPLE__) || defined(__CYGWIN__) || defined(__INTELLISENSE__)
 // We define these when using certain IDEs to fool preproc
-#define _(x)        (x)
-#define __(x)       (x)
+#define _(x)        {x}
+#define __(x)       {x}
 #define INCBIN(...) {0}
 #define INCBIN_U8   INCBIN
 #define INCBIN_U16  INCBIN
@@ -86,6 +85,12 @@
 #define SAFE_DIV(a, b) ((a) / (b))
 #endif
 
+// The below macro does a%n, but (to match) will switch to a&(n-1) if n is a power of 2.
+// There are cases where GF does a&(n-1) where we would really like to have a%n, because
+// if n is changed to a value that isn't a power of 2 then a&(n-1) is unlikely to work as
+// intended, and a%n for powers of 2 isn't always optimized to use &.
+#define MOD(a, n)(((n) & ((n)-1)) ? ((a) % (n)) : ((a) & ((n)-1)))
+
 // Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
 
@@ -133,13 +138,18 @@
 // values that don't appear in the Pokedex. NATIONAL_DEX_COUNT does not include these values.
 #define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(NUM_SPECIES)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
-#define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
+#define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
+
+// This returns the number of arguments passed to it (up to 8).
+#define NARG_8(...) NARG_8_(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+#define NARG_8_(_, a, b, c, d, e, f, g, h, N, ...) N
+
+#define CAT(a, b) CAT_(a, b)
+#define CAT_(a, b) a ## b
 
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
-
-#define REGISTERED_ITEMS_MAX 10
 
 struct Coords8
 {
@@ -196,6 +206,12 @@ struct Pokedex
     /*0x0C*/ u32 unknown3;
     /*0x10*/ u8 owned[NUM_DEX_FLAG_BYTES];
     /*0x44*/ u8 seen[NUM_DEX_FLAG_BYTES];
+};
+
+struct ItemSlot
+{
+    u16 itemId;
+    u16 quantity;
 };
 
 struct PokemonJumpRecords
@@ -362,7 +378,9 @@ struct BattleFrontier
     /*0x64C*/ struct EmeraldBattleTowerRecord towerPlayer;
     /*0x738*/ struct EmeraldBattleTowerRecord towerRecords[BATTLE_TOWER_RECORD_COUNT]; // From record mixing.
     /*0xBEB*/ struct BattleTowerInterview towerInterview;
-    /*0xBEC*/ struct BattleTowerEReaderTrainer ereaderTrainer;
+    /*0xBEC*/ struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
+    /*0xC18*/ struct ItemSlot bagPocket_Treasures[BAG_TREASURES_COUNT];
+    /*0xC64*/ u8 unused_C64[0x44];
     /*0xCA8*/ u8 challengeStatus;
     /*0xCA9*/ u8 lvlMode:2;
               u8 challengePaused:1;
@@ -509,7 +527,8 @@ struct SaveBlock2
              u16 optionsDisableMatchCall:1; // OPTIONS_MATCH_CALL_[ON/OFF]
              u16 optionsUnitSystem:1; // OPTIONS_UNIT_SYSTEM_[IMPERIAL/METRIC]
              u16 optionsCurrentFont:3; // Specifies one of multiple fonts to use (Emerald, FR/LG, R/S Europe, R/S U.S., HG/SS)
-             //u16 padding:12;
+             u16 optionsMessageBox:1; // OPTIONS_MESSAGE_BOX_[GREEN/BLUE]
+             //u16 padding:11;
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 outfitId:7;
     /*0x90*/ u8 autoRun:1;
@@ -575,12 +594,6 @@ struct WarpData
     s16 x, y;
 };
 
-struct ItemSlot
-{
-    u16 itemId;
-    u16 quantity;
-};
-
 struct Pokeblock
 {
     u8 color;
@@ -609,16 +622,13 @@ struct Roamer
     /*0x14*/ u8 filler[0x8];
 };
 
-struct NewRoamer
+struct RoamerTrio
 {
-    /*0x00*/ u32 ivs;
-    /*0x04*/ u32 personality;
-    /*0x08*/ u16 species;
-    /*0x0A*/ u16 hp;
-    /*0x0C*/ u8 level;
-    /*0x0D*/ u8 status;
-    /*0x0E*/ bool8 active;
-    /*0x0F*/ u8 filler;
+    /*0x00*/ u32 personality;
+    /*0x04*/ u8 ivs; // Stored as one byte to recreate roaming IV bug
+    /*0x05*/ u8 hp;
+    /*0x06*/ u8 status;
+    /*0x07*/ bool8 active;
 };
 
 struct RamScriptData
@@ -693,7 +703,7 @@ struct MauvilleManGiddy
 struct MauvilleManHipster
 {
     u8 id;
-    bool8 alreadySpoken;
+    bool8 taughtWord;
     u8 language;
 };
 
@@ -841,7 +851,7 @@ struct WaldaPhrase
 struct TrainerNameRecord
 {
     u32 trainerId;
-    u8 trainerName[PLAYER_NAME_LENGTH + 1];
+    u8 ALIGNED(2) trainerName[PLAYER_NAME_LENGTH + 1];
 };
 
 struct TrainerHillSave
@@ -991,8 +1001,7 @@ struct SaveBlock1
     /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    /*0x988*/ struct ItemSlot bagPocket_BattleItems[BAG_BATTLEITEMS_COUNT];
-    /*0x9B4*/ u8 unused_9B4[8];
+    /*0x988*/ u8 seen1[NUM_DEX_FLAG_BYTES];
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 registeredItemLastSelected:4; //max 16 items
               u8 registeredItemListCount:4;
@@ -1036,7 +1045,7 @@ struct SaveBlock1
     /*0x2BC8*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2BD4*/ u16 easyChatBattleLost[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2BE0*/ struct Mail mail[MAIL_COUNT];
-    /*0x2E20*/ u8 additionalPhrases[NUM_ADDITIONAL_PHRASE_BYTES]; // bitfield for 33 additional phrases in easy chat system
+    /*0x2E20*/ u8 unlockedTrendySayings[NUM_TRENDY_SAYING_BYTES]; // Bitfield for unlockable Easy Chat words in EC_GROUP_TRENDY_SAYING
     /*0x2E25*/ //u8 padding5[3];
     /*0x2E28*/ OldMan oldMan;
     /*0x2e64*/ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
@@ -1047,27 +1056,35 @@ struct SaveBlock1
     /*0x31B3*/ struct ExternalEventData externalEventData;
     /*0x31C7*/ struct ExternalEventFlags externalEventFlags;
     /*0x31DC*/ struct Roamer roamer;
-    /*0x31F8*/ struct EnigmaBerry enigmaBerry;
+    /*0x31F8*/ struct ItemSlot bagPocket_Mail[BAG_MAIL_COUNT];
+    /*0x3228*/ struct ContestLady contestLady;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3598*/ struct NewRoamer roam[TOTAL_ROAMING_POKEMON];;
-    /*0x35D8*/ u16 registeredItems[REGISTERED_ITEMS_MAX];
+    /*0x3598*/ struct RoamerTrio roamerTrio[TOTAL_ROAMING_POKEMON - 1];
+    /*0x35B0*/ u8 unused_35B0[0x3C];
     /*0x35EC*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
-    /*0x3B24*/ struct ItemSlot bagPocket_Mail[BAG_MAIL_COUNT];
-    /*0x3B54*/ struct ContestLady contestLady;
+    /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
     /*0x3B58*/ struct LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
-    /*0x3D5A*/ u8 unused_3D5A[10];
+    /*0x3D5A*/ u8 registeredItems[REGISTERED_ITEMS_LIST_COUNT];
     /*0x3D64*/ struct TrainerHillSave trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
-    /*0x3D88*/ struct ItemSlot bagPocket_Treasures[BAG_TREASURES_COUNT];
-    // sizeof: 0x3DD4
+    // sizeof: 0x3D88
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
+
+struct SaveBlock3
+{
+    /*0x0*/ struct BattleTowerEReaderTrainer ereaderTrainer;
+    /*0xBC*/ struct EnigmaBerry enigmaBerry;
+    //*0xF0*/ struct TrainerHillChallenge challenge; // sizeof=0xF0 without it, excluded until English-friendly Trainer Hill cards appear
+}; // sizeof=0xFB8 with Trainer Hill struct
+
+extern struct SaveBlock3* gSaveBlock3Ptr;
 
 struct MapPosition
 {

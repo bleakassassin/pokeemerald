@@ -28,7 +28,7 @@ PacifidlogTown_House2_EventScript_GiveReturn::
 	compare VAR_RESULT, TRUE
 	goto_if_eq PacifidlogTown_House2_EventScript_HaveReturn
 	msgbox PacifidlogTown_House2_Text_AdoringPokemonTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM27
+	giveitem ITEM_TM_RETURN
 	msgbox PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT
 	release
 	end
@@ -48,7 +48,7 @@ PacifidlogTown_House2_EventScript_GiveFrustration::
 	compare VAR_RESULT, TRUE
 	goto_if_eq PacifidlogTown_House2_EventScript_HaveFrustration
 	msgbox PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_TM21
+	giveitem ITEM_TM_FRUSTRATION
 	msgbox PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT
 	release
 	end

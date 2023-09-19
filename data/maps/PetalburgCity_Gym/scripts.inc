@@ -330,7 +330,7 @@ PetalburgCity_Gym_EventScript_NormanFaceDoorEast::
 PetalburgCity_Gym_EventScript_NormanPostBattle::
 	call PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry
 	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_GiveEnigmaBerry
-	goto_if_unset FLAG_RECEIVED_TM42, PetalburgCity_Gym_EventScript_GiveFacade2
+	goto_if_unset FLAG_RECEIVED_TM_FACADE, PetalburgCity_Gym_EventScript_GiveFacade2
 	goto_if_set FLAG_ENABLE_SHIP_SOUTHERN_ISLAND, PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough
 	goto_if_set FLAG_SYS_GAME_CLEAR, PetalburgCity_Gym_EventScript_SawStoryOnTV
 	msgbox PetalburgCity_Gym_Text_DadGoingToKeepTraining, MSGBOX_DEFAULT
@@ -404,9 +404,9 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	end
 
 PetalburgCity_Gym_EventScript_GiveFacade::
-	giveitem ITEM_TM42
+	giveitem ITEM_TM_FACADE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	setflag FLAG_RECEIVED_TM42
+	setflag FLAG_RECEIVED_TM_FACADE
 	msgbox PetalburgCity_Gym_Text_ExplainFacade, MSGBOX_DEFAULT
 	return
 
@@ -728,13 +728,16 @@ PetalburgCity_Gym_Movement_PlayerExitWithWallyEast:
 	delay_8
 	step_end
 
+PetalburgCity_Gym_EventScript_GotEReaderTicket::
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
 PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough::
 	msgbox PetalburgCity_Gym_Text_DadNoAmountOfTrainingIsEnough, MSGBOX_DEFAULT
 	release
 	end
 
 PetalburgCity_Gym_EventScript_SawStoryOnTV::
-	removeitem ITEM_EON_TICKET
+	checkitem ITEM_EON_TICKET
+	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_GotEReaderTicket
 	msgbox PetalburgCity_Gym_Text_DadSawStoryOnTV, MSGBOX_DEFAULT
 	giveitem ITEM_EON_TICKET
 	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND

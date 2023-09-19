@@ -282,7 +282,7 @@ static const struct ListMenuTemplate sItemListMenu =
     .itemPrintFunc = BagMenu_ItemPrintCallback,
     .totalItems = 0,
     .maxShowed = 0,
-    .windowId = 0,
+    .windowId = WIN_ITEM_LIST,
     .header_X = 0,
     .item_X = 8,
     .cursor_X = 0,
@@ -2115,8 +2115,8 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
 
     HideMapNamePopUpWindow();
     ChangeBgY_ScreenOff(0, 0, BG_COORD_SET);
-    if (button >= 2 && button <= REGISTERED_ITEMS_MAX + 2)
-        registeredItem = gSaveBlock1Ptr->registeredItems[button - 2];
+    if (button >= 2 && button <= REGISTERED_ITEMS_LIST_COUNT + 2)
+        registeredItem = gRegisteredItems[gSaveBlock1Ptr->registeredItems[button - 2]];
     else
     {
         switch (button)
@@ -2126,7 +2126,7 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
             break;
         case 1:
             //return TRUE;
-            registeredItem = gSaveBlock1Ptr->registeredItems[0];
+            registeredItem = gRegisteredItems[gSaveBlock1Ptr->registeredItems[0]];
             break;
         default:
             return FALSE;
@@ -2532,16 +2532,16 @@ static void PrintPocketNames(const u8 *pocketName1, const u8 *pocketName2)
 
 static void CopyPocketNameToWindow(u32 a)
 {
-    u8 (* tileDataBuffer)[36][32];
+    u8 (*tileDataBuffer)[36][32];
     u8 *windowTileData;
     int b;
     if (a > 9)
         a = 9;
     tileDataBuffer = &gBagMenu->pocketNameBuffer;
     windowTileData = (u8 *)GetWindowAttribute(WIN_POCKET_NAME, WINDOW_TILE_DATA);
-    CpuCopy32(tileDataBuffer[0][a], windowTileData, 0x120); // Top half of pocket name
+    CpuCopy32(&tileDataBuffer[0][a], windowTileData, 0x120); // Top half of pocket name
     b = a + 18;
-    CpuCopy32(tileDataBuffer[0][b], windowTileData + 0x120, 0x120); // Bottom half of pocket name
+    CpuCopy32(&tileDataBuffer[0][b], windowTileData + 0x120, 0x120); // Bottom half of pocket name
     CopyWindowToVram(WIN_POCKET_NAME, COPYWIN_GFX);
 }
 
@@ -2883,11 +2883,11 @@ static void SortItemsInBag(u8 pocket, u8 type)
         itemAmount = BAG_MEDICINE_COUNT;
         break;
     case BATTLEITEMS_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_BattleItems;
+        itemMem = gSaveBlock2Ptr->frontier.bagPocket_BattleItems;
         itemAmount = BAG_BATTLEITEMS_COUNT;
         break;
     case TREASURES_POCKET:
-        itemMem = gSaveBlock1Ptr->bagPocket_Treasures;
+        itemMem = gSaveBlock2Ptr->frontier.bagPocket_Treasures;
         itemAmount = BAG_TREASURES_COUNT;
         break;
     case MAIL_POCKET:

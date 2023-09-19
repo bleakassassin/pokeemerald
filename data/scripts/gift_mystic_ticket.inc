@@ -15,6 +15,7 @@ MysticTicket_Give:
 	setvar VAR_TEMP_0, 1
 	clearflag FLAG_EXCHANGED_SCANNER
 	giveitem ITEM_MYSTIC_TICKET
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
 	setflag FLAG_RECEIVED_MYSTIC_TICKET
 MysticTicket_Obtained:
 	vmessage MysteryGift_Text_TryUsingItAtLilycovePort

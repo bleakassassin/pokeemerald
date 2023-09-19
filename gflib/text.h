@@ -3,8 +3,6 @@
 
 #include "characters.h"
 
-#define NUM_TEXT_PRINTERS 32
-
 #define FONT_TYPE_EMERALD 0
 #define FONT_TYPE_FRLG    1
 #define FONT_TYPE_RS_EUR  2

@@ -13,7 +13,7 @@ AlteringCave_OnTransition:
 	copyvar VAR_0x8000, VAR_ALTERING_CAVE_WILD_SET
 	addvar VAR_0x8000, LAYOUT_ALTERING_CAVE
 	setmaplayoutindex VAR_0x8000
-	goto_if_eq VAR_OLD_SEA_MAP_STATE, 6, AlteringCave_EventScript_SetupLegendaryBirds
+	goto_if_eq VAR_OLD_SEA_MAP_STATE, 5, AlteringCave_EventScript_SetupLegendaryBirds
 	end
 
 AlteringCave_EventScript_ResetItemBall::
@@ -122,7 +122,7 @@ AlteringCave_EventScript_LegendaryBird::
 	copyvar VAR_0x8004, VAR_TEMP_1
 	setvar VAR_0x8005, 60
 	setvar VAR_0x8006, 0
-	special CreateEventLegalEnemyMon
+	special CreateEnemyEventMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate

@@ -316,7 +316,7 @@ static void ListMenuDummyTask(u8 taskId)
 
 }
 
-s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 drawMode, u16 tileNum, u16 palNum)
+s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const struct ListMenuTemplate *listMenuTemplate, u8 drawMode, u16 tileNum, u16 palOffset)
 {
     switch (sMysteryGiftLinkMenu.state)
     {
@@ -326,9 +326,9 @@ s32 DoMysteryGiftListMenu(const struct WindowTemplate *windowTemplate, const str
         switch (drawMode)
         {
         case 2:
-            LoadUserWindowBorderGfx(sMysteryGiftLinkMenu.windowId, tileNum, palNum);
+            LoadUserWindowBorderGfx(sMysteryGiftLinkMenu.windowId, tileNum, palOffset);
         case 1:
-            DrawTextBorderOuter(sMysteryGiftLinkMenu.windowId, tileNum, palNum / 16);
+            DrawTextBorderOuter(sMysteryGiftLinkMenu.windowId, tileNum, palOffset / 16);
             break;
         }
         gMultiuseListMenuTemplate = *listMenuTemplate;
@@ -1042,7 +1042,7 @@ static void SpriteCallback_ScrollIndicatorArrow(struct Sprite *sprite)
     }
 }
 
-static u8 AddScrollIndicatorArrowObject(u8 arrowDir, u8 x, u8 y, u16 tileTag, u16 palTag)
+static u8 AddScrollIndicatorArrowObject(u8 arrowDir, u8 x, u8 y, u16 tileTag, u16 palTag, u8 registerFlash)
 {
     u8 spriteId;
     struct SpriteTemplate spriteTemplate;
@@ -1059,6 +1059,8 @@ static u8 AddScrollIndicatorArrowObject(u8 arrowDir, u8 x, u8 y, u16 tileTag, u1
     gSprites[spriteId].tMultiplier = sScrollIndicatorTemplates[arrowDir].multiplier;
     gSprites[spriteId].tFrequency = sScrollIndicatorTemplates[arrowDir].frequency;
     gSprites[spriteId].tSinePos = 0;
+    if (registerFlash == TRUE)
+        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
 
     return spriteId;
 }
@@ -1102,8 +1104,8 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
     data->fullyDownThreshold = arrowInfo->fullyDownThreshold;
     data->tileTag = arrowInfo->tileTag;
     data->palTag = arrowInfo->palTag;
-    data->topSpriteId = AddScrollIndicatorArrowObject(arrowInfo->firstArrowType, arrowInfo->firstX, arrowInfo->firstY, arrowInfo->tileTag, arrowInfo->palTag);
-    data->bottomSpriteId = AddScrollIndicatorArrowObject(arrowInfo->secondArrowType, arrowInfo->secondX, arrowInfo->secondY, arrowInfo->tileTag, arrowInfo->palTag);
+    data->topSpriteId = AddScrollIndicatorArrowObject(arrowInfo->firstArrowType, arrowInfo->firstX, arrowInfo->firstY, arrowInfo->tileTag, arrowInfo->palTag, arrowInfo->registerFlash);
+    data->bottomSpriteId = AddScrollIndicatorArrowObject(arrowInfo->secondArrowType, arrowInfo->secondX, arrowInfo->secondY, arrowInfo->tileTag, arrowInfo->palTag, arrowInfo->registerFlash);
 
     if (arrowInfo->palTag == TAG_NONE)
     {
@@ -1116,7 +1118,7 @@ u8 AddScrollIndicatorArrowPair(const struct ScrollArrowsTemplate *arrowInfo, u16
 
 u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 firstPos, s32 secondPos, s32 fullyDownThreshold, s32 tileTag, s32 palTag, u16 *scrollOffset)
 {
-    if (arrowType == SCROLL_ARROW_UP || arrowType == SCROLL_ARROW_DOWN)
+    if (arrowType == SCROLL_ARROW_UP || arrowType == SCROLL_ARROW_FLASH)
     {
         gTempScrollArrowTemplate.firstArrowType = SCROLL_ARROW_UP;
         gTempScrollArrowTemplate.firstX = commonPos;
@@ -1140,6 +1142,11 @@ u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 fi
     gTempScrollArrowTemplate.tileTag = tileTag;
     gTempScrollArrowTemplate.palTag = palTag;
     gTempScrollArrowTemplate.palNum = 11;
+
+    if (arrowType == SCROLL_ARROW_FLASH)
+        gTempScrollArrowTemplate.registerFlash = TRUE;
+    else
+        gTempScrollArrowTemplate.registerFlash = FALSE;
 
     return AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, scrollOffset);
 }

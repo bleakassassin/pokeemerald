@@ -6,14 +6,14 @@
 struct TrainerHillTrainer
 {
     u8 name[TRAINER_NAME_LENGTH + 1];
-    u8 facilityClass;
-    bool32 unused; // Set to TRUE on JP trainers
+    u8 facilityClass:7;
+    u8 unused:1; // Set to TRUE on JP trainers
     u16 speechBefore[EASY_CHAT_BATTLE_WORDS_COUNT];
     u16 speechWin[EASY_CHAT_BATTLE_WORDS_COUNT];
     u16 speechLose[EASY_CHAT_BATTLE_WORDS_COUNT];
     u16 speechAfter[EASY_CHAT_BATTLE_WORDS_COUNT];
-    struct BattleTowerPokemon mons[PARTY_SIZE];
-};
+    struct BattleTowerPokemon mons[PARTY_SIZE]; // should be reworked to FRONTIER_PARTY_SIZE if possible
+}; // sizeof=0x144
 
 struct TrainerHillFloorMap
 {
@@ -22,24 +22,26 @@ struct TrainerHillFloorMap
     u8 trainerCoords[HILL_TRAINERS_PER_FLOOR]; // Starting at (0,6). Format is 0bYYYYXXXX.
     u8 trainerDirections; // DIR_* - 1, 4 bits per trainer
     u8 trainerRanges; // 4 bits per trainer
-};
+}; // sizeof=0x124
 
 struct TrainerHillFloor
 {
     u8 trainerNum1;
     u8 trainerNum2;
+    //u8 padding[2];
     struct TrainerHillTrainer trainers[HILL_TRAINERS_PER_FLOOR];
     struct TrainerHillFloorMap map;
-};
+}; // sizeof=0x3B0
 
 struct TrainerHillChallenge
 {
     u8 numTrainers;
     u8 unused1;
     u8 numFloors;
+    //u8 padding;
     u32 checksum; // A byte array sum of the floor data
     struct TrainerHillFloor floors[0]; // Floor data is assumed to follow, so this will be intentionally read out of bounds
-};
+}; // sizeof=0xEC8
 
 extern u32 *gTrainerHillVBlankCounter;
 

@@ -28,6 +28,7 @@ ProfileMan_EventScript_CreateProfile::
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
+	goto_if_ge VAR_0x8004, 1, ProfileMan_EventScript_PlayerInputMysteryEventPhrase
 	goto_if_eq VAR_RESULT, 0, ProfileMan_EventScript_CancelShowProfile
 	goto_if_eq VAR_RESULT, 1, ProfileMan_EventScript_ShowProfile
 	end
@@ -38,11 +39,18 @@ ProfileMan_EventScript_CancelShowProfile::
 	end
 
 ProfileMan_EventScript_ShowProfile::
-	setvar VAR_0x8004, 0
 	special ShowEasyChatProfile
 	waitmessage
 	delay 80
 	msgbox ProfileMan_Text_FantasticProfile, MSGBOX_DEFAULT
+	release
+	end
+
+ProfileMan_EventScript_PlayerInputMysteryEventPhrase::
+	setvar VAR_0x8004, 0
+	goto_if_set FLAG_SYS_MYSTERY_EVENT_ENABLE, ProfileMan_EventScript_ShowProfile
+	msgbox ProfileMan_Text_YouKnowSecretSaying, MSGBOX_DEFAULT
+	setflag FLAG_SYS_MYSTERY_EVENT_ENABLE
 	release
 	end
 
@@ -78,6 +86,7 @@ ProfileMan_EventScript_CreateNewProfile::
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
+	goto_if_ge VAR_0x8004, 1, ProfileMan_EventScript_PlayerInputMysteryEventPhrase
 	goto_if_eq VAR_RESULT, 0, ProfileMan_EventScript_CancelShowProfile
 	goto_if_eq VAR_RESULT, 1, ProfileMan_EventScript_ShowProfile
 	end
@@ -158,7 +167,6 @@ ProfileMan_Text_FantasticProfile:
 	.string "be captivated by you!\p"
 	.string "Thank you!$"
 
-@ Unused
 ProfileMan_Text_YouKnowSecretSaying:
 	.string "Oh?\n"
 	.string "You know the secret saying!\p"

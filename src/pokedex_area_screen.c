@@ -97,6 +97,7 @@ extern const u8 AbnormalWeather_EventScript_CheckKyogreGroudonStatus[];
 
 static void FindMapsWithMon(u16);
 static void BuildAreaGlowTilemap(void);
+static void ShowRoamingMonLocation(u8);
 static void SetAreaHasMon(u16, u16);
 static void SetSpecialMapHasMon(u16, u16);
 static u16 GetRegionMapSectionId(u8, u8);
@@ -235,7 +236,7 @@ static bool8 DrawAreaGlow(void)
     case 3:
         if (!FreeTempTileDataBuffersIfPossible())
         {
-            CpuCopy32(sAreaGlow_Pal, &gPlttBufferUnfaded[GLOW_PALETTE * 16], sizeof(sAreaGlow_Pal));
+            CpuCopy32(sAreaGlow_Pal, &gPlttBufferUnfaded[BG_PLTT_ID(GLOW_PALETTE)], sizeof(sAreaGlow_Pal));
             sPokedexAreaScreen->drawAreaGlowState++;
         }
         return TRUE;
@@ -254,13 +255,15 @@ static void FindMapsWithMon(u16 species)
 {
     u16 i;
     u8 j;
+    struct Roamer *roamer;
 
     sPokedexAreaScreen->alteringCaveCounter = 0;
     sPokedexAreaScreen->alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
     if (sPokedexAreaScreen->alteringCaveId >= NUM_ALTERING_CAVE_TABLES)
         sPokedexAreaScreen->alteringCaveId = 0;
 
-    if (species != gSaveBlock1Ptr->roam[3].species && (species < SPECIES_RAIKOU || species > SPECIES_SUICUNE))
+    roamer = &gSaveBlock1Ptr->roamer;
+    if (species != roamer->species && (species < SPECIES_RAIKOU || species > SPECIES_SUICUNE))
     {
         sPokedexAreaScreen->numOverworldAreas = 0;
         sPokedexAreaScreen->numSpecialAreas = 0;
@@ -321,19 +324,29 @@ static void FindMapsWithMon(u16 species)
     {
         // This is the roamer's species, show where the roamer is currently
         sPokedexAreaScreen->numSpecialAreas = 0;
-        for (j = 0; j < TOTAL_ROAMING_POKEMON; j++)
+        if (species == roamer->species && roamer->active)
         {
-            if (species == gSaveBlock1Ptr->roam[j].species && gSaveBlock1Ptr->roam[j].active)
+            ShowRoamingMonLocation(ROAMING_LATI);
+            return;
+        }
+        for (j = 0; j < ROAMING_LATI; j++)
+        {
+            if (species == j + SPECIES_RAIKOU && gSaveBlock1Ptr->roamerTrio[j].active)
             {
-                GetRoamerLocation(j, &sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, &sPokedexAreaScreen->overworldAreasWithMons[0].mapNum);
-                sPokedexAreaScreen->overworldAreasWithMons[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, sPokedexAreaScreen->overworldAreasWithMons[0].mapNum)->regionMapSectionId;
-                sPokedexAreaScreen->numOverworldAreas = 1;
+                ShowRoamingMonLocation(j);
                 break;
             }
             else
                 sPokedexAreaScreen->numOverworldAreas = 0;
         }
     }
+}
+
+static void ShowRoamingMonLocation(u8 id)
+{
+    GetRoamerLocation(id, &sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, &sPokedexAreaScreen->overworldAreasWithMons[0].mapNum);
+    sPokedexAreaScreen->overworldAreasWithMons[0].regionMapSectionId = Overworld_GetMapHeaderByGroupAndId(sPokedexAreaScreen->overworldAreasWithMons[0].mapGroup, sPokedexAreaScreen->overworldAreasWithMons[0].mapNum)->regionMapSectionId;
+    sPokedexAreaScreen->numOverworldAreas = 1;
 }
 
 static void SetAreaHasMon(u16 mapGroup, u16 mapNum)

@@ -100,6 +100,9 @@ static const struct PacifidlogMetatileOffsets sFloatingBridgeMetatileOffsets[] =
 };
 
 // Each element corresponds to a y coordinate row in the sootopolis gym 1F map.
+// The rows with ice each have a temp var used to track the ice steps. Each bit in the var
+// represents whether ice at that x coordinate (starting from the left edge) has been visited.
+// This method of tracking steps will break if the ice puzzle is more than 16 map spaces wide.
 static const u16 sSootopolisGymIceRowVars[] =
 {
     0,
@@ -266,24 +269,9 @@ static void TrySetPacifidlogBridgeMetatiles(const struct PacifidlogMetatileOffse
     }
 }
 
-static void TrySetLogBridgeHalfSubmerged(s16 x, s16 y, bool32 redrawMap)
-{
-    TrySetPacifidlogBridgeMetatiles(sHalfSubmergedBridgeMetatileOffsets, x, y, redrawMap);
-}
-
-static void TrySetLogBridgeFullySubmerged(s16 x, s16 y, bool32 redrawMap)
-{
-    TrySetPacifidlogBridgeMetatiles(sFullySubmergedBridgeMetatileOffsets, x, y, redrawMap);
-}
-
-static void TrySetLogBridgeFloating(s16 x, s16 y, bool32 redrawMap)
-{
-    TrySetPacifidlogBridgeMetatiles(sFloatingBridgeMetatileOffsets, x, y, redrawMap);
-}
-
 // Returns FALSE if player has moved from one end of a log to the other (log should remain submerged).
 // Otherwise it returns TRUE.
-static bool32 ShouldRaisePacifidlogLogs(s16 newX, s16 newY, s16 oldX, s16 oldY)
+static bool32 ShouldUpdatePacifidlogLogs(s16 newX, s16 newY, s16 oldX, s16 oldY)
 {
     u16 oldBehavior = MapGridGetMetatileBehaviorAt(oldX, oldY);
 
@@ -316,43 +304,6 @@ static bool32 ShouldRaisePacifidlogLogs(s16 newX, s16 newY, s16 oldX, s16 oldY)
     return TRUE;
 }
 
-// Returns FALSE if player has moved from one end of a log to the other (log should remain submerged).
-// Otherwise it returns TRUE.
-// This is the effectively the same as ShouldRaisePacifidlogLogs, as it swaps both the conditions and which position's behavior to check.
-// In effect the previous function asks "was the player's previous position not the other end of a log they're standing on?"
-// while this function asks "is the player's current position not the other end of a log they were previously standing on?"
-// and with the same positions both questions always have the same answer.
-static bool32 ShouldSinkPacifidlogLogs(s16 newX, s16 newY, s16 oldX, s16 oldY)
-{
-    u16 newBehavior = MapGridGetMetatileBehaviorAt(newX, newY);
-
-    if (MetatileBehavior_IsPacifidlogVerticalLogTop(newBehavior))
-    {
-        // Still on same one if moved from bottom to top
-        if (newY < oldY)
-            return FALSE;
-    }
-    else if (MetatileBehavior_IsPacifidlogVerticalLogBottom(newBehavior))
-    {
-        // Still on same one if moved from top to bottom
-        if (newY > oldY)
-            return FALSE;
-    }
-    else if (MetatileBehavior_IsPacifidlogHorizontalLogLeft(newBehavior))
-    {
-        // Still on same one if moved from right to left
-        if (newX < oldX)
-            return FALSE;
-    }
-    else if (MetatileBehavior_IsPacifidlogHorizontalLogRight(newBehavior))
-    {
-        // Still on same one if moved from left to right
-        if (newX > oldX)
-            return FALSE;
-    }
-    return TRUE;
-}
-
 #define tState    data[1]
 #define tPrevX    data[2]
 #define tPrevY    data[3]
@@ -374,7 +325,7 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
 
         // If player is already standing on a log when the callback
         // is set then immediately set it to submerged
-        TrySetLogBridgeFullySubmerged(x, y, TRUE);
+        TrySetPacifidlogBridgeMetatiles(sFullySubmergedBridgeMetatileOffsets, x, y, TRUE);
         tState = 1;
         break;
     case 1:
@@ -382,18 +333,15 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
         if (x == tPrevX && y == tPrevY)
             return;
 
-        if (ShouldRaisePacifidlogLogs(x, y, tPrevX, tPrevY))
+        if (ShouldUpdatePacifidlogLogs(x, y, tPrevX, tPrevY))
         {
             // Player's previous position is not the other end of a log
             // they're standing on, try and set it half-submerged (rising to surface).
-            // The floating metatile is queued up by setting it but not drawing it,
-            // but this is pointless as state 2 will handle it in full anyway.
-            TrySetLogBridgeHalfSubmerged(tPrevX, tPrevY, TRUE);
-            TrySetLogBridgeFloating(tPrevX, tPrevY, FALSE);
+            TrySetPacifidlogBridgeMetatiles(sHalfSubmergedBridgeMetatileOffsets, tPrevX, tPrevY, TRUE);
             tToRaiseX = tPrevX;
             tToRaiseY = tPrevY;
             tState = 2;
-            tDelay = 8;
+            tDelay = 7;
         }
         else
         {
@@ -403,13 +351,11 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
             tToRaiseY = -1;
         }
 
-        if (ShouldSinkPacifidlogLogs(x, y, tPrevX, tPrevY))
+        if (ShouldUpdatePacifidlogLogs(x, y, tPrevX, tPrevY))
         {
-            // Player's current position is not the other end of a log
-            // they were previously standing on, try and set it half-submerged (sinking)
-            TrySetLogBridgeHalfSubmerged(x, y, TRUE);
+            TrySetPacifidlogBridgeMetatiles(sHalfSubmergedBridgeMetatileOffsets, x, y, TRUE);
             tState = 2;
-            tDelay = 8;
+            tDelay = 7;
         }
 
         tPrevX = x;
@@ -423,12 +369,12 @@ static void PacifidlogBridgePerStepCallback(u8 taskId)
         if (--tDelay == 0)
         {
             // If player's current position is a log submerge it fully.
-            TrySetLogBridgeFullySubmerged(x, y, TRUE);
+            TrySetPacifidlogBridgeMetatiles(sFullySubmergedBridgeMetatileOffsets, x, y, TRUE);
 
             // Player's previous position is not the other end of a log
             // they're standing on, try to raise their previous position.
             if (tToRaiseX != -1 && tToRaiseY != -1)
-                TrySetLogBridgeFloating(tToRaiseX, tToRaiseY, TRUE);
+                TrySetPacifidlogBridgeMetatiles(sFloatingBridgeMetatileOffsets, tToRaiseX, tToRaiseY, TRUE);
 
             tState = 1;
         }
@@ -555,7 +501,7 @@ static void FortreeBridgePerStepCallback(u8 taskId)
         if (!isFortreeBridgePrev)
             break;
 
-        tBounceTime = 16;
+        tBounceTime = 8;
         tState = 2;
         // fallthrough
     case 2:
@@ -577,7 +523,6 @@ static void FortreeBridgePerStepCallback(u8 taskId)
             TryRaiseFortreeBridge(prevX, prevY);
         case 5:
         case 6:
-        case 7: // Not possible with % 7
             break;
         }
         if (tBounceTime == 0)

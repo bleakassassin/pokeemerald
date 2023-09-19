@@ -303,7 +303,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil::
 	lock
-	setvar VAR_TEMP_1, SPECIES_CYNDAQUIL
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CYNDAQUIL
 	call LittlerootTown_ProfessorBirchsLab_EventScript_CanPickJohtoStarter
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
@@ -311,7 +311,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Totodile::
 	lock
-	setvar VAR_TEMP_1, SPECIES_TOTODILE
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TOTODILE
 	call LittlerootTown_ProfessorBirchsLab_EventScript_CanPickJohtoStarter
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeTotodile, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
@@ -319,14 +319,14 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Totodile::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Chikorita::
 	lock
-	setvar VAR_TEMP_1, SPECIES_CHIKORITA
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CHIKORITA
 	call LittlerootTown_ProfessorBirchsLab_EventScript_CanPickJohtoStarter
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_YoullTakeChikorita, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime
 LittlerootTown_ProfessorBirchsLab_EventScript_GiveJohtoStarter::
 	hidemonpic
-	bufferspeciesname STR_VAR_1, VAR_TEMP_1
-	givemon VAR_TEMP_1, 5
+	bufferspeciesname STR_VAR_1, VAR_TEMP_TRANSFERRED_SPECIES
+	givemon VAR_TEMP_TRANSFERRED_SPECIES, 5
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_SendJohtoStarterToParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_SendJohtoStarterToPC
 LittlerootTown_ProfessorBirchsLab_EventScript_DontHaveAnyRoomForPokemon::
@@ -345,8 +345,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CanPickJohtoStarter::
 LittlerootTown_ProfessorBirchsLab_EventScript_JohtoStarter::
 	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	showmonpic VAR_TEMP_1, 10, 3
-	playmoncry VAR_TEMP_1, CRY_MODE_NORMAL
+	showmonpic VAR_TEMP_TRANSFERRED_SPECIES, 10, 3
+	playmoncry VAR_TEMP_TRANSFERRED_SPECIES, CRY_MODE_NORMAL
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime::

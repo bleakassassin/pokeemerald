@@ -81,17 +81,21 @@ ProfBirch_EventScript_RatingMessage::
 	return
 
 ProfBirch_EventScript_SeenAllHoennMons::
-	checkitem ITEM_OVAL_CHARM
-	goto_if_eq VAR_RESULT, TRUE, ProfBirch_EventScript_RatingMessage
+	goto_if_set FLAG_RECEIVED_OVAL_CHARM, ProfBirch_EventScript_RatingMessage
 	msgbox gBirchDexRatingText_AllHoennMonsSeen, MSGBOX_DEFAULT
-	giveitem ITEM_OVAL_CHARM
+	playfanfare MUS_OBTAIN_ITEM
+	message gBirchDexRatingText_ReceivedOvalCharm
+	waitfanfare
+	setflag FLAG_RECEIVED_OVAL_CHARM
 	msgbox gBirchDexRatingText_ImproveEggChances, MSGBOX_DEFAULT
 	return
 
 ProfBirch_EventScript_CompletedNationalDex::
-	checkitem ITEM_SHINY_CHARM
-	goto_if_eq VAR_RESULT, TRUE, Common_EventScript_NopReturn
+	goto_if_set FLAG_RECEIVED_SHINY_CHARM, Common_EventScript_NopReturn
 	msgbox gBirchDexRatingText_NationalDexCompleted, MSGBOX_DEFAULT
-	giveitem ITEM_SHINY_CHARM
+	playfanfare MUS_OBTAIN_ITEM
+	message gBirchDexRatingText_ReceivedShinyCharm
+	waitfanfare
+	setflag FLAG_RECEIVED_SHINY_CHARM
 	msgbox gBirchDexRatingText_ImproveShinyChances, MSGBOX_DEFAULT
 	return

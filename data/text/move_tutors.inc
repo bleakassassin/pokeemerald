@@ -235,3 +235,41 @@ MoveTutor_Text_ExplosionTaught:
 	.string "to ignite my own explosion…\p"
 	.string "Maybe it's because deep down,\n"
 	.string "I would rather stay here…$"
+
+MoveTutor_Text_UltimateMoveIntro:
+	.string "When I was just a wee YOUNGSTER,\n"
+	.string "those ladies were strong and beautiful.\p"
+	.string "They were idols among us TRAINERS.\p"
+	.string "Even now, age hasn't dulled their\n"
+	.string "abilities.\p"
+	.string "In fact, their POKéMON moves have\n"
+	.string "grown even more polished.\p"
+	.string "As for me…\p"
+	.string "I only have knowledge left for a few\n"
+	.string "moves, but they're truly special.\p"
+	.string "They're the ultimate moves!\p"
+	.string "Shall I teach them to your POKéMON?$"
+
+MoveTutor_Text_UltimateMoveTeach:
+	.string "What do you think? Shall I teach the\n"
+	.string "ultimate moves to your POKéMON?$"
+
+MoveTutor_Text_UltimateMoveWhichMon:
+	.string "Which POKéMON should I teach a move?$"
+
+MoveTutor_Text_UltimateMoveDeclined:
+	.string "Hmm… Well, that is fine, as well.\n"
+	.string "Visit if you have a change of heart.$"
+
+MoveTutor_Text_UltimateMoveNotMaxFriendship:
+	.string "The bond between you and your POKéMON\n"
+	.string "isn't strong enough yet.\p"
+	.string "It needs trust in you to be able to\n"
+	.string "use one of these moves.$"
+
+MoveTutor_Text_UltimateMoveTaught:
+	.string "Like those ladies, that move has aged\n"
+	.string "as wonderfully as one could hope.\p"
+	.string "But… For some reason, I can't help\n"
+	.string "but feel this…\p"
+	.string "Time is so cruel…$"

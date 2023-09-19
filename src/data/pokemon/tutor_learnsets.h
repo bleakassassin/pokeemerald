@@ -33,6 +33,9 @@ const u16 gTutorMoves[TUTOR_MOVE_COUNT] =
     [TUTOR_MOVE_NIGHTMARE] = MOVE_NIGHTMARE,
     [TUTOR_MOVE_SELF_DESTRUCT] = MOVE_SELF_DESTRUCT,
     [TUTOR_MOVE_SKY_ATTACK] = MOVE_SKY_ATTACK,
+    [TUTOR_MOVE_BLAST_BURN] = MOVE_BLAST_BURN,
+    [TUTOR_MOVE_HYDRO_CANNON] = MOVE_HYDRO_CANNON,
+    [TUTOR_MOVE_FRENZY_PLANT] = MOVE_FRENZY_PLANT,
 };
 
 #define TUTOR_LEARNSET(moves) {(u32)(moves), ((u64)(moves) >> 32)}
@@ -79,7 +82,8 @@ static const u32 sTutorLearnsets[][2] =
                                 | TUTOR(MOVE_SWAGGER)
                                 | TUTOR(MOVE_SLEEP_TALK)
                                 | TUTOR(MOVE_DEFENSE_CURL)
-                                | TUTOR(MOVE_FURY_CUTTER)),
+                                | TUTOR(MOVE_FURY_CUTTER)
+                                | TUTOR(MOVE_FRENZY_PLANT)),
 
     [SPECIES_CHARMANDER]       = TUTOR_LEARNSET(TUTOR(MOVE_MEGA_PUNCH)
                                 | TUTOR(MOVE_SWORDS_DANCE)
@@ -142,7 +146,8 @@ static const u32 sTutorLearnsets[][2] =
                                 | TUTOR(MOVE_SWIFT)
                                 | TUTOR(MOVE_DEFENSE_CURL)
                                 | TUTOR(MOVE_FIRE_PUNCH)
-                                | TUTOR(MOVE_FURY_CUTTER)),
+                                | TUTOR(MOVE_FURY_CUTTER)
+                                | TUTOR(MOVE_BLAST_BURN)),
 
     [SPECIES_SQUIRTLE]         = TUTOR_LEARNSET(TUTOR(MOVE_MEGA_PUNCH)
                                 | TUTOR(MOVE_MEGA_KICK)
@@ -199,7 +204,8 @@ static const u32 sTutorLearnsets[][2] =
                                 | TUTOR(MOVE_ICE_PUNCH)
                                 | TUTOR(MOVE_SWAGGER)
                                 | TUTOR(MOVE_SLEEP_TALK)
-                                | TUTOR(MOVE_DEFENSE_CURL)),
+                                | TUTOR(MOVE_DEFENSE_CURL)
+                                | TUTOR(MOVE_HYDRO_CANNON)),
 
     [SPECIES_CATERPIE]         = TUTOR_LEARNSET(0),
 

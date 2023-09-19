@@ -42,8 +42,8 @@ ItemBall_EventScript_ItemElixir::
 	finditem ITEM_ELIXIR
 	end
 
-ItemBall_EventScript_ItemTM37::
-	finditem ITEM_TM37
+ItemBall_EventScript_ItemTMSandstorm::
+	finditem ITEM_TM_SANDSTORM
 	end
 
 ItemBall_EventScript_ItemStardust::
@@ -78,8 +78,8 @@ ItemBall_EventScript_ItemSuperPotion::
 	finditem ITEM_SUPER_POTION
 	end
 
-ItemBall_EventScript_ItemTM01::
-	finditem ITEM_TM01
+ItemBall_EventScript_ItemTMFocusPunch::
+	finditem ITEM_TM_FOCUS_PUNCH
 	end
 
 ItemBall_EventScript_ItemGreatBall::
@@ -198,20 +198,20 @@ ItemBall_EventScript_ItemFireStone::
 	finditem ITEM_FIRE_STONE
 	end
 
-ItemBall_EventScript_ItemTM06::
-	finditem ITEM_TM06
+ItemBall_EventScript_ItemTMToxic::
+	finditem ITEM_TM_TOXIC
 	end
 
-ItemBall_EventScript_ItemTM23::
-	finditem ITEM_TM23
+ItemBall_EventScript_ItemTMIronTail::
+	finditem ITEM_TM_IRON_TAIL
 	end
 
 ItemBall_EventScript_ItemMoonStone::
 	finditem ITEM_MOON_STONE
 	end
 
-ItemBall_EventScript_ItemTM02::
-	finditem ITEM_TM02
+ItemBall_EventScript_ItemTMDragonClaw::
+	finditem ITEM_TM_DRAGON_CLAW
 	end
 
 ItemBall_EventScript_ItemThunderStone::
@@ -226,8 +226,8 @@ ItemBall_EventScript_ItemDiveBall::
 	finditem ITEM_DIVE_BALL
 	end
 
-ItemBall_EventScript_ItemTM13::
-	finditem ITEM_TM13
+ItemBall_EventScript_ItemTMIceBeam::
+	finditem ITEM_TM_ICE_BEAM
 	end
 
 ItemBall_EventScript_ItemStorageKey::
@@ -246,16 +246,16 @@ ItemBall_EventScript_ItemWaterStone::
 	finditem ITEM_WATER_STONE
 	end
 
-ItemBall_EventScript_ItemTM18::
-	finditem ITEM_TM18
+ItemBall_EventScript_ItemTMRainDance::
+	finditem ITEM_TM_RAIN_DANCE
 	end
 
-ItemBall_EventScript_ItemTM11::
-	finditem ITEM_TM11
+ItemBall_EventScript_ItemTMSunnyDay::
+	finditem ITEM_TM_SUNNY_DAY
 	end
 
-ItemBall_EventScript_ItemTM22::
-	finditem ITEM_TM22
+ItemBall_EventScript_ItemTMSolarBeam::
+	finditem ITEM_TM_SOLAR_BEAM
 	end
 
 ItemBall_EventScript_ItemSeaIncense::
@@ -266,16 +266,16 @@ ItemBall_EventScript_ItemLaxIncense::
 	finditem ITEM_LAX_INCENSE
 	end
 
-ItemBall_EventScript_ItemTM30::
-	finditem ITEM_TM30
+ItemBall_EventScript_ItemTMShadowBall::
+	finditem ITEM_TM_SHADOW_BALL
 	end
 
 ItemBall_EventScript_ItemMaxPotion::
 	finditem ITEM_MAX_POTION
 	end
 
-ItemBall_EventScript_ItemTM48::
-	finditem ITEM_TM48
+ItemBall_EventScript_ItemTMSkillSwap::
+	finditem ITEM_TM_SKILL_SWAP
 	end
 
 ItemBall_EventScript_ItemMasterBall::
@@ -290,16 +290,16 @@ ItemBall_EventScript_ItemIceHeal::
 	finditem ITEM_ICE_HEAL
 	end
 
-ItemBall_EventScript_ItemTM07::
-	finditem ITEM_TM07
+ItemBall_EventScript_ItemTMHail::
+	finditem ITEM_TM_HAIL
 	end
 
 ItemBall_EventScript_ItemNeverMeltIce::
 	finditem ITEM_NEVER_MELT_ICE
 	end
 
-ItemBall_EventScript_ItemTM26::
-	finditem ITEM_TM26
+ItemBall_EventScript_ItemTMEarthquake::
+	finditem ITEM_TM_EARTHQUAKE
 	end
 
 ItemBall_EventScript_ItemOrangeMail::
@@ -334,8 +334,8 @@ ItemBall_EventScript_ItemBeadMail::
 	finditem ITEM_BEAD_MAIL
 	end
 
-ItemBall_EventScript_ItemTM29::
-	finditem ITEM_TM29
+ItemBall_EventScript_ItemTMPsychic::
+	finditem ITEM_TM_PSYCHIC
 	end
 
 ItemBall_EventScript_ItemFullRestore::
