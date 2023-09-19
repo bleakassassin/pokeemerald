@@ -124,7 +124,7 @@ gBirchDexRatingText_AllHoennMonsSeen::
 	.string "all your hard work!$"
 
 gBirchDexRatingText_ReceivedOvalCharm::
-	.string "{PLAYER} received the OVAL CHARM!$"
+	.string "{PLAYER} received the Oval Charm!$"
 
 gBirchDexRatingText_ImproveEggChances::
 	.string "Prof. Birch: Holding an Oval Charm\n"
@@ -146,7 +146,7 @@ gBirchDexRatingText_NationalDexCompleted::
 	.string "something special. Here, take this!$"
 
 gBirchDexRatingText_ReceivedShinyCharm::
-	.string "{PLAYER} received the SHINY CHARM!$"
+	.string "{PLAYER} received the Shiny Charm!$"
 	
 gBirchDexRatingText_ImproveShinyChances::
 	.string "Prof. Birch: That will improve your\n"

@@ -92,7 +92,7 @@ BattleFrontier_Lounge1_Text_PokemonBreederIntro:
 	.string "my knowledge on Pokémon abilities!$"
 
 BattleFrontier_Lounge1_Text_ReceivedJudgeFunction:
-	.string "{PLAYER} received the JUDGE function!$"
+	.string "{PLAYER} received the Judge function!$"
 
 BattleFrontier_Lounge1_Text_ExplainJudgeFunction:
 	.string "Press the A Button when looking at a\n"

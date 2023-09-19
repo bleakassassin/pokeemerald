@@ -50,7 +50,7 @@ MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst:
 	.string "a serious challenge, expect the worst!$"
 
 MeteorFalls_StevensCave_Text_TestSkillsAgainstYou:
-	.string "STEVEN: So you've returned, {PLAYER}{KUN}.\p"
+	.string "Steven: So you've returned, {PLAYER}{KUN}.\p"
 	.string "Let me test my skills against you\n"
 	.string "once again!$"
 
