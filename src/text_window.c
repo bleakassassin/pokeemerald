@@ -186,10 +186,7 @@ const u16 *GetTextWindowPalette(u8 id)
 
 const u16 *GetOverworldTextboxPalettePtr(void)
 {
-    if (gSaveBlock2Ptr->optionsMessageBox == OPTIONS_MESSAGE_BOX_BLUE)
-        return gMessageBoxRS_Pal;
-    else
-        return gMessageBox_Pal;
+    return (gSaveBlock2Ptr->optionsMessageBox == OPTIONS_MESSAGE_BOX_BLUE) ? gMessageBoxRS_Pal : gMessageBox_Pal;
 }
 
 // Effectively LoadUserWindowBorderGfx but specifying the bg directly instead of a window from that bg
