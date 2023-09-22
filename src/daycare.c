@@ -531,9 +531,12 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
 static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
 {
     u8 i;
-    u8 selectedIvs[INHERITED_IV_COUNT];
+    u32 motherItem = GetBoxMonData(&daycare->mons[0].mon, MON_DATA_HELD_ITEM);
+    u32 fatherItem = GetBoxMonData(&daycare->mons[1].mon, MON_DATA_HELD_ITEM);
+    u8 inheritedIvCount = (motherItem == ITEM_MACHO_BRACE || fatherItem == ITEM_MACHO_BRACE) ? INHERITED_IV_COUNT_ITEM : INHERITED_IV_COUNT;
+    u8 selectedIvs[inheritedIvCount];
     u8 availableIVs[NUM_STATS];
-    u8 whichParents[INHERITED_IV_COUNT];
+    u8 whichParents[inheritedIvCount];
     u8 iv;
 
     // Initialize a list of IV indices.
@@ -543,7 +546,7 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 
     // Select the 3 IVs that will be inherited.
-    for (i = 0; i < INHERITED_IV_COUNT; i++)
+    for (i = 0; i < inheritedIvCount; i++)
     {
         // Randomly pick an IV from the available list and stop from being chosen again.
         // BUG: Instead of removing the IV that was just picked, this
@@ -562,13 +565,13 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     }
 
     // Determine which parent each of the selected IVs should inherit from.
-    for (i = 0; i < INHERITED_IV_COUNT; i++)
+    for (i = 0; i < inheritedIvCount; i++)
     {
         whichParents[i] = Random() % DAYCARE_MON_COUNT;
     }
 
     // Set each of inherited IVs on the egg mon.
-    for (i = 0; i < INHERITED_IV_COUNT; i++)
+    for (i = 0; i < inheritedIvCount; i++)
     {
         switch (selectedIvs[i])
         {

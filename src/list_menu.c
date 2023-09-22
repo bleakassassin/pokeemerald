@@ -1142,11 +1142,7 @@ u8 AddScrollIndicatorArrowPairParameterized(u32 arrowType, s32 commonPos, s32 fi
     gTempScrollArrowTemplate.tileTag = tileTag;
     gTempScrollArrowTemplate.palTag = palTag;
     gTempScrollArrowTemplate.palNum = 11;
-
-    if (arrowType == SCROLL_ARROW_FLASH)
-        gTempScrollArrowTemplate.registerFlash = TRUE;
-    else
-        gTempScrollArrowTemplate.registerFlash = FALSE;
+    gTempScrollArrowTemplate.registerFlash = (arrowType == SCROLL_ARROW_FLASH) ? TRUE : FALSE;
 
     return AddScrollIndicatorArrowPair(&gTempScrollArrowTemplate, scrollOffset);
 }

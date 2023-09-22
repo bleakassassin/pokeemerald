@@ -1002,10 +1002,7 @@ static bool8 ShouldBattleEReaderTrainer(u8 lvlMode, u16 winStreak)
     if (gSpecialVar_Result != 0 || gSaveBlock3Ptr->ereaderTrainer.winStreak != winStreak)
         return FALSE;
 
-    if (lvlMode != FRONTIER_LVL_50)
-        trainerTeamLevel = 100;
-    else
-        trainerTeamLevel = 50;
+    trainerTeamLevel = (lvlMode != FRONTIER_LVL_50) ? 100 : 50;
 
     for (i = 0; i < 3; i++)
     {
@@ -2974,10 +2971,7 @@ void ConvertEReaderTrainerFacilityClassToEmerald(void)
         if (sRubyFacilityClassToEmerald[i][0] == gSaveBlock3Ptr->ereaderTrainer.facilityClass)
             break;
     }
-    if (i != ARRAY_COUNT(sRubyFacilityClassToEmerald))
-        gSaveBlock3Ptr->ereaderTrainer.facilityClass = sRubyFacilityClassToEmerald[i][1];
-    else
-        gSaveBlock3Ptr->ereaderTrainer.facilityClass = FACILITY_CLASS_YOUNGSTER;
+    gSaveBlock3Ptr->ereaderTrainer.facilityClass = (i != ARRAY_COUNT(sRubyFacilityClassToEmerald) ? sRubyFacilityClassToEmerald[i][1] : FACILITY_CLASS_YOUNGSTER);
 
     SetEReaderTrainerChecksum(&gSaveBlock3Ptr->ereaderTrainer);
 }

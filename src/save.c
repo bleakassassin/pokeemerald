@@ -1177,10 +1177,7 @@ static void UpdateOldHackSave(void)
     CpuCopy16(gSaveBlock2Ptr->pokedex.seen, gSaveBlock1Ptr->seen1, sizeof(gSaveBlock2Ptr->pokedex.seen));
     CpuCopy16(gSaveBlock2Ptr->pokedex.seen, gSaveBlock1Ptr->seen2, sizeof(gSaveBlock2Ptr->pokedex.seen));
 
-    if (sOldSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
-        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
-    else
-        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;      
+    gSaveBlock2Ptr->optionsBattleStyle = (sOldSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD) ? OPTIONS_BATTLE_STYLE_SET : OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsDifficulty = sOldSaveBlock2Ptr->optionsDifficulty;
     gSaveBlock2Ptr->optionsBattleSceneOff = sOldSaveBlock2Ptr->optionsBattleSceneOff;
     gSaveBlock2Ptr->regionMapZoom = sOldSaveBlock2Ptr->regionMapZoom;

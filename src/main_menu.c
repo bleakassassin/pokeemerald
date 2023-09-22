@@ -693,10 +693,7 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
         }
         sCurrItemAndOptionMenuCheck &= ~OPTION_MENU_FLAG;  // turn off the "returning from options menu" flag
         tCurrItem = sCurrItemAndOptionMenuCheck;
-        if (tMenuType >= HAS_MYSTERY_EVENTS)
-            tItemCount = tMenuType + 1;
-        else
-            tItemCount = tMenuType + 2;
+        tItemCount = (tMenuType >= HAS_MYSTERY_EVENTS) ? tMenuType + 1 : tMenuType + 2;
     }
 }
 
