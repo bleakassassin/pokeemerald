@@ -2962,6 +2962,16 @@ void ValidateEReaderTrainer(void)
     }
 }
 
+void LowercaseEReaderTrainerPokemonNicknames(void)
+{
+    s32 i;
+
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    {
+        GetSpeciesName(gSaveBlock3Ptr->ereaderTrainer.party[i].nickname, gSaveBlock3Ptr->ereaderTrainer.party[i].species);
+    }
+}
+
 void ConvertEReaderTrainerFacilityClassToEmerald(void)
 {
     s32 i;
