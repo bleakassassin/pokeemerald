@@ -14,7 +14,7 @@ EventScript_Questionnaire::
 	end
 
 Questionnaire_EventScript_PlayerInputMysteryEventPhrase::
-	goto_if_unset FLAG_SYS_POKEDEX_GET, Questionnaire_EventScript_ThankYou
+	goto_if_unset FLAG_BADGE05_GET, Questionnaire_EventScript_ThankYou
 	goto_if_set FLAG_SYS_MYSTERY_EVENT_ENABLE, Questionnaire_EventScript_ThankYou
 	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0

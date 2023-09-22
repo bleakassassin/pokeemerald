@@ -48,6 +48,7 @@ ProfileMan_EventScript_ShowProfile::
 
 ProfileMan_EventScript_PlayerInputMysteryEventPhrase::
 	setvar VAR_0x8004, 0
+	goto_if_unset FLAG_BADGE05_GET, ProfileMan_EventScript_ShowProfile
 	goto_if_set FLAG_SYS_MYSTERY_EVENT_ENABLE, ProfileMan_EventScript_ShowProfile
 	msgbox ProfileMan_Text_YouKnowSecretSaying, MSGBOX_DEFAULT
 	setflag FLAG_SYS_MYSTERY_EVENT_ENABLE
