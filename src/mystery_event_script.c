@@ -132,6 +132,20 @@ static void SetRecordMixingGift(u8 unk, u8 quantity, u16 itemId)
     }
 }
 
+static void MakeEReaderNameLowercase(u8 *str)
+{
+    s32 i = 1;
+
+    if (str[i] == EOS)
+        return;
+    while (str[i] != EOS)
+    {
+        if ((str[i] >= CHAR_A && str[i] <= CHAR_Z) && (str[i - 1] >= CHAR_A && str[i - 1] <= CHAR_z))
+            str[i] += 26; // number of letters in the alphabet; lowercase characters immediately follow uppercase characters
+        i++;
+    }
+}
+
 u16 GetRecordMixingGift(void)
 {
     struct RecordMixingGiftData *data = &gSaveBlock1Ptr->recordMixingGift.data;
@@ -344,6 +358,7 @@ bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
     u32 data = ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase;
     memcpy(&gSaveBlock3Ptr->ereaderTrainer, (void *)data, sizeof(gSaveBlock3Ptr->ereaderTrainer));
+    MakeEReaderNameLowercase(gSaveBlock3Ptr->ereaderTrainer.name);
     LowercaseEReaderTrainerPokemonNicknames();
     ConvertEReaderTrainerFacilityClassToEmerald();
     ValidateEReaderTrainer();
