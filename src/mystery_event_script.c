@@ -217,6 +217,7 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
     u8 *berry = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     StringCopyN(gStringVar1, gSaveBlock3Ptr->enigmaBerry.berry.name, BERRY_NAME_LENGTH + 1);
     SetEnigmaBerry(berry);
+    MakeEReaderNameUppercase(gSaveBlock3Ptr->enigmaBerry.berry.name);
     StringCopyN(gStringVar2, gSaveBlock3Ptr->enigmaBerry.berry.name, BERRY_NAME_LENGTH + 1);
 
     if (!haveBerry)
@@ -344,6 +345,8 @@ bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
     u32 data = ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase;
     memcpy(&gSaveBlock3Ptr->ereaderTrainer, (void *)data, sizeof(gSaveBlock3Ptr->ereaderTrainer));
+    MakeEReaderNameUppercase(gSaveBlock3Ptr->ereaderTrainer.name);
+    StandarizeEReaderTrainerPokemonNicknames();
     ConvertEReaderTrainerFacilityClassToEmerald();
     ValidateEReaderTrainer();
     StringExpandPlaceholders(gStringVar4, gText_MysteryEventNewTrainer);

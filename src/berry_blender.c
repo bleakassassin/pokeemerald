@@ -3524,6 +3524,7 @@ static bool8 PrintBlendingResults(void)
                 StringAppend(sBerryBlender->stringVar, gLinkPlayers[place].name);
                 Blender_AddTextPrinter(WIN_RESULTS, sBerryBlender->stringVar, 8, yPos, TEXT_SKIP_DRAW, 3);
 
+                MakeEReaderNameUppercase(sBerryBlender->blendedBerries[place].name);
                 StringCopy(sBerryBlender->stringVar, sBerryBlender->blendedBerries[place].name);
                 ConvertInternationalString(sBerryBlender->stringVar, gLinkPlayers[place].language);
                 StringAppend(sBerryBlender->stringVar, sText_SpaceBerry);
