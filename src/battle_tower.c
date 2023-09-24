@@ -2962,7 +2962,7 @@ void ValidateEReaderTrainer(void)
     }
 }
 
-void StandarizeEReaderTrainerPokemonNicknames(void)
+void StandardizeEReaderTrainerPokemonNicknames(void)
 {
     s32 i;
 
