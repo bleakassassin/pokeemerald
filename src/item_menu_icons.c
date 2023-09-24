@@ -645,10 +645,7 @@ static void LoadBerryGfx(u8 berryId, u8 eReaderIndex)
 {
     struct CompressedSpritePalette pal;
 
-    if (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1 && eReaderIndex != 0)
-        pal.data = sEReaderBerryPicTable[eReaderIndex].pal;
-    else
-        pal.data = sBerryPicTable[berryId].pal;
+    pal.data = (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1 && eReaderIndex != 0) ? sEReaderBerryPicTable[eReaderIndex].pal : sBerryPicTable[berryId].pal;
     pal.tag = TAG_BERRY_PIC_PAL;
     LoadCompressedSpritePalette(&pal);
     if (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1)
