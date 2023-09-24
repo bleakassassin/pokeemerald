@@ -2,6 +2,7 @@
 #include "strings.h"
 #include "battle_pyramid_bag.h"
 #include "item_menu.h"
+#include "characters.h"
 
 ALIGNED(4)
 const u8 gText_EmptyString[] = _("");
@@ -1695,3 +1696,17 @@ const u8 gText_DelAll[] = _("Del. all");
 const u8 gText_Quiz[] = _("Quiz");
 const u8 gText_Answer[] = _("Answer");
 const u8 gText_Berry[] = _("Berry");
+
+void MakeEReaderNameLowercase(u8 *str)
+{
+    s32 i = 1;
+
+    if (str[i] == EOS)
+        return;
+    while (str[i] != EOS)
+    {
+        if ((str[i] >= CHAR_A && str[i] <= CHAR_Z) && (str[i - 1] >= CHAR_A && str[i - 1] <= CHAR_z))
+            str[i] += 26; // number of letters in the alphabet; lowercase characters immediately follow uppercase characters
+        i++;
+    }
+}
