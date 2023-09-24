@@ -71,7 +71,7 @@ u8 GetEreaderTrainerFrontSpriteId(void);
 u8 GetEreaderTrainerClassId(void);
 void GetEreaderTrainerName(u8 *dst);
 void ValidateEReaderTrainer(void);
-void LowercaseEReaderTrainerPokemonNicknames(void);
+void StandardizeEReaderTrainerPokemonNicknames(void);
 void ConvertEReaderTrainerFacilityClassToEmerald(void);
 void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer);
 void CopyEReaderTrainerGreeting(void);

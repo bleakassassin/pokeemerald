@@ -2962,7 +2962,7 @@ void ValidateEReaderTrainer(void)
     }
 }
 
-void LowercaseEReaderTrainerPokemonNicknames(void)
+void StandardizeEReaderTrainerPokemonNicknames(void)
 {
     s32 i;
 
