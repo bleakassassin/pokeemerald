@@ -3588,6 +3588,18 @@ extern const u32 gBerryPic_Starf[];
 extern const u32 gBerryPalette_Starf[];
 extern const u32 gBerryPic_Enigma[];
 extern const u32 gBerryPalette_Enigma[];
+extern const u32 gBerryPic_Pumkin[];
+extern const u32 gBerryPalette_Pumkin[];
+extern const u32 gBerryPic_Drash[];
+extern const u32 gBerryPalette_Drash[];
+extern const u32 gBerryPic_Eggant[];
+extern const u32 gBerryPalette_Eggant[];
+extern const u32 gBerryPic_Strib[];
+extern const u32 gBerryPalette_Strib[];
+extern const u32 gBerryPic_Chilan[];
+extern const u32 gBerryPalette_Chilan[];
+extern const u32 gBerryPic_Nutpea[];
+extern const u32 gBerryPalette_Nutpea[];
 
 //pokenav
 extern const u16 gPokenavCondition_Pal[];

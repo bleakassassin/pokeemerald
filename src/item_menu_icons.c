@@ -380,6 +380,17 @@ static const struct CompressedTilesPal sBerryPicTable[] =
     [ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1] = {gBerryPic_Enigma, gBerryPalette_Enigma},
 };
 
+static const struct CompressedTilesPal sEReaderBerryPicTable[] =
+{
+    {gBerryPic_Enigma, gBerryPalette_Enigma},
+    {gBerryPic_Pumkin, gBerryPalette_Pumkin},
+    {gBerryPic_Drash, gBerryPalette_Drash},
+    {gBerryPic_Eggant, gBerryPalette_Eggant},
+    {gBerryPic_Strib, gBerryPalette_Strib},
+    {gBerryPic_Chilan, gBerryPalette_Chilan},
+    {gBerryPic_Nutpea, gBerryPalette_Nutpea},
+};
+
 const struct CompressedSpriteSheet gBerryCheckCircleSpriteSheet =
 {
     gBerryCheckCircle_Gfx, 0x800, TAG_BERRY_CHECK_CIRCLE_GFX
@@ -630,25 +641,26 @@ static void ArrangeBerryGfx(void *src, void *dest)
     }
 }
 
-static void LoadBerryGfx(u8 berryId)
+static void LoadBerryGfx(u8 berryId, u8 eReaderIndex)
 {
     struct CompressedSpritePalette pal;
 
-    if (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1 && IsEnigmaBerryValid())
-    {
-        // unknown empty if statement
-    }
-
-    pal.data = sBerryPicTable[berryId].pal;
+    if (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1 && eReaderIndex != 0)
+        pal.data = sEReaderBerryPicTable[eReaderIndex].pal;
+    else
+        pal.data = sBerryPicTable[berryId].pal;
     pal.tag = TAG_BERRY_PIC_PAL;
     LoadCompressedSpritePalette(&pal);
-    LZDecompressWram(sBerryPicTable[berryId].tiles, &gDecompressionBuffer[0x1000]);
+    if (berryId == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY) - 1)
+        LZDecompressWram(sEReaderBerryPicTable[eReaderIndex].tiles, &gDecompressionBuffer[0x1000]);
+    else
+        LZDecompressWram(sBerryPicTable[berryId].tiles, &gDecompressionBuffer[0x1000]);
     ArrangeBerryGfx(&gDecompressionBuffer[0x1000], &gDecompressionBuffer[0]);
 }
 
 u8 CreateBerryTagSprite(u8 id, s16 x, s16 y)
 {
-    LoadBerryGfx(id);
+    LoadBerryGfx(id, gSaveBlock3Ptr->enigmaBerry.berry.index);
     return CreateSprite(&sBerryPicSpriteTemplate, x, y, 0);
 }
 
@@ -658,12 +670,12 @@ void FreeBerryTagSpritePalette(void)
 }
 
 // For throwing berries into the Berry Blender
-u8 CreateSpinningBerrySprite(u8 berryId, u8 x, u8 y, bool8 startAffine)
+u8 CreateSpinningBerrySprite(u8 berryId, u8 x, u8 y, bool8 startAffine, u8 eReaderIndex)
 {
     u8 spriteId;
 
     FreeSpritePaletteByTag(TAG_BERRY_PIC_PAL);
-    LoadBerryGfx(berryId);
+    LoadBerryGfx(berryId, eReaderIndex);
     spriteId = CreateSprite(&sBerryPicRotatingSpriteTemplate, x, y, 0);
     if (startAffine == TRUE)
         StartSpriteAffineAnim(&gSprites[spriteId], 1);
