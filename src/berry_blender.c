@@ -118,6 +118,7 @@ struct BlenderBerry
     u16 itemId;
     u8 name[BERRY_NAME_LENGTH + 1];
     u8 flavors[FLAVOR_COUNT + 1]; // 5 flavors, + 1 for feel
+    u8 eReaderIndex; // for e-Reader Berries so that each player's e-Reader Berry can be displayed properly
 };
 
 struct TimeAndRPM
@@ -1198,7 +1199,8 @@ static void SetBerrySpriteData(struct Sprite *sprite, s16 x, s16 y, s16 bounceSp
 
 static void CreateBerrySprite(u16 itemId, u8 playerId)
 {
-    u8 spriteId = CreateSpinningBerrySprite(ITEM_TO_BERRY(itemId) - 1, 0, 80, playerId & 1);
+    u8 spriteId = CreateSpinningBerrySprite(ITEM_TO_BERRY(itemId) - 1, 0, 80, playerId & 1,
+                                            sBerryBlender->blendedBerries[sPlayerIdMap[sBerryBlender->numPlayers - 2][playerId]].eReaderIndex);
     SetBerrySpriteData(&gSprites[spriteId],
                         sBerrySpriteData[playerId][0],
                         sBerrySpriteData[playerId][1],
@@ -1219,6 +1221,8 @@ static void ConvertItemToBlenderBerry(struct BlenderBerry* berry, u16 itemId)
     berry->flavors[FLAVOR_BITTER] = berryInfo->bitter;
     berry->flavors[FLAVOR_SOUR] = berryInfo->sour;
     berry->flavors[FLAVOR_COUNT] = berryInfo->smoothness;
+    if (itemId == ITEM_ENIGMA_BERRY)
+        berry->eReaderIndex = berryInfo->index;
 }
 
 static void InitLocalPlayers(u8 opponentsNum)

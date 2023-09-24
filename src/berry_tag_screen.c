@@ -465,7 +465,10 @@ static void PrintBerryDescription1(void)
     else
     {
         const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
-        AddTextPrinterParameterized(WIN_DESC, gSaveBlock2Ptr->optionsCurrentFont, berry->description1, 0, 1, 0, NULL);
+        if (sBerryTag->berryId == ItemIdToBerryType(ITEM_ENIGMA_BERRY))
+            AddTextPrinterParameterized(WIN_DESC, gSaveBlock2Ptr->optionsCurrentFont, gEReaderBerryDescriptionsPart1[gSaveBlock3Ptr->enigmaBerry.berry.index], 0, 1, 0, NULL);
+        else
+            AddTextPrinterParameterized(WIN_DESC, gSaveBlock2Ptr->optionsCurrentFont, berry->description1, 0, 1, 0, NULL);
     }
 }
 
@@ -479,7 +482,10 @@ static void PrintBerryDescription2(void)
     else
     {
         const struct Berry *berry = GetBerryInfo(sBerryTag->berryId);
-        AddTextPrinterParameterized(WIN_DESC, gSaveBlock2Ptr->optionsCurrentFont, berry->description2, 0, 0x11, 0, NULL);
+        if (sBerryTag->berryId == ItemIdToBerryType(ITEM_ENIGMA_BERRY))
+            AddTextPrinterParameterized(WIN_DESC, gSaveBlock2Ptr->optionsCurrentFont, gEReaderBerryDescriptionsPart2[gSaveBlock3Ptr->enigmaBerry.berry.index], 0, 0x11, 0, NULL);
+        else
+            AddTextPrinterParameterized(WIN_DESC, gSaveBlock2Ptr->optionsCurrentFont, berry->description2, 0, 0x11, 0, NULL);
     }
 }
 

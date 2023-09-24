@@ -253,7 +253,7 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
 
     ctx->mStatus = MEVENT_STATUS_SUCCESS;
 
-    if (IsEnigmaBerryValid() == TRUE)
+    if (WasEnigmaBerryReceivedCorrectly(berry) == TRUE)
         VarSet(VAR_ENIGMA_BERRY_AVAILABLE, 1);
     else
         ctx->mStatus = MEVENT_STATUS_LOAD_ERROR;

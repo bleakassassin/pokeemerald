@@ -557,13 +557,7 @@ void SpawnLinkPartnerObjectEvent(void)
                 break;
             }
             if (gLinkPlayers[i].outfit == OUTFIT_RS)
-            {
-                if (gLinkPlayers[i].gender == 0)
-                    linkSpriteId = OBJ_EVENT_GFX_LINK_RS_BRENDAN;
-                else
-                    linkSpriteId = OBJ_EVENT_GFX_LINK_RS_MAY;
-                break;
-            }
+                linkSpriteId = (gLinkPlayers[i].gender == 0) ? OBJ_EVENT_GFX_LINK_RS_BRENDAN : OBJ_EVENT_GFX_LINK_RS_MAY;
             SpawnSpecialObjectEventParameterized(linkSpriteId, movementTypes[j], 240 - i, coordOffsets[j][0] + x + MAP_OFFSET, coordOffsets[j][1] + y + MAP_OFFSET, 0);
             LoadLinkPartnerObjectEventSpritePalette(linkSpriteId, 240 - i, i);
             j++;

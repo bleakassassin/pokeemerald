@@ -113,6 +113,25 @@ static const u8 sBerryDescriptionPart1_Starf[] = _("So strong, it was abandoned 
 static const u8 sBerryDescriptionPart2_Starf[] = _("world's edge. Considered a mirage.");
 static const u8 sBerryDescriptionPart1_Enigma[] = _("A completely enigmatic Berry.");
 static const u8 sBerryDescriptionPart2_Enigma[] = _("Appears to have the power of stars.");
+static const u8 sBerryDescriptionPart1_Pumkin[] = _("This BERRY is amazingly sour.");
+static const u8 sBerryDescriptionPart2_Pumkin[] = _("It’s heavy due to its dense filling.");
+static const u8 sBerryDescriptionPart1_Drash[] = _("When it ripens, this sweet BERRY");
+static const u8 sBerryDescriptionPart2_Drash[] = _("falls and sticks into the ground.");
+static const u8 sBerryDescriptionPart1_Eggant[] = _("Very dry tasting, especially the");
+static const u8 sBerryDescriptionPart2_Eggant[] = _("parts not exposed to the sun.");
+static const u8 sBerryDescriptionPart1_Strib[] = _("It grows slowly, but abundantly.");
+static const u8 sBerryDescriptionPart2_Strib[] = _("Makes a soothing sound when shaken.");
+static const u8 sBerryDescriptionPart1_Chilan[] = _("This sparse BERRY grows quickly.");
+static const u8 sBerryDescriptionPart2_Chilan[] = _("Its skin is quite tough.");
+static const u8 sBerryDescriptionPart1_Nutpea[] = _("This BERRY is rigid and cracks open");
+static const u8 sBerryDescriptionPart2_Nutpea[] = _("when the center is squeezed.");
+
+static const u8 sBerryName_Pumkin[] = _("PUMKIN");
+static const u8 sBerryName_Drash[] = _("DRASH");
+static const u8 sBerryName_Eggant[] = _("EGGANT");
+static const u8 sBerryName_Strib[] = _("STRIB");
+static const u8 sBerryName_Chilan[] = _("CHILAN");
+static const u8 sBerryName_Nutpea[] = _("NUTPEA");
 
 const struct Berry gBerries[] =
 {
@@ -939,6 +958,39 @@ const struct BerryCrushBerryData gBerryCrush_BerryData[] = {
 
 const struct BerryTree gBlankBerryTree = {};
 
+static const u8 *const sEReaderBerries[] =
+{
+    gBerries[ITEM_ENIGMA_BERRY - FIRST_BERRY_INDEX].name,
+    sBerryName_Pumkin,
+    sBerryName_Drash,
+    sBerryName_Eggant,
+    sBerryName_Strib,
+    sBerryName_Chilan,
+    sBerryName_Nutpea
+};
+
+const u8 *const gEReaderBerryDescriptionsPart1[] =
+{
+    sBerryDescriptionPart1_Enigma,
+    sBerryDescriptionPart1_Pumkin,
+    sBerryDescriptionPart1_Drash,
+    sBerryDescriptionPart1_Eggant,
+    sBerryDescriptionPart1_Strib,
+    sBerryDescriptionPart1_Chilan,
+    sBerryDescriptionPart1_Nutpea
+};
+
+const u8 *const gEReaderBerryDescriptionsPart2[] =
+{
+    sBerryDescriptionPart2_Enigma,
+    sBerryDescriptionPart2_Pumkin,
+    sBerryDescriptionPart2_Drash,
+    sBerryDescriptionPart2_Eggant,
+    sBerryDescriptionPart2_Strib,
+    sBerryDescriptionPart2_Chilan,
+    sBerryDescriptionPart2_Nutpea
+};
+
 // unused
 void ClearEnigmaBerries(void)
 {
@@ -947,11 +999,26 @@ void ClearEnigmaBerries(void)
 
 void SetEnigmaBerry(u8 *src)
 {
-    u32 i;
+    u32 i, j = 0;
     u8 *dest = (u8 *)&gSaveBlock3Ptr->enigmaBerry;
 
-    for (i = 0; i < sizeof(gSaveBlock3Ptr->enigmaBerry); i++)
-        dest[i] = src[i];
+    for (i = 0; i < 0x52C; i++)
+    {
+        if (i < 0x1C || i >= 0x516)
+        {
+            dest[j] = src[i];
+            j++;
+        }
+    }
+
+    for (i = 0; i < ARRAY_COUNT(sEReaderBerries); i++)
+    {
+        if (!StringCompare(gSaveBlock3Ptr->enigmaBerry.berry.name, sEReaderBerries[i]))
+        {
+            gSaveBlock3Ptr->enigmaBerry.berry.index = i;
+            break;
+        }
+    }
 }
 
 static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
@@ -976,6 +1043,25 @@ bool32 IsEnigmaBerryValid(void)
         return FALSE;
     if (GetEnigmaBerryChecksum(&gSaveBlock3Ptr->enigmaBerry) != gSaveBlock3Ptr->enigmaBerry.checksum)
         return FALSE;
+    return TRUE;
+}
+
+bool32 WasEnigmaBerryReceivedCorrectly(u8 *src)
+{
+    u32 i;
+    u32 checksum;
+    u32 checksumReceived;
+
+    checksum = 0;
+    checksumReceived = (src[0x52F] << 24) | (src[0x52E] << 16) | (src[0x52D] << 8) | src[0x52C];
+
+    for (i = 0; i < 0x52C; i++)
+        checksum += src[i];
+
+    if (checksum != checksumReceived)
+        return FALSE;
+
+    gSaveBlock3Ptr->enigmaBerry.checksum = GetEnigmaBerryChecksum(&gSaveBlock3Ptr->enigmaBerry);
     return TRUE;
 }
 

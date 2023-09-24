@@ -4,6 +4,7 @@
 void ClearEnigmaBerries(void);
 void SetEnigmaBerry(u8 *src);
 bool32 IsEnigmaBerryValid(void);
+bool32 WasEnigmaBerryReceivedCorrectly(u8 *src);
 const struct Berry *GetBerryInfo(u8 berry);
 struct BerryTree *GetBerryTreeInfo(u8 id);
 bool32 ObjectEventInteractionWaterBerryTree(void);
@@ -36,5 +37,8 @@ struct BerryCrushBerryData {
 extern const struct BerryCrushBerryData gBerryCrush_BerryData[];
 extern const u8 sBerryDescriptionPart1_WatmelMetric[];
 extern const u8 sBerryDescriptionPart2_WatmelMetric[];
+
+extern const u8 *const gEReaderBerryDescriptionsPart1[];
+extern const u8 *const gEReaderBerryDescriptionsPart2[];
 
 #endif // GUARD_BERRY_H
