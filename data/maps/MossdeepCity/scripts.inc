@@ -77,10 +77,6 @@ MossdeepCity_EventScript_ReceiveJirachi::
 
 MossdeepCity_EventScript_ReceiveJirachiParty::
 	call MossdeepCity_EventScript_ReceivedJirachiFanfare
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MossdeepCity_EventScript_WomanKeepMakingWishes
-	call Common_EventScript_GetGiftMonPartySlot
-	call Common_EventScript_NameReceivedPartyMon
 MossdeepCity_EventScript_WomanKeepMakingWishes::
 	msgbox MossdeepCity_Text_KeepMakingWishes, MSGBOX_DEFAULT
 	release
@@ -88,10 +84,6 @@ MossdeepCity_EventScript_WomanKeepMakingWishes::
 
 MossdeepCity_EventScript_ReceiveJirachiPC::
 	call MossdeepCity_EventScript_ReceivedJirachiFanfare
-	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MossdeepCity_EventScript_SendJirachiToPC
-	call Common_EventScript_NameReceivedBoxMon
-MossdeepCity_EventScript_SendJirachiToPC::
 	call Common_EventScript_TransferredToPC
 	goto MossdeepCity_EventScript_WomanKeepMakingWishes
 

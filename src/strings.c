@@ -1697,7 +1697,7 @@ const u8 gText_Quiz[] = _("Quiz");
 const u8 gText_Answer[] = _("Answer");
 const u8 gText_Berry[] = _("Berry");
 
-void MakeEReaderNameLowercase(u8 *str)
+void MakeNameLowercase(u8 *str)
 {
     s32 i = 1;
 
