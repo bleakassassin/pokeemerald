@@ -343,10 +343,12 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 {
+    s32 i;
     u32 data = ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase;
     memcpy(&gSaveBlock3Ptr->ereaderTrainer, (void *)data, sizeof(gSaveBlock3Ptr->ereaderTrainer));
     MakeEReaderNameUppercase(gSaveBlock3Ptr->ereaderTrainer.name);
-    StandardizeEReaderTrainerPokemonNicknames();
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+        MakeEReaderNameUppercase(gSaveBlock3Ptr->ereaderTrainer.party[i].nickname);
     ConvertEReaderTrainerFacilityClassToEmerald();
     ValidateEReaderTrainer();
     StringExpandPlaceholders(gStringVar4, gText_MysteryEventNewTrainer);
