@@ -225,6 +225,7 @@ TrainerHill_Entrance_ReceivePrizeMon::
 
 TrainerHill_Entrance_EventScript_SendPrizeMonParty::
 	call TrainerHill_Entrance_EventScript_ReceivedPrizeMon
+	goto_if_eq VAR_TRAINER_HILL_PENDING_MON_PRIZE, SPECIES_CELEBI, TrainerHill_Entrance_EventScript_CancelEntry
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, TrainerHill_Entrance_EventScript_CancelEntry
 	call Common_EventScript_GetGiftMonPartySlot
@@ -233,6 +234,7 @@ TrainerHill_Entrance_EventScript_SendPrizeMonParty::
 
 TrainerHill_Entrance_EventScript_SendPrizeMonPC::
 	call TrainerHill_Entrance_EventScript_ReceivedPrizeMon
+	goto_if_eq VAR_TRAINER_HILL_PENDING_MON_PRIZE, SPECIES_CELEBI, TrainerHill_Entrance_EventScript_3rdStarterTransferredToPC
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, TrainerHill_Entrance_EventScript_3rdStarterTransferredToPC
 	call Common_EventScript_NameReceivedBoxMon
