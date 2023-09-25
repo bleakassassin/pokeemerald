@@ -217,7 +217,7 @@ bool8 MEScrCmd_setenigmaberry(struct ScriptContext *ctx)
     u8 *berry = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     StringCopyN(gStringVar1, gSaveBlock3Ptr->enigmaBerry.berry.name, BERRY_NAME_LENGTH + 1);
     SetEnigmaBerry(berry);
-    MakeEReaderNameUppercase(gSaveBlock3Ptr->enigmaBerry.berry.name);
+    MakeNameUppercase(gSaveBlock3Ptr->enigmaBerry.berry.name);
     StringCopyN(gStringVar2, gSaveBlock3Ptr->enigmaBerry.berry.name, BERRY_NAME_LENGTH + 1);
 
     if (!haveBerry)
@@ -346,9 +346,9 @@ bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
     s32 i;
     u32 data = ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase;
     memcpy(&gSaveBlock3Ptr->ereaderTrainer, (void *)data, sizeof(gSaveBlock3Ptr->ereaderTrainer));
-    MakeEReaderNameUppercase(gSaveBlock3Ptr->ereaderTrainer.name);
+    MakeNameUppercase(gSaveBlock3Ptr->ereaderTrainer.name);
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
-        MakeEReaderNameUppercase(gSaveBlock3Ptr->ereaderTrainer.party[i].nickname);
+        MakeNameUppercase(gSaveBlock3Ptr->ereaderTrainer.party[i].nickname);
     ConvertEReaderTrainerFacilityClassToEmerald();
     ValidateEReaderTrainer();
     StringExpandPlaceholders(gStringVar4, gText_MysteryEventNewTrainer);

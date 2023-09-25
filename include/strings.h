@@ -2960,6 +2960,6 @@ extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
 
-void MakeEReaderNameUppercase(u8 *str);
+void MakeNameUppercase(u8 *str);
 
 #endif // GUARD_STRINGS_H
