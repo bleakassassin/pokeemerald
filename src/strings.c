@@ -1699,7 +1699,7 @@ const u8 gText_Berry[] = _("BERRY");
 
 void MakeNameUppercase(u8 *str)
 {
-    s32 i;
+    s32 i = 0;
 
     if (str[i] == EOS)
         return;
