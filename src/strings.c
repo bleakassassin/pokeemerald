@@ -1697,6 +1697,20 @@ const u8 gText_Quiz[] = _("Quiz");
 const u8 gText_Answer[] = _("Answer");
 const u8 gText_Berry[] = _("Berry");
 
+void MakeNameUppercase(u8 *str)
+{
+    s32 i = 0;
+
+    if (str[i] == EOS)
+        return;
+    while (str[i] != EOS)
+    {
+        if (str[i] >= CHAR_a && str[i] <= CHAR_z)
+            str[i] -= 26; // number of letters in the alphabet; uppercase characters immediately precede lowercase characters
+        i++;
+    }
+}
+
 void MakeNameLowercase(u8 *str)
 {
     s32 i = 1;

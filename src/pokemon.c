@@ -4713,12 +4713,14 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     {
         otGender = MALE;
         otId = 0x00004E4Bu; //20043:00000
+        MakeNameUppercase(mon->box.nickname);
     }
 
     else if (species == SPECIES_CELEBI) //Replicate unused Agate Celebi from Pokemon Colosseum disc
     {
         otGender = FEMALE;
         otId = 0x00007991u; //31121:00000
+        MakeNameUppercase(mon->box.nickname);
     }
 
     GetTrainerName(otName, species);
