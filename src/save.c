@@ -55,7 +55,7 @@ static void CheckProgressFlags(void);
  * See SECTOR_ID_* constants in save.h
  */
 
-#define TM_FLAGS 41
+#define TM_FLAGS 39
 #define SAVEBLOCK_CHUNK(structure, chunkNum)                                   \
 {                                                                              \
     chunkNum * SECTOR_DATA_SIZE,                                               \
