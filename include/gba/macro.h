@@ -54,7 +54,7 @@
 
 #define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, ((size)/(32/8) & 0x1FFFFF))
 
-#define DmaSetUnchecked(dmaNum, src, dest, control)                                                                     \
+#define DmaSetUnchecked(dmaNum, src, dest, control)                                                                            \
 do {                                                                                                                  \
     vu32 *_dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum;                                                                    \
     u32 _eval_src = (u32)(src);                                                                                       \
