@@ -384,11 +384,17 @@ static const struct CompressedTilesPal sEReaderBerryPicTable[] =
 {
     {gBerryPic_Enigma, gBerryPalette_Enigma},
     {gBerryPic_Pumkin, gBerryPalette_Pumkin},
-    {gBerryPic_Drash, gBerryPalette_Drash},
+    {gBerryPic_Drash,  gBerryPalette_Drash},
     {gBerryPic_Eggant, gBerryPalette_Eggant},
-    {gBerryPic_Strib, gBerryPalette_Strib},
+    {gBerryPic_Strib,  gBerryPalette_Strib},
     {gBerryPic_Chilan, gBerryPalette_Chilan},
     {gBerryPic_Nutpea, gBerryPalette_Nutpea},
+    {gBerryPic_Ginema, gBerryPalette_Ginema},
+    {gBerryPic_Kuo,    gBerryPalette_Kuo},
+    {gBerryPic_Yago,   gBerryPalette_Yago},
+    {gBerryPic_Touga,  gBerryPalette_Touga},
+    {gBerryPic_Niniku, gBerryPalette_Niniku},
+    {gBerryPic_Topo,   gBerryPalette_Topo},
 };
 
 const struct CompressedSpriteSheet gBerryCheckCircleSpriteSheet =

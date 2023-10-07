@@ -125,6 +125,18 @@ static const u8 sBerryDescriptionPart1_Chilan[] = _("This sparse Berry grows qui
 static const u8 sBerryDescriptionPart2_Chilan[] = _("Its skin is quite tough.");
 static const u8 sBerryDescriptionPart1_Nutpea[] = _("This Berry is rigid and cracks open");
 static const u8 sBerryDescriptionPart2_Nutpea[] = _("when the center is squeezed.");
+static const u8 sBerryDescriptionPart1_Ginema[] = _("A perfectly round BERRY under layers");
+static const u8 sBerryDescriptionPart2_Ginema[] = _("of thin skin. Very dry and sour.");
+static const u8 sBerryDescriptionPart1_Kuo[] = _("The five flavors mix deliciously.");
+static const u8 sBerryDescriptionPart2_Kuo[] = _("Leaves a gritty feeling in the mouth.");
+static const u8 sBerryDescriptionPart1_Yago[] = _("Extremely bitter. It is so light");
+static const u8 sBerryDescriptionPart2_Yago[] = _("that it feels weightless when held.");
+static const u8 sBerryDescriptionPart1_Touga[] = _("Incredibly spicy. Nobody has ever");
+static const u8 sBerryDescriptionPart2_Touga[] = _("been able to eat one whole.");
+static const u8 sBerryDescriptionPart1_Niniku[] = _("Grows quickly, but yields few BERRIES.");
+static const u8 sBerryDescriptionPart2_Niniku[] = _("A pleasant scent comes from the stem.");
+static const u8 sBerryDescriptionPart1_Topo[] = _("Grows slowly, but yields many BERRIES.");
+static const u8 sBerryDescriptionPart2_Topo[] = _("It's full of sweet and sour juices.");
 
 static const u8 sBerryName_Pumkin[] = _("PUMKIN");
 static const u8 sBerryName_Drash[] = _("DRASH");
@@ -132,6 +144,17 @@ static const u8 sBerryName_Eggant[] = _("EGGANT");
 static const u8 sBerryName_Strib[] = _("STRIB");
 static const u8 sBerryName_Chilan[] = _("CHILAN");
 static const u8 sBerryName_Nutpea[] = _("NUTPEA");
+static const u8 sBerryName_Ginema[] = _("GINEMA");
+static const u8 sBerryName_Kuo[] = _("KUO");
+static const u8 sBerryName_Yago[] = _("YAGO");
+static const u8 sBerryName_Touga[] = _("TOUGA");
+static const u8 sBerryName_Niniku[] = _("NINIKU");
+static const u8 sBerryName_Topo[] = _("TOPO");
+static const u8 sBerryName_GinemaEN[] = _("ONYO");
+static const u8 sBerryName_KuoEN[] = _("RAKO");
+static const u8 sBerryName_YagoEN[] = _("BITMEL");
+static const u8 sBerryName_TougaEN[] = _("CHIPER");
+static const u8 sBerryName_NinikuEN[] = _("ARLIG");
 
 const struct Berry gBerries[] =
 {
@@ -966,7 +989,13 @@ static const u8 *const sEReaderBerries[] =
     sBerryName_Eggant,
     sBerryName_Strib,
     sBerryName_Chilan,
-    sBerryName_Nutpea
+    sBerryName_Nutpea,
+    sBerryName_Ginema,
+    sBerryName_Kuo,
+    sBerryName_Yago,
+    sBerryName_Touga,
+    sBerryName_Niniku,
+    sBerryName_Topo
 };
 
 const u8 *const gEReaderBerryDescriptionsPart1[] =
@@ -977,7 +1006,13 @@ const u8 *const gEReaderBerryDescriptionsPart1[] =
     sBerryDescriptionPart1_Eggant,
     sBerryDescriptionPart1_Strib,
     sBerryDescriptionPart1_Chilan,
-    sBerryDescriptionPart1_Nutpea
+    sBerryDescriptionPart1_Nutpea,
+    sBerryDescriptionPart1_Ginema,
+    sBerryDescriptionPart1_Kuo,
+    sBerryDescriptionPart1_Yago,
+    sBerryDescriptionPart1_Touga,
+    sBerryDescriptionPart1_Niniku,
+    sBerryDescriptionPart1_Topo
 };
 
 const u8 *const gEReaderBerryDescriptionsPart2[] =
@@ -988,7 +1023,13 @@ const u8 *const gEReaderBerryDescriptionsPart2[] =
     sBerryDescriptionPart2_Eggant,
     sBerryDescriptionPart2_Strib,
     sBerryDescriptionPart2_Chilan,
-    sBerryDescriptionPart2_Nutpea
+    sBerryDescriptionPart2_Nutpea,
+    sBerryDescriptionPart2_Ginema,
+    sBerryDescriptionPart2_Kuo,
+    sBerryDescriptionPart2_Yago,
+    sBerryDescriptionPart2_Touga,
+    sBerryDescriptionPart2_Niniku,
+    sBerryDescriptionPart2_Topo
 };
 
 // unused

@@ -1227,7 +1227,10 @@ static u8 GetMapsecType(u16 mapSecId)
     case MAPSEC_SOUTHERN_ISLAND:
         return FlagGet(FLAG_LANDMARK_SOUTHERN_ISLAND) ? MAPSECTYPE_ROUTE : MAPSECTYPE_NONE;
     case MAPSEC_ROUTE_103:
-        return FlagGet(FLAG_LANDMARK_ALTERING_CAVE) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
+        if (FlagGet(FLAG_LANDMARK_ALTERING_CAVE) && FlagGet(FLAG_HIDE_ROUTE_103_SNORLAX))
+            return MAPSECTYPE_ROUTE;
+        else
+            return MAPSECTYPE_ROUTE_CANTFLY;
     case MAPSEC_ROUTE_108:
         return FlagGet(FLAG_LANDMARK_ABANDONED_SHIP) ? MAPSECTYPE_ROUTE : MAPSECTYPE_ROUTE_CANTFLY;
     case MAPSEC_ROUTE_115:
@@ -1477,14 +1480,12 @@ static void FreeRegionMapCursorSprite(void)
     }
 }
 
-// Unused
-static void SetUnkCursorSpriteData(void)
+static void UNUSED SetUnkCursorSpriteData(void)
 {
     sRegionMap->cursorSprite->data[3] = TRUE;
 }
 
-// Unused
-static void ClearUnkCursorSpriteData(void)
+static void UNUSED ClearUnkCursorSpriteData(void)
 {
     sRegionMap->cursorSprite->data[3] = FALSE;
 }

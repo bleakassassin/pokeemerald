@@ -174,12 +174,12 @@ enum {
 
 static const struct MenuAction sMenuActions[] =
 {
-    [ACTION_USE_FIELD] =    { gMenuText_Use, BagAction_UseOnField },
-    [ACTION_TOSS] =         { gText_Toss, BagAction_Toss },
-    [ACTION_GIVE] =         { gText_Give, BagAction_Give },
-    [ACTION_CANCEL] =       { gText_Cancel, BagAction_Cancel },
-    [ACTION_USE_BATTLE] =   { gMenuText_Use, BagAction_UseInBattle },
-    [ACTION_DUMMY] =        { gText_EmptyString, NULL },
+    [ACTION_USE_FIELD] =    { gMenuText_Use, {BagAction_UseOnField} },
+    [ACTION_TOSS] =         { gText_Toss, {BagAction_Toss} },
+    [ACTION_GIVE] =         { gText_Give, {BagAction_Give} },
+    [ACTION_CANCEL] =       { gText_Cancel, {BagAction_Cancel} },
+    [ACTION_USE_BATTLE] =   { gMenuText_Use, {BagAction_UseInBattle} },
+    [ACTION_DUMMY] =        { gText_EmptyString, {NULL} },
 };
 
 static const u8 sMenuActionIds_Field[] = {ACTION_USE_FIELD, ACTION_GIVE, ACTION_TOSS, ACTION_CANCEL};
@@ -382,8 +382,8 @@ void CB2_PyramidBagMenuFromStartMenu(void)
     GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_FIELD, CB2_ReturnToFieldWithOpenMenu);
 }
 
-// Unused, CB2_BagMenuFromBattle is used instead
-static void OpenBattlePyramidBagInBattle(void)
+// CB2_BagMenuFromBattle is used instead
+static void UNUSED OpenBattlePyramidBagInBattle(void)
 {
     GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
 }
@@ -1468,8 +1468,7 @@ static void DrawTossNumberWindow(u8 windowId)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-// Unused
-static u8 GetMenuActionWindowId(u8 windowArrayId)
+static u8 UNUSED GetMenuActionWindowId(u8 windowArrayId)
 {
     return gPyramidBagMenu->windowIds[windowArrayId];
 }
