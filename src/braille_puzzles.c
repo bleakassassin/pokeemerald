@@ -250,6 +250,11 @@ static void DoBrailleRegisteelEffect(void)
     UnlockPlayerFieldControls();
 }
 
+// theory: another commented out DoBrailleWait and Task_BrailleWait.
+static void DoBrailleWait(void)
+{
+}
+
 // this used to be FldEff_UseFlyAncientTomb . why did GF merge the 2 functions?
 bool8 FldEff_UsePuzzleEffect(void)
 {

@@ -1100,8 +1100,7 @@ static u16 GetNPCRoomGraphicsId(void)
     return sNPCTable[sNpcId].graphicsId;
 }
 
-// Unused
-static u8 GetInWildMonRoom(void)
+static bool8 UNUSED GetInWildMonRoom(void)
 {
     return sInWildMonRoom;
 }

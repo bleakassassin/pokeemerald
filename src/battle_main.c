@@ -2074,8 +2074,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     return gTrainers[trainerNum].partySize;
 }
 
-// Unused
-static void HBlankCB_Battle(void)
+static void UNUSED HBlankCB_Battle(void)
 {
     if (REG_VCOUNT < DISPLAY_HEIGHT && REG_VCOUNT >= 111)
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_SCREENBASE(24) | BGCNT_TXT256x512);
@@ -2711,8 +2710,7 @@ void SpriteCallbackDummy_2(struct Sprite *sprite)
 #define sNumFlickers data[3]
 #define sDelay       data[4]
 
-// Unused
-static void SpriteCB_InitFlicker(struct Sprite *sprite)
+static void UNUSED SpriteCB_InitFlicker(struct Sprite *sprite)
 {
     sprite->sNumFlickers = 6;
     sprite->sDelay = 1;
@@ -2867,8 +2865,7 @@ static void SpriteCB_BattleSpriteSlideLeft(struct Sprite *sprite)
     }
 }
 
-// Unused
-static void SetIdleSpriteCallback(struct Sprite *sprite)
+static void UNUSED SetIdleSpriteCallback(struct Sprite *sprite)
 {
     sprite->callback = SpriteCB_Idle;
 }
@@ -3691,8 +3688,7 @@ static void BattleIntroRecordMonsToDex(void)
     }
 }
 
-// Unused
-static void BattleIntroSkipRecordMonsToDex(void)
+static void UNUSED BattleIntroSkipRecordMonsToDex(void)
 {
     if (gBattleControllerExecFlags == 0)
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
@@ -3795,8 +3791,7 @@ static void BattleIntroPlayer1SendsOutMonAnimation(void)
     gBattleMainFunc = TryDoEventsBeforeFirstTurn;
 }
 
-// Unused
-static void BattleIntroSwitchInPlayerMons(void)
+static void UNUSED BattleIntroSwitchInPlayerMons(void)
 {
     if (gBattleControllerExecFlags == 0)
     {
