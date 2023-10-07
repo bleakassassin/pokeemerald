@@ -50,11 +50,11 @@
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 
-#define DAY_EVO_HOUR_BEGIN       12
-#define DAY_EVO_HOUR_END         HOURS_PER_DAY
+#define DAY_EVO_HOUR_BEGIN       6
+#define DAY_EVO_HOUR_END         20
 
-#define NIGHT_EVO_HOUR_BEGIN     0
-#define NIGHT_EVO_HOUR_END       12
+#define NIGHT_EVO_HOUR_BEGIN     20
+#define NIGHT_EVO_HOUR_END       6
 
 #define FRIENDSHIP_EVO_THRESHOLD 220
 
