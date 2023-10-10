@@ -23,6 +23,14 @@ EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
 #include "data/text/item_descriptions.h"
 #include "data/items.h"
 
+static const u16 sHackPockets[] =
+{
+    BATTLEITEMS_POCKET,
+    TREASURES_POCKET,
+    MAIL_POCKET,
+    ITEMS_POCKET
+};
+
 u16 GetBagItemQuantity(u16 *quantity)
 {
     return gSaveBlock2Ptr->encryptionKey ^ *quantity;
@@ -50,6 +58,16 @@ void ApplyNewEncryptionKeyToBagItems(u32 newKey)
     {
         for (item = 0; item < gBagPockets[pocket].capacity; item++)
             ApplyNewEncryptionKeyToHword(&(gBagPockets[pocket].itemSlots[item].quantity), newKey);
+    }
+}
+
+void ApplyLastHackEncryptionKeyToNewPockets(u32 key) // This prevents item quantities for hack-specific pockets from breaking when saving the game in vanilla Emerald
+{
+    u32 i, item;
+    for (i = 0; i < ARRAY_COUNT(sHackPockets); i++)
+    {
+        for (item = 0; item < gBagPockets[sHackPockets[i]].capacity; item++)
+            ApplyNewEncryptionKeyToHword(&(gBagPockets[sHackPockets[i]].itemSlots[item].quantity), key);
     }
 }
 

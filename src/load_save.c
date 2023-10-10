@@ -136,6 +136,7 @@ void MoveSaveBlocks_ResetHeap(void)
     encryptionKey = (Random() << 16) + (Random());
     ApplyNewEncryptionKeyToAllEncryptedData(encryptionKey);
     gSaveBlock2Ptr->encryptionKey = encryptionKey;
+    gSaveBlock2Ptr->encryptionKeyHack = encryptionKey;
 }
 
 u32 UseContinueGameWarp(void)
@@ -306,8 +307,10 @@ void SavePlayerBag(void)
 
     encryptionKeyBackup = gSaveBlock2Ptr->encryptionKey;
     gSaveBlock2Ptr->encryptionKey = gLastEncryptionKey;
+    gSaveBlock2Ptr->encryptionKeyHack = gLastEncryptionKey;
     ApplyNewEncryptionKeyToBagItems(encryptionKeyBackup);
     gSaveBlock2Ptr->encryptionKey = encryptionKeyBackup; // updated twice?
+    gSaveBlock2Ptr->encryptionKeyHack = encryptionKeyBackup;
 }
 
 void ApplyNewEncryptionKeyToHword(u16 *hWord, u32 newKey)
