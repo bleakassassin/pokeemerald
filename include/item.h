@@ -36,6 +36,7 @@ extern struct BagPocket gBagPockets[];
 
 u16 GetBagItemQuantity(u16 *quantity);
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
+void ApplyLastHackEncryptionKeyToNewPockets(u32 key);
 void SetBagItemsPointers(void);
 void CopyItemName(u16 itemId, u8 *dst);
 void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity);

@@ -1079,6 +1079,7 @@ static void UpdateVanillaSave(void)
     gSaveBlock1Ptr->registeredItems[0] = MapRegisteredItem(gSaveBlock1Ptr->registeredItem);
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
+    gSaveBlock2Ptr->encryptionKeyHack = gSaveBlock2Ptr->encryptionKey;
     InitLilycoveLady();
     UpdateGiftRibbons();
 
@@ -1176,6 +1177,8 @@ static void UpdateOldHackSave(void)
     CpuCopy16(&sOldSaveBlock1Ptr->contestLady, &gSaveBlock1Ptr->contestLady, sizeof(gSaveBlock1Ptr->contestLady));
     CpuCopy16(gSaveBlock2Ptr->pokedex.seen, gSaveBlock1Ptr->seen1, sizeof(gSaveBlock2Ptr->pokedex.seen));
     CpuCopy16(gSaveBlock2Ptr->pokedex.seen, gSaveBlock1Ptr->seen2, sizeof(gSaveBlock2Ptr->pokedex.seen));
+
+    gSaveBlock2Ptr->encryptionKeyHack = gSaveBlock2Ptr->encryptionKey;
 
     gSaveBlock2Ptr->optionsBattleStyle = (sOldSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD) ? OPTIONS_BATTLE_STYLE_SET : OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsDifficulty = sOldSaveBlock2Ptr->optionsDifficulty;
@@ -1281,6 +1284,7 @@ void MoveItemsToCorrectPocket(void)
     struct BagPocket *medicine = &gBagPockets[MEDICINE_POCKET];
     struct BagPocket *keyitems = &gBagPockets[KEYITEMS_POCKET];
 
+    ApplyLastHackEncryptionKeyToNewPockets(gSaveBlock2Ptr->encryptionKeyHack);
     for (i = 0; i < TM_FLAGS; i++)
     {
         if (FlagGet(sTMFlagChecks[i][0]) && CheckBagHasItem(sTMFlagChecks[i][1], 1) == FALSE)
