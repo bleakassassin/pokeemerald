@@ -54,17 +54,17 @@
 
 #define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, ((size)/(32/8) & 0x1FFFFF))
 
-#define DmaSetUnchecked(dmaNum, src, dest, control)                                                                            \
-do {                                                                                                                  \
-    vu32 *_dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum;                                                                    \
-    u32 _eval_src = (u32)(src);                                                                                       \
-    u32 _eval_dst = (u32)(dest);                                                                                      \
-    u32 _eval_ctl = (u32)(control);                                                                                   \
-    register u32 _r_src asm("r0") = _eval_src;                                                                        \
-    register u32 _r_dst asm("r1") = _eval_dst;                                                                        \
-    register u32 _r_ctl asm("r2") = _eval_ctl;                                                                        \
-    asm volatile("stmia %0!, {%1, %2, %3}" : "+l" (_dmaRegs) : "l" (_r_src), "l" (_r_dst), "l" (_r_ctl) : "memory");  \
-} while (0)
+#define DmaSetUnchecked(dmaNum, src, dest, control) \
+{                                                 \
+    vu32 *dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum; \
+    u32 eval_src = (u32)(src);                    \
+    u32 eval_dst = (u32)(dest);                   \
+    u32 eval_ctl = (u32)(control);                \
+    register u32 r_src asm("r0") = eval_src;      \
+    register u32 r_dst asm("r1") = eval_dst;      \
+    register u32 r_ctl asm("r2") = eval_ctl;      \
+    asm volatile("stmia %0!, {%1, %2, %3}" : "+l" (dmaRegs) : "l" (r_src), "l" (r_dst), "l" (r_ctl) : "memory");  \
+}
 
 #if MODERN
 // NOTE: Assumes 16-bit DMAs.
