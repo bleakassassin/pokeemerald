@@ -1064,6 +1064,8 @@ void UpdateSaveVersion(void)
         UpdateOldHackSave();
         UpdateSaveAddresses();
     }
+    else if (version == VERSION_SAVE_REFACTOR)
+        gSaveBlock2Ptr->encryptionKeyHack = gSaveBlock2Ptr->encryptionKey;
     VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
 }
 
