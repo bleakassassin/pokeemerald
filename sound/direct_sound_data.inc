@@ -408,7 +408,8 @@ Cry_Charmeleon::
 
 	.align 2
 Cry_Charizard::
-	.incbin "sound/direct_sound_samples/cries/charizard.bin"
+Cry_Rhyhorn::
+	.incbin "sound/direct_sound_samples/cries/charizard_rhyhorn.bin"
 
 	.align 2
 Cry_Squirtle::
@@ -624,7 +625,8 @@ Cry_Arcanine::
 
 	.align 2
 Cry_Poliwag::
-	.incbin "sound/direct_sound_samples/cries/poliwag.bin"
+Cry_Ditto::
+	.incbin "sound/direct_sound_samples/cries/poliwag_ditto.bin"
 
 	.align 2
 Cry_Poliwhirl::
@@ -827,10 +829,6 @@ Cry_Weezing::
 	.incbin "sound/direct_sound_samples/cries/weezing.bin"
 
 	.align 2
-Cry_Rhyhorn::
-	.incbin "sound/direct_sound_samples/cries/rhyhorn.bin"
-
-	.align 2
 Cry_Rhydon::
 	.incbin "sound/direct_sound_samples/cries/rhydon.bin"
 
@@ -909,10 +907,6 @@ Cry_Gyarados::
 	.align 2
 Cry_Lapras::
 	.incbin "sound/direct_sound_samples/cries/lapras.bin"
-
-	.align 2
-Cry_Ditto::
-	.incbin "sound/direct_sound_samples/cries/ditto.bin"
 
 	.align 2
 Cry_Eevee::
