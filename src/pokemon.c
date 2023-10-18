@@ -3135,6 +3135,9 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 
 static bool8 IsStatHyperTrained(struct Pokemon *mon, u8 statIndex)
 {
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+        return FALSE;
+
     switch (statIndex)
     {
     case STAT_HP:
