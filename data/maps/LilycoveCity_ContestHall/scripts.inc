@@ -351,7 +351,7 @@ LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
 	.string "I've entered a bunch of CONTESTS,\n"
 	.string "so I'm seeing how things work.\p"
 	.string "If you're in a COOLNESS CONTEST,\n"
-	.string "Cool moves go over as appeals.\p"
+	.string "COOL moves go over as appeals.\p"
 	.string "But SMART moves and CUTE moves\n"
 	.string "don't go over well, for instance.$"
 
