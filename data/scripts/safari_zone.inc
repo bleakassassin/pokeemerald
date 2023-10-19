@@ -246,7 +246,7 @@ SafariZone_RestHouse_Text_FatMan:
 	.string "If you put a {POKEBLOCK} on the FEEDER,\n"
 	.string "POKéMON are attracted to it.\p"
 	.string "I think POKéMON with the same sort of\n"
-	.string "nature are drawn by a certain {POKEBLOCK}.$"
+	.string "NATURE are drawn by a certain {POKEBLOCK}.$"
 
 SafariZone_South_Text_AreaOffLimits1:
 	.string "This area is still under construction.\n"

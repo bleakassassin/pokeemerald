@@ -333,7 +333,7 @@ VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves:
 	.string "It doesn't matter how strong it is,\n"
 	.string "either.\p"
 	.string "For example, a POKéMON with a GENTLE\n"
-	.string "nature probably won't enjoy hurting\l"
+	.string "NATURE probably won't enjoy hurting\l"
 	.string "its opponents.\p"
 	.string "If it can't seem to live up to its\n"
 	.string "potential, it's probably failing at\l"
