@@ -487,7 +487,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_RSMayReflection,       OBJ_EVENT_PAL_TAG_RS_MAY_REFLECTION},
     {gObjectEventPal_Machoke,               OBJ_EVENT_PAL_TAG_MACHOKE},
 #ifdef BUGFIX
-    {NULL,                                  OBJ_EVENT_PAL_TAG_NONE}, 
+    {NULL,                                  OBJ_EVENT_PAL_TAG_NONE},
 #else
     {}, // BUG: FindObjectEventPaletteIndexByTag looks for OBJ_EVENT_PAL_TAG_NONE and not 0x0.
         // If it's looking for a tag that isn't in this table, the game locks in an infinite loop.
