@@ -2272,7 +2272,8 @@ static void Task_PutAwayDecoration(u8 taskId)
         gTasks[taskId].tState = 1;
         break;
     case 1:
-        if (!gPaletteFade.active) {
+        if (!gPaletteFade.active)
+        {
             DrawWholeMapView();
             ScriptContext_SetupScript(SecretBase_EventScript_PutAwayDecoration);
             ClearDialogWindowAndFrame(0, TRUE);
