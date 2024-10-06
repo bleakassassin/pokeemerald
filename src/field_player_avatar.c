@@ -1705,7 +1705,10 @@ static void Task_WaitStopSurfing(u8 taskId)
         gPlayerAvatar.preventStep = FALSE;
         UnlockPlayerFieldControls();
         DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
+#ifdef BUGFIX
+        // If this is not defined but the player steps into grass from surfing, they will appear over the grass instead of in the grass.
         playerObjEvent->triggerGroundEffectsOnMove = TRUE;
+#endif
         DestroyTask(taskId);
     }
 }
@@ -2140,7 +2143,7 @@ static void Task_DoPlayerSpinExit(u8 taskId)
             tSpeed = 1;
             tCurY = (u16)(sprite->y + sprite->y2) << 4;
             sprite->y2 = 0;
-            CameraObjectReset2();
+            CameraObjectFreeze();
             object->fixedPriority = TRUE;
             sprite->oam.priority = 0;
             sprite->subpriority = 0;
@@ -2209,7 +2212,7 @@ static void Task_DoPlayerSpinEntrance(u8 taskId)
             tSubpriority = sprite->subpriority;
             tCurY = -((u16)sprite->y2 + 32) * 16;
             sprite->y2 = 0;
-            CameraObjectReset2();
+            CameraObjectFreeze();
             object->fixedPriority = TRUE;
             sprite->oam.priority = 1;
             sprite->subpriority = 0;
@@ -2244,7 +2247,7 @@ static void Task_DoPlayerSpinEntrance(u8 taskId)
                 object->fixedPriority = 0;
                 sprite->oam.priority = tPriority;
                 sprite->subpriority = tSubpriority;
-                CameraObjectReset1();
+                CameraObjectReset();
                 DestroyTask(taskId);
             }
             break;
