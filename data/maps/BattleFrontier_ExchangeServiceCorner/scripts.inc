@@ -754,7 +754,7 @@ BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc::
 	.string "reduce accuracy.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_SootheBellDesc::
-	.string "A hold item that cals spirits and\n"
+	.string "A hold item that calms spirits and\n"
 	.string "fosters friendship.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc::
