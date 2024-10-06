@@ -53,6 +53,9 @@ SafariZone_EventScript_ChoosePokeblock::
 	special OpenPokeblockCaseOnFeeder
 	waitstate
 	goto_if_ne VAR_RESULT, 0xFFFF, SafariZone_EventScript_PokeblockPlaced
+#ifdef BUGFIX
+	releaseall  @ Only gets called from EventScript_PokeBlockFeeder which uses lockall.
+#endif
 	end
 
 SafariZone_EventScript_PokeblockPlaced::
@@ -246,7 +249,7 @@ SafariZone_RestHouse_Text_FatMan:
 	.string "If you put a {POKEBLOCK} on the feeder,\n"
 	.string "Pokémon are attracted to it.\p"
 	.string "I think Pokémon with the same sort of\n"
-	.string "nature are drawn by a certain {POKEBLOCK}.$"
+	.string "Nature are drawn by a certain {POKEBLOCK}.$"
 
 SafariZone_South_Text_AreaOffLimits1:
 	.string "This area is still under construction.\n"

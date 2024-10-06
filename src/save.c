@@ -1064,16 +1064,18 @@ void UpdateSaveVersion(void)
         UpdateOldHackSave();
         UpdateSaveAddresses();
     }
+    else if (version == VERSION_SAVE_REFACTOR)
+        gSaveBlock2Ptr->encryptionKeyHack = gSaveBlock2Ptr->encryptionKey;
     VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
 }
 
 static void UpdateVanillaSave(void)
 {
-    FlagClear(FLAG_REMATCH_SIDNEY);
-    FlagClear(FLAG_REMATCH_PHOEBE);
-    FlagClear(FLAG_REMATCH_GLACIA);
-    FlagClear(FLAG_REMATCH_DRAKE);
-    FlagClear(FLAG_REMATCH_WALLACE);
+    FlagClear(FLAG_REGISTERED_SIDNEY);
+    FlagClear(FLAG_REGISTERED_PHOEBE);
+    FlagClear(FLAG_REGISTERED_GLACIA);
+    FlagClear(FLAG_REGISTERED_DRAKE);
+    FlagClear(FLAG_REGISTERED_WALLACE);
     FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
 
     gSaveBlock1Ptr->registeredItems[0] = MapRegisteredItem(gSaveBlock1Ptr->registeredItem);

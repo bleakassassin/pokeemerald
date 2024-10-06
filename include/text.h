@@ -1,7 +1,7 @@
 #ifndef GUARD_TEXT_H
 #define GUARD_TEXT_H
 
-#include "characters.h"
+#include "constants/characters.h"
 
 #define FONT_TYPE_EMERALD 0
 #define FONT_TYPE_FRLG    1

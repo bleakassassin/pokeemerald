@@ -411,7 +411,13 @@ static void WaitForVBlank(void)
 {
     gMain.intrCheck &= ~INTR_FLAG_VBLANK;
 
-    VBlankIntrWait();
+    if (gWirelessCommType != 0)
+    {
+        while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
+            ;
+    }
+    else
+        VBlankIntrWait();
 }
 
 void SetTrainerHillVBlankCounter(u32 *counter)
