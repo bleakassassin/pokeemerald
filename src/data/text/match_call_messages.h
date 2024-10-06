@@ -375,7 +375,7 @@ const u8 gText_MatchCallEliteFour_Phoebe_Intro2[] = _("Mt. Pyre is doing?");
 
 const u8 gText_MatchCallEliteFour_Glacia_Strategy[] = _("I use items for help.");
 const u8 gText_MatchCallEliteFour_Glacia_Pokemon[] = _("Flaming passion in icy cold!");
-const u8 gText_MatchCallEliteFour_Glacia_Intro1[] = _("The ICE type can be better");
+const u8 gText_MatchCallEliteFour_Glacia_Intro1[] = _("The Ice type can be better");
 const u8 gText_MatchCallEliteFour_Glacia_Intro2[] = _("trained in this hot land.");
 
 const u8 gText_MatchCallEliteFour_Drake_Strategy[] = _("Harness strong abilities.");
