@@ -677,29 +677,29 @@ BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc::
 
 BattleFrontier_ExchangeServiceCorner_Text_MachoBraceDesc::
 	.string "A hold item that promotes growth,\n"
-	.string "but it reduces SPEED.$"
+	.string "but it reduces Speed.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_RareCandyDesc::
-	.string "Raises the level of a POKéMON by one.$"
+	.string "Raises the level of a Pokémon by one.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LiechiBerryDesc::
-	.string "A hold item that raises ATTACK in a\n"
+	.string "A hold item that raises Attack in a\n"
 	.string "pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_GanlonBerryDesc::
-	.string "A hold item that raises DEFENSE in a\n"
+	.string "A hold item that raises Defense in a\n"
 	.string "pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_SalacBerryDesc::
-	.string "A hold item that raises SPEED in a\n"
+	.string "A hold item that raises Speed in a\n"
 	.string "pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PetayaBerryDesc::
-	.string "A hold item that raises SP. ATK in a\n"
+	.string "A hold item that raises Sp. Atk in a\n"
 	.string "pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ApicotBerryDesc::
-	.string "A hold item that raises SP. DEF in a\n"
+	.string "A hold item that raises Sp. Def in a\n"
 	.string "pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LansatBerryDesc::
@@ -727,19 +727,19 @@ BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc::
 	.string "when the foe is hit.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_UpGradeDesc::
-	.string "A peculiar box made by SILPH CO.$"
+	.string "A peculiar box made by Silph Co.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DeepSeaToothDesc::
-	.string "A hold item that raises the SP. ATK\n"
-	.string "of CLAMPERL.$"
+	.string "A hold item that raises the Sp. Atk\n"
+	.string "of Clamperl.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DeepSeaScaleDesc::
-	.string "A hold item that raises the SP. DEF\n"
-	.string "of CLAMPERL.$"
+	.string "A hold item that raises the Sp. Def\n"
+	.string "of Clamperl.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DragonScaleDesc::
-	.string "A strange scale held by DRAGON-type\n"
-	.string "POKéMON.$"
+	.string "A strange scale held by Dragon-type\n"
+	.string "Pokémon.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc::
 	.string "A hold item that gradually restores\n"
