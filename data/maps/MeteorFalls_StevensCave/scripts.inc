@@ -44,8 +44,9 @@ MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst:
 	.string "But you know there's more to me.\p"
 	.string "You should have a very good idea about\n"
 	.string "how good I am as a TRAINER.\p"
-	.string "My POKéMON and I have polished over every\n"
-	.string "surface of our game since our last match.\p"
+	.string "My POKéMON and I have polished every\n"
+	.string "surface of our game since our last\l"
+	.string "match with you and your team.\p"
 	.string "Okay, {PLAYER}{KUN}, if you're going to mount\n"
 	.string "a serious challenge, expect the worst!$"
 
