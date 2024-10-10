@@ -13,7 +13,7 @@ PetalburgCity_House2_Text_NormanBecameGymLeader:
 	.string "NORMAN became our town's new\n"
 	.string "GYM LEADER.\p"
 	.string "I think he called his family over from\n"
-	.string "somewhere far away.$"
+	.string "the JOHTO region.$"
 
 PetalburgCity_House2_Text_BattledNormanOnce:
 	.string "I battled NORMAN once, but, whew,\n"
