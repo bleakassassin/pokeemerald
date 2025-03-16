@@ -298,7 +298,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
 {
     {
         .name = {_("サダヒロ"), _("Alann"), _("Alain"), _("Adelfo"), _("Claus"), _("Teo")},
-        .otId = 0xBDC9,
+        .otId = 48585,
         .facilityClass = FACILITY_CLASS_BUG_CATCHER,
         .species = {SPECIES_BEAUTIFLY, SPECIES_DUSTOX, SPECIES_ILLUMISE, SPECIES_SHIFTRY, SPECIES_BRELOOM, SPECIES_NINJASK, SPECIES_SHEDINJA, SPECIES_PINSIR, SPECIES_HERACROSS, SPECIES_VOLBEAT},
         .id = 0,
@@ -306,7 +306,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("ヒロオ"), _("Lionel"), _("Lionel"), _("Caio"), _("Ludwig"), _("Leo")},
-        .otId = 0xCF09,
+        .otId = 53001,
         .facilityClass = FACILITY_CLASS_YOUNGSTER,
         .species = {SPECIES_SWELLOW, SPECIES_SWALOT, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_TORKOAL, SPECIES_HARIYAMA, SPECIES_MIGHTYENA, SPECIES_LUDICOLO, SPECIES_CRAWDAUNT, SPECIES_WHISCASH},
         .id = 1,
@@ -314,7 +314,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("ケイジ"), _("Sonny"), _("Herve"), _("Fedro"), _("Wenzel"), _("Santi")},
-        .otId = 0x2E34,
+        .otId = 11828,
         .facilityClass = FACILITY_CLASS_SCHOOL_KID_M,
         .species = {SPECIES_LINOONE, SPECIES_MIGHTYENA, SPECIES_WHISCASH, SPECIES_ZANGOOSE, SPECIES_SEVIPER, SPECIES_NINETALES, SPECIES_KECLEON, SPECIES_SHUCKLE, SPECIES_MANECTRIC, SPECIES_MACHAMP},
         .id = 2,
@@ -322,7 +322,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("ユラ"), _("Layla"), _("Layla"), _("Astrid"), _("Sonja"), _("Lola")},
-        .otId = 0x84EF,
+        .otId = 34031,
         .facilityClass = FACILITY_CLASS_LASS,
         .species = {SPECIES_SWALOT, SPECIES_XATU, SPECIES_ALTARIA, SPECIES_GOLDUCK, SPECIES_FLYGON, SPECIES_ALAKAZAM, SPECIES_GARDEVOIR, SPECIES_WAILORD, SPECIES_GRUMPIG, SPECIES_MIGHTYENA},
         .id = 3,
@@ -330,7 +330,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("ヨウカ"), _("Macy"), _("Amelie"), _("Cleo"), _("Maria"), _("Elisa")},
-        .otId = 0x1E43,
+        .otId = 7747,
         .facilityClass = FACILITY_CLASS_SCHOOL_KID_F,
         .species = {SPECIES_WIGGLYTUFF, SPECIES_LINOONE, SPECIES_KINGDRA, SPECIES_DELCATTY, SPECIES_RAICHU, SPECIES_FEAROW, SPECIES_STARMIE, SPECIES_MEDICHAM, SPECIES_SHIFTRY, SPECIES_BEAUTIFLY},
         .id = 4,
@@ -338,7 +338,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("ヤスシ"), _("Donte"), _("Brahim"), _("Glauco"), _("Josef"), _("Roque")},
-        .otId = 0x379F,
+        .otId = 14239,
         .facilityClass = FACILITY_CLASS_RUNNING_TRIATHLETE_M,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_AGGRON, SPECIES_MAGNETON, SPECIES_MACHAMP, SPECIES_ARMALDO, SPECIES_HERACROSS, SPECIES_NOSEPASS, SPECIES_EXPLOUD, SPECIES_MIGHTYENA},
         .id = 5,
@@ -346,7 +346,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("ミサオ"), _("Amira"), _("Laure"), _("Dafne"), _("Amelie"), _("Lara")},
-        .otId = 0xF555,
+        .otId = 62805,
         .facilityClass = FACILITY_CLASS_RUNNING_TRIATHLETE_F,
         .species = {SPECIES_STARMIE, SPECIES_DODRIO, SPECIES_MAGNETON, SPECIES_MEDICHAM, SPECIES_MIGHTYENA, SPECIES_GLALIE, SPECIES_GOLEM, SPECIES_ELECTRODE, SPECIES_PELIPPER, SPECIES_SHARPEDO},
         .id = 6,
@@ -354,7 +354,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("カズサ"), _("Kali"), _("Jodie"), _("Ilenia"), _("Karo"), _("Elsa")},
-        .otId = 0x8D26,
+        .otId = 36134,
         .facilityClass = FACILITY_CLASS_BEAUTY,
         .species = {SPECIES_NINETALES, SPECIES_ALAKAZAM, SPECIES_SCEPTILE, SPECIES_SALAMENCE, SPECIES_GOLDUCK, SPECIES_MAWILE, SPECIES_WEEZING, SPECIES_LANTURN, SPECIES_GARDEVOIR, SPECIES_MILOTIC},
         .id = 7,
@@ -362,7 +362,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("スミレ"), _("Annie"), _("Annie"), _("Imelda"), _("Ines"), _("Rosa")},
-        .otId = 0x800C,
+        .otId = 32780,
         .facilityClass = FACILITY_CLASS_AROMA_LADY,
         .species = {SPECIES_SCEPTILE, SPECIES_VILEPLUME, SPECIES_BELLOSSOM, SPECIES_ROSELIA, SPECIES_CORSOLA, SPECIES_FLYGON, SPECIES_BRELOOM, SPECIES_MILOTIC, SPECIES_ALTARIA, SPECIES_CRADILY},
         .id = 8,
@@ -370,7 +370,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("アキノリ"), _("Dillen"), _("Rene"), _("Indro"), _("Detlef"), _("Pedro")},
-        .otId = 0x469f,
+        .otId = 18079,
         .facilityClass = FACILITY_CLASS_HIKER,
         .species = {SPECIES_SKARMORY, SPECIES_GOLEM, SPECIES_BLAZIKEN, SPECIES_CAMERUPT, SPECIES_DONPHAN, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_TROPIUS, SPECIES_SOLROCK, SPECIES_RHYDON},
         .id = 9,
@@ -378,7 +378,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("トウゾウ"), _("Dallas"), _("Bruno"), _("Learco"), _("Ansgar"), _("Manolo")},
-        .otId = 0x71FC,
+        .otId = 29180,
         .facilityClass = FACILITY_CLASS_FISHERMAN,
         .species = {SPECIES_SEAKING, SPECIES_STARMIE, SPECIES_GOLDUCK, SPECIES_TENTACRUEL, SPECIES_OCTILLERY, SPECIES_GOREBYSS, SPECIES_GLALIE, SPECIES_WAILORD, SPECIES_SHARPEDO, SPECIES_KINGDRA},
         .id = 10,
@@ -386,7 +386,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("セイヤ"), _("Frank"), _("Frank"), _("Olindo"), _("Frank"), _("Mauro")},
-        .otId = 0xA39E,
+        .otId = 41886,
         .facilityClass = FACILITY_CLASS_SAILOR,
         .species = {SPECIES_QUAGSIRE, SPECIES_STARMIE, SPECIES_PELIPPER, SPECIES_CRAWDAUNT, SPECIES_WAILORD, SPECIES_GYARADOS, SPECIES_SWAMPERT, SPECIES_LANTURN, SPECIES_WHISCASH, SPECIES_SHUCKLE},
         .id = 11,
@@ -394,7 +394,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("リュウジ"), _("Lamont"), _("Xav"), _("Orfeo"), _("Jürgen"), _("Jorge")},
-        .otId = 0xE590,
+        .otId = 58768,
         .facilityClass = FACILITY_CLASS_GUITARIST,
         .species = {SPECIES_ABSOL, SPECIES_CROBAT, SPECIES_EXPLOUD, SPECIES_MAGNETON, SPECIES_SHARPEDO, SPECIES_MANECTRIC, SPECIES_METAGROSS, SPECIES_ELECTRODE, SPECIES_NOSEPASS, SPECIES_WEEZING},
         .id = 12,
@@ -402,7 +402,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("カツアキ"), _("Tyrese"), _("Andy"), _("Paride"), _("David"), _("Chicho")},
-        .otId = 0xD018,
+        .otId = 53272,
         .facilityClass = FACILITY_CLASS_BLACK_BELT,
         .species = {SPECIES_BLAZIKEN, SPECIES_GOLEM, SPECIES_MACHAMP, SPECIES_RHYDON, SPECIES_HARIYAMA, SPECIES_AGGRON, SPECIES_MEDICHAM, SPECIES_ZANGOOSE, SPECIES_VIGOROTH, SPECIES_SLAKING},
         .id = 13,
@@ -410,7 +410,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("トシミツ"), _("Dante"), _("Dante"), _("Raoul"), _("Lothar"), _("Pablo")},
-        .otId = 0xBC75,
+        .otId = 48245,
         .facilityClass = FACILITY_CLASS_RUIN_MANIAC,
         .species = {SPECIES_SCEPTILE, SPECIES_SANDSLASH, SPECIES_FLYGON, SPECIES_CLAYDOL, SPECIES_ARMALDO, SPECIES_CROBAT, SPECIES_CRADILY, SPECIES_SOLROCK, SPECIES_LUNATONE, SPECIES_GOLEM},
         .id = 14,
@@ -418,7 +418,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
     },
     {
         .name = {_("ローウェン"), _("Arturo"), _("Arturo"), _("Romolo"), _("Brian"), _("Arturo")},
-        .otId = 0xFA02,
+        .otId = 64002,
         .facilityClass = FACILITY_CLASS_GENTLEMAN,
         .species = {SPECIES_ABSOL, SPECIES_MIGHTYENA, SPECIES_ALAKAZAM, SPECIES_BANETTE, SPECIES_NINETALES, SPECIES_CLAYDOL, SPECIES_MUK, SPECIES_SALAMENCE, SPECIES_WALREIN, SPECIES_DUSCLOPS},
         .id = 15,
