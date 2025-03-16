@@ -22,9 +22,7 @@ LavaridgeTown_Mart_EventScript_2ndClerk::
 LavaridgeTown_Mart_2ndClerk:
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_BEAD_MAIL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 LavaridgeTown_Mart_EventScript_ExpertM::
 	msgbox LavaridgeTown_Mart_Text_XSpeedFirstStrike, MSGBOX_NPC

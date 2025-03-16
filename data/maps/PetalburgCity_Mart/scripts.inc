@@ -21,9 +21,7 @@ PetalburgCity_Mart_Pokemart_Basic:
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_ESCAPE_ROPE
 	.2byte ITEM_REPEL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 PetalburgCity_Mart_EventScript_2ndClerk::
 	lock
@@ -41,9 +39,7 @@ PetalburgCity_Mart_2ndClerk:
 	.2byte ITEM_X_ATTACK
 	.2byte ITEM_X_DEFEND
 	.2byte ITEM_ORANGE_MAIL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 PetalburgCity_Mart_EventScript_Woman::
 	msgbox PetalburgCity_Mart_Text_WeakWillGrowStronger, MSGBOX_NPC

@@ -22,9 +22,7 @@ FortreeCity_Mart_EventScript_2ndClerk::
 FortreeCity_Mart_2ndClerk:
 	.2byte ITEM_WOOD_MAIL
 	.2byte ITEM_TROPIC_MAIL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 FortreeCity_Mart_EventScript_Woman::
 	msgbox FortreeCity_Mart_Text_SuperRepelBetter, MSGBOX_NPC

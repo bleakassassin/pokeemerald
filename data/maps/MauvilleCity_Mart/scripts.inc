@@ -27,9 +27,7 @@ MauvilleCity_Mart_2ndClerk:
 	.2byte ITEM_DIRE_HIT
 	.2byte ITEM_X_ACCURACY
 	.2byte ITEM_GLITTER_MAIL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 MauvilleCity_Mart_EventScript_ExpertM::
 	msgbox MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats, MSGBOX_NPC
