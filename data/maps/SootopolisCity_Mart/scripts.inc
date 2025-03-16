@@ -23,9 +23,7 @@ SootopolisCity_Mart_2ndClerk:
 	.2byte ITEM_X_ATTACK
 	.2byte ITEM_X_DEFEND
 	.2byte ITEM_SHADOW_MAIL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 SootopolisCity_Mart_EventScript_FatMan::
 	lock

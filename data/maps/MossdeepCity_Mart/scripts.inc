@@ -25,9 +25,7 @@ MossdeepCity_Mart_2ndClerk:
 	.2byte ITEM_X_ATTACK
 	.2byte ITEM_X_DEFEND
 	.2byte ITEM_DREAM_MAIL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 MossdeepCity_Mart_EventScript_Woman::
 	msgbox MossdeepCity_Mart_Text_ReviveIsFantastic, MSGBOX_NPC
