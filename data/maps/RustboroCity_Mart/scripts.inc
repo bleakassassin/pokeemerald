@@ -21,9 +21,7 @@ RustboroCity_Mart_Pokemart_Basic:
 	.2byte ITEM_PARALYZE_HEAL
 	.2byte ITEM_ESCAPE_ROPE
 	.2byte ITEM_REPEL
-	.2byte ITEM_NONE
-	release
-	end
+	pokemartlistend
 
 RustboroCity_Mart_EventScript_2ndClerk::
 	lock

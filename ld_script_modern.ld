@@ -28,7 +28,6 @@ SECTIONS {
 
         src/m4a.o(.bss.code);
 
-        src/*.o(COMMON);
         *libc.a:*.o(COMMON);
         *libnosys.a:*.o(COMMON);
     } > IWRAM
