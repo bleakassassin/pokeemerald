@@ -201,6 +201,9 @@ extern const u8 gText_Deselect[];
 extern const u8 gMenuText_CheckTag[];
 extern const u8 gText_Confirm[];
 extern const u8 gMenuText_Show[];
+extern const u8 gText_MoveItemWhere[];
+extern const u8 gText_XsYAnd[];
+extern const u8 gText_XsYWereSwapped[];
 
 extern const u8 gText_WithdrawPokemon[];
 extern const u8 gText_WithdrawMonDescription[];
