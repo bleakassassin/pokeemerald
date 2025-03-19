@@ -560,5 +560,6 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
 bool8 CheckSplitPhysical(u8 moveType);
 bool8 CheckSplitSpecial(u8 moveType);
 u16 PlayerOutfitAndGenderToFrontTrainerPic(u8 outfitId, u8 playerGender);
+u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 
 #endif // GUARD_POKEMON_H
