@@ -471,6 +471,13 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
     [TYPE_DARK] = _("DARK"),
 };
 
+const u8 gCategoryNames[NUMBER_OF_CATEGORIES][11] =
+{
+    [CATEGORY_PHYSICAL] = _("PHYSICAL"),
+    [CATEGORY_SPECIAL] = _("SPECIAL"),
+    [CATEGORY_STATUS] = _("STATUS"),
+};
+
 // This is a factor in how much money you get for beating a trainer.
 const struct TrainerMoney gTrainerMoneyTable[] =
 {
