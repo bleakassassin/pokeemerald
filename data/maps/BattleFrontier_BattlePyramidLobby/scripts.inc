@@ -739,7 +739,7 @@ BattleFrontier_BattlePyramidLobby_Text_HintPPWaste:
 	.string "unrequited anger…\p"
 	.string "It is a curse…\p"
 	.string "…And, I see your POKéMON drained of\n"
-	.string "Power Points and having no recourse\l"
+	.string "POWER POINTS and having no recourse\l"
 	.string "but to use STRUGGLE…$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintLevitate:
@@ -859,7 +859,7 @@ BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing:
 BattleFrontier_BattlePyramidLobby_Text_GiveYouTheseBattlePoints:
 	.string "Young explorer!\n"
 	.string "In commendation of your courage,\l"
-	.string "we give you these Battle Point(s)!$"
+	.string "we give you these BATTLE POINT(S)!$"
 
 BattleFrontier_BattlePyramidLobby_Text_RulesAreListed:
 	.string "The Battle Quest rules are listed.$"

@@ -459,17 +459,17 @@ PetalburgWoods_Text_MiracleSeedExplanation:
 PetalburgWoods_Text_TrainerTipsExperience:
 	.string "TRAINER TIPS\p"
 	.string "Any POKéMON that appears even once\n"
-	.string "in a battle is awarded EXP Points.\p"
+	.string "in a battle is awarded EXP. POINTS.\p"
 	.string "To raise a weak POKéMON, put it at the\n"
 	.string "left of the team list.\p"
 	.string "As soon as a battle starts, switch it\n"
-	.string "out. It will earn EXP Points without\l"
+	.string "out. It will earn EXP. POINTS without\l"
 	.string "being exposed to any harm.$"
 
 PetalburgWoods_Text_TrainerTipsPP:
 	.string "TRAINER TIPS\p"
-	.string "In addition to Hit Points (HP), POKéMON\n"
-	.string "have Power Points (PP) that are used to\l"
+	.string "In addition to HIT POINTS (HP), POKéMON\n"
+	.string "have POWER POINTS (PP) that are used to\l"
 	.string "make moves during battle.\p"
 	.string "If a POKéMON runs out of PP, it must be\n"
 	.string "taken to a POKéMON CENTER.$"

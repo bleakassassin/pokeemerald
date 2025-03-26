@@ -239,15 +239,15 @@ BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
 
 BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
 	.string "{PLAYER} obtained\n"
-	.string "{STR_VAR_1} Battle Point(s).$"
+	.string "{STR_VAR_1} BATTLE POINT(S).$"
 
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
-	.string "SCOTT: You can check your Battle\n"
-	.string "Points on your FRONTIER PASS.\p"
+	.string "SCOTT: You can check your BATTLE\n"
+	.string "POINTS on your FRONTIER PASS.\p"
 	.string "The more success you have here at\n"
-	.string "the BATTLE FRONTIER, the more Battle\l"
-	.string "Points you will collect.\p"
-	.string "Use your Battle Points the way you\n"
+	.string "the BATTLE FRONTIER, the more BATTLE\l"
+	.string "POINTS you will collect.\p"
+	.string "Use your BATTLE POINTS the way you\n"
 	.string "see fit, like trading them for items.$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:

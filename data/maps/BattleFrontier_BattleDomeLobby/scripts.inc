@@ -460,7 +460,7 @@ BattleFrontier_BattleDomeLobby_Text_ExplainSinglesChallenge:
 	.string "examining the opponent's trio.\p"
 	.string "You win the tournament by defeating\n"
 	.string "four TRAINERS.\p"
-	.string "Battle Points are awarded to\n"
+	.string "BATTLE POINTS are awarded to\n"
 	.string "the tournament winner.\p"
 	.string "If you want to interrupt your\n"
 	.string "tournament, please save the game.\p"
@@ -568,7 +568,7 @@ BattleFrontier_BattleDomeLobby_Text_ExplainDoublesChallenge:
 	.string "examining the opponent's trio.\p"
 	.string "You win the tournament by defeating\n"
 	.string "four TRAINERS.\p"
-	.string "Battle Points are awarded to\n"
+	.string "BATTLE POINTS are awarded to\n"
 	.string "the tournament winner.\p"
 	.string "If you want to interrupt your\n"
 	.string "tournament, please save the game.\p"
@@ -642,7 +642,7 @@ BattleFrontier_BattleDomeLobby_Text_CongratsDefeatedTucker:
 BattleFrontier_BattleDomeLobby_Text_AwardTheseBattlePoints:
 	.string "In recognition of your strategy--\n"
 	.string "a thing of beauty it was, too--\l"
-	.string "we award you these Battle Point(s)!$"
+	.string "we award you these BATTLE POINT(S)!$"
 
 BattleFrontier_BattleDomeLobby_Text_RecordLastMatch:
 	.string "Would you like to record your\n"

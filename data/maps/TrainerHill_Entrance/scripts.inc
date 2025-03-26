@@ -427,7 +427,7 @@ TrainerHill_Entrance_Text_ExplainTrainerHill:
 	.string "the Time Board--try competing with\l"
 	.string "your friends.\p"
 	.string "In TRAINER battles along the way,\n"
-	.string "neither Exp. Points nor money will\l"
+	.string "neither EXP. POINTS nor money will\l"
 	.string "be awarded.$"
 
 @ Unused

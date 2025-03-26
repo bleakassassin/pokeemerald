@@ -402,7 +402,7 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge:
 	.string "POKéMON and watch over them.\p"
 	.string "If you achieve the honor of beating\n"
 	.string "seven TRAINERS in succession,\l"
-	.string "we will present you with Battle Points.\p"
+	.string "we will present you with BATTLE POINTS.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, you must save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -473,7 +473,7 @@ BattleFrontier_BattlePalaceLobby_Text_FeatWillBeRecorded:
 @ Unused
 BattleFrontier_BattlePalaceLobby_Text_BattlePointsFor7WinStreak:
 	.string "For the feat of your 7-win streak,\n"
-	.string "we present you with Battle Point(s).$"
+	.string "we present you with BATTLE POINT(S).$"
 
 BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize:
 	.string "You seem to have no space for\n"
@@ -572,7 +572,7 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainDoubleBattleChallenge:
 	.string "POKéMON and watch over them.\p"
 	.string "If you achieve the honor of beating\n"
 	.string "seven TRAINERS in succession,\l"
-	.string "we will present you with Battle Points.\p"
+	.string "we will present you with BATTLE POINTS.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -585,7 +585,7 @@ BattleFrontier_BattlePalaceLobby_Text_ToDefeatMavenAnd7Trainers:
 BattleFrontier_BattlePalaceLobby_Text_PresentYouWithBattlePoints:
 	.string "In honor of the bond you share with\n"
 	.string "your POKéMON, we present you with\l"
-	.string "these Battle Point(s).$"
+	.string "these BATTLE POINT(S).$"
 
 BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch:
 	.string "Would you like to record your latest\n"

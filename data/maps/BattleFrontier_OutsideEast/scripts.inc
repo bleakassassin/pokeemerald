@@ -257,7 +257,7 @@ BattleFrontier_OutsideEast_Text_RankingHallSign:
 
 BattleFrontier_OutsideEast_Text_ExchangeCornerSign:
 	.string "BATTLE POINT EXCHANGE SERVICE CORNER\n"
-	.string "Exchange your Battle Points!$"
+	.string "Exchange your BATTLE POINTS!$"
 
 BattleFrontier_OutsideEast_Text_BattleTowerFeelsSpecial:
 	.string "Wow!\n"
@@ -385,7 +385,7 @@ BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower:
 
 BattleFrontier_OutsideEast_Text_EnoughBattlePointsForDoll:
 	.string "Yes!\n"
-	.string "I've finally got enough Battle Points!\p"
+	.string "I've finally got enough BATTLE POINTS!\p"
 	.string "I guess I'll trade for another giant\n"
 	.string "plush DOLL!$"
 

@@ -1177,7 +1177,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainSinglesChallenge:
 	.string "In each of the SINGLE BATTLE ROOMS,\n"
 	.string "seven TRAINERS await your challenge.\p"
 	.string "If you manage to defeat all seven,\n"
-	.string "you will earn Battle Points.\p"
+	.string "you will earn BATTLE POINTS.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -1207,7 +1207,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainDoublesChallenge:
 	.string "In each of the DOUBLE BATTLE ROOMS,\n"
 	.string "seven TRAINERS await your challenge.\p"
 	.string "If you manage to defeat all seven,\n"
-	.string "you will earn Battle Points.\p"
+	.string "you will earn BATTLE POINTS.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -1245,7 +1245,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainMultisChallenge:
 	.string "In the MULTI BATTLE ROOM, seven\n"
 	.string "tag teams await your challenge.\p"
 	.string "If you manage to defeat all seven\n"
-	.string "teams, you will earn Battle Points.\p"
+	.string "teams, you will earn BATTLE POINTS.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -1281,7 +1281,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainLinkMultisChallenge:
 	.string "tag teams await you and your friend\l"
 	.string "to make a tag-team challenge.\p"
 	.string "If you manage to defeat all seven\n"
-	.string "teams, you will earn Battle Points.\p"
+	.string "teams, you will earn BATTLE POINTS.\p"
 	.string "Please beware that unlike other ROOMS,\n"
 	.string "you may not interrupt your challenge.\p"
 	.string "Once you start, you must battle seven\n"
@@ -1345,10 +1345,10 @@ BattleFrontier_BattleTowerLobby_Text_CongratsDefeatedMaiden:
 
 BattleFrontier_BattleTowerLobby_Text_AwardYouTheseBattlePoints:
 	.string "In recognition of your infinite talent,\n"
-	.string "we award you these Battle Point(s).$"
+	.string "we award you these BATTLE POINT(S).$"
 
 BattleFrontier_Text_ObtainedXBattlePoints:
-	.string "{PLAYER} obtained {STR_VAR_1} Battle Point(s).$"
+	.string "{PLAYER} obtained {STR_VAR_1} BATTLE POINT(S).$"
 
 BattleFrontier_BattleTowerLobby_Text_RulesAreListed:
 	.string "The BATTLE TOWER rules are listed.$"

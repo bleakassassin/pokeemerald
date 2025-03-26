@@ -648,7 +648,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingReturnToPickStat::
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
 	.string "Hello, this is the EXCHANGE SERVICE\n"
 	.string "CORNER.\p"
-	.string "We exchange the Battle Points you\n"
+	.string "We exchange the BATTLE POINTS you\n"
 	.string "have collected for lovely prizes.\p"
 	.string "Please choose a prize from this list.$"
 
@@ -669,7 +669,7 @@ BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize:
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints:
 	.string "I'm so sorry…\n"
-	.string "You don't have enough Battle Points…$"
+	.string "You don't have enough BATTLE POINTS…$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PCIsFull:
 	.string "I'm so sorry…\n"
@@ -682,7 +682,7 @@ BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt:
 BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints:
 	.string "Thank you very much.\p"
 	.string "Please visit us when you have\n"
-	.string "saved up Battle Points.$"
+	.string "saved up BATTLE POINTS.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls:
 	.string "Oh, they're so nice!\n"
@@ -715,7 +715,7 @@ BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord:
 	.string "Did you know?\p"
 	.string "If you stretch your record at any of\n"
 	.string "the BATTLE facilities, they start\l"
-	.string "giving you more and more Battle Points.$"
+	.string "giving you more and more BATTLE POINTS.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIntro:
 	.string "Hoho!\n"
@@ -723,10 +723,10 @@ BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIntro:
 	.string "If you have any POKéMON at Lv. 50 or\n"
 	.string "above, I can train their stats!\p"
 	.string "Each stat I train will cost you 24\n"
-	.string "Battle Points.\p"
+	.string "BATTLE POINTS.\p"
 	.string "I can also HYPER TRAIN all of your\n"
 	.string "POKéMON's stats at once if you have\l"
-	.string "the Battle Points to spare.\p"
+	.string "the BATTLE POINTS to spare.\p"
 	.string "I can assure you that your POKéMON will\n"
 	.string "come out of it in tip-top shape!$"
 
@@ -758,18 +758,18 @@ BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIVsMaxed:
 	.string "All of its stats are in peak condition!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingNotEnoughBP:
-	.string "You don't have enough Battle Points!\n"
-	.string "I need 24 Battle Points to train a stat.$"
+	.string "You don't have enough BATTLE POINTS!\n"
+	.string "I need 24 BATTLE POINTS to train a stat.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseXStat:
 	.string "You want me to raise your {STR_VAR_1}'s\n"
 	.string "{STR_VAR_2}, then?\l"
-	.string "That will cost 24 Battle Points.$"
+	.string "That will cost 24 BATTLE POINTS.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseAllStats:
 	.string "You want me to raise all of your\n"
 	.string "{STR_VAR_1}'s stats, then?\p"
-	.string "That will cost {STR_VAR_3} Battle Points.$"
+	.string "That will cost {STR_VAR_3} BATTLE POINTS.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingStatMaxed:
 	.string "That stat is already in peak condition!\n"

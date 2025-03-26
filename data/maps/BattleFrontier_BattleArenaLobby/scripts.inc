@@ -385,7 +385,7 @@ BattleFrontier_BattleArenaLobby_Text_ExplainChallenge:
 	.string "to continue with your challenge.\p"
 	.string "If you pull off the feat of beating\n"
 	.string "seven TRAINERS in succession,\l"
-	.string "we will present you with Battle Points.$"
+	.string "we will present you with BATTLE POINTS.$"
 
 BattleFrontier_BattleArenaLobby_Text_OkayToSave:
 	.string "Before showing you to the BATTLE\n"
@@ -573,4 +573,4 @@ BattleFrontier_BattleArenaLobby_Text_CongratsOnDefeatingTycoon:
 BattleFrontier_BattleArenaLobby_Text_PleaseAcceptBattlePoints:
 	.string "My dear challenger, in recognition of\n"
 	.string "your indefatigable spirit, please\l"
-	.string "accept these Battle Point(s).$"
+	.string "accept these BATTLE POINT(S).$"
