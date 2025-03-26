@@ -540,3 +540,8 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special SwapPlayersOutfit
 	def_special BufferUnitSystemText
+	def_special ScriptGetPartyMonLevel
+	def_special CheckIfIVsMaxed
+	def_special CheckIfSelectedStatMaxed
+	def_special BufferStatName
+	def_special HyperTrainStats

@@ -3133,7 +3133,7 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     return checksum;
 }
 
-static bool8 IsStatHyperTrained(struct Pokemon *mon, u8 statIndex)
+bool8 IsStatHyperTrained(struct Pokemon *mon, u8 statIndex)
 {
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         return FALSE;

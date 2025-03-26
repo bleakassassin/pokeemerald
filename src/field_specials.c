@@ -786,6 +786,16 @@ static const u16 sPetalburgGymSlidingDoorMetatiles[] = {
     METATILE_PetalburgGym_SlidingDoor_Frame4,
 };
 
+static const u8 *const sStatStrings[] =
+{
+    gText_HP,
+    gText_Attack,
+    gText_Defense,
+    gText_SpAtk,
+    gText_SpDef,
+    gText_Speed
+};
+
 void PetalburgGymSlideOpenRoomDoors(void)
 {
     sSlidingDoorNextFrameCounter = 0;
@@ -1597,6 +1607,11 @@ u8 GetLeadMonIndex(void)
 u16 ScriptGetPartyMonSpecies(void)
 {
     return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
+}
+
+u16 ScriptGetPartyMonLevel(void)
+{
+    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_LEVEL, NULL);
 }
 
 // Removed for Emerald
@@ -4466,4 +4481,60 @@ bool8 CheckPartyForMew(void)
     }
 
     return FALSE;
+}
+
+void BufferStatName(void)
+{
+    StringCopy(gStringVar2, sStatStrings[gSpecialVar_0x8005]);
+}
+
+bool8 CheckIfIVsMaxed(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8006];
+    u32 i;
+    u32 j = 0;
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        if (GetMonData(mon, MON_DATA_HP_IV + i, NULL) < MAX_PER_STAT_IVS && IsStatHyperTrained(mon, i) == FALSE)
+        {
+            gSpecialVar_0x8005 = i;
+            j++;
+        }
+    }
+
+    gSpecialVar_0x8004 = j * 24;
+
+    if (j > 0)
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 CheckIfSelectedStatMaxed(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8006];
+
+    if (GetMonData(mon, MON_DATA_HP_IV + gSpecialVar_0x8005, NULL) < MAX_PER_STAT_IVS && IsStatHyperTrained(mon, gSpecialVar_0x8005) == FALSE)
+        return FALSE;
+
+    return TRUE;
+}
+
+void HyperTrainStats(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8006];
+    u8 trained = TRUE;
+    u32 i;
+
+    if (gSpecialVar_0x8004 > 24)
+    {
+        for (i = 0; i < NUM_STATS; i++)
+        {
+           if (GetMonData(mon, MON_DATA_HP_IV + i, NULL) < MAX_PER_STAT_IVS && IsStatHyperTrained(mon, i) == FALSE)
+                SetMonData(mon, MON_DATA_HYPER_TRAINED_HP + i, &trained);
+        }
+    }
+    else
+        SetMonData(mon, MON_DATA_HYPER_TRAINED_HP + gSpecialVar_0x8005, &trained);
 }

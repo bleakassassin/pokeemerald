@@ -537,6 +537,114 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Girl::
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord, MSGBOX_NPC
 	end
 
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingExpert::
+	lock
+	faceplayer
+	goto_if_set FLAG_SPOKE_TO_HYPER_TRAINING_EXPERT, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingMet
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIntro, MSGBOX_DEFAULT
+	setflag FLAG_SPOKE_TO_HYPER_TRAINING_EXPERT
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingMet::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_WannaHyperTrain, MSGBOX_YESNO
+BattleFrontier_ExchangeServiceCorner_EventScript_MoreHyperTraining::
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingDeclined
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_le VAR_TEMP_1, 24, BattleFrontier_Lounge7_EventScript_NotEnoughPointsForTraining
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingWhichMon, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	waitstate
+	copyvar VAR_0x8006, VAR_0x8004
+	goto_if_eq VAR_0x8006, PARTY_NOTHING_CHOSEN, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingDeclined
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+	goto_if_eq VAR_RESULT, SPECIES_EGG, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingEgg
+	bufferspeciesname STR_VAR_1, VAR_RESULT
+	specialvar VAR_RESULT, ScriptGetPartyMonLevel
+	goto_if_lt VAR_RESULT, 50, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingLowLevel
+	specialvar VAR_RESULT, CheckIfIVsMaxed
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingIVsMaxed
+	goto_if_eq VAR_0x8004, 24, BattleFrontier_ExchangeServiceCorner_EventScript_OneStatToHyperTrain
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingPickStat::
+	message BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingPickStat
+	waitmessage
+	special ShowBattlePointsWindow
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingCallbackPickStat::
+	multichoicegrid 8, 1, MULTI_HYPER_TRAINING, 2, FALSE
+	goto_if_ge VAR_RESULT, 7, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingCanceled
+	goto_if_eq VAR_RESULT, 6, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainAllStats
+	copyvar VAR_0x8005, VAR_RESULT
+	specialvar VAR_RESULT, CheckIfSelectedStatMaxed
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingSelectedStatMaxed
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainXStat::
+	special BufferStatName
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseXStat, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingReturnToPickStat
+	setvar VAR_0x8004, 24
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainStats::
+	special TakeFrontierBattlePoints
+	special HyperTrainStats
+	special UpdateBattlePointsWindow
+	playse SE_SHOP
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_TrainingStartsNow, MSGBOX_DEFAULT
+	closemessage
+	special CloseBattlePointsWindow
+	fadescreen FADE_TO_BLACK
+	delay 15
+	playse SE_M_MEGA_KICK
+	waitse
+	delay 30
+	fadescreen FADE_FROM_BLACK
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingDone, MSGBOX_DEFAULT
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DoMoreHyperTraining, MSGBOX_YESNO
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_MoreHyperTraining
+
+BattleFrontier_ExchangeServiceCorner_EventScript_OneStatToHyperTrain::
+	special ShowBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainXStat
+
+BattleFrontier_Lounge7_EventScript_NotEnoughPointsForTraining::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingNotEnoughBP, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainAllStats::
+	goto_if_lt VAR_TEMP_1, VAR_0x8004, BattleFrontier_Lounge7_EventScript_NotEnoughPointsForAll
+	buffernumberstring STR_VAR_3, VAR_0x8004
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseAllStats, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingReturnToPickStat
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainStats
+
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingCanceled::
+	special CloseBattlePointsWindow
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingDeclined::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingDeclined, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingEgg::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingEgg, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingLowLevel::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingLowLevel, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingIVsMaxed::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIVsMaxed, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingSelectedStatMaxed::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingStatMaxed, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingReturnToPickStat
+
+BattleFrontier_Lounge7_EventScript_NotEnoughPointsForAll::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingNotEnoughBP, MSGBOX_DEFAULT
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingReturnToPickStat::
+	message BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingPickStat
+	waitmessage
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingCallbackPickStat
+
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
 	.string "Hello, this is the EXCHANGE SERVICE\n"
 	.string "CORNER.\p"
@@ -608,6 +716,74 @@ BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord:
 	.string "If you stretch your record at any of\n"
 	.string "the BATTLE facilities, they start\l"
 	.string "giving you more and more Battle Points.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIntro:
+	.string "Hoho!\n"
+	.string "I'm the HYPER TRAINING EXPERT!\p"
+	.string "If you have any POKéMON at Lv. 50 or\n"
+	.string "above, I can train their stats!\p"
+	.string "Each stat I train will cost you 24\n"
+	.string "Battle Points.\p"
+	.string "I can also HYPER TRAIN all of your\n"
+	.string "POKéMON's stats at once if you have\l"
+	.string "the Battle Points to spare.\p"
+	.string "I can assure you that your POKéMON will\n"
+	.string "come out of it in tip-top shape!$"
+
+BattleFrontier_ExchangeServiceCorner_Text_WannaHyperTrain:
+	.string "What do you say? Want your POKéMON to\n"
+	.string "go through some HYPER TRAINING?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingWhichMon:
+	.string "Which POKéMON do you want me to HYPER\n"
+	.string "TRAIN?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingPickStat:
+	.string "Which stat needs training?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingDeclined:
+	.string "Come back anytime you're ready for\n"
+	.string "some HYPER TRAINING!$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingEgg:
+	.string "An EGG?!\n"
+	.string "How am I supposed to train that?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingLowLevel:
+	.string "Your {STR_VAR_1} is underleveled!\n"
+	.string "Come back once it reaches Lv. 50.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIVsMaxed:
+	.string "Your {STR_VAR_1} doesn't need training!\n"
+	.string "All of its stats are in peak condition!$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingNotEnoughBP:
+	.string "You don't have enough Battle Points!\n"
+	.string "I need 24 Battle Points to train a stat.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseXStat:
+	.string "You want me to raise your {STR_VAR_1}'s\n"
+	.string "{STR_VAR_2}, then?\l"
+	.string "That will cost 24 Battle Points.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseAllStats:
+	.string "You want me to raise all of your\n"
+	.string "{STR_VAR_1}'s stats, then?\p"
+	.string "That will cost {STR_VAR_3} Battle Points.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingStatMaxed:
+	.string "That stat is already in peak condition!\n"
+	.string "There's nothing more I can do with it.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_TrainingStartsNow:
+	.string "The training starts now!$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingDone:
+	.string "All done!\n"
+	.string "Your {STR_VAR_1} looks mightily trained.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_DoMoreHyperTraining:
+	.string "Want to do some more HYPER TRAINING?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc::
 	.string "A large poster with a SMOOCHUM print.$"

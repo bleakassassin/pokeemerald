@@ -774,6 +774,18 @@ static const struct MenuAction MultichoiceList_TagMatchTypeExpert[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_HyperTraining[] =
+{
+    {gText_HP},
+    {gText_Attack},
+    {gText_Defense},
+    {gText_SpAtk},
+    {gText_SpDef},
+    {gText_Speed},
+    {gText_All},
+    {gText_Exit},
+};
+
 static const struct MenuAction MultichoiceList_Exit[] =
 {
     {gText_Exit},
@@ -878,7 +890,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_TENT]                       = MULTICHOICE(MultichoiceList_Tent),
     [MULTI_UNUSED_SSTIDAL_1]           = MULTICHOICE(MultichoiceList_UnusedSSTidal1),
     [MULTI_UNUSED_SSTIDAL_2]           = MULTICHOICE(MultichoiceList_UnusedSSTidal2),
-    [MULTI_UNUSED_SSTIDAL_3]           = MULTICHOICE(MultichoiceList_UnusedSSTidal3),
+    [MULTI_HYPER_TRAINING]             = MULTICHOICE(MultichoiceList_HyperTraining),
     [MULTI_GAME_CORNER_POKEMON]        = MULTICHOICE(MultichoiceList_GameCornerPokemon),
     [MULTI_FOSSIL]                     = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_YESNO]                      = MULTICHOICE(MultichoiceList_YesNo),

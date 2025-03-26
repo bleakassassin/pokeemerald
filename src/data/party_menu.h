@@ -1120,16 +1120,6 @@ static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
     FALSE
 };
 
-static const u8 *const sUnused_StatStrings[] =
-{
-    gText_HP,
-    gText_Attack,
-    gText_Defense,
-    gText_SpAtk,
-    gText_SpDef,
-    gText_Speed
-};
-
 /* Expands to:
  * static const u16 sTMHMMoves[] =
  * {

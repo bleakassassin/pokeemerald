@@ -1288,7 +1288,7 @@
 #define FLAG_UNUSED_0x4D4                                           0x4D4 // Unused Flag
 #define FLAG_UNUSED_0x4D5                                           0x4D5 // Unused Flag
 #define FLAG_UNUSED_0x4D6                                           0x4D6 // Unused Flag
-#define FLAG_UNUSED_0x4D7                                           0x4D7 // Unused Flag
+#define FLAG_SPOKE_TO_HYPER_TRAINING_EXPERT                         0x4D7 // Edited Flag; set if player spoke to expert in Battle Frontier Exchange Service Corner
 #define FLAG_RECEIVED_OVAL_CHARM                                    0x4D8 // Edited Flag; set if player speaks to Birch after obtaining all Hoenn Dex Pokemon
 #define FLAG_RECEIVED_SHINY_CHARM                                   0x4D9 // Edited Flag; set if player speaks to Birch after obtaining all Pokemon
 #define FLAG_READ_STEVENS_LETTER                                    0x4DA // Edited Flag; used to progress post-game state

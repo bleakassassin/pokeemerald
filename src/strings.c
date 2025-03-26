@@ -187,6 +187,7 @@ const u8 gText_Mail[] = _("MAIL");
 const u8 gText_Take[] = _("TAKE");
 const u8 gText_Store[] = _("STORE");
 const u8 gText_Check[] = _("CHECK");
+const u8 gText_All[] = _("ALL");
 const u8 gText_None[] = _("NONE");
 const u8 gText_Deselect[] = _("DESELECT");
 const u8 gText_ThreeMarks[] = _("???");

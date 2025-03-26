@@ -696,7 +696,7 @@ static const u8 sTextColors[][3] =
     {0, 11, 12},
     {0, 13, 14},
     {0, 7, 8},
-    {13, 15, 14},
+    {0, 6, 15},
     {0, 1, 2},
     {0, 3, 4},
     {0, 5, 6},
@@ -3484,6 +3484,7 @@ static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n)
 
 static void DisplayStatsOrIVRanks(bool8 mode)
 {
+    int statsXPos;
     u8 *currHPString = Alloc(20);
     const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
 
@@ -3504,6 +3505,37 @@ static void DisplayStatsOrIVRanks(bool8 mode)
         ConvertIVsToSymbols(gStringVar3, 2, MON_DATA_SPEED_IV);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
         PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_RIGHT), gStringVar4, 2, 0, 0, 0);
+
+        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_HP))
+        {
+            statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_HP, 42);
+            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_HP, statsXPos, 0, 0, 8);
+        }
+        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_ATK))
+        {
+            statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Attack, 42);
+            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack, statsXPos, 16, 0, 8);
+        }
+        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_DEF))
+        {
+            statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Defense, 42);
+            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense, statsXPos, 32, 0, 8);
+        }
+        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_SPATK))
+        {
+            statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpAtk, 36);
+            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk, statsXPos, 0, 0, 8);
+        }
+        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_SPDEF))
+        {
+            statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpDef, 36);
+            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef, statsXPos, 16, 0, 8);
+        }
+        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_SPEED))
+        {
+            statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Speed, 36);
+            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed, statsXPos, 32, 0, 8);
+        }
         break;
     default:
         BufferStat(currHPString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
@@ -3518,6 +3550,19 @@ static void DisplayStatsOrIVRanks(bool8 mode)
         BufferStat(gStringVar3, natureMod[STAT_SPEED - 1], sMonSummaryScreen->summary.speed, 2, 3);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
         PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_RIGHT), gStringVar4, 2, 0, 0, 0);
+
+        statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_HP, 42);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_HP, statsXPos, 0, 0, 1);
+        statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Attack, 42);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack, statsXPos, 16, 0, 1);
+        statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Defense, 42);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense, statsXPos, 32, 0, 1);
+        statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpAtk, 36);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk, statsXPos, 0, 0, 1);
+        statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpDef, 36);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef, statsXPos, 16, 0, 1);
+        statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Speed, 36);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed, statsXPos, 32, 0, 1);
         break;
     }
 
@@ -3531,7 +3576,7 @@ static u8 ConvertIVsToSymbols(u8 *dest, u8 idx, u8 stat)
     static const u8 sStatRankTwoStars[] = _("{COLOR}{01}{SHADOW}{02}  {STAR}{STAR}");
     static const u8 sStatRankThreeStars[] = _("{COLOR}{01}{SHADOW}{02}{STAR}{STAR}{STAR}");
     static const u8 sStatRankSilver[] = _("{COLOR}{02}{SHADOW}{04}{STAR}{STAR}{STAR}");
-    static const u8 sStatRankGold[] = _("{COLOR}{06}{SHADOW}{04}{STAR}{STAR}{STAR}");
+    static const u8 sStatRankGold[] = _("{COLOR}{06}{SHADOW}{15}{STAR}{STAR}{STAR}");
 
     iv = GetMonData(&sMonSummaryScreen->currentMon, stat);
     if (iv == 0)
