@@ -473,7 +473,7 @@ BattleFrontier_BattlePalaceLobby_Text_FeatWillBeRecorded:
 @ Unused
 BattleFrontier_BattlePalaceLobby_Text_BattlePointsFor7WinStreak:
 	.string "For the feat of your 7-win streak,\n"
-	.string "we present you with BATTLE POINT(S).$"
+	.string "we present you with BATTLE POINTS.$"
 
 BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize:
 	.string "You seem to have no space for\n"
@@ -585,7 +585,7 @@ BattleFrontier_BattlePalaceLobby_Text_ToDefeatMavenAnd7Trainers:
 BattleFrontier_BattlePalaceLobby_Text_PresentYouWithBattlePoints:
 	.string "In honor of the bond you share with\n"
 	.string "your POKéMON, we present you with\l"
-	.string "these BATTLE POINT(S).$"
+	.string "these BATTLE POINTS.$"
 
 BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch:
 	.string "Would you like to record your latest\n"

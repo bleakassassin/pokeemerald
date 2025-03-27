@@ -389,7 +389,7 @@ BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins:
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak:
 	.string "In recognition of your 7-win streak,\n"
-	.string "we award you these BATTLE POINT(S).$"
+	.string "we award you these BATTLE POINTS.$"
 
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints:
@@ -455,7 +455,7 @@ BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead:
 BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints:
 	.string "In recognition of your wealth of\n"
 	.string "knowledge and keen intelligence,\l"
-	.string "we award you these BATTLE POINT(S).$"
+	.string "we award you these BATTLE POINTS.$"
 
 BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave:
 	.string "Let me exchange your POKéMON\n"
