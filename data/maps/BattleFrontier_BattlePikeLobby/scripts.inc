@@ -397,9 +397,8 @@ BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer:
 
 BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere:
 	.string "Listen! Listen!\p"
-	.string "Don't you think that the special\n"
-	.string "abilities of POKéMON will be useful\l"
-	.string "here?$"
+	.string "Don't you think that the ABILITIES\n"
+	.string "of POKéMON will be useful here?$"
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose:
