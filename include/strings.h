@@ -689,7 +689,7 @@ extern const u8 gText_MentalHerb48BP[];
 extern const u8 gText_BrightPowder64BP[];
 extern const u8 gText_ChoiceBand64BP[];
 extern const u8 gText_KingsRock64BP[];
-extern const u8 gText_Everstone32BP[];
+extern const u8 gText_Everstone16BP[];
 extern const u8 gText_UpGrade32BP[];
 extern const u8 gText_DeepSeaTooth32BP[];
 extern const u8 gText_DeepSeaScale32BP[];

@@ -2596,9 +2596,9 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
     {
+        gText_Everstone16BP,
         gText_WhiteHerb48BP,
         gText_MentalHerb48BP,
-        gText_Everstone32BP,
         gText_KingsRock64BP,
         gText_UpGrade32BP,
         gText_DeepSeaTooth32BP,

@@ -95,9 +95,9 @@ static const u16 sFrontierExchangeCorner_VitaminsGold[] =
 
 static const u16 sFrontierExchangeCorner_HoldItems[] =
 {
+    ITEM_EVERSTONE,
     ITEM_WHITE_HERB,
     ITEM_MENTAL_HERB,
-    ITEM_EVERSTONE,
     ITEM_KINGS_ROCK,
     ITEM_UP_GRADE,
     ITEM_DEEP_SEA_TOOTH,
@@ -210,9 +210,9 @@ static const u8 *const sFrontierExchangeCorner_VitaminsDescriptionsGold[] =
 
 static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] =
 {
+    BattleFrontier_ExchangeServiceCorner_Text_EverstoneDesc,
     BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc,
     BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_EverstoneDesc,
     BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc,
     BattleFrontier_ExchangeServiceCorner_Text_UpGradeDesc,
     BattleFrontier_ExchangeServiceCorner_Text_DeepSeaToothDesc,

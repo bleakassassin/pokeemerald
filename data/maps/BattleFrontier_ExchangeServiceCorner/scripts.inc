@@ -417,9 +417,9 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem::
 	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
-	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb
-	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb
-	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_Everstone
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Everstone
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb
+	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb
 	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_UpGrade
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_DeepSeaTooth
@@ -434,6 +434,11 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem::
 	case 14, BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
+BattleFrontier_ExchangeServiceCorner_EventScript_Everstone::
+	setvar VAR_0x8008, 8
+	setvar VAR_0x8009, ITEM_EVERSTONE
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
+
 BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb::
 	setvar VAR_0x8008, 12
 	setvar VAR_0x8009, ITEM_WHITE_HERB
@@ -442,11 +447,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb::
 BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb::
 	setvar VAR_0x8008, 12
 	setvar VAR_0x8009, ITEM_MENTAL_HERB
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
-
-BattleFrontier_ExchangeServiceCorner_EventScript_Everstone::
-	setvar VAR_0x8008, 16
-	setvar VAR_0x8009, ITEM_EVERSTONE
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock::
@@ -886,6 +886,10 @@ BattleFrontier_ExchangeServiceCorner_Text_StarfBerryDesc::
 	.string "A hold item that sharply boosts a\n"
 	.string "stat in a pinch.$"
 
+BattleFrontier_ExchangeServiceCorner_Text_EverstoneDesc::
+	.string "A wondrous hold item that prevents\n"
+	.string "evolution.$"
+
 BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
 	.string "A hold item that restores any\n"
 	.string "lowered stat.$"
@@ -893,10 +897,6 @@ BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
 BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc::
 	.string "A hold item that snaps POKéMON out\n"
 	.string "of infatuation.$"
-
-BattleFrontier_ExchangeServiceCorner_Text_EverstoneDesc::
-	.string "A wondrous hold item that prevents\n"
-	.string "evolution.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc::
 	.string "A hold item that may cause flinching\n"
