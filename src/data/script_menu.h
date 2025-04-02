@@ -779,9 +779,9 @@ static const struct MenuAction MultichoiceList_HyperTraining[] =
     {gText_HP},
     {gText_Attack},
     {gText_Defense},
+    {gText_Speed},
     {gText_SpAtk},
     {gText_SpDef},
-    {gText_Speed},
     {gText_All},
     {gText_Exit},
 };

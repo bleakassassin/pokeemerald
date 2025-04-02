@@ -791,9 +791,9 @@ static const u8 *const sStatStrings[] =
     gText_HP,
     gText_Attack,
     gText_Defense,
+    gText_Speed,
     gText_SpAtk,
-    gText_SpDef,
-    gText_Speed
+    gText_SpDef
 };
 
 void PetalburgGymSlideOpenRoomDoors(void)
