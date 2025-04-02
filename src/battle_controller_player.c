@@ -19,6 +19,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokeball.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "random.h"
@@ -1541,6 +1542,9 @@ u8 TypeEffectiveness(u8 targetId)
 
     move = gBattleMons[gActiveBattler].moves[gMoveSelectionCursor[gActiveBattler]];
     moveFlags = AI_TypeCalc(move, gBattleMons[targetId].species, gBattleMons[targetId].ability);
+
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[targetId].species), FLAG_GET_CAUGHT) == FALSE)
+        return 10; // 10 - normal effectiveness
 
     if (moveFlags & MOVE_RESULT_NO_EFFECT)
         return B_WIN_TYPE_NO_EFF;
