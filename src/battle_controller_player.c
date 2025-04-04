@@ -1579,9 +1579,9 @@ static void MoveSelectionDisplayMoveTypeDoubles(u8 targetId)
 	txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
 	txtPtr[0] = EXT_CTRL_CODE_BEGIN;
 	txtPtr++;
-	txtPtr[0] = 6;
+	txtPtr[0] = EXT_CTRL_CODE_FONT;
 	txtPtr++;
-	txtPtr[0] = 1;
+	txtPtr[0] = FONT_NORMAL;
 	txtPtr++;
 
 	StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
