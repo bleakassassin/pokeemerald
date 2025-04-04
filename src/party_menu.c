@@ -4729,6 +4729,35 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc task)
     gTasks[taskId].func = Task_HandleWhichMoveInput;
 }
 
+void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 abilityNumAlt = GetMonData(mon, MON_DATA_ABILITY_CAPSULE_TOGGLE, NULL);
+
+    if (gSpeciesInfo[species].abilities[1] == 0 || gSpeciesInfo[species].abilities[0] == gSpeciesInfo[species].abilities[1])
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+    }
+    else
+    {
+        u8 toggleAbilityNum = !abilityNumAlt;
+
+        PlaySE(SE_USE_ITEM);
+        RemoveBagItem(ITEM_ABILITY_CAPSULE, 1);
+        SetMonData(mon, MON_DATA_ABILITY_CAPSULE_TOGGLE, &toggleAbilityNum);
+        GetMonNickname(mon, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnSwitchedAbilities);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+}
+
 u16 ItemIdToBattleMoveId(u16 item)
 {
     u16 tmNumber = item - ITEM_TM01;

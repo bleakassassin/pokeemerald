@@ -8495,11 +8495,23 @@ static void Cmd_healpartystatus(void)
                 u8 ability;
 
                 if (gBattlerPartyIndexes[gBattlerAttacker] == i)
-                    ability = gBattleMons[gBattlerAttacker].ability;
+                {
+                    if (ShouldUseAltAbility(&party[i]))
+                        ability = !(gBattleMons[gBattlerAttacker].ability);
+                    else
+                        ability = gBattleMons[gBattlerAttacker].ability;
+                }
                 else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
                          && gBattlerPartyIndexes[gActiveBattler] == i
                          && !(gAbsentBattlerFlags & gBitTable[gActiveBattler]))
-                    ability = gBattleMons[gActiveBattler].ability;
+                {
+                    if (ShouldUseAltAbility(&party[i]))
+                        ability = !(gBattleMons[gActiveBattler].ability);
+                    else
+                        ability = gBattleMons[gActiveBattler].ability;
+                }
+                else if (ShouldUseAltAbility(&party[i]))
+                    ability = GetAbilityBySpecies(species, !abilityNum);
                 else
                     ability = GetAbilityBySpecies(species, abilityNum);
 
@@ -9726,7 +9738,7 @@ static void Cmd_pickup(void)
 {
     s32 i;
     u16 species, heldItem;
-    u8 ability;
+    u8 ability, abilityNum;
 
     if (InBattlePike())
     {
@@ -9738,11 +9750,12 @@ static void Cmd_pickup(void)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            abilityNum = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
 
-            if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM))
-                ability = gSpeciesInfo[species].abilities[1];
+            if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_CAPSULE_TOGGLE) == TRUE)
+                ability = gSpeciesInfo[species].abilities[!abilityNum];
             else
-                ability = gSpeciesInfo[species].abilities[0];
+                ability = gSpeciesInfo[species].abilities[abilityNum];
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
@@ -9761,11 +9774,12 @@ static void Cmd_pickup(void)
         {
             species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
             heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+            abilityNum = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
 
-            if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM))
-                ability = gSpeciesInfo[species].abilities[1];
+            if (GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_CAPSULE_TOGGLE) == TRUE)
+                ability = gSpeciesInfo[species].abilities[!abilityNum];
             else
-                ability = gSpeciesInfo[species].abilities[0];
+                ability = gSpeciesInfo[species].abilities[abilityNum];
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE

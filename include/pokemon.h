@@ -100,6 +100,7 @@ enum {
     MON_DATA_HYPER_TRAINED_SPEED,
     MON_DATA_HYPER_TRAINED_SPATK,
     MON_DATA_HYPER_TRAINED_SPDEF,
+    MON_DATA_ABILITY_CAPSULE_TOGGLE,
 };
 
 struct PokemonSubstruct0
@@ -109,7 +110,8 @@ struct PokemonSubstruct0
     u32 experience;
     u8 ppBonuses;
     u8 friendship;
-    u16 filler:10;
+    u16 filler:9;
+    u8 abilityNumAlt:1;
     u8 hyperTrainedHp:1;
     u8 hyperTrainedAtk:1;
     u8 hyperTrainedDef:1;
@@ -472,6 +474,7 @@ u8 GetMonsStateToDoubles(void);
 u8 GetMonsStateToDoubles_2(void);
 u8 GetAbilityBySpecies(u16 species, u8 abilityNum);
 u8 GetMonAbility(struct Pokemon *mon);
+bool8 ShouldUseAltAbility (struct Pokemon *mon);
 void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord);
 u8 GetSecretBaseTrainerPicIndex(void);
 u8 GetSecretBaseTrainerClass(void);

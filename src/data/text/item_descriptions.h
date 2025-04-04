@@ -251,6 +251,11 @@ static const u8 sGreenShardDesc[] = _(
     "ancient item. Can\n"
     "be sold cheaply.");
 
+static const u8 sAbilityCapsuleDesc[] = _(
+    "A capsule that\n"
+    "swaps the ABILITY\n"
+    "of a POKéMON.");
+
 // Vitamins
 static const u8 sHPUpDesc[] = _(
     "Raises the base HP\n"

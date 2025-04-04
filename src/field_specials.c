@@ -2368,7 +2368,7 @@ void ShowScrollableMultichoice(void)
         break;
     case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 14;
+        task->tNumItems = 15;
         task->tLeft = 14;
         task->tTop = 1;
         task->tWidth = 15;
@@ -2378,7 +2378,7 @@ void ShowScrollableMultichoice(void)
         break;
     case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 15;
+        task->tNumItems = 16;
         task->tLeft = 14;
         task->tTop = 1;
         task->tWidth = 15;
@@ -2388,7 +2388,7 @@ void ShowScrollableMultichoice(void)
         break;
     case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 16;
+        task->tNumItems = 17;
         task->tLeft = 14;
         task->tTop = 1;
         task->tWidth = 15;
@@ -2549,6 +2549,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Carbos1BP,
         gText_HpUp1BP,
         gText_MachoBrace16BP,
+        gText_AbilityCapsule24BP,
         gText_RareCandy64BP,
         gText_LiechiBerry128BP,
         gText_GanlonBerry128BP,
@@ -2566,6 +2567,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Carbos1BP,
         gText_HpUp1BP,
         gText_MachoBrace16BP,
+        gText_AbilityCapsule24BP,
         gText_RareCandy64BP,
         gText_LiechiBerry128BP,
         gText_GanlonBerry128BP,
@@ -2584,6 +2586,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Carbos1BP,
         gText_HpUp1BP,
         gText_MachoBrace16BP,
+        gText_AbilityCapsule24BP,
         gText_RareCandy64BP,
         gText_LiechiBerry128BP,
         gText_GanlonBerry128BP,

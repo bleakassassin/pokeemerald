@@ -2534,6 +2534,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     GiveBoxMonInitialMoveset(boxMon);
 
     value = FALSE;
+    SetBoxMonData(boxMon, MON_DATA_ABILITY_CAPSULE_TOGGLE, &value);
     SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_HP, &value);
     SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_ATK, &value);
     SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_DEF, &value);
@@ -4234,6 +4235,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_FRIENDSHIP:
         retVal = substruct0->friendship;
         break;
+    case MON_DATA_ABILITY_CAPSULE_TOGGLE:
+        retVal = substruct0->abilityNumAlt;
+        break;
     case MON_DATA_HYPER_TRAINED_HP:
         retVal = substruct0->hyperTrainedHp;
         break;
@@ -4628,6 +4632,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_FRIENDSHIP:
         SET8(substruct0->friendship);
         break;
+    case MON_DATA_ABILITY_CAPSULE_TOGGLE:
+        SET8(substruct0->abilityNumAlt);
+        break;
     case MON_DATA_HYPER_TRAINED_HP:
         SET8(substruct0->hyperTrainedHp);
         break;
@@ -4989,7 +4996,18 @@ u8 GetMonAbility(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
-    return GetAbilityBySpecies(species, abilityNum);
+    if (ShouldUseAltAbility(mon))
+        return GetAbilityBySpecies(species, !abilityNum);
+    else
+        return GetAbilityBySpecies(species, abilityNum);
+}
+
+bool8 ShouldUseAltAbility (struct Pokemon *mon)
+{
+    if ((GetMonData(mon, MON_DATA_ABILITY_CAPSULE_TOGGLE) == TRUE) && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
+        return TRUE;
+
+    return FALSE;
 }
 
 void CreateSecretBaseEnemyParty(struct SecretBase *secretBaseRecord)

@@ -180,7 +180,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     for (i = firstId; i < lastId; i++)
     {
         u16 species;
-        u8 monAbility;
+        u8 monAbility, abilityNum;
 
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
@@ -198,10 +198,13 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
-        if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)
-            monAbility = gSpeciesInfo[species].abilities[1];
+        abilityNum = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
+
+        if (ShouldUseAltAbility(&party[i]))
+            monAbility = gSpeciesInfo[species].abilities[!abilityNum];
         else
-            monAbility = gSpeciesInfo[species].abilities[0];
+            monAbility = gSpeciesInfo[species].abilities[abilityNum];
+
 
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
@@ -378,7 +381,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     for (i = firstId; i < lastId; i++)
     {
         u16 species;
-        u8 monAbility;
+        u8 monAbility, abilityNum;
 
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
@@ -396,10 +399,12 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
-        if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)
-            monAbility = gSpeciesInfo[species].abilities[1];
+        abilityNum = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
+
+        if (ShouldUseAltAbility(&party[i]))
+            monAbility = gSpeciesInfo[species].abilities[!abilityNum];
         else
-            monAbility = gSpeciesInfo[species].abilities[0];
+            monAbility = gSpeciesInfo[species].abilities[abilityNum];
 
         moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (moveFlags & flags)

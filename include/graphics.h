@@ -3436,6 +3436,9 @@ extern const u32 gItemIcon_MagmaEmblem[];
 extern const u32 gItemIconPalette_MagmaEmblem[];
 extern const u32 gItemIcon_OldSeaMap[];
 extern const u32 gItemIconPalette_OldSeaMap[];
+// Custom items replacing FR/LG-exclusive key items
+extern const u32 gItemIcon_AbilityCapsule[];
+extern const u32 gItemIconPalette_AbilityCapsule[];
 
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];

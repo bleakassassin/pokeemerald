@@ -266,12 +266,13 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin::
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
 	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_MachoBrace
-	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
-	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
-	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
-	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
-	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
+	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
+	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
+	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
+	case 13, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminSilver::
@@ -288,13 +289,14 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminSilver::
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
 	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_MachoBrace
-	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
-	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
-	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
-	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
-	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
-	case 13, BattleFrontier_ExchangeServiceCorner_EventScript_LansatBerry
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
+	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
+	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
+	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
+	case 13, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
+	case 14, BattleFrontier_ExchangeServiceCorner_EventScript_LansatBerry
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminGold::
@@ -311,14 +313,15 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminGold::
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
 	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_MachoBrace
-	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
-	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
-	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
-	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
-	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
-	case 13, BattleFrontier_ExchangeServiceCorner_EventScript_LansatBerry
-	case 14, BattleFrontier_ExchangeServiceCorner_EventScript_StarfBerry
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
+	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
+	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
+	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry
+	case 13, BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry
+	case 14, BattleFrontier_ExchangeServiceCorner_EventScript_LansatBerry
+	case 15, BattleFrontier_ExchangeServiceCorner_EventScript_StarfBerry
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Protein::
@@ -354,6 +357,11 @@ BattleFrontier_ExchangeServiceCorner_EventScript_HPUp::
 BattleFrontier_ExchangeServiceCorner_EventScript_MachoBrace::
 	setvar VAR_0x8008, 8
 	setvar VAR_0x8009, ITEM_MACHO_BRACE
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
+
+BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule::
+	setvar VAR_0x8008, 24
+	setvar VAR_0x8009, ITEM_ABILITY_CAPSULE
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy::
@@ -854,6 +862,10 @@ BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc::
 BattleFrontier_ExchangeServiceCorner_Text_MachoBraceDesc::
 	.string "A hold item that promotes growth,\n"
 	.string "but it reduces SPEED.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_AbilityCapsuleDesc::
+	.string "A capsule that swaps the ABILITY of\n"
+	.string "a POKéMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_RareCandyDesc::
 	.string "Raises the level of a POKéMON by one.$"

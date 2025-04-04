@@ -736,3 +736,7 @@ const u32 gItemIconPalette_MagmaEmblem[] = INCBIN_U32("graphics/items/icon_palet
 
 const u32 gItemIcon_OldSeaMap[] = INCBIN_U32("graphics/items/icons/old_sea_map.4bpp.lz");
 const u32 gItemIconPalette_OldSeaMap[] = INCBIN_U32("graphics/items/icon_palettes/old_sea_map.gbapal.lz");
+
+// Custom items replacing FR/LG-exclusive key items
+const u32 gItemIcon_AbilityCapsule[] = INCBIN_U32("graphics/items/icons/ability_capsule.4bpp.lz");
+const u32 gItemIconPalette_AbilityCapsule[] = INCBIN_U32("graphics/items/icon_palettes/ability_capsule.gbapal.lz");
