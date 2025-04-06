@@ -4633,10 +4633,31 @@ void HyperTrainStats(void)
     CalculateMonStats(mon);
 }
 
+static const u8 sNaturesWithNoStatChanges[] = 
+{
+    NATURE_HARDY,
+    NATURE_DOCILE,
+    NATURE_BASHFUL,
+    NATURE_QUIRKY,
+    NATURE_SERIOUS
+};
+
 bool8 CheckIfNatureModIsSame(void)
 {
-    if (GetNature(&gPlayerParty[gSpecialVar_0x8004], TRUE) == gNatureMod[gSpecialVar_0x8005 + 1])
+    u8 i;
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    if (GetNature(mon, TRUE) == gNatureMod[gSpecialVar_0x8005 + 1])
         return TRUE;
+
+    if (gSpecialVar_0x8005 == NATURE_NO_CHANGE)
+    {
+        for (i = 0; i < ARRAY_COUNT(sNaturesWithNoStatChanges); i++)
+        {
+            if (sNaturesWithNoStatChanges[i] == GetNature(mon, TRUE))
+                return TRUE;
+        }
+    }
 
     return FALSE;
 }

@@ -179,7 +179,8 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
-#define NATURE_MOD_NONE  0 // No modded Nature, not refenced if value is 0
+#define NATURE_MOD_NONE  0  // No modded Nature, not refenced if value is 0
+#define NATURE_NO_CHANGE 20 // Serious Nature in the ESC list, checked against other Natures with no stat changes
 
 // Constants for AdjustFriendship
 #define FRIENDSHIP_EVENT_GROW_LEVEL       0
