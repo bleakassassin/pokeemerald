@@ -4629,6 +4629,8 @@ void HyperTrainStats(void)
     }
     else
         SetMonData(mon, MON_DATA_HYPER_TRAINED_HP + gSpecialVar_0x8005, &trained);
+    
+    CalculateMonStats(mon);
 }
 
 bool8 CheckIfNatureModIsSame(void)
