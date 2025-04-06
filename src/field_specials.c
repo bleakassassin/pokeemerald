@@ -30,6 +30,7 @@
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "pokemon_summary_screen.h"
 #include "random.h"
 #include "rayquaza_scene.h"
 #include "region_map.h"
@@ -1273,7 +1274,7 @@ void RemoveCameraObject(void)
 
 u8 GetPokeblockNameByMonNature(void)
 {
-    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()]), gStringVar1);
+    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()], FALSE), gStringVar1);
 }
 
 void GetSecretBaseNearbyMapName(void)
@@ -2466,6 +2467,16 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
+    case SCROLL_MULTI_EXCHANGE_CORNER_NATURE_VENDOR:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = 22;
+        task->tLeft = 22;
+        task->tTop = 1;
+        task->tWidth = 12;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
     default:
         gSpecialVar_Result = MULTI_B_PRESSED;
         DestroyTask(taskId);
@@ -2693,6 +2704,31 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_PokemonMoves,
         gText_Underpowered,
         gText_WhenInDanger,
+        gText_Exit
+    },
+    [SCROLL_MULTI_EXCHANGE_CORNER_NATURE_VENDOR] =
+    {
+        gLonelyNatureName,
+        gAdamantNatureName,
+        gNaughtyNatureName,
+        gBraveNatureName,
+        gBoldNatureName,
+        gImpishNatureName,
+        gLaxNatureName,
+        gRelaxedNatureName,
+        gModestNatureName,
+        gMildNatureName,
+        gRashNatureName,
+        gQuietNatureName,
+        gCalmNatureName,
+        gGentleNatureName,
+        gCarefulNatureName,
+        gSassyNatureName,
+        gTimidNatureName,
+        gHastyNatureName,
+        gJollyNatureName,
+        gNaiveNatureName,
+        gSeriousNatureName,
         gText_Exit
     }
 };
@@ -2976,7 +3012,7 @@ void ShowNatureGirlMessage(void)
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
         gSpecialVar_0x8004 = 0;
 
-    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
+    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004], FALSE);
     ShowFieldMessage(sNatureGirlMessages[nature]);
 }
 
@@ -3298,11 +3334,32 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
         .baseBlock = 28,
     };
 
+    static const struct WindowTemplate sBattleFrontierNature_WindowTemplate =
+    {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 9,
+        .width = 10,
+        .height = 4,
+        .paletteNum = 15,
+        .baseBlock = 28,
+    };
+
     if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {
         if (gSpecialVar_0x8006 == 0)
         {
             sTutorMoveAndElevatorWindowId = AddWindow(&sBattleFrontierTutor_WindowTemplate);
+            SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, FALSE);
+        }
+        ShowBattleFrontierTutorMoveDescription(menu, selection);
+    }
+
+    if (menu == SCROLL_MULTI_EXCHANGE_CORNER_NATURE_VENDOR)
+    {
+        if (gSpecialVar_0x8008 == 0)
+        {
+            sTutorMoveAndElevatorWindowId = AddWindow(&sBattleFrontierNature_WindowTemplate);
             SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, FALSE);
         }
         ShowBattleFrontierTutorMoveDescription(menu, selection);
@@ -3344,6 +3401,32 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         gText_Exit,
     };
 
+    static const u8 *const sBattleFrontier_NatureDescriptions[] =
+    {
+        BattleFrontier_ExchangeServiceCorner_Text_LonelyDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_AdamantDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_NaughtyDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_BraveDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_BoldDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_ImpishDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_LaxDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_RelaxedDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_ModestDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_MildDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_RashDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_QuietDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_CalmDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_GentleDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_CarefulDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_SassyDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_TimidDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_HastyDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_JollyDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_NaiveDesc,
+        BattleFrontier_ExchangeServiceCorner_Text_SeriousDesc,
+        gText_Exit,
+    };
+
     if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {
         FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
@@ -3351,6 +3434,12 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
             AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_TutorMoveDescriptions2[selection], 0, 0, 0, NULL);
         else
             AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_TutorMoveDescriptions1[selection], 0, 0, 0, NULL);
+    }
+
+    if (menu == SCROLL_MULTI_EXCHANGE_CORNER_NATURE_VENDOR)
+    {
+        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
+        AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, gSaveBlock2Ptr->optionsCurrentFont, sBattleFrontier_NatureDescriptions[selection], 0, 0, 0, NULL);
     }
 }
 
@@ -4540,4 +4629,25 @@ void HyperTrainStats(void)
     }
     else
         SetMonData(mon, MON_DATA_HYPER_TRAINED_HP + gSpecialVar_0x8005, &trained);
+}
+
+bool8 CheckIfNatureModIsSame(void)
+{
+    if (GetNature(&gPlayerParty[gSpecialVar_0x8004], TRUE) == gNatureMod[gSpecialVar_0x8005 + 1])
+        return TRUE;
+
+    return FALSE;
+}
+
+void BufferNatureName(void)
+{
+    StringCopy(gStringVar2, gNatureNamePointers[gNatureMod[gSpecialVar_0x8005 + 1]]);
+}
+
+void ChangeNatureMod(void)
+{
+    u8 natureMod = gSpecialVar_0x8005 + 1;
+
+    SetMonData(&gPlayerParty[gSpecialVar_0x8006], MON_DATA_NATURE_MOD, &natureMod);
+    CalculateMonStats(&gPlayerParty[gSpecialVar_0x8006]);
 }

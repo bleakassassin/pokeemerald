@@ -151,7 +151,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Decor1::
 	bufferdecorationname 0, VAR_0x8009
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmPrize, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize	
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize
 
 BattleFrontier_ExchangeServiceCorner_EventScript_DecorClerk2::
 	lock
@@ -238,7 +238,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Decor2::
 	bufferdecorationname 0, VAR_0x8009
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmPrize, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2Branch
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize	
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize
 
 BattleFrontier_ExchangeServiceCorner_EventScript_VitaminClerk::
 	lock
@@ -653,6 +653,79 @@ BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingReturnToPickStat::
 	waitmessage
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingCallbackPickStat
 
+BattleFrontier_ExchangeServiceCorner_EventScript_NatureClerk::
+	lock
+	faceplayer
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_WelcomeNatureMod, MSGBOX_DEFAULT
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_le VAR_TEMP_1, 24, BattleFrontier_Lounge7_EventScript_NotEnoughPointsForNatureMod
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_PleaseChooseNature, MSGBOX_DEFAULT
+	special ShowBattlePointsWindow
+BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNatureList::
+	setvar VAR_0x8004, SCROLL_MULTI_EXCHANGE_CORNER_NATURE_VENDOR
+	setvar VAR_0x8008, 0
+	special ShowScrollableMultichoice
+	waitstate
+	setvar VAR_0x8008, 1
+	goto_if_ge VAR_RESULT, 21, BattleFrontier_ExchangeServiceCorner_EventScript_CancelNatureMod
+	copyvar VAR_0x8005, VAR_RESULT
+BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNaturePokemon::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_ChoosePokemonNature, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	waitstate
+	copyvar VAR_0x8006, VAR_0x8004
+	goto_if_eq VAR_0x8006, PARTY_NOTHING_CHOSEN, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+	bufferspeciesname STR_VAR_1, VAR_RESULT
+	goto_if_eq VAR_RESULT, SPECIES_EGG, BattleFrontier_ExchangeServiceCorner_EventScript_NatureEgg
+	copyvar VAR_0x8007, VAR_RESULT
+	specialvar VAR_RESULT CheckIfNatureModIsSame
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_SameNaturePicked
+	special ShowBattlePointsWindow
+	special BufferNatureName
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_NatureModToPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+	setvar VAR_0x8004, 24
+	special TakeFrontierBattlePoints
+	special ChangeNatureMod
+	special UpdateBattlePointsWindow
+	playse SE_SHOP
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_PleaseWaitAMoment, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+	delay 15
+	playse SE_USE_ITEM
+	waitse
+	delay 30
+	fadescreen FADE_FROM_BLACK
+	playmoncry VAR_0x8007, CRY_MODE_NORMAL
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_NatureModDone, MSGBOX_DEFAULT
+	waitmoncry
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_AnotherNatureMod, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_ModAnotherNature
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+
+BattleFrontier_Lounge7_EventScript_NotEnoughPointsForNatureMod::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_UnfortunatelyNotEnoughPoints, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_CancelNatureMod::
+	special CloseBattleFrontierTutorWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+
+BattleFrontier_ExchangeServiceCorner_EventScript_NatureEgg::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_CantChangeNatureEgg, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNaturePokemon
+
+BattleFrontier_ExchangeServiceCorner_EventScript_SameNaturePicked::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_AlreadyHasNatureEffects, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNaturePokemon
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ModAnotherNature::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_PleaseChooseNature, MSGBOX_DEFAULT
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNatureList
+
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
 	.string "Hello, this is the EXCHANGE SERVICE\n"
 	.string "CORNER.\p"
@@ -660,9 +733,51 @@ BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
 	.string "have collected for lovely prizes.\p"
 	.string "Please choose a prize from this list.$"
 
-@ Unused
-BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize:
-	.string "Please choose a prize from this list.$"
+BattleFrontier_ExchangeServiceCorner_Text_WelcomeNatureMod:
+	.string "Hello, this is the EXCHANGE SERVICE\n"
+	.string "CORNER.\p"
+	.string "Here, you can redeem 24 BATTLE POINTS\n"
+	.string "to change the effect of NATURE on the\l"
+	.string "stats of one of your POKéMON.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_UnfortunatelyNotEnoughPoints:
+	.string "Unfortunately, it appears you don't\n"
+	.string "have enough BATTLE POINTS…\p"
+	.string "Please visit us when you have\n"
+	.string "saved up enough BATTLE POINTS.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_PleaseChooseNature:
+	.string "Please choose the NATURE whose effect\n"
+	.string "you'd like to give to your POKéMON.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_ChoosePokemonNature:
+	.string "Please choose the POKéMON you want to\n"
+	.string "have the stat effects of this NATURE.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_CantChangeNatureEgg:
+	.string "EGGS are ineligible to receive the\n"
+	.string "the stat effects of NATURES.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_AlreadyHasNatureEffects:
+	.string "It appears your POKéMON already has\n"
+	.string "the effects of that NATURE.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_NatureModToPokemon:
+	.string "You'd like your {STR_VAR_1} to have the\n"
+	.string "stat effects of the {STR_VAR_2} NATURE?\l"
+	.string "That will be 24 BATTLE POINTS.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_PleaseWaitAMoment:
+	.string "Thank you!\n"
+	.string "Please wait a moment…$"
+
+BattleFrontier_ExchangeServiceCorner_Text_NatureModDone:
+	.string "Done! Your {STR_VAR_1} now has the stat\n"
+	.string "changes of the {STR_VAR_2} NATURE.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_AnotherNatureMod:
+	.string "Would you like to change the effects\n"
+	.string "of NATURE for more of your POKéMON?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmPrize:
 	.string "You've chosen the {STR_VAR_1}.\n"
@@ -956,3 +1071,87 @@ BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc::
 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc::
 	.string "A hold item that raises the\n"
 	.string "critical-hit rate.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_LonelyDesc::
+	.string "Up: ATTACK\n"
+	.string "Down: DEFENSE$"
+
+BattleFrontier_ExchangeServiceCorner_Text_AdamantDesc::
+	.string "Up: ATTACK\n"
+	.string "Down: SP. ATK$"
+
+BattleFrontier_ExchangeServiceCorner_Text_NaughtyDesc::
+	.string "Up: ATTACK\n"
+	.string "Down: SP. DEF$"
+
+BattleFrontier_ExchangeServiceCorner_Text_BraveDesc::
+	.string "Up: ATTACK\n"
+	.string "Down: SPEED$"
+
+BattleFrontier_ExchangeServiceCorner_Text_BoldDesc::
+	.string "Up: DEFENSE\n"
+	.string "Down: ATTACK$"
+
+BattleFrontier_ExchangeServiceCorner_Text_ImpishDesc::
+	.string "Up: DEFENSE\n"
+	.string "Down: SP. ATK$"
+
+BattleFrontier_ExchangeServiceCorner_Text_LaxDesc::
+	.string "Up: DEFENSE\n"
+	.string "Down: SP. DEF$"
+
+BattleFrontier_ExchangeServiceCorner_Text_RelaxedDesc::
+	.string "Up: DEFENSE\n"
+	.string "Down: SPEED$"
+
+BattleFrontier_ExchangeServiceCorner_Text_ModestDesc::
+	.string "Up: SP. ATK\n"
+	.string "Down: ATTACK$"
+
+BattleFrontier_ExchangeServiceCorner_Text_MildDesc::
+	.string "Up: SP. ATK\n"
+	.string "Down: DEFENSE$"
+
+BattleFrontier_ExchangeServiceCorner_Text_RashDesc::
+	.string "Up: SP. ATK\n"
+	.string "Down: SP. DEF$"
+
+BattleFrontier_ExchangeServiceCorner_Text_QuietDesc::
+	.string "Up: SP. ATK\n"
+	.string "Down: SPEED$"
+
+BattleFrontier_ExchangeServiceCorner_Text_CalmDesc::
+	.string "Up: SP. DEF\n"
+	.string "Down: ATTACK$"
+
+BattleFrontier_ExchangeServiceCorner_Text_GentleDesc::
+	.string "Up: SP. DEF\n"
+	.string "Down: DEFENSE$"
+
+BattleFrontier_ExchangeServiceCorner_Text_CarefulDesc::
+	.string "Up: SP. DEF\n"
+	.string "Down: SP. ATK$"
+
+BattleFrontier_ExchangeServiceCorner_Text_SassyDesc::
+	.string "Up: SP. DEF\n"
+	.string "Down: SPEED$"
+
+BattleFrontier_ExchangeServiceCorner_Text_TimidDesc::
+	.string "Up: SPEED\n"
+	.string "Down: ATTACK$"
+
+BattleFrontier_ExchangeServiceCorner_Text_HastyDesc::
+	.string "Up: SPEED\n"
+	.string "Down: DEFENSE$"
+
+BattleFrontier_ExchangeServiceCorner_Text_JollyDesc::
+	.string "Up: SPEED\n"
+	.string "Down: SP. ATK$"
+
+BattleFrontier_ExchangeServiceCorner_Text_NaiveDesc::
+	.string "Up: SPEED\n"
+	.string "Down: SP. DEF$"
+
+BattleFrontier_ExchangeServiceCorner_Text_SeriousDesc::
+	.string "Up: None\n"
+	.string "Down: None$"

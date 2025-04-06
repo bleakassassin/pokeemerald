@@ -94,13 +94,14 @@ enum {
     MON_DATA_SPEED2,
     MON_DATA_SPATK2,
     MON_DATA_SPDEF2,
+    MON_DATA_NATURE_MOD,
+    MON_DATA_ABILITY_CAPSULE_TOGGLE,
     MON_DATA_HYPER_TRAINED_HP,
     MON_DATA_HYPER_TRAINED_ATK,
     MON_DATA_HYPER_TRAINED_DEF,
     MON_DATA_HYPER_TRAINED_SPEED,
     MON_DATA_HYPER_TRAINED_SPATK,
     MON_DATA_HYPER_TRAINED_SPDEF,
-    MON_DATA_ABILITY_CAPSULE_TOGGLE,
 };
 
 struct PokemonSubstruct0
@@ -110,7 +111,8 @@ struct PokemonSubstruct0
     u32 experience;
     u8 ppBonuses;
     u8 friendship;
-    u16 filler:9;
+    u8 natureMod:5;  // 21 possible values besides disabled (0)
+    u16 filler:4;
     u8 abilityNumAlt:1;
     u8 hyperTrainedHp:1;
     u8 hyperTrainedAtk:1;
@@ -405,6 +407,7 @@ extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
 extern const u16 gUnionRoomFacilityClasses[];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const s8 gNatureStatTable[][5];
+extern const u8 gNatureMod[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -491,7 +494,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask, u8 battlerId);
 u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit);
 u8 *UseStatIncreaseItem(u16 itemId);
-u8 GetNature(struct Pokemon *mon);
+u8 GetNature(struct Pokemon *mon, bool32 allowMod);
 u8 GetNatureFromPersonality(u32 personality);
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem);
 u16 HoennPokedexNumToSpecies(u16 hoennNum);

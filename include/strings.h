@@ -908,6 +908,29 @@ extern const u8 BattleFrontier_Lounge7_Text_IcePunchDesc[];
 extern const u8 BattleFrontier_Lounge7_Text_ThunderPunchDesc[];
 extern const u8 BattleFrontier_Lounge7_Text_FirePunchDesc[];
 
+// Battle Frontier Nature Mod
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LonelyDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_AdamantDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_NaughtyDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_BraveDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_BoldDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ImpishDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_LaxDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_RelaxedDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_ModestDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_MildDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_RashDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_QuietDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_CalmDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_GentleDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_CarefulDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_SassyDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_TimidDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_HastyDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_JollyDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_NaiveDesc[];
+extern const u8 BattleFrontier_ExchangeServiceCorner_Text_SeriousDesc[];
+
 extern const u8 gText_YourPartnerHasRetired[];
 
 extern const u8 gText_Wallace[];
@@ -2966,6 +2989,33 @@ extern const u8 gText_YourName[];
 extern const u8 gText_BoxName[];
 extern const u8 gText_PkmnsNickname[];
 extern const u8 gText_TellHimTheWords[];
+
+// Natures
+extern const u8 gHardyNatureName[];
+extern const u8 gLonelyNatureName[];
+extern const u8 gBraveNatureName[];
+extern const u8 gAdamantNatureName[];
+extern const u8 gNaughtyNatureName[];
+extern const u8 gBoldNatureName[];
+extern const u8 gDocileNatureName[];
+extern const u8 gRelaxedNatureName[];
+extern const u8 gImpishNatureName[];
+extern const u8 gLaxNatureName[];
+extern const u8 gTimidNatureName[];
+extern const u8 gHastyNatureName[];
+extern const u8 gSeriousNatureName[];
+extern const u8 gJollyNatureName[];
+extern const u8 gNaiveNatureName[];
+extern const u8 gModestNatureName[];
+extern const u8 gMildNatureName[];
+extern const u8 gQuietNatureName[];
+extern const u8 gBashfulNatureName[];
+extern const u8 gRashNatureName[];
+extern const u8 gCalmNatureName[];
+extern const u8 gGentleNatureName[];
+extern const u8 gSassyNatureName[];
+extern const u8 gCarefulNatureName[];
+extern const u8 gQuirkyNatureName[];
 
 void MakeNameUppercase(u8 *str);
 

@@ -545,3 +545,6 @@ gSpecials::
 	def_special CheckIfSelectedStatMaxed
 	def_special BufferStatName
 	def_special HyperTrainStats
+	def_special CheckIfNatureModIsSame
+	def_special BufferNatureName
+	def_special ChangeNatureMod

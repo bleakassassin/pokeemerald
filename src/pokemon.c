@@ -3030,7 +3030,7 @@ static u16 GetDeoxysStat(struct Pokemon *mon, s32 statId)
     ivVal = GetMonData(mon, MON_DATA_HP_IV + statId, NULL);
     evVal = GetMonData(mon, MON_DATA_HP_EV + statId, NULL);
     statValue = ((sDeoxysBaseStats[statId] * 2 + ivVal + evVal / 4) * mon->level) / 100 + 5;
-    nature = GetNature(mon);
+    nature = GetNature(mon, TRUE);
     statValue = ModifyStatByNature(nature, statValue, (u8)statId);
     return statValue;
 }
@@ -3174,7 +3174,7 @@ bool8 IsStatHyperTrained(struct Pokemon *mon, u8 statIndex)
 {                                                                             \
     u8 baseStat = gSpeciesInfo[species].base;                                 \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5;               \
-    u8 nature = GetNature(mon);                                               \
+    u8 nature = GetNature(mon, TRUE);                                         \
     if (IsStatHyperTrained(mon, statIndex))                                   \
         n = (((2 * baseStat + MAX_PER_STAT_IVS + ev / 4) * level) / 100) + 5; \
     n = ModifyStatByNature(nature, n, statIndex);                             \
@@ -4235,6 +4235,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_FRIENDSHIP:
         retVal = substruct0->friendship;
         break;
+    case MON_DATA_NATURE_MOD:
+        retVal = substruct0->natureMod;
+        break;
     case MON_DATA_ABILITY_CAPSULE_TOGGLE:
         retVal = substruct0->abilityNumAlt;
         break;
@@ -4631,6 +4634,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     case MON_DATA_FRIENDSHIP:
         SET8(substruct0->friendship);
+        break;
+    case MON_DATA_NATURE_MOD:
+        SET8(substruct0->natureMod);
         break;
     case MON_DATA_ABILITY_CAPSULE_TOGGLE:
         SET8(substruct0->abilityNumAlt);
@@ -5960,9 +5966,38 @@ u8 *UseStatIncreaseItem(u16 itemId)
     return gDisplayedStringBattle;
 }
 
-u8 GetNature(struct Pokemon *mon)
+const u8 gNatureMod[] =
 {
-    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % NUM_NATURES;
+    NATURE_MOD_NONE,
+    NATURE_LONELY,
+    NATURE_ADAMANT,
+    NATURE_NAUGHTY,
+    NATURE_BRAVE,
+    NATURE_BOLD,
+    NATURE_IMPISH,
+    NATURE_LAX,
+    NATURE_RELAXED,
+    NATURE_MODEST,
+    NATURE_MILD,
+    NATURE_RASH,
+    NATURE_QUIET,
+    NATURE_CALM,
+    NATURE_GENTLE,
+    NATURE_CAREFUL,
+    NATURE_SASSY,
+    NATURE_TIMID,
+    NATURE_HASTY,
+    NATURE_JOLLY,
+    NATURE_NAIVE,
+    NATURE_SERIOUS
+};
+
+u8 GetNature(struct Pokemon *mon, bool32 allowMod)
+{
+    if (!allowMod || GetMonData(mon, MON_DATA_NATURE_MOD, 0) == NATURE_MOD_NONE || gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+        return GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, 0));
+    else
+        return gNatureMod[GetMonData(mon, MON_DATA_NATURE_MOD, 0)];
 }
 
 u8 GetNatureFromPersonality(u32 personality)
@@ -7059,7 +7094,7 @@ bool8 IsMonSpriteNotFlipped(u16 species)
 
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
 {
-    u8 nature = GetNature(mon);
+    u8 nature = GetNature(mon, FALSE);
     return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
 }
 
