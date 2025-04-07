@@ -32,6 +32,7 @@
 #include "util.h"
 #include "window.h"
 #include "constants/battle_anim.h"
+#include "constants/battle_move_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
@@ -1536,18 +1537,29 @@ static void MoveSelectionDisplayPpNumber(void)
 
 u8 TypeEffectiveness(u8 targetId)
 {
-    u8 moveFlags;
+    u8 moveFlags, moveEffect;
     u16 move;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
     move = gBattleMons[gActiveBattler].moves[gMoveSelectionCursor[gActiveBattler]];
     moveFlags = AI_TypeCalc(move, gBattleMons[targetId].species, gBattleMons[targetId].ability);
+    moveEffect = gBattleMoves[move].effect;
 
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[targetId].species), FLAG_GET_CAUGHT) == FALSE)
         return 10; // 10 - normal effectiveness
 
     if (moveFlags & MOVE_RESULT_NO_EFFECT)
         return B_WIN_TYPE_NO_EFF;
+    else if (moveEffect == EFFECT_BIDE
+            || moveEffect == EFFECT_SUPER_FANG
+            || moveEffect == EFFECT_DRAGON_RAGE
+            || moveEffect == EFFECT_LEVEL_DAMAGE
+            || moveEffect == EFFECT_PSYWAVE
+            || moveEffect == EFFECT_COUNTER
+            || moveEffect == EFFECT_SONICBOOM
+            || moveEffect == EFFECT_MIRROR_COAT
+            || moveEffect == EFFECT_ENDEAVOR)
+        return 10; // 10 - normal effectiveness
     else if (moveFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE )
         return B_WIN_TYPE_NOT_VERY_EFF;
     else if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
