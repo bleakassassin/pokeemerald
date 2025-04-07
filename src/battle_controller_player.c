@@ -1548,7 +1548,9 @@ u8 TypeEffectiveness(u8 targetId)
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[targetId].species), FLAG_GET_CAUGHT) == FALSE)
         return B_WIN_MOVE_TYPE; // normal effectiveness
 
-    if (moveFlags & MOVE_RESULT_NO_EFFECT)
+    if (move == MOVE_HIDDEN_POWER || move == MOVE_WEATHER_BALL)
+        return B_WIN_MOVE_TYPE; // normal effectiveness
+    else if (moveFlags & MOVE_RESULT_NO_EFFECT)
         return B_WIN_TYPE_NO_EFF;
     else if (moveEffect == EFFECT_BIDE
             || moveEffect == EFFECT_SUPER_FANG
