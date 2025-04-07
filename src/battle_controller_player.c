@@ -1546,7 +1546,7 @@ u8 TypeEffectiveness(u8 targetId)
     moveEffect = gBattleMoves[move].effect;
 
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[targetId].species), FLAG_GET_CAUGHT) == FALSE)
-        return 10; // 10 - normal effectiveness
+        return B_WIN_MOVE_TYPE; // normal effectiveness
 
     if (moveFlags & MOVE_RESULT_NO_EFFECT)
         return B_WIN_TYPE_NO_EFF;
@@ -1559,13 +1559,13 @@ u8 TypeEffectiveness(u8 targetId)
             || moveEffect == EFFECT_SONICBOOM
             || moveEffect == EFFECT_MIRROR_COAT
             || moveEffect == EFFECT_ENDEAVOR)
-        return 10; // 10 - normal effectiveness
+        return B_WIN_MOVE_TYPE;
     else if (moveFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE )
         return B_WIN_TYPE_NOT_VERY_EFF;
     else if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
         return B_WIN_TYPE_SUPER_EFF;
     else
-        return 10; // 10 - normal effectiveness
+        return B_WIN_MOVE_TYPE;
 }
 
 static void MoveSelectionDisplayMoveType(void)
