@@ -7196,24 +7196,16 @@ void SetWildMonHeldItem(void)
         }
         if (gMapHeader.mapLayoutId == LAYOUT_ALTERING_CAVE)
         {
+            // In Altering Cave, use special item list
             s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
-            if (sAlteringCaveWildMonHeldItems[alteringCaveId].item != ITEM_NONE)
-            {
-                // In Altering Cave with Pokemon that doesn't have wild hold items, use special item list
-                if (rnd < chanceNotRare)
-                    return;
+            if (rnd < (100 - chanceNotRare) && sAlteringCaveWildMonHeldItems[alteringCaveId].item != ITEM_NONE)
                 SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &sAlteringCaveWildMonHeldItems[alteringCaveId].item);
-            }
+            if (rnd < chanceNoItem)
+                return;
+            if (rnd < chanceNotRare)
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
             else
-            {
-                // In Altering Cave with Pokemon that does have wild hold items, use normal items
-                if (rnd < chanceNoItem)
-                    return;
-                if (rnd < chanceNotRare)
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemCommon);
-                else
-                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemRare);
-            }
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gSpeciesInfo[species].itemRare);
         }
         else
         {
