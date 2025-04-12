@@ -325,6 +325,7 @@ static void Cmd_removeattackerstatus1(void);
 static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
 static void Cmd_trainerslideout(void);
+static void Cmd_checknicknamesoption(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
@@ -576,7 +577,8 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_removeattackerstatus1,                   //0xF5
     Cmd_finishaction,                            //0xF6
     Cmd_finishturn,                              //0xF7
-    Cmd_trainerslideout                          //0xF8
+    Cmd_trainerslideout,                         //0xF8
+    Cmd_checknicknamesoption                     //0xF9
 };
 
 struct StatFractions
@@ -10301,11 +10303,16 @@ static void Cmd_trygivecaughtmonnick(void)
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
     case 0:
-        HandleBattleWindow(YESNOBOX_X_Y, 0);
-        BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
-        gBattleCommunication[MULTIUSE_STATE]++;
-        gBattleCommunication[CURSOR_POSITION] = 0;
-        BattleCreateYesNoCursorAt(0);
+        if (gSaveBlock2Ptr->optionsGiveNicknames == OPTIONS_GIVE_NICKNAMES_OFF)
+            gBattleCommunication[MULTIUSE_STATE] = 4;
+        else
+        {
+            HandleBattleWindow(YESNOBOX_X_Y, 0);
+            BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
+            gBattleCommunication[MULTIUSE_STATE]++;
+            gBattleCommunication[CURSOR_POSITION] = 0;
+            BattleCreateYesNoCursorAt(0);
+        }
         break;
     case 1:
         if (JOY_NEW(DPAD_UP) && gBattleCommunication[CURSOR_POSITION] != 0)
@@ -10402,4 +10409,12 @@ static void Cmd_trainerslideout(void)
     MarkBattlerForControllerExec(gActiveBattler);
 
     gBattlescriptCurrInstr += 2;
+}
+
+static void Cmd_checknicknamesoption(void)
+{
+    if (gSaveBlock2Ptr->optionsGiveNicknames == OPTIONS_GIVE_NICKNAMES_OFF)
+        gBattlescriptCurrInstr += 1;
+    else
+        gBattlescriptCurrInstr += 5;
 }

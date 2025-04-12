@@ -307,6 +307,7 @@ extern const u8 gText_MessageBox[];
 extern const u8 gText_Frame[];
 extern const u8 gText_Font[];
 extern const u8 gText_ButtonMode[];
+extern const u8 gText_GiveNicknames[];
 
 extern const u8 gText_MaleSymbol[];
 extern const u8 gText_FemaleSymbol[];

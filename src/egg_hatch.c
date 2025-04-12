@@ -661,8 +661,10 @@ static void CB2_EggHatch(void)
         if (IsFanfareTaskInactive())
             sEggHatchData->state++;
         break;
-    case 7: // Twice?
-        if (IsFanfareTaskInactive())
+    case 7:
+        if (gSaveBlock2Ptr->optionsGiveNicknames == OPTIONS_GIVE_NICKNAMES_OFF)
+            sEggHatchData->state = 11;
+        else
             sEggHatchData->state++;
         break;
     case 8:

@@ -116,6 +116,8 @@ LilycoveCity_ContestHall_EventScript_GiveTreecko::
 
 LilycoveCity_ContestHall_EventScript_Send3rdStarterParty::
 	call LilycoveCity_ContestHall_EventScript_Received3rdStarter
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, LilycoveCity_ContestHall_EventScript_EnterMoreContests
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_ContestHall_EventScript_EnterMoreContests
 	call Common_EventScript_GetGiftMonPartySlot
@@ -124,6 +126,8 @@ LilycoveCity_ContestHall_EventScript_Send3rdStarterParty::
 
 LilycoveCity_ContestHall_EventScript_Send3rdStarterPC::
 	call LilycoveCity_ContestHall_EventScript_Received3rdStarter
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, LilycoveCity_ContestHall_EventScript_3rdStarterTransferredToPC
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_ContestHall_EventScript_3rdStarterTransferredToPC
 	call Common_EventScript_NameReceivedBoxMon

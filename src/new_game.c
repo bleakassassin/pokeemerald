@@ -98,6 +98,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->optionsAttackStyle = OPTIONS_ATTACK_STYLE_TYPE;
+    gSaveBlock2Ptr->optionsGiveNicknames = OPTIONS_GIVE_NICKNAMES_ON;
     gSaveBlock2Ptr->optionsDisableMatchCall = FALSE;
     gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
     gSaveBlock2Ptr->regionMapZoom = FALSE;

@@ -1253,6 +1253,11 @@
 	.byte \position
 	.endm
 
+	.macro checknicknamesoption ptr:req
+	.byte 0xf9
+	.4byte \ptr
+	.endm
+
 @ various command changed to more readable macros
 	.macro cancelmultiturnmoves battler:req
 	various \battler, VARIOUS_CANCEL_MULTI_TURN_MOVES

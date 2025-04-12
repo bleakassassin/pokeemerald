@@ -49,6 +49,8 @@ RivalsHouse_2F_EventScript_GiveMudkip::
 
 RivalsHouse_2F_EventScript_SendRivalStarterParty::
 	call RivalsHouse_2F_EventScript_ReceivedRivalStarter
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, RivalsHouse_2F_EventScript_AddedRivalStarter
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RivalsHouse_2F_EventScript_AddedRivalStarter
 	call Common_EventScript_GetGiftMonPartySlot
@@ -57,6 +59,8 @@ RivalsHouse_2F_EventScript_SendRivalStarterParty::
 
 RivalsHouse_2F_EventScript_SendRivalStarterPC::
 	call RivalsHouse_2F_EventScript_ReceivedRivalStarter
+	goto_if_eq VAR_RESULT, OFF, RivalsHouse_2F_EventScript_RivalStarterTransferredToPC
+	checkgivenicknamesoption
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RivalsHouse_2F_EventScript_RivalStarterTransferredToPC
 	call Common_EventScript_NameReceivedBoxMon

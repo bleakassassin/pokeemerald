@@ -1398,6 +1398,7 @@ const u8 gText_BattleScene[] = _("BATTLE EFFECTS");
 const u8 gText_BattleStyle[] = _("BATTLE STYLE");
 const u8 gText_Difficulty[] = _("DIFFICULTY");
 const u8 gText_AttackStyle[] = _("ATTACK STYLE");
+const u8 gText_GiveNicknames[] = _("GIVE NICKNAMES");
 const u8 gText_MatchCalls[] = _("MATCH CALLS");
 const u8 gText_Sound[] = _("SOUND");
 const u8 gText_UnitSystem[] = _("UNIT SYSTEM");

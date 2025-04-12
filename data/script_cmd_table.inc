@@ -218,7 +218,7 @@ gScriptCmdTable::
 	script_cmd_table_entry SCR_OP_LOADHELP                      ScrCmd_nop1                           @ 0xc8
 	script_cmd_table_entry SCR_OP_UNLOADHELP                    ScrCmd_nop1                           @ 0xc9
 	script_cmd_table_entry SCR_OP_SIGNMSG                       ScrCmd_nop1                           @ 0xca
-	script_cmd_table_entry SCR_OP_NORMALMSG                     ScrCmd_nop1                           @ 0xcb
+	script_cmd_table_entry SCR_OP_CHECKGIVENICKNAMESOPTION      ScrCmd_checkgivenicknamesoption       @ 0xcb
 	script_cmd_table_entry SCR_OP_COMPAREHIDDENVAR              ScrCmd_nop1                           @ 0xcc
 	script_cmd_table_entry SCR_OP_SETMODERNFATEFULENCOUNTER     ScrCmd_setmodernfatefulencounter      @ 0xcd
 	script_cmd_table_entry SCR_OP_CHECKMODERNFATEFULENCOUNTER   ScrCmd_checkmodernfatefulencounter    @ 0xce

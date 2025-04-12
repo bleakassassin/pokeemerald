@@ -1562,9 +1562,9 @@
 	.byte SCR_OP_SIGNMSG
 	.endm
 
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro normalmsg
-	.byte SCR_OP_NORMALMSG
+	@ Checks if the "Give Nicknames" option is enabled in the Options menu. Stores the result in VAR_RESULT. Skips nickname prompt if it's off.
+	.macro checkgivenicknamesoption
+	.byte SCR_OP_CHECKGIVENICKNAMESOPTION
 	.endm
 
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
@@ -1876,6 +1876,9 @@
 
 	YES = 1
 	NO  = 0
+
+	ON  = 0
+	OFF = 1
 
 	@ Buffers the given text and calls the relevant standard message script (see gStdScripts).
 	.macro msgbox text:req, type=MSGBOX_DEFAULT

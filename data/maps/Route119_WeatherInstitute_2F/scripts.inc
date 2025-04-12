@@ -97,6 +97,8 @@ Route119_WeatherInstitute_2F_EventScript_ReceiveCastform::
 
 Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty::
 	call Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, Route119_WeatherInstitute_2F_EventScript_ExplainCastform
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route119_WeatherInstitute_2F_EventScript_ExplainCastform
 	call Common_EventScript_GetGiftMonPartySlot
@@ -106,6 +108,8 @@ Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty::
 
 Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC::
 	call Route119_WeatherInstitute_2F_EventScript_ReceivedCastformFanfare
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, Route119_WeatherInstitute_2F_EventScript_SendCastformToPC
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, Route119_WeatherInstitute_2F_EventScript_SendCastformToPC
 	call Common_EventScript_NameReceivedBoxMon

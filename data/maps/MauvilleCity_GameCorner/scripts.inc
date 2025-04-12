@@ -355,6 +355,8 @@ MauvilleCity_GameCorner_EventScript_CheckPokemonPrize::
 
 MauvilleCity_GameCorner_EventScript_ReceiveMonParty::
 	call MauvilleCity_GameCorner_EventScript_ReceivedMonFanfare
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize
 	call Common_EventScript_GetGiftMonPartySlot
@@ -365,6 +367,8 @@ MauvilleCity_GameCorner_EventScript_ReceiveMonParty::
 
 MauvilleCity_GameCorner_EventScript_ReceiveMonPC::
 	call MauvilleCity_GameCorner_EventScript_ReceivedMonFanfare
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, MauvilleCity_GameCorner_EventScript_SendPokemonToPC
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_GameCorner_EventScript_SendPokemonToPC
 	call Common_EventScript_NameReceivedBoxMon

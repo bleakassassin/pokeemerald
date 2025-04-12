@@ -117,6 +117,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	waitmessage
 	playfanfare MUS_EVOLVED
 	waitfanfare
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
 	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
