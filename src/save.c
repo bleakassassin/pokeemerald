@@ -1066,6 +1066,11 @@ void UpdateSaveVersion(void)
     }
     else if (version == VERSION_SAVE_REFACTOR)
         gSaveBlock2Ptr->encryptionKeyHack = gSaveBlock2Ptr->encryptionKey;
+    if (version <= VERSION_POCKET_ENCRYPTION)
+    {
+        if (FlagGet(FLAG_KOBE_TRADE_DONE) == TRUE)
+            AddBagItem(ITEM_STICK, 1); // traded Farfetch'd didn't hold Stick, making it unobtainable in hack
+    }
     VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
 }
 

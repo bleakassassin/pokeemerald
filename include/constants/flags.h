@@ -1310,9 +1310,9 @@
 #define FLAG_CAUGHT_ARTICUNO                                        0x4EA // Edited Flag; used for Articuno in Altering Cave
 #define FLAG_CAUGHT_ZAPDOS                                          0x4EB // Edited Flag; used for Zapdos in Altering Cave
 #define FLAG_CAUGHT_MOLTRES                                         0x4EC // Edited Flag; used for Moltres in Altering Cave
-#define FLAG_KOBE_TRADE_DONE                                        0x4ED
-#define FLAG_ROMAN_TRADE_DONE                                       0x4EE
-#define FLAG_SKYLAR_TRADE_DONE                                      0x4EF
+#define FLAG_KOBE_TRADE_DONE                                        0x4ED // Edited Flag; used for Farfetch'd trade at Battle Frontier
+#define FLAG_ROMAN_TRADE_DONE                                       0x4EE // Edited Flag; used for Smoochum trade at Battle Frontier
+#define FLAG_SKYLAR_TRADE_DONE                                      0x4EF // Edited Flag; used for Dratini trade at Battle Frontier
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0x4F0
 #define FLAG_DEFEATED_DEWFORD_GYM                                   0x4F1
