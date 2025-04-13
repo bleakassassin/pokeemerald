@@ -2357,6 +2357,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
     ZeroBoxMonData(boxMon);
 
+    gDisableVBlankRNGAdvance = TRUE;
+
     if (species == SPECIES_JIRACHI) //Replicate Wishmaker Jirachi from US Colosseum Bonus Disc
     {
         otId = 0x00004E4Bu; //20043:00000
@@ -2538,6 +2540,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
+
+    gDisableVBlankRNGAdvance = FALSE;
 
     GiveBoxMonInitialMoveset(boxMon);
 

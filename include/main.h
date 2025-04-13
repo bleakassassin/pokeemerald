@@ -73,4 +73,6 @@ void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
 u16 GetGeneratedTrainerIdLower(void);
 
+extern EWRAM_DATA bool8 gDisableVBlankRNGAdvance;
+
 #endif // GUARD_MAIN_H
