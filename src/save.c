@@ -18,6 +18,7 @@
 #include "registered_items_menu.h"
 #include "roamer.h"
 #include "save_versions.h"
+#include "script_pokemon_util.h"
 #include "constants/game_stat.h"
 #include "constants/heal_locations.h"
 #include "constants/items.h"
@@ -1068,8 +1069,13 @@ void UpdateSaveVersion(void)
         gSaveBlock2Ptr->encryptionKeyHack = gSaveBlock2Ptr->encryptionKey;
     if (version <= VERSION_POCKET_ENCRYPTION)
     {
-        if (FlagGet(FLAG_KOBE_TRADE_DONE) == TRUE)
-            AddBagItem(ITEM_STICK, 1); // traded Farfetch'd didn't hold Stick, making it unobtainable in hack
+        FlagClear(FLAG_RUSTBORO_NPC_TRADE_COMPLETED);
+        FlagClear(FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED);
+        FlagClear(FLAG_FORTREE_NPC_TRADE_COMPLETED);
+        FlagClear(FLAG_BATTLE_FRONTIER_TRADE_DONE);
+        FlagClear(FLAG_HADEN_TRADE_DONE);
+        FlagClear(FLAG_DONTAE_TRADE_DONE);
+        FlagClear(FLAG_REYLEY_TRADE_DONE);
     }
     VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
 }
@@ -1082,6 +1088,7 @@ static void UpdateVanillaSave(void)
     FlagClear(FLAG_REGISTERED_DRAKE);
     FlagClear(FLAG_REGISTERED_WALLACE);
     FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
+    FlagClear(FLAG_BATTLE_FRONTIER_TRADE_DONE);
 
     gSaveBlock1Ptr->registeredItems[0] = MapRegisteredItem(gSaveBlock1Ptr->registeredItem);
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;

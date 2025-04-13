@@ -592,10 +592,10 @@ static const struct MenuAction MultichoiceList_UnusedSSTidal3[] =
 
 static const struct MenuAction MultichoiceList_GameCornerPokemon[] =
 {
-    {gText_TyrogueAndPrice},
-    {gText_MrMimeAndPrice},
-    {gText_LickitungAndPrice},
     {gText_EeveeAndPrice},
+    {gText_DratiniAndPrice},
+    {gText_HitmonleeAndPrice},
+    {gText_HitmonchanAndPrice},
     {gText_PorygonAndPrice},
     {gText_Exit},
 };

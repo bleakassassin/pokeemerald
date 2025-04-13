@@ -995,7 +995,7 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x9C40,
         .heldItem = ITEM_X_ATTACK,
         .mailNum = -1,
-        .otName = _("DARRELL"),
+        .otName = _("ELYSSA"),
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_SLAKOTH
@@ -1011,7 +1011,7 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x498A2E17,
         .heldItem = ITEM_WOOD_MAIL,
         .mailNum = 0,
-        .otName = _("ELYSSA"),
+        .otName = _("DARRELL"),
         .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_SPINDA
@@ -1027,74 +1027,74 @@ static const struct InGameTrade sIngameTrades[] =
         .personality = 0x4C970B7F,
         .heldItem = ITEM_TROPIC_MAIL,
         .mailNum = 1,
-        .otName = _("LAINE"),
-        .otGender = FEMALE,
+        .otName = _("LANE"),
+        .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_BELLOSSOM
     },
-    [INGAME_TRADE_EEVEE] =
-    {
-        .nickname = _("LEVY"),
-        .species = SPECIES_EEVEE,
-        .ivs = {4, 5, 4, 5, 4, 4},
-        .abilityNum = 0,
-        .otId = 91481,
-        .conditions = {5, 5, 5, 30, 5},
-        .personality = 0x8B,
-        .heldItem = ITEM_GLITTER_MAIL,
-        .mailNum = 2,
-        .otName = _("ISIS"),
-        .otGender = FEMALE,
-        .sheen = 10,
-        .requestedSpecies = SPECIES_PIKACHU
-    },
     [INGAME_TRADE_FARFETCHD] =
     {
-        .nickname = _("DUX"),
+        .nickname = _("CH'DING"),
         .species = SPECIES_FARFETCHD,
-        .ivs = {5, 4, 5, 4, 4, 4},
+        .ivs = {20, 25, 21, 24, 15, 20},
         .abilityNum = 0,
-        .otId = 38726,
+        .otId = 8810,
         .conditions = {30, 5, 5, 5, 5},
-        .personality = 0x84,
+        .personality = 0x151943D7,
         .heldItem = ITEM_STICK,
-        .mailNum = -1,
-        .otName = _("KOBE"),
-        .otGender = MALE,
-        .sheen = 10,
-        .requestedSpecies = SPECIES_RALTS
-    },
-    [INGAME_TRADE_SMOOCHUM] =
-    {
-        .nickname = _("SMOOCHES"),
-        .species = SPECIES_SMOOCHUM,
-        .ivs = {4, 4, 4, 5, 5, 4},
-        .abilityNum = 0,
-        .otId = 73996,
-        .conditions = {5, 5, 30, 5, 5},
-        .personality = 0x6F,
-        .heldItem = ITEM_RETRO_MAIL,
-        .mailNum = 3,
-        .otName = _("ROMAN"),
+        .mailNum = 255,
+        .otName = _("ELYSSA"),
         .otGender = MALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_VOLBEAT
     },
-    [INGAME_TRADE_DRATINI] =
+    [INGAME_TRADE_LICKITUNG] =
     {
-        .nickname = _("DRAGOON"),
-        .species = SPECIES_DRATINI,
-        .ivs = {5, 4, 4, 4, 5, 4},
+        .nickname = _("MARC"),
+        .species = SPECIES_LICKITUNG,
+        .ivs = {24, 19, 21, 15, 23, 21},
         .abilityNum = 0,
-        .otId = 46285,
+        .otId = 1239,
         .conditions = {5, 5, 5, 5, 30},
-        .personality = 0x7F,
-        .heldItem = ITEM_WAVE_MAIL,
-        .mailNum = 4,
-        .otName = _("SKYLAR"),
+        .personality = 0x451308AB,
+        .heldItem = ITEM_GLITTER_MAIL,
+        .mailNum = 2,
+        .otName = _("HADEN"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_BAGON
+        .requestedSpecies = SPECIES_PIKACHU
+    },
+    [INGAME_TRADE_JYNX] =
+    {
+        .nickname = _("ZYNX"),
+        .species = SPECIES_JYNX,
+        .ivs = {18, 17, 18, 22, 25, 21},
+        .abilityNum = 0,
+        .otId = 36728,
+        .conditions = {5, 30, 5, 5, 5},
+        .personality = 0x498A2E1D,
+        .heldItem = ITEM_RETRO_MAIL,
+        .mailNum = 3,
+        .otName = _("DONTAE"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_GARDEVOIR
+    },
+    [INGAME_TRADE_MR_MIME] =
+    {
+        .nickname = _("MIMIEN"),
+        .species = SPECIES_MR_MIME,
+        .ivs = {20, 15, 17, 24, 23, 22},
+        .abilityNum = 0,
+        .otId = 1985,
+        .conditions = {5, 5, 5, 30, 5},
+        .personality = 0x00009CAE,
+        .heldItem = ITEM_DREAM_MAIL,
+        .mailNum = 4,
+        .otName = _("REYLEY"),
+        .otGender = MALE,
+        .sheen = 10,
+        .requestedSpecies = SPECIES_CHIMECHO
     }
 };
 
@@ -1124,7 +1124,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_THANK_YOU,
         EC_WORD_FOR,
         EC_POKEMON(PIKACHU),
-        EC_POKEMON_NATIONAL(EEVEE),
+        EC_POKEMON_NATIONAL(LICKITUNG),
         EC_WORD_CRIES,
         EC_WORD_IN,
         EC_WORD_A,
@@ -1134,9 +1134,9 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_BE,
         EC_WORD_NICE,
         EC_WORD_TO,
-        EC_POKEMON_NATIONAL(SMOOCHUM),
+        EC_POKEMON_NATIONAL(JYNX),
         EC_WORD_EXCL,
-        EC_POKEMON(VOLBEAT),
+        EC_POKEMON(GARDEVOIR),
         EC_WORD_WILL,
         EC_WORD_BE,
         EC_WORD_FANTASTIC
@@ -1144,11 +1144,11 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_I,
         EC_WORD_WILL,
         EC_WORD_MAKE,
-        EC_POKEMON(BAGON),
+        EC_POKEMON(CHIMECHO),
         EC_WORD_TOUGH,
         EC_WORD_PLEASE,
         EC_WORD_TRAIN,
-        EC_POKEMON_NATIONAL(DRATINI),
+        EC_POKEMON_NATIONAL(MR_MIME),
         EC_WORD_WELL
     }
 };

@@ -278,31 +278,31 @@ MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize::
 MauvilleCity_GameCorner_EventScript_ChoosePokemonPrize::
 	multichoice 12, 0, MULTI_GAME_CORNER_POKEMON, FALSE
 	switch VAR_RESULT
-	case 0, MauvilleCity_GameCorner_EventScript_Tyrogue
-	case 1, MauvilleCity_GameCorner_EventScript_MrMime
-	case 2, MauvilleCity_GameCorner_EventScript_Lickitung
-	case 3, MauvilleCity_GameCorner_EventScript_Eevee
+	case 0, MauvilleCity_GameCorner_EventScript_Eevee
+	case 1, MauvilleCity_GameCorner_EventScript_Dratini
+	case 2, MauvilleCity_GameCorner_EventScript_Hitmonlee
+	case 3, MauvilleCity_GameCorner_EventScript_Hitmonchan
 	case 4, MauvilleCity_GameCorner_EventScript_Porygon
 	goto MauvilleCity_GameCorner_EventScript_CancelRedemption
 
-MauvilleCity_GameCorner_EventScript_Tyrogue::
-	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TYROGUE
+MauvilleCity_GameCorner_EventScript_Eevee::
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_EEVEE
 	setvar VAR_TEMP_2, 2500
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 
-MauvilleCity_GameCorner_EventScript_MrMime::
-	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_MR_MIME
+MauvilleCity_GameCorner_EventScript_Dratini::
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_DRATINI
 	setvar VAR_TEMP_2, 2800
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 
-MauvilleCity_GameCorner_EventScript_Lickitung::
-	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_LICKITUNG
+MauvilleCity_GameCorner_EventScript_Hitmonlee::
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_HITMONLEE
 	setvar VAR_TEMP_2, 4600
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 
-MauvilleCity_GameCorner_EventScript_Eevee::
-	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_EEVEE
-	setvar VAR_TEMP_2, 5500
+MauvilleCity_GameCorner_EventScript_Hitmonchan::
+	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_HITMONCHAN
+	setvar VAR_TEMP_2, 4600
 	goto MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize
 
 MauvilleCity_GameCorner_EventScript_Porygon::
@@ -315,10 +315,10 @@ MauvilleCity_GameCorner_EventScript_ConfirmPokemonPrize::
 	checkcoins VAR_RESULT
 	goto_if_lt VAR_RESULT, VAR_TEMP_2, MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon
 	switch VAR_TEMP_TRANSFERRED_SPECIES
-	case SPECIES_TYROGUE, MauvilleCity_GameCorner_EventScript_GiveTyrogue
-	case SPECIES_MR_MIME, MauvilleCity_GameCorner_EventScript_GiveMrMime
-	case SPECIES_LICKITUNG, MauvilleCity_GameCorner_EventScript_GiveLickitung
 	case SPECIES_EEVEE, MauvilleCity_GameCorner_EventScript_GiveEevee
+	case SPECIES_DRATINI, MauvilleCity_GameCorner_EventScript_GiveDratini
+	case SPECIES_HITMONLEE, MauvilleCity_GameCorner_EventScript_GiveHitmonlee
+	case SPECIES_HITMONCHAN, MauvilleCity_GameCorner_EventScript_GiveHitmonchan
 	case SPECIES_PORYGON, MauvilleCity_GameCorner_EventScript_GivePorygon
 	end
 
@@ -327,24 +327,24 @@ MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForPokemon::
 	goto MauvilleCity_GameCorner_EventScript_ReturnToChoosePokemonPrize
 	end
 
-MauvilleCity_GameCorner_EventScript_GiveTyrogue::
-	givemon SPECIES_TYROGUE, 10, ITEM_NONE
-	goto MauvilleCity_GameCorner_EventScript_CheckPokemonPrize
-
-MauvilleCity_GameCorner_EventScript_GiveMrMime::
-	givemon SPECIES_MR_MIME, 10, ITEM_NONE
-	goto MauvilleCity_GameCorner_EventScript_CheckPokemonPrize
-
-MauvilleCity_GameCorner_EventScript_GiveLickitung::
-	givemon SPECIES_LICKITUNG, 15, ITEM_NONE
-	goto MauvilleCity_GameCorner_EventScript_CheckPokemonPrize
-
 MauvilleCity_GameCorner_EventScript_GiveEevee::
-	givemon SPECIES_EEVEE, 15, ITEM_NONE
+	givemon SPECIES_EEVEE, 25, ITEM_NONE
+	goto MauvilleCity_GameCorner_EventScript_CheckPokemonPrize
+
+MauvilleCity_GameCorner_EventScript_GiveDratini::
+	givemon SPECIES_DRATINI, 18, ITEM_NONE
+	goto MauvilleCity_GameCorner_EventScript_CheckPokemonPrize
+
+MauvilleCity_GameCorner_EventScript_GiveHitmonlee::
+	givemon SPECIES_HITMONLEE, 25, ITEM_NONE
+	goto MauvilleCity_GameCorner_EventScript_CheckPokemonPrize
+
+MauvilleCity_GameCorner_EventScript_GiveHitmonchan::
+	givemon SPECIES_HITMONCHAN, 25, ITEM_NONE
 	goto MauvilleCity_GameCorner_EventScript_CheckPokemonPrize
 
 MauvilleCity_GameCorner_EventScript_GivePorygon::
-	givemon SPECIES_PORYGON, 20, ITEM_NONE
+	givemon SPECIES_PORYGON, 18, ITEM_NONE
 MauvilleCity_GameCorner_EventScript_CheckPokemonPrize::
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, MauvilleCity_GameCorner_EventScript_ReceiveMonParty
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, MauvilleCity_GameCorner_EventScript_ReceiveMonPC
