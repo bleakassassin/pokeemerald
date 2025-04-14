@@ -1096,7 +1096,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         {
             PlayBGM(MUS_EVOLUTION);
             gTasks[taskId].tState++;
-            BeginNormalPaletteFade(0x1C, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0x1C, 3, 0, 0x10, RGB_BLACK);
         }
         break;
     case T_EVOSTATE_START_BG_AND_SPARKLE_SPIRAL:
