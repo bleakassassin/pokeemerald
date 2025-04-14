@@ -413,6 +413,7 @@ static void StopLearningMovePrompt(u8);
 static void CB2_ShowSummaryScreenToForgetMove(void);
 static void CB2_ReturnToPartyMenuWhileLearningMove(void);
 static void Task_ReturnToPartyMenuWhileLearningMove(u8);
+static void EndLearningMove(u8);
 static void DisplayPartyMenuForgotMoveMessage(u8);
 static void Task_PartyMenuReplaceMove(u8);
 static void Task_StopLearningMoveYesNo(u8);
@@ -4898,7 +4899,7 @@ static void Task_HandleReplaceMoveYesNoInput(u8 taskId)
         PlaySE(SE_SELECT);
         // fallthrough
     case 1:
-        StopLearningMovePrompt(taskId);
+        EndLearningMove(taskId);
         break;
     }
 }
@@ -4933,6 +4934,24 @@ static void Task_ReturnToPartyMenuWhileLearningMove(u8 taskId)
             DisplayPartyMenuForgotMoveMessage(taskId);
         else
             StopLearningMovePrompt(taskId);
+    }
+}
+
+static void EndLearningMove(u8 taskId)
+{
+    GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+    StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
+    StringExpandPlaceholders(gStringVar4, gText_MoveNotLearned);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    if (gPartyMenu.learnMoveState == 1)
+    {
+        gTasks[taskId].func = Task_TryLearningNextMoveAfterText;
+    }
+    else
+    {
+        if (gPartyMenu.learnMoveState == 2) // never occurs
+            gSpecialVar_Result = FALSE;
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
     }
 }
 
@@ -4995,20 +5014,7 @@ static void Task_HandleStopLearningMoveYesNoInput(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0:
-        GetMonNickname(mon, gStringVar1);
-        StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
-        StringExpandPlaceholders(gStringVar4, gText_MoveNotLearned);
-        DisplayPartyMenuMessage(gStringVar4, TRUE);
-        if (gPartyMenu.learnMoveState == 1)
-        {
-            gTasks[taskId].func = Task_TryLearningNextMoveAfterText;
-        }
-        else
-        {
-            if (gPartyMenu.learnMoveState == 2) // never occurs
-                gSpecialVar_Result = FALSE;
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-        }
+        EndLearningMove(taskId);
         break;
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);

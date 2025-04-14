@@ -5460,13 +5460,15 @@ static void Cmd_yesnoboxlearnmove(void)
             }
             else
             {
-                gBattleScripting.learnMoveState = 5;
+                HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+                gBattlescriptCurrInstr += 20;
             }
         }
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            gBattleScripting.learnMoveState = 5;
+            HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
+            gBattlescriptCurrInstr += 20;
         }
         break;
     case 2:
