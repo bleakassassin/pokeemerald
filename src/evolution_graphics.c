@@ -587,7 +587,7 @@ static void Task_CycleEvolutionMonSprite_TryEnd(u8 taskId)
     }
     else
     {
-        gTasks[taskId].tScaleSpeed += 2;
+        gTasks[taskId].tScaleSpeed += 3;
         gTasks[taskId].tShowingPostEvo ^= 1;
         gTasks[taskId].func = Task_CycleEvolutionMonSprite_UpdateSize;
     }

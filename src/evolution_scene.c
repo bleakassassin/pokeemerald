@@ -87,8 +87,8 @@ static const u8 sText_ShedinjaJapaneseName[] = _("ヌケニン");
 // Once it has cycled x number of times, it will move to the next array in this table.
 static const u8 sBgAnim_PaletteControl[][4] =
 {
-    {  0, 12, 1, 6 },
-    { 13, 36, 5, 2 },
+    {  0, 12, 1, 2 },
+    { 13, 36, 3, 2 },
     { 13, 24, 1, 2 },
     { 37, 49, 1, 6 },
 };
@@ -685,7 +685,7 @@ static void Task_EvolutionScene(u8 taskId)
             // Start music, fade background to black
             PlayNewMapMusic(MUS_EVOLUTION);
             gTasks[taskId].tState++;
-            BeginNormalPaletteFade(0x1C, 4, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0x1C, 3, 0, 0x10, RGB_BLACK);
         }
         break;
     case EVOSTATE_START_BG_AND_SPARKLE_SPIRAL:
@@ -705,11 +705,8 @@ static void Task_EvolutionScene(u8 taskId)
         }
         break;
     case EVOSTATE_CYCLE_MON_SPRITE: // launch task that flashes pre evo with post evo sprites
-        if (!gTasks[sEvoGraphicsTaskId].isActive)
-        {
-            sEvoGraphicsTaskId = CycleEvolutionMonSprite(sEvoStructPtr->preEvoSpriteId, sEvoStructPtr->postEvoSpriteId);
-            gTasks[taskId].tState++;
-        }
+        sEvoGraphicsTaskId = CycleEvolutionMonSprite(sEvoStructPtr->preEvoSpriteId, sEvoStructPtr->postEvoSpriteId);
+        gTasks[taskId].tState++;
         break;
     case EVOSTATE_WAIT_CYCLE_MON_SPRITE:
         if (--sEvoStructPtr->delayTimer == 0)
@@ -1099,7 +1096,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         {
             PlayBGM(MUS_EVOLUTION);
             gTasks[taskId].tState++;
-            BeginNormalPaletteFade(0x1C, 4, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(0x1C, 0, 0, 0x10, RGB_BLACK);
         }
         break;
     case T_EVOSTATE_START_BG_AND_SPARKLE_SPIRAL:
@@ -1121,11 +1118,8 @@ static void Task_TradeEvolutionScene(u8 taskId)
         }
         break;
     case T_EVOSTATE_CYCLE_MON_SPRITE:
-        if (!gTasks[sEvoGraphicsTaskId].isActive)
-        {
-            sEvoGraphicsTaskId = CycleEvolutionMonSprite(sEvoStructPtr->preEvoSpriteId, sEvoStructPtr->postEvoSpriteId);
-            gTasks[taskId].tState++;
-        }
+        sEvoGraphicsTaskId = CycleEvolutionMonSprite(sEvoStructPtr->preEvoSpriteId, sEvoStructPtr->postEvoSpriteId);
+        gTasks[taskId].tState++;
         break;
     case T_EVOSTATE_WAIT_CYCLE_MON_SPRITE:
         if (--sEvoStructPtr->delayTimer == 0)
