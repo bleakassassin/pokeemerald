@@ -647,6 +647,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     s32 i, j;
     u8 invalidMons;
     u16 move;
+    bool8 bestMoveCheck = FALSE;
 
     if (*(gBattleStruct->monToSwitchIntoId + gActiveBattler) != PARTY_SIZE)
         return *(gBattleStruct->monToSwitchIntoId + gActiveBattler);
@@ -694,7 +695,10 @@ u8 GetMostSuitableMonToSwitchInto(void)
 
     while (invalidMons != (1 << PARTY_SIZE) - 1) // All mons are invalid.
     {
-        bestDmg = TYPE_MUL_NO_EFFECT;
+        if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
+            bestDmg = 255;
+        else
+            bestDmg = TYPE_MUL_NO_EFFECT;
         bestMonId = PARTY_SIZE;
         // Find the mon whose type is the most suitable offensively.
         for (i = firstId; i < lastId; i++)
@@ -717,7 +721,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
                 /* Possible bug: this comparison gives the type that takes the most damage, when
                 a "good" AI would want to select the type that takes the least damage. Unknown if this
                 is a legitimate mistake or if it's an intentional, if weird, design choice */
-                if (bestDmg < typeDmg)
+                if ((gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD && bestDmg > typeDmg)
+                    || (gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_HARD && bestDmg < typeDmg))
                 {
                     bestDmg = typeDmg;
                     bestMonId = i;
@@ -739,10 +744,16 @@ u8 GetMostSuitableMonToSwitchInto(void)
                     break;
             }
 
-            if (i != MAX_MON_MOVES)
+            if (i != MAX_MON_MOVES || (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD && bestMoveCheck == TRUE && bestDmg <= TYPE_MUL_NOT_EFFECTIVE))
                 return bestMonId; // Has both the typing and at least one super effective move.
 
             invalidMons |= gBitTable[bestMonId]; // Sorry buddy, we want something better.
+            
+            if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD && invalidMons == 0x3F && bestMoveCheck == FALSE)
+            {
+                invalidMons = 0;
+                bestMoveCheck = TRUE;
+            }
         }
         else
         {
