@@ -8,6 +8,7 @@
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_message_box.h"
+#include "gym_leader_rematch.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "main.h"
@@ -15,6 +16,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "random.h"
 #include "script.h"
 #include "string_util.h"
 #include "strings.h"
@@ -428,6 +430,8 @@ static void GiveChallengePrize(void)
         gSaveBlock1Ptr->trainerHill.receivedPrize = TRUE;
         gSaveBlock2Ptr->frontier.unk_EF9 = 0;
         gSpecialVar_Result = 0;
+        if (Random() % 3 == 0)
+            UpdateGymLeaderRematch();
     }
     else
     {

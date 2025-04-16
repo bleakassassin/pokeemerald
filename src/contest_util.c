@@ -15,6 +15,7 @@
 #include "field_specials.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "gym_leader_rematch.h"
 #include "international_string_util.h"
 #include "link.h"
 #include "link_rfu.h"
@@ -2371,6 +2372,8 @@ void ShouldReadyContestArtist(void)
      && gContestMonTotalPoints[gContestPlayerMonIndex] >= 800)
     {
         gSpecialVar_0x8004 = TRUE;
+        if (Random() % 3 == 0)
+            UpdateGymLeaderRematch();
     }
     else
     {
