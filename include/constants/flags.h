@@ -1388,7 +1388,7 @@
 #define FLAG_HEALED_AT_POKEMON_CENTER               (SYSTEM_FLAGS + 0x21) // Edited Flag; used to shorten Pokemon Center lady dialogue after first heal
 #define FLAG_ORGANIZED_POKEMON_STORAGE              (SYSTEM_FLAGS + 0x22) // Edited Flag; set if Lanette moved the "Move Pokemon" setting in storage system to the top
 #define FLAG_WON_LEAGUE_REMATCHES                   (SYSTEM_FLAGS + 0x23) // Edited Flag; set after beating Pokemon League rematches
-#define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
+#define FLAG_SYS_FAST_SURF                          (SYSTEM_FLAGS + 0x24) // Edited Flag; set to enable faster surfing if used by a Pokemon in the player's party
 #define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag
 #define FLAG_UNUSED_0x886                           (SYSTEM_FLAGS + 0x26) // Unused Flag
 #define FLAG_SYS_WILD_FIELD_MOVE                    (SYSTEM_FLAGS + 0x27)
