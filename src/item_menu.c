@@ -1665,7 +1665,7 @@ static void OpenContextMenu(u8 taskId)
                 memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_ItemsPocket, sizeof(sContextMenuItems_ItemsPocket));
                 if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
                     gBagMenu->contextMenuItemsBuffer[0] = ACTION_CHECK;
-                else if (ItemId_GetFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_CannotUse)
+                else if (GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_CannotUse)
                 {
                     gBagMenu->contextMenuItemsPtr = sContextMenuItems_BallsPocket;
                     gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BallsPocket);
@@ -1677,7 +1677,7 @@ static void OpenContextMenu(u8 taskId)
                 memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_KeyItemsPocket, sizeof(sContextMenuItems_KeyItemsPocket));
                 if ((TxRegItemsMenu_CheckRegisteredHasItem(gSpecialVar_ItemId)))
                     gBagMenu->contextMenuItemsBuffer[1] = ACTION_DESELECT;
-                else if (ItemId_GetFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_CannotUse)
+                else if (GetItemFieldFunc(gSpecialVar_ItemId) == ItemUseOutOfBattle_CannotUse)
                 {
                     gBagMenu->contextMenuItemsPtr = sContextMenuItems_Cancel;
                     gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_Cancel);
@@ -2970,8 +2970,8 @@ static s8 CompareItemsAlphabetically(struct ItemSlot* itemSlot1, struct ItemSlot
     }
     else
     {
-        name1 = ItemId_GetName(item1);
-        name2 = ItemId_GetName(item2);
+        name1 = GetItemName(item1);
+        name2 = GetItemName(item2);
     }
 
     for (i = 0; ; ++i)

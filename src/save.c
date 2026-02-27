@@ -1309,14 +1309,14 @@ void MoveItemsToCorrectPocket(void)
 
     for (i = 0; i < BAG_MEDICINE_COUNT; i++) // BAG_MEDICINE_COUNT is the same as BAG_KEYITEMS_COUNT (30)
     {
-        if (ItemId_GetPocket(medicine->itemSlots[i].itemId) != POCKET_MEDICINE) // Check for items moved to new pockets
+        if (GetItemPocket(medicine->itemSlots[i].itemId) != POCKET_MEDICINE) // Check for items moved to new pockets
         {
             AddBagItem(medicine->itemSlots[i].itemId, medicine->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
             medicine->itemSlots[i].itemId =  ITEM_NONE;
             medicine->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
         }
 
-        if (ItemId_GetPocket(keyitems->itemSlots[i].itemId) != POCKET_KEY_ITEMS) // Check for fossils
+        if (GetItemPocket(keyitems->itemSlots[i].itemId) != POCKET_KEY_ITEMS) // Check for fossils
         {
             AddBagItem(keyitems->itemSlots[i].itemId, keyitems->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
             keyitems->itemSlots[i].itemId =  ITEM_NONE;

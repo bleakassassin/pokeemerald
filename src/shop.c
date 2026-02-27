@@ -810,7 +810,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
                 STR_CONV_MODE_LEFT_ALIGN,
                 5);
         }
-        if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1)))
+        if (GetItemPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1)))
             StringCopy(gStringVar4, gText_SoldOutLabel);
         else
             StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
@@ -1183,7 +1183,7 @@ static void Task_BuyMenu(u8 taskId)
             else
                 sShopData->totalCost = gDecorations[itemId].price;
 
-            if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1)))
+            if (GetItemPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1)))
                 BuyMenuDisplayMessage(taskId, gText_SoldOut, BuyMenuReturnToItemList);
             else if (!CheckBagHasSpace(itemId, 1))
                 BuyMenuDisplayMessage(taskId, gText_NoMoreRoomForThis, BuyMenuReturnToItemList);
@@ -1206,7 +1206,7 @@ static void Task_BuyMenu(u8 taskId)
                         ConvertIntToDecimalStringN(gStringVar2, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, 6);
                         StringExpandPlaceholders(gStringVar4, gText_YouWantedVar1ThatllBeVar2);
                         tItemCount = 1;
-                        sShopData->totalCost = (ItemId_GetPrice(tItemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT)) * tItemCount;
+                        sShopData->totalCost = (GetItemPrice(tItemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT)) * tItemCount;
                         BuyMenuDisplayMessage(taskId, gStringVar4, BuyMenuConfirmPurchase);
                     }
                     else
@@ -1352,7 +1352,7 @@ static void Task_ReturnToItemListAfterItemPurchase(u8 taskId)
     {
         PlaySE(SE_SELECT);
         // Every 10 Balls purchased at once gets the player a Premeir Ball
-        if ((ItemId_GetPocket(tItemId) == POCKET_POKE_BALLS) && tItemCount >= 10 && AddBagItem(ITEM_PREMIER_BALL, tItemCount / 10) == TRUE)
+        if ((GetItemPocket(tItemId) == POCKET_POKE_BALLS) && tItemCount >= 10 && AddBagItem(ITEM_PREMIER_BALL, tItemCount / 10) == TRUE)
         {
             if (tItemCount > 19)
             {
