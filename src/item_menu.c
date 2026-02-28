@@ -25,7 +25,6 @@
 #include "list_menu.h"
 #include "link.h"
 #include "mail.h"
-#include "main.h"
 #include "malloc.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -605,7 +604,7 @@ void CB2_BagMenuFromStartMenu(void)
 
 void CB2_BagMenuFromBattle(void)
 {
-    if (!InBattlePyramid())
+    if (CurrentBattlePyramidLocation() == PYRAMID_LOCATION_NONE)
         GoToBagMenu(ITEMMENULOCATION_BATTLE, POCKETS_COUNT, CB2_SetUpReshowBattleScreenAfterMenu2);
     else
         GoToBattlePyramidBagMenu(PYRAMIDBAG_LOC_BATTLE, CB2_SetUpReshowBattleScreenAfterMenu2);
@@ -618,7 +617,7 @@ void CB2_ChooseBerry(void)
 }
 
 // Choosing berry for Berry Blender or Berry Crush
-void ChooseBerryForMachine(void (*exitCallback)(void))
+void ChooseBerryForMachine(MainCallback exitCallback)
 {
     GoToBagMenu(ITEMMENULOCATION_BERRY_BLENDER_CRUSH, BERRIES_POCKET, exitCallback);
 }
@@ -652,7 +651,7 @@ void QuizLadyOpenBagMenu(void)
     gSpecialVar_Result = FALSE;
 }
 
-void GoToBagMenu(u8 location, u8 pocket, void ( *exitCallback)())
+void GoToBagMenu(u8 location, u8 pocket, MainCallback exitCallback)
 {
     gBagMenu = AllocZeroed(sizeof(*gBagMenu));
     if (gBagMenu == NULL)
@@ -1195,7 +1194,7 @@ u8 GetItemListPosition(u8 pocketId)
     return gBagPosition.scrollPosition[pocketId] + gBagPosition.cursorPosition[pocketId];
 }
 
-void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void (*callback)(u8 taskId))
+void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, TaskFunc callback)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1483,7 +1482,7 @@ static void StartItemSwap(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    ListMenuSetUnkIndicatorsStructField(tListTaskId, 16, 1);
+    ListMenuSetTemplateField(tListTaskId, LISTFIELD_CURSORKIND, CURSOR_INVISIBLE);
     tListPosition = gBagPosition.scrollPosition[gBagPosition.pocket] + gBagPosition.cursorPosition[gBagPosition.pocket];
     gBagMenu->toSwapPos = tListPosition;
     CopyItemName(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, tListPosition), gStringVar1);
@@ -2110,7 +2109,7 @@ bool8 UseRegisteredKeyItemOnField(u8 button)
     u8 taskId;
     u16 registeredItem;
 
-    if (InUnionRoom() == TRUE || InBattlePyramid() || InBattlePike() || InMultiPartnerRoom() == TRUE)
+    if (InUnionRoom() == TRUE || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || InBattlePike() || InMultiPartnerRoom() == TRUE)
         return FALSE;
 
     HideMapNamePopUpWindow();

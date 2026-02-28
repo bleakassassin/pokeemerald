@@ -368,7 +368,7 @@ CableClub_EventScript_EnterColosseum::
 	waitdooranim
 	applymovement LOCALID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -462,7 +462,7 @@ CableClub_EventScript_EnterTradeCenter::
 	waitdooranim
 	applymovement LOCALID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -527,7 +527,7 @@ CableClub_EventScript_EnterRecordCorner::
 	waitdooranim
 	applymovement LOCALID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -914,7 +914,7 @@ CableClub_EventScript_EnterUnionRoom::
 	waitdooranim
 	applymovement LOCALID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	closedoor 5, 1
 	waitdooranim
 	special Script_ResetUnionRoomTrade
@@ -978,7 +978,7 @@ CableClub_EventScript_SwitchWardrobe::
 	waitdooranim
 	applymovement LOCALID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	closedoor 13, 3
 	waitdooranim
 	applymovement LOCALID_PLAYER, Movement_PlayerEnterLinkRoom
@@ -992,7 +992,7 @@ CableClub_EventScript_SwitchWardrobe::
 	delay 30
 	applymovement LOCALID_PLAYER, Movement_PlayerExitLinkRoom
 	delay 14
-	showobjectat LOCALID_PLAYER, 0
+	showplayer
 	waitmovement 0
 	closedoor 13, 3
 	waitdooranim
@@ -1257,7 +1257,7 @@ CableClub_EventScript_EnterWirelessLinkRoom::
 	waitdooranim
 	applymovement LOCALID_PLAYER, Movement_PlayerEnterLinkRoom
 	waitmovement 0
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	closedoor 9, 1
 	waitdooranim
 	release
@@ -1434,7 +1434,7 @@ MossdeepCity_GameCorner_1F_EventScript_EnterMinigameRoom::
 	closemessage
 	applymovement LOCALID_PLAYER, Movement_PlayerEnterMinigameRoom
 	waitmovement 0
-	hideobjectat LOCALID_PLAYER, 0
+	hideplayer
 	release
 	waitstate
 	end
