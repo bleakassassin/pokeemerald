@@ -1,6 +1,3 @@
-.set LOCALID_SAILOR, 1
-.set LOCALID_SS_TIDAL, 2
-
 FarawayIsland_Entrance_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, FarawayIsland_Entrance_OnTransition
 	.byte 0
@@ -29,8 +26,8 @@ FarawayIsland_Entrance_EventScript_Sailor::
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 30
-	hideobjectat LOCALID_SAILOR, MAP_FARAWAY_ISLAND_ENTRANCE
-	setvar VAR_0x8004, LOCALID_SS_TIDAL
+	hideobjectat LOCALID_FARAWAY_ISLAND_SAILOR, MAP_FARAWAY_ISLAND_ENTRANCE
+	setvar VAR_0x8004, LOCALID_FARAWAY_ISLAND_SS_TIDAL
 	call Common_EventScript_FerryDepartIsland
 	warp MAP_LILYCOVE_CITY_HARBOR, 8, 11
 	waitstate
@@ -59,7 +56,7 @@ FarawayIsland_Entrance_EventScript_Sign::
 	waitmoncry
 	playmoncry SPECIES_MOLTRES, CRY_MODE_ENCOUNTER
 	waitmoncry
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
 	delay 30
 	msgbox FarawayIsland_Entrance_Text_PokemonFlyingAbove, MSGBOX_DEFAULT
 	fadeinbgm 1

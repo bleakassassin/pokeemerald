@@ -1,12 +1,7 @@
-.set LOCALID_OPPONENT, 1
-.set LOCALID_ATTENDANT, 2
-
 VerdanturfTown_BattleTentBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, VerdanturfTown_BattleTentBattleRoom_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, VerdanturfTown_BattleTentBattleRoom_OnWarp
 	.byte 0
-
-	@ The opponent is represented by object event 2, which has the gfx id VAR_OBJ_GFX_ID_0
 
 VerdanturfTown_BattleTentBattleRoom_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom
@@ -14,15 +9,15 @@ VerdanturfTown_BattleTentBattleRoom_OnFrame:
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_EnterRoom::
 	special SpawnCameraObject
-	setobjectxyperm OBJ_EVENT_ID_CAMERA, 6, 5
-	applymovement OBJ_EVENT_ID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter
+	setobjectxyperm LOCALID_CAMERA, 6, 5
+	applymovement LOCALID_PLAYER, VerdanturfTown_BattleTentBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	frontier_get FRONTIER_DATA_BATTLE_NUM
 	goto_if_ne VAR_RESULT, 0, VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter::
 	tower_setopponent
-	addobject LOCALID_OPPONENT
-	applymovement LOCALID_OPPONENT, VerdanturfTown_BattleTentBattleRoom_Movement_OpponentEnter
+	addobject LOCALID_VERDANTURF_TENT_BATTLE_OPPONENT
+	applymovement LOCALID_VERDANTURF_TENT_BATTLE_OPPONENT, VerdanturfTown_BattleTentBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 	battletent_getopponentintro
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -42,11 +37,11 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_DefeatedOpponent::
 	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
 	switch VAR_RESULT
 	case 3, VerdanturfTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon
-	applymovement LOCALID_OPPONENT, VerdanturfTown_BattleTentBattleRoom_Movement_OpponentExit
+	applymovement LOCALID_VERDANTURF_TENT_BATTLE_OPPONENT, VerdanturfTown_BattleTentBattleRoom_Movement_OpponentExit
 	waitmovement 0
-	removeobject LOCALID_OPPONENT
-	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterDown
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	removeobject LOCALID_VERDANTURF_TENT_BATTLE_OPPONENT
+	applymovement LOCALID_VERDANTURF_TENT_BATTLE_ATTENDANT, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox BattleFrontier_BattlePalaceBattleRoom_Text_LetMeRestoreYourMons, MSGBOX_DEFAULT
 	special LoadPlayerParty
@@ -83,8 +78,8 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_AskRetireChallenge::
 	case MULTI_B_PRESSED, VerdanturfTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_ContinueChallenge::
-	applymovement LOCALID_ATTENDANT, Common_Movement_WalkInPlaceFasterRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_VERDANTURF_TENT_BATTLE_ATTENDANT, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	closemessage
 	goto VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter
@@ -110,11 +105,11 @@ VerdanturfTown_BattleTentBattleRoom_OnWarp:
 	.2byte 0
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_SetUpObjects::
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
+	hideobjectat LOCALID_PLAYER, MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM
 	setvar VAR_TEMP_1, 1
-	setobjectxy OBJ_EVENT_ID_PLAYER, 2, 8
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
-	removeobject LOCALID_OPPONENT
+	setobjectxy LOCALID_PLAYER, 2, 8
+	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+	removeobject LOCALID_VERDANTURF_TENT_BATTLE_OPPONENT
 	end
 
 VerdanturfTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent::

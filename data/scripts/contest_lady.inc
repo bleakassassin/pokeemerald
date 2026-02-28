@@ -1,5 +1,3 @@
-.set LOCALID_LADYS_MON, 34
-
 LilycoveCity_ContestHall_EventScript_ContestLady::
 	lock
 	faceplayer
@@ -55,7 +53,7 @@ LilycoveCity_ContestHall_EventScript_GivePokeblock::
 	applymovement VAR_LAST_TALKED, LilycoveCity_ContestHall_Movement_LadyFaceMon
 	waitmovement 0
 	delay 60
-	applymovement LOCALID_LADYS_MON, LilycoveCity_ContestHall_Movement_MonFaceLady
+	applymovement LOCALID_CONTEST_LADYS_MON, LilycoveCity_ContestHall_Movement_MonFaceLady
 	waitmovement 0
 	delay 60
 	waitse
@@ -67,7 +65,7 @@ LilycoveCity_ContestHall_EventScript_GivePokeblock::
 
 @ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_ContestHall_EventScript_MonEnjoyPokeblock::
-	applymovement LOCALID_LADYS_MON, LilycoveCity_ContestHall_Movement_MonJump
+	applymovement LOCALID_CONTEST_LADYS_MON, LilycoveCity_ContestHall_Movement_MonJump
 	waitmovement 0
 	delay 60
 LilycoveCity_ContestHall_EventScript_FinishFeedPokeblock::
