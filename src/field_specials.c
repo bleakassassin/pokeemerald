@@ -2748,7 +2748,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
     HideFrontierExchangeCornerItemIcon(task->tScrollMultiId, sScrollableMultichoice_iconSlot ^ 1);
     sScrollableMultichoice_iconSlot ^= 1;
     ShowBattleFrontierTutorWindow(task->tScrollMultiId, 0);
-    sScrollableMultichoice_ListMenuItem = AllocZeroed(task->tNumItems * 8);
+    sScrollableMultichoice_ListMenuItem = AllocZeroed(task->tNumItems * sizeof(struct ListMenuItem));
     InitScrollableMultichoice();
 
     for (width = 0, i = 0; i < task->tNumItems; i++)
