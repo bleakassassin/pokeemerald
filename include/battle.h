@@ -358,7 +358,9 @@ struct BattleStruct
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
     u8 expGetterMonId;
-    u8 unused_1;
+    u8 battlerDone:1;
+    u8 teamExpDisplayed:1;
+    u8 unused_1:6;
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[MAX_BATTLERS_COUNT];

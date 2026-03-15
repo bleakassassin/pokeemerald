@@ -3347,7 +3347,7 @@ static void Cmd_getexp(void)
             }
 
             gBattleScripting.getexpState++;
-            gBattleStruct->expGetterMonId = 0;
+            gBattleStruct->expGetterMonId = gBattlerPartyIndexes[0];
             gBattleStruct->sentInPokes = sentIn;
         }
         // fall through
@@ -3361,9 +3361,9 @@ static void Cmd_getexp(void)
             else
                 holdEffect = GetItemHoldEffect(item);
 
-            if (holdEffect != HOLD_EFFECT_EXP_SHARE && gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_EASY && !(gBattleStruct->sentInPokes & 1))
+            if (holdEffect != HOLD_EFFECT_EXP_SHARE && gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_EASY 
+                && !(gBattleStruct->sentInPokes & (1 << gBattleStruct->expGetterMonId)))
             {
-                *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
@@ -3371,8 +3371,7 @@ static void Cmd_getexp(void)
                 || GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_IS_EGG)
                 || !GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
             {
-                *(&gBattleStruct->sentInPokes) >>= 1;
-                gBattleScripting.getexpState = 5;
+                gBattleScripting.getexpState++;
                 gBattleMoveDamage = 0; // used for exp
             }
             else
@@ -3387,14 +3386,14 @@ static void Cmd_getexp(void)
 
                 if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
                 {
-                    if (gBattleStruct->sentInPokes & 1)
+                    if (gBattleStruct->sentInPokes & (1 << gBattleStruct->expGetterMonId))
                         gBattleMoveDamage = *exp;
                     else
                         gBattleMoveDamage = 0;
 
                     if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_EASY)
                     {
-                        if (!(gBattleStruct->sentInPokes & 1))
+                        if (!(gBattleStruct->sentInPokes & (1 << gBattleStruct->expGetterMonId)))
                         {
                             if (holdEffect == HOLD_EFFECT_EXP_SHARE)
                                 gBattleMoveDamage = *exp;
@@ -3442,24 +3441,35 @@ static void Cmd_getexp(void)
                         gBattleStruct->expGetterBattlerId = 0;
                     }
 
-                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
-                    // buffer 'gained' or 'gained a boosted'
-                    PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
-                    PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                    if (gBattleStruct->battlerDone == FALSE || gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_EASY)
+                    {
+                        PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, gBattleStruct->expGetterBattlerId, gBattleStruct->expGetterMonId);
+                        // buffer 'gained' or 'gained a boosted'
+                        PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
+                        PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
+                        PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                    }
+                    else if (gBattleStruct->teamExpDisplayed == FALSE)
+                    {
+                        PrepareStringBattle(STRINGID_RESTOFPARTYGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                        gBattleStruct->teamExpDisplayed = TRUE;
+                    }
 
-                    PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
-                    MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
                 }
-                gBattleStruct->sentInPokes >>= 1;
                 gBattleScripting.getexpState++;
             }
         }
         break;
     case 3: // Set stats and give exp
-        if (gBattleControllerExecFlags == 0)
+        MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
+
+        if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+            gBattleScripting.getexpState = 5;
+
+        else if (gBattleControllerExecFlags == 0)
         {
             gBattleBufferB[gBattleStruct->expGetterBattlerId][0] = 0;
-            if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP) && GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) != MAX_LEVEL)
+            if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
             {
                 gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
                 gBattleResources->beforeLvlUp->stats[STAT_ATK]   = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
@@ -3538,7 +3548,23 @@ static void Cmd_getexp(void)
         }
         else
         {
-            gBattleStruct->expGetterMonId++;
+            if (gBattleStruct->expGetterMonId == gBattlerPartyIndexes[0] && gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                gBattleStruct->expGetterMonId = gBattlerPartyIndexes[2];
+            else
+            {
+                if (gBattleStruct->battlerDone == FALSE)
+                {
+                    gBattleStruct->expGetterMonId = 0;
+                    gBattleStruct->battlerDone = TRUE;
+                }
+                else
+                    gBattleStruct->expGetterMonId++;
+
+                while (gBattleStruct->expGetterMonId == gBattlerPartyIndexes[0]
+                      || (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && gBattleStruct->expGetterMonId == gBattlerPartyIndexes[2]))
+                    gBattleStruct->expGetterMonId++;
+            }
+
             if (gBattleStruct->expGetterMonId < PARTY_SIZE)
                 gBattleScripting.getexpState = 2; // loop again
             else
@@ -3548,6 +3574,8 @@ static void Cmd_getexp(void)
     case 6: // increment instruction
         if (gBattleControllerExecFlags == 0)
         {
+            gBattleStruct->battlerDone = FALSE;
+            gBattleStruct->teamExpDisplayed = FALSE;
             // not sure why gf clears the item and ability here
             gBattleMons[gBattlerFainted].item = ITEM_NONE;
             gBattleMons[gBattlerFainted].ability = ABILITY_NONE;
