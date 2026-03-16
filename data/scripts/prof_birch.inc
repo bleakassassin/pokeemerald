@@ -86,6 +86,7 @@ ProfBirch_EventScript_SeenAllHoennMons::
 	playfanfare MUS_OBTAIN_ITEM
 	message gBirchDexRatingText_ReceivedOvalCharm
 	waitfanfare
+	waitmessage
 	setflag FLAG_RECEIVED_OVAL_CHARM
 	msgbox gBirchDexRatingText_ImproveEggChances, MSGBOX_DEFAULT
 	return
@@ -96,6 +97,7 @@ ProfBirch_EventScript_CompletedNationalDex::
 	playfanfare MUS_OBTAIN_ITEM
 	message gBirchDexRatingText_ReceivedShinyCharm
 	waitfanfare
+	waitmessage
 	setflag FLAG_RECEIVED_SHINY_CHARM
 	msgbox gBirchDexRatingText_ImproveShinyChances, MSGBOX_DEFAULT
 	return
