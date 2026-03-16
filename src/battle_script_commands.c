@@ -3407,6 +3407,8 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
+                    if (FlagGet(FLAG_SCOTT_GIVES_BATTLE_POINTS))    // Player receives the Exp. Charm after talking to Scott in his house at the Battle Frontier
+                        gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
 
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId]))
                     {

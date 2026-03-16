@@ -182,11 +182,16 @@ BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint::
 
 BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints::
 	special GiveFrontierBattlePoints
-	msgbox BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	msgbox BattleFrontier_ScottsHouse_Text_ExplainBattlePoints, MSGBOX_DEFAULT
+	playfanfare MUS_OBTAIN_ITEM
+	message BattleFrontier_ScottsHouse_Text_ReceivedExpCharm
+	waitfanfare
+	waitmessage
+	msgbox BattleFrontier_ScottsHouse_Text_LetYourPokemonGainMoreExp, MSGBOX_DEFAULT
 	setflag FLAG_SCOTT_GIVES_BATTLE_POINTS
 	setflag FLAG_TEMP_2
-	release
+	goto BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints
 	end
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth::
@@ -235,10 +240,6 @@ BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
 	.string "as a memento for all the time our\l"
 	.string "paths crossed on our journeys.$"
 
-BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
-	.string "{PLAYER} obtained\n"
-	.string "{STR_VAR_1} BATTLE POINT(S).$"
-
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
 	.string "SCOTT: You can check your BATTLE\n"
 	.string "POINTS on your FRONTIER PASS.\p"
@@ -246,7 +247,19 @@ BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
 	.string "the BATTLE FRONTIER, the more BATTLE\l"
 	.string "POINTS you will collect.\p"
 	.string "Use your BATTLE POINTS the way you\n"
-	.string "see fit, like trading them for items.$"
+	.string "see fit, like trading them for items.\p"
+	.string "… … … … … …\n"
+	.string "Oh, one other thing!\p"
+	.string "Before you go, please take this, too.$"
+
+BattleFrontier_ScottsHouse_Text_ReceivedExpCharm:
+	.string "{PLAYER} received the EXP. CHARM!$"
+
+BattleFrontier_ScottsHouse_Text_LetYourPokemonGainMoreExp:
+	.string "SCOTT: This here will let your POKéMON\n"
+	.string "gain more EXP. POINTS from battle.\p"
+	.string "It should help you prepare for each of\n"
+	.string "the facilities at the BATTLE FRONTIER.$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
 	.string "I'm expecting great things from you!$"
