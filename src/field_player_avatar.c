@@ -283,7 +283,11 @@ static const u8 sRSAvatarGfxIds[GENDER_COUNT] =
     [FEMALE] = OBJ_EVENT_GFX_LINK_RS_MAY
 };
 
-static const u16 sPlayerAvatarGfxToStateFlag[OUTFIT_TOTAL][GENDER_COUNT][4][2] =
+static const struct __attribute__((packed))
+{
+    u16 graphicsId;
+    u16 playerFlag;
+} sPlayerAvatarGfxToStateFlag[OUTFIT_TOTAL][GENDER_COUNT][4] =
 {
     [OUTFIT_EMERALD] =
     {
@@ -1391,8 +1395,8 @@ static u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][0]); i++)
     {
-        if (sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i][0] == graphicsId)
-            return sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i][1];
+        if (sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i].graphicsId == graphicsId)
+            return sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i].playerFlag;
     }
     return PLAYER_AVATAR_FLAG_ON_FOOT;
 }
@@ -1404,8 +1408,8 @@ u16 GetPlayerAvatarGraphicsIdByCurrentState(void)
 
     for (i = 0; i < ARRAY_COUNT(sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][0]); i++)
     {
-        if (sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i][1] & flags)
-            return sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i][0];
+        if (sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i].playerFlag & flags)
+            return sPlayerAvatarGfxToStateFlag[gSaveBlock2Ptr->outfitId][gSaveBlock2Ptr->playerGender][i].graphicsId;
     }
     return 0;
 }
