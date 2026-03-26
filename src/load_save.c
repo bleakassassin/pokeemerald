@@ -1,6 +1,7 @@
 #include "global.h"
 #include "malloc.h"
 #include "berry_powder.h"
+#include "event_data.h"
 #include "item.h"
 #include "load_save.h"
 #include "main.h"
@@ -172,7 +173,19 @@ void SavePlayerParty(void)
     gSaveBlock1Ptr->playerPartyCount = gPlayerPartyCount;
 
     for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (FlagGet(FLAG_TEMP_STATS))   // Checks if player is in Pokemon Center so it only runs if needed
+            CalculatePartyMonStats(i);  // 1st time disables meta-edited stats to maintain Colosseum/XD compatibility
         gSaveBlock1Ptr->playerParty[i] = gPlayerParty[i];
+    }
+
+    if (FlagGet(FLAG_TEMP_STATS))
+    {
+        FlagClear(FLAG_TEMP_STATS);     // Clear to restore meta-edited stats
+        for (i = 0; i < PARTY_SIZE; i++)
+            CalculatePartyMonStats(i);  // 2nd time restores meta-edited stats
+        FlagSet(FLAG_TEMP_STATS);       // Set again in case player decides to save again without changing screens
+    }
 }
 
 void LoadPlayerParty(void)

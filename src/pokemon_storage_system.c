@@ -2292,6 +2292,7 @@ enum {
 
 static void Task_PokeStorageMain(u8 taskId)
 {
+    FlagClear(FLAG_TEMP_STATS);
     switch (sStorage->state)
     {
     case MSTATE_HANDLE_INPUT:

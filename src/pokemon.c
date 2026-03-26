@@ -3148,8 +3148,8 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 
 bool8 IsStatHyperTrained(struct Pokemon *mon, u8 statIndex)
 {
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
-        return FALSE;
+    if (FlagGet(FLAG_TEMP_STATS)) // Flag is only set inside Pokémon Centers on resume; cleared otherwise
+        return FALSE;             // Bypass for CalculateMonStats when saving inside Pokémon Center to retain compatibility with Colosseum and XD
 
     switch (statIndex)
     {
@@ -3266,6 +3266,15 @@ void CalculateMonStats(struct Pokemon *mon)
     }
 
     SetMonData(mon, MON_DATA_HP, &currentHP);
+}
+
+void CalculatePartyMonStats(s32 partyMon)
+{
+    if (GetMonData(&gPlayerParty[partyMon], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
+     && GetMonData(&gPlayerParty[partyMon], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
+    {
+        CalculateMonStats(&gPlayerParty[partyMon]);
+    }
 }
 
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest)
@@ -5272,6 +5281,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
     s8 evChange;
     u16 evCount;
 
+    FlagClear(FLAG_TEMP_STATS); // In case of using an item that will ultimately change a Pokémon's stats in a Pokémon Center
     // Get item hold effect
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
     if (heldItem == ITEM_ENIGMA_BERRY)
@@ -6019,7 +6029,7 @@ const u8 gNatureMod[] =
 
 u8 GetNature(struct Pokemon *mon, bool32 allowMod)
 {
-    if (!allowMod || GetMonData(mon, MON_DATA_NATURE_MOD, 0) == NATURE_MOD_NONE || gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+    if (!allowMod || GetMonData(mon, MON_DATA_NATURE_MOD, 0) == NATURE_MOD_NONE || FlagGet(FLAG_TEMP_STATS)) // Modded Nature disabled for non-stat usage and Pokémon Center saving
         return GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, 0));
     else
         return gNatureMod[GetMonData(mon, MON_DATA_NATURE_MOD, 0)];

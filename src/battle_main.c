@@ -5236,17 +5236,11 @@ static void ReturnFromBattleToOverworld(void)
         PartySpreadPokerus(gPlayerParty);
     }
 
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
-        {
-            CalculateMonStats(&gPlayerParty[i]);
-        }
-    }
-
     if (gBattleTypeFlags & BATTLE_TYPE_LINK && gReceivedRemoteLinkPlayers)
         return;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+        CalculatePartyMonStats(i);
 
     gSpecialVar_Result = gBattleOutcome;
     gMain.inBattle = FALSE;

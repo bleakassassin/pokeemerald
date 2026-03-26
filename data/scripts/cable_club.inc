@@ -1312,6 +1312,7 @@ EventScript_CloseMossdeepGameCornerBarrier::
 	return
 
 CableClub_OnResume:
+	setflag FLAG_TEMP_STATS
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_InfoMan2::

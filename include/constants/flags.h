@@ -15,7 +15,7 @@
 #define FLAG_TEMP_4      (TEMP_FLAGS_START + 0x4)
 #define FLAG_TEMP_CUT    (TEMP_FLAGS_START + 0x5)
 #define FLAG_TEMP_ROCK_SMASH (TEMP_FLAGS_START + 0x6)
-#define FLAG_TEMP_7      (TEMP_FLAGS_START + 0x7)  // Unused Flag
+#define FLAG_TEMP_STATS  (TEMP_FLAGS_START + 0x7)
 #define FLAG_TEMP_8      (TEMP_FLAGS_START + 0x8)  // Unused Flag
 #define FLAG_TEMP_9      (TEMP_FLAGS_START + 0x9)  // Unused Flag
 #define FLAG_TEMP_A      (TEMP_FLAGS_START + 0xA)  // Unused Flag
