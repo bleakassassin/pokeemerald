@@ -186,10 +186,6 @@ static const union AnimCmd *const sAnims_LeaderTateAndLiza[] ={
     sAnim_GeneralFrame0,
 };
 
-static const union AnimCmd *const sAnims_LeaderWallace[] ={
-    sAnim_GeneralFrame0,
-};
-
 static const union AnimCmd *const sAnims_LeaderJuan[] ={
     sAnim_GeneralFrame0,
 };
@@ -371,6 +367,10 @@ static const union AnimCmd *const sAnims_RubySapphireBrendan[] ={
 };
 
 static const union AnimCmd *const sAnims_RubySapphireMay[] ={
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_LeaderWallace[] ={
     sAnim_GeneralFrame0,
 };
 
