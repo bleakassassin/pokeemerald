@@ -134,7 +134,8 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
             u8 opponentBattler;
             u16 species;
 
-            LoadAndCreateEnemyShadowSprites();
+            if (gBattleScripting.monCaught != TRUE)
+                LoadAndCreateEnemyShadowSprites();
 
             opponentBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBattler]], MON_DATA_SPECIES);
