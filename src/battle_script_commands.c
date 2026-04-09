@@ -10423,7 +10423,7 @@ static void Cmd_trainerslideout(void)
 static void Cmd_checknicknamesoption(void)
 {
     if (gSaveBlock2Ptr->optionsGiveNicknames == OPTIONS_GIVE_NICKNAMES_OFF)
-        gBattlescriptCurrInstr += 1;
+        gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
     else
         gBattlescriptCurrInstr += 5;
 }
