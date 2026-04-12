@@ -1508,7 +1508,7 @@ static void CheckWonderGuardAndLevitate(void)
 }
 
 // Same as ModulateDmgByType except different arguments
-static void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
+void ModulateDmgByType2(u8 multiplier, u16 move, u8 *flags)
 {
     gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
     if (gBattleMoveDamage == 0 && multiplier != 0)

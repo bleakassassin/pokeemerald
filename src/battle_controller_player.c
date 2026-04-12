@@ -31,6 +31,7 @@
 #include "text.h"
 #include "util.h"
 #include "window.h"
+#include "constants/abilities.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
 #include "constants/items.h"
@@ -389,6 +390,7 @@ static void HandleInputChooseTarget(void)
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
         gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseMove;
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
         DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
         DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
@@ -1537,20 +1539,77 @@ static void MoveSelectionDisplayPpNumber(void)
 
 u8 TypeEffectiveness(u8 targetId)
 {
-    u8 moveFlags, moveEffect;
-    u16 move;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
-
-    move = gBattleMons[gActiveBattler].moves[gMoveSelectionCursor[gActiveBattler]];
-    moveFlags = AI_TypeCalc(move, gBattleMons[targetId].species, gBattleMons[targetId].ability);
-    moveEffect = gBattleMoves[move].effect;
+    s32 i = 0;
+    u8 flags = 0;
+    u8 moveType, typeBits;
+    u16 move = gBattleMons[gActiveBattler].moves[gMoveSelectionCursor[gActiveBattler]];
+    u8 moveEffect = gBattleMoves[move].effect;
 
     if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[targetId].species), FLAG_GET_CAUGHT) == FALSE)
-        return B_WIN_MOVE_TYPE; // normal effectiveness
+        return B_WIN_MOVE_TYPE; // normal effectiveness if target Pokémon isn't fully registered into Pokédex
 
-    if (move == MOVE_HIDDEN_POWER || move == MOVE_WEATHER_BALL)
-        return B_WIN_MOVE_TYPE; // normal effectiveness
-    else if (moveFlags & MOVE_RESULT_NO_EFFECT)
+    if (move == MOVE_STRUGGLE)
+        return B_WIN_MOVE_TYPE; // Struggle is typeless
+
+    if (IS_CATEGORY_STATUS(move))
+    {
+        if ((moveEffect == EFFECT_POISON || moveEffect == EFFECT_TOXIC) && (IS_BATTLER_OF_TYPE(targetId, TYPE_POISON) || IS_BATTLER_OF_TYPE(targetId, TYPE_STEEL)))
+            return B_WIN_TYPE_NO_EFF; // poison check; Poison- and Steel-type Pokémon are immune
+        else if (moveEffect == EFFECT_LEECH_SEED && IS_BATTLER_OF_TYPE(targetId, TYPE_GRASS))
+            return B_WIN_TYPE_NO_EFF; // seeding check; Grass-type Pokémon aren't affected
+        else if (moveEffect == EFFECT_WILL_O_WISP && IS_BATTLER_OF_TYPE(targetId, TYPE_FIRE))
+            return B_WIN_TYPE_NO_EFF; // burn check; Fire-type Pokémon aren't affected
+        else if (move != MOVE_THUNDER_WAVE && move != MOVE_GLARE)
+            return B_WIN_MOVE_TYPE; // all status moves besides Thunder Wave and Glare ignore the type chart
+    }
+
+    if (move == MOVE_HIDDEN_POWER)
+    {
+        typeBits  = ((gBattleMons[gActiveBattler].hpIV & 1) << 0)
+                  | ((gBattleMons[gActiveBattler].attackIV & 1) << 1)
+                  | ((gBattleMons[gActiveBattler].defenseIV & 1) << 2)
+                  | ((gBattleMons[gActiveBattler].speedIV & 1) << 3)
+                  | ((gBattleMons[gActiveBattler].spAttackIV & 1) << 4)
+                  | ((gBattleMons[gActiveBattler].spDefenseIV & 1) << 5);
+        moveType = ((NUMBER_OF_MON_TYPES - 3) * typeBits) / 63 + 1;
+    }
+    else if (move == MOVE_WEATHER_BALL)
+    {
+        if (gBattleWeather & B_WEATHER_RAIN)
+            moveType = TYPE_WATER;
+        else if (gBattleWeather & B_WEATHER_SANDSTORM)
+            moveType = TYPE_ROCK;
+        else if (gBattleWeather & B_WEATHER_SUN)
+            moveType = TYPE_FIRE;
+        else if (gBattleWeather & B_WEATHER_HAIL)
+            moveType = TYPE_ICE;
+        else
+            moveType = TYPE_NORMAL;
+    }
+    else
+        moveType = gBattleMoves[move].type;
+
+    while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
+    {
+        if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
+        {
+            i += 3;
+            continue;
+        }
+        if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+        {
+            // check type1
+            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[targetId].types[0])
+                ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
+            // check type2
+            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[targetId].types[1] &&
+                gBattleMons[targetId].types[0] != gBattleMons[targetId].types[1])
+                ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
+        }
+        i += 3;
+    }
+
+    if (flags & MOVE_RESULT_DOESNT_AFFECT_FOE)
         return B_WIN_TYPE_NO_EFF;
     else if (moveEffect == EFFECT_BIDE
             || moveEffect == EFFECT_SUPER_FANG
@@ -1561,10 +1620,10 @@ u8 TypeEffectiveness(u8 targetId)
             || moveEffect == EFFECT_SONICBOOM
             || moveEffect == EFFECT_MIRROR_COAT
             || moveEffect == EFFECT_ENDEAVOR)
-        return B_WIN_MOVE_TYPE;
-    else if (moveFlags & MOVE_RESULT_NOT_VERY_EFFECTIVE )
+        return B_WIN_MOVE_TYPE; // for set-damage moves; they ignore resistances, immunites accounted for by previous check
+    else if (flags & MOVE_RESULT_NOT_VERY_EFFECTIVE )
         return B_WIN_TYPE_NOT_VERY_EFF;
-    else if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE)
+    else if (flags & MOVE_RESULT_SUPER_EFFECTIVE)
         return B_WIN_TYPE_SUPER_EFF;
     else
         return B_WIN_MOVE_TYPE;
