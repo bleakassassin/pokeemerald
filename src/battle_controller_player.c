@@ -1537,6 +1537,20 @@ static void MoveSelectionDisplayPpNumber(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
+u8 GetWeatherBallType(void)
+{
+    if (gBattleWeather & B_WEATHER_RAIN)
+        return TYPE_WATER;
+    else if (gBattleWeather & B_WEATHER_SANDSTORM)
+        return TYPE_ROCK;
+    else if (gBattleWeather & B_WEATHER_SUN)
+        return TYPE_FIRE;
+    else if (gBattleWeather & B_WEATHER_HAIL)
+        return TYPE_ICE;
+    else
+        return TYPE_NORMAL;
+}
+
 u8 TypeEffectiveness(u8 targetId)
 {
     s32 i = 0;
@@ -1574,18 +1588,7 @@ u8 TypeEffectiveness(u8 targetId)
         moveType = ((NUMBER_OF_MON_TYPES - 3) * typeBits) / 63 + 1;
     }
     else if (move == MOVE_WEATHER_BALL)
-    {
-        if (gBattleWeather & B_WEATHER_RAIN)
-            moveType = TYPE_WATER;
-        else if (gBattleWeather & B_WEATHER_SANDSTORM)
-            moveType = TYPE_ROCK;
-        else if (gBattleWeather & B_WEATHER_SUN)
-            moveType = TYPE_FIRE;
-        else if (gBattleWeather & B_WEATHER_HAIL)
-            moveType = TYPE_ICE;
-        else
-            moveType = TYPE_NORMAL;
-    }
+        moveType = GetWeatherBallType();
     else
         moveType = gBattleMoves[move].type;
 
@@ -1634,13 +1637,19 @@ static void MoveSelectionDisplayMoveType(void)
     u8 *txtPtr;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     u8 typeColor = IsDoubleBattle() ? B_WIN_MOVE_TYPE : TypeEffectiveness(GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerPosition(gActiveBattler))));
+    u8 moveType;
 
     txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
     *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
     *(txtPtr)++ = EXT_CTRL_CODE_FONT;
     *(txtPtr)++ = FONT_NORMAL;
 
-    StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
+    if (moveInfo->moves[gMoveSelectionCursor[gActiveBattler]] == MOVE_WEATHER_BALL)
+        moveType = GetWeatherBallType();
+    else
+        moveType = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type;
+
+    StringCopy(txtPtr, gTypeNames[moveType]);
     BattlePutTextOnWindow(gDisplayedStringBattle, typeColor);
 }
 
@@ -1648,16 +1657,19 @@ static void MoveSelectionDisplayMoveTypeDoubles(u8 targetId)
 {
 	u8 *txtPtr;
 	struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][4]);
+    u8 moveType;
 
 	txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
-	txtPtr[0] = EXT_CTRL_CODE_BEGIN;
-	txtPtr++;
-	txtPtr[0] = EXT_CTRL_CODE_FONT;
-	txtPtr++;
-	txtPtr[0] = FONT_NORMAL;
-	txtPtr++;
+    *(txtPtr)++ = EXT_CTRL_CODE_BEGIN;
+    *(txtPtr)++ = EXT_CTRL_CODE_FONT;
+    *(txtPtr)++ = FONT_NORMAL;
 
-	StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
+    if (moveInfo->moves[gMoveSelectionCursor[gActiveBattler]] == MOVE_WEATHER_BALL)
+        moveType = GetWeatherBallType();
+    else
+        moveType = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type;
+
+    StringCopy(txtPtr, gTypeNames[moveType]);
 	BattlePutTextOnWindow(gDisplayedStringBattle, TypeEffectiveness(targetId));
 }
 
