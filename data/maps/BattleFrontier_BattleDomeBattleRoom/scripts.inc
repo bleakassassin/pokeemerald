@@ -909,8 +909,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_PlayerHasEnteredDome:
 	.string "{PLAYER} has entered the BATTLE DOME!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTrainer:
-	.string "{STR_VAR_1}\n"
-	.string "match!\p"
+	.string "{STR_VAR_1} match!\p"
 	.string "{PLAYER} versus {STR_VAR_2}!\p"
 	.string "Let the battle begin!$"
 
