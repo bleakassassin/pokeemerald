@@ -147,10 +147,10 @@ BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
 	.string "It's this mysterious TRAINER called\n"
-	.string "the SALON MAIDEN that runs the place.$"
+	.string "the TOWER TYCOON that runs the place.$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
-	.string "Have you battled the SALON MAIDEN?\p"
+	.string "Have you battled the TOWER TYCOON?\p"
 	.string "When she's measuring up her opponent,\n"
 	.string "she apparently uses these POKéMON:\p"
 	.string "A PSYCHIC-type PSI POKéMON,\n"
@@ -158,7 +158,7 @@ BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
 	.string "and a NORMAL-type SLEEPING POKéMON.$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenGoldMons::
-	.string "Have you battled the SALON MAIDEN\n"
+	.string "Have you battled the TOWER TYCOON\n"
 	.string "when she's serious?\p"
 	.string "When she's battling flat out,\n"
 	.string "she apparently uses these POKéMON:\p"
@@ -245,10 +245,10 @@ BattleFrontier_Lounge2_Text_ArenaTycoonIsThere::
 	.string "One of those top TRAINERS that SCOTT\n"
 	.string "calls the FRONTIER BRAINS is there.\p"
 	.string "It's this cute TRAINER called\n"
-	.string "the ARENA TYCOON that runs the place.$"
+	.string "the ARENA CHIEF that runs the place.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
-	.string "Have you battled the ARENA TYCOON\n"
+	.string "Have you battled the ARENA CHIEF\n"
 	.string "before?\p"
 	.string "When she's assessing the foe's ability,\n"
 	.string "she supposedly uses these POKéMON:\p"
@@ -257,7 +257,7 @@ BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
 	.string "and a BUG & GHOST SHED POKéMON.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons::
-	.string "Have you battled the ARENA TYCOON\n"
+	.string "Have you battled the ARENA CHIEF\n"
 	.string "when she's serious?\p"
 	.string "When she battles for keeps,\n"
 	.string "she supposedly uses these POKéMON:\p"
