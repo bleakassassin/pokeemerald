@@ -1219,7 +1219,7 @@ gTVTodaysRivalTrainerText04::
 
 gTVTodaysRivalTrainerText05::
 	.string "Our rival has collected {STR_VAR_1} BATTLE\n"
-	.string "POINT(S) at the BATTLE FRONTIER.$"
+	.string "POINTS at the BATTLE FRONTIER.$"
 
 gTVTodaysRivalTrainerText06::
 	.string "So, how did you measure up in\n"

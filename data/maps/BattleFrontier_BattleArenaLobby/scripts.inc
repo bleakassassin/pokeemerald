@@ -571,4 +571,4 @@ BattleFrontier_BattleArenaLobby_Text_CongratsOnDefeatingTycoon:
 BattleFrontier_BattleArenaLobby_Text_PleaseAcceptBattlePoints:
 	.string "My dear challenger, in recognition of\n"
 	.string "your indefatigable spirit, please\l"
-	.string "accept these BATTLE POINT(S).$"
+	.string "accept these BATTLE POINTS.$"

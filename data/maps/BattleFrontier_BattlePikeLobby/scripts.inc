@@ -357,7 +357,7 @@ BattleFrontier_BattlePikeLobby_Text_ShallRecordResults:
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints2:
 	.string "To commemorate your completion of\n"
 	.string "the Battle Choice challenge, we award\l"
-	.string "you these BATTLE POINT(S)…$"
+	.string "you these BATTLE POINTS…$"
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_ReachedBattlePointLimit:
@@ -380,7 +380,7 @@ BattleFrontier_BattlePikeLobby_Text_SnatchedVictoryFromQueen:
 
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints:
 	.string "In recognition of your amazing luck,\n"
-	.string "we award you these BATTLE POINT(S)…$"
+	.string "we award you these BATTLE POINTS…$"
 
 BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal:
 	.string "Arrgh! I blew my chance!\n"

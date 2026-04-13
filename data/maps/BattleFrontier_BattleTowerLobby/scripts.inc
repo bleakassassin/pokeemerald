@@ -1338,10 +1338,10 @@ BattleFrontier_BattleTowerLobby_Text_CongratsDefeatedMaiden:
 
 BattleFrontier_BattleTowerLobby_Text_AwardYouTheseBattlePoints:
 	.string "In recognition of your infinite talent,\n"
-	.string "we award you these BATTLE POINT(S).$"
+	.string "we award you these BATTLE POINTS.$"
 
 BattleFrontier_Text_ObtainedXBattlePoints:
-	.string "{PLAYER} obtained {STR_VAR_1} BATTLE POINT(S).$"
+	.string "{PLAYER} obtained {STR_VAR_1} BATTLE POINTS.$"
 
 BattleFrontier_BattleTowerLobby_Text_RulesAreListed:
 	.string "The BATTLE TOWER rules are listed.$"
