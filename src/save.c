@@ -12,6 +12,7 @@
 #include "trainer_hill.h"
 #include "link.h"
 #include "event_data.h"
+#include "field_specials.h"
 #include "item.h"
 #include "lilycove_lady.h"
 #include "registered_items_menu.h"
@@ -1078,6 +1079,8 @@ void UpdateSaveVersion(void)
     }
     if (version <= VERSION_TRADE_OVERHAUL)
     {
+        gSpecialVar_0x8004 = gSaveBlock2Ptr->frontier.cardBattlePoints;
+        GiveFrontierBattlePoints(); // Compensation for players who received BP before the increase in BP rewards
         if (FlagGet(FLAG_CAUGHT_MEW) == TRUE)
             AddBagItem(ITEM_LUM_BERRY, 1); // Faraway Island Mew didn't hold a Lum Berry before this version
         if (FlagGet(FLAG_TRAINER_HILL_MON_PRIZE_EXPERT) == TRUE)
