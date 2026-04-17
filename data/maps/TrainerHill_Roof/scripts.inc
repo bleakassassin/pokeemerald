@@ -72,7 +72,7 @@ TrainerHill_Roof_EventScript_GiveKantoStarter::
 	return
 
 TrainerHill_Roof_EventScript_GiveCelebi::
-	givemon SPECIES_CELEBI, 10
+	givemon SPECIES_CELEBI, 10, ITEM_LUM_BERRY
 	return
 
 TrainerHill_Roof_EventScript_SendPrizeMonParty::

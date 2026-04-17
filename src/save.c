@@ -1076,6 +1076,13 @@ void UpdateSaveVersion(void)
         FlagClear(FLAG_DONTAE_TRADE_DONE);
         FlagClear(FLAG_REYLEY_TRADE_DONE);
     }
+    if (version <= VERSION_TRADE_OVERHAUL)
+    {
+        if (FlagGet(FLAG_CAUGHT_MEW) == TRUE)
+            AddBagItem(ITEM_LUM_BERRY, 1); // Faraway Island Mew didn't hold a Lum Berry before this version
+        if (FlagGet(FLAG_TRAINER_HILL_MON_PRIZE_EXPERT) == TRUE)
+            AddBagItem(ITEM_LUM_BERRY, 1); // Prize Celebi for beating Trainer Hill Expert Mode in 12 minues didn't hold a Lum Berry before this version
+    }
     VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
 }
 
