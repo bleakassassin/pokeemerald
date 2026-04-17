@@ -29,16 +29,16 @@ BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMoveWindow::
 	waitstate
 	copyvar VAR_TEMP_FRONTIER_TUTOR_SELECTION, VAR_RESULT
 	switch VAR_RESULT
-	case 0, BattleFrontier_Lounge7_EventScript_4BP
-	case 1, BattleFrontier_Lounge7_EventScript_4BP
-	case 2, BattleFrontier_Lounge7_EventScript_4BP
-	case 3, BattleFrontier_Lounge7_EventScript_4BP
-	case 4, BattleFrontier_Lounge7_EventScript_4BP
-	case 5, BattleFrontier_Lounge7_EventScript_4BP
-	case 6, BattleFrontier_Lounge7_EventScript_4BP
-	case 7, BattleFrontier_Lounge7_EventScript_6BP
-	case 8, BattleFrontier_Lounge7_EventScript_6BP
-	case 9, BattleFrontier_Lounge7_EventScript_8BP
+	case 0, BattleFrontier_Lounge7_EventScript_5BP
+	case 1, BattleFrontier_Lounge7_EventScript_5BP
+	case 2, BattleFrontier_Lounge7_EventScript_5BP
+	case 3, BattleFrontier_Lounge7_EventScript_5BP
+	case 4, BattleFrontier_Lounge7_EventScript_5BP
+	case 5, BattleFrontier_Lounge7_EventScript_5BP
+	case 6, BattleFrontier_Lounge7_EventScript_5BP
+	case 7, BattleFrontier_Lounge7_EventScript_7BP
+	case 8, BattleFrontier_Lounge7_EventScript_7BP
+	case 9, BattleFrontier_Lounge7_EventScript_10BP
 	goto BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect
 
 BattleFrontier_Lounge7_EventScript_ChooseNewLeftTutorMove::
@@ -54,18 +54,18 @@ BattleFrontier_Lounge7_EventScript_2BP::
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
-BattleFrontier_Lounge7_EventScript_4BP::
-	setvar VAR_0x8008, 4
+BattleFrontier_Lounge7_EventScript_5BP::
+	setvar VAR_0x8008, 5
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
-BattleFrontier_Lounge7_EventScript_6BP::
-	setvar VAR_0x8008, 6
+BattleFrontier_Lounge7_EventScript_7BP::
+	setvar VAR_0x8008, 7
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
-BattleFrontier_Lounge7_EventScript_8BP::
-	setvar VAR_0x8008, 8
+BattleFrontier_Lounge7_EventScript_10BP::
+	setvar VAR_0x8008, 10
 	goto BattleFrontier_Lounge7_EventScript_ConfirmMoveSelection
 	end
 
@@ -100,16 +100,16 @@ BattleFrontier_Lounge7_EventScript_ChooseRightTutorMoveWindow::
 	case 0, BattleFrontier_Lounge7_EventScript_2BP
 	case 1, BattleFrontier_Lounge7_EventScript_2BP
 	case 2, BattleFrontier_Lounge7_EventScript_2BP
-	case 3, BattleFrontier_Lounge7_EventScript_4BP
-	case 4, BattleFrontier_Lounge7_EventScript_4BP
-	case 5, BattleFrontier_Lounge7_EventScript_4BP
-	case 6, BattleFrontier_Lounge7_EventScript_4BP
-	case 7, BattleFrontier_Lounge7_EventScript_4BP
-	case 8, BattleFrontier_Lounge7_EventScript_4BP
-	case 9, BattleFrontier_Lounge7_EventScript_4BP
-	case 10, BattleFrontier_Lounge7_EventScript_6BP
-	case 11, BattleFrontier_Lounge7_EventScript_8BP
-	case 12, BattleFrontier_Lounge7_EventScript_8BP
+	case 3, BattleFrontier_Lounge7_EventScript_5BP
+	case 4, BattleFrontier_Lounge7_EventScript_5BP
+	case 5, BattleFrontier_Lounge7_EventScript_5BP
+	case 6, BattleFrontier_Lounge7_EventScript_5BP
+	case 7, BattleFrontier_Lounge7_EventScript_5BP
+	case 8, BattleFrontier_Lounge7_EventScript_5BP
+	case 9, BattleFrontier_Lounge7_EventScript_5BP
+	case 10, BattleFrontier_Lounge7_EventScript_7BP
+	case 11, BattleFrontier_Lounge7_EventScript_10BP
+	case 12, BattleFrontier_Lounge7_EventScript_10BP
 	goto BattleFrontier_Lounge7_EventScript_ExitTutorMoveSelect
 
 BattleFrontier_Lounge7_EventScript_ChooseNewRightTutorMove::

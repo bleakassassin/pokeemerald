@@ -104,47 +104,47 @@ BattleFrontier_ExchangeServiceCorner_EventScript_KissPoster::
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_KissCushion::
-	setvar VAR_0x8008, 12
+	setvar VAR_0x8008, 16
 	setvar VAR_0x8009, DECOR_KISS_CUSHION
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_SmoochumDoll::
-	setvar VAR_0x8008, 16
+	setvar VAR_0x8008, 32
 	setvar VAR_0x8009, DECOR_SMOOCHUM_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_TogepiDoll::
-	setvar VAR_0x8008, 16
+	setvar VAR_0x8008, 32
 	setvar VAR_0x8009, DECOR_TOGEPI_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_MeowthDoll::
-	setvar VAR_0x8008, 16
+	setvar VAR_0x8008, 32
 	setvar VAR_0x8009, DECOR_MEOWTH_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ClefairyDoll::
-	setvar VAR_0x8008, 16
+	setvar VAR_0x8008, 32
 	setvar VAR_0x8009, DECOR_CLEFAIRY_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_DittoDoll::
-	setvar VAR_0x8008, 16
+	setvar VAR_0x8008, 32
 	setvar VAR_0x8009, DECOR_DITTO_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_CyndaquilDoll::
-	setvar VAR_0x8008, 24
+	setvar VAR_0x8008, 48
 	setvar VAR_0x8009, DECOR_CYNDAQUIL_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChikoritaDoll::
-	setvar VAR_0x8008, 24
+	setvar VAR_0x8008, 48
 	setvar VAR_0x8009, DECOR_CHIKORITA_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor1
 
 BattleFrontier_ExchangeServiceCorner_EventScript_TotodileDoll::
-	setvar VAR_0x8008, 24
+	setvar VAR_0x8008, 48
 	setvar VAR_0x8009, DECOR_TOTODILE_DOLL
 	
 BattleFrontier_ExchangeServiceCorner_EventScript_Decor1::
@@ -161,7 +161,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_DecorClerk2::
 	
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2Branch::
 	goto_if_set FLAG_REGI_DOORS_OPENED, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2_Regi
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2_Regi
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2
@@ -195,42 +195,42 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2_Regi::
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
 BattleFrontier_ExchangeServiceCorner_EventScript_LaprasDoll::
-	setvar VAR_0x8008, 40
+	setvar VAR_0x8008, 80
 	setvar VAR_0x8009, DECOR_LAPRAS_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor2
 
 BattleFrontier_ExchangeServiceCorner_EventScript_SnorlaxDoll::
-	setvar VAR_0x8008, 40
+	setvar VAR_0x8008, 80
 	setvar VAR_0x8009, DECOR_SNORLAX_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor2
 
 BattleFrontier_ExchangeServiceCorner_EventScript_VenusaurDoll::
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, 128
 	setvar VAR_0x8009, DECOR_VENUSAUR_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor2
 
 BattleFrontier_ExchangeServiceCorner_EventScript_CharizardDoll::
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, 128
 	setvar VAR_0x8009, DECOR_CHARIZARD_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor2
 
 BattleFrontier_ExchangeServiceCorner_EventScript_BlastoiseDoll::
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, 128
 	setvar VAR_0x8009, DECOR_BLASTOISE_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor2
 
 BattleFrontier_ExchangeServiceCorner_EventScript_RegirockDoll::
-	setvar VAR_0x8008, 128
+	setvar VAR_0x8008, 256
 	setvar VAR_0x8009, DECOR_REGIROCK_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor2
 
 BattleFrontier_ExchangeServiceCorner_EventScript_RegiceDoll::
-	setvar VAR_0x8008, 128
+	setvar VAR_0x8008, 256
 	setvar VAR_0x8009, DECOR_REGICE_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor2
 
 BattleFrontier_ExchangeServiceCorner_EventScript_RegisteelDoll::
-	setvar VAR_0x8008, 128
+	setvar VAR_0x8008, 256
 	setvar VAR_0x8009, DECOR_REGISTEEL_DOLL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Decor2
 	
@@ -266,8 +266,8 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin::
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
 	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_MachoBrace
-	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
 	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
 	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
 	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
@@ -289,8 +289,8 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminSilver::
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
 	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_MachoBrace
-	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
 	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
 	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
 	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
@@ -313,8 +313,8 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminGold::
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
 	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_MachoBrace
-	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule
 	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry
 	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry
 	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry
@@ -355,52 +355,52 @@ BattleFrontier_ExchangeServiceCorner_EventScript_HPUp::
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_MachoBrace::
-	setvar VAR_0x8008, 8
+	setvar VAR_0x8008, 10
 	setvar VAR_0x8009, ITEM_MACHO_BRACE
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
-BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule::
-	setvar VAR_0x8008, 24
-	setvar VAR_0x8009, ITEM_ABILITY_CAPSULE
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
-
 BattleFrontier_ExchangeServiceCorner_EventScript_RareCandy::
-	setvar VAR_0x8008, 24
+	setvar VAR_0x8008, 20
 	setvar VAR_0x8009, ITEM_RARE_CANDY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
+BattleFrontier_ExchangeServiceCorner_EventScript_AbilityCapsule::
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_ABILITY_CAPSULE
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
+
 BattleFrontier_ExchangeServiceCorner_EventScript_LiechiBerry::
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, 50
 	setvar VAR_0x8009, ITEM_LIECHI_BERRY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_GanlonBerry::
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, 50
 	setvar VAR_0x8009, ITEM_GANLON_BERRY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_SalacBerry::
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, 50
 	setvar VAR_0x8009, ITEM_SALAC_BERRY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_PetayaBerry::
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, 50
 	setvar VAR_0x8009, ITEM_PETAYA_BERRY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_ApicotBerry::
-	setvar VAR_0x8008, 64
+	setvar VAR_0x8008, 50
 	setvar VAR_0x8009, ITEM_APICOT_BERRY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_LansatBerry::
-	setvar VAR_0x8008, 128
+	setvar VAR_0x8008, 100
 	setvar VAR_0x8009, ITEM_LANSAT_BERRY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
 BattleFrontier_ExchangeServiceCorner_EventScript_StarfBerry::
-	setvar VAR_0x8008, 128
+	setvar VAR_0x8008, 200
 	setvar VAR_0x8009, ITEM_STARF_BERRY
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_Vitamin
 
@@ -425,96 +425,96 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem::
 	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
-	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Everstone
-	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb
-	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb
-	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock
-	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_UpGrade
-	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_DeepSeaTooth
-	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_DeepSeaScale
-	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_DragonScale
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers
-	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw
-	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder
-	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_SootheBell
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_UpGrade
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_DragonScale
+	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_Everstone
+	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_DeepSeaTooth
+	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_DeepSeaScale
+	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder
+	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock
+	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand
+	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers
 	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand
-	case 13, BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand
-	case 14, BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens
+	case 13, BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens
+	case 14, BattleFrontier_ExchangeServiceCorner_EventScript_SootheBell
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 
-BattleFrontier_ExchangeServiceCorner_EventScript_Everstone::
-	setvar VAR_0x8008, 8
-	setvar VAR_0x8009, ITEM_EVERSTONE
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
-
-BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb::
-	setvar VAR_0x8008, 12
-	setvar VAR_0x8009, ITEM_WHITE_HERB
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
-
-BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb::
-	setvar VAR_0x8008, 12
-	setvar VAR_0x8009, ITEM_MENTAL_HERB
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
-
-BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock::
-	setvar VAR_0x8008, 16
-	setvar VAR_0x8009, ITEM_KINGS_ROCK
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
-
 BattleFrontier_ExchangeServiceCorner_EventScript_UpGrade::
-	setvar VAR_0x8008, 16
+	setvar VAR_0x8008, 5
 	setvar VAR_0x8009, ITEM_UP_GRADE
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
+BattleFrontier_ExchangeServiceCorner_EventScript_DragonScale::
+	setvar VAR_0x8008, 5
+	setvar VAR_0x8009, ITEM_DRAGON_SCALE
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Everstone::
+	setvar VAR_0x8008, 10
+	setvar VAR_0x8009, ITEM_EVERSTONE
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
+
 BattleFrontier_ExchangeServiceCorner_EventScript_DeepSeaTooth::
-	setvar VAR_0x8008, 16
+	setvar VAR_0x8008, 10
 	setvar VAR_0x8009, ITEM_DEEP_SEA_TOOTH
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_DeepSeaScale::
-	setvar VAR_0x8008, 16
+	setvar VAR_0x8008, 10
 	setvar VAR_0x8009, ITEM_DEEP_SEA_SCALE
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
-BattleFrontier_ExchangeServiceCorner_EventScript_DragonScale::
-	setvar VAR_0x8008, 16
-	setvar VAR_0x8009, ITEM_DRAGON_SCALE
+BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb::
+	setvar VAR_0x8008, 15
+	setvar VAR_0x8009, ITEM_WHITE_HERB
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
-BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers::
-	setvar VAR_0x8008, 24
-	setvar VAR_0x8009, ITEM_LEFTOVERS
+BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb::
+	setvar VAR_0x8008, 15
+	setvar VAR_0x8009, ITEM_MENTAL_HERB
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw::
-	setvar VAR_0x8008, 24
+	setvar VAR_0x8008, 20
 	setvar VAR_0x8009, ITEM_QUICK_CLAW
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder::
-	setvar VAR_0x8008, 24
+	setvar VAR_0x8008, 20
 	setvar VAR_0x8009, ITEM_BRIGHT_POWDER
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
-BattleFrontier_ExchangeServiceCorner_EventScript_SootheBell::
-	setvar VAR_0x8008, 24
-	setvar VAR_0x8009, ITEM_SOOTHE_BELL
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
-
-BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand::
-	setvar VAR_0x8008, 24
-	setvar VAR_0x8009, ITEM_CHOICE_BAND
+BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock::
+	setvar VAR_0x8008, 20
+	setvar VAR_0x8009, ITEM_KINGS_ROCK
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand::
-	setvar VAR_0x8008, 24
+	setvar VAR_0x8008, 20
 	setvar VAR_0x8009, ITEM_FOCUS_BAND
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
+BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers::
+	setvar VAR_0x8008, 25
+	setvar VAR_0x8009, ITEM_LEFTOVERS
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand::
+	setvar VAR_0x8008, 25
+	setvar VAR_0x8009, ITEM_CHOICE_BAND
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
+
 BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens::
-	setvar VAR_0x8008, 24
+	setvar VAR_0x8008, 25
 	setvar VAR_0x8009, ITEM_SCOPE_LENS
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_SootheBell::
+	setvar VAR_0x8008, 25
+	setvar VAR_0x8009, ITEM_SOOTHE_BELL
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_HoldItem::
@@ -556,7 +556,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingMet::
 BattleFrontier_ExchangeServiceCorner_EventScript_MoreHyperTraining::
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingDeclined
 	specialvar VAR_TEMP_1, GetFrontierBattlePoints
-	goto_if_le VAR_TEMP_1, 24, BattleFrontier_Lounge7_EventScript_NotEnoughPointsForTraining
+	goto_if_le VAR_TEMP_1, 25, BattleFrontier_Lounge7_EventScript_NotEnoughPointsForTraining
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingWhichMon, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	waitstate
@@ -569,7 +569,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_MoreHyperTraining::
 	goto_if_lt VAR_RESULT, 50, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingLowLevel
 	specialvar VAR_RESULT, CheckIfIVsMaxed
 	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingIVsMaxed
-	goto_if_eq VAR_0x8004, 24, BattleFrontier_ExchangeServiceCorner_EventScript_OneStatToHyperTrain
+	goto_if_eq VAR_0x8004, 25, BattleFrontier_ExchangeServiceCorner_EventScript_OneStatToHyperTrain
 BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingPickStat::
 	message BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingPickStat
 	waitmessage
@@ -585,7 +585,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainXStat::
 	special BufferStatName
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseXStat, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingReturnToPickStat
-	setvar VAR_0x8004, 24
+	setvar VAR_0x8004, 25
 BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainStats::
 	special TakeFrontierBattlePoints
 	special HyperTrainStats
@@ -658,7 +658,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_NatureClerk::
 	faceplayer
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_WelcomeNatureMod, MSGBOX_DEFAULT
 	specialvar VAR_TEMP_1, GetFrontierBattlePoints
-	goto_if_le VAR_TEMP_1, 24, BattleFrontier_Lounge7_EventScript_NotEnoughPointsForNatureMod
+	goto_if_le VAR_TEMP_1, 50, BattleFrontier_Lounge7_EventScript_NotEnoughPointsForNatureMod
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_PleaseChooseNature, MSGBOX_DEFAULT
 	special ShowBattlePointsWindow
 BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNatureList::
@@ -685,7 +685,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNaturePokemon::
 	special BufferNatureName
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_NatureModToPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	setvar VAR_0x8004, 24
+	setvar VAR_0x8004, 50
 	special TakeFrontierBattlePoints
 	special ChangeNatureMod
 	special UpdateBattlePointsWindow
@@ -736,7 +736,7 @@ BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
 BattleFrontier_ExchangeServiceCorner_Text_WelcomeNatureMod:
 	.string "Hello, this is the EXCHANGE SERVICE\n"
 	.string "CORNER.\p"
-	.string "Here, you can redeem 24 BATTLE POINTS\n"
+	.string "Here, you can redeem 50 BATTLE POINTS\n"
 	.string "to change the effect of NATURE on the\l"
 	.string "stats of one of your POKéMON.$"
 
@@ -765,7 +765,7 @@ BattleFrontier_ExchangeServiceCorner_Text_AlreadyHasNatureEffects:
 BattleFrontier_ExchangeServiceCorner_Text_NatureModToPokemon:
 	.string "You'd like your {STR_VAR_1} to have the\n"
 	.string "stat effects of the {STR_VAR_2} NATURE?\l"
-	.string "That will be 24 BATTLE POINTS.$"
+	.string "That will be 50 BATTLE POINTS.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PleaseWaitAMoment:
 	.string "Thank you!\n"
@@ -845,7 +845,7 @@ BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIntro:
 	.string "I'm the HYPER TRAINING EXPERT!\p"
 	.string "If you have any POKéMON at Lv. 50 or\n"
 	.string "above, I can train their stats!\p"
-	.string "Each stat I train will cost you 24\n"
+	.string "Each stat I train will cost you 25\n"
 	.string "BATTLE POINTS.\p"
 	.string "I can also HYPER TRAIN all of your\n"
 	.string "POKéMON's stats at once if you have\l"
@@ -882,12 +882,12 @@ BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIVsMaxed:
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingNotEnoughBP:
 	.string "You don't have enough BATTLE POINTS!\n"
-	.string "I need 24 BATTLE POINTS to train a stat.$"
+	.string "I need 25 BATTLE POINTS to train a stat.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseXStat:
 	.string "You want me to raise your {STR_VAR_1}'s\n"
 	.string "{STR_VAR_2}, then?\l"
-	.string "That will cost 24 BATTLE POINTS.$"
+	.string "That will cost 25 BATTLE POINTS.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseAllStats:
 	.string "You want me to raise all of your\n"
@@ -978,12 +978,12 @@ BattleFrontier_ExchangeServiceCorner_Text_MachoBraceDesc::
 	.string "A hold item that promotes growth,\n"
 	.string "but it reduces SPEED.$"
 
+BattleFrontier_ExchangeServiceCorner_Text_RareCandyDesc::
+	.string "Raises the level of a POKéMON by one.$"
+
 BattleFrontier_ExchangeServiceCorner_Text_AbilityCapsuleDesc::
 	.string "A capsule that swaps the ABILITY of\n"
 	.string "a POKéMON.$"
-
-BattleFrontier_ExchangeServiceCorner_Text_RareCandyDesc::
-	.string "Raises the level of a POKéMON by one.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LiechiBerryDesc::
 	.string "A hold item that raises ATTACK in a\n"
@@ -1013,24 +1013,16 @@ BattleFrontier_ExchangeServiceCorner_Text_StarfBerryDesc::
 	.string "A hold item that sharply boosts a\n"
 	.string "stat in a pinch.$"
 
+BattleFrontier_ExchangeServiceCorner_Text_UpGradeDesc::
+	.string "A peculiar box made by SILPH CO.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_DragonScaleDesc::
+	.string "A strange scale held by DRAGON-type\n"
+	.string "POKéMON.$"
+
 BattleFrontier_ExchangeServiceCorner_Text_EverstoneDesc::
 	.string "A wondrous hold item that prevents\n"
 	.string "evolution.$"
-
-BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
-	.string "A hold item that restores any\n"
-	.string "lowered stat.$"
-
-BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc::
-	.string "A hold item that snaps POKéMON out\n"
-	.string "of infatuation.$"
-
-BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc::
-	.string "A hold item that may cause flinching\n"
-	.string "when the foe is hit.$"
-
-BattleFrontier_ExchangeServiceCorner_Text_UpGradeDesc::
-	.string "A peculiar box made by SILPH CO.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DeepSeaToothDesc::
 	.string "A hold item that raises the SP. ATK\n"
@@ -1040,13 +1032,13 @@ BattleFrontier_ExchangeServiceCorner_Text_DeepSeaScaleDesc::
 	.string "A hold item that raises the SP. DEF\n"
 	.string "of CLAMPERL.$"
 
-BattleFrontier_ExchangeServiceCorner_Text_DragonScaleDesc::
-	.string "A strange scale held by DRAGON-type\n"
-	.string "POKéMON.$"
+BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
+	.string "A hold item that restores any\n"
+	.string "lowered stat.$"
 
-BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc::
-	.string "A hold item that gradually restores\n"
-	.string "HP in battle.$"
+BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc::
+	.string "A hold item that snaps POKéMON out\n"
+	.string "of infatuation.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc::
 	.string "A hold item that occasionally allows\n"
@@ -1056,21 +1048,29 @@ BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc::
 	.string "A hold item that casts a glare to\n"
 	.string "reduce accuracy.$"
 
-BattleFrontier_ExchangeServiceCorner_Text_SootheBellDesc::
-	.string "A hold item that calms spirits and\n"
-	.string "fosters friendship.$"
-
-BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc::
-	.string "Raises a move's power, but permits\n"
-	.string "only that move.$"
+BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc::
+	.string "A hold item that may cause flinching\n"
+	.string "when the foe is hit.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc::
 	.string "A hold item that occasionally\n"
 	.string "prevents fainting.$"
 
+BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc::
+	.string "A hold item that gradually restores\n"
+	.string "HP in battle.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc::
+	.string "Raises a move's power, but permits\n"
+	.string "only that move.$"
+
 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc::
 	.string "A hold item that raises the\n"
 	.string "critical-hit rate.$"
+
+BattleFrontier_ExchangeServiceCorner_Text_SootheBellDesc::
+	.string "A hold item that calms spirits and\n"
+	.string "fosters friendship.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LonelyDesc::
 	.string "Up: ATTACK\n"
