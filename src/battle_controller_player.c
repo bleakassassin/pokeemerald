@@ -2821,7 +2821,6 @@ static void PlayerHandleChooseAction(void)
 {
     s32 i;
 
-    MoveSelectionDestroyMoveDescription();
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattleTv_ClearExplosionFaintCause();
     BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
