@@ -548,3 +548,4 @@ gSpecials::
 	def_special CheckIfNatureModIsSame
 	def_special BufferNatureName
 	def_special ChangeNatureMod
+	def_special IsSelectedMonNicknamedOrNotEnglish

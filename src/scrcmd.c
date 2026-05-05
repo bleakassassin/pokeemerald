@@ -2266,6 +2266,15 @@ bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)
     return FALSE;
 }
 
+bool8 ScrCmd_getmonmetlocation(struct ScriptContext *ctx)
+{
+    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
+
+    if (partyIndex < PARTY_SIZE)
+        gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MET_LOCATION);
+    return FALSE;
+}
+
 static void CloseBrailleWindow(void)
 {
     ClearStdWindowAndFrame(sBrailleWindowId, TRUE);

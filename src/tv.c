@@ -3384,6 +3384,11 @@ void BufferMonNickname(void)
     StringGet_Nickname(gStringVar1);
 }
 
+bool8 IsSelectedMonNicknamedOrNotEnglish(void)
+{
+    return IsPartyMonNicknamedOrNotEnglish(gSpecialVar_0x8004);
+}
+
 void IsMonOTIDNotPlayers(void)
 {
     if (GetPlayerIDAsU32() == GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_ID, NULL))

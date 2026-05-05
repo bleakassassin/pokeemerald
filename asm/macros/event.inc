@@ -1568,25 +1568,25 @@
 	.byte \color
 	.endm
 
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro loadhelp text:req
-	.byte SCR_OP_LOADHELP
-	.4byte \text
+	@ Checks if the "Give Nicknames" option is enabled in the Options menu. Stores the result in VAR_RESULT. Skips nickname prompt if it's off.
+	.macro checkgivenicknamesoption
+	.byte SCR_OP_CHECKGIVENICKNAMESOPTION
 	.endm
 
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro unloadhelp
-	.byte SCR_OP_UNLOADHELP
+	@ Gets the location where the player caught the Pokemon in the specified slot of their party.
+	.macro getmonmetlocation slot:req
+	.byte SCR_OP_GETMONMETLOCATION
+	.2byte \slot
 	.endm
 
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro signmsg
 	.byte SCR_OP_SIGNMSG
 	.endm
-
-	@ Checks if the "Give Nicknames" option is enabled in the Options menu. Stores the result in VAR_RESULT. Skips nickname prompt if it's off.
-	.macro checkgivenicknamesoption
-	.byte SCR_OP_CHECKGIVENICKNAMESOPTION
+	
+	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
+	.macro normalmsg
+	.byte SCR_OP_NORMALMSG
 	.endm
 
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.

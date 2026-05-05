@@ -31,6 +31,7 @@ SlateportCity_NameRatersHouse_EventScript_RateMonNickname::
 	specialvar VAR_RESULT, MonOTNameNotPlayer
 	special BufferMonNickname
 	goto_if_eq VAR_RESULT, TRUE, SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT
+SlateportCity_NameRatersHouse_EventScript_CanChangeNickname::
 	msgbox SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, SlateportCity_NameRatersHouse_EventScript_ChangeNickname
 	goto_if_eq VAR_RESULT, NO, SlateportCity_NameRatersHouse_EventScript_DeclineNameRate
@@ -42,6 +43,14 @@ SlateportCity_NameRatersHouse_EventScript_CantRateEgg::
 	end
 
 SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT::
+	checkmodernfatefulencounter VAR_0x8004
+	goto_if_eq VAR_RESULT, TRUE, SlateportCity_NameRatersHouse_EventScript_CantChangeNickname
+	getmonmetlocation VAR_0x8004
+@ 0xFF is METLOC_FATEFUL_ENCOUNTER
+	goto_if_eq VAR_RESULT, 0xFF, SlateportCity_NameRatersHouse_EventScript_CantChangeNickname
+	specialvar VAR_RESULT, IsSelectedMonNicknamedOrNotEnglish
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_NameRatersHouse_EventScript_CanChangeNickname
+SlateportCity_NameRatersHouse_EventScript_CantChangeNickname::
 	msgbox SlateportCity_NameRatersHouse_Text_MagnificentName, MSGBOX_DEFAULT
 	release
 	end
