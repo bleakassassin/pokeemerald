@@ -1028,7 +1028,7 @@ static const struct InGameTrade sIngameTrades[] =
         .heldItem = ITEM_TROPIC_MAIL,
         .mailNum = 1,
         .otName = _("LANE"),
-        .otGender = MALE,
+        .otGender = FEMALE,
         .sheen = 10,
         .requestedSpecies = SPECIES_BELLOSSOM
     },
