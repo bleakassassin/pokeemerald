@@ -285,7 +285,7 @@ BattleFrontier_BattlePikeLobby_Text_ExplainBattlePike:
 	.string "path depends entirely on the luck\l"
 	.string "of the challenger…\p"
 	.string "If you reach the goal, you will be\n"
-	.string "rewarded with BATTLE POINTS.\p"
+	.string "rewarded with Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please have a word with\l"
 	.string "our staff in the big rooms on the way.\p"
@@ -355,13 +355,13 @@ BattleFrontier_BattlePikeLobby_Text_ShallRecordResults:
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints2:
 	.string "To commemorate your completion of\n"
 	.string "the Battle Choice challenge, we award\l"
-	.string "you these BATTLE POINTS…$"
+	.string "you these Battle Points…$"
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_ReachedBattlePointLimit:
 	.string "You appear to have reached the limit\n"
-	.string "for BATTLE POINTS…\p"
-	.string "Please exchange some BATTLE POINTS\n"
+	.string "for Battle Points…\p"
+	.string "Please exchange some Battle Points\n"
 	.string "for prizes, then return…$"
 
 BattleFrontier_BattlePikeLobby_Text_FailedToSaveBeforeQuitting:
@@ -378,7 +378,7 @@ BattleFrontier_BattlePikeLobby_Text_SnatchedVictoryFromQueen:
 
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints:
 	.string "In recognition of your amazing luck,\n"
-	.string "we award you these BATTLE POINTS…$"
+	.string "we award you these Battle Points…$"
 
 BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal:
 	.string "Arrgh! I blew my chance!\n"

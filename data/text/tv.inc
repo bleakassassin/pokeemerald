@@ -2066,10 +2066,10 @@ gTVWhatsNo1InHoennTodayText06::
 
 gTVWhatsNo1InHoennTodayText07::
 	.string "In just one day, {STR_VAR_1} obtained\n"
-	.string "{STR_VAR_2} BATTLE POINTS!\p"
+	.string "{STR_VAR_2} Battle Points!\p"
 	.string "{STR_VAR_1} was later seen wrestling\n"
 	.string "with the choice of exchanging\l"
-	.string "the BATTLE POINTS for a cool item or\l"
+	.string "the Battle Points for a cool item or\l"
 	.string "a nifty interior decoration.\p"
 	.string "The Trainer reportedly was grinning\n"
 	.string "while mulling options.$"

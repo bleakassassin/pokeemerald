@@ -191,7 +191,7 @@ BattleFrontier_Lounge7_Text_LeftTutorIntro:
 	.string "yet cute moves.\p"
 	.string "But my lessons don't come free.\n"
 	.string "How about paying for the moves I teach\l"
-	.string "with a wee bit of BATTLE POINTS?$"
+	.string "with a wee bit of Battle Points?$"
 
 BattleFrontier_Lounge7_Text_LeftTutorWelcomeBack:
 	.string "Buhahaha!\p"
@@ -204,7 +204,7 @@ BattleFrontier_Lounge7_Text_TeachWhichMove:
 
 BattleFrontier_Lounge7_Text_MoveWillBeXBattlePoints:
 	.string "The move {STR_VAR_1}, is it?\n"
-	.string "That will be {STR_VAR_2} BATTLE POINTS, okay?$"
+	.string "That will be {STR_VAR_2} Battle Points, okay?$"
 
 BattleFrontier_Lounge7_Text_TeachMoveToWhichMon:
 	.string "Fine, fine, now pick the Pokémon\n"
@@ -212,11 +212,11 @@ BattleFrontier_Lounge7_Text_TeachMoveToWhichMon:
 
 BattleFrontier_Lounge7_Text_HaventGotEnoughPoints:
 	.string "What the…\n"
-	.string "You haven't got enough BATTLE POINTS!$"
+	.string "You haven't got enough Battle Points!$"
 
 BattleFrontier_Lounge7_Text_IllTakeBattlePoints:
 	.string "Do you see how skilled I am now?\n"
-	.string "I'll take your BATTLE POINTS, thanks!$"
+	.string "I'll take your Battle Points, thanks!$"
 
 BattleFrontier_Lounge7_Text_YouDontWantTo:
 	.string "What's that?\n"
@@ -240,7 +240,7 @@ BattleFrontier_Lounge7_Text_RightTutorIntro:
 	.string "yet pretty moves.\p"
 	.string "But my lessons don't come free.\n"
 	.string "How about paying for the moves I teach\l"
-	.string "with a wee bit of BATTLE POINTS?$"
+	.string "with a wee bit of Battle Points?$"
 
 BattleFrontier_Lounge7_Text_RightTutorWelcomeBack:
 	.string "Ihihihi!\p"

@@ -1682,9 +1682,9 @@ static void MoveSelectionDisplayMoveDescription(void)
     u16 power = gBattleMoves[move].power;
     u16 accuracy = gBattleMoves[move].accuracy;
     u8 powerValue[3], accuracyValue[3];
-    u8 powerDescription[9] = _("POWER: ");
-    u8 accuracyDescription[14] = _("{CLEAR_TO 0x48}ACCURACY: ");
-    u8 accuracyDescCategory[14] = _("{CLEAR_TO 0x53}ACCURACY: ");
+    u8 powerDescription[9] = _("Power: ");
+    u8 accuracyDescription[14] = _("{CLEAR_TO 0x48}Accuracy: ");
+    u8 accuracyDescCategory[14] = _("{CLEAR_TO 0x53}Accuracy: ");
 
     if (gSaveBlock2Ptr->optionsAttackStyle == OPTIONS_ATTACK_STYLE_CATEGORY && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)))
     {
@@ -1720,7 +1720,7 @@ static void MoveSelectionDisplayMoveDescription(void)
 
     if (isCategory == TRUE)
     {
-        u8 categoryDescription[12] = _("CATEGORY: ");
+        u8 categoryDescription[12] = _("Category: ");
 
         StringAppend(gDisplayedStringBattle, categoryDescription);
         StringAppend(gDisplayedStringBattle, gCategoryNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].category]);

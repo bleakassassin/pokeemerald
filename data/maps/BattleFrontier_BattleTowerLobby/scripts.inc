@@ -1163,7 +1163,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainSinglesChallenge:
 	.string "In each of the Single Battle Rooms,\n"
 	.string "seven Trainers await your challenge.\p"
 	.string "If you manage to defeat all seven,\n"
-	.string "you will earn BATTLE POINTS.\p"
+	.string "you will earn Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -1193,7 +1193,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainDoublesChallenge:
 	.string "In each of the Double Battle Rooms,\n"
 	.string "seven Trainers await your challenge.\p"
 	.string "If you manage to defeat all seven,\n"
-	.string "you will earn BATTLE POINTS.\p"
+	.string "you will earn Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -1231,7 +1231,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainMultisChallenge:
 	.string "In the Multi Battle Room, seven\n"
 	.string "tag teams await your challenge.\p"
 	.string "If you manage to defeat all seven\n"
-	.string "teams, you will earn BATTLE POINTS.\p"
+	.string "teams, you will earn Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -1331,10 +1331,10 @@ BattleFrontier_BattleTowerLobby_Text_CongratsDefeatedMaiden:
 
 BattleFrontier_BattleTowerLobby_Text_AwardYouTheseBattlePoints:
 	.string "In recognition of your infinite talent,\n"
-	.string "we award you these BATTLE POINTS.$"
+	.string "we award you these Battle Points.$"
 
 BattleFrontier_Text_ObtainedXBattlePoints:
-	.string "{PLAYER} obtained {STR_VAR_1} BATTLE POINTS.$"
+	.string "{PLAYER} obtained {STR_VAR_1} Battle Points.$"
 
 BattleFrontier_BattleTowerLobby_Text_RulesAreListed:
 	.string "The Battle Tower rules are listed.$"

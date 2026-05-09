@@ -372,7 +372,7 @@ VerdanturfTown_BattleTentLobby_Text_ExplainBasicRules:
 	.string "battle by themselves.\p"
 	.string "Unlike in the wild, Pokémon that live\n"
 	.string "with people behave differently\l"
-	.string "depending on their NATURE.$"
+	.string "depending on their Nature.$"
 
 @ Unused
 VerdanturfTown_BattleTentLobby_Text_ExplainNatureRules:

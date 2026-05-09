@@ -253,8 +253,8 @@ static const u8 sGreenShardDesc[] = _(
 
 static const u8 sAbilityCapsuleDesc[] = _(
     "A capsule that\n"
-    "swaps the ABILITY\n"
-    "of a POKéMON.");
+    "swaps the Ability\n"
+    "of a Pokémon.");
 
 // Vitamins
 static const u8 sHPUpDesc[] = _(

@@ -473,9 +473,9 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 
 const u8 gCategoryNames[NUMBER_OF_CATEGORIES][11] =
 {
-    [CATEGORY_PHYSICAL] = _("PHYSICAL"),
-    [CATEGORY_SPECIAL] = _("SPECIAL"),
-    [CATEGORY_STATUS] = _("STATUS"),
+    [CATEGORY_PHYSICAL] = _("Physical"),
+    [CATEGORY_SPECIAL] = _("Special"),
+    [CATEGORY_STATUS] = _("Status"),
 };
 
 // This is a factor in how much money you get for beating a trainer.

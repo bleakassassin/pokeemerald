@@ -342,7 +342,7 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge:
 	.string "one of your rental Pokémon.\p"
 	.string "Repeat this cycle of battling and\n"
 	.string "trading--if you win seven times in\l"
-	.string "a row, you will earn BATTLE POINTS.\p"
+	.string "a row, you will earn Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save, you will be\n"
@@ -386,14 +386,14 @@ BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins:
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak:
 	.string "In recognition of your 7-win streak,\n"
-	.string "we award you these BATTLE POINTS.$"
+	.string "we award you these Battle Points.$"
 
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints:
 	.string "Oh, oh, oh!\p"
-	.string "Your BATTLE POINTS are maxed.\p"
+	.string "Your Battle Points are maxed.\p"
 	.string "Please come back after using\n"
-	.string "some BATTLE POINTS.$"
+	.string "some Battle Points.$"
 
 BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume:
 	.string "We've been waiting for you!\p"
@@ -438,7 +438,7 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge:
 	.string "one of your rental Pokémon.\p"
 	.string "Repeat this cycle of battling and\n"
 	.string "trading--if you win seven times in\l"
-	.string "a row, you will earn BATTLE POINTS.\p"
+	.string "a row, you will earn Battle Points.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -452,7 +452,7 @@ BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead:
 BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints:
 	.string "In recognition of your wealth of\n"
 	.string "knowledge and keen intelligence,\l"
-	.string "we award you these BATTLE POINTS.$"
+	.string "we award you these Battle Points.$"
 
 BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave:
 	.string "Let me exchange your Pokémon\n"

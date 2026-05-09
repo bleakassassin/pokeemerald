@@ -724,38 +724,38 @@ BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
 	.string "Please choose a prize from this list.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WelcomeNatureMod:
-	.string "Hello, this is the EXCHANGE SERVICE\n"
-	.string "CORNER.\p"
-	.string "Here, you can redeem 50 BATTLE POINTS\n"
-	.string "to change the effect of NATURE on the\l"
-	.string "stats of one of your POKéMON.$"
+	.string "Hello, this is the Exchange Service\n"
+	.string "Corner.\p"
+	.string "Here, you can redeem 50 Battle Points\n"
+	.string "to change the effect of Nature on the\l"
+	.string "stats of one of your Pokémon.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_UnfortunatelyNotEnoughPoints:
 	.string "Unfortunately, it appears you don't\n"
-	.string "have enough BATTLE POINTS…\p"
+	.string "have enough Battle Points…\p"
 	.string "Please visit us when you have\n"
-	.string "saved up enough BATTLE POINTS.$"
+	.string "saved up enough Battle Points.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PleaseChooseNature:
-	.string "Please choose the NATURE whose effect\n"
-	.string "you'd like to give to your POKéMON.$"
+	.string "Please choose the Nature whose effect\n"
+	.string "you'd like to give to your Pokémon.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ChoosePokemonNature:
-	.string "Please choose the POKéMON you want to\n"
-	.string "have the stat effects of this NATURE.$"
+	.string "Please choose the Pokémon you want to\n"
+	.string "have the stat effects of this Nature.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CantChangeNatureEgg:
-	.string "EGGS are ineligible to receive the\n"
-	.string "the stat effects of NATURES.$"
+	.string "Eggs are ineligible to receive the\n"
+	.string "the stat effects of Natures.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_AlreadyHasNatureEffects:
-	.string "It appears your POKéMON already has\n"
-	.string "the effects of that NATURE.$"
+	.string "It appears your Pokémon already has\n"
+	.string "the effects of that Nature.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_NatureModToPokemon:
 	.string "You'd like your {STR_VAR_1} to have the\n"
-	.string "stat effects of the {STR_VAR_2} NATURE?\l"
-	.string "That will be 50 BATTLE POINTS.$"
+	.string "stat effects of the {STR_VAR_2} Nature?\l"
+	.string "That will be 50 Battle Points.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PleaseWaitAMoment:
 	.string "Thank you!\n"
@@ -763,11 +763,11 @@ BattleFrontier_ExchangeServiceCorner_Text_PleaseWaitAMoment:
 
 BattleFrontier_ExchangeServiceCorner_Text_NatureModDone:
 	.string "Done! Your {STR_VAR_1} now has the stat\n"
-	.string "changes of the {STR_VAR_2} NATURE.$"
+	.string "changes of the {STR_VAR_2} Nature.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_AnotherNatureMod:
 	.string "Would you like to change the effects\n"
-	.string "of NATURE for more of your POKéMON?$"
+	.string "of Nature for more of your Pokémon?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmPrize:
 	.string "You've chosen the {STR_VAR_1}.\n"
@@ -782,7 +782,7 @@ BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize:
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints:
 	.string "I'm so sorry…\n"
-	.string "You don't have enough BATTLE POINTS…$"
+	.string "You don't have enough Battle Points…$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PCIsFull:
 	.string "I'm so sorry…\n"
@@ -795,7 +795,7 @@ BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt:
 BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints:
 	.string "Thank you very much.\p"
 	.string "Please visit us when you have\n"
-	.string "saved up BATTLE POINTS.$"
+	.string "saved up Battle Points.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls:
 	.string "Oh, they're so nice!\n"
@@ -828,38 +828,38 @@ BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord:
 	.string "Did you know?\p"
 	.string "If you stretch your record at any of\n"
 	.string "the Battle facilities, they start\l"
-	.string "giving you more and more BATTLE POINTS.$"
+	.string "giving you more and more Battle Points.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIntro:
 	.string "Hoho!\n"
-	.string "I'm the HYPER TRAINING EXPERT!\p"
-	.string "If you have any POKéMON at Lv. 50 or\n"
+	.string "I'm the Hyper Training Expert!\p"
+	.string "If you have any Pokémon at Lv. 50 or\n"
 	.string "above, I can train their stats!\p"
 	.string "Each stat I train will cost you 25\n"
-	.string "BATTLE POINTS.\p"
-	.string "I can also HYPER TRAIN all of your\n"
-	.string "POKéMON's stats at once if you have\l"
-	.string "the BATTLE POINTS to spare.\p"
-	.string "I can assure you that your POKéMON will\n"
+	.string "Battle Points.\p"
+	.string "I can also Hyper Train all of your\n"
+	.string "Pokémon's stats at once if you have\l"
+	.string "the Battle Points to spare.\p"
+	.string "I can assure you that your Pokémon will\n"
 	.string "come out of it in tip-top shape!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WannaHyperTrain:
-	.string "What do you say? Want your POKéMON to\n"
-	.string "go through some HYPER TRAINING?$"
+	.string "What do you say? Want your Pokémon to\n"
+	.string "go through some Hyper Training?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingWhichMon:
-	.string "Which POKéMON do you want me to HYPER\n"
-	.string "TRAIN?$"
+	.string "Which Pokémon do you want me to Hyper\n"
+	.string "Train?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingPickStat:
 	.string "Which stat needs training?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingDeclined:
 	.string "Come back anytime you're ready for\n"
-	.string "some HYPER TRAINING!$"
+	.string "some Hyper Training!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingEgg:
-	.string "An EGG?!\n"
+	.string "An Egg?!\n"
 	.string "How am I supposed to train that?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingLowLevel:
@@ -871,18 +871,18 @@ BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingIVsMaxed:
 	.string "All of its stats are in peak condition!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingNotEnoughBP:
-	.string "You don't have enough BATTLE POINTS!\n"
-	.string "I need 25 BATTLE POINTS to train a stat.$"
+	.string "You don't have enough Battle Points!\n"
+	.string "I need 25 Battle Points to train a stat.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseXStat:
 	.string "You want me to raise your {STR_VAR_1}'s\n"
 	.string "{STR_VAR_2}, then?\l"
-	.string "That will cost 25 BATTLE POINTS.$"
+	.string "That will cost 25 Battle Points.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingRaiseAllStats:
 	.string "You want me to raise all of your\n"
 	.string "{STR_VAR_1}'s stats, then?\p"
-	.string "That will cost {STR_VAR_3} BATTLE POINTS.$"
+	.string "That will cost {STR_VAR_3} Battle Points.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingStatMaxed:
 	.string "That stat is already in peak condition!\n"
@@ -896,7 +896,7 @@ BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingDone:
 	.string "Your {STR_VAR_1} looks mightily trained.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DoMoreHyperTraining:
-	.string "Want to do some more HYPER TRAINING?$"
+	.string "Want to do some more Hyper Training?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc::
 	.string "A large poster with a Smoochum print.$"
@@ -972,8 +972,8 @@ BattleFrontier_ExchangeServiceCorner_Text_RareCandyDesc::
 	.string "Raises the level of a Pokémon by one.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_AbilityCapsuleDesc::
-	.string "A capsule that swaps the ABILITY of\n"
-	.string "a POKéMON.$"
+	.string "A capsule that swaps the Ability of\n"
+	.string "a Pokémon.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LiechiBerryDesc::
 	.string "A hold item that raises Attack in a\n"
@@ -1004,11 +1004,11 @@ BattleFrontier_ExchangeServiceCorner_Text_StarfBerryDesc::
 	.string "stat in a pinch.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_UpGradeDesc::
-	.string "A peculiar box made by SILPH CO.$"
+	.string "A peculiar box made by Silph Co.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DragonScaleDesc::
-	.string "A strange scale held by DRAGON-type\n"
-	.string "POKéMON.$"
+	.string "A strange scale held by Dragon-type\n"
+	.string "Pokémon.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_EverstoneDesc::
 	.string "A wondrous hold item that prevents\n"
@@ -1027,7 +1027,7 @@ BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
 	.string "lowered stat.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc::
-	.string "A hold item that snaps POKéMON out\n"
+	.string "A hold item that snaps Pokémon out\n"
 	.string "of infatuation.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc::
@@ -1063,84 +1063,84 @@ BattleFrontier_ExchangeServiceCorner_Text_SootheBellDesc::
 	.string "fosters friendship.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LonelyDesc::
-	.string "Up: ATTACK\n"
-	.string "Down: DEFENSE$"
+	.string "Up: Attack\n"
+	.string "Down: Defense$"
 
 BattleFrontier_ExchangeServiceCorner_Text_AdamantDesc::
-	.string "Up: ATTACK\n"
-	.string "Down: SP. ATK$"
+	.string "Up: Attack\n"
+	.string "Down: Sp. Atk$"
 
 BattleFrontier_ExchangeServiceCorner_Text_NaughtyDesc::
-	.string "Up: ATTACK\n"
-	.string "Down: SP. DEF$"
+	.string "Up: Attack\n"
+	.string "Down: Sp. Def$"
 
 BattleFrontier_ExchangeServiceCorner_Text_BraveDesc::
-	.string "Up: ATTACK\n"
-	.string "Down: SPEED$"
+	.string "Up: Attack\n"
+	.string "Down: Speed$"
 
 BattleFrontier_ExchangeServiceCorner_Text_BoldDesc::
-	.string "Up: DEFENSE\n"
-	.string "Down: ATTACK$"
+	.string "Up: Defense\n"
+	.string "Down: Attack$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ImpishDesc::
-	.string "Up: DEFENSE\n"
-	.string "Down: SP. ATK$"
+	.string "Up: Defense\n"
+	.string "Down: Sp. Atk$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LaxDesc::
-	.string "Up: DEFENSE\n"
-	.string "Down: SP. DEF$"
+	.string "Up: Defense\n"
+	.string "Down: Sp. Def$"
 
 BattleFrontier_ExchangeServiceCorner_Text_RelaxedDesc::
-	.string "Up: DEFENSE\n"
-	.string "Down: SPEED$"
+	.string "Up: Defense\n"
+	.string "Down: Speed$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ModestDesc::
-	.string "Up: SP. ATK\n"
-	.string "Down: ATTACK$"
+	.string "Up: Sp. Atk\n"
+	.string "Down: Attack$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MildDesc::
-	.string "Up: SP. ATK\n"
-	.string "Down: DEFENSE$"
+	.string "Up: Sp. Atk\n"
+	.string "Down: Defense$"
 
 BattleFrontier_ExchangeServiceCorner_Text_RashDesc::
-	.string "Up: SP. ATK\n"
-	.string "Down: SP. DEF$"
+	.string "Up: Sp. Atk\n"
+	.string "Down: Sp. Def$"
 
 BattleFrontier_ExchangeServiceCorner_Text_QuietDesc::
-	.string "Up: SP. ATK\n"
-	.string "Down: SPEED$"
+	.string "Up: Sp. Atk\n"
+	.string "Down: Speed$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CalmDesc::
-	.string "Up: SP. DEF\n"
-	.string "Down: ATTACK$"
+	.string "Up: Sp. Def\n"
+	.string "Down: Attack$"
 
 BattleFrontier_ExchangeServiceCorner_Text_GentleDesc::
-	.string "Up: SP. DEF\n"
-	.string "Down: DEFENSE$"
+	.string "Up: Sp. Def\n"
+	.string "Down: Defense$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CarefulDesc::
-	.string "Up: SP. DEF\n"
-	.string "Down: SP. ATK$"
+	.string "Up: Sp. Def\n"
+	.string "Down: Sp. Atk$"
 
 BattleFrontier_ExchangeServiceCorner_Text_SassyDesc::
-	.string "Up: SP. DEF\n"
-	.string "Down: SPEED$"
+	.string "Up: Sp. Def\n"
+	.string "Down: Speed$"
 
 BattleFrontier_ExchangeServiceCorner_Text_TimidDesc::
-	.string "Up: SPEED\n"
-	.string "Down: ATTACK$"
+	.string "Up: Speed\n"
+	.string "Down: Attack$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HastyDesc::
-	.string "Up: SPEED\n"
-	.string "Down: DEFENSE$"
+	.string "Up: Speed\n"
+	.string "Down: Defense$"
 
 BattleFrontier_ExchangeServiceCorner_Text_JollyDesc::
-	.string "Up: SPEED\n"
-	.string "Down: SP. ATK$"
+	.string "Up: Speed\n"
+	.string "Down: Sp. Atk$"
 
 BattleFrontier_ExchangeServiceCorner_Text_NaiveDesc::
-	.string "Up: SPEED\n"
-	.string "Down: SP. DEF$"
+	.string "Up: Speed\n"
+	.string "Down: Sp. Def$"
 
 BattleFrontier_ExchangeServiceCorner_Text_SeriousDesc::
 	.string "Up: None\n"

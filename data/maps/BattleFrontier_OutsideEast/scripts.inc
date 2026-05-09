@@ -382,7 +382,7 @@ BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower:
 
 BattleFrontier_OutsideEast_Text_EnoughBattlePointsForDoll:
 	.string "Yes!\n"
-	.string "I've finally got enough BATTLE POINTS!\p"
+	.string "I've finally got enough Battle Points!\p"
 	.string "I guess I'll trade for another giant\n"
 	.string "plush doll!$"
 

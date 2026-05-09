@@ -314,7 +314,7 @@ BattleFrontier_Lounge3_Text_HowAboutEnteringEventForMe::
 BattleFrontier_Lounge3_Text_SpotMeSomeBattlePoints::
 	.string "All right, that's perfect.\n"
 	.string "So, uh… How about spotting me some\l"
-	.string "of your BATTLE POINTS?\p"
+	.string "of your Battle Points?\p"
 	.string "Trust me, I'll show you my gratitude\n"
 	.string "afterward.$"
 
@@ -324,7 +324,7 @@ BattleFrontier_Lounge3_Text_HowMuchCanYouSpot::
 
 BattleFrontier_Lounge3_Text_YouDontHaveEnoughPoints::
 	.string "Oh, no, no, no!\n"
-	.string "You don't have enough BATTLE POINTS!\p"
+	.string "You don't have enough Battle Points!\p"
 	.string "I wish you wouldn't monkey around and\n"
 	.string "waste everyone's time!$"
 
@@ -420,7 +420,7 @@ BattleFrontier_Lounge3_Text_NiceTryCantReturnPoints::
 	.string "Oh, it's you…\n"
 	.string "Nice try…\p"
 	.string "I hate to break it to you, but I can't\n"
-	.string "return your BATTLE POINTS…\p"
+	.string "return your Battle Points…\p"
 	.string "I guess we'll have to let it motivate\n"
 	.string "us to try harder next time!$"
 
@@ -430,12 +430,12 @@ BattleFrontier_Lounge3_Text_HelloChampHeresYourPoints::
 	.string "I knew you could!\n"
 	.string "I knew you would!\l"
 	.string "We're both big winners!\p"
-	.string "I'll return your BATTLE POINTS and,\n"
+	.string "I'll return your Battle Points and,\n"
 	.string "of course, a little extra from me!$"
 
 BattleFrontier_Lounge3_Text_ObtainedBattlePoints::
 	.string "{PLAYER} obtained\n"
-	.string "{STR_VAR_1} BATTLE POINTS.$"
+	.string "{STR_VAR_1} Battle Points.$"
 
 BattleFrontier_Lounge3_Text_ThinkOfMeForAnotherChallenge::
 	.string "If you're up for another challenge,\n"
