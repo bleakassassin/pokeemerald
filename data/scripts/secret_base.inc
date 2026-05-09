@@ -131,7 +131,6 @@ SecretBase_EventScript_SetAsBase::
 	closemessage
 	setflag FLAG_RECEIVED_SECRET_POWER
 	special EnterNewlyCreatedSecretBase
-	waitstate
 	end
 
 SecretBase_Movement_EnterBase:
@@ -584,7 +583,6 @@ SecretBase_EventScript_BattleTrainer::
 	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
-	waitstate
 	call_if_eq VAR_RESULT, B_OUTCOME_DREW, SecretBase_EventScript_DrewSecretBaseBattle
 	call_if_eq VAR_RESULT, B_OUTCOME_WON, SecretBase_EventScript_WonSecretBaseBattle
 	call_if_eq VAR_RESULT, B_OUTCOME_LOST, SecretBase_EventScript_LostSecretBaseBattle

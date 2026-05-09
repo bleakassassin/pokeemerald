@@ -36,7 +36,6 @@ LilycoveCity_ContestHall_EventScript_GiveAnotherPokeblock::
 LilycoveCity_ContestHall_EventScript_ChoosePokeblock::
 	fadescreen FADE_TO_BLACK
 	special OpenPokeblockCaseForContestLady
-	waitstate
 	goto_if_ne VAR_RESULT, 0xFFFF, LilycoveCity_ContestHall_EventScript_GivePokeblock
 	msgbox LilycoveCity_ContestHall_Text_ICantHaveOnePokeblock, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LilycoveCity_ContestHall_EventScript_ChoosePokeblock

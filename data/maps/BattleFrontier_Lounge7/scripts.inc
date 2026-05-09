@@ -26,7 +26,6 @@ BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMove::
 	
 BattleFrontier_Lounge7_EventScript_ChooseLeftTutorMoveWindow::
 	special ShowScrollableMultichoice
-	waitstate
 	copyvar VAR_TEMP_FRONTIER_TUTOR_SELECTION, VAR_RESULT
 	switch VAR_RESULT
 	case 0, BattleFrontier_Lounge7_EventScript_5BP
@@ -94,7 +93,6 @@ BattleFrontier_Lounge7_EventScript_ChooseRightTutorMove::
 	
 BattleFrontier_Lounge7_EventScript_ChooseRightTutorMoveWindow::
 	special ShowScrollableMultichoice
-	waitstate
 	copyvar VAR_TEMP_FRONTIER_TUTOR_SELECTION, VAR_RESULT
 	switch VAR_RESULT
 	case 0, BattleFrontier_Lounge7_EventScript_2BP
@@ -157,7 +155,6 @@ BattleFrontier_Lounge7_EventScript_TeachTutorMove::
 	special CloseBattlePointsWindow
 	special CloseBattleFrontierTutorWindow
 	special ChooseMonForMoveTutor
-	waitstate
 	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_Lounge7_EventScript_CancelChooseMon
 	msgbox BattleFrontier_Lounge7_Text_IllTakeBattlePoints, MSGBOX_DEFAULT
 	copyvar VAR_0x8004, VAR_0x8008

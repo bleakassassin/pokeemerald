@@ -47,13 +47,11 @@ FortreeCity_EventScript_GameboyKid::
 	goto_if_eq VAR_RESULT, NO, FortreeCity_EventScript_ThatsFineThen
 	msgbox FortreeCity_Text_JustChooseThePokemon, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FortreeCity_EventScript_ThatsFineThen
 	copyvar VAR_0x8005, VAR_0x8004
 	setvar VAR_0x8004, 7
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	msgbox FortreeCity_Text_Text_TradeDidntGoThrough, MSGBOX_DEFAULT
 	release
 	end

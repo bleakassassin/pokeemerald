@@ -81,7 +81,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1
 	special ShowFrontierExchangeCornerItemIconWindow
 	special ShowScrollableMultichoice
-	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
 	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_KissPoster
@@ -167,7 +166,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2
 	special ShowFrontierExchangeCornerItemIconWindow
 	special ShowScrollableMultichoice
-	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
 	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_LaprasDoll
@@ -181,7 +179,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2_Regi::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2R
 	special ShowFrontierExchangeCornerItemIconWindow
 	special ShowScrollableMultichoice
-	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
 	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_LaprasDoll
@@ -256,7 +253,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR
 	special ShowFrontierExchangeCornerItemIconWindow
 	special ShowScrollableMultichoice
-	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
 	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Protein
@@ -279,7 +275,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminSilver::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_S
 	special ShowFrontierExchangeCornerItemIconWindow
 	special ShowScrollableMultichoice
-	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
 	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Protein
@@ -303,7 +298,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitaminGold::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR_G
 	special ShowFrontierExchangeCornerItemIconWindow
 	special ShowScrollableMultichoice
-	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
 	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Protein
@@ -422,7 +416,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem::
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR
 	special ShowFrontierExchangeCornerItemIconWindow
 	special ShowScrollableMultichoice
-	waitstate
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
 	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_UpGrade
@@ -559,7 +552,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_MoreHyperTraining::
 	goto_if_le VAR_TEMP_1, 25, BattleFrontier_Lounge7_EventScript_NotEnoughPointsForTraining
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_HyperTrainingWhichMon, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x8006, VAR_0x8004
 	goto_if_eq VAR_0x8006, PARTY_NOTHING_CHOSEN, BattleFrontier_ExchangeServiceCorner_EventScript_HyperTrainingDeclined
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
@@ -665,14 +657,12 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNatureList::
 	setvar VAR_0x8004, SCROLL_MULTI_EXCHANGE_CORNER_NATURE_VENDOR
 	setvar VAR_0x8008, 0
 	special ShowScrollableMultichoice
-	waitstate
 	setvar VAR_0x8008, 1
 	goto_if_ge VAR_RESULT, 21, BattleFrontier_ExchangeServiceCorner_EventScript_CancelNatureMod
 	copyvar VAR_0x8005, VAR_RESULT
 BattleFrontier_ExchangeServiceCorner_EventScript_ReturnToNaturePokemon::
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_ChoosePokemonNature, MSGBOX_DEFAULT
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x8006, VAR_0x8004
 	goto_if_eq VAR_0x8006, PARTY_NOTHING_CHOSEN, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies

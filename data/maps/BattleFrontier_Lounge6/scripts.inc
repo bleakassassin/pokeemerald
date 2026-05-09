@@ -27,7 +27,6 @@ BattleFrontier_Lounge6_EventScript_Trader_Part1::
 
 BattleFrontier_Lounge6_EventScript_Trader_Part2::
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	return
 
@@ -42,7 +41,6 @@ BattleFrontier_Lounge6_EventScript_Trader_Part4::
 	copyvar VAR_0x8005, VAR_0x800A
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	bufferspeciesname STR_VAR_1, VAR_0x8009
 	return
 

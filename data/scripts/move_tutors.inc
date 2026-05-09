@@ -251,7 +251,6 @@ MoveTutor_EventScript_UltimateMoveNotMaxFriendship::
 
 MoveTutor_EventScript_OpenPartyMenu::
 	special ChooseMonForMoveTutor
-	waitstate
 	lock
 	faceplayer
 	return

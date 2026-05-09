@@ -190,7 +190,6 @@ CaveOfOrigin_B4F_EventScript_MewtwoBattle::
 	special RemoveCameraObject
 	setwildbattle SPECIES_MEWTWO, 70
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 11
 	setmaplayoutindex LAYOUT_CAVE_OF_ORIGIN_B4F
 	specialvar VAR_RESULT, GetBattleOutcome

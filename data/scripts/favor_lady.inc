@@ -32,7 +32,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem::
 	fadescreen FADE_TO_BLACK
 	setvar VAR_RESULT, 0
 	special Script_FavorLadyOpenBagMenu
-	waitstate
 	goto_if_eq VAR_RESULT, 0, LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem
 	specialvar VAR_RESULT, Script_DoesFavorLadyLikeItem
 	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_DidntLikeFavorItem
