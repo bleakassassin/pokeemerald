@@ -70,7 +70,7 @@ ContestHall_EventScript_Contest::
 ContestHall_EventScript_SetContestObjects::
 	goto_if_ne VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_LoadPlayerObject
 	special LoadLinkContestPlayerPalettes
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
+	hideobjectat LOCALID_PLAYER, MAP_LITTLEROOT_TOWN
 	call ContestHall_EventScript_CreateAudience
 	end
 
@@ -437,8 +437,8 @@ ContestHall_EventScript_SetExitWarpLinkContest::
 	
 ContestHall_EventScript_LoadPlayerObject::
 	removeobject 14
-	setobjectxy OBJ_EVENT_ID_PLAYER, 10, 7
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
+	setobjectxy LOCALID_PLAYER, 10, 7
+	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
 	call ContestHall_EventScript_CreateAudience
 	return
 

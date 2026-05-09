@@ -125,7 +125,6 @@ AlteringCave_EventScript_LegendaryBird::
 	special CreateEnemyEventMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
-	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
 	specialvar VAR_RESULT, GetBattleOutcome
 	return

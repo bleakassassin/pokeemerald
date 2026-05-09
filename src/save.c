@@ -9,15 +9,16 @@
 #include "load_save.h"
 #include "overworld.h"
 #include "pokemon_storage_system.h"
-#include "main.h"
 #include "trainer_hill.h"
 #include "link.h"
 #include "event_data.h"
+#include "field_specials.h"
 #include "item.h"
 #include "lilycove_lady.h"
 #include "registered_items_menu.h"
 #include "roamer.h"
 #include "save_versions.h"
+#include "script_pokemon_util.h"
 #include "constants/game_stat.h"
 #include "constants/heal_locations.h"
 #include "constants/items.h"
@@ -169,7 +170,7 @@ COMMON_DATA struct SaveSector *gReadWriteSector = NULL; // Pointer to a buffer f
 COMMON_DATA u16 gIncrementalSectorId = 0;
 COMMON_DATA u16 gSaveUnusedVar = 0;
 COMMON_DATA u16 gSaveFileStatus = 0;
-COMMON_DATA void (*gGameContinueCallback)(void) = NULL;
+COMMON_DATA MainCallback gGameContinueCallback = NULL;
 COMMON_DATA struct SaveSectorLocation gRamSaveSectorLocations[NUM_SECTORS_PER_SLOT] = {0};
 COMMON_DATA u16 gSaveUnusedVar2 = 0;
 COMMON_DATA u16 gSaveAttemptStatus = 0;
@@ -907,7 +908,7 @@ bool8 LinkFullSave_SetLastSectorSignature(void)
     return FALSE;
 }
 
-u8 WriteSaveBlock2(void)
+bool8 WriteSaveBlock2(void)
 {
     if (gFlashMemoryPresent != TRUE)
         return TRUE;
@@ -969,7 +970,7 @@ u8 LoadGameSave(u8 saveType)
         TryReadSpecialSaveSector(SECTOR_ID_TRAINER_HILL, (u8 *)gSaveBlock3Ptr);
         CopyPartyAndObjectsFromSave();
         gSaveFileStatus = status;
-        gGameContinueCallback = 0;
+        gGameContinueCallback = NULL;
         break;
     case SAVE_HALL_OF_FAME:
         status = TryLoadSaveSector(SECTOR_ID_HOF_1, gDecompressionBuffer, SECTOR_DATA_SIZE);
@@ -984,7 +985,7 @@ u8 LoadGameSave(u8 saveType)
 u16 GetSaveBlocksPointersBaseOffset(void)
 {
     u16 i, slotOffset;
-    struct SaveSector* sector;
+    struct SaveSector *sector;
 
     sector = gReadWriteSector = &gSaveDataBuffer;
     if (gFlashMemoryPresent != TRUE)
@@ -1066,6 +1067,25 @@ void UpdateSaveVersion(void)
     }
     else if (version == VERSION_SAVE_REFACTOR)
         gSaveBlock2Ptr->encryptionKeyHack = gSaveBlock2Ptr->encryptionKey;
+    if (version <= VERSION_POCKET_ENCRYPTION)
+    {
+        FlagClear(FLAG_RUSTBORO_NPC_TRADE_COMPLETED);
+        FlagClear(FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED);
+        FlagClear(FLAG_FORTREE_NPC_TRADE_COMPLETED);
+        FlagClear(FLAG_BATTLE_FRONTIER_TRADE_DONE);
+        FlagClear(FLAG_HADEN_TRADE_DONE);
+        FlagClear(FLAG_DONTAE_TRADE_DONE);
+        FlagClear(FLAG_REYLEY_TRADE_DONE);
+    }
+    if (version <= VERSION_TRADE_OVERHAUL)
+    {
+        gSpecialVar_0x8004 = gSaveBlock2Ptr->frontier.cardBattlePoints;
+        GiveFrontierBattlePoints(); // Compensation for players who received BP before the increase in BP rewards
+        if (FlagGet(FLAG_CAUGHT_MEW) == TRUE)
+            AddBagItem(ITEM_LUM_BERRY, 1); // Faraway Island Mew didn't hold a Lum Berry before this version
+        if (FlagGet(FLAG_TRAINER_HILL_MON_PRIZE_EXPERT) == TRUE)
+            AddBagItem(ITEM_LUM_BERRY, 1); // Prize Celebi for beating Trainer Hill Expert Mode in 12 minues didn't hold a Lum Berry before this version
+    }
     VarSet(VAR_SAVE_COMPATIBILITY, VERSION_LATEST);
 }
 
@@ -1077,6 +1097,7 @@ static void UpdateVanillaSave(void)
     FlagClear(FLAG_REGISTERED_DRAKE);
     FlagClear(FLAG_REGISTERED_WALLACE);
     FlagSet(FLAG_HIDE_MEW_CAVE_OF_ORIGIN);
+    FlagClear(FLAG_BATTLE_FRONTIER_TRADE_DONE);
 
     gSaveBlock1Ptr->registeredItems[0] = MapRegisteredItem(gSaveBlock1Ptr->registeredItem);
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
@@ -1297,14 +1318,14 @@ void MoveItemsToCorrectPocket(void)
 
     for (i = 0; i < BAG_MEDICINE_COUNT; i++) // BAG_MEDICINE_COUNT is the same as BAG_KEYITEMS_COUNT (30)
     {
-        if (ItemId_GetPocket(medicine->itemSlots[i].itemId) != POCKET_MEDICINE) // Check for items moved to new pockets
+        if (GetItemPocket(medicine->itemSlots[i].itemId) != POCKET_MEDICINE) // Check for items moved to new pockets
         {
             AddBagItem(medicine->itemSlots[i].itemId, medicine->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
             medicine->itemSlots[i].itemId =  ITEM_NONE;
             medicine->itemSlots[i].quantity =  0 ^ gSaveBlock2Ptr->encryptionKey;
         }
 
-        if (ItemId_GetPocket(keyitems->itemSlots[i].itemId) != POCKET_KEY_ITEMS) // Check for fossils
+        if (GetItemPocket(keyitems->itemSlots[i].itemId) != POCKET_KEY_ITEMS) // Check for fossils
         {
             AddBagItem(keyitems->itemSlots[i].itemId, keyitems->itemSlots[i].quantity ^ gSaveBlock2Ptr->encryptionKey);
             keyitems->itemSlots[i].itemId =  ITEM_NONE;

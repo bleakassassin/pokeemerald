@@ -56,7 +56,7 @@ static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
 static const u8 sText_PkmnGainedEXP[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} Exp. Points!\p");
 static const u8 sText_EmptyString4[] = _("");
 static const u8 sText_ABoosted[] = _(" a boosted");
-static const u8 sText_PkmnGrewToLv[] = _("{B_BUFF1} grew to\nLV. {B_BUFF2}!{WAIT_SE}\p");
+static const u8 sText_PkmnGrewToLv[] = _("{B_BUFF1} grew to\nLv. {B_BUFF2}!{WAIT_SE}\p");
 static const u8 sText_PkmnLearnedMove[] = _("{B_BUFF1} learned\n{B_BUFF2}!{WAIT_SE}\p");
 static const u8 sText_TryToLearnMove1[] = _("{B_BUFF1} is trying to\nlearn {B_BUFF2}.\p");
 static const u8 sText_TryToLearnMove2[] = _("But, {B_BUFF1} can't learn\nmore than four moves.\p");
@@ -338,7 +338,7 @@ static const u8 sText_ButItFailed[] = _("But it failed!");
 static const u8 sText_ItHurtConfusion[] = _("It hurt itself in its\nconfusion!");
 static const u8 sText_MirrorMoveFailed[] = _("The Mirror Move failed!");
 static const u8 sText_StartedToRain[] = _("It started to rain!");
-static const u8 sText_DownpourStarted[] = _("A downpour started!"); // corresponds to DownpourText in pokegold and pokecrystal and is used by Rain Dance in GSC
+static const u8 sText_RestOfTeamGainedEXP[] = _("The rest of your team gained\nEXP. POINTS!\p");
 static const u8 sText_RainContinues[] = _("Rain continues to fall.");
 static const u8 sText_DownpourContinues[] = _("The downpour continues."); // unused
 static const u8 sText_RainStopped[] = _("The rain stopped.");
@@ -434,7 +434,7 @@ static const u8 sText_SpDef2[] = _("Sp. Def");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
 
-const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
+const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
 {
     [STAT_HP]      = sText_HP2,
     [STAT_ATK]     = sText_Attack2,
@@ -452,7 +452,7 @@ static const u8 sText_PokeblockWasTooSweet[] = _("was too sweet!");
 static const u8 sText_PokeblockWasTooBitter[] = _("was too bitter!");
 static const u8 sText_PokeblockWasTooSour[] = _("was too sour!");
 
-const u8 * const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
+const u8 *const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
 {
     [FLAVOR_SPICY]  = sText_PokeblockWasTooSpicy,
     [FLAVOR_DRY]    = sText_PokeblockWasTooDry,
@@ -517,7 +517,7 @@ static const u8 sText_Trainer2WinText[];
 static const u8 sText_TwoInGameTrainersDefeated[];
 static const u8 sText_Trainer2LoseText[];
 
-const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_START] =
+const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_START] =
 {
     [STRINGID_TRAINER1LOSETEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1LoseText,
     [STRINGID_PKMNGAINEDEXP - BATTLESTRINGS_TABLE_START] = sText_PkmnGainedEXP,
@@ -740,7 +740,7 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
     [STRINGID_ITHURTCONFUSION - BATTLESTRINGS_TABLE_START] = sText_ItHurtConfusion,
     [STRINGID_MIRRORMOVEFAILED - BATTLESTRINGS_TABLE_START] = sText_MirrorMoveFailed,
     [STRINGID_STARTEDTORAIN - BATTLESTRINGS_TABLE_START] = sText_StartedToRain,
-    [STRINGID_DOWNPOURSTARTED - BATTLESTRINGS_TABLE_START] = sText_DownpourStarted,
+    [STRINGID_RESTOFPARTYGAINEDEXP - BATTLESTRINGS_TABLE_START] = sText_RestOfTeamGainedEXP,
     [STRINGID_RAINCONTINUES - BATTLESTRINGS_TABLE_START] = sText_RainContinues,
     [STRINGID_DOWNPOURCONTINUES - BATTLESTRINGS_TABLE_START] = sText_DownpourContinues,
     [STRINGID_RAINSTOPPED - BATTLESTRINGS_TABLE_START] = sText_RainStopped,
@@ -913,7 +913,7 @@ const u16 gNoEscapeStringIds[] =
 const u16 gMoveWeatherChangeStringIds[] =
 {
     [B_MSG_STARTED_RAIN]      = STRINGID_STARTEDTORAIN,
-    [B_MSG_STARTED_DOWNPOUR]  = STRINGID_DOWNPOURSTARTED, // Unused
+    [B_MSG_STARTED_DOWNPOUR]  = STRINGID_RESTOFPARTYGAINEDEXP, // Unused here, renamed/repurposed but not removed
     [B_MSG_WEATHER_FAILED]    = STRINGID_BUTITFAILED,
     [B_MSG_STARTED_SANDSTORM] = STRINGID_SANDSTORMBREWED,
     [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
@@ -1298,7 +1298,7 @@ static const u8 sText_SpAtk[] = _("Sp. Atk");
 static const u8 sText_SpDef[] = _("Sp. Def");
 
 // Unused
-static const u8 * const sStatNamesTable2[] =
+static const u8 *const sStatNamesTable2[] =
 {
     sText_HP, sText_SpAtk, sText_Attack,
     sText_SpDef, sText_Defense, sText_Speed
@@ -1411,7 +1411,7 @@ static const u8 sText_LostToOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} lost t
 static const u8 sText_TiedOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} tied the opponent\n{B_OPPONENT_MON1_NAME} in a Referee's decision!");
 static const u8 sText_RefCommenceBattle[] = _("Referee: {B_PLAYER_MON1_NAME} VS {B_OPPONENT_MON1_NAME}!\nCommence battling!");
 
-const u8 * const gRefereeStringsTable[] =
+const u8 *const gRefereeStringsTable[] =
 {
     [B_MSG_REF_NOTHING_IS_DECIDED] = sText_RefIfNothingIsDecided,
     [B_MSG_REF_THATS_IT]           = sText_RefThatsIt,
@@ -1718,6 +1718,56 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .fgColor = 1,
         .shadowColor = 6,
     },
+    [B_WIN_MOVE_DESCRIPTION] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_DESC_CATEGORY] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_SMALL_NARROW,
+        .x = 0,
+        .y = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_TYPE_SUPER_EFF] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 6,
+        .bgColor = 14,
+        .shadowColor = 5,
+    },
+    [B_WIN_TYPE_NOT_VERY_EFF] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 14,
+        .shadowColor = 3,
+    },
+    [B_WIN_TYPE_NO_EFF] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 7,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
 };
 
 static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
@@ -1950,6 +2000,56 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .fgColor = 2,
         .bgColor = 1,
         .shadowColor = 3,
+    },
+    [B_WIN_MOVE_DESCRIPTION] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_MOVE_DESC_CATEGORY] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_SMALL_NARROW,
+        .x = 0,
+        .y = 0,
+        .speed = 0,
+        .fgColor = 13,
+        .bgColor = 14,
+        .shadowColor = 15,
+    },
+    [B_WIN_TYPE_SUPER_EFF] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 6,
+        .bgColor = 14,
+        .shadowColor = 5,
+    },
+    [B_WIN_TYPE_NOT_VERY_EFF] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NARROW,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 1,
+        .bgColor = 14,
+        .shadowColor = 3,
+    },
+    [B_WIN_TYPE_NO_EFF] = {
+        .fillValue = PIXEL_FILL(0xE),
+        .fontId = FONT_NORMAL,
+        .x = 0,
+        .y = 1,
+        .speed = 0,
+        .fgColor = 7,
+        .bgColor = 14,
+        .shadowColor = 15,
     },
 };
 
@@ -2255,7 +2355,7 @@ void BufferStringBattle(u16 stringID)
 
 u32 BattleStringExpandPlaceholdersToDisplayedString(const u8 *src)
 {
-    BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
+    return BattleStringExpandPlaceholders(src, gDisplayedStringBattle);
 }
 
 static const u8 *TryGetStatusString(u8 *src)
@@ -2288,8 +2388,8 @@ static const u8 *TryGetStatusString(u8 *src)
     return NULL;
 }
 
-#define HANDLE_NICKNAME_STRING_CASE(battlerId, monIndex)                \
-    if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)                     \
+#define HANDLE_NICKNAME_STRING_CASE(battler, monIndex)                \
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)                     \
     {                                                                   \
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                     \
             toCpy = sText_FoePkmnPrefix;                                \
@@ -2427,7 +2527,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
                 StringGet_Nickname(text);
                 toCpy = text;
                 break;
-            case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only battlerId 0/1
+            case B_TXT_ATK_NAME_WITH_PREFIX_MON1: // attacker name with prefix, only battler 0/1
                 HANDLE_NICKNAME_STRING_CASE(gBattlerAttacker,
                                             gBattlerPartyIndexes[GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker))])
                 break;
@@ -2446,13 +2546,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_DEF_NAME_WITH_PREFIX: // target name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gBattlerTarget, gBattlerPartyIndexes[gBattlerTarget])
                 break;
-            case B_TXT_EFF_NAME_WITH_PREFIX: // effect battlerId name with prefix
+            case B_TXT_EFF_NAME_WITH_PREFIX: // effect battler name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gEffectBattler, gBattlerPartyIndexes[gEffectBattler])
                 break;
-            case B_TXT_ACTIVE_NAME_WITH_PREFIX: // active battlerId name with prefix
+            case B_TXT_ACTIVE_NAME_WITH_PREFIX: // active battler name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gActiveBattler, gBattlerPartyIndexes[gActiveBattler])
                 break;
-            case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX: // scripting active battlerId name with prefix
+            case B_TXT_SCR_ACTIVE_NAME_WITH_PREFIX: // scripting active battler name with prefix
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler, gBattlerPartyIndexes[gBattleScripting.battler])
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
@@ -2524,7 +2624,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
             case B_TXT_SCR_ACTIVE_ABILITY: // scripting active ability
                 toCpy = gAbilityNames[sBattlerAbilities[gBattleScripting.battler]];
                 break;
-            case B_TXT_EFF_ABILITY: // effect battlerId ability
+            case B_TXT_EFF_ABILITY: // effect battler ability
                 toCpy = gAbilityNames[sBattlerAbilities[gEffectBattler]];
                 break;
             case B_TXT_TRAINER1_CLASS: // trainer class name

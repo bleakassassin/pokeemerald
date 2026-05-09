@@ -31,12 +31,10 @@ LilycoveCity_DepartmentStore_1F_EventScript_AskTakeQuiz::
 
 LilycoveCity_DepartmentStore_1F_EventScript_ShowQuestion::
 	special QuizLadyShowQuizQuestion
-	waitstate
 	goto LilycoveCity_DepartmentStore_1F_EventScript_CheckQuizTakingState
 
 LilycoveCity_DepartmentStore_1F_EventScript_GetAnswer::
 	special QuizLadyGetPlayerAnswer
-	waitstate
 	goto LilycoveCity_DepartmentStore_1F_EventScript_CheckQuizTakingState
 
 LilycoveCity_DepartmentStore_1F_EventScript_AskQuitQuiz::
@@ -104,7 +102,6 @@ LilycoveCity_DepartmentStore_1F_EventScript_PickPrize::
 	fadescreen FADE_TO_BLACK
 	setvar VAR_RESULT, 0
 	special Script_QuizLadyOpenBagMenu
-	waitstate
 	goto_if_eq VAR_RESULT, 1, LilycoveCity_DepartmentStore_1F_EventScript_WriteQuiz
 	msgbox LilycoveCity_DepartmentStore_1F_Text_QuitChoosingPrize, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LilycoveCity_DepartmentStore_1F_EventScript_DeclineMakeQuiz
@@ -124,7 +121,6 @@ LilycoveCity_DepartmentStore_1F_EventScript_WriteQuiz::
 LilycoveCity_DepartmentStore_1F_EventScript_WriteQuizQuestion::
 	fadescreen FADE_TO_BLACK
 	special QuizLadySetCustomQuestion
-	waitstate
 	goto_if_eq VAR_RESULT, 0, LilycoveCity_DepartmentStore_1F_EventScript_AskQuitWritingQuizQuestion
 	goto LilycoveCity_DepartmentStore_1F_EventScript_FinishMakingQuiz
 	end

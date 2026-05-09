@@ -1,5 +1,3 @@
-.set LOCALID_ATTENDANT, 1
-
 BattleFrontier_BattlePikeLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeLobby_OnWarp
@@ -18,7 +16,7 @@ BattleFrontier_BattlePikeLobby_OnWarp:
 
 BattleFrontier_BattlePikeLobby_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_1, 1
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_GetChallengeStatus::
@@ -123,7 +121,6 @@ BattleFrontier_BattlePikeLobby_EventScript_TryEnterChallenge::
 	copyvar VAR_0x8004, VAR_RESULT
 	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
-	waitstate
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePikeLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
 	switch VAR_RESULT
@@ -198,8 +195,8 @@ BattleFrontier_BattlePikeLobby_EventScript_ShowResults::
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor::
-	applymovement LOCALID_ATTENDANT, BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeLobby_Movement_PlayerWalkToCorridor
+	applymovement LOCALID_PIKE_LOBBY_ATTENDANT, BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor
+	applymovement LOCALID_PLAYER, BattleFrontier_BattlePikeLobby_Movement_PlayerWalkToCorridor
 	waitmovement 0
 	return
 
@@ -263,7 +260,6 @@ BattleFrontier_BattlePikeLobby_EventScript_ExitRules::
 BattleFrontier_BattlePike_EventScript_CloseCurtain::
 	playse SE_PIKE_CURTAIN_CLOSE
 	special CloseBattlePikeCurtain
-	waitstate
 	waitse
 	return
 
@@ -289,7 +285,7 @@ BattleFrontier_BattlePikeLobby_Text_ExplainBattlePike:
 	.string "path depends entirely on the luck\l"
 	.string "of the challenger…\p"
 	.string "If you reach the goal, you will be\n"
-	.string "rewarded with Battle Points.\p"
+	.string "rewarded with BATTLE POINTS.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please have a word with\l"
 	.string "our staff in the big rooms on the way.\p"
@@ -359,13 +355,13 @@ BattleFrontier_BattlePikeLobby_Text_ShallRecordResults:
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints2:
 	.string "To commemorate your completion of\n"
 	.string "the Battle Choice challenge, we award\l"
-	.string "you these Battle Point(s)…$"
+	.string "you these BATTLE POINTS…$"
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_ReachedBattlePointLimit:
 	.string "You appear to have reached the limit\n"
-	.string "for Battle Points…\p"
-	.string "Please exchange some Battle Points\n"
+	.string "for BATTLE POINTS…\p"
+	.string "Please exchange some BATTLE POINTS\n"
 	.string "for prizes, then return…$"
 
 BattleFrontier_BattlePikeLobby_Text_FailedToSaveBeforeQuitting:
@@ -382,7 +378,7 @@ BattleFrontier_BattlePikeLobby_Text_SnatchedVictoryFromQueen:
 
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints:
 	.string "In recognition of your amazing luck,\n"
-	.string "we award you these Battle Point(s)…$"
+	.string "we award you these BATTLE POINTS…$"
 
 BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal:
 	.string "Arrgh! I blew my chance!\n"
@@ -397,9 +393,8 @@ BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer:
 
 BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere:
 	.string "Listen! Listen!\p"
-	.string "Don't you think that the special\n"
-	.string "abilities of Pokémon will be useful\l"
-	.string "here?$"
+	.string "Don't you think that the Abilities\n"
+	.string "of Pokémon will be useful here?$"
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose:

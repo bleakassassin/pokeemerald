@@ -8,10 +8,10 @@
 #define INGAME_TRADE_MAKUHITA 0
 #define INGAME_TRADE_SKITTY 1
 #define INGAME_TRADE_CORSOLA 2
-#define INGAME_TRADE_EEVEE 3
-#define INGAME_TRADE_FARFETCHD 4
-#define INGAME_TRADE_SMOOCHUM 5
-#define INGAME_TRADE_DRATINI 6
+#define INGAME_TRADE_FARFETCHD 3
+#define INGAME_TRADE_LICKITUNG 4
+#define INGAME_TRADE_JYNX 5
+#define INGAME_TRADE_MR_MIME 6
 
 // Return values for CanTradeSelectedMon and CanSpinTradeMon
 #define CAN_TRADE_MON              0

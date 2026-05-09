@@ -6325,7 +6325,7 @@ static const struct TrainerMonItemCustomMoves sParty_WallaceLeader[] = {
     .iv = 250,
     .lvl = 44,
     .species = SPECIES_MILOTIC,
-    .heldItem = ITEM_CHESTO_BERRY,
+    .heldItem = ITEM_SITRUS_BERRY,
     .moves = {MOVE_WATER_PULSE, MOVE_TWISTER, MOVE_RECOVER, MOVE_ICE_BEAM}
     }
 };

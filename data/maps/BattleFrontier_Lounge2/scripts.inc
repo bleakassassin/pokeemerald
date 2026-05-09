@@ -147,10 +147,10 @@ BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
 	.string "One of those top Trainers that Scott\n"
 	.string "calls the Frontier Brains is there.\p"
 	.string "It's this mysterious Trainer called\n"
-	.string "the Salon Maiden that runs the place.$"
+	.string "the Tower Tycoon that runs the place.$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
-	.string "Have you battled the Salon Maiden?\p"
+	.string "Have you battled the Tower Tycoon?\p"
 	.string "When she's measuring up her opponent,\n"
 	.string "she apparently uses these Pokémon:\p"
 	.string "A Psychic-type PSI Pokémon,\n"
@@ -158,7 +158,7 @@ BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
 	.string "and a Normal-type Sleeping Pokémon.$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenGoldMons::
-	.string "Have you battled the Salon Maiden\n"
+	.string "Have you battled the Tower Tycoon\n"
 	.string "when she's serious?\p"
 	.string "When she's battling flat out,\n"
 	.string "she apparently uses these Pokémon:\p"
@@ -245,10 +245,10 @@ BattleFrontier_Lounge2_Text_ArenaTycoonIsThere::
 	.string "One of those top Trainers that Scott\n"
 	.string "calls the Frontier Brains is there.\p"
 	.string "It's this cute Trainer called\n"
-	.string "the Arena Tycoon that runs the place.$"
+	.string "the Arena Chief that runs the place.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
-	.string "Have you battled the Arena Tycoon\n"
+	.string "Have you battled the Arena Chief\n"
 	.string "before?\p"
 	.string "When she's assessing the foe's ability,\n"
 	.string "she supposedly uses these Pokémon:\p"
@@ -257,7 +257,7 @@ BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
 	.string "and a Bug & Ghost Shed Pokémon.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons::
-	.string "Have you battled the Arena Tycoon\n"
+	.string "Have you battled the Arena Chief\n"
 	.string "when she's serious?\p"
 	.string "When she battles for keeps,\n"
 	.string "she supposedly uses these Pokémon:\p"

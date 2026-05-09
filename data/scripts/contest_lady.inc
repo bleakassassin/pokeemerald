@@ -1,5 +1,3 @@
-.set LOCALID_LADYS_MON, 34
-
 LilycoveCity_ContestHall_EventScript_ContestLady::
 	lock
 	faceplayer
@@ -38,7 +36,6 @@ LilycoveCity_ContestHall_EventScript_GiveAnotherPokeblock::
 LilycoveCity_ContestHall_EventScript_ChoosePokeblock::
 	fadescreen FADE_TO_BLACK
 	special OpenPokeblockCaseForContestLady
-	waitstate
 	goto_if_ne VAR_RESULT, 0xFFFF, LilycoveCity_ContestHall_EventScript_GivePokeblock
 	msgbox LilycoveCity_ContestHall_Text_ICantHaveOnePokeblock, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LilycoveCity_ContestHall_EventScript_ChoosePokeblock
@@ -55,7 +52,7 @@ LilycoveCity_ContestHall_EventScript_GivePokeblock::
 	applymovement VAR_LAST_TALKED, LilycoveCity_ContestHall_Movement_LadyFaceMon
 	waitmovement 0
 	delay 60
-	applymovement LOCALID_LADYS_MON, LilycoveCity_ContestHall_Movement_MonFaceLady
+	applymovement LOCALID_CONTEST_LADYS_MON, LilycoveCity_ContestHall_Movement_MonFaceLady
 	waitmovement 0
 	delay 60
 	waitse
@@ -67,7 +64,7 @@ LilycoveCity_ContestHall_EventScript_GivePokeblock::
 
 @ VAR_0x8004 here is the return value from GivePokeblockToContestLady
 LilycoveCity_ContestHall_EventScript_MonEnjoyPokeblock::
-	applymovement LOCALID_LADYS_MON, LilycoveCity_ContestHall_Movement_MonJump
+	applymovement LOCALID_CONTEST_LADYS_MON, LilycoveCity_ContestHall_Movement_MonJump
 	waitmovement 0
 	delay 60
 LilycoveCity_ContestHall_EventScript_FinishFeedPokeblock::
@@ -116,6 +113,8 @@ LilycoveCity_ContestHall_EventScript_GiveTreecko::
 
 LilycoveCity_ContestHall_EventScript_Send3rdStarterParty::
 	call LilycoveCity_ContestHall_EventScript_Received3rdStarter
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, LilycoveCity_ContestHall_EventScript_EnterMoreContests
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_ContestHall_EventScript_EnterMoreContests
 	call Common_EventScript_GetGiftMonPartySlot
@@ -124,6 +123,8 @@ LilycoveCity_ContestHall_EventScript_Send3rdStarterParty::
 
 LilycoveCity_ContestHall_EventScript_Send3rdStarterPC::
 	call LilycoveCity_ContestHall_EventScript_Received3rdStarter
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, LilycoveCity_ContestHall_EventScript_3rdStarterTransferredToPC
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, LilycoveCity_ContestHall_EventScript_3rdStarterTransferredToPC
 	call Common_EventScript_NameReceivedBoxMon

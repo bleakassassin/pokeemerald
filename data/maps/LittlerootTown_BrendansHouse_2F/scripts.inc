@@ -1,5 +1,3 @@
-.set LOCALID_RIVAL, 1
-
 LittlerootTown_BrendansHouse_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_BrendansHouse_2F_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_BrendansHouse_2F_OnWarp
@@ -13,8 +11,8 @@ LittlerootTown_BrendansHouse_2F_OnTransition:
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_SetReadyToMeetBrendan::
-	setobjectxyperm LOCALID_RIVAL, 1, 2
-	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_RIVALS_HOUSE_2F_RIVAL, 1, 2
+	setobjectmovementtype LOCALID_RIVALS_HOUSE_2F_RIVAL, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_BrendansHouse_2F_OnWarp:
@@ -45,7 +43,6 @@ LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC::
 	playse SE_PC_ON
 	msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
 	special BedroomPC
-	waitstate
 	releaseall
 	end
 

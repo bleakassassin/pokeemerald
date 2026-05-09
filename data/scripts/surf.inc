@@ -5,6 +5,7 @@ EventScript_UseSurf::
 	checkpartymove MOVE_SURF
 	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_SurfWildMon
 	clearflag FLAG_SYS_WILD_FIELD_MOVE
+	setflag FLAG_SYS_FAST_SURF
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
@@ -18,5 +19,6 @@ EventScript_ReleaseUseSurf::
 
 EventScript_SurfWildMon::
 	setflag FLAG_SYS_WILD_FIELD_MOVE
+	clearflag FLAG_SYS_FAST_SURF
 	setfieldeffectargument 0, SPECIES_WAILMER
 	goto EventScript_InitSurf

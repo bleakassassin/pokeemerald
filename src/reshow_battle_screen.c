@@ -18,9 +18,9 @@
 
 // this file's functions
 static void CB2_ReshowBattleScreenAfterMenu(void);
-static bool8 LoadBattlerSpriteGfx(u8 battlerId);
-static void CreateBattlerSprite(u8 battlerId);
-static void CreateHealthboxSprite(u8 battlerId);
+static bool8 LoadBattlerSpriteGfx(u8 battler);
+static void CreateBattlerSprite(u8 battler);
+static void CreateHealthboxSprite(u8 battler);
 static void ClearBattleBgCntBaseBlocks(void);
 
 void ReshowBattleScreenDummy(void)
@@ -134,7 +134,8 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
             u8 opponentBattler;
             u16 species;
 
-            LoadAndCreateEnemyShadowSprites();
+            if (gBattleScripting.monCaught != TRUE)
+                LoadAndCreateEnemyShadowSprites();
 
             opponentBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
             species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBattler]], MON_DATA_SPECIES);

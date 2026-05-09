@@ -72,12 +72,14 @@ TrainerHill_Roof_EventScript_GiveKantoStarter::
 	return
 
 TrainerHill_Roof_EventScript_GiveCelebi::
-	givemon SPECIES_CELEBI, 10
+	givemon SPECIES_CELEBI, 10, ITEM_LUM_BERRY
 	return
 
 TrainerHill_Roof_EventScript_SendPrizeMonParty::
 	call TrainerHill_Roof_EventScript_ReceivedPrizeMon
 	goto_if_eq VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CELEBI, TrainerHill_Roof_EventScript_CheckFinalTime
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, TrainerHill_Roof_EventScript_CheckFinalTime
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, TrainerHill_Roof_EventScript_CheckFinalTime
 	call Common_EventScript_GetGiftMonPartySlot
@@ -87,6 +89,8 @@ TrainerHill_Roof_EventScript_SendPrizeMonParty::
 TrainerHill_Roof_EventScript_SendPrizeMonPC::
 	call TrainerHill_Roof_EventScript_ReceivedPrizeMon
 	goto_if_eq VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CELEBI, TrainerHill_Roof_EventScript_PrizeMonTransferredToPC
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, TrainerHill_Roof_EventScript_PrizeMonTransferredToPC
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, TrainerHill_Roof_EventScript_PrizeMonTransferredToPC
 	call Common_EventScript_NameReceivedBoxMon

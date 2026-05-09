@@ -251,6 +251,11 @@ static const u8 sGreenShardDesc[] = _(
     "ancient item. Can\n"
     "be sold cheaply.");
 
+static const u8 sAbilityCapsuleDesc[] = _(
+    "A capsule that\n"
+    "swaps the ABILITY\n"
+    "of a POKéMON.");
+
 // Vitamins
 static const u8 sHPUpDesc[] = _(
     "Raises the base HP\n"
@@ -730,7 +735,7 @@ static const u8 sMachoBraceDesc[] = _(
 
 static const u8 sExpShareDesc[] = _(
     "A hold item that\n"
-    "gets Exp. points\n"
+    "gets Exp. Points\n"
     "from battles.");
 
 static const u8 sQuickClawDesc[] = _(
@@ -805,7 +810,7 @@ static const u8 sFocusBandDesc[] = _(
 
 static const u8 sLuckyEggDesc[] = _(
     "A hold item that\n"
-    "boosts Exp. points\n"
+    "boosts Exp. Points\n"
     "earned in battle.");
 
 static const u8 sScopeLensDesc[] = _(

@@ -1,5 +1,3 @@
-.set LOCALID_SUDOWOODO, 14
-
 BattleFrontier_OutsideEast_MapScripts::
 	map_script MAP_SCRIPT_ON_RESUME, BattleFrontier_OutsideEast_OnResume
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_OutsideEast_OnTransition
@@ -109,7 +107,7 @@ BattleFrontier_OutsideEast_EventScript_Sudowoodo::
 	faceplayer
 	waitse
 	playse SE_SUDOWOODO_SHAKE
-	applymovement LOCALID_SUDOWOODO, BattleFrontier_OutsideEast_Movement_SudowoodoShake
+	applymovement LOCALID_FRONTIER_SUDOWOODO, BattleFrontier_OutsideEast_Movement_SudowoodoShake
 	waitmovement 0
 	release
 	end
@@ -118,10 +116,9 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo::
 	lock
 	faceplayer
 	special DoWateringBerryTreeAnim
-	waitstate
 	waitse
 	playse SE_SUDOWOODO_SHAKE
-	applymovement LOCALID_SUDOWOODO, BattleFrontier_OutsideEast_Movement_SudowoodoShake
+	applymovement LOCALID_FRONTIER_SUDOWOODO, BattleFrontier_OutsideEast_Movement_SudowoodoShake
 	waitmovement 0
 	msgbox gText_Sudowoodo_Attacked, MSGBOX_DEFAULT
 	closemessage
@@ -129,7 +126,7 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo::
 	playmoncry SPECIES_SUDOWOODO, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, LOCALID_SUDOWOODO
+	setvar VAR_LAST_TALKED, LOCALID_FRONTIER_SUDOWOODO
 	setwildbattle SPECIES_SUDOWOODO, 40
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
@@ -385,7 +382,7 @@ BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower:
 
 BattleFrontier_OutsideEast_Text_EnoughBattlePointsForDoll:
 	.string "Yes!\n"
-	.string "I've finally got enough Battle Points!\p"
+	.string "I've finally got enough BATTLE POINTS!\p"
 	.string "I guess I'll trade for another giant\n"
 	.string "plush doll!$"
 

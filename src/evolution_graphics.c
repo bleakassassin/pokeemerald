@@ -38,8 +38,8 @@ static void EndOnPostEvoMon(u8 taskId);
 
 #define TAG_SPARKLE 1001
 
-static const u16 sEvoSparkle_Pal[] = INCBIN_U16("graphics/misc/evo_sparkle.gbapal");
-static const u32 sEvoSparkle_Gfx[] = INCBIN_U32("graphics/misc/evo_sparkle.4bpp.lz");
+static const u16 sEvoSparkle_Pal[] = INCGFX_U16("graphics/misc/evo_sparkle.png", ".gbapal");
+static const u32 sEvoSparkle_Gfx[] = INCGFX_U32("graphics/misc/evo_sparkle.png", ".4bpp.lz");
 
 static const struct CompressedSpriteSheet sEvoSparkleSpriteSheets[] =
 {
@@ -587,7 +587,7 @@ static void Task_CycleEvolutionMonSprite_TryEnd(u8 taskId)
     }
     else
     {
-        gTasks[taskId].tScaleSpeed += 2;
+        gTasks[taskId].tScaleSpeed += 3;
         gTasks[taskId].tShowingPostEvo ^= 1;
         gTasks[taskId].func = Task_CycleEvolutionMonSprite_UpdateSize;
     }

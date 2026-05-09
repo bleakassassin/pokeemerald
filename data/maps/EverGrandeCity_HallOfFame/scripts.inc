@@ -1,5 +1,3 @@
-.set LOCALID_CHAMPION, 1
-
 EverGrandeCity_HallOfFame_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_HallOfFame_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, EverGrandeCity_HallOfFame_OnTransition
@@ -22,7 +20,7 @@ EverGrandeCity_HallOfFame_OnWarp:
 	.2byte 0
 
 EverGrandeCity_HallOfFame_EventScript_TurnPlayerNorth::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 EverGrandeCity_HallOfFame_OnFrame:
@@ -31,25 +29,25 @@ EverGrandeCity_HallOfFame_OnFrame:
 
 EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame::
 	lockall
-	applymovement LOCALID_CHAMPION, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
-	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
+	applymovement LOCALID_HALL_OF_FAME_CHAMPION, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
+	applymovement LOCALID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
 	waitmovement 0
-	applymovement LOCALID_CHAMPION, Common_Movement_WalkInPlaceFasterRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_HALL_OF_FAME_CHAMPION, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_CHAMPION, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
-	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
+	applymovement LOCALID_HALL_OF_FAME_CHAMPION, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
+	applymovement LOCALID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
 	waitmovement 0
 	delay 20
-	applymovement LOCALID_CHAMPION, Common_Movement_WalkInPlaceFasterRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_HALL_OF_FAME_CHAMPION, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_CHAMPION, Common_Movement_WalkInPlaceFasterUp
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_HALL_OF_FAME_CHAMPION, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 20
 	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD
@@ -66,7 +64,6 @@ EverGrandeCity_HallOfFame_EventScript_GameClearMale::
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	fadescreenspeed FADE_TO_BLACK, 24
 	special GameClear
-	waitstate
 	releaseall
 	end
 
@@ -74,7 +71,6 @@ EverGrandeCity_HallOfFame_EventScript_GameClearFemale::
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 	fadescreenspeed FADE_TO_BLACK, 24
 	special GameClear
-	waitstate
 	releaseall
 	end
 

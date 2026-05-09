@@ -1,5 +1,3 @@
-.set LOCALID_RIVAL, 1
-
 LittlerootTown_MaysHouse_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_MaysHouse_2F_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_MaysHouse_2F_OnWarp
@@ -13,8 +11,8 @@ LittlerootTown_MaysHouse_2F_OnTransition:
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay::
-	setobjectxyperm LOCALID_RIVAL, 7, 2
-	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_UP
+	setobjectxyperm LOCALID_RIVALS_HOUSE_2F_RIVAL, 7, 2
+	setobjectmovementtype LOCALID_RIVALS_HOUSE_2F_RIVAL, MOVEMENT_TYPE_FACE_UP
 	return
 
 LittlerootTown_MaysHouse_2F_OnWarp:
@@ -49,6 +47,8 @@ RivalsHouse_2F_EventScript_GiveMudkip::
 
 RivalsHouse_2F_EventScript_SendRivalStarterParty::
 	call RivalsHouse_2F_EventScript_ReceivedRivalStarter
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, RivalsHouse_2F_EventScript_AddedRivalStarter
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RivalsHouse_2F_EventScript_AddedRivalStarter
 	call Common_EventScript_GetGiftMonPartySlot
@@ -57,6 +57,8 @@ RivalsHouse_2F_EventScript_SendRivalStarterParty::
 
 RivalsHouse_2F_EventScript_SendRivalStarterPC::
 	call RivalsHouse_2F_EventScript_ReceivedRivalStarter
+	goto_if_eq VAR_RESULT, OFF, RivalsHouse_2F_EventScript_RivalStarterTransferredToPC
+	checkgivenicknamesoption
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RivalsHouse_2F_EventScript_RivalStarterTransferredToPC
 	call Common_EventScript_NameReceivedBoxMon
@@ -107,13 +109,13 @@ RivalsHouse_2F_EventScript_May::
 	msgbox RivalsHouse_2F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
 	goto_if_eq VAR_FACING, DIR_EAST, RivalsHouse_2F_EventScript_MeetMayEast
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	applymovement LOCALID_PLAYER, Common_Movement_FaceLeft
 	applymovement VAR_LAST_TALKED, RivalsHouse_2F_Movement_MayGoDownstairs
 	waitmovement 0
 	return
 
 RivalsHouse_2F_EventScript_MeetMayEast::
-	applymovement OBJ_EVENT_ID_PLAYER, RivalsHouse_2F_Movement_PlayerWatchMayEast
+	applymovement LOCALID_PLAYER, RivalsHouse_2F_Movement_PlayerWatchMayEast
 	applymovement VAR_LAST_TALKED, RivalsHouse_2F_Movement_MayGoDownstairsEast
 	waitmovement 0
 	return
@@ -160,13 +162,13 @@ RivalsHouse_2F_EventScript_Brendan::
 	msgbox RivalsHouse_2F_Text_BrendanWhoAreYou, MSGBOX_DEFAULT
 	closemessage
 	goto_if_eq VAR_FACING, DIR_WEST, RivalsHouse_2F_EventScript_MeetBrendanWest
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceRight
+	applymovement LOCALID_PLAYER, Common_Movement_FaceRight
 	applymovement VAR_LAST_TALKED, RivalsHouse_2F_Movement_BrendanGoDownstairs
 	waitmovement 0
 	return
 
 RivalsHouse_2F_EventScript_MeetBrendanWest::
-	applymovement OBJ_EVENT_ID_PLAYER, RivalsHouse_2F_Movement_PlayerWatchBrendanWest
+	applymovement LOCALID_PLAYER, RivalsHouse_2F_Movement_PlayerWatchBrendanWest
 	applymovement VAR_LAST_TALKED, RivalsHouse_2F_Movement_BrendanGoDownstairsWest
 	waitmovement 0
 	return
@@ -247,7 +249,6 @@ LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC::
 	playse SE_PC_ON
 	msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
 	special BedroomPC
-	waitstate
 	releaseall
 	end
 

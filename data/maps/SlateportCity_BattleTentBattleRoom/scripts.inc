@@ -1,5 +1,3 @@
-.set LOCALID_OPPONENT, 2
-
 SlateportCity_BattleTentBattleRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, SlateportCity_BattleTentBattleRoom_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_BattleTentBattleRoom_OnFrame
@@ -11,9 +9,9 @@ SlateportCity_BattleTentBattleRoom_OnWarp:
 
 SlateportCity_BattleTentBattleRoom_EventScript_SetUpObjects::
 	setvar VAR_TEMP_1, 1
-	setobjectxy OBJ_EVENT_ID_PLAYER, 4, 8
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
-	hideobjectat LOCALID_OPPONENT, MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
+	setobjectxy LOCALID_PLAYER, 4, 8
+	applymovement LOCALID_PLAYER, Common_Movement_FaceUp
+	hideobjectat LOCALID_SLATEPORT_TENT_BATTLE_OPPONENT, MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM
 	end
 
 SlateportCity_BattleTentBattleRoom_OnFrame:
@@ -22,14 +20,14 @@ SlateportCity_BattleTentBattleRoom_OnFrame:
 
 SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
 	special SpawnCameraObject
-	setobjectxyperm OBJ_EVENT_ID_CAMERA, 4, 4
-	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_BattleTentBattleRoom_Movement_PlayerEnter
+	setobjectxyperm LOCALID_CAMERA, 4, 4
+	applymovement LOCALID_PLAYER, SlateportCity_BattleTentBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	factory_setopponentgfx
-	setobjectxyperm LOCALID_OPPONENT, 5, 1
-	removeobject LOCALID_OPPONENT
-	addobject LOCALID_OPPONENT
-	applymovement LOCALID_OPPONENT, SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter
+	setobjectxyperm LOCALID_SLATEPORT_TENT_BATTLE_OPPONENT, 5, 1
+	removeobject LOCALID_SLATEPORT_TENT_BATTLE_OPPONENT
+	addobject LOCALID_SLATEPORT_TENT_BATTLE_OPPONENT
+	applymovement LOCALID_SLATEPORT_TENT_BATTLE_OPPONENT, SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 	battletent_getopponentintro
 	lockall
@@ -40,7 +38,6 @@ SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
 	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
 	setvar VAR_0x8005, 0
 	special DoSpecialTrainerBattle
-	waitstate
 	switch VAR_RESULT
 	case 1, SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent
 SlateportCity_BattleTent_EventScript_WarpToLobbyLost::

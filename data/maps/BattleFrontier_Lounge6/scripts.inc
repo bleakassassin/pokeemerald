@@ -5,7 +5,7 @@ BattleFrontier_Lounge6_EventScript_Trader::
 	lock
 	faceplayer
 	goto_if_set FLAG_BATTLE_FRONTIER_TRADE_DONE, BattleFrontier_Lounge6_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_EEVEE
+	setvar VAR_0x8008, INGAME_TRADE_FARFETCHD
 	call BattleFrontier_Lounge6_EventScript_Trader_Part1
 	msgbox BattleFrontier_Lounge6_Text_WouldYouLikeToTrade, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_DeclineTrade
@@ -27,7 +27,6 @@ BattleFrontier_Lounge6_EventScript_Trader_Part1::
 
 BattleFrontier_Lounge6_EventScript_Trader_Part2::
 	special ChoosePartyMon
-	waitstate
 	copyvar VAR_0x800A, VAR_0x8004
 	return
 
@@ -42,7 +41,6 @@ BattleFrontier_Lounge6_EventScript_Trader_Part4::
 	copyvar VAR_0x8005, VAR_0x800A
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
-	waitstate
 	bufferspeciesname STR_VAR_1, VAR_0x8009
 	return
 
@@ -62,110 +60,110 @@ BattleFrontier_Lounge6_EventScript_TradeCompleted::
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_Kobe::
+BattleFrontier_Lounge6_EventScript_Haden::
 	lock
 	faceplayer
-	goto_if_set FLAG_KOBE_TRADE_DONE, BattleFrontier_Lounge6_EventScript_KobeTradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_FARFETCHD
+	goto_if_set FLAG_HADEN_TRADE_DONE, BattleFrontier_Lounge6_EventScript_HadenTradeCompleted
+	setvar VAR_0x8008, INGAME_TRADE_LICKITUNG
 	call BattleFrontier_Lounge6_EventScript_Trader_Part1
 	msgbox BattleFrontier_Lounge6_Text_IllTradeIfYouWant, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_KobeDeclineTrade
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_HadenDeclineTrade
 	call BattleFrontier_Lounge6_EventScript_Trader_Part2
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge6_EventScript_KobeDeclineTrade
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge6_EventScript_HadenDeclineTrade
 	call BattleFrontier_Lounge6_EventScript_Trader_Part3
-	goto_if_ne VAR_RESULT, VAR_0x8009, BattleFrontier_Lounge6_EventScript_KobeNotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, BattleFrontier_Lounge6_EventScript_HadenNotRequestedMon
 	call BattleFrontier_Lounge6_EventScript_Trader_Part4
 	msgbox BattleFrontier_Lounge6_Text_PleaseBeGoodToMyPokemon, MSGBOX_DEFAULT
-	setflag FLAG_KOBE_TRADE_DONE
+	setflag FLAG_HADEN_TRADE_DONE
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_KobeDeclineTrade::
+BattleFrontier_Lounge6_EventScript_HadenDeclineTrade::
 	msgbox BattleFrontier_Lounge6_Text_YouDontWantToThatsOkay, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_KobeNotRequestedMon::
+BattleFrontier_Lounge6_EventScript_HadenNotRequestedMon::
 	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox BattleFrontier_Lounge6_Text_DoesntLookLikeMonToMe, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_KobeTradeCompleted::
+BattleFrontier_Lounge6_EventScript_HadenTradeCompleted::
 	msgbox BattleFrontier_Lounge6_Text_AnyPokemonCanBeCute, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_Roman::
+BattleFrontier_Lounge6_EventScript_Dontae::
 	lock
 	faceplayer
-	goto_if_set FLAG_ROMAN_TRADE_DONE, BattleFrontier_Lounge6_EventScript_RomanTradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_SMOOCHUM
+	goto_if_set FLAG_DONTAE_TRADE_DONE, BattleFrontier_Lounge6_EventScript_DontaeTradeCompleted
+	setvar VAR_0x8008, INGAME_TRADE_JYNX
 	call BattleFrontier_Lounge6_EventScript_Trader_Part1
 	msgbox BattleFrontier_Lounge6_Text_YouWillTradeWontYou, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_RomanDeclineTrade
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_DontaeDeclineTrade
 	call BattleFrontier_Lounge6_EventScript_Trader_Part2
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge6_EventScript_RomanDeclineTrade
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge6_EventScript_DontaeDeclineTrade
 	call BattleFrontier_Lounge6_EventScript_Trader_Part3
-	goto_if_ne VAR_RESULT, VAR_0x8009, BattleFrontier_Lounge6_EventScript_RomanNotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, BattleFrontier_Lounge6_EventScript_DontaeNotRequestedMon
 	call BattleFrontier_Lounge6_EventScript_Trader_Part4
 	msgbox BattleFrontier_Lounge6_Text_MonYouTakeCare, MSGBOX_DEFAULT
-	setflag FLAG_ROMAN_TRADE_DONE
+	setflag FLAG_DONTAE_TRADE_DONE
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_RomanDeclineTrade::
+BattleFrontier_Lounge6_EventScript_DontaeDeclineTrade::
 	msgbox BattleFrontier_Lounge6_Text_YouWontTradeMe, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_RomanNotRequestedMon::
+BattleFrontier_Lounge6_EventScript_DontaeNotRequestedMon::
 	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox BattleFrontier_Lounge6_Text_ThisIsntAMon, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_RomanTradeCompleted::
+BattleFrontier_Lounge6_EventScript_DontaeTradeCompleted::
 	msgbox BattleFrontier_Lounge6_Text_GoingToMakeVolbeatStrong, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_Skylar::
+BattleFrontier_Lounge6_EventScript_Reyley::
 	lock
 	faceplayer
-	goto_if_set FLAG_SKYLAR_TRADE_DONE, BattleFrontier_Lounge6_EventScript_SkylarTradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_DRATINI
+	goto_if_set FLAG_REYLEY_TRADE_DONE, BattleFrontier_Lounge6_EventScript_ReyleyTradeCompleted
+	setvar VAR_0x8008, INGAME_TRADE_MR_MIME
 	call BattleFrontier_Lounge6_EventScript_Trader_Part1
 	msgbox BattleFrontier_Lounge6_Text_WillingToTradeIt, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_SkylarDeclineTrade
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_Lounge6_EventScript_ReyleyDeclineTrade
 	call BattleFrontier_Lounge6_EventScript_Trader_Part2
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge6_EventScript_SkylarDeclineTrade
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_Lounge6_EventScript_ReyleyDeclineTrade
 	call BattleFrontier_Lounge6_EventScript_Trader_Part3
-	goto_if_ne VAR_RESULT, VAR_0x8009, BattleFrontier_Lounge6_EventScript_SkylarNotRequestedMon
+	goto_if_ne VAR_RESULT, VAR_0x8009, BattleFrontier_Lounge6_EventScript_ReyleyNotRequestedMon
 	call BattleFrontier_Lounge6_EventScript_Trader_Part4
 	msgbox BattleFrontier_Lounge6_Text_ItsSubtlyDifferentThankYou, MSGBOX_DEFAULT
-	setflag FLAG_SKYLAR_TRADE_DONE
+	setflag FLAG_REYLEY_TRADE_DONE
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_SkylarDeclineTrade::
+BattleFrontier_Lounge6_EventScript_ReyleyDeclineTrade::
 	msgbox BattleFrontier_Lounge6_Text_NotDesperateOrAnything, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_SkylarNotRequestedMon::
+BattleFrontier_Lounge6_EventScript_ReyleyNotRequestedMon::
 	bufferspeciesname STR_VAR_1, VAR_0x8009
 	msgbox BattleFrontier_Lounge6_Text_WontAcceptAnyLessThanRealMon, MSGBOX_DEFAULT
 	release
 	end
 
-BattleFrontier_Lounge6_EventScript_SkylarTradeCompleted::
+BattleFrontier_Lounge6_EventScript_ReyleyTradeCompleted::
 	msgbox BattleFrontier_Lounge6_Text_ReallyWantedToGetBagon, MSGBOX_DEFAULT
 	release
 	end
 
 BattleFrontier_Lounge6_Text_WouldYouLikeToTrade:
-	.string "My Pokémon is an {STR_VAR_2}.\n"
+	.string "My Pokémon is a {STR_VAR_2}.\n"
 	.string "Do you know it?\l"
 	.string "It's quite cute and rather nice.\p"
 	.string "This little one, I could trade with\n"
@@ -192,7 +190,7 @@ BattleFrontier_Lounge6_Text_WellThatsFineToo:
 
 BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined:
 	.string "Giggle!\n"
-	.string "A Pikachu is so much cuter than I had\l"
+	.string "A Volbeat is so much cuter than I had\l"
 	.string "imagined. I'm delighted!$"
 
 BattleFrontier_Lounge6_Text_IllTradeIfYouWant:
@@ -275,5 +273,5 @@ BattleFrontier_Lounge6_Text_NotDesperateOrAnything:
 BattleFrontier_Lounge6_Text_ReallyWantedToGetBagon:
 	.string "I know I could go looking for one\n"
 	.string "on my own, but…\p"
-	.string "But I really wanted to get a Bagon\n"
+	.string "But I really wanted to get a Chimecho\n"
 	.string "that another Trainer caught…$"

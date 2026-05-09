@@ -23,7 +23,7 @@ static bool8 ShouldSwitchIfPerishSong(void)
         && gDisableStructs[gActiveBattler].perishSongTimer == 0)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
-        BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
         return TRUE;
     }
     else
@@ -107,7 +107,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
             {
                 // We found a mon.
                 *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-                BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+                BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
                 return TRUE;
             }
         }
@@ -180,7 +180,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     for (i = firstId; i < lastId; i++)
     {
         u16 species;
-        u8 monAbility;
+        u8 monAbility, abilityNum;
 
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
@@ -198,16 +198,19 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
-        if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)
-            monAbility = gSpeciesInfo[species].abilities[1];
+        abilityNum = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
+
+        if (ShouldUseAltAbility(&party[i]))
+            monAbility = gSpeciesInfo[species].abilities[!abilityNum];
         else
-            monAbility = gSpeciesInfo[species].abilities[0];
+            monAbility = gSpeciesInfo[species].abilities[abilityNum];
+
 
         if (absorbingTypeAbility == monAbility && Random() & 1)
         {
             // we found a mon.
             *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
             return TRUE;
         }
     }
@@ -229,14 +232,14 @@ static bool8 ShouldSwitchIfNaturalCure(void)
      && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
-        BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
         return TRUE;
     }
     else if (gBattleMoves[gLastLandedMoves[gActiveBattler]].power == 0
           && Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
-        BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -248,7 +251,7 @@ static bool8 ShouldSwitchIfNaturalCure(void)
     if (Random() & 1)
     {
         *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
-        BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+        BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
         return TRUE;
     }
 
@@ -378,7 +381,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
     for (i = firstId; i < lastId; i++)
     {
         u16 species;
-        u8 monAbility;
+        u8 monAbility, abilityNum;
 
         if (GetMonData(&party[i], MON_DATA_HP) == 0)
             continue;
@@ -396,10 +399,12 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
             continue;
 
         species = GetMonData(&party[i], MON_DATA_SPECIES);
-        if (GetMonData(&party[i], MON_DATA_ABILITY_NUM) != 0)
-            monAbility = gSpeciesInfo[species].abilities[1];
+        abilityNum = GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM);
+
+        if (ShouldUseAltAbility(&party[i]))
+            monAbility = gSpeciesInfo[species].abilities[!abilityNum];
         else
-            monAbility = gSpeciesInfo[species].abilities[0];
+            monAbility = gSpeciesInfo[species].abilities[abilityNum];
 
         moveFlags = AI_TypeCalc(gLastLandedMoves[gActiveBattler], species, monAbility);
         if (moveFlags & flags)
@@ -416,7 +421,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u8 flags, u8 moduloPercent)
                 if (moveFlags & MOVE_RESULT_SUPER_EFFECTIVE && Random() % moduloPercent == 0)
                 {
                     *(gBattleStruct->AI_monToSwitchIntoId + gActiveBattler) = i;
-                    BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_SWITCH, 0);
+                    BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
                     return TRUE;
                 }
             }
@@ -599,7 +604,7 @@ void AI_TrySwitchOrUseItem(void)
         }
     }
 
-    BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_MOVE, BATTLE_OPPOSITE(gActiveBattler) << 8);
+    BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_MOVE, BATTLE_OPPOSITE(gActiveBattler) << 8);
 }
 
 static void ModulateByTypeEffectiveness(u8 atkType, u8 defType1, u8 defType2, u8 *var)
@@ -642,6 +647,7 @@ u8 GetMostSuitableMonToSwitchInto(void)
     s32 i, j;
     u8 invalidMons;
     u16 move;
+    bool8 bestMoveCheck = FALSE;
 
     if (*(gBattleStruct->monToSwitchIntoId + gActiveBattler) != PARTY_SIZE)
         return *(gBattleStruct->monToSwitchIntoId + gActiveBattler);
@@ -689,7 +695,10 @@ u8 GetMostSuitableMonToSwitchInto(void)
 
     while (invalidMons != (1 << PARTY_SIZE) - 1) // All mons are invalid.
     {
-        bestDmg = TYPE_MUL_NO_EFFECT;
+        if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
+            bestDmg = 255;
+        else
+            bestDmg = TYPE_MUL_NO_EFFECT;
         bestMonId = PARTY_SIZE;
         // Find the mon whose type is the most suitable offensively.
         for (i = firstId; i < lastId; i++)
@@ -712,7 +721,8 @@ u8 GetMostSuitableMonToSwitchInto(void)
                 /* Possible bug: this comparison gives the type that takes the most damage, when
                 a "good" AI would want to select the type that takes the least damage. Unknown if this
                 is a legitimate mistake or if it's an intentional, if weird, design choice */
-                if (bestDmg < typeDmg)
+                if ((gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD && bestDmg > typeDmg)
+                    || (gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_HARD && bestDmg < typeDmg))
                 {
                     bestDmg = typeDmg;
                     bestMonId = i;
@@ -734,10 +744,16 @@ u8 GetMostSuitableMonToSwitchInto(void)
                     break;
             }
 
-            if (i != MAX_MON_MOVES)
+            if (i != MAX_MON_MOVES || (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD && bestMoveCheck == TRUE && bestDmg <= TYPE_MUL_NOT_EFFECTIVE))
                 return bestMonId; // Has both the typing and at least one super effective move.
 
             invalidMons |= gBitTable[bestMonId]; // Sorry buddy, we want something better.
+            
+            if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD && invalidMons == 0x3F && bestMoveCheck == FALSE)
+            {
+                invalidMons = 0;
+                bestMoveCheck = TRUE;
+            }
         }
         else
         {
@@ -933,7 +949,7 @@ static bool8 ShouldUseItem(void)
 
         if (shouldUse)
         {
-            BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_ITEM, 0);
+            BtlController_EmitTwoReturnValues(B_COMM_TO_ENGINE, B_ACTION_USE_ITEM, 0);
             *(gBattleStruct->chosenItem + (gActiveBattler / 2) * 2) = item;
             gBattleResources->battleHistory->trainerItems[i] = ITEM_NONE;
             return shouldUse;

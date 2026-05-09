@@ -2038,7 +2038,7 @@ MatchCall_Text_Mom3::
 	.string "Wear those Running Shoes until\n"
 	.string "they fall apart, honey!$"
 
-MatchCall_Text_Roxanne1::
+MatchCall_Text_Roxanne_Preparing::
 	.string "Roxanne: Oh, hello, {PLAYER}!\p"
 	.string "I've been hard at work retraining\n"
 	.string "since we met.\p"
@@ -2047,7 +2047,7 @@ MatchCall_Text_Roxanne1::
 	.string "But when I do, please visit my Gym\n"
 	.string "for a rematch!$"
 
-MatchCall_Text_Roxanne2::
+MatchCall_Text_Roxanne_PreparingPostGame::
 	.string "Roxanne: Is this {PLAYER}?\n"
 	.string "Congratulations!\l"
 	.string "I've been hearing about you!\p"
@@ -2056,18 +2056,18 @@ MatchCall_Text_Roxanne2::
 	.string "But when I do, please visit my Gym\n"
 	.string "for a rematch!$"
 
-MatchCall_Text_Roxanne3::
+MatchCall_Text_Roxanne_RematchReady::
 	.string "Roxanne: {PLAYER}!\n"
 	.string "My Gym is ready!\p"
 	.string "Please visit Rustboro whenever\n"
 	.string "you can!$"
 
-MatchCall_Text_Roxanne4::
+MatchCall_Text_Roxanne_PostRematch::
 	.string "Roxanne: At the Rustboro Gym,\n"
 	.string "the fact that we battled, {PLAYER},\l"
 	.string "is a matter of pride.$"
 
-MatchCall_Text_Brawly1::
+MatchCall_Text_Brawly_Preparing::
 	.string "Brawly: Hey, there, {PLAYER}{KUN}!\p"
 	.string "I learned a lot from the battle we\n"
 	.string "had together.\p"
@@ -2078,7 +2078,7 @@ MatchCall_Text_Brawly1::
 	.string "But if I can reopen the Gym,\n"
 	.string "I want you to challenge us again.$"
 
-MatchCall_Text_Brawly2::
+MatchCall_Text_Brawly_PreparingPostGame::
 	.string "Brawly: Hey, {PLAYER}{KUN}!\n"
 	.string "Congratulations!\p"
 	.string "Word about your exploits arrived\n"
@@ -2090,17 +2090,17 @@ MatchCall_Text_Brawly2::
 	.string "But if I can reopen the Gym,\n"
 	.string "I want you to challenge us again.$"
 
-MatchCall_Text_Brawly3::
+MatchCall_Text_Brawly_RematchReady::
 	.string "Brawly: Hey, {PLAYER}{KUN}!\n"
 	.string "My Gym's ready for action!\p"
 	.string "Come back to Dewford anytime\n"
 	.string "for another challenge!$"
 
-MatchCall_Text_Brawly4::
+MatchCall_Text_Brawly_PostRematch::
 	.string "Brawly: {PLAYER}{KUN}, I don't think\n"
 	.string "I'll ever get bored of battling you!$"
 
-MatchCall_Text_Wattson1::
+MatchCall_Text_Wattson_Preparing::
 	.string "Wattson: Oh, it's you!\p"
 	.string "After you left, I've been redoing\n"
 	.string "my training from scratch.\p"
@@ -2109,7 +2109,7 @@ MatchCall_Text_Wattson1::
 	.string "You'll have to wait till then!\n"
 	.string "Wahahahaha!$"
 
-MatchCall_Text_Wattson2::
+MatchCall_Text_Wattson_PreparingPostGame::
 	.string "Wattson: Wahahahaha!\p"
 	.string "You've really done it, haven't you?\n"
 	.string "I've been getting word about you!\p"
@@ -2120,18 +2120,18 @@ MatchCall_Text_Wattson2::
 	.string "You'll have to wait till then!\n"
 	.string "Wahahahaha!$"
 
-MatchCall_Text_Wattson3::
+MatchCall_Text_Wattson_RematchReady::
 	.string "Wattson: Oh, it's you!\n"
 	.string "My Gym's ready!\p"
 	.string "Visit Mauville anytime!\n"
 	.string "Wahahahaha!$"
 
-MatchCall_Text_Wattson4::
+MatchCall_Text_Wattson_PostRematch::
 	.string "Wattson: Wahahaha!\p"
 	.string "A battle with you is always charged\n"
 	.string "with shocking power!$"
 
-MatchCall_Text_Flannery1::
+MatchCall_Text_Flannery_Preparing::
 	.string "Flannery: {PLAYER}…\p"
 	.string "When we battled, I learned exactly\n"
 	.string "how immature I was.\p"
@@ -2141,7 +2141,7 @@ MatchCall_Text_Flannery1::
 	.string "When the time comes, {PLAYER},\n"
 	.string "please challenge us again.$"
 
-MatchCall_Text_Flannery2::
+MatchCall_Text_Flannery_PreparingPostGame::
 	.string "Flannery: Hello, {PLAYER}?\n"
 	.string "Congratulations!\p"
 	.string "Word of your success has reached\n"
@@ -2152,44 +2152,44 @@ MatchCall_Text_Flannery2::
 	.string "appear beside my name in the\l"
 	.string "Match Call list.$"
 
-MatchCall_Text_Flannery3::
+MatchCall_Text_Flannery_RematchReady::
 	.string "Flannery: Oh, {PLAYER}?\n"
 	.string "Our Gym's ready!\p"
 	.string "Come to Lavaridge for a soak\n"
 	.string "in the hot spring and a challenge!$"
 
-MatchCall_Text_Flannery4::
+MatchCall_Text_Flannery_PostRematch::
 	.string "Flannery: {PLAYER}…\n"
 	.string "I'm positive that you keep getting\l"
 	.string "better at training every time.$"
 
-MatchCall_Text_Winona1::
+MatchCall_Text_Winona_Preparing::
 	.string "Winona: Hello, {PLAYER}!\p"
 	.string "Thanks to our battle, I've come\n"
 	.string "to understand my weak points!\p"
 	.string "When I reopen the Gym, I won't go\n"
 	.string "down in defeat again!$"
 
-MatchCall_Text_Winona2::
+MatchCall_Text_Winona_PreparingPostGame::
 	.string "Winona: You've done it, {PLAYER}!\p"
 	.string "News about the new Champion\n"
 	.string "has reached us in Fortree!\p"
 	.string "But… The next time we battle,\n"
 	.string "it's not going to end the same way.$"
 
-MatchCall_Text_Winona3::
+MatchCall_Text_Winona_RematchReady::
 	.string "Winona: Is this {PLAYER}?\n"
 	.string "Our Gym is back in operation!\p"
 	.string "We're waiting for you in Fortree!$"
 
-MatchCall_Text_Winona4::
+MatchCall_Text_Winona_PostRematch::
 	.string "Winona: {PLAYER}…\n"
 	.string "Though I have lost, my wings will\l"
 	.string "never break.\p"
 	.string "Yes, in exactly the same way that\n"
 	.string "you never lost sight of your dream.$"
 
-MatchCall_Text_TateLiza1::
+MatchCall_Text_TateLiza_Preparing::
 	.string "Tate: Oh! You're…\n"
 	.string "Liza: {PLAYER}!\p"
 	.string "Tate: We're in training again…\n"
@@ -2199,7 +2199,7 @@ MatchCall_Text_TateLiza1::
 	.string "Tate: A mark'll appear by our name…\n"
 	.string "Liza: On the Match Call list.$"
 
-MatchCall_Text_TateLiza2::
+MatchCall_Text_TateLiza_PreparingPostGame::
 	.string "Tate: {PLAYER}, congratulations!\n"
 	.string "Liza: {PLAYER}, congratulations!\p"
 	.string "Tate: The two of us are…\n"
@@ -2209,7 +2209,7 @@ MatchCall_Text_TateLiza2::
 	.string "Tate: A mark'll appear by our name…\n"
 	.string "Liza: On the Match Call list.$"
 
-MatchCall_Text_TateLiza3::
+MatchCall_Text_TateLiza_RematchReady::
 	.string "Tate: {PLAYER}!\n"
 	.string "Liza: {PLAYER}!\p"
 	.string "Tate: Our Gym is ready!\n"
@@ -2217,13 +2217,13 @@ MatchCall_Text_TateLiza3::
 	.string "Tate: Please come visit…\n"
 	.string "Liza: Mossdeep anytime!$"
 
-MatchCall_Text_TateLiza4::
+MatchCall_Text_TateLiza_PostRematch::
 	.string "Tate: {PLAYER}, the battle we had…\n"
 	.string "Liza: Is an invaluable experience.\p"
 	.string "Tate: It would be nice if…\n"
 	.string "Liza: We could all battle again!$"
 
-MatchCall_Text_Juan1::
+MatchCall_Text_Juan_Preparing::
 	.string "Juan: Hmm…\n"
 	.string "{PLAYER}{KUN}… Was it?\p"
 	.string "Our battle together--it brought\n"
@@ -2232,7 +2232,7 @@ MatchCall_Text_Juan1::
 	.string "Perhaps you are a genius who may\n"
 	.string "yet surpass Wallace!$"
 
-MatchCall_Text_Juan2::
+MatchCall_Text_Juan_PreparingPostGame::
 	.string "Juan: Fufu… {PLAYER}{KUN}…\n"
 	.string "My eye for appraising talent was\n"
 	.string "affirmed during our battle…\p"
@@ -2242,14 +2242,14 @@ MatchCall_Text_Juan2::
 	.string "you, for you have scaled the peak\l"
 	.string "of power and prestige.$"
 
-MatchCall_Text_Juan3::
+MatchCall_Text_Juan_RematchReady::
 	.string "Juan: Hoho… {PLAYER}{KUN}…\p"
 	.string "Our Sootopolis Gym has finally\n"
 	.string "reopened.\p"
 	.string "If you wish to see me, you are\n"
 	.string "welcome to visit anytime.$"
 
-MatchCall_Text_Juan4::
+MatchCall_Text_Juan_PostRematch::
 	.string "Juan: {PLAYER}{KUN}…\p"
 	.string "Like the finest music, the battles\n"
 	.string "we wage together strike chords\l"
@@ -2767,20 +2767,20 @@ MatchCall_Text_Norman5::
 	.string "But with a name like that, it may\n"
 	.string "be somehow linked to a volcano!$"
 
-MatchCall_Text_Norman6::
+MatchCall_Text_Norman_Preparing::
 	.string "Dad: Hiyah! Haah! Dwah!\p"
 	.string "…Oh? {PLAYER}!\p"
 	.string "You caught me right in the middle\n"
 	.string "of a Pokémon training session!$"
 
-MatchCall_Text_Norman7::
+MatchCall_Text_Norman_PreparingPostGame::
 	.string "Dad: {PLAYER}!\p"
 	.string "Who would've thought you'd become\n"
 	.string "the Pokémon League Champion…\p"
 	.string "Okay!\n"
 	.string "I won't be left behind!$"
 
-MatchCall_Text_Norman8::
+MatchCall_Text_Norman_RematchReady::
 	.string "Dad: Hm? {PLAYER}?\n"
 	.string "What good timing!\p"
 	.string "This time, I'm going to challenge\n"
@@ -2788,7 +2788,7 @@ MatchCall_Text_Norman8::
 	.string "I'm waiting in the Petalburg Gym.\n"
 	.string "Accept my challenge anytime!$"
 
-MatchCall_Text_Norman9::
+MatchCall_Text_Norman_PostRematch::
 	.string "Dad: …You amaze me, {PLAYER}.\n"
 	.string "How much higher will you soar?$"
 

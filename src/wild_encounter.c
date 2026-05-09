@@ -1,23 +1,22 @@
 #include "global.h"
-#include "wild_encounter.h"
-#include "pokemon.h"
-#include "metatile_behavior.h"
-#include "fieldmap.h"
-#include "random.h"
-#include "field_player_avatar.h"
-#include "event_data.h"
-#include "safari_zone.h"
-#include "overworld.h"
-#include "pokeblock.h"
 #include "battle_setup.h"
-#include "roamer.h"
-#include "tv.h"
-#include "rtc.h"
-#include "link.h"
-#include "script.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "event_data.h"
+#include "fieldmap.h"
+#include "field_player_avatar.h"
+#include "link.h"
+#include "metatile_behavior.h"
+#include "overworld.h"
+#include "pokeblock.h"
+#include "pokemon.h"
+#include "random.h"
+#include "roamer.h"
 #include "rtc.h"
+#include "safari_zone.h"
+#include "script.h"
+#include "tv.h"
+#include "wild_encounter.h"
 #include "constants/abilities.h"
 #include "constants/game_stat.h"
 #include "constants/items.h"
@@ -34,8 +33,8 @@ extern const u8 EventScript_RepelWoreOff[];
 
 // Number of accessible fishing spots in each section of Route 119
 // Each section is an area of the route between the y coordinates in sRoute119WaterTileData
-#define NUM_FISHING_SPOTS_1 126
-#define NUM_FISHING_SPOTS_2 162
+#define NUM_FISHING_SPOTS_1 131
+#define NUM_FISHING_SPOTS_2 167
 #define NUM_FISHING_SPOTS_3 149
 #define NUM_FISHING_SPOTS (NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2 + NUM_FISHING_SPOTS_3)
 
@@ -76,9 +75,9 @@ static const struct WildPokemon sWildFeebas = {20, 25, SPECIES_FEEBAS};
 static const u16 sRoute119WaterTileData[] =
 {
 //yMin, yMax, numSpots in previous sections
-    18,  45,  0,
-    46,  75,  NUM_FISHING_SPOTS_1,
-    98, 112,  NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2,
+     0,  45,  0,
+    46,  91,  NUM_FISHING_SPOTS_1,
+    92, 139,  NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2,
 };
 
 void DisableWildEncounters(bool8 disabled)
@@ -125,8 +124,8 @@ static bool8 CheckFeebas(void)
     u8 route119Section = 0;
     u16 spotId;
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE119)
-     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE119))
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ROUTE119)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ROUTE119))
     {
         u8 behavior;
 
@@ -148,11 +147,11 @@ static bool8 CheckFeebas(void)
             return TRUE;
 
         // Get which third of the map the player is in
-        if (y <= sRoute119WaterTileData[3 * 0 + 1])
+        if (y >= sRoute119WaterTileData[3 * 0 + 0] && y <= sRoute119WaterTileData[3 * 0 + 1])
             route119Section = 0;
         if (y >= sRoute119WaterTileData[3 * 1 + 0] && y <= sRoute119WaterTileData[3 * 1 + 1])
             route119Section = 1;
-        if (y >= sRoute119WaterTileData[3 * 2 + 0])
+        if (y >= sRoute119WaterTileData[3 * 2 + 0] && y <= sRoute119WaterTileData[3 * 2 + 1])
             route119Section = 2;
 
         // 50% chance of encountering Feebas (assuming this is a Feebas spot)
@@ -168,7 +167,13 @@ static bool8 CheckFeebas(void)
             feebasSpots[i] = FeebasRandom() % NUM_FISHING_SPOTS;
             if (feebasSpots[i] == 0)
                 feebasSpots[i] = NUM_FISHING_SPOTS;
-            i++;
+            
+            // < 1 below is a pointless check, it will never be TRUE.
+            // >= 4 to skip fishing spots 1-3, because these are inaccessible
+            // spots at the top of the map, at (9,7), (7,13), and (15,16).
+            // The first accessible fishing spot is spot 4 at (18,18).
+            if (feebasSpots[i] < 1 || feebasSpots[i] >= 4)
+                i++;
         }
 
         // Check which fishing spot the player is at, and see if
@@ -325,14 +330,14 @@ static u16 GetCurrentMapWildMonHeaderId(void)
     for (i = 0; ; i++)
     {
         const struct WildPokemonHeader *wildHeader = &gWildMonHeaders[i];
-        if (wildHeader->mapGroup == MAP_GROUP(UNDEFINED))
+        if (wildHeader->mapGroup == MAP_GROUP(MAP_UNDEFINED))
             break;
 
         if (gWildMonHeaders[i].mapGroup == gSaveBlock1Ptr->location.mapGroup &&
             gWildMonHeaders[i].mapNum == gSaveBlock1Ptr->location.mapNum)
         {
-            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ALTERING_CAVE) &&
-                gSaveBlock1Ptr->location.mapNum == MAP_NUM(ALTERING_CAVE))
+            if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ALTERING_CAVE) &&
+                gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ALTERING_CAVE))
             {
                 u16 alteringCaveId = VarGet(VAR_ALTERING_CAVE_WILD_SET);
                 if (alteringCaveId >= NUM_ALTERING_CAVE_TABLES)
@@ -586,8 +591,8 @@ static bool8 AllowWildCheckOnNewMetatile(void)
 
 static bool8 AreLegendariesInSootopolisPreventingEncounters(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(SOOTOPOLIS_CITY)
-     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(SOOTOPOLIS_CITY))
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_SOOTOPOLIS_CITY)
+     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_SOOTOPOLIS_CITY))
     {
         return FALSE;
     }
@@ -916,7 +921,7 @@ bool8 UpdateRepelCounter(void)
 {
     u16 steps;
 
-    if (InBattlePike() || InBattlePyramid())
+    if (InBattlePike() || CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
         return FALSE;
     if (InUnionRoom() == TRUE)
         return FALSE;

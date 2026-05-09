@@ -1,6 +1,3 @@
-.set LOCALID_ATTENDANT_SINGLES, 1
-.set LOCALID_ATTENDANT_DOUBLES, 6
-
 BattleFrontier_BattleFactoryLobby_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleFactoryLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleFactoryLobby_OnWarp
@@ -12,7 +9,7 @@ BattleFrontier_BattleFactoryLobby_OnWarp:
 
 BattleFrontier_BattleFactoryLobby_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_1, 1
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 BattleFrontier_BattleFactoryLobby_OnFrame:
@@ -170,7 +167,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge::
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant
 	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 8, 13
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
@@ -178,11 +175,11 @@ BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge::
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
+	setvar VAR_LAST_TALKED, LOCALID_FACTORY_ATTENDANT_SINGLES
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
+	setvar VAR_LAST_TALKED, LOCALID_FACTORY_ATTENDANT_DOUBLES
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge::
@@ -345,7 +342,7 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge:
 	.string "one of your rental Pokémon.\p"
 	.string "Repeat this cycle of battling and\n"
 	.string "trading--if you win seven times in\l"
-	.string "a row, you will earn Battle Points.\p"
+	.string "a row, you will earn BATTLE POINTS.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save, you will be\n"
@@ -389,14 +386,14 @@ BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins:
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak:
 	.string "In recognition of your 7-win streak,\n"
-	.string "we award you these Battle Point(s).$"
+	.string "we award you these BATTLE POINTS.$"
 
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints:
 	.string "Oh, oh, oh!\p"
-	.string "Your Battle Points are maxed.\p"
+	.string "Your BATTLE POINTS are maxed.\p"
 	.string "Please come back after using\n"
-	.string "some Battle Points.$"
+	.string "some BATTLE POINTS.$"
 
 BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume:
 	.string "We've been waiting for you!\p"
@@ -441,7 +438,7 @@ BattleFrontier_BattleFactoryLobby_Text_ExplainDoublesChallenge:
 	.string "one of your rental Pokémon.\p"
 	.string "Repeat this cycle of battling and\n"
 	.string "trading--if you win seven times in\l"
-	.string "a row, you will earn Battle Points.\p"
+	.string "a row, you will earn BATTLE POINTS.\p"
 	.string "If you want to interrupt your\n"
 	.string "challenge, please save the game.\p"
 	.string "If you don't save before interrupting,\n"
@@ -455,7 +452,7 @@ BattleFrontier_BattleFactoryLobby_Text_CongratsForDefeatingHead:
 BattleFrontier_BattleFactoryLobby_Text_AwardBattlePoints:
 	.string "In recognition of your wealth of\n"
 	.string "knowledge and keen intelligence,\l"
-	.string "we award you these Battle Point(s).$"
+	.string "we award you these BATTLE POINTS.$"
 
 BattleFrontier_BattleFactoryLobby_Text_ExchangeMonsAndSave:
 	.string "Let me exchange your Pokémon\n"

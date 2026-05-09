@@ -98,6 +98,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsDifficulty = OPTIONS_DIFFICULTY_NORMAL;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->optionsAttackStyle = OPTIONS_ATTACK_STYLE_TYPE;
+    gSaveBlock2Ptr->optionsGiveNicknames = OPTIONS_GIVE_NICKNAMES_ON;
     gSaveBlock2Ptr->optionsDisableMatchCall = FALSE;
     gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
@@ -134,7 +135,7 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
     WarpIntoMap();
 }
 

@@ -1,5 +1,3 @@
-.set LOCALID_FOSSIL_SCIENTIST, 5
-
 RustboroCity_DevonCorp_2F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_DevonCorp_2F_OnTransition
 	.byte 0
@@ -184,6 +182,8 @@ RustboroCity_DevonCorp_2F_EventScript_KabutoReady::
 
 RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonParty::
 	call RustboroCity_DevonCorp_2F_EventScript_ReceivedFossilMonFanfare
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, RustboroCity_DevonCorp_2F_EventScript_FinishReceivingFossilMon
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_FinishReceivingFossilMon
 	call Common_EventScript_GetGiftMonPartySlot
@@ -192,6 +192,8 @@ RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonParty::
 
 RustboroCity_DevonCorp_2F_EventScript_ReceiveFossilMonPC::
 	call RustboroCity_DevonCorp_2F_EventScript_ReceivedFossilMonFanfare
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, RustboroCity_DevonCorp_2F_EventScript_TransferFossilMonToPC
 	msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, RustboroCity_DevonCorp_2F_EventScript_TransferFossilMonToPC
 	call Common_EventScript_NameReceivedBoxMon

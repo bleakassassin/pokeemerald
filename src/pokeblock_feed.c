@@ -760,7 +760,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         break;
     case 6:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, gBattleTerrainTiles_Building, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gBattleEnvironmentTiles_Building, 0, 0, 0);
         sPokeblockFeed->loadGfxState++;
         break;
     case 7:
@@ -771,7 +771,7 @@ static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
         }
         break;
     case 8:
-        LoadCompressedPalette(gBattleTerrainPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleEnvironmentPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
         sPokeblockFeed->loadGfxState = 0;
         return TRUE;
     }
@@ -860,7 +860,7 @@ static void Task_PrintAtePokeblockMessage(u8 taskId)
     struct Pokemon *mon = &gPlayerParty[gPokeblockMonId];
     struct Pokeblock *pokeblock = &gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId];
 
-    gPokeblockGain = PokeblockGetGain(GetNature(mon), pokeblock);
+    gPokeblockGain = PokeblockGetGain(GetNature(mon, FALSE), pokeblock);
     GetMonNickname(mon, gStringVar1);
     PokeblockCopyName(pokeblock, gStringVar2);
 
@@ -912,7 +912,7 @@ static u8 CreateMonSprite(struct Pokemon *mon)
 
     sPokeblockFeed->species = species;
     sPokeblockFeed->monSpriteId_ = spriteId;
-    sPokeblockFeed->nature = GetNature(mon);
+    sPokeblockFeed->nature = GetNature(mon, FALSE);
     gSprites[spriteId].sSpecies = species;
     gSprites[spriteId].callback = SpriteCallbackDummy;
 

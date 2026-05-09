@@ -26,6 +26,11 @@
 #include "c_file.h"
 #include "charmap.h"
 
+#ifdef _WIN32
+#include <io.h>
+#include <fcntl.h>
+#endif
+
 static void UsageAndExit(const char *program);
 
 Charmap* g_charmap;
@@ -113,9 +118,9 @@ void PreprocAsmFile(std::string filename, bool isStdin, bool doEnum)
     }
 }
 
-void PreprocCFile(const char * filename, bool isStdin)
+void PreprocCFile(const char * filename, bool isStdin, const char * graphicsRoot)
 {
-    CFile cFile(filename, isStdin);
+    CFile cFile(filename, isStdin, graphicsRoot);
     cFile.Preproc();
 }
 
@@ -142,7 +147,7 @@ const char* GetFileExtension(const char* filename)
 
 static void UsageAndExit(const char *program)
 {
-    std::fprintf(stderr, "Usage: %s [-i] [-e] SRC_FILE CHARMAP_FILE\nwhere -i denotes if input is from stdin\n      -e enables enum handling\n", program);
+    std::fprintf(stderr, "Usage: %s [-i] [-e] [-g PATH] SRC_FILE CHARMAP_FILE\nwhere -i denotes if input is from stdin\n      -e enables enum handling\n-g specifies the root for INCGFX\n", program);
     std::exit(EXIT_FAILURE);
 }
 
@@ -153,9 +158,10 @@ int main(int argc, char **argv)
     const char *charmap = NULL;
     bool isStdin = false;
     bool doEnum = false;
+    const char *graphicsRoot = "";
 
-    /* preproc [-i] [-e] SRC_FILE CHARMAP_FILE */
-    while ((opt = getopt(argc, argv, "ie")) != -1)
+    /* preproc [-i] [-e] [-g PATH] SRC_FILE CHARMAP_FILE */
+    while ((opt = getopt(argc, argv, "ieg:")) != -1)
     {
         switch (opt)
         {
@@ -164,6 +170,9 @@ int main(int argc, char **argv)
             break;
         case 'e':
             doEnum = true;
+            break;
+        case 'g':
+            graphicsRoot = optarg;
             break;
         default:
             UsageAndExit(argv[0]);
@@ -179,6 +188,11 @@ int main(int argc, char **argv)
 
     g_charmap = new Charmap(charmap);
 
+#ifdef _WIN32
+	// On Windows, piping from stdout can break newlines. Treat stdout as binary stream to avoid this.
+	_setmode(_fileno(stdout), _O_BINARY);
+#endif
+
     const char* extension = GetFileExtension(source);
 
     if (!extension)
@@ -192,7 +206,7 @@ int main(int argc, char **argv)
     {
         if (doEnum)
             FATAL_ERROR("-e is invalid for C sources\n");
-        PreprocCFile(source, isStdin);
+        PreprocCFile(source, isStdin, graphicsRoot);
     }
     else
     {

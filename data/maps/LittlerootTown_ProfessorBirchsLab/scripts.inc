@@ -1,10 +1,3 @@
-.set LOCALID_AIDE, 1
-.set LOCALID_BIRCH, 2
-.set LOCALID_RIVAL, 3
-.set LOCALID_BALL_CYNDAQUIL, 4
-.set LOCALID_BALL_TOTODILE, 5
-.set LOCALID_BALL_CHIKORITA, 6
-
 LittlerootTown_ProfessorBirchsLab_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_ProfessorBirchsLab_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LittlerootTown_ProfessorBirchsLab_OnWarp
@@ -52,8 +45,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CheckReadyForFinalJohtoStarter::
 	specialvar VAR_RESULT, HasAllHoennMons
 	goto_if_eq VAR_RESULT, TRUE, LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForFinalJohtoStarter
 LittlerootTown_ProfessorBirchsLab_EventScript_SetAfterJohtoStarterLayout::
-	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
-	setobjectxyperm LOCALID_RIVAL, 5, 10
+	setobjectmovementtype LOCALID_BIRCHS_LAB_RIVAL, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
+	setobjectxyperm LOCALID_BIRCHS_LAB_RIVAL, 5, 10
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetReadyForSecondJohtoStarter::
@@ -79,25 +72,25 @@ LittlerootTown_ProfessorBirchsLab_OnWarp:
 	.2byte 0
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetPlayerPosForReceiveStarter::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForDexUpgrade::
-	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
-	turnobject LOCALID_RIVAL, DIR_NORTH
-	setobjectxy LOCALID_RIVAL, 5, 5
-	turnobject LOCALID_BIRCH, DIR_SOUTH
-	setobjectxy LOCALID_BIRCH, 6, 4
-	turnobject LOCALID_AIDE, DIR_EAST
-	setobjectxy LOCALID_AIDE, 10, 10
+	turnobject LOCALID_PLAYER, DIR_NORTH
+	turnobject LOCALID_BIRCHS_LAB_RIVAL, DIR_NORTH
+	setobjectxy LOCALID_BIRCHS_LAB_RIVAL, 5, 5
+	turnobject LOCALID_BIRCHS_LAB_BIRCH, DIR_SOUTH
+	setobjectxy LOCALID_BIRCHS_LAB_BIRCH, 6, 4
+	turnobject LOCALID_BIRCHS_LAB_AIDE, DIR_EAST
+	setobjectxy LOCALID_BIRCHS_LAB_AIDE, 10, 10
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForLaterJohtoStarter::
-	addobject LOCALID_RIVAL
-	turnobject LOCALID_BIRCH, DIR_SOUTH
-	setobjectxy LOCALID_BIRCH, 6, 4
-	turnobject LOCALID_RIVAL, DIR_EAST
-	setobjectxy LOCALID_RIVAL, 5, 5
+	addobject LOCALID_BIRCHS_LAB_RIVAL
+	turnobject LOCALID_BIRCHS_LAB_BIRCH, DIR_SOUTH
+	setobjectxy LOCALID_BIRCHS_LAB_BIRCH, 6, 4
+	turnobject LOCALID_BIRCHS_LAB_RIVAL, DIR_EAST
+	setobjectxy LOCALID_BIRCHS_LAB_RIVAL, 5, 5
 	end
 
 LittlerootTown_ProfessorBirchsLab_OnFrame:
@@ -117,6 +110,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent::
 	waitmessage
 	playfanfare MUS_EVOLVED
 	waitfanfare
+	checkgivenicknamesoption
+	goto_if_eq VAR_RESULT, OFF, LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, YES, LittlerootTown_ProfessorBirchsLab_EventScript_NicknameStarter
 	goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_GoSeeRival
@@ -149,7 +144,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_DeclineSeeingRival::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex
 	waitmovement 0
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
 	end
@@ -169,7 +164,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	delay 30
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_BIRCH, LittlerootTown_ProfessorBirchsLab_Movement_BirchRetrievePokedexes
+	applymovement LOCALID_BIRCHS_LAB_BIRCH, LittlerootTown_ProfessorBirchsLab_Movement_BirchRetrievePokedexes
 	waitmovement 0
 	delay 20
 	playse SE_CLICK
@@ -180,8 +175,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	delay 10
 	playse SE_CLICK
 	delay 20
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterRight
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_BIRCHS_LAB_RIVAL, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayUpgradeComment
@@ -189,10 +184,10 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	playse SE_PC_ON
 	waitse
 	delay 20
-	applymovement LOCALID_BIRCH, LittlerootTown_ProfessorBirchsLab_Movement_BirchReturnPokedex
+	applymovement LOCALID_BIRCHS_LAB_BIRCH, LittlerootTown_ProfessorBirchsLab_Movement_BirchReturnPokedex
 	waitmovement 0
-	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterUp
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_BIRCHS_LAB_RIVAL, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OkayAllDone, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
@@ -255,7 +250,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_BirchReturnPokedex:
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ChooseSecondJohtoStarter::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_WonLeagueRematchChoosePokemon, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
@@ -264,7 +259,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ChooseSecondJohtoStarter::
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ChooseFinalJohtoStarter::
 	lockall
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
+	applymovement LOCALID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 10
@@ -343,7 +338,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_CanPickJohtoStarter::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_JohtoStarter::
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	showmonpic VAR_TEMP_TRANSFERRED_SPECIES, 10, 3
 	playmoncry VAR_TEMP_TRANSFERRED_SPECIES, CRY_MODE_NORMAL
@@ -402,7 +397,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GotSecondJohtoStarter::
 	return
 
 LittlerootTown_ProfessorBirchsLab_EventScript_GotFinalJohtoStarter::
-	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_BIRCHS_LAB_BIRCH, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 11
@@ -473,9 +468,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
+	applymovement LOCALID_BIRCHS_LAB_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls

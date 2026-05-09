@@ -1,5 +1,3 @@
-.set LOCALID_MOVE_RELEARNER, 1
-
 FallarborTown_MoveRelearnersHouse_MapScripts::
 	.byte 0
 
@@ -20,14 +18,12 @@ FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove::
 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon::
 	msgbox FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT
 	special ChooseMonForMoveRelearner
-	waitstate
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
 	special IsSelectedMonEgg
 	goto_if_eq VAR_RESULT, TRUE, FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg
 	goto_if_eq VAR_0x8005, 0, FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon
 	msgbox FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove, MSGBOX_DEFAULT
 	special TeachMoveRelearnerMove
-	waitstate
 	goto_if_eq VAR_0x8004, 0, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
 	call_if_lt VAR_HEART_SCALES_GIVEN_TO_RELEARNER, 10, FallarborTown_MoveRelearnersHouse_EventScript_GiveHeartScale
 FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::

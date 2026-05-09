@@ -24,6 +24,7 @@ enum
     MENUITEM_BATTLESTYLE,
     MENUITEM_DIFFICULTY,
     MENUITEM_ATTACKSTYLE,
+    MENUITEM_NICKNAMES,
     MENUITEM_MATCHCALL,
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
@@ -92,6 +93,7 @@ static const sItemFunctions[MENUITEM_COUNT] =
     [MENUITEM_BATTLESTYLE]  = {DrawChoices_BattleStyle, ProcessInput_Options_Two},
     [MENUITEM_DIFFICULTY]   = {DrawChoices_Difficulty,  ProcessInput_Options_Three},
     [MENUITEM_ATTACKSTYLE]  = {DrawChoices_AttackStyle, ProcessInput_Options_Two},
+    [MENUITEM_NICKNAMES]    = {DrawChoices_BattleScene, ProcessInput_Options_Two},
     [MENUITEM_SOUND]        = {DrawChoices_Sound,       ProcessInput_Sound},
     [MENUITEM_BUTTONMODE]   = {DrawChoices_ButtonMode,  ProcessInput_Options_Two},
     [MENUITEM_UNITSYSTEM]   = {DrawChoices_UnitSystem,  ProcessInput_Options_Two},
@@ -105,9 +107,9 @@ static const sItemFunctions[MENUITEM_COUNT] =
 // EWRAM vars
 EWRAM_DATA static struct OptionMenu *sOptions = NULL;
 
-static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_menu_text.gbapal");
+static const u16 sOptionMenuText_Pal[] = INCGFX_U16("graphics/interface/option_menu_text.pal", ".gbapal");
 // note: this is only used in the Japanese release
-static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
+static const u8 sEqualSignGfx[] = INCGFX_U8("graphics/interface/option_menu_equals_sign.png", ".4bpp");
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
@@ -116,6 +118,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_BATTLESTYLE] = gText_BattleStyle,
     [MENUITEM_DIFFICULTY]  = gText_Difficulty,
     [MENUITEM_ATTACKSTYLE] = gText_AttackStyle,
+    [MENUITEM_NICKNAMES]   = gText_GiveNicknames,
     [MENUITEM_MATCHCALL]   = gText_MatchCalls,
     [MENUITEM_SOUND]       = gText_Sound,
     [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
@@ -188,6 +191,7 @@ static const u8 sText_BattleScene[] = _("Toggle in-battle animations.");
 static const u8 sText_BattleStyle[] = _("Toggle switch prompt for foe's next {PKMN}.");
 static const u8 sText_Difficulty[]  = _("Set battle difficulty and Exp. gain.");
 static const u8 sText_AttackStyle[] = _("Set what determines attack power.");
+static const u8 sText_Nicknames[]   = _("Toggle nickname prompt for new {PKMN}.");
 static const u8 sText_MatchCall[]   = _("Toggle calls from other Trainers.");
 static const u8 sText_Sound[]       = _("Set audio output.");
 static const u8 sText_ButtonMode[]  = _("Set function of L/R Buttons.");
@@ -203,6 +207,7 @@ static const u8 *const sOptionMenuItemDescriptions[MENUITEM_COUNT] =
     [MENUITEM_BATTLESTYLE] = sText_BattleStyle,
     [MENUITEM_DIFFICULTY]  = sText_Difficulty,
     [MENUITEM_ATTACKSTYLE] = sText_AttackStyle,
+    [MENUITEM_NICKNAMES]   = sText_Nicknames,
     [MENUITEM_MATCHCALL]   = sText_MatchCall,
     [MENUITEM_SOUND]       = sText_Sound,
     [MENUITEM_BUTTONMODE]  = sText_ButtonMode,
@@ -294,6 +299,7 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
         sOptions->sel[MENUITEM_DIFFICULTY]  = gSaveBlock2Ptr->optionsDifficulty;
         sOptions->sel[MENUITEM_ATTACKSTYLE] = gSaveBlock2Ptr->optionsAttackStyle;
+        sOptions->sel[MENUITEM_NICKNAMES]   = gSaveBlock2Ptr->optionsGiveNicknames;
         sOptions->sel[MENUITEM_MATCHCALL]   = gSaveBlock2Ptr->optionsDisableMatchCall;
         sOptions->sel[MENUITEM_SOUND]       = gSaveBlock2Ptr->optionsSound;
         sOptions->sel[MENUITEM_BUTTONMODE]  = gSaveBlock2Ptr->optionsButtonMode;
@@ -484,6 +490,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsBattleStyle      = sOptions->sel[MENUITEM_BATTLESTYLE];
     gSaveBlock2Ptr->optionsDifficulty       = sOptions->sel[MENUITEM_DIFFICULTY];
     gSaveBlock2Ptr->optionsAttackStyle      = sOptions->sel[MENUITEM_ATTACKSTYLE];
+    gSaveBlock2Ptr->optionsGiveNicknames    = sOptions->sel[MENUITEM_NICKNAMES];
     gSaveBlock2Ptr->optionsDisableMatchCall = sOptions->sel[MENUITEM_MATCHCALL];
     gSaveBlock2Ptr->optionsSound            = sOptions->sel[MENUITEM_SOUND];
     gSaveBlock2Ptr->optionsButtonMode       = sOptions->sel[MENUITEM_BUTTONMODE];

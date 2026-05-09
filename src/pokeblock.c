@@ -62,7 +62,7 @@ enum {
 struct PokeblockMenuStruct
 {
     u8 tilemap[BG_SCREEN_SIZE];
-    void (*callbackOnUse)(void);
+    MainCallback callbackOnUse;
     const u8 *pokeblockActionIds;
     u8 numActions;
     u8 caseId;
@@ -80,7 +80,7 @@ struct PokeblockMenuStruct
 
 struct PokeblockSavedData
 {
-    void (*callback)(void);
+    MainCallback callback;
     u16 selectedRow;
     u16 scrollOffset;
 };
@@ -699,7 +699,7 @@ static void DrawPokeblockMenuTitleText(void)
 {
     u8 i;
 
-    const u8 *itemName = ItemId_GetName(ITEM_POKEBLOCK_CASE);
+    const u8 *itemName = GetItemName(ITEM_POKEBLOCK_CASE);
     PrintOnPokeblockWindow(WIN_TITLE, itemName, GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, itemName, 0x48));
 
     PrintOnPokeblockWindow(WIN_SPICY,  gText_Spicy, 0);
@@ -1255,7 +1255,7 @@ static void CloseTossPokeblockWindow(u8 taskId)
 
 static void PokeblockAction_UseInBattle(u8 taskId)
 {
-    u8 nature = GetNature(&gEnemyParty[0]);
+    u8 nature = GetNature(&gEnemyParty[0], FALSE);
     s16 gain = PokeblockGetGain(nature, &gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId]);
     StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId].color]);
     TryClearPokeblock(gSpecialVar_ItemId);

@@ -64,7 +64,7 @@ void SetHBlankCallback(IntrCallback callback);
 void SetVCountCallback(IntrCallback callback);
 void SetSerialCallback(IntrCallback callback);
 void InitFlashTimer(void);
-void SetTrainerHillVBlankCounter(u32 *var);
+void SetTrainerHillVBlankCounter(u32 *counter);
 void ClearTrainerHillVBlankCounter(void);
 void DoSoftReset(void);
 void ClearPokemonCrySongs(void);
@@ -72,5 +72,7 @@ void RestoreSerialTimer3IntrHandlers(void);
 void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
 u16 GetGeneratedTrainerIdLower(void);
+
+extern EWRAM_DATA bool8 gDisableVBlankRNGAdvance;
 
 #endif // GUARD_MAIN_H

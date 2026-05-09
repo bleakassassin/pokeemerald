@@ -1,5 +1,3 @@
-.set LOCALID_SCOTT, 1
-
 BattleFrontier_ScottsHouse_MapScripts::
 	.byte 0
 
@@ -149,7 +147,7 @@ BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier::
 	call_if_eq VAR_FACING, DIR_EAST, BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast
 	call_if_eq VAR_FACING, DIR_WEST, BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest
 	msgbox BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal, MSGBOX_DEFAULT
-	applymovement LOCALID_SCOTT, Common_Movement_FacePlayer
+	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing, MSGBOX_DEFAULT
 	goto_if_eq VAR_SCOTT_STATE, 13, BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints
@@ -159,55 +157,60 @@ BattleFrontier_ScottsHouse_EventScript_WelcomeToFrontier::
 	end
 
 BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints::
-	buffernumberstring STR_VAR_1, 4
-	setvar VAR_0x8004, 4
+	buffernumberstring STR_VAR_1, 7
+	setvar VAR_0x8004, 7
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
 BattleFrontier_ScottsHouse_EventScript_Give3BattlePoints::
+	buffernumberstring STR_VAR_1, 5
+	setvar VAR_0x8004, 5
+	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
+	end
+
+BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints::
 	buffernumberstring STR_VAR_1, 3
 	setvar VAR_0x8004, 3
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
-BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints::
+BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint::
 	buffernumberstring STR_VAR_1, 2
 	setvar VAR_0x8004, 2
 	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
 	end
 
-BattleFrontier_ScottsHouse_EventScript_Give1BattlePoint::
-	buffernumberstring STR_VAR_1, 1
-	setvar VAR_0x8004, 1
-	goto BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints
-	end
-
 BattleFrontier_ScottsHouse_EventScript_GiveBattlePoints::
 	special GiveFrontierBattlePoints
-	msgbox BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
 	msgbox BattleFrontier_ScottsHouse_Text_ExplainBattlePoints, MSGBOX_DEFAULT
+	playfanfare MUS_OBTAIN_ITEM
+	message BattleFrontier_ScottsHouse_Text_ReceivedExpCharm
+	waitfanfare
+	waitmessage
+	msgbox BattleFrontier_ScottsHouse_Text_LetYourPokemonGainMoreExp, MSGBOX_DEFAULT
 	setflag FLAG_SCOTT_GIVES_BATTLE_POINTS
 	setflag FLAG_TEMP_2
-	release
+	goto BattleFrontier_ScottsHouse_EventScript_GivenBattlePoints
 	end
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth::
-	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFasterUp
+	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth::
-	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast::
-	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFasterRight
+	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	return
 
 BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
-	applymovement LOCALID_SCOTT, Common_Movement_WalkInPlaceFasterLeft
+	applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	return
 
@@ -237,10 +240,6 @@ BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
 	.string "as a memento for all the time our\l"
 	.string "paths crossed on our journeys.$"
 
-BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
-	.string "{PLAYER} obtained\n"
-	.string "{STR_VAR_1} Battle Point(s).$"
-
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
 	.string "Scott: You can check your Battle\n"
 	.string "Points on your Frontier Pass.\p"
@@ -248,7 +247,19 @@ BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
 	.string "the Battle Frontier, the more Battle\l"
 	.string "Points you will collect.\p"
 	.string "Use your Battle Points the way you\n"
-	.string "see fit, like trading them for items.$"
+	.string "see fit, like trading them for items.\p"
+	.string "… … … … … …\n"
+	.string "Oh, one other thing!\p"
+	.string "Before you go, please take this, too.$"
+
+BattleFrontier_ScottsHouse_Text_ReceivedExpCharm:
+	.string "{PLAYER} received the Exp. Charm!$"
+
+BattleFrontier_ScottsHouse_Text_LetYourPokemonGainMoreExp:
+	.string "Scott: This here will let your Pokémon\n"
+	.string "gain more Exp. Points from battle.\p"
+	.string "It should help you prepare for each of\n"
+	.string "the facilities at the Battle Frontier.$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
 	.string "I'm expecting great things from you!$"

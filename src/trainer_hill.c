@@ -8,6 +8,7 @@
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_message_box.h"
+#include "gym_leader_rematch.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "main.h"
@@ -15,6 +16,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "random.h"
 #include "script.h"
 #include "string_util.h"
 #include "strings.h"
@@ -175,7 +177,7 @@ static const u16 sPokemonPrizeList[] =
     SPECIES_CELEBI
 };
 
-static const u16 sEReader_Pal[] = INCBIN_U16("graphics/trainer_hill/ereader.gbapal");
+static const u16 sEReader_Pal[] = INCGFX_U16("graphics/trainer_hill/ereader.pal", ".gbapal");
 static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct TrainerHillChallenge *const sChallengeData[NUM_TRAINER_HILL_MODES] =
@@ -195,7 +197,7 @@ static const u8 *const sFloorStrings[] =
     gText_TrainerHill4F,
 };
 
-static void (* const sHillFunctions[])(void) =
+static void (*const sHillFunctions[])(void) =
 {
     [TRAINER_HILL_FUNC_START]                 = TrainerHillStartChallenge,
     [TRAINER_HILL_FUNC_GET_OWNER_STATE]       = GetOwnerState,
@@ -229,7 +231,7 @@ static const u8 *const sModeStrings[NUM_TRAINER_HILL_MODES] =
 static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
 {
     .graphicsId = OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL,
-    .elevation = 3,
+    .elevation = ELEVATION_DEFAULT,
     .movementType = MOVEMENT_TYPE_LOOK_AROUND,
     .movementRangeX = 1,
     .movementRangeY = 1,
@@ -238,10 +240,10 @@ static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
 
 static const u32 sNextFloorMapNum[NUM_TRAINER_HILL_FLOORS] =
 {
-    [TRAINER_HILL_1F - 1] = MAP_NUM(TRAINER_HILL_2F),
-    [TRAINER_HILL_2F - 1] = MAP_NUM(TRAINER_HILL_3F),
-    [TRAINER_HILL_3F - 1] = MAP_NUM(TRAINER_HILL_4F),
-    [TRAINER_HILL_4F - 1] = MAP_NUM(TRAINER_HILL_ROOF)
+    [TRAINER_HILL_1F - 1] = MAP_NUM(MAP_TRAINER_HILL_2F),
+    [TRAINER_HILL_2F - 1] = MAP_NUM(MAP_TRAINER_HILL_3F),
+    [TRAINER_HILL_3F - 1] = MAP_NUM(MAP_TRAINER_HILL_4F),
+    [TRAINER_HILL_4F - 1] = MAP_NUM(MAP_TRAINER_HILL_ROOF)
 };
 static const u8 sTrainerPartySlots[HILL_TRAINERS_PER_FLOOR][PARTY_SIZE / 2] =
 {
@@ -345,13 +347,13 @@ static void FreeDataStruct(void)
     TRY_FREE_AND_SET_NULL(sHillData);
 }
 
-void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
+void CopyTrainerHillTrainerText(u8 which, u16 localId)
 {
     u8 id, floorId;
 
     SetUpDataStruct();
     floorId = GetFloorId();
-    id = trainerId - 1;
+    id = localId - 1;
 
     switch (which)
     {
@@ -428,6 +430,8 @@ static void GiveChallengePrize(void)
         gSaveBlock1Ptr->trainerHill.receivedPrize = TRUE;
         gSaveBlock2Ptr->frontier.unk_EF9 = 0;
         gSpecialVar_Result = 0;
+        if (Random() % 3 == 0)
+            UpdateGymLeaderRematch();
     }
     else
     {
@@ -659,17 +663,17 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
     return TRUE;
 }
 
-static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
+static u16 GetMapDataForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
 {
     bool8 impassable;
-    u16 metatile;
+    u16 metatileId;
     u16 elevation;
 
     impassable = (sHillData->floors[floorId].map.collisionData[y] >> (15 - x) & 1);
-    metatile = sHillData->floors[floorId].map.metatileData[floorWidth * y + x] + NUM_METATILES_IN_PRIMARY;
-    elevation = 3 << MAPGRID_ELEVATION_SHIFT;
+    metatileId = sHillData->floors[floorId].map.metatileData[floorWidth * y + x] + NUM_METATILES_IN_PRIMARY;
+    elevation = PACK_ELEVATION(ELEVATION_DEFAULT);
 
-    return ((impassable << MAPGRID_COLLISION_SHIFT) & MAPGRID_COLLISION_MASK) | elevation | (metatile & MAPGRID_METATILE_ID_MASK);
+    return PACK_COLLISION(impassable) | elevation | PACK_METATILE(metatileId);
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
@@ -714,7 +718,7 @@ void GenerateTrainerHillFloorLayout(u16 *mapArg)
     for (y = 0; y < HILL_FLOOR_HEIGHT_MAIN; y++)
     {
         for (x = 0; x < HILL_FLOOR_WIDTH; x++)
-            dst[x] = GetMetatileForFloor(mapId, x, y, HILL_FLOOR_WIDTH);
+            dst[x] = GetMapDataForFloor(mapId, x, y, HILL_FLOOR_WIDTH);
         dst += 31;
     }
 
@@ -773,7 +777,7 @@ static bool32 UNUSED OnTrainerHillRoof(void)
 
 const struct WarpEvent* SetWarpDestinationTrainerHill4F(void)
 {
-    const struct MapHeader *header = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(TRAINER_HILL_4F), MAP_NUM(TRAINER_HILL_4F));
+    const struct MapHeader *header = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TRAINER_HILL_4F), MAP_NUM(MAP_TRAINER_HILL_4F));
 
     return &header->events->warps[1];
 }
@@ -792,7 +796,7 @@ const struct WarpEvent* SetWarpDestinationTrainerHillFinalFloor(u8 warpEventId)
     if (numFloors == 0 || numFloors > NUM_TRAINER_HILL_FLOORS)
         numFloors = NUM_TRAINER_HILL_FLOORS;
 
-    header = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(TRAINER_HILL_4F), sNextFloorMapNum[numFloors - 1]);
+    header = Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(MAP_TRAINER_HILL_4F), sNextFloorMapNum[numFloors - 1]);
     return &header->events->warps[0];
 }
 

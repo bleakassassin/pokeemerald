@@ -90,8 +90,8 @@ static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
     [FRONTIER_FACILITY_PALACE]  = {21,  42, 21, 1},
     [FRONTIER_FACILITY_ARENA]   = {28,  56, 28, 1},
     [FRONTIER_FACILITY_FACTORY] = {21,  42, 21, 1},
-    [FRONTIER_FACILITY_PIKE]    = {28, 140, 56, 1},
-    [FRONTIER_FACILITY_PYRAMID] = {21,  70, 35, 0},
+    [FRONTIER_FACILITY_PIKE]    = {56, 112, 56, 1},
+    [FRONTIER_FACILITY_PYRAMID] = {35,  70, 35, 0},
 };
 
 static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZE] =
@@ -500,94 +500,94 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
 static const u8 sBattlePointAwards[][NUM_FRONTIER_FACILITIES][FRONTIER_MODE_COUNT] =
 {
     {
-        {1, 2, 3, 3}, {1, 1}, {4, 5}, {1}, {3, 4}, {1}, {5}
+        {6, 7, 8, 8}, {6, 6}, {9, 10}, {6}, {8, 9}, {6}, {10}
     },
     {
-        {2, 3, 4, 4}, {1, 1}, {4, 5}, {1}, {3, 4}, {1}, {5}
+        {7, 8, 9, 9}, {6, 6}, {9, 10}, {6}, {8, 9}, {6}, {10}
     },
     {
-        {3, 4, 5, 5}, {2, 2}, {5, 6}, {1}, {4, 5}, {2}, {6}
+        {8, 9, 10, 10}, {7, 7}, {10, 11}, {6}, {9, 10}, {7}, {11}
     },
     {
-        {4, 5, 6, 6}, {2, 2}, {5, 6}, {2}, {4, 5}, {2}, {6}
+        {9, 10, 11, 11}, {7, 7}, {10, 11}, {7}, {9, 10}, {7}, {11}
     },
     {
-        {5, 6, 7, 7}, {3, 3}, {6, 7}, {2}, {5, 6}, {2}, {7}
+        {10, 11, 12, 12}, {8, 8}, {11, 12}, {7}, {10, 11}, {7}, {12}
     },
     {
-        {6, 7, 8, 8}, {3, 3}, {6, 7}, {2}, {5, 6}, {4}, {7}
+        {11, 12, 13, 13}, {8, 8}, {11, 12}, {7}, {10, 11}, {9}, {12}
     },
     {
-        {7, 8, 9, 9}, {4, 4}, {7, 8}, {3}, {6, 7}, {4}, {8}
+        {12, 13, 14, 14}, {9, 9}, {12, 13}, {8}, {11, 12}, {9}, {13}
     },
     {
-        {8, 9, 10, 10}, {4, 4}, {7, 8}, {3},{6, 7}, {4}, {8}
+        {13, 14, 15, 15}, {9, 9}, {12, 13}, {8},{11, 12}, {9}, {13}
     },
     {
-        {9, 10, 11, 11}, {5, 5}, {8, 9}, {4}, {7, 8}, {8}, {9}
+        {14, 15, 16, 16}, {10, 10}, {13, 14}, {9}, {12, 13}, {13}, {14}
     },
     {
-        {10, 11, 12, 12}, {5, 5}, {8, 9}, {4}, {7, 8}, {8}, {9}
+        {15, 16, 17, 17}, {10, 10}, {13, 14}, {9}, {12, 13}, {13}, {14}
     },
     {
-        {11, 12, 13, 13}, {6, 6}, {9, 10}, {5,0}, {8, 9}, {8}, {10}
+        {16, 17, 18, 18}, {11, 11}, {14, 15}, {10,0}, {13, 14}, {13}, {15}
     },
     {
-        {12, 13, 14, 14}, {6, 6}, {9, 10}, {6,0}, {8, 9}, {8}, {10}
+        {17, 18, 19, 19}, {11, 11}, {14, 15}, {11,0}, {13, 14}, {13}, {15}
     },
     {
-        {13, 14, 15, 15}, {7, 7}, {10, 11}, {7}, {9, 10}, {10}, {11}
+        {18, 19, 20, 20}, {12, 12}, {15, 16}, {12}, {14, 15}, {15}, {16}
     },
     {
-        {14, 15, 15, 15}, {7, 7}, {10, 11}, {8}, {9, 10}, {10}, {11}
+        {19, 20, 20, 20}, {12, 12}, {15, 16}, {13}, {14, 15}, {15}, {16}
     },
     {
-        {15, 15, 15, 15}, {8, 8}, {11, 12}, {9}, {10, 11}, {10}, {12}
+        {20, 20, 20, 20}, {13, 13}, {16, 17}, {14}, {15, 16}, {15}, {17}
     },
     {
-        {15, 15, 15, 15}, {8, 8}, {11, 12}, {10}, {10, 11}, {10}, {12}
+        {20, 20, 20, 20}, {13, 13}, {16, 17}, {15}, {15, 16}, {15}, {17}
     },
     {
-        {15, 15, 15, 15}, {9, 9}, {12, 13}, {11}, {11, 12}, {12}, {13}
+        {20, 20, 20, 20}, {14, 14}, {17, 18}, {16}, {16, 17}, {17}, {18}
     },
     {
-        {15, 15, 15, 15}, {9, 9}, {12, 13}, {12}, {11, 12}, {12}, {13}
+        {20, 20, 20, 20}, {14, 14}, {17, 18}, {17}, {16, 17}, {17}, {18}
     },
     {
-        {15, 15, 15, 15}, {10, 10}, {13, 14}, {13}, {12, 13}, {12}, {14}
+        {20, 20, 20, 20}, {15, 15}, {18, 19}, {18}, {17, 18}, {17}, {19}
     },
     {
-        {15, 15, 15, 15}, {10, 10}, {13, 14}, {14}, {12, 13}, {12}, {14}
+        {20, 20, 20, 20}, {15, 15}, {18, 19}, {19}, {17, 18}, {17}, {19}
     },
     {
-        {15, 15, 15, 15}, {11, 11}, {14, 15}, {15}, {13, 14}, {12}, {15}
+        {20, 20, 20, 20}, {16, 16}, {19, 20}, {20}, {18, 19}, {17}, {20}
     },
     {
-        {15, 15, 15, 15}, {11, 11}, {14, 15}, {15}, {13, 14}, {14}, {15}
+        {20, 20, 20, 20}, {16, 16}, {19, 20}, {20}, {18, 19}, {19}, {20}
     },
     {
-        {15, 15, 15, 15}, {12, 12}, {15, 15}, {15}, {14, 15}, {14}, {15}
+        {20, 20, 20, 20}, {17, 17}, {20, 20}, {20}, {19, 20}, {19}, {20}
     },
     {
-        {15, 15, 15, 15}, {12, 12}, {15, 15}, {15}, {14, 15}, {14}, {15}
+        {20, 20, 20, 20}, {17, 17}, {20, 20}, {20}, {19, 20}, {19}, {20}
     },
     {
-        {15, 15, 15, 15}, {13, 13}, {15, 15}, {15}, {15, 15}, {14}, {15}
+        {20, 20, 20, 20}, {18, 18}, {20, 20}, {20}, {20, 20}, {19}, {20}
     },
     {
-        {15, 15, 15, 15}, {13, 13}, {15, 15}, {15}, {15, 15}, {15}, {15}
+        {20, 20, 20, 20}, {18, 18}, {20, 20}, {20}, {20, 20}, {20}, {20}
     },
     {
-        {15, 15, 15, 15}, {14, 14}, {15, 15}, {15}, {15, 15}, {15}, {15}
+        {20, 20, 20, 20}, {19, 19}, {20, 20}, {20}, {20, 20}, {20}, {20}
     },
     {
-        {15, 15, 15, 15}, {14, 14}, {15, 15}, {15}, {15, 15}, {15}, {15}
+        {20, 20, 20, 20}, {19, 19}, {20, 20}, {20}, {20, 20}, {20}, {20}
     },
     {
-        {15, 15, 15, 15}, {15, 15}, {15, 15}, {15}, {15, 15}, {15}, {15}
+        {20, 20, 20, 20}, {20, 20}, {20, 20}, {20}, {20, 20}, {20}, {20}
     },
     {
-        {15, 15, 15, 15}, {15, 15}, {15, 15}, {15}, {15, 15}, {15}, {15}
+        {20, 20, 20, 20}, {20, 20}, {20, 20}, {20}, {20, 20}, {20}, {20}
     },
 };
 
@@ -604,7 +604,7 @@ static const u16 sBattledBrainBitFlags[NUM_FRONTIER_FACILITIES][2] =
     [FRONTIER_FACILITY_PYRAMID] = {1 << 12, 1 << 13},
 };
 
-static void (* const sFrontierUtilFuncs[])(void) =
+static void (*const sFrontierUtilFuncs[])(void) =
 {
     [FRONTIER_UTIL_FUNC_GET_STATUS]            = GetChallengeStatus,
     [FRONTIER_UTIL_FUNC_GET_DATA]              = GetFrontierData,
@@ -1083,6 +1083,7 @@ static void PrintTwoStrings(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x
     AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str1, x1, y, TEXT_SKIP_DRAW, NULL);
     ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
     StringExpandPlaceholders(gStringVar4, str2);
+    x2 -= GetStringWidth(gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, -1);
     AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
 }
 
@@ -1127,12 +1128,12 @@ static void ShowDomeResultsWindow(u8 battleMode)
     AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv50, 8, 32, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 8, 96, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    DomePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 64, 121, 32);
-    PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_50], 64, 121, 48);
-    PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_50], 64, 112, 64);
-    DomePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 64, 121, 96);
-    PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_OPEN], 64, 121, 112);
-    PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_OPEN], 64, 112, 128);
+    DomePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_50, 64, 216, 32);
+    PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_50], 64, 216, 48);
+    PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_50], 64, 216, 64);
+    DomePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 64, 216, 96);
+    PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlock2Ptr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_OPEN], 64, 216, 112);
+    PrintTwoStrings(gText_Total, gText_Championships, gSaveBlock2Ptr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_OPEN], 64, 216, 128);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1221,14 +1222,6 @@ static u16 PikeGetWinStreak(u8 lvlMode)
         return winStreak;
 }
 
-static void PikePrintCleared(const u8 *str1, const u8 *str2, u16 num, u8 x1, u8 x2, u8 y)
-{
-    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, str1, x1, y, TEXT_SKIP_DRAW, NULL);
-    ConvertIntToDecimalStringN(gStringVar1, num, STR_CONV_MODE_RIGHT_ALIGN, 4);
-    StringExpandPlaceholders(gStringVar4, str2);
-    AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gStringVar4, x2, y, TEXT_SKIP_DRAW, NULL);
-}
-
 static void PikePrintPrevOrCurrentStreak(u8 lvlMode, u8 x1, u8 x2, u8 y)
 {
     bool8 isCurrent;
@@ -1255,12 +1248,12 @@ static void ShowPikeResultsWindow(void)
     AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_Lv50, 8, 32, TEXT_SKIP_DRAW, NULL);
     AddTextPrinterParameterized(gRecordsWindowId, gSaveBlock2Ptr->optionsCurrentFont, gText_OpenLv, 8, 96, TEXT_SKIP_DRAW, NULL);
     PrintHyphens(10);
-    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 114, 32);
-    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_50], 64, 114, 48);
-    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_50], 64, 114, 64);
-    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 114, 96);
-    PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_OPEN], 64, 114, 112);
-    PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_OPEN], 64, 114, 128);
+    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_50, 64, 216, 32);
+    PrintTwoStrings(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_50], 64, 216, 48);
+    PrintTwoStrings(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_50], 64, 216, 64);
+    PikePrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 216, 96);
+    PrintTwoStrings(gText_Record, gText_RoomsCleared, gSaveBlock2Ptr->frontier.pikeRecordStreaks[FRONTIER_LVL_OPEN], 64, 216, 112);
+    PrintTwoStrings(gText_Total, gText_TimesCleared, gSaveBlock2Ptr->frontier.pikeTotalStreaks[FRONTIER_LVL_OPEN], 64, 216, 128);
     PutWindowTilemap(gRecordsWindowId);
     CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
 }
@@ -1890,7 +1883,7 @@ static void GiveBattlePoints(void)
 
     points = sBattlePointAwards[challengeNum][facility][battleMode];
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-        points += 10;
+        points += 15;
     gSaveBlock2Ptr->frontier.battlePoints += points;
     ConvertIntToDecimalStringN(gStringVar1, points, STR_CONV_MODE_LEFT_ALIGN, 2);
     if (gSaveBlock2Ptr->frontier.battlePoints > MAX_BATTLE_FRONTIER_POINTS)
@@ -1901,8 +1894,8 @@ static void GiveBattlePoints(void)
     IncrementDailyBattlePoints(sBattlePointAwards[challengeNum][facility][battleMode]);
     if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
-        points += 10;
-        IncrementDailyBattlePoints(10);
+        points += 15;
+        IncrementDailyBattlePoints(15);
     }
     if (points > 0xFFFF)
         points = 0xFFFF;

@@ -15,7 +15,7 @@
 #define FLAG_TEMP_4      (TEMP_FLAGS_START + 0x4)
 #define FLAG_TEMP_CUT    (TEMP_FLAGS_START + 0x5)
 #define FLAG_TEMP_ROCK_SMASH (TEMP_FLAGS_START + 0x6)
-#define FLAG_TEMP_7      (TEMP_FLAGS_START + 0x7)  // Unused Flag
+#define FLAG_TEMP_STATS  (TEMP_FLAGS_START + 0x7)
 #define FLAG_TEMP_8      (TEMP_FLAGS_START + 0x8)  // Unused Flag
 #define FLAG_TEMP_9      (TEMP_FLAGS_START + 0x9)  // Unused Flag
 #define FLAG_TEMP_A      (TEMP_FLAGS_START + 0xA)  // Unused Flag
@@ -445,7 +445,7 @@
 #define FLAG_REGISTERED_TRENT                (TRAINER_REGISTERED_FLAGS_START + REMATCH_TRENT)
 #define FLAG_REGISTERED_SAWYER               (TRAINER_REGISTERED_FLAGS_START + REMATCH_SAWYER)
 #define FLAG_REGISTERED_KIRA_AND_DAN         (TRAINER_REGISTERED_FLAGS_START + REMATCH_KIRA_AND_DAN)
-#define FLAG_REGISTERED_WALLY                (TRAINER_REGISTERED_FLAGS_START + REMATCH_WALLY)
+#define FLAG_REGISTERED_WALLY                (TRAINER_REGISTERED_FLAGS_START + REMATCH_WALLY_VR)
 #define FLAG_REGISTERED_ROXANNE              (TRAINER_REGISTERED_FLAGS_START + REMATCH_ROXANNE)
 #define FLAG_REGISTERED_BRAWLY               (TRAINER_REGISTERED_FLAGS_START + REMATCH_BRAWLY)
 #define FLAG_REGISTERED_WATTSON              (TRAINER_REGISTERED_FLAGS_START + REMATCH_WATTSON)
@@ -845,7 +845,7 @@
 #define FLAG_HIDE_ROUTE_111_GABBY_AND_TY_1                          0x31C
 #define FLAG_HIDE_ROUTE_118_GABBY_AND_TY_1                          0x31D
 #define FLAG_HIDE_ROUTE_120_GABBY_AND_TY_1                          0x31E
-#define FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3                          0x31F
+#define FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2                          0x31F
 #define FLAG_HIDE_LUGIA                                             0x320
 #define FLAG_HIDE_HO_OH                                             0x321
 #define FLAG_HIDE_LILYCOVE_CONTEST_HALL_REPORTER                    0x322
@@ -949,7 +949,7 @@
 #define FLAG_HIDE_ROUTE_110_TEAM_AQUA                               0x384
 #define FLAG_HIDE_ROUTE_118_GABBY_AND_TY_2                          0x385
 #define FLAG_HIDE_ROUTE_120_GABBY_AND_TY_2                          0x386
-#define FLAG_HIDE_ROUTE_111_GABBY_AND_TY_2                          0x387
+#define FLAG_HIDE_ROUTE_111_GABBY_AND_TY_3                          0x387
 #define FLAG_HIDE_ROUTE_118_GABBY_AND_TY_3                          0x388
 #define FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS                     0x389
 #define FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST                      0x38A
@@ -1288,7 +1288,7 @@
 #define FLAG_UNUSED_0x4D4                                           0x4D4 // Unused Flag
 #define FLAG_UNUSED_0x4D5                                           0x4D5 // Unused Flag
 #define FLAG_UNUSED_0x4D6                                           0x4D6 // Unused Flag
-#define FLAG_UNUSED_0x4D7                                           0x4D7 // Unused Flag
+#define FLAG_SPOKE_TO_HYPER_TRAINING_EXPERT                         0x4D7 // Edited Flag; set if player spoke to expert in Battle Frontier Exchange Service Corner
 #define FLAG_RECEIVED_OVAL_CHARM                                    0x4D8 // Edited Flag; set if player speaks to Birch after obtaining all Hoenn Dex Pokemon
 #define FLAG_RECEIVED_SHINY_CHARM                                   0x4D9 // Edited Flag; set if player speaks to Birch after obtaining all Pokemon
 #define FLAG_READ_STEVENS_LETTER                                    0x4DA // Edited Flag; used to progress post-game state
@@ -1310,9 +1310,9 @@
 #define FLAG_CAUGHT_ARTICUNO                                        0x4EA // Edited Flag; used for Articuno in Altering Cave
 #define FLAG_CAUGHT_ZAPDOS                                          0x4EB // Edited Flag; used for Zapdos in Altering Cave
 #define FLAG_CAUGHT_MOLTRES                                         0x4EC // Edited Flag; used for Moltres in Altering Cave
-#define FLAG_KOBE_TRADE_DONE                                        0x4ED
-#define FLAG_ROMAN_TRADE_DONE                                       0x4EE
-#define FLAG_SKYLAR_TRADE_DONE                                      0x4EF
+#define FLAG_HADEN_TRADE_DONE                                       0x4ED // Edited Flag; used for Lickitung trade at Battle Frontier
+#define FLAG_DONTAE_TRADE_DONE                                      0x4EE // Edited Flag; used for Jynx trade at Battle Frontier
+#define FLAG_REYLEY_TRADE_DONE                                      0x4EF // Edited Flag; used for Mr. Mime trade at Battle Frontier
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0x4F0
 #define FLAG_DEFEATED_DEWFORD_GYM                                   0x4F1
@@ -1388,7 +1388,7 @@
 #define FLAG_HEALED_AT_POKEMON_CENTER               (SYSTEM_FLAGS + 0x21) // Edited Flag; used to shorten Pokemon Center lady dialogue after first heal
 #define FLAG_ORGANIZED_POKEMON_STORAGE              (SYSTEM_FLAGS + 0x22) // Edited Flag; set if Lanette moved the "Move Pokemon" setting in storage system to the top
 #define FLAG_WON_LEAGUE_REMATCHES                   (SYSTEM_FLAGS + 0x23) // Edited Flag; set after beating Pokemon League rematches
-#define FLAG_UNUSED_0x884                           (SYSTEM_FLAGS + 0x24) // Unused Flag
+#define FLAG_SYS_FAST_SURF                          (SYSTEM_FLAGS + 0x24) // Edited Flag; set to enable faster surfing if used by a Pokemon in the player's party
 #define FLAG_UNUSED_0x885                           (SYSTEM_FLAGS + 0x25) // Unused Flag
 #define FLAG_UNUSED_0x886                           (SYSTEM_FLAGS + 0x26) // Unused Flag
 #define FLAG_SYS_WILD_FIELD_MOVE                    (SYSTEM_FLAGS + 0x27)

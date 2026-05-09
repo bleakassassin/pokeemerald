@@ -4233,16 +4233,16 @@ const struct Item gItems[] =
 
 // FireRed/LeafGreen key items
 
-    [ITEM_OAKS_PARCEL] =
+    [ITEM_ABILITY_CAPSULE] =
     {
-        .name = _("Oak's Parcel"),
-        .itemId = ITEM_OAKS_PARCEL,
+        .name = _("Ability Cap"),
+        .itemId = ITEM_ABILITY_CAPSULE,
         .price = 0,
-        .description = sOaksParcelDesc,
-        .importance = 2,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .description = sAbilityCapsuleDesc,
+        .importance = 1,
+        .pocket = POCKET_MEDICINE,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_AbilityCapsule,
     },
 
     [ITEM_POKE_FLUTE] =

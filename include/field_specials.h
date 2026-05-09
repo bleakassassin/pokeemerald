@@ -5,7 +5,7 @@ extern bool8 gBikeCyclingChallenge;
 extern u8 gBikeCollisions;
 
 u8 GetLeadMonIndex(void);
-u8 IsDestinationBoxFull(void);
+bool8 IsDestinationBoxFull(void);
 u16 GetPCBoxToSendMon(void);
 bool8 InMultiPartnerRoom(void);
 void UpdateTrainerFansAfterLinkBattle(void);
@@ -24,6 +24,7 @@ void FrontierGamblerSetWonOrLost(bool8 won);
 u8 TryGainNewFanFromCounter(u8 incrementId);
 bool8 InPokemonCenter(void);
 void SetShoalItemFlag(u16 unused);
+void GiveFrontierBattlePoints(void);
 void UpdateFrontierManiac(u16 daysSince);
 void UpdateFrontierGambler(u16 daysSince);
 void ResetCyclingRoadChallengeData(void);
