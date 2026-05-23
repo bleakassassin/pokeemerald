@@ -3463,15 +3463,18 @@ static void Cmd_getexp(void)
         }
         break;
     case 3: // Set stats and give exp
-        MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
-
-        if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
-            gBattleScripting.getexpState = 5;
-
-        else if (gBattleControllerExecFlags == 0)
+        if (gBattleControllerExecFlags == 0)
         {
+            MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
             gBattleBufferB[gBattleStruct->expGetterBattlerId][0] = 0;
-            if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
+
+            if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
+            {
+                gBattleScripting.getexpState = 5;
+                gBattleMoveDamage = 0;
+            }
+
+            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
             {
                 gBattleResources->beforeLvlUp->stats[STAT_HP]    = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_MAX_HP);
                 gBattleResources->beforeLvlUp->stats[STAT_ATK]   = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_ATK);
@@ -3483,8 +3486,8 @@ static void Cmd_getexp(void)
                 gActiveBattler = gBattleStruct->expGetterBattlerId;
                 BtlController_EmitExpUpdate(B_COMM_TO_CONTROLLER, gBattleStruct->expGetterMonId, gBattleMoveDamage);
                 MarkBattlerForControllerExec(gActiveBattler);
+                gBattleScripting.getexpState++;
             }
-            gBattleScripting.getexpState++;
         }
         break;
     case 4: // lvl up if necessary
