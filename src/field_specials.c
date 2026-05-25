@@ -4619,7 +4619,7 @@ void HyperTrainStats(void)
     u8 trained = TRUE;
     u32 i;
 
-    if (gSpecialVar_0x8004 > 24)
+    if (gSpecialVar_0x8004 > 25)
     {
         for (i = 0; i < NUM_STATS; i++)
         {
