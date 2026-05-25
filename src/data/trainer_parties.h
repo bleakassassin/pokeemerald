@@ -9973,25 +9973,20 @@ static const struct TrainerMonNoItemDefaultMoves sParty_GruntMagmaHideout16[] = 
     }
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_TabithaMagmaHideout[] = {
+static const struct TrainerMonNoItemDefaultMoves sParty_Courtney[] = {
     {
     .iv = 75,
-    .lvl = 26,
-    .species = SPECIES_NUMEL,
-    },
-    {
-    .iv = 75,
-    .lvl = 28,
+    .lvl = 30,
     .species = SPECIES_MIGHTYENA,
     },
     {
     .iv = 75,
-    .lvl = 30,
-    .species = SPECIES_ZUBAT,
+    .lvl = 32,
+    .species = SPECIES_GOLBAT,
     },
     {
     .iv = 75,
-    .lvl = 33,
+    .lvl = 34,
     .species = SPECIES_CAMERUPT,
     }
 };

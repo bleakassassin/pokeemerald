@@ -71,8 +71,8 @@
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {
-      "local_id": "LOCALID_MAGMA_HIDEOUT_4F_TABITHA",
-      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
+      "local_id": "LOCALID_MAGMA_HIDEOUT_4F_COURTNEY",
+      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_F",
       "x": 22,
       "y": 4,
       "elevation": 0,
@@ -81,7 +81,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "4",
-      "script": "MagmaHideout_4F_EventScript_Tabitha",
+      "script": "MagmaHideout_4F_EventScript_Courtney",
       "flag": "FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS"
     },
     {

@@ -2500,7 +2500,6 @@ extern const u32 gTrainerFrontPic_LeaderFlannery[];
 extern const u32 gTrainerFrontPic_LeaderNorman[];
 extern const u32 gTrainerFrontPic_LeaderWinona[];
 extern const u32 gTrainerFrontPic_LeaderTateAndLiza[];
-extern const u32 gTrainerFrontPic_LeaderWallace[];
 extern const u32 gTrainerFrontPic_LeaderJuan[];
 extern const u32 gTrainerFrontPic_SchoolKidM[];
 extern const u32 gTrainerFrontPic_SchoolKidF[];
@@ -2547,6 +2546,8 @@ extern const u32 gTrainerFrontPic_Red[];
 extern const u32 gTrainerFrontPic_Leaf[];
 extern const u32 gTrainerFrontPic_RubySapphireBrendan[];
 extern const u32 gTrainerFrontPic_RubySapphireMay[];
+extern const u32 gTrainerFrontPic_MagmaAdminF[];
+extern const u32 gTrainerFrontPic_LeaderWallace[];
 
 extern const u32 gTrainerPalette_Hiker[];
 extern const u32 gTrainerPalette_AquaGruntM[];
