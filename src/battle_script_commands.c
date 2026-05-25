@@ -3367,9 +3367,13 @@ static void Cmd_getexp(void)
                 gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
-            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL
-                || GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_IS_EGG)
+            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_IS_EGG)
                 || !GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
+            {
+                gBattleScripting.getexpState = 5;
+                gBattleMoveDamage = 0; // used for exp
+            }
+            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL) == MAX_LEVEL)
             {
                 gBattleScripting.getexpState++;
                 gBattleMoveDamage = 0; // used for exp
