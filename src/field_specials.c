@@ -2612,9 +2612,9 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     {
         gText_UpGrade5BP,
         gText_DragonScale5BP,
+        gText_Everstone10BP,
         gText_DeepSeaTooth10BP,
         gText_DeepSeaScale10BP,
-        gText_Everstone10BP,
         gText_WhiteHerb48BP,
         gText_MentalHerb48BP,
         gText_QuickClaw48BP,
