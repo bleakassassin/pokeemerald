@@ -4595,7 +4595,7 @@ bool8 CheckIfIVsMaxed(void)
         }
     }
 
-    gSpecialVar_0x8004 = j * 24;
+    gSpecialVar_0x8004 = j * 25;
 
     if (j > 0)
         return FALSE;
