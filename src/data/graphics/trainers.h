@@ -139,8 +139,6 @@ const u32 gTrainerPalette_LeaderWinona[] = INCGFX_U32("graphics/trainers/front_p
 const u32 gTrainerFrontPic_LeaderTateAndLiza[] = INCGFX_U32("graphics/trainers/front_pics/leader_tate_and_liza.png", ".4bpp.lz");
 const u32 gTrainerPalette_LeaderTateAndLiza[] = INCGFX_U32("graphics/trainers/front_pics/leader_tate_and_liza.png", ".gbapal.lz");
 
-const u32 gTrainerFrontPic_LeaderWallace[] = INCGFX_U32("graphics/trainers/front_pics/leader_wallace.png", ".4bpp.lz");
-
 const u32 gTrainerFrontPic_LeaderJuan[] = INCGFX_U32("graphics/trainers/front_pics/leader_juan.png", ".4bpp.lz");
 const u32 gTrainerPalette_LeaderJuan[] = INCGFX_U32("graphics/trainers/front_pics/leader_juan.png", ".gbapal.lz");
 
@@ -278,6 +276,10 @@ const u32 gTrainerPalette_RubySapphireBrendan[] = INCGFX_U32("graphics/trainers/
 
 const u32 gTrainerFrontPic_RubySapphireMay[] = INCGFX_U32("graphics/trainers/front_pics/may_rs.png", ".4bpp.lz");
 const u32 gTrainerPalette_RubySapphireMay[] = INCGFX_U32("graphics/trainers/palettes/may_rs.pal", ".gbapal.lz");
+
+const u32 gTrainerFrontPic_MagmaAdminF[] = INCGFX_U32("graphics/trainers/front_pics/magma_admin_f.png", ".4bpp.lz");
+
+const u32 gTrainerFrontPic_LeaderWallace[] = INCGFX_U32("graphics/trainers/front_pics/leader_wallace.png", ".4bpp.lz");
 
 const u8 gTrainerBackPic_Brendan[] = INCGFX_U8("graphics/trainers/back_pics/brendan.png", ".4bpp");
 const u8 gTrainerBackPic_May[] = INCGFX_U8("graphics/trainers/back_pics/may.png", ".4bpp");

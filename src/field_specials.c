@@ -2612,9 +2612,9 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     {
         gText_UpGrade5BP,
         gText_DragonScale5BP,
+        gText_Everstone10BP,
         gText_DeepSeaTooth10BP,
         gText_DeepSeaScale10BP,
-        gText_Everstone10BP,
         gText_WhiteHerb48BP,
         gText_MentalHerb48BP,
         gText_QuickClaw48BP,
@@ -4595,7 +4595,7 @@ bool8 CheckIfIVsMaxed(void)
         }
     }
 
-    gSpecialVar_0x8004 = j * 24;
+    gSpecialVar_0x8004 = j * 25;
 
     if (j > 0)
         return FALSE;
@@ -4619,7 +4619,7 @@ void HyperTrainStats(void)
     u8 trained = TRUE;
     u32 i;
 
-    if (gSpecialVar_0x8004 > 24)
+    if (gSpecialVar_0x8004 > 25)
     {
         for (i = 0; i < NUM_STATS; i++)
         {

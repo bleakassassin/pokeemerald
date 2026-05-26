@@ -138,7 +138,13 @@ static EWRAM_DATA struct PokemonSummaryScreenData
     {
         u16 species; // 0x0
         u16 species2; // 0x2
-        u8 isEgg; // 0x4
+        u8 isEgg:1; // 0x4
+        u8 hyperTrainedHP:1;
+        u8 hyperTrainedAtk:1;
+        u8 hyperTrainedDef:1;
+        u8 hyperTrainedSpAtk:1;
+        u8 hyperTrainedSpDef:1;
+        u8 hyperTrainedSpeed:1;
         u8 level; // 0x5
         u8 ribbonCount; // 0x6
         u8 ailment; // 0x7
@@ -1478,6 +1484,12 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
             sum->spatk = GetMonData(mon, MON_DATA_SPATK);
             sum->spdef = GetMonData(mon, MON_DATA_SPDEF);
             sum->speed = GetMonData(mon, MON_DATA_SPEED);
+            sum->hyperTrainedHP = GetMonData(mon, MON_DATA_HYPER_TRAINED_HP);
+            sum->hyperTrainedAtk = GetMonData(mon, MON_DATA_HYPER_TRAINED_ATK);
+            sum->hyperTrainedDef = GetMonData(mon, MON_DATA_HYPER_TRAINED_DEF);
+            sum->hyperTrainedSpAtk = GetMonData(mon, MON_DATA_HYPER_TRAINED_SPATK);
+            sum->hyperTrainedSpDef = GetMonData(mon, MON_DATA_HYPER_TRAINED_SPDEF);
+            sum->hyperTrainedSpeed = GetMonData(mon, MON_DATA_HYPER_TRAINED_SPEED);
         }
         else
         {
@@ -1490,6 +1502,12 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
             sum->spatk = GetMonData(mon, MON_DATA_SPATK2);
             sum->spdef = GetMonData(mon, MON_DATA_SPDEF2);
             sum->speed = GetMonData(mon, MON_DATA_SPEED2);
+            sum->hyperTrainedHP = GetMonData(mon, MON_DATA_HYPER_TRAINED_HP);
+            sum->hyperTrainedAtk = GetMonData(mon, MON_DATA_HYPER_TRAINED_ATK);
+            sum->hyperTrainedDef = GetMonData(mon, MON_DATA_HYPER_TRAINED_DEF);
+            sum->hyperTrainedSpAtk = GetMonData(mon, MON_DATA_HYPER_TRAINED_SPATK);
+            sum->hyperTrainedSpDef = GetMonData(mon, MON_DATA_HYPER_TRAINED_SPDEF);
+            sum->hyperTrainedSpeed = GetMonData(mon, MON_DATA_HYPER_TRAINED_SPEED);
         }
         break;
     case 3:
@@ -3545,36 +3563,18 @@ static void DisplayStatsOrIVRanks(bool8 mode)
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
         PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_RIGHT), gStringVar4, 2, 0, 0, 0);
 
-        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_HP))
-        {
-            statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_HP, 42);
-            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_HP, statsXPos, 0, 0, 8);
-        }
-        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_ATK))
-        {
-            statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Attack, 42);
-            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack, statsXPos, 16, 0, 8);
-        }
-        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_DEF))
-        {
-            statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Defense, 42);
-            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense, statsXPos, 32, 0, 8);
-        }
-        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_SPATK))
-        {
-            statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpAtk, 36);
-            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk, statsXPos, 0, 0, 8);
-        }
-        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_SPDEF))
-        {
-            statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpDef, 36);
-            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef, statsXPos, 16, 0, 8);
-        }
-        if (GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HYPER_TRAINED_SPEED))
-        {
-            statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Speed, 36);
-            PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed, statsXPos, 32, 0, 8);
-        }
+        statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_HP, 42);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_HP, statsXPos, 0, 0, 1 + (7 * sMonSummaryScreen->summary.hyperTrainedHP));
+        statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Attack, 42);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Attack, statsXPos, 16, 0, 1 + (7 * sMonSummaryScreen->summary.hyperTrainedAtk));
+        statsXPos = 6 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Defense, 42);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_LEFT, gText_Defense, statsXPos, 32, 0, 1 + (7 * sMonSummaryScreen->summary.hyperTrainedDef));
+        statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpAtk, 36);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpAtk, statsXPos, 0, 0, 1 + (7 * sMonSummaryScreen->summary.hyperTrainedSpAtk));
+        statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_SpDef, 36);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_SpDef, statsXPos, 16, 0, 1 + (7 * sMonSummaryScreen->summary.hyperTrainedSpDef));
+        statsXPos = 2 + GetStringCenterAlignXOffset(gSaveBlock2Ptr->optionsCurrentFont, gText_Speed, 36);
+        PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATS_RIGHT, gText_Speed, statsXPos, 32, 0, 1 + (7 * sMonSummaryScreen->summary.hyperTrainedSpeed));
         break;
     default:
         BufferStat(currHPString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
