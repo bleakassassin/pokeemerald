@@ -55,7 +55,7 @@ struct TrainerCardData
     bool8 hasHofResult;
     bool8 hasLinkResults;
     bool8 hasBattleTowerWins;
-    bool8 unused_E;
+    bool8 isHack;
     bool8 unused_F;
     bool8 hasTrades;
     u8 badgeCount[NUM_BADGES];
@@ -572,7 +572,7 @@ static bool8 LoadCardGfx(void)
             LZ77UnCompWram(gKantoTrainerCard_Gfx, sData->cardTiles);
         break;
     case 5:
-        if (sData->cardType == CARD_TYPE_FRLG)
+        if (sData->cardType == CARD_TYPE_FRLG || sData->isHack == TRUE)
             LZ77UnCompWram(sTrainerCardStickers_Gfx, sData->stickerTiles);
         break;
     default:
@@ -727,6 +727,12 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
 
     trainerCard->money = GetMoney(&gSaveBlock1Ptr->money);
 
+    trainerCard->isHack = TRUE;
+    trainerCard->shouldDrawStickers = TRUE;
+    trainerCard->stickers[0] = FlagGet(FLAG_SCOTT_GIVES_BATTLE_POINTS);
+    trainerCard->stickers[1] = FlagGet(FLAG_RECEIVED_OVAL_CHARM);
+    trainerCard->stickers[2] = FlagGet(FLAG_RECEIVED_SHINY_CHARM);
+
     for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
         trainerCard->easyChatProfile[i] = gSaveBlock1Ptr->easyChatProfile[i];
 
@@ -819,7 +825,7 @@ static void SetDataFromTrainerCard(void)
     sData->hasHofResult = FALSE;
     sData->hasLinkResults = FALSE;
     sData->hasBattleTowerWins = FALSE;
-    sData->unused_E = FALSE;
+    sData->isHack = FALSE;
     sData->unused_F = FALSE;
     sData->hasTrades = FALSE;
     memset(sData->badgeCount, 0, sizeof(sData->badgeCount));
@@ -837,6 +843,9 @@ static void SetDataFromTrainerCard(void)
         sData->hasTrades++;
     if (sData->trainerCard.battleTowerWins || sData->trainerCard.battleTowerStraightWins)
         sData->hasBattleTowerWins++;
+
+    if (sData->trainerCard.isHack)
+        sData->isHack++;
 
     for (i = 0, badgeFlag = FLAG_BADGE01_GET; badgeFlag < FLAG_BADGE01_GET + NUM_BADGES; badgeFlag++, i++)
     {
@@ -1376,7 +1385,7 @@ static void PrintStickersOnCard(void)
     u8 i;
     u8 paletteSlots[4] = {11, 12, 13, 14};
 
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.shouldDrawStickers == TRUE)
+    if ((sData->cardType == CARD_TYPE_FRLG || sData->isHack == TRUE) && sData->trainerCard.shouldDrawStickers == TRUE)
     {
         for (i = 0; i < TRAINER_CARD_STICKER_TYPES; i++)
         {
