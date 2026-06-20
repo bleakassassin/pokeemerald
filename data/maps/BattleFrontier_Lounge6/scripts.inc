@@ -243,7 +243,7 @@ BattleFrontier_Lounge6_Text_YouWontTradeMe:
 BattleFrontier_Lounge6_Text_GoingToMakeVolbeatStrong:
 	.string "I'm going to make VOLBEAT super\n"
 	.string "strong from this moment on!\p"
-	.string "I hope you do the same with SMOOCHUM!$"
+	.string "I hope you do the same with FARFETCH'D!$"
 
 BattleFrontier_Lounge6_Text_WillingToTradeIt:
 	.string "Check out this {STR_VAR_2}!\p"
