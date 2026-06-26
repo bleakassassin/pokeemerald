@@ -4674,3 +4674,26 @@ void ChangeNatureMod(void)
     SetMonData(&gPlayerParty[gSpecialVar_0x8006], MON_DATA_NATURE_MOD, &natureMod);
     CalculateMonStats(&gPlayerParty[gSpecialVar_0x8006]);
 }
+
+void MassageServices(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_FEEBAS)
+    {
+        u8 feebasBeauty = GetMonData(mon, MON_DATA_BEAUTY);
+
+        if (feebasBeauty < 170) // Only proceed if Feebas isn't at the Beauty threshold to evolve to Milotic; ignores sheen
+        {
+            u16 feebasSheen = GetMonData(mon, MON_DATA_SHEEN) + 22; // Increase sheen by 22
+
+            feebasBeauty += 32; // Increase Beauty by 32; both values taken from Daisy Oak's grooming session in HG/SS
+            if (feebasSheen > MAX_SHEEN)
+                feebasSheen = MAX_SHEEN;
+            SetMonData(mon, MON_DATA_BEAUTY, &feebasBeauty);
+            SetMonData(mon, MON_DATA_SHEEN, &feebasSheen);
+        }
+    }
+    AdjustFriendship(mon, FRIENDSHIP_EVENT_MASSAGE);
+    FlagSet(FLAG_DAILY_MASSAGE_SERVICE);
+}

@@ -917,6 +917,45 @@ SlateportCity_EventScript_BerryCrushRankingsSign::
 	releaseall
 	end
 
+SlateportCity_EventScript_Groomer::
+	lock
+	faceplayer
+	goto_if_set FLAG_DAILY_MASSAGE_SERVICE, SlateportCity_EventScript_AlreadyMassaged
+	msgbox SlateportCity_Text_ProvideMassagesToPokemon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, SlateportCity_EventScript_DeclinedMassage
+	msgbox SlateportCity_Text_WhichCouldUseMassage, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SlateportCity_EventScript_DeclinedMassage
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+	goto_if_eq VAR_RESULT, SPECIES_EGG, SlateportCity_CantMassageEgg
+	msgbox SlateportCity_Text_TimeToGetToWork
+	closemessage
+	fadescreen FADE_TO_BLACK
+	playfanfare MUS_HEAL
+	waitfanfare
+	special MassageServices
+	fadescreen FADE_FROM_BLACK
+	special BufferMonNickname
+	msgbox SlateportCity_Text_MonLooksDreamilyContent, MSGBOX_DEFAULT
+	msgbox SlateportCity_Text_ThereWeGoMoreFriendly, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_EventScript_DeclinedMassage::
+	msgbox SlateportCity_EventScript_FeelFreeToStopByHere, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_EventScript_AlreadyMassaged::
+	msgbox SlateportCity_Text_MassageTimeToRecover, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_CantMassageEgg::
+	msgbox SlateportCity_Text_CantMassageEgg, MSGBOX_DEFAULT
+	release
+	end
+
 SlateportCity_Text_EnergyGuruSellWhatYouNeed:
 	.string "I'm the ENERGY GURU! I'll go for it and\n"
 	.string "sell you what you need!$"
@@ -1307,6 +1346,43 @@ SlateportCity_Text_ComeBackToTradeBerryPowder:
 	.string "BERRY POWDER for some medicine.\p"
 	.string "I'm always running a bazaar here.\p"
 	.string "Did you know?$"
+
+SlateportCity_Text_ProvideMassagesToPokemon:
+	.string "Well, hello there!\p"
+	.string "I provide massages to POKéMON to help\n"
+	.string "them look and feel better.\p"
+	.string "Would you like me to give one of your\n"
+	.string "POKéMON a treatment?$"
+
+SlateportCity_Text_WhichCouldUseMassage:
+	.string "Which one could use a massage?$"
+
+SlateportCity_Text_TimeToGetToWork:
+	.string "Okay!\n"
+	.string "Time for me to get to work.$"
+
+SlateportCity_Text_MonLooksDreamilyContent:
+	.string "{STR_VAR_1} looks dreamily content…$"
+
+SlateportCity_Text_ThereWeGoMoreFriendly:
+	.string "There we go! All done.\n"
+	.string "It looks so relaxed now.\p"
+	.string "I'd say that made your POKéMON more\n"
+	.string "friendly towards you!$"
+
+SlateportCity_EventScript_FeelFreeToStopByHere:
+	.string "Is that so? Feel free to stop by here\n"
+	.string "if you reconsider!$"
+
+SlateportCity_Text_MassageTimeToRecover:
+	.string "That massage took a lot out of me.\n"
+	.string "I'll need some time to recover.\p"
+	.string "Come back tomorrow if you'd like me to\n"
+	.string "give another massage!$"
+
+SlateportCity_Text_CantMassageEgg:
+	.string "I can't possibly massage an EGG!\n"
+	.string "I can only do that for hatched POKéMON.$"
 
 SlateportCity_Text_YouDroveTeamAquaAway:
 	.string "SCOTT: Huh?\n"

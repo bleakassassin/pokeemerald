@@ -554,3 +554,4 @@ gSpecials::
 	def_special BufferNatureName
 	def_special ChangeNatureMod
 	def_special IsSelectedMonNicknamedOrNotEnglish
+	def_special MassageServices
