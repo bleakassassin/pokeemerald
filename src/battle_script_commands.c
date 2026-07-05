@@ -3423,7 +3423,10 @@ static void Cmd_getexp(void)
                         }
                         else
                         {
-                            gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
+                            if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LANGUAGE) != GAME_LANGUAGE)
+                                gBattleMoveDamage = (gBattleMoveDamage * 170) / 100;
+                            else
+                                gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                             i = STRINGID_ABOOSTED;
                         }
                     }
