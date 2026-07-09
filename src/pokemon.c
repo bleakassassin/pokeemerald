@@ -2159,7 +2159,7 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
     .callback = SpriteCallbackDummy,
 };
 
-#define RUBY_POKEMON       6
+#define RUBY_POKEMON       7
 #define SAPPHIRE_POKEMON   1
 #define FIRERED_POKEMON   64
 #define LEAFGREEN_POKEMON 10
@@ -2167,6 +2167,7 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
 const u16 sRubyPokemon[] =
 {
     SPECIES_CELEBI,
+    SPECIES_SURSKIT,
     SPECIES_MEDITITE,
     SPECIES_MEDICHAM,
     SPECIES_ROSELIA,
