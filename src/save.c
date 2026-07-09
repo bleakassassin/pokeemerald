@@ -19,6 +19,7 @@
 #include "roamer.h"
 #include "save_versions.h"
 #include "script_pokemon_util.h"
+#include "tv.h"
 #include "constants/game_stat.h"
 #include "constants/heal_locations.h"
 #include "constants/items.h"
@@ -1140,6 +1141,7 @@ static void UpdateVanillaSave(void)
     }
     else
     {
+        ClearTVShowData();
         FlagClear(FLAG_HIDE_OCEANIC_MUSEUM_REPORTER);
         FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL);
 
