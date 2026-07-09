@@ -114,6 +114,7 @@ enum
     SPRITE_ARR_ID_MON,
     SPRITE_ARR_ID_BALL,
     SPRITE_ARR_ID_STATUS,
+    SPRITE_ARR_ID_LANGUAGE,
     SPRITE_ARR_ID_TYPE, // 2 for mon types, 5 for move types(4 moves and 1 to learn), used interchangeably, because mon types and move types aren't shown on the same screen
     SPRITE_ARR_ID_MOVE_SELECTOR1 = SPRITE_ARR_ID_TYPE + TYPE_ICON_SPRITE_COUNT, // 10 sprites that make up the selector
     SPRITE_ARR_ID_MOVE_SELECTOR2 = SPRITE_ARR_ID_MOVE_SELECTOR1 + MOVE_SELECTOR_SPRITES_COUNT,
@@ -170,7 +171,8 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u8 ppBonuses; // 0x34
         u8 sanity; // 0x35
         u8 OTName[17]; // 0x36
-        u8 natureMod; // 0x47
+        u8 natureMod:5; // 0x47
+        u8 language:3;
         u32 OTID; // 0x48
     } summary;
     u16 bgTilemapBuffers[PSS_PAGE_COUNT][2][0x400];
@@ -305,6 +307,7 @@ static void SetMoveCategoryIcons(void);
 static void SetNewMoveTypeIcon(void);
 static void SetNewMoveCategoryIcon(void);
 static void SwapMovesTypeSprites(u8, u8);
+static void SetLanguageIcon(void);
 static u8 LoadMonGfxAndSprite(struct Pokemon *, s16 *);
 static u8 CreateMonSprite(struct Pokemon *);
 static void SpriteCB_Pokemon(struct Sprite *);
@@ -319,6 +322,7 @@ static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
+static void CreateLanguageIcon(void);
 
 // const rom data
 #include "data/text/move_descriptions.h"
@@ -749,6 +753,8 @@ static const u8 sButtons_Gfx[][4 * TILE_SIZE_4BPP] = {
     INCGFX_U8("graphics/summary_screen/b_button.png", ".4bpp"),
 };
 
+static const u32 sLanguages_Gfx[] = INCGFX_U32("graphics/summary_screen/languages.png", ".4bpp.lz");
+
 static void (*const sTextPrinterFunctions[])(void) =
 {
     [PSS_PAGE_INFO] = PrintInfoPageText,
@@ -775,7 +781,7 @@ static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
 #define TAG_MON_STATUS 30001
 #define TAG_MOVE_TYPES 30002
 #define TAG_MON_MARKINGS 30003
-#define TAG_MOVE_CATEGORIES 30004
+#define TAG_LANGUAGES 30004
 
 static const struct OamData sOamData_MoveTypes =
 {
@@ -1137,6 +1143,76 @@ static const struct SpriteTemplate sSpriteTemplate_StatusCondition =
 };
 static const u16 sMarkings_Pal[] = INCGFX_U16("graphics/summary_screen/markings.pal", ".gbapal");
 
+static const struct CompressedSpriteSheet sSpriteSheet_Languages =
+{
+    .data = sLanguages_Gfx,
+    .size = NUM_LANGUAGES * 0x80,
+    .tag = TAG_LANGUAGES
+};
+static const struct OamData sOamData_Languages =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+static const union AnimCmd sSpriteAnim_LanguageJapanese[] = {
+    ANIMCMD_FRAME(0, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_LanguageEnglish[] = {
+    ANIMCMD_FRAME(4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_LanguageFrench[] = {
+    ANIMCMD_FRAME(8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_LanguageItalian[] = {
+    ANIMCMD_FRAME(12, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_LanguageGerman[] = {
+    ANIMCMD_FRAME(16, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_LanguageUnknown[] = {
+    ANIMCMD_FRAME(20, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd sSpriteAnim_LanguageSpanish[] = {
+    ANIMCMD_FRAME(24, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+static const union AnimCmd *const sSpriteAnimTable_Languages[] = {
+    sSpriteAnim_LanguageJapanese,
+    sSpriteAnim_LanguageEnglish,
+    sSpriteAnim_LanguageFrench,
+    sSpriteAnim_LanguageItalian,
+    sSpriteAnim_LanguageGerman,
+    sSpriteAnim_LanguageUnknown,
+    sSpriteAnim_LanguageSpanish,
+};
+static const struct SpriteTemplate sSpriteTemplate_Languages =
+{
+    .tileTag = TAG_LANGUAGES,
+    .paletteTag = TAG_LANGUAGES,
+    .oam = &sOamData_Languages,
+    .anims = sSpriteAnimTable_Languages,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
 // code
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void))
 {
@@ -1289,6 +1365,7 @@ static bool8 LoadGraphics(void)
     case 16:
         ResetSpriteIds();
         CreateMoveTypeIcons();
+        CreateLanguageIcon();
         sMonSummaryScreen->switchCounter = 0;
         gMain.state++;
         break;
@@ -1417,6 +1494,10 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 12:
+        LoadCompressedSpriteSheet(&sSpriteSheet_Languages);
+        sMonSummaryScreen->switchCounter++;
+        break;
+    case 13:
         LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
         sMonSummaryScreen->switchCounter = 0;
         return TRUE;
@@ -1520,6 +1601,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
         sum->metGame = GetMonData(mon, MON_DATA_MET_GAME);
         sum->friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+        sum->language = GetMonData(mon, MON_DATA_LANGUAGE);
         break;
     default:
         sum->ribbonCount = GetMonData(mon, MON_DATA_RIBBON_COUNT);
@@ -1727,21 +1809,21 @@ static void Task_ChangeSummaryMon(u8 taskId)
         RemoveAndCreateMonMarkingsSprite(&sMonSummaryScreen->currentMon);
         break;
     case 6:
-        CreateCaughtBallSprite(&sMonSummaryScreen->currentMon);
-        break;
-    case 7:
         if (sMonSummaryScreen->summary.ailment != AILMENT_NONE)
             PositionStatusSlidingWindow(10, -2);
         DrawPokerusCuredSymbol(&sMonSummaryScreen->currentMon);
         data[1] = 0;
         break;
-    case 8:
+    case 7:
         sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON] = LoadMonGfxAndSprite(&sMonSummaryScreen->currentMon, &data[1]);
         if (sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON] == SPRITE_NONE)
             return;
         gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].data[2] = 1;
         TryDrawExperienceProgressBar();
         data[1] = 0;
+        break;
+    case 8:
+        CreateCaughtBallSprite(&sMonSummaryScreen->currentMon);
         break;
     case 9:
         SetTypeIcons();
@@ -3310,6 +3392,15 @@ static void PrintMonTrainerMemo(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_MEMO), gStringVar4, 0, 0, 0, 0);
 }
 
+static void CreateLanguageIcon(void)
+{
+    if (sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_LANGUAGE] == SPRITE_NONE)
+    {
+        sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_LANGUAGE] = CreateSprite(&sSpriteTemplate_Languages, 168, 41, 0);
+        SetSpriteInvisibility(SPRITE_ARR_ID_LANGUAGE, TRUE);
+    }
+}
+
 static void BufferNatureString(void)
 {
     struct PokemonSummaryScreenData *sumStruct = sMonSummaryScreen;
@@ -3963,7 +4054,7 @@ static void HidePageSpecificSprites(void)
     // Keeps Pok�mon, caught ball and status sprites visible.
     u8 i;
 
-    for (i = SPRITE_ARR_ID_TYPE; i < ARRAY_COUNT(sMonSummaryScreen->spriteIds); i++)
+    for (i = SPRITE_ARR_ID_LANGUAGE; i < ARRAY_COUNT(sMonSummaryScreen->spriteIds); i++)
     {
         if (sMonSummaryScreen->spriteIds[i] != SPRITE_NONE)
             SetSpriteInvisibility(i, TRUE);
@@ -3976,6 +4067,7 @@ static void SetTypeIcons(void)
     {
     case PSS_PAGE_INFO:
         SetMonTypeIcons();
+        SetLanguageIcon();
         break;
     case PSS_PAGE_BATTLE_MOVES:
         if (sMonSummaryScreen->showCategory == FALSE)
@@ -4125,6 +4217,28 @@ static void SwapMovesTypeSprites(u8 moveIndex1, u8 moveIndex2)
     sprite1->animEnded = FALSE;
     sprite2->animBeginning = TRUE;
     sprite2->animEnded = FALSE;
+}
+
+static void SetLanguageSpritePosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
+{
+    struct Sprite *sprite = &gSprites[sMonSummaryScreen->spriteIds[spriteArrayId]];
+    StartSpriteAnim(sprite, typeId);
+    sprite->oam.paletteNum = gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_BALL]].oam.paletteNum;
+    sprite->x = x;
+    sprite->y = y;
+    SetSpriteInvisibility(spriteArrayId, FALSE);
+}
+
+static void SetLanguageIcon(void)
+{
+    struct PokeSummary *summary = &sMonSummaryScreen->summary;
+    if (summary->isEgg || summary->language == GAME_LANGUAGE)
+    {
+        SetLanguageSpritePosAndPal(GAME_LANGUAGE - 1, 168, 41, SPRITE_ARR_ID_LANGUAGE); // languages start at 1 instead of 0
+        SetSpriteInvisibility(SPRITE_ARR_ID_LANGUAGE, TRUE);
+    }
+    else
+        SetLanguageSpritePosAndPal(summary->language - 1, 168, 41, SPRITE_ARR_ID_LANGUAGE);
 }
 
 static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
