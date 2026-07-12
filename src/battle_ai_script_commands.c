@@ -92,8 +92,8 @@ static void Cmd_if_equal_(void);
 static void Cmd_if_not_equal_(void);
 static void Cmd_if_user_goes(void);
 static void Cmd_if_user_doesnt_go(void);
-static void Cmd_nop_2A(void);
-static void Cmd_nop_2B(void);
+static void Cmd_if_hard_difficulty(void);
+static void Cmd_if_not_hard_difficulty(void);
 static void Cmd_count_usable_party_mons(void);
 static void Cmd_get_considered_move(void);
 static void Cmd_get_considered_move_effect(void);
@@ -201,8 +201,8 @@ static const BattleAICmdFunc sBattleAICmdTable[] =
     Cmd_if_not_equal_,                              // 0x27
     Cmd_if_user_goes,                               // 0x28
     Cmd_if_user_doesnt_go,                          // 0x29
-    Cmd_nop_2A,                                     // 0x2A
-    Cmd_nop_2B,                                     // 0x2B
+    Cmd_if_hard_difficulty,                         // 0x2A
+    Cmd_if_not_hard_difficulty,                     // 0x2B
     Cmd_count_usable_party_mons,                    // 0x2C
     Cmd_get_considered_move,                        // 0x2D
     Cmd_get_considered_move_effect,                 // 0x2E
@@ -1281,12 +1281,20 @@ static void Cmd_if_user_doesnt_go(void)
         gAIScriptPtr += 6;
 }
 
-static void Cmd_nop_2A(void)
+static void Cmd_if_hard_difficulty(void)
 {
+    if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
+        gAIScriptPtr += 1;
+    else
+        gAIScriptPtr += 5;    
 }
 
-static void Cmd_nop_2B(void)
+static void Cmd_if_not_hard_difficulty(void)
 {
+    if (gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_HARD)
+        gAIScriptPtr += 1;
+    else
+        gAIScriptPtr += 5;    
 }
 
 static void Cmd_count_usable_party_mons(void)
@@ -1486,11 +1494,10 @@ static void Cmd_get_highest_type_effectiveness(void)
         {
             // TypeCalc does not assign to gMoveResultFlags, Cmd_typecalc does
             // This makes the check for gMoveResultFlags below always fail
-#ifdef BUGFIX
-            gMoveResultFlags = TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
-#else
-            TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
-#endif
+            if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
+                gMoveResultFlags = TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+            else
+                TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
 
             if (gBattleMoveDamage == 120) // Super effective STAB.
                 gBattleMoveDamage = AI_EFFECTIVENESS_x2;
@@ -1530,11 +1537,10 @@ static void Cmd_if_type_effectiveness(void)
     // This is how you get the "dual non-immunity" glitch, where AI
     // will use ineffective moves on immune pokémon if the second type
     // has a non-neutral, non-immune effectiveness
-#ifdef BUGFIX
-    gMoveResultFlags = TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
-#else
-    TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
-#endif
+    if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
+        gMoveResultFlags = TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+    else
+        TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
 
     if (gBattleMoveDamage == 120) // Super effective STAB.
         gBattleMoveDamage = AI_EFFECTIVENESS_x2;
@@ -1648,9 +1654,8 @@ static void Cmd_get_weather(void)
     //      as a result of this function.
     //      Assigning AI_WEATHER_NONE here matches the fix implemented in future
     //      generations.
-    #ifdef BUGFIX
+    if (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_NONE;
-    #endif
 
     if (gBattleWeather & B_WEATHER_RAIN)
         AI_THINKING_STRUCT->funcResult = AI_WEATHER_RAIN;
@@ -1788,11 +1793,9 @@ static void Cmd_if_cant_faint(void)
 
     gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
-#ifdef BUGFIX
     // Moves always do at least 1 damage.
-    if (gBattleMoveDamage == 0)
+    if (gBattleMoveDamage == 0 && (gSaveBlock2Ptr->optionsDifficulty == OPTIONS_DIFFICULTY_HARD))
         gBattleMoveDamage = 1;
-#endif
 
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
         gAIScriptPtr = T1_READ_PTR(gAIScriptPtr + 1);
@@ -1909,13 +1912,16 @@ static void Cmd_if_has_move_with_effect(void)
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
             // BUG: checks sBattler_AI instead of gBattlerTarget.
-            #ifndef BUGFIX
-            if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
-                break;
-            #else
-            if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
-                break;
-            #endif
+            if (gSaveBlock2Ptr->optionsDifficulty != OPTIONS_DIFFICULTY_HARD)
+            {
+                if (gBattleMons[sBattler_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            else
+            {
+                if (gBattleMons[gBattlerTarget].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBattlerTarget].moves[i]].effect == gAIScriptPtr[2])
+                    break;
+            }
         }
         if (i == MAX_MON_MOVES)
             gAIScriptPtr += 7;
