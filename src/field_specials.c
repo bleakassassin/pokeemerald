@@ -4697,3 +4697,27 @@ void MassageServices(void)
     AdjustFriendship(mon, FRIENDSHIP_EVENT_MASSAGE);
     FlagSet(FLAG_DAILY_MASSAGE_SERVICE);
 }
+
+bool8 CheckIfNoEVs(void)
+{
+    u8 i;
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    for (i = MON_DATA_HP_EV; i <= MON_DATA_SPDEF_EV; i++)
+    {
+        if (GetMonData(mon, i) != 0)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void ResetEVs(void)
+{
+    u8 i;
+    u8 reset = 0; 
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    for (i = MON_DATA_HP_EV; i <= MON_DATA_SPDEF_EV; i++)
+        SetMonData(mon, i, &reset);
+    CalculateMonStats(mon);
+}

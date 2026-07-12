@@ -555,3 +555,5 @@ gSpecials::
 	def_special ChangeNatureMod
 	def_special IsSelectedMonNicknamedOrNotEnglish
 	def_special MassageServices
+	def_special CheckIfNoEVs
+	def_special ResetEVs
