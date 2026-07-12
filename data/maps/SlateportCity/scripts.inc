@@ -928,7 +928,7 @@ SlateportCity_EventScript_Groomer::
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, SlateportCity_EventScript_DeclinedMassage
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	goto_if_eq VAR_RESULT, SPECIES_EGG, SlateportCity_CantMassageEgg
-	msgbox SlateportCity_Text_TimeToGetToWork
+	msgbox SlateportCity_Text_TimeToGetToWork, MSGBOX_DEFAULT
 	closemessage
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_HEAL
