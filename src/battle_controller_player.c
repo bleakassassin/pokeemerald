@@ -1585,7 +1585,10 @@ u8 TypeEffectiveness(u8 targetId)
                   | ((gBattleMons[gActiveBattler].speedIV & 1) << 3)
                   | ((gBattleMons[gActiveBattler].spAttackIV & 1) << 4)
                   | ((gBattleMons[gActiveBattler].spDefenseIV & 1) << 5);
+
         moveType = ((NUMBER_OF_MON_TYPES - 3) * typeBits) / 63 + 1;
+        if (moveType >= TYPE_MYSTERY)
+            moveType++;
     }
     else if (move == MOVE_WEATHER_BALL)
         moveType = GetWeatherBallType();
