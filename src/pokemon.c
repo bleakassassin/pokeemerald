@@ -2265,6 +2265,18 @@ const u16 sLeafGreenPokemon[] =
 static const u8 sText_OT_Wishmkr[] = _("WISHMKR");
 static const u8 sText_OT_Agate[] = _("AGATE");
 
+static void PadTrainerName(u8 *name, const u8 *string)
+{
+    s8 i;
+
+    for (i = 0; i <= PLAYER_NAME_LENGTH; i++)
+    {
+        name[i] = string[i];
+        if (i > StringLength(string))
+            name[i] = EOS;
+    }    
+}
+
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
     u8 *raw = (u8 *)boxMon;
@@ -2323,6 +2335,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 value;
     u16 checksum;
     u32 shinyValue;
+    const u8 *string = NULL;
     u8 otName[PLAYER_NAME_LENGTH + 1];
     bool8 otGender;
     u32 otId;
@@ -2366,6 +2379,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         otId = 0x00004E4Bu; //20043:00000
         otGender = MALE;
         metLocation = METLOC_FATEFUL_ENCOUNTER;
+        string = sText_OT_Wishmkr;
         do
         {
             if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE)
@@ -2391,6 +2405,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         otId = 0x00007991u; //31121:00000
         otGender = FEMALE;
         metLocation = METLOC_FATEFUL_ENCOUNTER;
+        string = sText_OT_Agate;
         if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE)
         {
             do
@@ -2492,10 +2507,15 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_CHECKSUM, &checksum);
     EncryptBoxMon(boxMon);
     GetSpeciesName(speciesName, species);
-    GetTrainerName(otName, species);
+    if (string != NULL)
+    {
+        PadTrainerName(otName, string);
+        SetBoxMonData(boxMon, MON_DATA_OT_NAME, otName);
+    }
+    else
+        SetBoxMonData(boxMon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetBoxMonData(boxMon, MON_DATA_NICKNAME, speciesName);
     SetBoxMonData(boxMon, MON_DATA_LANGUAGE, &gGameLanguage);
-    SetBoxMonData(boxMon, MON_DATA_OT_NAME, otName);
     SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
     SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].friendship);
@@ -4882,9 +4902,10 @@ void CopyMon(void *dest, void *src, size_t size)
 u8 GiveMonToPlayer(struct Pokemon *mon)
 {
     s32 i;
-    u8 otName[PLAYER_NAME_LENGTH + 1];
     bool8 otGender;
     u32 otId;
+    const u8 *string = NULL;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
     s16 species;
 
     otGender = gSaveBlock2Ptr->playerGender;
@@ -4898,16 +4919,23 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     {
         otGender = MALE;
         otId = 0x00004E4Bu; //20043:00000
+        string = sText_OT_Wishmkr;
     }
 
     else if (species == SPECIES_CELEBI) //Replicate unused Agate Celebi from Pokemon Colosseum disc
     {
         otGender = FEMALE;
         otId = 0x00007991u; //31121:00000
+        string = sText_OT_Agate;
     }
 
-    GetTrainerName(otName, species);
-    SetMonData(mon, MON_DATA_OT_NAME, otName);
+    if (string != NULL)
+    {
+        PadTrainerName(otName, string);
+        SetMonData(mon, MON_DATA_OT_NAME, otName);
+    }
+    else
+        SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetMonData(mon, MON_DATA_OT_GENDER, &otGender);
     SetMonData(mon, MON_DATA_OT_ID, &otId);
 
@@ -5131,26 +5159,6 @@ void GetSpeciesName(u8 *name, u16 species)
             name[i] = gSpeciesNames[SPECIES_NONE][i];
         else
             name[i] = gSpeciesNames[species][i];
-
-        if (name[i] == EOS)
-            break;
-    }
-
-    name[i] = EOS;
-}
-
-void GetTrainerName(u8 *name, u16 species)
-{
-    s8 i;
-
-    for (i = 0; i <= PLAYER_NAME_LENGTH; i++)
-    {
-        if (species == SPECIES_JIRACHI)
-            name[i] = sText_OT_Wishmkr[i];
-        else if (species == SPECIES_CELEBI)
-            name[i] = sText_OT_Agate[i];
-        else
-            name[i] = gSaveBlock2Ptr->playerName[i];
 
         if (name[i] == EOS)
             break;
