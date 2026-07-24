@@ -776,8 +776,14 @@ AI_CheckViability:
 	end
 
 AI_CV_Sleep:
+	if_hard_difficulty AI_CV_Sleep_Bugfix
 	if_has_move_with_effect AI_TARGET, EFFECT_DREAM_EATER, AI_CV_SleepEncourageSlpDamage
 	if_has_move_with_effect AI_TARGET, EFFECT_NIGHTMARE, AI_CV_SleepEncourageSlpDamage
+	goto AI_CV_Sleep_End
+
+AI_CV_Sleep_Bugfix:
+	if_has_move_with_effect AI_USER, EFFECT_DREAM_EATER, AI_CV_SleepEncourageSlpDamage
+	if_has_move_with_effect AI_USER, EFFECT_NIGHTMARE, AI_CV_SleepEncourageSlpDamage
 	goto AI_CV_Sleep_End
 
 AI_CV_SleepEncourageSlpDamage:
@@ -1838,18 +1844,31 @@ AI_CV_Flail_End:
 	end
 
 AI_CV_HealBell:
+	if_hard_difficulty AI_CV_HealBell_Bugfix
 	if_status AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
 	if_status_in_party AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
 	score -5
 AI_CV_HealBell_End:
 	end
 
+AI_CV_HealBell_Bugfix:
+	if_status AI_USER, STATUS1_ANY, AI_CV_HealBell_End
+	if_status_in_party AI_USER_PARTNER, STATUS1_ANY, AI_CV_HealBell_End
+	goto Score_Minus5
+
 AI_CV_Thief:
 	get_hold_effect AI_TARGET
 	if_not_in_bytes AI_CV_Thief_EncourageItemsToSteal, AI_CV_Thief_ScoreDown2
+	if_hard_difficulty AI_CV_Thief_ItemCheck
+AI_CV_Thief2:
 	if_random_less_than 50, AI_CV_Thief_End
 	score +1
 	goto AI_CV_Thief_End
+
+AI_CV_Thief_ItemCheck:
+	get_used_held_item AI_USER
+	if_not_equal ITEM_NONE, AI_CV_Thief_ScoreDown2
+	goto AI_CV_Thief2
 
 AI_CV_Thief_ScoreDown2:
 	score -2
