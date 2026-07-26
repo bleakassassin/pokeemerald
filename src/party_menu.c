@@ -312,6 +312,7 @@ static void HandleChooseMonSelection(u8, s8 *);
 static u16 PartyMenuButtonHandler(s8 *);
 static s8 *GetCurrentPartySlotPtr(void);
 static bool8 IsSelectedMonNotEgg(u8 *);
+static bool8 DoesMonHaveTwoAbilities(u16);
 static void PartyMenuRemoveWindow(u8 *);
 static void CB2_SetUpExitToBattleScreen(void);
 static void Task_ClosePartyMenuAfterText(u8);
@@ -1006,6 +1007,10 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
             if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item) != SPECIES_NONE)
                 return FALSE;
             DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
+        case ITEM_IS_ABILITY_CAPSULE:
+            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && DoesMonHaveTwoAbilities(GetMonData(currentPokemon, MON_DATA_SPECIES, NULL)))
+                return FALSE;
+            DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
             break;
         }
     }
@@ -1375,6 +1380,14 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             break;
         }
     }
+}
+
+static bool8 DoesMonHaveTwoAbilities(u16 species)
+{
+    if (gSpeciesInfo[species].abilities[1] == 0 || gSpeciesInfo[species].abilities[0] == gSpeciesInfo[species].abilities[1])
+        return FALSE;
+    else
+        return TRUE;
 }
 
 static bool8 IsSelectedMonNotEgg(u8 *slotPtr)
@@ -4742,10 +4755,9 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc task)
 void ItemUseCB_AbilityCapsule(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 abilityNumAlt = GetMonData(mon, MON_DATA_ABILITY_CAPSULE_TOGGLE, NULL);
 
-    if (gSpeciesInfo[species].abilities[1] == 0 || gSpeciesInfo[species].abilities[0] == gSpeciesInfo[species].abilities[1])
+    if (!DoesMonHaveTwoAbilities(GetMonData(mon, MON_DATA_SPECIES, NULL)))
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);

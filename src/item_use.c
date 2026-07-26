@@ -183,6 +183,8 @@ u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
         return ITEM_IS_TM_HM;
     else if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_EvolutionStone)
         return ITEM_IS_EVOLUTION_STONE;
+    else if (GetItemFieldFunc(itemId) == ItemUseOutOfBattle_AbilityCapsule)
+        return ITEM_IS_ABILITY_CAPSULE;
     else
         return ITEM_IS_OTHER;
 }
