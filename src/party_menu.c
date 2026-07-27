@@ -4641,7 +4641,10 @@ static void ShowMoveSelectWindow(u8 slot)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         move = GetMonData(&gPlayerParty[slot], MON_DATA_MOVE1 + i);
-        AddTextPrinterParameterized(windowId, fontId, gMoveNames[move], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
+        if (GetMonData(&gPlayerParty[slot], MON_DATA_PP1 + i) == 0)
+            AddTextPrinterParameterized3(windowId, fontId, 8, (i * 16), sFontColorTable[5], TEXT_SKIP_DRAW, gMoveNames[move]);
+        else
+            AddTextPrinterParameterized3(windowId, fontId, 8, (i * 16), sFontColorTable[3], TEXT_SKIP_DRAW, gMoveNames[move]);
         if (move != MOVE_NONE)
             moveCount++;
     }
