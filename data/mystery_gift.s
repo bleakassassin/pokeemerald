@@ -1,5 +1,6 @@
 #include "constants/global.h"
 #include "constants/flags.h"
+#include "constants/comparison_operators.h"
 #include "constants/items.h"
 #include "constants/map_scripts.h"
 #include "constants/mystery_gift.h"

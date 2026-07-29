@@ -2135,7 +2135,7 @@ extern const u8 gText_PokemonCantBeSame[];
 extern const u8 gText_NoIdenticalHoldItems[];
 extern const u8 gText_DoWhatWithPokemon[];
 extern const u8 gText_RestoreWhichMove[];
-extern const u8 gText_BoostPp[];
+extern const u8 gText_BoostPP[];
 extern const u8 gText_PkmnSwitchedAbilities[];
 extern const u8 gText_DoWhatWithItem[];
 extern const u8 gText_DoWhatWithMail[];

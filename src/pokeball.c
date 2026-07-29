@@ -1319,9 +1319,12 @@ void LoadBallGfx(u8 ballId)
     switch (ballId)
     {
     case BALL_DIVE:
+// BUGFIX: The thrown Timer Ball has a unique fully open sprite that is never used, as it was never included in this case
+#ifdef BUGFIX
+    case BALL_TIMER:
+#endif
     case BALL_LUXURY:
     case BALL_PREMIER:
-    case BALL_TIMER:
         break;
     default:
         var = GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag);
