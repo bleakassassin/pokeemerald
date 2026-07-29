@@ -536,6 +536,7 @@ const struct TrainerMoney gTrainerMoneyTable[] =
     {TRAINER_CLASS_HIKER, 10},
     {TRAINER_CLASS_YOUNG_COUPLE, 8},
     {TRAINER_CLASS_WINSTRATE, 10},
+    {TRAINER_CLASS_GYM_LEADERS, 25},
     {0xFF, 5}, // Any trainer class not listed above uses this
 };
 
@@ -4216,8 +4217,8 @@ static void HandleTurnActionSelectionState(void)
                         for (i = 0; i < MAX_MON_MOVES; i++)
                         {
                             moveInfo.moves[i] = gBattleMons[gActiveBattler].moves[i];
-                            moveInfo.currentPp[i] = gBattleMons[gActiveBattler].pp[i];
-                            moveInfo.maxPp[i] = CalculatePPWithBonus(
+                            moveInfo.currentPP[i] = gBattleMons[gActiveBattler].pp[i];
+                            moveInfo.maxPP[i] = CalculatePPWithBonus(
                                                             gBattleMons[gActiveBattler].moves[i],
                                                             gBattleMons[gActiveBattler].ppBonuses,
                                                             i);
@@ -5011,6 +5012,7 @@ static void HandleEndTurn_BattleWon(void)
             PlayBGM(MUS_VICTORY_AQUA_MAGMA);
             break;
         case TRAINER_CLASS_LEADER:
+        case TRAINER_CLASS_GYM_LEADERS:
             PlayBGM(MUS_VICTORY_GYM_LEADER);
             break;
         default:

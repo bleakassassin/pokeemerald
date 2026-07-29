@@ -231,6 +231,58 @@ BattleFrontier_OutsideEast_EventScript_Camper::
 	msgbox BattleFrontier_OutsideEast_Text_StickyMonWithLongTail, MSGBOX_NPC
 	end
 
+BattleFrontier_OutsideEast_EventScript_LadyClear::
+	lock
+	faceplayer
+	msgbox BattleFrontier_OutsideEast_Text_FlowersClearBasePoints, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_OutsideEast_EventScript_DeclineClear
+	checkitem ITEM_HEART_SCALE
+	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_OutsideEast_EventScript_NotEnoughHeartScales
+	msgbox BattleFrontier_OutsideEast_Text_WhichMonCleanSlate, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	lock
+	faceplayer
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, BattleFrontier_OutsideEast_EventScript_DeclineClear
+	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
+	goto_if_eq VAR_RESULT, SPECIES_EGG, BattleFrontier_OutsideEast_EventScript_EggSelected
+	specialvar VAR_RESULT, CheckIfNoEVs
+	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_OutsideEast_EventScript_AlreadyBlankSlate
+	special BufferMonNickname
+	msgbox BattleFrontier_OutsideEast_Text_MonLoseAllBasePoints, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_OutsideEast_EventScript_DeclineClear
+	msgbox BattleFrontier_OutsideEast_Text_SlowlyDipIntoFlowers, MSGBOX_DEFAULT
+	removeitem ITEM_HEART_SCALE
+	fadescreen FADE_TO_WHITE
+	special ResetEVs
+	playse SE_M_PETAL_DANCE
+	waitse
+	closemessage
+	fadescreen FADE_FROM_WHITE
+	msgbox BattleFrontier_OutsideEast_Text_MonBasePointsClearedAway, MSGBOX_DEFAULT
+	msgbox BattleFrontier_OutsideEast_Text_EverythingsClearNow, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_OutsideEast_EventScript_DeclineClear::
+	msgbox BattleFrontier_OutsideEast_Text_IfYouNeedCleanSlate, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_OutsideEast_EventScript_NotEnoughHeartScales::
+	msgbox BattleFrontier_OutsideEast_Text_DontHaveHeartScale, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_OutsideEast_EventScript_EggSelected::
+	msgbox BattleFrontier_OutsideEast_Text_EggAlreadyClean, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_OutsideEast_EventScript_AlreadyBlankSlate::
+	msgbox BattleFrontier_OutsideEast_Text_AlreadyBlankSlate, MSGBOX_DEFAULT
+	release
+	end
+
 BattleFrontier_OutsideEast_Text_BattleTowerSign:
 	.string "This is the Battle Tower!\n"
 	.string "Keep the win streak as the toughest\l"
@@ -435,3 +487,54 @@ BattleFrontier_OutsideEast_Text_StickyMonWithLongTail:
 	.string "with a long tail up ahead!\p"
 	.string "It was hiding under a boulder, and\n"
 	.string "it kept staring at me!$"
+
+BattleFrontier_OutsideEast_Text_FlowersClearBasePoints:
+	.string "The flowers in this garden help clear\n"
+	.string "away the mess from any of my efforts.\p"
+	.string "I can even use them to clear away the\n"
+	.string "base points of a Pokémon and give them\l"
+	.string "a clean slate.\p"
+	.string "Would you like for me to do that?\n"
+	.string "I can clear away one of your Pokémon's\l"
+	.string "base points for a Heart Scale.$"
+
+BattleFrontier_OutsideEast_Text_IfYouNeedCleanSlate:
+	.string "If you're ever in the need for a clean\n"
+	.string "slate, I'll be right here.$"
+
+BattleFrontier_OutsideEast_Text_DontHaveHeartScale:
+	.string "It seems you don't have a Heart Scale…\p"
+	.string "A heartfelt offering is needed to bring\n"
+	.string "true clarity to a Pokémon.$"
+
+BattleFrontier_OutsideEast_Text_WhichMonCleanSlate:
+	.string "Which Pokémon would you like to have a\n"
+	.string "clean slate?$"
+
+BattleFrontier_OutsideEast_Text_EggAlreadyClean:
+	.string "Oh, but an Egg is already clean.\n"
+	.string "It's had no experience of its own.$"
+
+BattleFrontier_OutsideEast_Text_AlreadyBlankSlate:
+	.string "Your Pokémon's already a blank slate.\n"
+	.string "There's nothing for me to do.$"
+
+BattleFrontier_OutsideEast_Text_MonLoseAllBasePoints:
+	.string "You'd like {STR_VAR_1} to lose all of its\n"
+	.string "base points?$"
+
+BattleFrontier_OutsideEast_Text_SlowlyDipIntoFlowers:
+	.string "Allow me to slowly dip your Pokémon into\n"
+	.string "this field of flowers.\p"
+	.string "The fragrance and feel will leave them\n"
+	.string "clean and refreshed…$"
+
+BattleFrontier_OutsideEast_Text_MonBasePointsClearedAway:
+	.string "All the base points of {STR_VAR_1} have\n"
+	.string "been cleared away!$"
+
+BattleFrontier_OutsideEast_Text_EverythingsClearNow:
+	.string "Everything's clear now…\n"
+	.string "It's like a blank canvas.\p"
+	.string "Come back anytime. Lady Clear will\n"
+	.string "always be here to help you.$"

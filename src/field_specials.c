@@ -4674,3 +4674,50 @@ void ChangeNatureMod(void)
     SetMonData(&gPlayerParty[gSpecialVar_0x8006], MON_DATA_NATURE_MOD, &natureMod);
     CalculateMonStats(&gPlayerParty[gSpecialVar_0x8006]);
 }
+
+void MassageServices(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_FEEBAS)
+    {
+        u8 feebasBeauty = GetMonData(mon, MON_DATA_BEAUTY);
+
+        if (feebasBeauty < 170) // Only proceed if Feebas isn't at the Beauty threshold to evolve to Milotic; ignores sheen
+        {
+            u16 feebasSheen = GetMonData(mon, MON_DATA_SHEEN) + 22; // Increase sheen by 22
+
+            feebasBeauty += 32; // Increase Beauty by 32; both values taken from Daisy Oak's grooming session in HG/SS
+            if (feebasSheen > MAX_SHEEN)
+                feebasSheen = MAX_SHEEN;
+            SetMonData(mon, MON_DATA_BEAUTY, &feebasBeauty);
+            SetMonData(mon, MON_DATA_SHEEN, &feebasSheen);
+        }
+    }
+    AdjustFriendship(mon, FRIENDSHIP_EVENT_MASSAGE);
+    FlagSet(FLAG_DAILY_MASSAGE_SERVICE);
+}
+
+bool8 CheckIfNoEVs(void)
+{
+    u8 i;
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    for (i = MON_DATA_HP_EV; i <= MON_DATA_SPDEF_EV; i++)
+    {
+        if (GetMonData(mon, i) != 0)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+void ResetEVs(void)
+{
+    u8 i;
+    u8 reset = 0; 
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+
+    for (i = MON_DATA_HP_EV; i <= MON_DATA_SPDEF_EV; i++)
+        SetMonData(mon, i, &reset);
+    CalculateMonStats(mon);
+}

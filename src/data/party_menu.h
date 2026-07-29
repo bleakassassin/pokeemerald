@@ -117,7 +117,7 @@ static const u8 sFontColorTable[][3] =
     {TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_2,  TEXT_DYNAMIC_COLOR_3},  // Gender symbol
     {TEXT_COLOR_WHITE,       TEXT_COLOR_DARK_GRAY,  TEXT_COLOR_LIGHT_GRAY}, // Selection actions
     {TEXT_COLOR_WHITE,       TEXT_COLOR_BLUE,       TEXT_COLOR_LIGHT_BLUE}, // Field moves
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,      TEXT_COLOR_DARK_GRAY},  // Unused
+    {TEXT_COLOR_WHITE,       TEXT_COLOR_RED,        TEXT_COLOR_LIGHT_RED},  // Moves with no PP left
 };
 
 static const struct WindowTemplate sSinglePartyMenuWindowTemplate[] =
@@ -631,7 +631,7 @@ static const u8 *const sActionStringTable[] =
     [PARTY_MSG_UNUSED]                 = gText_EmptyString,
     [PARTY_MSG_DO_WHAT_WITH_MON]       = gText_DoWhatWithPokemon,
     [PARTY_MSG_RESTORE_WHICH_MOVE]     = gText_RestoreWhichMove,
-    [PARTY_MSG_BOOST_PP_WHICH_MOVE]    = gText_BoostPp,
+    [PARTY_MSG_BOOST_PP_WHICH_MOVE]    = gText_BoostPP,
     [PARTY_MSG_DO_WHAT_WITH_ITEM]      = gText_DoWhatWithItem,
     [PARTY_MSG_DO_WHAT_WITH_MAIL]      = gText_DoWhatWithMail,
     [PARTY_MSG_ALREADY_HOLDING_ONE]    = gText_AlreadyHoldingOne,

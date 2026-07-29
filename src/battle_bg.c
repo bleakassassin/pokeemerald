@@ -878,7 +878,7 @@ void DrawMainBattleBackground(void)
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {
             u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-            if (trainerClass == TRAINER_CLASS_LEADER)
+            if (trainerClass == TRAINER_CLASS_LEADER || trainerClass == TRAINER_CLASS_GYM_LEADERS)
             {
                 LZDecompressVram(gBattleEnvironmentTiles_Building, (void *)(BG_CHAR_ADDR(2)));
                 LZDecompressVram(gBattleEnvironmentTilemap_Building, (void *)(BG_SCREEN_ADDR(26)));
@@ -1272,7 +1272,7 @@ void DrawBattleEntryBackground(void)
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {
             u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-            if (trainerClass == TRAINER_CLASS_LEADER)
+            if (trainerClass == TRAINER_CLASS_LEADER || trainerClass == TRAINER_CLASS_GYM_LEADERS)
             {
                 LZDecompressVram(gBattleEnvironmentAnimTiles_Building, (void *)(BG_CHAR_ADDR(1)));
                 LZDecompressVram(gBattleEnvironmentAnimTilemap_Building, (void *)(BG_SCREEN_ADDR(28)));
@@ -1329,7 +1329,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-                if (trainerClass == TRAINER_CLASS_LEADER)
+                if (trainerClass == TRAINER_CLASS_LEADER || trainerClass == TRAINER_CLASS_GYM_LEADERS)
                 {
                     LZDecompressVram(gBattleEnvironmentTiles_Building, (void *)(BG_CHAR_ADDR(2)));
                     break;
@@ -1391,7 +1391,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-                if (trainerClass == TRAINER_CLASS_LEADER)
+                if (trainerClass == TRAINER_CLASS_LEADER || trainerClass == TRAINER_CLASS_GYM_LEADERS)
                 {
                     LZDecompressVram(gBattleEnvironmentTilemap_Building, (void *)(BG_SCREEN_ADDR(26)));
                     break;
@@ -1453,7 +1453,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
             if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             {
                 u8 trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-                if (trainerClass == TRAINER_CLASS_LEADER)
+                if (trainerClass == TRAINER_CLASS_LEADER || trainerClass == TRAINER_CLASS_GYM_LEADERS)
                 {
                     LoadCompressedPalette(gBattleEnvironmentPalette_BuildingLeader, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
                     break;

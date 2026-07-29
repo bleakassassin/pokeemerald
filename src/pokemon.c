@@ -2104,6 +2104,7 @@ static const s8 sFriendshipEventModifiers[][3] =
     [FRIENDSHIP_EVENT_LEAGUE_BATTLE]   = { 3,  2,  1},
     [FRIENDSHIP_EVENT_LEARN_TMHM]      = { 1,  1,  0},
     [FRIENDSHIP_EVENT_WALKING]         = { 1,  1,  1},
+    [FRIENDSHIP_EVENT_MASSAGE]         = {10, 10, 10},
     [FRIENDSHIP_EVENT_FAINT_SMALL]     = {-1, -1, -1},
     [FRIENDSHIP_EVENT_FAINT_FIELD_PSN] = {-5, -5, -10},
     [FRIENDSHIP_EVENT_FAINT_LARGE]     = {-5, -5, -10},
@@ -2158,7 +2159,7 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
     .callback = SpriteCallbackDummy,
 };
 
-#define RUBY_POKEMON       6
+#define RUBY_POKEMON       7
 #define SAPPHIRE_POKEMON   1
 #define FIRERED_POKEMON   64
 #define LEAFGREEN_POKEMON 10
@@ -2166,6 +2167,7 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
 const u16 sRubyPokemon[] =
 {
     SPECIES_CELEBI,
+    SPECIES_SURSKIT,
     SPECIES_MEDITITE,
     SPECIES_MEDICHAM,
     SPECIES_ROSELIA,
@@ -2263,6 +2265,18 @@ const u16 sLeafGreenPokemon[] =
 static const u8 sText_OT_Wishmkr[] = _("WISHMKR");
 static const u8 sText_OT_Agate[] = _("AGATE");
 
+static void PadTrainerName(u8 *name, const u8 *string)
+{
+    s8 i;
+
+    for (i = 0; i <= PLAYER_NAME_LENGTH; i++)
+    {
+        name[i] = string[i];
+        if (i > StringLength(string))
+            name[i] = EOS;
+    }    
+}
+
 void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
     u8 *raw = (u8 *)boxMon;
@@ -2321,6 +2335,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 value;
     u16 checksum;
     u32 shinyValue;
+    const u8 *string = NULL;
     u8 otName[PLAYER_NAME_LENGTH + 1];
     bool8 otGender;
     u32 otId;
@@ -2364,6 +2379,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         otId = 0x00004E4Bu; //20043:00000
         otGender = MALE;
         metLocation = METLOC_FATEFUL_ENCOUNTER;
+        string = sText_OT_Wishmkr;
         do
         {
             if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE)
@@ -2389,6 +2405,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         otId = 0x00007991u; //31121:00000
         otGender = FEMALE;
         metLocation = METLOC_FATEFUL_ENCOUNTER;
+        string = sText_OT_Agate;
         if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG) && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE)
         {
             do
@@ -2490,10 +2507,15 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_CHECKSUM, &checksum);
     EncryptBoxMon(boxMon);
     GetSpeciesName(speciesName, species);
-    GetTrainerName(otName, species);
+    if (string != NULL)
+    {
+        PadTrainerName(otName, string);
+        SetBoxMonData(boxMon, MON_DATA_OT_NAME, otName);
+    }
+    else
+        SetBoxMonData(boxMon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetBoxMonData(boxMon, MON_DATA_NICKNAME, speciesName);
     SetBoxMonData(boxMon, MON_DATA_LANGUAGE, &gGameLanguage);
-    SetBoxMonData(boxMon, MON_DATA_OT_NAME, otName);
     SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
     SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].friendship);
@@ -4128,7 +4150,14 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
     return ret;
 }
 
+#ifndef UBFIX
 u32 GetMonData2(struct Pokemon *mon, s32 field) __attribute__((alias("GetMonData3")));
+#else
+u32 GetMonData2(struct Pokemon *mon, s32 field)
+{
+    return GetMonData3(mon, field, NULL);
+}
+#endif
 
 /* GameFreak called GetBoxMonData with either 2 or 3 arguments, for type
  * safety we have a GetBoxMonData macro (in include/pokemon.h) which
@@ -4514,7 +4543,14 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
     return retVal;
 }
 
+#ifndef UBFIX
 u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field) __attribute__((alias("GetBoxMonData3")));
+#else
+u32 GetBoxMonData2(struct BoxPokemon *boxMon, s32 field)
+{
+    return GetBoxMonData3(boxMon, field, NULL);
+}
+#endif
 
 #define SET8(lhs) (lhs) = *data
 #define SET16(lhs) (lhs) = data[0] + (data[1] << 8)
@@ -4880,9 +4916,10 @@ void CopyMon(void *dest, void *src, size_t size)
 u8 GiveMonToPlayer(struct Pokemon *mon)
 {
     s32 i;
-    u8 otName[PLAYER_NAME_LENGTH + 1];
     bool8 otGender;
     u32 otId;
+    const u8 *string = NULL;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
     s16 species;
 
     otGender = gSaveBlock2Ptr->playerGender;
@@ -4896,6 +4933,7 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     {
         otGender = MALE;
         otId = 0x00004E4Bu; //20043:00000
+        string = sText_OT_Wishmkr;
         MakeNameUppercase(mon->box.nickname);
     }
 
@@ -4903,11 +4941,17 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
     {
         otGender = FEMALE;
         otId = 0x00007991u; //31121:00000
+        string = sText_OT_Agate;
         MakeNameUppercase(mon->box.nickname);
     }
 
-    GetTrainerName(otName, species);
-    SetMonData(mon, MON_DATA_OT_NAME, otName);
+    if (string != NULL)
+    {
+        PadTrainerName(otName, string);
+        SetMonData(mon, MON_DATA_OT_NAME, otName);
+    }
+    else
+        SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetMonData(mon, MON_DATA_OT_GENDER, &otGender);
     SetMonData(mon, MON_DATA_OT_ID, &otId);
 
@@ -5131,26 +5175,6 @@ void GetSpeciesName(u8 *name, u16 species)
             name[i] = gSpeciesNames[SPECIES_NONE][i];
         else
             name[i] = gSpeciesNames[species][i];
-
-        if (name[i] == EOS)
-            break;
-    }
-
-    name[i] = EOS;
-}
-
-void GetTrainerName(u8 *name, u16 species)
-{
-    s8 i;
-
-    for (i = 0; i <= PLAYER_NAME_LENGTH; i++)
-    {
-        if (species == SPECIES_JIRACHI)
-            name[i] = sText_OT_Wishmkr[i];
-        else if (species == SPECIES_CELEBI)
-            name[i] = sText_OT_Agate[i];
-        else
-            name[i] = gSaveBlock2Ptr->playerName[i];
 
         if (name[i] == EOS)
             break;
@@ -6499,6 +6523,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
                 return;
             if (!(gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_LEADER
+                || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_GYM_LEADERS
                 || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR
                 || gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION))
                 return;
@@ -7001,6 +7026,7 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_MAGMA_ADMIN:
             return MUS_VS_AQUA_MAGMA;
         case TRAINER_CLASS_LEADER:
+        case TRAINER_CLASS_GYM_LEADERS:
             return MUS_VS_GYM_LEADER;
         case TRAINER_CLASS_CHAMPION:
             return MUS_VS_CHAMPION;

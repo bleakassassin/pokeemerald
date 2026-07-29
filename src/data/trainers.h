@@ -3255,7 +3255,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_TATE_AND_LIZA_1] =
     {
-        .trainerClass = TRAINER_CLASS_LEADER,
+        .trainerClass = TRAINER_CLASS_GYM_LEADERS,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_TATE_AND_LIZA,
         .trainerName = _("Tate&Liza"),
@@ -6039,7 +6039,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_JAZMYN] =
     {
-        .trainerClass = TRAINER_CLASS_COOLTRAINER_2,
+        .trainerClass = TRAINER_CLASS_COOLTRAINER,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL,
         .trainerPic = TRAINER_PIC_COOLTRAINER_F,
         .trainerName = _("Jazmyn"),
@@ -9531,7 +9531,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_TATE_AND_LIZA_2] =
     {
-        .trainerClass = TRAINER_CLASS_LEADER,
+        .trainerClass = TRAINER_CLASS_GYM_LEADERS,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_TATE_AND_LIZA,
         .trainerName = _("Tate&Liza"),
@@ -9543,7 +9543,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_TATE_AND_LIZA_3] =
     {
-        .trainerClass = TRAINER_CLASS_LEADER,
+        .trainerClass = TRAINER_CLASS_GYM_LEADERS,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_TATE_AND_LIZA,
         .trainerName = _("Tate&Liza"),
@@ -9555,7 +9555,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_TATE_AND_LIZA_4] =
     {
-        .trainerClass = TRAINER_CLASS_LEADER,
+        .trainerClass = TRAINER_CLASS_GYM_LEADERS,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_TATE_AND_LIZA,
         .trainerName = _("Tate&Liza"),
@@ -9567,7 +9567,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_TATE_AND_LIZA_5] =
     {
-        .trainerClass = TRAINER_CLASS_LEADER,
+        .trainerClass = TRAINER_CLASS_GYM_LEADERS,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_TATE_AND_LIZA,
         .trainerName = _("Tate&Liza"),

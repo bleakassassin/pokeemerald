@@ -776,8 +776,14 @@ AI_CheckViability:
 	end
 
 AI_CV_Sleep:
+	if_hard_difficulty AI_CV_Sleep_Bugfix
 	if_has_move_with_effect AI_TARGET, EFFECT_DREAM_EATER, AI_CV_SleepEncourageSlpDamage
 	if_has_move_with_effect AI_TARGET, EFFECT_NIGHTMARE, AI_CV_SleepEncourageSlpDamage
+	goto AI_CV_Sleep_End
+
+AI_CV_Sleep_Bugfix:
+	if_has_move_with_effect AI_USER, EFFECT_DREAM_EATER, AI_CV_SleepEncourageSlpDamage
+	if_has_move_with_effect AI_USER, EFFECT_NIGHTMARE, AI_CV_SleepEncourageSlpDamage
 	goto AI_CV_Sleep_End
 
 AI_CV_SleepEncourageSlpDamage:
@@ -1647,18 +1653,17 @@ AI_CV_Counter5:
 	if_random_less_than 100, AI_CV_Counter6
 	score +1
 AI_CV_Counter6:
-#ifdef BUGFIX
+	if_not_hard_difficulty AI_CV_Counter6_Bugged
 	get_target_type1
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter7
 	get_target_type2
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter7
 	goto AI_CV_Counter_End
-#else
+AI_CV_Counter6_Bugged:
 	get_target_type1
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
 	get_target_type2
 	if_in_bytes AI_CV_Counter_PhysicalTypeList, AI_CV_Counter_End
-#endif
 AI_CV_Counter7:
 	if_random_less_than 50, AI_CV_Counter_End
 AI_CV_Counter8:
@@ -1839,18 +1844,31 @@ AI_CV_Flail_End:
 	end
 
 AI_CV_HealBell:
+	if_hard_difficulty AI_CV_HealBell_Bugfix
 	if_status AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
 	if_status_in_party AI_TARGET, STATUS1_ANY, AI_CV_HealBell_End
 	score -5
 AI_CV_HealBell_End:
 	end
 
+AI_CV_HealBell_Bugfix:
+	if_status AI_USER, STATUS1_ANY, AI_CV_HealBell_End
+	if_status_in_party AI_USER_PARTNER, STATUS1_ANY, AI_CV_HealBell_End
+	goto Score_Minus5
+
 AI_CV_Thief:
 	get_hold_effect AI_TARGET
 	if_not_in_bytes AI_CV_Thief_EncourageItemsToSteal, AI_CV_Thief_ScoreDown2
+	if_hard_difficulty AI_CV_Thief_ItemCheck
+AI_CV_Thief2:
 	if_random_less_than 50, AI_CV_Thief_End
 	score +1
 	goto AI_CV_Thief_End
+
+AI_CV_Thief_ItemCheck:
+	get_used_held_item AI_USER
+	if_not_equal ITEM_NONE, AI_CV_Thief_ScoreDown2
+	goto AI_CV_Thief2
 
 AI_CV_Thief_ScoreDown2:
 	score -2
@@ -1938,19 +1956,19 @@ AI_CV_Protect_End:
 @ BUG: Foresight is only encouraged if the user is Ghost type or
 @      has high evasion, but should check target instead
 AI_CV_Foresight:
-#ifdef BUGFIX
+	if_not_hard_difficulty AI_CV_Foresight_Bugged
 	get_target_type1
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	get_target_type2
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	if_stat_level_more_than AI_TARGET, STAT_EVASION, 8, AI_CV_Foresight3
-#else
+	goto Score_Minus2
+AI_CV_Foresight_Bugged:
 	get_user_type1
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	get_user_type2
 	if_equal TYPE_GHOST, AI_CV_Foresight2
 	if_stat_level_more_than AI_USER, STAT_EVASION, 8, AI_CV_Foresight3
-#endif
 	score -2
 	goto AI_CV_Foresight_End
 
@@ -2145,18 +2163,17 @@ AI_CV_MirrorCoat5:
 	if_random_less_than 100, AI_CV_MirrorCoat6
 	score +1
 AI_CV_MirrorCoat6:
-#ifdef BUGFIX
+	if_not_hard_difficulty AI_CV_MirrorCoat6_Bugged
 	get_target_type1
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat7
 	get_target_type2
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat7
 	goto AI_CV_MirrorCoat_End
-#else
+AI_CV_MirrorCoat6_Bugged:
 	get_target_type1
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
 	get_target_type2
 	if_in_bytes AI_CV_MirrorCoat_SpecialTypeList, AI_CV_MirrorCoat_End
-#endif
 AI_CV_MirrorCoat7:
 	if_random_less_than 50, AI_CV_MirrorCoat_End
 AI_CV_MirrorCoat_ScoreUp4:
@@ -2206,13 +2223,13 @@ AI_CV_SemiInvulnerable2:
 	if_status2 AI_TARGET, STATUS2_CURSED, AI_CV_SemiInvulnerable_TryEncourage
 	if_status3 AI_TARGET, STATUS3_LEECHSEED, AI_CV_SemiInvulnerable_TryEncourage
 	get_weather
-#ifdef BUGFIX
+	if_not_hard_difficulty AI_CV_SemiInvulnerable2_Bugged
 	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckIceType
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckSandstormTypes
-#else
+	goto AI_CV_SemiInvulnerable5
+AI_CV_SemiInvulnerable2_Bugged:
 	if_equal AI_WEATHER_HAIL, AI_CV_SemiInvulnerable_CheckSandstormTypes
 	if_equal AI_WEATHER_SANDSTORM, AI_CV_SemiInvulnerable_CheckIceType
-#endif
 	goto AI_CV_SemiInvulnerable5
 
 AI_CV_SemiInvulnerable_CheckSandstormTypes:
@@ -2277,11 +2294,11 @@ AI_CV_Hail_End:
 
 @ BUG: Facade score is increased if the target is statused, but should be if the user is
 AI_CV_Facade:
-#ifdef BUGFIX
+	if_not_hard_difficulty AI_CV_Facade_Bugged
 	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
-#else
+	goto Score_Plus1
+AI_CV_Facade_Bugged:
 	if_not_status AI_TARGET, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, AI_CV_Facade_End
-#endif
 	score +1
 AI_CV_Facade_End:
 	end
@@ -3199,9 +3216,9 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP:
 AI_TrySunnyDayStart:
 	if_target_is_ally AI_TryOnAlly
 	if_not_effect EFFECT_SUNNY_DAY, AI_TrySunnyDayStart_End
-#ifndef BUGFIX  @ funcResult has not been set in this script yet, below call is nonsense
+	if_hard_difficulty AI_TrySunnyDayStart_Bugfix  @ funcResult has not been set in this script yet, below call is nonsense
 	if_equal FALSE, AI_TrySunnyDayStart_End
-#endif
+AI_TrySunnyDayStart_Bugfix:
 	is_first_turn_for AI_USER
 	if_equal FALSE, AI_TrySunnyDayStart_End
 	score +5

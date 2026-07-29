@@ -126,7 +126,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevatorEast:
 @ Unused
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevatorWest:
 	applymovement LOCALID_TOWER_PARTNER_ROOM_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
-	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEneterElevatorWest
+	applymovement LOCALID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorWest
 	waitmovement 0
 	return
 
@@ -144,7 +144,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorEast:
 	step_end
 
 @ Functionally unused
-BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEneterElevatorWest:
+BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorWest:
 	walk_left
 	walk_up
 	set_invisible
@@ -1496,7 +1496,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_RuinManiacReject::
 	.string "I think my Pokémon are tough…$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMIntro::
-	.string "I'm Cooltrainer {STR_VAR_1}!$"
+	.string "I'm Ace Trainer {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMMon1::
 	.string "The Pokémon I have right now are one\n"
@@ -1517,7 +1517,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMReject::
 	.string "the greatest team ever.$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFIntro::
-	.string "I'm Cooltrainer {STR_VAR_1}!$"
+	.string "I'm Ace Trainer {STR_VAR_1}!$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFMon1::
 	.string "The team I've been raising has one\n"

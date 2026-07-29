@@ -206,7 +206,7 @@ gSpecials::
 	def_special ChooseSendDaycareMon, waitstate=1
 	def_special ShowDaycareLevelMenu, waitstate=1
 	def_special GetNumLevelsGainedFromDaycare
-	def_special GetDaycareCost
+	def_special GetDaycareCostAndPrepareString
 	def_special TakePokemonFromDaycare
 	def_special ScriptHatchMon
 	def_special EggHatch, waitstate=1
@@ -554,3 +554,6 @@ gSpecials::
 	def_special BufferNatureName
 	def_special ChangeNatureMod
 	def_special IsSelectedMonNicknamedOrNotEnglish
+	def_special MassageServices
+	def_special CheckIfNoEVs
+	def_special ResetEVs

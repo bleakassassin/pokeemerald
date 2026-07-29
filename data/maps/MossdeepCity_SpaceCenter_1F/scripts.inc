@@ -87,7 +87,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchJirachi::
 	applymovement LOCALID_SPACE_CENTER_1F_SAILOR, Common_Movement_FaceUp
 	applymovement LOCALID_SPACE_CENTER_1F_WOMAN, Common_Movement_FaceUp
 	waitse
-	playse SE_M_PETAL_DANCE
+	playse SE_M_REFLECT
 	waitse
 	playse SE_MUGSHOT
 	delay 40

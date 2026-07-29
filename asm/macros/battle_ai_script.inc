@@ -251,12 +251,14 @@
 	.4byte \param1
 	.endm
 
-	.macro nop_2A
+	.macro if_hard_difficulty param0:req
 	.byte 0x2a
+	.4byte \param0
 	.endm
 
-	.macro nop_2B
-	.byte 0x2b
+	.macro if_not_hard_difficulty param0:req
+	.byte 0x2a
+	.4byte \param0
 	.endm
 
 	.macro count_usable_party_mons battler:req
