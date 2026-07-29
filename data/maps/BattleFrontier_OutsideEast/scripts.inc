@@ -536,5 +536,5 @@ BattleFrontier_OutsideEast_Text_MonBasePointsClearedAway:
 BattleFrontier_OutsideEast_Text_EverythingsClearNow:
 	.string "Everything's clear now…\n"
 	.string "It's like a blank canvas.\p"
-	.string "Come back anytime. Lady Clear will\n"
+	.string "Come back anytime. LADY CLEAR will\n"
 	.string "always be here to help you.$"
