@@ -1,10 +1,13 @@
 #include "global.h"
 #include "event_data.h"
+#include "event_object_lock.h"
+#include "event_scripts.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "script.h"
 #include "sound.h"
 #include "task.h"
+#include "window.h"
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 #include "constants/metatile_labels.h"
@@ -57,6 +60,7 @@ static const u8 sRegicePathCoords[][2] =
 static void Task_SealedChamberShakingEffect(u8);
 static void DoBrailleRegirockEffect(void);
 static void DoBrailleRegisteelEffect(void);
+static void Task_BrailleWait(u8);
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
@@ -92,11 +96,11 @@ void DoBrailleDigEffect(void)
 bool8 CheckRelicanthWailord(void)
 {
     // Emerald change: why did they flip it?
-    // First comes Wailord
+    // First comes Relicanth
     if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_RELICANTH)
     {
         CalculatePlayerPartyCount();
-        // Last comes Relicanth
+        // Last comes Wailord
         if (GetMonData(&gPlayerParty[gPlayerPartyCount - 1], MON_DATA_SPECIES_OR_EGG, 0) == SPECIES_WAILORD)
             return TRUE;
     }
@@ -250,9 +254,10 @@ static void DoBrailleRegisteelEffect(void)
     UnlockPlayerFieldControls();
 }
 
-// theory: another commented out DoBrailleWait and Task_BrailleWait.
-static void DoBrailleWait(void)
+void ShouldDoBrailleRegicePuzzle(void)
 {
+    if (!FlagGet(FLAG_SYS_BRAILLE_REGICE_COMPLETED))
+        CreateTask(Task_BrailleWait, 80);
 }
 
 // this used to be FldEff_UseFlyAncientTomb . why did GF merge the 2 functions?
@@ -275,64 +280,137 @@ bool8 FldEff_UsePuzzleEffect(void)
 
 // The puzzle to unlock Regice's cave requires the player to interact with the braille message on the back wall,
 // step on every space on the perimeter of the cave (and only those spaces) then return to the back wall.
-bool8 ShouldDoBrailleRegicePuzzle(void)
+// bool8 ShouldDoBrailleRegicePuzzle(void)
+// {
+//     u8 i;
+// 
+//     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ISLAND_CAVE)
+//         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ISLAND_CAVE))
+//     {
+//         if (FlagGet(FLAG_SYS_BRAILLE_REGICE_COMPLETED))
+//             return FALSE;
+//         // Set when the player interacts with the braille message
+//         if (FlagGet(FLAG_TEMP_REGICE_PUZZLE_STARTED) == FALSE)
+//             return FALSE;
+//         // Cleared when the player interacts with the braille message
+//         if (FlagGet(FLAG_TEMP_REGICE_PUZZLE_FAILED) == TRUE)
+//             return FALSE;
+// 
+//         for (i = 0; i < ARRAY_COUNT(sRegicePathCoords); i++)
+//         {
+//             u8 xPos = sRegicePathCoords[i][0];
+//             u8 yPos = sRegicePathCoords[i][1];
+//             if (gSaveBlock1Ptr->pos.x == xPos && gSaveBlock1Ptr->pos.y == yPos)
+//             {
+//                 // Player is standing on a correct space, set the corresponding bit
+//                 if (i < 16)
+//                 {
+//                     u16 val = VarGet(VAR_REGICE_STEPS_1);
+//                     val |= 1 << i;
+//                     VarSet(VAR_REGICE_STEPS_1, val);
+//                 }
+//                 else if (i < 32)
+//                 {
+//                     u16 val = VarGet(VAR_REGICE_STEPS_2);
+//                     val |= 1 << (i - 16);
+//                     VarSet(VAR_REGICE_STEPS_2, val);
+//                 }
+//                 else
+//                 {
+//                     u16 val = VarGet(VAR_REGICE_STEPS_3);
+//                     val |= 1 << (i - 32);
+//                     VarSet(VAR_REGICE_STEPS_3, val);
+//                 }
+// 
+//                 // Make sure a full lap has been completed. There are 36 steps in a lap, so 16+16+4 bits to check across the 3 vars.
+//                 if (VarGet(VAR_REGICE_STEPS_1) != 0xFFFF || VarGet(VAR_REGICE_STEPS_2) != 0xFFFF || VarGet(VAR_REGICE_STEPS_3) != 0xF)
+//                     return FALSE;
+// 
+//                 // A lap has been completed, the puzzle is complete when the player returns to the braille message.
+//                 if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)
+//                     return TRUE;
+//                 else
+//                     return FALSE;
+//             }
+//         }
+// 
+//         // Player stepped on an incorrect space, puzzle failed.
+//         FlagSet(FLAG_TEMP_REGICE_PUZZLE_FAILED);
+//         FlagClear(FLAG_TEMP_REGICE_PUZZLE_STARTED);
+//     }
+// 
+//     return FALSE;
+// }
+
+static bool32 BrailleWait_CheckButtonPress(void)
 {
-    u8 i;
+    u16 keyMask = A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON | DPAD_ANY | R_BUTTON;
 
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_ISLAND_CAVE)
-        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_ISLAND_CAVE))
+    if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
+        keyMask |= L_BUTTON;
+
+    if (JOY_NEW(keyMask))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+// Task data for Regice's braille puzzle
+#define tState data[0]
+#define tTimer data[1]
+
+static void Task_BrailleWait(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch (tState)
     {
-        if (FlagGet(FLAG_SYS_BRAILLE_REGICE_COMPLETED))
-            return FALSE;
-        // Set when the player interacts with the braille message
-        if (FlagGet(FLAG_TEMP_REGICE_PUZZLE_STARTED) == FALSE)
-            return FALSE;
-        // Cleared when the player interacts with the braille message
-        if (FlagGet(FLAG_TEMP_REGICE_PUZZLE_FAILED) == TRUE)
-            return FALSE;
-
-        for (i = 0; i < ARRAY_COUNT(sRegicePathCoords); i++)
+    case 0:
+        tTimer = 7200; // 7200 frames = 2 minutes
+        tState = 1;
+        break;
+    case 1:
+        if (BrailleWait_CheckButtonPress() != FALSE)
         {
-            u8 xPos = sRegicePathCoords[i][0];
-            u8 yPos = sRegicePathCoords[i][1];
-            if (gSaveBlock1Ptr->pos.x == xPos && gSaveBlock1Ptr->pos.y == yPos)
+            CloseBrailleWindow();
+            PlaySE(SE_SELECT);
+            tState = 2;
+        }
+        else
+        {
+            tTimer = tTimer - 1;
+            if (tTimer == 0)
             {
-                // Player is standing on a correct space, set the corresponding bit
-                if (i < 16)
-                {
-                    u16 val = VarGet(VAR_REGICE_STEPS_1);
-                    val |= 1 << i;
-                    VarSet(VAR_REGICE_STEPS_1, val);
-                }
-                else if (i < 32)
-                {
-                    u16 val = VarGet(VAR_REGICE_STEPS_2);
-                    val |= 1 << (i - 16);
-                    VarSet(VAR_REGICE_STEPS_2, val);
-                }
-                else
-                {
-                    u16 val = VarGet(VAR_REGICE_STEPS_3);
-                    val |= 1 << (i - 32);
-                    VarSet(VAR_REGICE_STEPS_3, val);
-                }
-
-                // Make sure a full lap has been completed. There are 36 steps in a lap, so 16+16+4 bits to check across the 3 vars.
-                if (VarGet(VAR_REGICE_STEPS_1) != 0xFFFF || VarGet(VAR_REGICE_STEPS_2) != 0xFFFF || VarGet(VAR_REGICE_STEPS_3) != 0xF)
-                    return FALSE;
-
-                // A lap has been completed, the puzzle is complete when the player returns to the braille message.
-                if (gSaveBlock1Ptr->pos.x == 8 && gSaveBlock1Ptr->pos.y == 21)
-                    return TRUE;
-                else
-                    return FALSE;
+                CloseBrailleWindow();
+                tState = 3;
+                tTimer = 30;
             }
         }
-
-        // Player stepped on an incorrect space, puzzle failed.
-        FlagSet(FLAG_TEMP_REGICE_PUZZLE_FAILED);
-        FlagClear(FLAG_TEMP_REGICE_PUZZLE_STARTED);
+        break;
+    case 2:
+        if (BrailleWait_CheckButtonPress() == FALSE)
+        {
+            tTimer = tTimer - 1;
+            if (tTimer == 0)
+                tState = 4;
+            break;
+        }
+        ScriptUnfreezeObjectEvents();
+        DestroyTask(taskId);
+        UnlockPlayerFieldControls();
+        break;
+    case 3:
+        tTimer = tTimer - 1;
+        if (tTimer == 0)
+            tState = 4;
+        break;
+    case 4:
+        ScriptUnfreezeObjectEvents();
+        ScriptContext_SetupScript(IslandCave_EventScript_OpenRegiEntrance);
+        DestroyTask(taskId);
+        break;
     }
-
-    return FALSE;
 }
+
+#undef tState
+#undef tTimer

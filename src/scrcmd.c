@@ -68,8 +68,6 @@ extern const SpecialFunc gSpecials[];
 extern const u8 *gStdScripts[];
 extern const u8 *gStdScripts_End[];
 
-static void CloseBrailleWindow(void);
-
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
 void *const gNullScriptPtr = NULL;
@@ -2276,7 +2274,7 @@ bool8 ScrCmd_getmonmetlocation(struct ScriptContext *ctx)
     return FALSE;
 }
 
-static void CloseBrailleWindow(void)
+void CloseBrailleWindow(void)
 {
     ClearStdWindowAndFrame(sBrailleWindowId, TRUE);
     RemoveWindow(sBrailleWindowId);

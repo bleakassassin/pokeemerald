@@ -29,7 +29,7 @@ IslandCave_EventScript_HideRegiEntrance::
 
 IslandCave_OnTransition:
 	setflag FLAG_LANDMARK_ISLAND_CAVE
-	call IslandCave_EventScript_ClearSteps
+@	call IslandCave_EventScript_ClearSteps
 	call_if_unset FLAG_CAUGHT_REGICE, IslandCave_EventScript_ShowRegice
 	end
 
@@ -52,9 +52,10 @@ IslandCave_EventScript_OpenRegiEntrance::
 
 IslandCave_EventScript_CaveEntranceMiddle::
 	lockall
-	call_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_ClearSteps
+@	call_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_ClearSteps
 	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_BigHoleInWall
-	braillemessage IslandCave_Braille_RunLapAroundWall
+@	braillemessage IslandCave_Braille_RunLapAroundWall
+	braillemessage IslandCave_Braille_WaitTwoMinutes
 	setflag FLAG_TEMP_REGICE_PUZZLE_STARTED
 	special ShouldDoBrailleRegicePuzzle
 	goto IslandCave_EventScript_CloseBrailleMsg
@@ -67,8 +68,9 @@ IslandCave_EventScript_BigHoleInWall::
 
 IslandCave_EventScript_CaveEntranceSide::
 	lockall
-	call_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_ClearSteps
-	braillemessage IslandCave_Braille_RunLapAroundWall
+@	call_if_set FLAG_TEMP_REGICE_PUZZLE_FAILED, IslandCave_EventScript_ClearSteps
+@	braillemessage IslandCave_Braille_RunLapAroundWall
+	braillemessage IslandCave_Braille_WaitTwoMinutes
 	goto_if_set FLAG_SYS_BRAILLE_REGICE_COMPLETED, IslandCave_EventScript_CloseBrailleMsg
 	setflag FLAG_TEMP_REGICE_PUZZLE_STARTED
 	special ShouldDoBrailleRegicePuzzle

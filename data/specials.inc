@@ -512,7 +512,7 @@ gSpecials::
 	def_special SeenAllHoennMons
 	def_special SetUnlockedPokedexFlags
 	def_special IsTrainerRegistered
-	def_special ShouldDoBrailleRegicePuzzle
+	def_special ShouldDoBrailleRegicePuzzle, waitstate=1
 	def_special EnableNationalPokedex
 	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice, waitstate=1
 	def_special GetLilycoveSSTidalSelection
