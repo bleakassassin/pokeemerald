@@ -322,7 +322,7 @@ Route103_EventScript_WakeSnorlax::
 	delay 40
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_ROUTE103_SNORLAX
-	setwildbattle SPECIES_SNORLAX, 50
+	setwildbattle SPECIES_SNORLAX, 30
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE

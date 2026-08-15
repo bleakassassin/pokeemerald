@@ -120,7 +120,7 @@ AlteringCave_EventScript_LegendaryBird::
 	delay 20
 	closemessage
 	copyvar VAR_0x8004, VAR_TEMP_1
-	setvar VAR_0x8005, 60
+	setvar VAR_0x8005, 50
 	setvar VAR_0x8006, 0
 	special CreateEnemyEventMon
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
